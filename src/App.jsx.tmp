@@ -5071,8 +5071,8 @@ const QUIZ_BANK = [
       {
         "q": "2 Richtig Erreichte Punkte 1,00 von 1,00 Bayesian Classification Consider Bayes' Rule for classification, as presented in the lecture slides: P ( ω i ∣ x ) = p ( x ∣ ω i ) P ( ω i ) p ( x ) Assume we have a classification problem with 5 (fish) classes, a 100-dimensional real-valued feature space, and a training set D consisting of 5000 examples (fish). Which of the following statements are correct? For any fish \\(\\boldsymbol{x} \\in \\mathcal{D}\\) , \\(p(\\boldsymbol{x}) \\leq 1/5000\\)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5080,8 +5080,8 @@ const QUIZ_BANK = [
       {
         "q": "For any fish \\(\\boldsymbol{x} \\in \\mathcal{D}\\) , \\(p(\\boldsymbol{x})\\) is a vector with 100 values",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5089,8 +5089,8 @@ const QUIZ_BANK = [
       {
         "q": "5 Richtig Erreichte Punkte 1,00 von 1,00 For any \\(\\boldsymbol{x}\\) , \\(\\sum_i p(\\boldsymbol{x} \\mid \\omega_i) = 1.0\\)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5098,8 +5098,8 @@ const QUIZ_BANK = [
       {
         "q": "\\(P(\\omega_1 \\mid \\boldsymbol{x})\\) is a vector with 5 entries",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5107,8 +5107,8 @@ const QUIZ_BANK = [
       {
         "q": "Consider the \\(5 \\times 5\\) zero-one loss function \\(\\lambda\\) for the above classification problem, a specific set of prior and class-conditional distributions learned from some training set, and a Bayesian Minimum-Risk Classifier as described in the lecture slides. Which of the following statements are correct? When tested on some specific test set \\(\\mathcal{T}\\) , the minimum-risk classifier will end up in exactly the same position in ROC space as a MAP classifier",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5116,8 +5116,8 @@ const QUIZ_BANK = [
       {
         "q": "7 Richtig Erreichte Punkte 1,00 von 1,00 Johannes Kepler Universität Linz Impressum \\(\\sum_i \\sum_j \\lambda_{ij} = 1.0\\)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5125,8 +5125,8 @@ const QUIZ_BANK = [
       {
         "q": "If we multiply all values in \\(\\lambda\\) by 5, the result will be an invalid loss function",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5134,8 +5134,8 @@ const QUIZ_BANK = [
       {
         "q": "9 Richtig Erreichte Punkte 1,00 von 1,00 Density Estimation Consider the following figure from the lecture slides, in the context of the task of estimating the mean of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset: density estimation Answer the following questions: θ The likelihood function cannot be negative anywhere",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5143,8 +5143,8 @@ const QUIZ_BANK = [
       {
         "q": "The y values in the lower plot cannot be probabilities, because they are negative",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5152,8 +5152,8 @@ const QUIZ_BANK = [
       {
         "q": "at the middle The likelihood function is itself a normal distribution",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5161,8 +5161,8 @@ const QUIZ_BANK = [
       {
         "q": "\\(\\hat{\\theta}\\) is the maximum probability of the dataset",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5170,8 +5170,8 @@ const QUIZ_BANK = [
       {
         "q": "We need to plot the likelihood function in order to find the maximum",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5179,8 +5179,8 @@ const QUIZ_BANK = [
       {
         "q": "The resulting classifier will have an expected accuracy of \\(1/N\\)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5188,8 +5188,8 @@ const QUIZ_BANK = [
       {
         "q": "Each example from the training set will be classified into the correct class",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5197,8 +5197,8 @@ const QUIZ_BANK = [
       {
         "q": "All test examples will be classified into the same class",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5206,8 +5206,8 @@ const QUIZ_BANK = [
       {
         "q": "21 Richtig Erreichte Punkte 1,00 von 1,00 Trees and Forests Consider a decision tree learner that operates as follows: given a training set D and a set of discrete features F , it randomly selects one feature from F , builds a one-level tree by splitting the data according to this feature, and labels the resulting subnodes as leaves with the majority class in each respective node. Which of the following statements (if any) are true? It makes no sense to combine several such trees into a Random Forest, because the trees rely on incompatible features",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5215,8 +5215,8 @@ const QUIZ_BANK = [
       {
         "q": "The chosen feature split might have an information gain of zero",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5224,8 +5224,8 @@ const QUIZ_BANK = [
       {
         "q": "Any such decision tree will have an accuracy on the training set \\(\\mathcal{D}\\) that is higher than the default accuracy",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5233,8 +5233,8 @@ const QUIZ_BANK = [
       {
         "q": "23 Richtig Erreichte Punkte 1,00 von 1,00 Johannes Kepler Universität Linz Impressum Any such decision tree will have exactly the default accuracy on the training set \\(\\mathcal{D}\\)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5242,8 +5242,8 @@ const QUIZ_BANK = [
       {
         "q": "The resulting structure is not a decision tree",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5251,8 +5251,8 @@ const QUIZ_BANK = [
       {
         "q": "24 Richtig Erreichte Punkte 1,00 von 1,00 Various Classifiers Consider the following 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features x 1 , x 2 , where the two classes are indicated by filled vs. empty dots: dataset Which of the following statements are correct? A support vector machine with a quadratic kernel can achieve an error of zero on this dataset",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5260,8 +5260,8 @@ const QUIZ_BANK = [
       {
         "q": "28 Richtig Erreichte Punkte 1,00 von 1,00 If we map this dataset into a new 2D feature space defined by features \\(x_1^2, x_2^2\\) , ID3 can separate the two classes with a two-level decision tree (i.e., two levels of splits)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5269,8 +5269,8 @@ const QUIZ_BANK = [
       {
         "q": "A decision tree learned by ID3 would have to have an infinite number of splits (i.e., infinite depth) in order to achieve an error of zero on this dataset",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5278,8 +5278,8 @@ const QUIZ_BANK = [
       {
         "q": "A nearest-neighbour classifier can only perform well on this dataset if it uses circular (and not rectangular) neighbourhoods",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5287,8 +5287,8 @@ const QUIZ_BANK = [
       {
         "q": "The max margin hyperplane that an SVM with quadratic kernel would learn on this dataset remains the same, regardless of which of the two classes we label as +1 and which one as -1",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5296,8 +5296,8 @@ const QUIZ_BANK = [
       {
         "q": "31 Richtig Erreichte Punkte 1,00 von 1,00 There exists no \\(k\\) for which a k-NN algorithm would predict class \"white\" for point (0,0)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5305,8 +5305,8 @@ const QUIZ_BANK = [
       {
         "q": "Consider a classifier for the above dataset in the form of a Feedforward Neural Network, with two input units for the two features \\(x_1, x_2\\) , one hidden unit with the \\(\\tanh\\) activation function, and one output unit with identity activation. We represent the two classes in the data as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and will predict class 1 (black) for an input when the value predicted at the output is higher than some threshold \\(\\tau\\) , class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct: Increasing the classification threshold \\(\\tau\\) cannot increase the recall of the model on class 0 on the training set",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5314,8 +5314,8 @@ const QUIZ_BANK = [
       {
         "q": "The single hidden unit is unnecessary and makes no difference; a network without hidden unit could learn the same function",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5323,8 +5323,8 @@ const QUIZ_BANK = [
       {
         "q": "The output predicted by the output unit is a probability",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5332,8 +5332,8 @@ const QUIZ_BANK = [
       {
         "q": "By choosing different values for \\(\\tau\\) (for a fixed learned model), we can obtain classifiers with different positions in ROC space",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5341,8 +5341,8 @@ const QUIZ_BANK = [
       {
         "q": "The output predicted by the output unit will always be in the interval \\([0,1]\\)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5350,8 +5350,8 @@ const QUIZ_BANK = [
       {
         "q": "42 Richtig Erreichte Punkte 1,00 von 1,00 With only two states, matrix \\(\\boldsymbol{A}\\) must be symmetric",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5359,8 +5359,8 @@ const QUIZ_BANK = [
       {
         "q": "If your neighbour never snores, one row of the matrix \\(\\boldsymbol{B}\\) will be all zeros",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5368,8 +5368,8 @@ const QUIZ_BANK = [
       {
         "q": "Matrix \\(\\boldsymbol{B}\\) represents a Markov Process",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false
@@ -5377,8 +5377,8 @@ const QUIZ_BANK = [
       {
         "q": "The diagonal of \\(\\boldsymbol{A}\\) must sum to 1.0",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [],
         "multi": false

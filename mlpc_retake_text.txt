@@ -45,19 +45,19 @@ Which	of	the	following	statements	are	correct?
 ,	
 \(p(\boldsymbol{x})	\leq	1/5000\)
 	
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 For	any	fish	
 \(\boldsymbol{x}	\in	\mathcal{D}\)
 ,	
 \(p(\boldsymbol{x})\)
 	is	a	vector	with	100	values
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 --- PAGE 2 ---
 Frage	
 3
@@ -76,16 +76,16 @@ For	any
 \(\boldsymbol{x}\)
 ,	
 \(\sum_i	p(\boldsymbol{x}	\mid	\omega_i)	=	1.0\)
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 \(P(\omega_1	\mid	\boldsymbol{x})\)
 	is	a	vector	with	5	entries
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 Consider	the	
 \(5	\times	5\)
 	zero-one	loss	function	
@@ -97,10 +97,10 @@ When	tested	on	some	specific	test	set
 \(\mathcal{T}\)
 ,	the	minimum-risk	classifier	will	end	up	in	exactly	the	same	position	in	ROC	space	as	a	MAP
 classifier
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Wahr'.
+False
+Die	richtige	Antwort	ist	'True'.
 --- PAGE 3 ---
 Frage	
 6
@@ -113,22 +113,22 @@ Erreichte	Punkte	1,00	von	1,00
 Johannes	Kepler	Universität	Linz
 Impressum
 \(\sum_i	\sum_j	\lambda_{ij}	=	1.0\)
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 If	we	multiply	all	values	in	
 \(\lambda\)
 	by	5,	the	result	will	be	an	invalid	loss	function
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 --- PAGE 4 ---
 Information
 Frage	
 8
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Frage	
 9
@@ -142,15 +142,15 @@ density	estimation
 Answer	the	following	questions:
 θ
 The	likelihood	function	cannot	be	negative	anywhere
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Wahr'.
+Die	richtige	Antwort	ist	'True'.
 The	y	values	in	the	lower	plot	cannot	be	probabilities,	because	they	are	negative
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Wahr'.
+False
+Die	richtige	Antwort	ist	'True'.
 --- PAGE 5 ---
 Frage	
 10
@@ -158,7 +158,7 @@ Richtig
 Erreichte	Punkte	1,00	von	1,00
 Frage	
 11
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Frage	
 12
@@ -175,21 +175,21 @@ at	the	middle
 Die	richtige	Antwort	ist:
 at	the	middle
 The	likelihood	function	is	itself	a	normal	distribution
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Falsch'.
+False
+Die	richtige	Antwort	ist	'False'.
 \(\hat{\theta}\)
 	is	the	maximum	probability	of	the	dataset
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 We	need	to	plot	the	likelihood	function	in	order	to	find	the	maximum
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 --- PAGE 6 ---
 Johannes	Kepler	Universität	Linz
 Impressum
@@ -201,11 +201,11 @@ Richtig
 Erreichte	Punkte	1,00	von	1,00
 Frage	
 15
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Frage	
 16
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Nearest	Neighbour	Classifiers
 Consider	a	k-nearest-neighbour	classifier	in	a	d-dimensional	numeric	feature	space,	with	a	training	set	
@@ -228,44 +228,44 @@ D
 |
 	is	the	number	of	given	training	examples,	then	…
 The	classifier	will	maximally	overfit	on	the	training	data
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 The	resulting	classifier	will	have	an	expected	accuracy	of	
 \(1/N\)
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Falsch'.
+False
+Die	richtige	Antwort	ist	'False'.
 Each	example	from	the	training	set	will	be	classified	into	the	correct	class
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Falsch'.
+False
+Die	richtige	Antwort	ist	'False'.
 --- PAGE 8 ---
 Frage	
 17
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Frage	
 18
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Johannes	Kepler	Universität	Linz
 Impressum
 The	resubstitution	estimate	on	
 \(\mathcal{D}\)
 	will	be	1.0
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Falsch'.
+False
+Die	richtige	Antwort	ist	'False'.
 All	test	examples	will	be	classified	into	the	same	class
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Wahr'.
+Die	richtige	Antwort	ist	'True'.
 --- PAGE 9 ---
 Information
 Frage	
@@ -292,22 +292,22 @@ builds	a	one-level	tree	by	splitting	the	data	according	to	this	feature,	and	lab
 respective	node.
 Which	of	the	following	statements	(if	any)	are	true?
 It	makes	no	sense	to	combine	several	such	trees	into	a	Random	Forest,	because	the	trees	rely	on	incompatible	features
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 The	chosen	feature	split	might	have	an	information	gain	of	zero
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Wahr'.
+False
+Die	richtige	Antwort	ist	'True'.
 Any	such	decision	tree	will	have	an	accuracy	on	the	training	set	
 \(\mathcal{D}\)
 	that	is	higher	than	the	default	accuracy
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 --- PAGE 10 ---
 Frage	
 22
@@ -321,15 +321,15 @@ Johannes	Kepler	Universität	Linz
 Impressum
 Any	such	decision	tree	will	have	exactly	the	default	accuracy	on	the	training	set	
 \(\mathcal{D}\)
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 The	resulting	structure	is	not	a	decision	tree
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 --- PAGE 11 ---
 Information
 Information
@@ -349,14 +349,14 @@ indicated	by	filled	vs.	empty	dots:
 dataset
 Which	of	the	following	statements	are	correct?	
 A	support	vector	machine	with	a	quadratic	kernel	can	achieve	an	error	of	zero	on	this	dataset
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Wahr'.
+False
+Die	richtige	Antwort	ist	'True'.
 --- PAGE 12 ---
 Frage	
 25
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Frage	
 26
@@ -364,7 +364,7 @@ Richtig
 Erreichte	Punkte	1,00	von	1,00
 Frage	
 27
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Frage	
 28
@@ -374,26 +374,26 @@ If	we	map	this	dataset	into	a	new	2D	feature	space	defined	by	features
 \(x_1^2,	x_2^2\)
 ,	ID3	can	separate	the	two	classes	with	a	two-level	decision	tree
 (i.e.,	two	levels	of	splits)
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Falsch'.
+False
+Die	richtige	Antwort	ist	'False'.
 A	decision	tree	learned	by	ID3	would	have	to	have	an	infinite	number	of	splits	(i.e.,	infinite	depth)	in	order	to	achieve	an	error	of	zero	on	this	dataset
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 A	nearest-neighbour	classifier	can	only	perform	well	on	this	dataset	if	it	uses	circular	(and	not	rectangular)	neighbourhoods
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Falsch'.
+False
+Die	richtige	Antwort	ist	'False'.
 The	max	margin	hyperplane	that	an	SVM	with	quadratic	kernel	would	learn	on	this	dataset	remains	the	same,	regardless	of	which	of	the	two	classes	we
 label	as	+1	and	which	one	as	-1
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Wahr'.
+False
+Die	richtige	Antwort	ist	'True'.
 --- PAGE 13 ---
 Frage	
 29
@@ -402,7 +402,7 @@ Erreichte	Punkte	1,00	von	1,00
 Information
 Frage	
 30
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Frage	
 31
@@ -411,10 +411,10 @@ Erreichte	Punkte	1,00	von	1,00
 There	exists	no	
 \(k\)
 	for	which	a	k-NN	algorithm	would	predict	class	"white"	for	point	(0,0)
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 Consider	a	classifier	for	the	above	dataset	in	the	form	of	a	Feedforward	Neural	Network,	with	two	input	units	for	the	two	features	
 \(x_1,	x_2\)
 ,
@@ -431,23 +431,23 @@ Which	of	the	following	statements	about	this	model	are	correct:
 Increasing	the	classification	threshold	
 \(\tau\)
 	cannot	increase	the	recall	of	the	model	on	class	0	on	the	training	set
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Falsch'.
+False
+Die	richtige	Antwort	ist	'False'.
 The	single	hidden	unit	is	unnecessary	and	makes	no	difference;	a	network	without	hidden	unit	could	learn	the	same	function
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 --- PAGE 14 ---
 Frage	
 32
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Frage	
 33
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Frage	
 34
@@ -455,34 +455,34 @@ Richtig
 Erreichte	Punkte	1,00	von	1,00
 Frage	
 35
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 If	we	set	the	threshold	
 \(\tau\)
 	to	0.0	or	1.0,	all	possible	inputs	will	always	be	classified	into	the	same	class	(black	or	white,	respectively),	by	any	model
 trained	in	this	way
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Falsch'.
+False
+Die	richtige	Antwort	ist	'False'.
 The	output	predicted	by	the	output	unit	is	a	probability
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Falsch'.
+False
+Die	richtige	Antwort	ist	'False'.
 By	choosing	different	values	for	
 \(\tau\)
 	(for	a	fixed	learned	model),	we	can	obtain	classifiers	with	different	positions	in	ROC	space
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Wahr'.
+False
+Die	richtige	Antwort	ist	'True'.
 The	output	predicted	by	the	output	unit	will	always	be	in	the	interval	
 \([0,1]\)
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Falsch'.
+False
+Die	richtige	Antwort	ist	'False'.
 --- PAGE 15 ---
 Johannes	Kepler	Universität	Linz
 Impressum
@@ -494,11 +494,11 @@ Richtig
 Erreichte	Punkte	2,00	von	2,00
 Frage	
 37
-Falsch
+False
 Erreichte	Punkte	0,00	von	2,00
 Frage	
 38
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Information
 Hidden	Markov	Models
@@ -579,7 +579,7 @@ Which	of	the	following	statements	about	this	model	are	true?
 --- PAGE 17 ---
 Frage	
 39
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Frage	
 40
@@ -587,7 +587,7 @@ Richtig
 Erreichte	Punkte	1,00	von	1,00
 Frage	
 41
-Falsch
+False
 Erreichte	Punkte	0,00	von	1,00
 Frage	
 42
@@ -596,31 +596,31 @@ Erreichte	Punkte	1,00	von	1,00
 With	only	two	states,	matrix	
 \(\boldsymbol{A}\)
 	must	be	symmetric
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Falsch'.
+False
+Die	richtige	Antwort	ist	'False'.
 If	your	neighbour	never	snores,	one	row	of	the	matrix	
 \(\boldsymbol{B}\)
 	will	be	all	zeros
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Wahr'.
+False
+Die	richtige	Antwort	ist	'True'.
 Matrix	
 \(\boldsymbol{B}\)
 	represents	a	Markov	Process	
-Wahr
+True
 	
-Falsch
-Die	richtige	Antwort	ist	'Falsch'.
+False
+Die	richtige	Antwort	ist	'False'.
 The	diagonal	of	
 \(\boldsymbol{A}\)
 	must	sum	to	1.0
-Wahr
-Falsch
+True
+False
 	
-Die	richtige	Antwort	ist	'Falsch'.
+Die	richtige	Antwort	ist	'False'.
 --- PAGE 18 ---
 Frage	
 43

@@ -20,10 +20,10 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
    For any fish \(\boldsymbol{x} \in \mathcal{D}\), \(p(\boldsymbol{x}) \leq 1/5000\)
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 2
 
@@ -31,20 +31,20 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   For any fish \(\boldsymbol{x} \in \mathcal{D}\), \(p(\boldsymbol{x})\) is a vector with 100 values
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 Frage 3
 
 Richtig
 Erreichte Punkte 1,00 von 1,00
 
   For any \(\boldsymbol{x}\), \(\sum_i p(\boldsymbol{x} \mid \omega_i) = 1.0\)
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 4
 
@@ -52,10 +52,10 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   \(P(\omega_1 \mid \boldsymbol{x})\) is a vector with 5 entries
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Information
 
@@ -71,20 +71,20 @@ Erreichte Punkte 1,00 von 1,00
   When tested on some specific test set \(\mathcal{T}\), the minimum-risk classifier will end up in exactly the same position in ROC space as a MAP
   classifier
 
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Wahr'.
+  Die richtige Antwort ist 'True'.
 Frage 6                                                                                       Impressum
 
 Richtig
 Erreichte Punkte 1,00 von 1,00
 
   \(\sum_i \sum_j \lambda_{ij} = 1.0\)
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 7
 
@@ -92,12 +92,12 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   If we multiply all values in \(\lambda\) by 5, the result will be an invalid loss function
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
-   Johannes Kepler Universität Linz
+   Johannes Kepler Universitï¿½t Linz
 Information
 
   Density Estimation
@@ -111,14 +111,14 @@ Erreichte Punkte 1,00 von 1,00
 
 Frage 8
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   The likelihood function cannot be negative anywhere
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Wahr'.
+  Die richtige Antwort ist 'True'.
 
 Frage 9
 
@@ -126,10 +126,10 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   The y values in the lower plot cannot be probabilities, because they are negative
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Wahr'.
+  Die richtige Antwort ist 'True'.
 Frage 10
 
 Richtig
@@ -145,14 +145,14 @@ Erreichte Punkte 1,00 von 1,00
 
 Frage 11
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   The likelihood function is itself a normal distribution
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 12
 
@@ -160,10 +160,10 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   \(\hat{\theta}\) is the maximum probability of the dataset
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 13
 
@@ -171,11 +171,11 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   We need to plot the likelihood function in order to find the maximum
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
-Johannes Kepler Universität Linz  Impressum
+  Die richtige Antwort ist 'False'.
+Johannes Kepler Universitï¿½t Linz  Impressum
 Information
 
   Nearest Neighbour Classifiers
@@ -191,55 +191,55 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   The classifier will maximally overfit on the training data
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 15
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   The resulting classifier will have an expected accuracy of \(1/N\)
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 16
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   Each example from the training set will be classified into the correct class
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 Frage 17                                                      Impressum
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   The resubstitution estimate on \(\mathcal{D}\) will be 1.0
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 18
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   All test examples will be classified into the same class
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Wahr'.
+  Die richtige Antwort ist 'True'.
 
-   Johannes Kepler Universität Linz
+   Johannes Kepler Universitï¿½t Linz
 Information
 
   Trees and Forests
@@ -255,10 +255,10 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   It makes no sense to combine several such trees into a Random Forest, because the trees rely on incompatible features
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 20
 
@@ -266,10 +266,10 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   The chosen feature split might have an information gain of zero
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Wahr'.
+  Die richtige Antwort ist 'True'.
 
 Frage 21
 
@@ -277,20 +277,20 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   Any such decision tree will have an accuracy on the training set \(\mathcal{D}\) that is higher than the default accuracy
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 Frage 22                                                                                             Impressum
 
 Richtig
 Erreichte Punkte 1,00 von 1,00
 
   Any such decision tree will have exactly the default accuracy on the training set \(\mathcal{D}\)
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 23
 
@@ -298,12 +298,12 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   The resulting structure is not a decision tree
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
-   Johannes Kepler Universität Linz
+   Johannes Kepler Universitï¿½t Linz
 Information
 
   Various Classifiers
@@ -323,22 +323,22 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   A support vector machine with a quadratic kernel can achieve an error of zero on this dataset
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Wahr'.
+  Die richtige Antwort ist 'True'.
 Frage 25
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   If we map this dataset into a new 2D feature space defined by features \(x_1^2, x_2^2\), ID3 can separate the two classes with a two-level decision tree
   (i.e., two levels of splits)
 
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 26
 
@@ -346,21 +346,21 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   A decision tree learned by ID3 would have to have an infinite number of splits (i.e., infinite depth) in order to achieve an error of zero on this dataset
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 27
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   A nearest-neighbour classifier can only perform well on this dataset if it uses circular (and not rectangular) neighbourhoods
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 28
 
@@ -370,20 +370,20 @@ Erreichte Punkte 1,00 von 1,00
   The max margin hyperplane that an SVM with quadratic kernel would learn on this dataset remains the same, regardless of which of the two classes we
   label as +1 and which one as -1
 
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Wahr'.
+  Die richtige Antwort ist 'True'.
 Frage 29
 
 Richtig
 Erreichte Punkte 1,00 von 1,00
 
   There exists no \(k\) for which a k-NN algorithm would predict class "white" for point (0,0)
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Information
 
@@ -395,14 +395,14 @@ Information
 
 Frage 30
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   Increasing the classification threshold \(\tau\) cannot increase the recall of the model on class 0 on the training set
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 31
 
@@ -410,33 +410,33 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   The single hidden unit is unnecessary and makes no difference; a network without hidden unit could learn the same function
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 Frage 32
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   If we set the threshold \(\tau\) to 0.0 or 1.0, all possible inputs will always be classified into the same class (black or white, respectively), by any model
   trained in this way
 
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 33
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   The output predicted by the output unit is a probability
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 34
 
@@ -444,22 +444,22 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   By choosing different values for \(\tau\) (for a fixed learned model), we can obtain classifiers with different positions in ROC space
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Wahr'.
+  Die richtige Antwort ist 'True'.
 
 Frage 35
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   The output predicted by the output unit will always be in the interval \([0,1]\)
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
-Johannes Kepler Universität Linz  Impressum
+  Die richtige Antwort ist 'False'.
+Johannes Kepler Universitï¿½t Linz  Impressum
 Information
 
   Hidden Markov Models
@@ -483,7 +483,7 @@ Erreichte Punkte 2,00 von 2,00
 
 Frage 37
 
-Falsch
+False
 Erreichte Punkte 0,00 von 2,00
 
   What is the dimension (number of rows and columns) of matrix \( B \) (as defined in the lecture slides)?
@@ -494,7 +494,7 @@ Erreichte Punkte 0,00 von 2,00
 
 Frage 38
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   What is the dimension of \( \Pi \) (as defined in the lecture slides)?
@@ -505,14 +505,14 @@ Information
   Which of the following statements about this model are true?
 Frage 39
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   With only two states, matrix \(\boldsymbol{A}\) must be symmetric
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 40
 
@@ -520,21 +520,21 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   If your neighbour never snores, one row of the matrix \(\boldsymbol{B}\) will be all zeros
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Wahr'.
+  Die richtige Antwort ist 'True'.
 
 Frage 41
 
-Falsch
+False
 Erreichte Punkte 0,00 von 1,00
 
   Matrix \(\boldsymbol{B}\) represents a Markov Process
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 
 Frage 42
 
@@ -542,10 +542,10 @@ Richtig
 Erreichte Punkte 1,00 von 1,00
 
   The diagonal of \(\boldsymbol{A}\) must sum to 1.0
-       Wahr
-       Falsch
+       True
+       False
 
-  Die richtige Antwort ist 'Falsch'.
+  Die richtige Antwort ist 'False'.
 Frage 43
 
 Richtig
@@ -560,5 +560,5 @@ Erreichte Punkte 1,00 von 1,00
   Die richtige Antwort ist:
   matrix \(\boldsymbol{A}\) of the model
 
-Johannes Kepler Universität Linz                                                                                                 Impressum
+Johannes Kepler Universitï¿½t Linz                                                                                                 Impressum
 

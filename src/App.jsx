@@ -6487,11 +6487,11 @@ const QUIZ_BANK_OLD = [
     "description": "Machine Learning Pattern Classification retake exam",
     "questions": [
       {
-        "context": "Bayesian Classification. Consider Bayes' Rule for classification: \\\\(P(\\\\omega_i \\\\mid \\\\boldsymbol{x}) = \\\\frac{p(\\\\boldsymbol{x} \\\\mid \\\\omega_i) P(\\\\omega_i)}{p(\\\\boldsymbol{x})}\\\\). Assume a classification problem with 5 (fish) classes, a 100-dimensional real-valued feature space, and a training set \\\\(\\\\mathcal{D}\\\\) consisting of 5000 examples. Which of the following statements are correct?",
-        "q": "For any fish \\\\(\\\\boldsymbol{x} \\\\in \\\\mathcal{D}\\\\), \\\\(p(\\\\boldsymbol{x}) \\\\leq 1/5000\\\\)",
+        "context": "Bayesian Classification. Consider Bayes' Rule for classification: \\(P(\\omega_i \\mid \\boldsymbol{x}) = \\frac{p(\\boldsymbol{x} \\mid \\omega_i) P(\\omega_i)}{p(\\boldsymbol{x})}\\). Assume a classification problem with 5 (fish) classes, a 100-dimensional real-valued feature space, and a training set \\(\\mathcal{D}\\) consisting of 5000 examples. Which of the following statements are correct?",
+        "q": "For any fish \\(\\boldsymbol{x} \\in \\mathcal{D}\\), \\(p(\\boldsymbol{x}) \\leq 1/5000\\)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6500,11 +6500,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "p(x) is a continuous density, not bounded by 1/N."
       },
       {
-        "context": "Bayesian Classification. Consider Bayes' Rule for classification: \\\\(P(\\\\omega_i \\\\mid \\\\boldsymbol{x}) = \\\\frac{p(\\\\boldsymbol{x} \\\\mid \\\\omega_i) P(\\\\omega_i)}{p(\\\\boldsymbol{x})}\\\\). Assume a classification problem with 5 (fish) classes, a 100-dimensional real-valued feature space, and a training set \\\\(\\\\mathcal{D}\\\\) consisting of 5000 examples. Which of the following statements are correct?",
-        "q": "For any fish \\\\(\\\\boldsymbol{x} \\\\in \\\\mathcal{D}\\\\), \\\\(p(\\\\boldsymbol{x})\\\\) is a vector with 100 values",
+        "context": "Bayesian Classification. Consider Bayes' Rule for classification: \\(P(\\omega_i \\mid \\boldsymbol{x}) = \\frac{p(\\boldsymbol{x} \\mid \\omega_i) P(\\omega_i)}{p(\\boldsymbol{x})}\\). Assume a classification problem with 5 (fish) classes, a 100-dimensional real-valued feature space, and a training set \\(\\mathcal{D}\\) consisting of 5000 examples. Which of the following statements are correct?",
+        "q": "For any fish \\(\\boldsymbol{x} \\in \\mathcal{D}\\), \\(p(\\boldsymbol{x})\\) is a vector with 100 values",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6513,11 +6513,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "p(x) is a scalar density value."
       },
       {
-        "context": "Bayesian Classification. Consider Bayes' Rule for classification: \\\\(P(\\\\omega_i \\\\mid \\\\boldsymbol{x}) = \\\\frac{p(\\\\boldsymbol{x} \\\\mid \\\\omega_i) P(\\\\omega_i)}{p(\\\\boldsymbol{x})}\\\\). Assume a classification problem with 5 (fish) classes, a 100-dimensional real-valued feature space, and a training set \\\\(\\\\mathcal{D}\\\\) consisting of 5000 examples. Which of the following statements are correct?",
-        "q": "For any \\\\(\\\\boldsymbol{x}\\\\), \\\\(\\\\sum_i p(\\\\boldsymbol{x} \\\\mid \\\\omega_i) = 1.0\\\\)",
+        "context": "Bayesian Classification. Consider Bayes' Rule for classification: \\(P(\\omega_i \\mid \\boldsymbol{x}) = \\frac{p(\\boldsymbol{x} \\mid \\omega_i) P(\\omega_i)}{p(\\boldsymbol{x})}\\). Assume a classification problem with 5 (fish) classes, a 100-dimensional real-valued feature space, and a training set \\(\\mathcal{D}\\) consisting of 5000 examples. Which of the following statements are correct?",
+        "q": "For any \\(\\boldsymbol{x}\\), \\(\\sum_i p(\\boldsymbol{x} \\mid \\omega_i) = 1.0\\)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6526,11 +6526,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "Densities for different classes do not sum to 1 over classes; they integrate to 1 over x."
       },
       {
-        "context": "Bayesian Classification. Consider Bayes' Rule for classification: \\\\(P(\\\\omega_i \\\\mid \\\\boldsymbol{x}) = \\\\frac{p(\\\\boldsymbol{x} \\\\mid \\\\omega_i) P(\\\\omega_i)}{p(\\\\boldsymbol{x})}\\\\). Assume a classification problem with 5 (fish) classes, a 100-dimensional real-valued feature space, and a training set \\\\(\\\\mathcal{D}\\\\) consisting of 5000 examples. Which of the following statements are correct?",
-        "q": "\\\\(P(\\\\omega_1 \\\\mid \\\\boldsymbol{x})\\\\) is a vector with 5 entries",
+        "context": "Bayesian Classification. Consider Bayes' Rule for classification: \\(P(\\omega_i \\mid \\boldsymbol{x}) = \\frac{p(\\boldsymbol{x} \\mid \\omega_i) P(\\omega_i)}{p(\\boldsymbol{x})}\\). Assume a classification problem with 5 (fish) classes, a 100-dimensional real-valued feature space, and a training set \\(\\mathcal{D}\\) consisting of 5000 examples. Which of the following statements are correct?",
+        "q": "\\(P(\\omega_1 \\mid \\boldsymbol{x})\\) is a vector with 5 entries",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6539,11 +6539,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "It is a scalar posterior for class 1."
       },
       {
-        "context": "Minimum-Risk Classifier (zero-one loss). Consider the \\\\(5 \\\\times 5\\\\) zero-one loss function \\\\(\\\\lambda\\\\) for the above 5-class problem, a specific set of prior and class-conditional distributions learned from some training set, and a Bayesian Minimum-Risk Classifier as described in the lecture slides. Which of the following statements are correct?",
-        "q": "When tested on some specific test set \\\\(\\\\mathcal{T}\\\\), the minimum-risk classifier will end up in exactly the same position in ROC space as a MAP classifier",
+        "context": "Minimum-Risk Classifier (zero-one loss). Consider the \\(5 \\times 5\\) zero-one loss function \\(\\lambda\\) for the above 5-class problem, a specific set of prior and class-conditional distributions learned from some training set, and a Bayesian Minimum-Risk Classifier as described in the lecture slides. Which of the following statements are correct?",
+        "q": "When tested on some specific test set \\(\\mathcal{T}\\), the minimum-risk classifier will end up in exactly the same position in ROC space as a MAP classifier",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           0
@@ -6552,11 +6552,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "Under zero-one loss, the minimum-risk classifier is equivalent to MAP."
       },
       {
-        "context": "Minimum-Risk Classifier (zero-one loss). Consider the \\\\(5 \\\\times 5\\\\) zero-one loss function \\\\(\\\\lambda\\\\) for the above 5-class problem, a specific set of prior and class-conditional distributions learned from some training set, and a Bayesian Minimum-Risk Classifier as described in the lecture slides. Which of the following statements are correct?",
-        "q": "\\\\(\\\\sum_i \\\\sum_j \\\\lambda_{ij} = 1.0\\\\)",
+        "context": "Minimum-Risk Classifier (zero-one loss). Consider the \\(5 \\times 5\\) zero-one loss function \\(\\lambda\\) for the above 5-class problem, a specific set of prior and class-conditional distributions learned from some training set, and a Bayesian Minimum-Risk Classifier as described in the lecture slides. Which of the following statements are correct?",
+        "q": "\\(\\sum_i \\sum_j \\lambda_{ij} = 1.0\\)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6565,11 +6565,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "For 5x5 zero-one loss, the off-diagonal sum is 20, not 1."
       },
       {
-        "context": "Minimum-Risk Classifier (zero-one loss). Consider the \\\\(5 \\\\times 5\\\\) zero-one loss function \\\\(\\\\lambda\\\\) for the above 5-class problem, a specific set of prior and class-conditional distributions learned from some training set, and a Bayesian Minimum-Risk Classifier as described in the lecture slides. Which of the following statements are correct?",
-        "q": "If we multiply all values in \\\\(\\\\lambda\\\\) by 5, the result will be an invalid loss function",
+        "context": "Minimum-Risk Classifier (zero-one loss). Consider the \\(5 \\times 5\\) zero-one loss function \\(\\lambda\\) for the above 5-class problem, a specific set of prior and class-conditional distributions learned from some training set, and a Bayesian Minimum-Risk Classifier as described in the lecture slides. Which of the following statements are correct?",
+        "q": "If we multiply all values in \\(\\lambda\\) by 5, the result will be an invalid loss function",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6578,11 +6578,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "Scaling a loss function by a positive constant yields a valid loss function."
       },
       {
-        "context": "Density Estimation. Consider a figure from the lecture slides in the context of estimating the mean \\\\(\\\\mu\\\\) of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset. The figure shows three stacked plots: the top plot shows the data and candidate normal densities, the middle plot shows the likelihood function as a function of \\\\(\\\\mu\\\\), and the bottom plot shows the log-likelihood (with negative y values). Answer the following questions:",
+        "context": "Density Estimation. Consider a figure from the lecture slides in the context of estimating the mean \\(\\mu\\) of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset. The figure shows three stacked plots: the top plot shows the data and candidate normal densities, the middle plot shows the likelihood function as a function of \\(\\mu\\), and the bottom plot shows the log-likelihood (with negative y values). Answer the following questions:",
         "q": "The likelihood function cannot be negative anywhere",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           0
@@ -6591,11 +6591,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "Likelihoods are products of densities, which are non-negative."
       },
       {
-        "context": "Density Estimation. Consider a figure from the lecture slides in the context of estimating the mean \\\\(\\\\mu\\\\) of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset. The figure shows three stacked plots: the top plot shows the data and candidate normal densities, the middle plot shows the likelihood function as a function of \\\\(\\\\mu\\\\), and the bottom plot shows the log-likelihood (with negative y values). Answer the following questions:",
+        "context": "Density Estimation. Consider a figure from the lecture slides in the context of estimating the mean \\(\\mu\\) of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset. The figure shows three stacked plots: the top plot shows the data and candidate normal densities, the middle plot shows the likelihood function as a function of \\(\\mu\\), and the bottom plot shows the log-likelihood (with negative y values). Answer the following questions:",
         "q": "The y values in the lower plot cannot be probabilities, because they are negative",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           0
@@ -6604,7 +6604,7 @@ const QUIZ_BANK_OLD = [
         "explanation": "The lower plot shows log-likelihood values, which can be negative."
       },
       {
-        "context": "Density Estimation. Consider a figure from the lecture slides in the context of estimating the mean \\\\(\\\\mu\\\\) of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset. The figure shows three stacked plots: the top plot shows the data and candidate normal densities, the middle plot shows the likelihood function as a function of \\\\(\\\\mu\\\\), and the bottom plot shows the log-likelihood (with negative y values). Answer the following questions:",
+        "context": "Density Estimation. Consider a figure from the lecture slides in the context of estimating the mean \\(\\mu\\) of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset. The figure shows three stacked plots: the top plot shows the data and candidate normal densities, the middle plot shows the likelihood function as a function of \\(\\mu\\), and the bottom plot shows the log-likelihood (with negative y values). Answer the following questions:",
         "q": "In the figure, the likelihood function is the plot",
         "opts": [
           "at the top",
@@ -6617,11 +6617,11 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "context": "Density Estimation. Consider a figure from the lecture slides in the context of estimating the mean \\\\(\\\\mu\\\\) of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset. The figure shows three stacked plots: the top plot shows the data and candidate normal densities, the middle plot shows the likelihood function as a function of \\\\(\\\\mu\\\\), and the bottom plot shows the log-likelihood (with negative y values). Answer the following questions:",
+        "context": "Density Estimation. Consider a figure from the lecture slides in the context of estimating the mean \\(\\mu\\) of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset. The figure shows three stacked plots: the top plot shows the data and candidate normal densities, the middle plot shows the likelihood function as a function of \\(\\mu\\), and the bottom plot shows the log-likelihood (with negative y values). Answer the following questions:",
         "q": "The likelihood function is itself a normal distribution",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6630,11 +6630,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "The likelihood as a function of the parameter is not a normalized probability distribution."
       },
       {
-        "context": "Density Estimation. Consider a figure from the lecture slides in the context of estimating the mean \\\\(\\\\mu\\\\) of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset. The figure shows three stacked plots: the top plot shows the data and candidate normal densities, the middle plot shows the likelihood function as a function of \\\\(\\\\mu\\\\), and the bottom plot shows the log-likelihood (with negative y values). Answer the following questions:",
-        "q": "\\\\(\\\\hat{\\\\theta}\\\\) is the maximum probability of the dataset",
+        "context": "Density Estimation. Consider a figure from the lecture slides in the context of estimating the mean \\(\\mu\\) of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset. The figure shows three stacked plots: the top plot shows the data and candidate normal densities, the middle plot shows the likelihood function as a function of \\(\\mu\\), and the bottom plot shows the log-likelihood (with negative y values). Answer the following questions:",
+        "q": "\\(\\hat{\\theta}\\) is the maximum probability of the dataset",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6643,11 +6643,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "It is the parameter value that maximizes likelihood, not a probability."
       },
       {
-        "context": "Density Estimation. Consider a figure from the lecture slides in the context of estimating the mean \\\\(\\\\mu\\\\) of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset. The figure shows three stacked plots: the top plot shows the data and candidate normal densities, the middle plot shows the likelihood function as a function of \\\\(\\\\mu\\\\), and the bottom plot shows the log-likelihood (with negative y values). Answer the following questions:",
+        "context": "Density Estimation. Consider a figure from the lecture slides in the context of estimating the mean \\(\\mu\\) of a normal distribution (with given fixed variance) from a set of observations in a 1D dataset. The figure shows three stacked plots: the top plot shows the data and candidate normal densities, the middle plot shows the likelihood function as a function of \\(\\mu\\), and the bottom plot shows the log-likelihood (with negative y values). Answer the following questions:",
         "q": "We need to plot the likelihood function in order to find the maximum",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6656,11 +6656,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "The maximum can be found analytically by setting the derivative to zero."
       },
       {
-        "context": "1-NN / Nearest Neighbour Classifiers. Consider a k-nearest-neighbour classifier in a d-dimensional numeric feature space, with a training set \\\\(\\\\mathcal{D}\\\\) containing > 0 instances of two classes, and with the Euclidean distance as distance function. If we set \\\\(k = N\\\\), where \\\\(N = |\\\\mathcal{D}|\\\\) is the number of given training examples, then which of the following statements are true?",
+        "context": "1-NN / Nearest Neighbour Classifiers. Consider a k-nearest-neighbour classifier in a d-dimensional numeric feature space, with a training set \\(\\mathcal{D}\\) containing > 0 instances of two classes, and with the Euclidean distance as distance function. If we set \\(k = N\\), where \\(N = |\\mathcal{D}|\\) is the number of given training examples, then which of the following statements are true?",
         "q": "The classifier will maximally overfit on the training data",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6669,11 +6669,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "k=N gives the majority class for every input — maximum underfitting."
       },
       {
-        "context": "1-NN / Nearest Neighbour Classifiers. Consider a k-nearest-neighbour classifier in a d-dimensional numeric feature space, with a training set \\\\(\\\\mathcal{D}\\\\) containing > 0 instances of two classes, and with the Euclidean distance as distance function. If we set \\\\(k = N\\\\), where \\\\(N = |\\\\mathcal{D}|\\\\) is the number of given training examples, then which of the following statements are true?",
-        "q": "The resulting classifier will have an expected accuracy of \\\\(1/N\\\\)",
+        "context": "1-NN / Nearest Neighbour Classifiers. Consider a k-nearest-neighbour classifier in a d-dimensional numeric feature space, with a training set \\(\\mathcal{D}\\) containing > 0 instances of two classes, and with the Euclidean distance as distance function. If we set \\(k = N\\), where \\(N = |\\mathcal{D}|\\) is the number of given training examples, then which of the following statements are true?",
+        "q": "The resulting classifier will have an expected accuracy of \\(1/N\\)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6681,11 +6681,11 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "context": "1-NN / Nearest Neighbour Classifiers. Consider a k-nearest-neighbour classifier in a d-dimensional numeric feature space, with a training set \\\\(\\\\mathcal{D}\\\\) containing > 0 instances of two classes, and with the Euclidean distance as distance function. If we set \\\\(k = N\\\\), where \\\\(N = |\\\\mathcal{D}|\\\\) is the number of given training examples, then which of the following statements are true?",
+        "context": "1-NN / Nearest Neighbour Classifiers. Consider a k-nearest-neighbour classifier in a d-dimensional numeric feature space, with a training set \\(\\mathcal{D}\\) containing > 0 instances of two classes, and with the Euclidean distance as distance function. If we set \\(k = N\\), where \\(N = |\\mathcal{D}|\\) is the number of given training examples, then which of the following statements are true?",
         "q": "Each example from the training set will be classified into the correct class",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6694,11 +6694,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "All examples receive the same (majority) prediction."
       },
       {
-        "context": "1-NN / Nearest Neighbour Classifiers. Consider a k-nearest-neighbour classifier in a d-dimensional numeric feature space, with a training set \\\\(\\\\mathcal{D}\\\\) containing > 0 instances of two classes, and with the Euclidean distance as distance function. If we set \\\\(k = N\\\\), where \\\\(N = |\\\\mathcal{D}|\\\\) is the number of given training examples, then which of the following statements are true?",
-        "q": "The resubstitution estimate on \\\\(\\\\mathcal{D}\\\\) will be 1.0",
+        "context": "1-NN / Nearest Neighbour Classifiers. Consider a k-nearest-neighbour classifier in a d-dimensional numeric feature space, with a training set \\(\\mathcal{D}\\) containing > 0 instances of two classes, and with the Euclidean distance as distance function. If we set \\(k = N\\), where \\(N = |\\mathcal{D}|\\) is the number of given training examples, then which of the following statements are true?",
+        "q": "The resubstitution estimate on \\(\\mathcal{D}\\) will be 1.0",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6706,11 +6706,11 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "context": "1-NN / Nearest Neighbour Classifiers. Consider a k-nearest-neighbour classifier in a d-dimensional numeric feature space, with a training set \\\\(\\\\mathcal{D}\\\\) containing > 0 instances of two classes, and with the Euclidean distance as distance function. If we set \\\\(k = N\\\\), where \\\\(N = |\\\\mathcal{D}|\\\\) is the number of given training examples, then which of the following statements are true?",
+        "context": "1-NN / Nearest Neighbour Classifiers. Consider a k-nearest-neighbour classifier in a d-dimensional numeric feature space, with a training set \\(\\mathcal{D}\\) containing > 0 instances of two classes, and with the Euclidean distance as distance function. If we set \\(k = N\\), where \\(N = |\\mathcal{D}|\\) is the number of given training examples, then which of the following statements are true?",
         "q": "All test examples will be classified into the same class",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           0
@@ -6719,11 +6719,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "With k=N, every query uses all training data and returns the majority class."
       },
       {
-        "context": "Trees and Forests. Consider a decision tree learner that operates as follows: given a training set \\\\(\\\\mathcal{D}\\\\) and a set of discrete features \\\\(F\\\\), it randomly selects one feature from \\\\(F\\\\), builds a one-level tree by splitting the data according to this feature, and labels the resulting subnodes as leaves with the majority class in each respective node. Which of the following statements (if any) are true?",
+        "context": "Trees and Forests. Consider a decision tree learner that operates as follows: given a training set \\(\\mathcal{D}\\) and a set of discrete features \\(F\\), it randomly selects one feature from \\(F\\), builds a one-level tree by splitting the data according to this feature, and labels the resulting subnodes as leaves with the majority class in each respective node. Which of the following statements (if any) are true?",
         "q": "It makes no sense to combine several such trees into a Random Forest, because the trees rely on incompatible features",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6731,11 +6731,11 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "context": "Trees and Forests. Consider a decision tree learner that operates as follows: given a training set \\\\(\\\\mathcal{D}\\\\) and a set of discrete features \\\\(F\\\\), it randomly selects one feature from \\\\(F\\\\), builds a one-level tree by splitting the data according to this feature, and labels the resulting subnodes as leaves with the majority class in each respective node. Which of the following statements (if any) are true?",
+        "context": "Trees and Forests. Consider a decision tree learner that operates as follows: given a training set \\(\\mathcal{D}\\) and a set of discrete features \\(F\\), it randomly selects one feature from \\(F\\), builds a one-level tree by splitting the data according to this feature, and labels the resulting subnodes as leaves with the majority class in each respective node. Which of the following statements (if any) are true?",
         "q": "The chosen feature split might have an information gain of zero",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           0
@@ -6744,11 +6744,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "A randomly chosen feature can be uninformative."
       },
       {
-        "context": "Trees and Forests. Consider a decision tree learner that operates as follows: given a training set \\\\(\\\\mathcal{D}\\\\) and a set of discrete features \\\\(F\\\\), it randomly selects one feature from \\\\(F\\\\), builds a one-level tree by splitting the data according to this feature, and labels the resulting subnodes as leaves with the majority class in each respective node. Which of the following statements (if any) are true?",
-        "q": "Any such decision tree will have an accuracy on the training set \\\\(\\\\mathcal{D}\\\\) that is higher than the default accuracy",
+        "context": "Trees and Forests. Consider a decision tree learner that operates as follows: given a training set \\(\\mathcal{D}\\) and a set of discrete features \\(F\\), it randomly selects one feature from \\(F\\), builds a one-level tree by splitting the data according to this feature, and labels the resulting subnodes as leaves with the majority class in each respective node. Which of the following statements (if any) are true?",
+        "q": "Any such decision tree will have an accuracy on the training set \\(\\mathcal{D}\\) that is higher than the default accuracy",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6757,11 +6757,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "If info gain is 0, accuracy equals default accuracy."
       },
       {
-        "context": "Trees and Forests. Consider a decision tree learner that operates as follows: given a training set \\\\(\\\\mathcal{D}\\\\) and a set of discrete features \\\\(F\\\\), it randomly selects one feature from \\\\(F\\\\), builds a one-level tree by splitting the data according to this feature, and labels the resulting subnodes as leaves with the majority class in each respective node. Which of the following statements (if any) are true?",
-        "q": "Any such decision tree will have exactly the default accuracy on the training set \\\\(\\\\mathcal{D}\\\\)",
+        "context": "Trees and Forests. Consider a decision tree learner that operates as follows: given a training set \\(\\mathcal{D}\\) and a set of discrete features \\(F\\), it randomly selects one feature from \\(F\\), builds a one-level tree by splitting the data according to this feature, and labels the resulting subnodes as leaves with the majority class in each respective node. Which of the following statements (if any) are true?",
+        "q": "Any such decision tree will have exactly the default accuracy on the training set \\(\\mathcal{D}\\)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6770,11 +6770,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "It can be higher when a useful feature is selected."
       },
       {
-        "context": "Trees and Forests. Consider a decision tree learner that operates as follows: given a training set \\\\(\\\\mathcal{D}\\\\) and a set of discrete features \\\\(F\\\\), it randomly selects one feature from \\\\(F\\\\), builds a one-level tree by splitting the data according to this feature, and labels the resulting subnodes as leaves with the majority class in each respective node. Which of the following statements (if any) are true?",
+        "context": "Trees and Forests. Consider a decision tree learner that operates as follows: given a training set \\(\\mathcal{D}\\) and a set of discrete features \\(F\\), it randomly selects one feature from \\(F\\), builds a one-level tree by splitting the data according to this feature, and labels the resulting subnodes as leaves with the majority class in each respective node. Which of the following statements (if any) are true?",
         "q": "The resulting structure is not a decision tree",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6783,11 +6783,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "A one-level tree (decision stump) is still a decision tree."
       },
       {
-        "context": "Various Classifiers (2-class x1/x2 dataset). Consider a 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features \\\\(x_1, x_2\\\\), where the two classes are indicated by filled vs. empty dots. The dataset is not linearly separable: filled (black) dots form an inner cluster near the origin and empty (white) dots surround them in a roughly circular/annular arrangement. Which of the following statements are correct?",
+        "context": "Various Classifiers (2-class x1/x2 dataset). Consider a 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features \\(x_1, x_2\\), where the two classes are indicated by filled vs. empty dots. The dataset is not linearly separable: filled (black) dots form an inner cluster near the origin and empty (white) dots surround them in a roughly circular/annular arrangement. Which of the following statements are correct?",
         "q": "A support vector machine with a quadratic kernel can achieve an error of zero on this dataset",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           0
@@ -6796,11 +6796,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "A quadratic kernel can model a circular boundary."
       },
       {
-        "context": "Various Classifiers (2-class x1/x2 dataset). Consider a 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features \\\\(x_1, x_2\\\\), where the two classes are indicated by filled vs. empty dots. The dataset is not linearly separable: filled (black) dots form an inner cluster near the origin and empty (white) dots surround them in a roughly circular/annular arrangement. Which of the following statements are correct?",
-        "q": "If we map this dataset into a new 2D feature space defined by features \\\\(x_1^2, x_2^2\\\\), ID3 can separate the two classes with a two-level decision tree (i.e., two levels of splits)",
+        "context": "Various Classifiers (2-class x1/x2 dataset). Consider a 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features \\(x_1, x_2\\), where the two classes are indicated by filled vs. empty dots. The dataset is not linearly separable: filled (black) dots form an inner cluster near the origin and empty (white) dots surround them in a roughly circular/annular arrangement. Which of the following statements are correct?",
+        "q": "If we map this dataset into a new 2D feature space defined by features \\(x_1^2, x_2^2\\), ID3 can separate the two classes with a two-level decision tree (i.e., two levels of splits)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6808,11 +6808,11 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "context": "Various Classifiers (2-class x1/x2 dataset). Consider a 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features \\\\(x_1, x_2\\\\), where the two classes are indicated by filled vs. empty dots. The dataset is not linearly separable: filled (black) dots form an inner cluster near the origin and empty (white) dots surround them in a roughly circular/annular arrangement. Which of the following statements are correct?",
+        "context": "Various Classifiers (2-class x1/x2 dataset). Consider a 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features \\(x_1, x_2\\), where the two classes are indicated by filled vs. empty dots. The dataset is not linearly separable: filled (black) dots form an inner cluster near the origin and empty (white) dots surround them in a roughly circular/annular arrangement. Which of the following statements are correct?",
         "q": "A decision tree learned by ID3 would have to have an infinite number of splits (i.e., infinite depth) in order to achieve an error of zero on this dataset",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6821,11 +6821,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "Finite-depth axis-aligned splits suffice for a finite dataset."
       },
       {
-        "context": "Various Classifiers (2-class x1/x2 dataset). Consider a 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features \\\\(x_1, x_2\\\\), where the two classes are indicated by filled vs. empty dots. The dataset is not linearly separable: filled (black) dots form an inner cluster near the origin and empty (white) dots surround them in a roughly circular/annular arrangement. Which of the following statements are correct?",
+        "context": "Various Classifiers (2-class x1/x2 dataset). Consider a 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features \\(x_1, x_2\\), where the two classes are indicated by filled vs. empty dots. The dataset is not linearly separable: filled (black) dots form an inner cluster near the origin and empty (white) dots surround them in a roughly circular/annular arrangement. Which of the following statements are correct?",
         "q": "A nearest-neighbour classifier can only perform well on this dataset if it uses circular (and not rectangular) neighbourhoods",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6833,11 +6833,11 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "context": "Various Classifiers (2-class x1/x2 dataset). Consider a 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features \\\\(x_1, x_2\\\\), where the two classes are indicated by filled vs. empty dots. The dataset is not linearly separable: filled (black) dots form an inner cluster near the origin and empty (white) dots surround them in a roughly circular/annular arrangement. Which of the following statements are correct?",
+        "context": "Various Classifiers (2-class x1/x2 dataset). Consider a 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features \\(x_1, x_2\\), where the two classes are indicated by filled vs. empty dots. The dataset is not linearly separable: filled (black) dots form an inner cluster near the origin and empty (white) dots surround them in a roughly circular/annular arrangement. Which of the following statements are correct?",
         "q": "The max margin hyperplane that an SVM with quadratic kernel would learn on this dataset remains the same, regardless of which of the two classes we label as +1 and which one as -1",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           0
@@ -6846,11 +6846,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "The max-margin separator is symmetric under class label swap."
       },
       {
-        "context": "Various Classifiers (2-class x1/x2 dataset). Consider a 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features \\\\(x_1, x_2\\\\), where the two classes are indicated by filled vs. empty dots. The dataset is not linearly separable: filled (black) dots form an inner cluster near the origin and empty (white) dots surround them in a roughly circular/annular arrangement. Which of the following statements are correct?",
-        "q": "There exists no \\\\(k\\\\) for which a k-NN algorithm would predict class \"white\" for point (0,0)",
+        "context": "Various Classifiers (2-class x1/x2 dataset). Consider a 2-class dataset (from the lecture slides) in a two-dimensional feature space defined by features \\(x_1, x_2\\), where the two classes are indicated by filled vs. empty dots. The dataset is not linearly separable: filled (black) dots form an inner cluster near the origin and empty (white) dots surround them in a roughly circular/annular arrangement. Which of the following statements are correct?",
+        "q": "There exists no \\(k\\) for which a k-NN algorithm would predict class \"white\" for point (0,0)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6859,11 +6859,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "For large enough k, the majority white class wins."
       },
       {
-        "context": "Feedforward NN. Consider a classifier for the above 2-class \\\\(x_1, x_2\\\\) dataset in the form of a Feedforward Neural Network, with two input units for the two features \\\\(x_1, x_2\\\\), one hidden unit with the \\\\(\\\\tanh\\\\) activation function, and one output unit with identity activation. We represent the two classes as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and predict class 1 (black) when the output value is higher than some threshold \\\\(\\\\tau\\\\), class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct?",
-        "q": "Increasing the classification threshold \\\\(\\\\tau\\\\) cannot increase the recall of the model on class 0 on the training set",
+        "context": "Feedforward NN. Consider a classifier for the above 2-class \\(x_1, x_2\\) dataset in the form of a Feedforward Neural Network, with two input units for the two features \\(x_1, x_2\\), one hidden unit with the \\(\\tanh\\) activation function, and one output unit with identity activation. We represent the two classes as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and predict class 1 (black) when the output value is higher than some threshold \\(\\tau\\), class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct?",
+        "q": "Increasing the classification threshold \\(\\tau\\) cannot increase the recall of the model on class 0 on the training set",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6872,11 +6872,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "Raising tau makes more inputs classified as 0, increasing class 0 recall."
       },
       {
-        "context": "Feedforward NN. Consider a classifier for the above 2-class \\\\(x_1, x_2\\\\) dataset in the form of a Feedforward Neural Network, with two input units for the two features \\\\(x_1, x_2\\\\), one hidden unit with the \\\\(\\\\tanh\\\\) activation function, and one output unit with identity activation. We represent the two classes as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and predict class 1 (black) when the output value is higher than some threshold \\\\(\\\\tau\\\\), class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct?",
+        "context": "Feedforward NN. Consider a classifier for the above 2-class \\(x_1, x_2\\) dataset in the form of a Feedforward Neural Network, with two input units for the two features \\(x_1, x_2\\), one hidden unit with the \\(\\tanh\\) activation function, and one output unit with identity activation. We represent the two classes as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and predict class 1 (black) when the output value is higher than some threshold \\(\\tau\\), class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct?",
         "q": "The single hidden unit is unnecessary and makes no difference; a network without hidden unit could learn the same function",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6885,11 +6885,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "Without a hidden nonlinearity, the network is linear in inputs."
       },
       {
-        "context": "Feedforward NN. Consider a classifier for the above 2-class \\\\(x_1, x_2\\\\) dataset in the form of a Feedforward Neural Network, with two input units for the two features \\\\(x_1, x_2\\\\), one hidden unit with the \\\\(\\\\tanh\\\\) activation function, and one output unit with identity activation. We represent the two classes as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and predict class 1 (black) when the output value is higher than some threshold \\\\(\\\\tau\\\\), class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct?",
-        "q": "If we set the threshold \\\\(\\\\tau\\\\) to 0.0 or 1.0, all possible inputs will always be classified into the same class (black or white, respectively), by any model trained in this way",
+        "context": "Feedforward NN. Consider a classifier for the above 2-class \\(x_1, x_2\\) dataset in the form of a Feedforward Neural Network, with two input units for the two features \\(x_1, x_2\\), one hidden unit with the \\(\\tanh\\) activation function, and one output unit with identity activation. We represent the two classes as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and predict class 1 (black) when the output value is higher than some threshold \\(\\tau\\), class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct?",
+        "q": "If we set the threshold \\(\\tau\\) to 0.0 or 1.0, all possible inputs will always be classified into the same class (black or white, respectively), by any model trained in this way",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6898,11 +6898,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "Output with identity activation is unbounded; outputs can lie above/below those thresholds."
       },
       {
-        "context": "Feedforward NN. Consider a classifier for the above 2-class \\\\(x_1, x_2\\\\) dataset in the form of a Feedforward Neural Network, with two input units for the two features \\\\(x_1, x_2\\\\), one hidden unit with the \\\\(\\\\tanh\\\\) activation function, and one output unit with identity activation. We represent the two classes as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and predict class 1 (black) when the output value is higher than some threshold \\\\(\\\\tau\\\\), class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct?",
+        "context": "Feedforward NN. Consider a classifier for the above 2-class \\(x_1, x_2\\) dataset in the form of a Feedforward Neural Network, with two input units for the two features \\(x_1, x_2\\), one hidden unit with the \\(\\tanh\\) activation function, and one output unit with identity activation. We represent the two classes as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and predict class 1 (black) when the output value is higher than some threshold \\(\\tau\\), class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct?",
         "q": "The output predicted by the output unit is a probability",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6911,11 +6911,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "Identity output is not constrained to [0,1]."
       },
       {
-        "context": "Feedforward NN. Consider a classifier for the above 2-class \\\\(x_1, x_2\\\\) dataset in the form of a Feedforward Neural Network, with two input units for the two features \\\\(x_1, x_2\\\\), one hidden unit with the \\\\(\\\\tanh\\\\) activation function, and one output unit with identity activation. We represent the two classes as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and predict class 1 (black) when the output value is higher than some threshold \\\\(\\\\tau\\\\), class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct?",
-        "q": "By choosing different values for \\\\(\\\\tau\\\\) (for a fixed learned model), we can obtain classifiers with different positions in ROC space",
+        "context": "Feedforward NN. Consider a classifier for the above 2-class \\(x_1, x_2\\) dataset in the form of a Feedforward Neural Network, with two input units for the two features \\(x_1, x_2\\), one hidden unit with the \\(\\tanh\\) activation function, and one output unit with identity activation. We represent the two classes as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and predict class 1 (black) when the output value is higher than some threshold \\(\\tau\\), class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct?",
+        "q": "By choosing different values for \\(\\tau\\) (for a fixed learned model), we can obtain classifiers with different positions in ROC space",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           0
@@ -6924,11 +6924,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "Varying the threshold sweeps the ROC curve."
       },
       {
-        "context": "Feedforward NN. Consider a classifier for the above 2-class \\\\(x_1, x_2\\\\) dataset in the form of a Feedforward Neural Network, with two input units for the two features \\\\(x_1, x_2\\\\), one hidden unit with the \\\\(\\\\tanh\\\\) activation function, and one output unit with identity activation. We represent the two classes as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and predict class 1 (black) when the output value is higher than some threshold \\\\(\\\\tau\\\\), class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct?",
-        "q": "The output predicted by the output unit will always be in the interval \\\\([0,1]\\\\)",
+        "context": "Feedforward NN. Consider a classifier for the above 2-class \\(x_1, x_2\\) dataset in the form of a Feedforward Neural Network, with two input units for the two features \\(x_1, x_2\\), one hidden unit with the \\(\\tanh\\) activation function, and one output unit with identity activation. We represent the two classes as 0 (white) and 1 (black), learn model parameters by training on the dataset with the squared error loss function, and predict class 1 (black) when the output value is higher than some threshold \\(\\tau\\), class 0 (white) otherwise. There is no restriction on the size of weights. Which of the following statements about this model are correct?",
+        "q": "The output predicted by the output unit will always be in the interval \\([0,1]\\)",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6937,8 +6937,8 @@ const QUIZ_BANK_OLD = [
         "explanation": "Identity activation produces unbounded outputs."
       },
       {
-        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\\\(S = \\\\{\\\\mathit{game}, \\\\mathit{nogame}\\\\}\\\\) and possible observations \\\\(O = \\\\{\\\\mathit{none}, \\\\mathit{cheer}, \\\\mathit{shout}, \\\\mathit{curse}, \\\\mathit{snore}\\\\}\\\\), with parameter values learned from observations over many previous championships.",
-        "q": "What is the dimension (number of rows and columns) of matrix \\\\(A\\\\) (as defined in the lecture slides)?",
+        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\(S = \\{\\mathit{game}, \\mathit{nogame}\\}\\) and possible observations \\(O = \\{\\mathit{none}, \\mathit{cheer}, \\mathit{shout}, \\mathit{curse}, \\mathit{snore}\\}\\), with parameter values learned from observations over many previous championships.",
+        "q": "What is the dimension (number of rows and columns) of matrix \\(A\\) (as defined in the lecture slides)?",
         "opts": [
           "1 x 2",
           "2 x 2",
@@ -6953,8 +6953,8 @@ const QUIZ_BANK_OLD = [
         "explanation": "A is the state transition matrix, |S| x |S| = 2 x 2."
       },
       {
-        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\\\(S = \\\\{\\\\mathit{game}, \\\\mathit{nogame}\\\\}\\\\) and possible observations \\\\(O = \\\\{\\\\mathit{none}, \\\\mathit{cheer}, \\\\mathit{shout}, \\\\mathit{curse}, \\\\mathit{snore}\\\\}\\\\), with parameter values learned from observations over many previous championships.",
-        "q": "What is the dimension (number of rows and columns) of matrix \\\\(B\\\\) (as defined in the lecture slides)?",
+        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\(S = \\{\\mathit{game}, \\mathit{nogame}\\}\\) and possible observations \\(O = \\{\\mathit{none}, \\mathit{cheer}, \\mathit{shout}, \\mathit{curse}, \\mathit{snore}\\}\\), with parameter values learned from observations over many previous championships.",
+        "q": "What is the dimension (number of rows and columns) of matrix \\(B\\) (as defined in the lecture slides)?",
         "opts": [
           "2 x 2",
           "2 x 5",
@@ -6969,8 +6969,8 @@ const QUIZ_BANK_OLD = [
         "explanation": "B is the emission matrix, |S| x |O| = 2 x 5."
       },
       {
-        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\\\(S = \\\\{\\\\mathit{game}, \\\\mathit{nogame}\\\\}\\\\) and possible observations \\\\(O = \\\\{\\\\mathit{none}, \\\\mathit{cheer}, \\\\mathit{shout}, \\\\mathit{curse}, \\\\mathit{snore}\\\\}\\\\), with parameter values learned from observations over many previous championships.",
-        "q": "What is the dimension of \\\\(\\\\Pi\\\\) (as defined in the lecture slides)?",
+        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\(S = \\{\\mathit{game}, \\mathit{nogame}\\}\\) and possible observations \\(O = \\{\\mathit{none}, \\mathit{cheer}, \\mathit{shout}, \\mathit{curse}, \\mathit{snore}\\}\\), with parameter values learned from observations over many previous championships.",
+        "q": "What is the dimension of \\(\\Pi\\) (as defined in the lecture slides)?",
         "opts": [
           "1",
           "2",
@@ -6984,11 +6984,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "Pi is the initial state distribution, length |S| = 2."
       },
       {
-        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\\\(S = \\\\{\\\\mathit{game}, \\\\mathit{nogame}\\\\}\\\\) and possible observations \\\\(O = \\\\{\\\\mathit{none}, \\\\mathit{cheer}, \\\\mathit{shout}, \\\\mathit{curse}, \\\\mathit{snore}\\\\}\\\\), with parameter values learned from observations over many previous championships. Which of the following statements about this model are true?",
-        "q": "With only two states, matrix \\\\(\\\\boldsymbol{A}\\\\) must be symmetric",
+        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\(S = \\{\\mathit{game}, \\mathit{nogame}\\}\\) and possible observations \\(O = \\{\\mathit{none}, \\mathit{cheer}, \\mathit{shout}, \\mathit{curse}, \\mathit{snore}\\}\\), with parameter values learned from observations over many previous championships. Which of the following statements about this model are true?",
+        "q": "With only two states, matrix \\(\\boldsymbol{A}\\) must be symmetric",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -6997,24 +6997,24 @@ const QUIZ_BANK_OLD = [
         "explanation": "Transition probabilities P(s|s') need not equal P(s'|s)."
       },
       {
-        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\\\(S = \\\\{\\\\mathit{game}, \\\\mathit{nogame}\\\\}\\\\) and possible observations \\\\(O = \\\\{\\\\mathit{none}, \\\\mathit{cheer}, \\\\mathit{shout}, \\\\mathit{curse}, \\\\mathit{snore}\\\\}\\\\), with parameter values learned from observations over many previous championships. Which of the following statements about this model are true?",
-        "q": "If your neighbour never snores, one row of the matrix \\\\(\\\\boldsymbol{B}\\\\) will be all zeros",
+        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\(S = \\{\\mathit{game}, \\mathit{nogame}\\}\\) and possible observations \\(O = \\{\\mathit{none}, \\mathit{cheer}, \\mathit{shout}, \\mathit{curse}, \\mathit{snore}\\}\\), with parameter values learned from observations over many previous championships. Which of the following statements about this model are true?",
+        "q": "If your neighbour never snores, one row of the matrix \\(\\boldsymbol{B}\\) will be all zeros",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           0
         ],
         "multi": false,
-        "explanation": "Wait — rows of B correspond to states and sum to 1; the snore column would be all zeros. The marked answer is 'Wahr'."
+        "explanation": "Wait — rows of B correspond to states and sum to 1; the snore column would be all zeros. The marked answer is 'True'."
       },
       {
-        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\\\(S = \\\\{\\\\mathit{game}, \\\\mathit{nogame}\\\\}\\\\) and possible observations \\\\(O = \\\\{\\\\mathit{none}, \\\\mathit{cheer}, \\\\mathit{shout}, \\\\mathit{curse}, \\\\mathit{snore}\\\\}\\\\), with parameter values learned from observations over many previous championships. Which of the following statements about this model are true?",
-        "q": "Matrix \\\\(\\\\boldsymbol{B}\\\\) represents a Markov Process",
+        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\(S = \\{\\mathit{game}, \\mathit{nogame}\\}\\) and possible observations \\(O = \\{\\mathit{none}, \\mathit{cheer}, \\mathit{shout}, \\mathit{curse}, \\mathit{snore}\\}\\), with parameter values learned from observations over many previous championships. Which of the following statements about this model are true?",
+        "q": "Matrix \\(\\boldsymbol{B}\\) represents a Markov Process",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -7023,11 +7023,11 @@ const QUIZ_BANK_OLD = [
         "explanation": "B is the emission matrix; A represents the Markov process."
       },
       {
-        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\\\(S = \\\\{\\\\mathit{game}, \\\\mathit{nogame}\\\\}\\\\) and possible observations \\\\(O = \\\\{\\\\mathit{none}, \\\\mathit{cheer}, \\\\mathit{shout}, \\\\mathit{curse}, \\\\mathit{snore}\\\\}\\\\), with parameter values learned from observations over many previous championships. Which of the following statements about this model are true?",
-        "q": "The diagonal of \\\\(\\\\boldsymbol{A}\\\\) must sum to 1.0",
+        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\(S = \\{\\mathit{game}, \\mathit{nogame}\\}\\) and possible observations \\(O = \\{\\mathit{none}, \\mathit{cheer}, \\mathit{shout}, \\mathit{curse}, \\mathit{snore}\\}\\), with parameter values learned from observations over many previous championships. Which of the following statements about this model are true?",
+        "q": "The diagonal of \\(\\boldsymbol{A}\\) must sum to 1.0",
         "opts": [
-          "Wahr",
-          "Falsch"
+          "True",
+          "False"
         ],
         "ans": [
           1
@@ -7036,13 +7036,13 @@ const QUIZ_BANK_OLD = [
         "explanation": "Rows sum to 1, not the diagonal."
       },
       {
-        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\\\(S = \\\\{\\\\mathit{game}, \\\\mathit{nogame}\\\\}\\\\) and possible observations \\\\(O = \\\\{\\\\mathit{none}, \\\\mathit{cheer}, \\\\mathit{shout}, \\\\mathit{curse}, \\\\mathit{snore}\\\\}\\\\), with parameter values learned from observations over many previous championships. Which of the following statements about this model are true?",
-        "q": "We can estimate the expected duration of a game (= number of consecutive time points \\\\(t\\\\) with \\\\(q_t = \\\\mathit{game}\\\\)) from",
+        "context": "HMM. Suppose you are (mildly) interested in the currently ongoing European Football Championship. As you go past your neighbour's house, you are trying to infer, from the noises you hear from the open windows, whether there is currently a game going on. Model this as an HMM with states \\(S = \\{\\mathit{game}, \\mathit{nogame}\\}\\) and possible observations \\(O = \\{\\mathit{none}, \\mathit{cheer}, \\mathit{shout}, \\mathit{curse}, \\mathit{snore}\\}\\), with parameter values learned from observations over many previous championships. Which of the following statements about this model are true?",
+        "q": "We can estimate the expected duration of a game (= number of consecutive time points \\(t\\) with \\(q_t = \\mathit{game}\\)) from",
         "opts": [
-          "matrix \\\\(\\\\boldsymbol{A}\\\\) of the model",
-          "vector \\\\(\\\\mathbf{\\\\Pi}\\\\) of the model",
+          "matrix \\(\\boldsymbol{A}\\) of the model",
+          "vector \\(\\mathbf{\\Pi}\\) of the model",
           "not at all",
-          "matrix \\\\(\\\\boldsymbol{B}\\\\) of the model"
+          "matrix \\(\\boldsymbol{B}\\) of the model"
         ],
         "ans": [
           0
@@ -7699,7 +7699,12 @@ function arrMatch(a, b) {
 }
 
 function freshState(questions) {
-  return { sel: questions.map(() => []), done: questions.map(() => false), scores: questions.map(() => null) };
+  return {
+    sel: questions.map(() => []),
+    done: questions.map(() => false),
+    scores: questions.map(() => null),
+    revealed: questions.map(() => false),
+  };
 }
 
 export default function App() {
@@ -7828,7 +7833,7 @@ export default function App() {
   } else {
     const quiz = QUIZ_BANK.find(q => q.id === activeQuizId);
     const Qs = quiz.questions;
-    const { sel, done, scores } = state;
+    const { sel, done, scores, revealed = [] } = state;
     const q = Qs[cur];
     const isDone = done[cur];
     const curSel = sel[cur];
@@ -7856,6 +7861,33 @@ export default function App() {
         next.done[cur] = true; next.scores[cur] = correct; return next;
       });
     }
+
+    // Open-ended (short-answer) helpers: questions where opts.length === 0
+    function revealAnswer() {
+      setState(prev => {
+        const rev = [...(prev.revealed || Qs.map(() => false))];
+        rev[cur] = true;
+        return { ...prev, revealed: rev };
+      });
+    }
+    function continueOpenEnded() {
+      setState(prev => {
+        const next = {
+          ...prev,
+          done: [...prev.done],
+          scores: [...prev.scores],
+          revealed: [...(prev.revealed || Qs.map(() => false))],
+        };
+        next.revealed[cur] = true;
+        next.done[cur] = true;
+        // Auto-correct so open-ended doesn't penalise the score
+        next.scores[cur] = true;
+        return next;
+      });
+      if (cur < Qs.length - 1) setCur(c => c + 1);
+    }
+    const isOpenEnded = !q.opts || q.opts.length === 0;
+    const isRevealed = revealed[cur] === true;
 
     if (showResults) {
       const pct = Math.round(correctCount / Qs.length * 100);
@@ -7916,27 +7948,50 @@ export default function App() {
             <MathText text={q.q} />
           </div>
 
-          <div className="options-container">
-            {q.opts.map((o, oi) => {
-              const isC = q.ans.includes(oi), isS = curSel.includes(oi);
-              let btnClass = "option-button";
-              if (isDone) {
-                if (isS && isC) btnClass += " correct";
-                else if (isS && !isC) btnClass += " wrong";
-                else if (!isS && isC) btnClass += " correct";
-              } else if (isS) {
-                btnClass += " selected";
-              }
-              return (
-                <button key={oi} onClick={() => toggle(oi)} disabled={isDone} className={btnClass}>
-                  <span style={{ fontWeight: "700", marginRight: "8px" }}>{String.fromCharCode(65 + oi)}.</span>
-                  <MathText text={o} />
-                </button>
-              );
-            })}
-          </div>
+          {!isOpenEnded && (
+            <div className="options-container">
+              {q.opts.map((o, oi) => {
+                const isC = q.ans.includes(oi), isS = curSel.includes(oi);
+                let btnClass = "option-button";
+                if (isDone) {
+                  if (isS && isC) btnClass += " correct";
+                  else if (isS && !isC) btnClass += " wrong";
+                  else if (!isS && isC) btnClass += " correct";
+                } else if (isS) {
+                  btnClass += " selected";
+                }
+                return (
+                  <button key={oi} onClick={() => toggle(oi)} disabled={isDone} className={btnClass}>
+                    <span style={{ fontWeight: "700", marginRight: "8px" }}>{String.fromCharCode(65 + oi)}.</span>
+                    <MathText text={o} />
+                  </button>
+                );
+              })}
+            </div>
+          )}
 
-          {isDone && (
+          {isOpenEnded && (
+            <div className="openended-container">
+              <div className="openended-note">Short-answer question — no multiple-choice options in the original exam.</div>
+              {!isRevealed && (
+                <button onClick={revealAnswer} className="btn btn-primary openended-reveal-btn">
+                  Reveal reference answer
+                </button>
+              )}
+              {isRevealed && (
+                <div className="openended-answer-box">
+                  <div className="openended-answer-label">Reference answer</div>
+                  <div className="openended-answer-body">
+                    {q.explanation
+                      ? <MathText text={q.explanation} />
+                      : <em>No reference answer was provided in the source PDF.</em>}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {!isOpenEnded && isDone && (
             <div className={`feedback-container ${scores[cur] ? "feedback-correct" : "feedback-wrong"}`}>
               <span style={{ fontSize: "18px" }}>{scores[cur] ? "✓" : "✗"}</span>
               <div>
@@ -7963,9 +8018,12 @@ export default function App() {
 
           <div className="action-buttons">
             {cur > 0 && <button onClick={() => setCur(c => c - 1)} className="btn btn-secondary">← Back</button>}
-            {!isDone && <button onClick={submit} className="btn btn-primary" disabled={curSel.length === 0}>Check answer</button>}
-            {isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-primary">Next →</button>}
-            {!isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-secondary">Skip →</button>}
+            {!isOpenEnded && !isDone && <button onClick={submit} className="btn btn-primary" disabled={curSel.length === 0}>Check answer</button>}
+            {!isOpenEnded && isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-primary">Next →</button>}
+            {!isOpenEnded && !isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-secondary">Skip →</button>}
+            {isOpenEnded && isRevealed && cur < Qs.length - 1 && <button onClick={continueOpenEnded} className="btn btn-primary">Continue →</button>}
+            {isOpenEnded && !isRevealed && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-secondary">Skip →</button>}
+            {isOpenEnded && isRevealed && cur === Qs.length - 1 && !isDone && <button onClick={continueOpenEnded} className="btn btn-primary">Mark done</button>}
             {cur === Qs.length - 1 && (
               <button
                 onClick={() => {

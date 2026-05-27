@@ -679,3 +679,40 @@ body {
   color: var(--wrong-text);
   border-color: var(--wrong-border);
 }
+
+/* === Open-ended (short-answer) question rendering === */
+.openended-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+.openended-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.openended-reveal-btn {
+  align-self: flex-start;
+}
+.openended-answer-box {
+  background: var(--correct-bg);
+  border: 1px solid var(--correct-border);
+  border-left: 4px solid var(--correct-border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+.openended-answer-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--correct-text);
+  margin-bottom: 8px;
+}
+.openended-answer-body {
+  font-size: 0.97rem;
+}
+.openended-answer-body .katex { font-size: 1em; }
