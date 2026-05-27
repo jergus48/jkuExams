@@ -4951,18 +4951,6 @@ const QUIZ_BANK_OLD = [
     "description": "Final exam for the Python course at JKU, SS2024. 41 questions covering PyTorch, TorchScript, data preprocessing, ML workflow and theory.",
     "questions": [
       {
-        "q": "By selecting \"I confirm\", I hereby declare under oath that I will work on this examination on my own without any help or any third-party assistance.\n\nBy selecting \"I confirm\", I understand that noncompliance results in invalidation of the assessment, whereby the invalidated exam is added to the total number of retakes and noncompliance may result in further legal action.",
-        "opts": [
-          "I confirm",
-          "I confirm"
-        ],
-        "ans": [
-          0,
-          1
-        ],
-        "multi": true
-      },
-      {
         "q": "Given a sample image `img` (type `PIL.Image`) and a PyTorch transformation pipeline `transforms` (type `torchvision.transforms.v2.Compose`), which of the following is the correct way of applying the transformations on the image?",
         "opts": [
           "`transformed_img = transforms(img)`",
@@ -7814,8 +7802,8 @@ export default function App() {
             const bestClass = stats
               ? (stats.best >= 90 ? "stat-excellent"
                 : stats.best >= 75 ? "stat-great"
-                : stats.best >= 60 ? "stat-good"
-                : "stat-poor")
+                  : stats.best >= 60 ? "stat-good"
+                    : "stat-poor")
               : "";
             return (
               <div key={quiz.id} onClick={() => startQuiz(quiz.id)} className={`quiz-card ${stats ? "quiz-card-completed" : ""}`}>
