@@ -7698,12 +7698,87 @@ function arrMatch(a, b) {
   return a.length === b.length && [...a].sort().join() === [...b].sort().join();
 }
 
+// ── Interactive table input widget ────────────────────────────────────────────
+function TableInputWidget({ tableInput, qState, onValChange, onCheck }) {
+  const { headers, rows } = tableInput;
+  const { vals, results, checked } = qState;
+  const editableKeys = rows.flatMap((row, ri) =>
+    row.cells.map((cell, ci) => cell.e ? `${ri}-${ci}` : null).filter(Boolean)
+  );
+  const allCorrect = checked && editableKeys.length > 0 &&
+    editableKeys.every(k => results[k] === true);
+  const anyChecked = checked && editableKeys.length > 0;
+
+  return (
+    <div className="table-input-wrap">
+      <div className="table-input-scroll">
+        <table className="table-input-tbl">
+          {headers && (
+            <thead>
+              <tr>
+                <th className="table-row-hdr-th"></th>
+                {headers.map((h, i) => <th key={i} className="table-col-hdr">{h}</th>)}
+              </tr>
+            </thead>
+          )}
+          <tbody>
+            {rows.map((row, ri) => (
+              <tr key={ri}>
+                <td className="table-row-hdr-td">{row.label || ""}</td>
+                {row.cells.map((cell, ci) => {
+                  const key = `${ri}-${ci}`;
+                  const userVal = vals[key] ?? "";
+                  const res = results[key];
+                  let cls = "table-input-cell";
+                  if (!cell.e) cls += " cell-static-td";
+                  else if (checked) cls += res ? " cell-ok" : " cell-err";
+                  return (
+                    <td key={ci} className={cls}>
+                      {cell.e ? (
+                        <input
+                          className="cell-inp"
+                          type="text"
+                          value={userVal}
+                          onChange={e => onValChange(key, e.target.value)}
+                          placeholder="?"
+                          spellCheck={false}
+                        />
+                      ) : (
+                        <span className="cell-static-val">{cell.v}</span>
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="table-check-row">
+        <button className="btn btn-primary" onClick={onCheck}>
+          {checked ? "Re-check" : "Check answers"}
+        </button>
+        {anyChecked && (
+          <span className={allCorrect ? "check-result-ok" : "check-result-err"}>
+            {allCorrect
+              ? "✓ All correct!"
+              : `✗ ${editableKeys.filter(k => results[k] === false).length} cell(s) wrong — fix and re-check`}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function freshState(questions) {
   return {
     sel: questions.map(() => []),
     done: questions.map(() => false),
     scores: questions.map(() => null),
     revealed: questions.map(() => false),
+    tableInputs: questions.map(q =>
+      q.tableInput ? { vals: {}, results: {}, checked: false } : null
+    ),
   };
 }
 
@@ -7833,7 +7908,7 @@ export default function App() {
   } else {
     const quiz = QUIZ_BANK.find(q => q.id === activeQuizId);
     const Qs = quiz.questions;
-    const { sel, done, scores, revealed = [] } = state;
+    const { sel, done, scores, revealed = [], tableInputs = [] } = state;
     const q = Qs[cur];
     const isDone = done[cur];
     const curSel = sel[cur];
@@ -7886,7 +7961,54 @@ export default function App() {
       });
       if (cur < Qs.length - 1) setCur(c => c + 1);
     }
-    const isOpenEnded = !q.opts || q.opts.length === 0;
+    // Table input handlers
+    function updateTableVal(key, val) {
+      setState(prev => {
+        const ti = [...(prev.tableInputs || [])];
+        ti[cur] = { ...ti[cur], vals: { ...ti[cur].vals, [key]: val } };
+        return { ...prev, tableInputs: ti };
+      });
+    }
+    function checkTableAnswers() {
+      const tInput = q.tableInput;
+      const ti = tableInputs[cur] || { vals: {} };
+      const results = {};
+      let allCorrect = true;
+      tInput.rows.forEach((row, ri) => {
+        row.cells.forEach((cell, ci) => {
+          if (cell.e) {
+            const key = `${ri}-${ci}`;
+            const userVal = (ti.vals[key] || "").trim().toLowerCase().replace(/\s+/g, "");
+            const correctVal = cell.v.trim().toLowerCase().replace(/\s+/g, "");
+            const ok = userVal === correctVal;
+            results[key] = ok;
+            if (!ok) allCorrect = false;
+          }
+        });
+      });
+      setState(prev => {
+        const newTi = [...(prev.tableInputs || [])];
+        newTi[cur] = { ...newTi[cur], results, checked: true };
+        const newDone = [...prev.done];
+        const newScores = [...prev.scores];
+        if (allCorrect) { newDone[cur] = true; newScores[cur] = true; }
+        return { ...prev, tableInputs: newTi, done: newDone, scores: newScores };
+      });
+    }
+    function continueTableInput() {
+      setState(prev => {
+        const next = { ...prev, done: [...prev.done], scores: [...prev.scores] };
+        next.done[cur] = true;
+        next.scores[cur] = tableInputs[cur]?.checked
+          ? (Object.values(tableInputs[cur].results).every(Boolean) ? true : false)
+          : false;
+        return next;
+      });
+      if (cur < Qs.length - 1) setCur(c => c + 1);
+    }
+
+    const isTableInput = !!q.tableInput;
+    const isOpenEnded = !isTableInput && (!q.opts || q.opts.length === 0);
     const isRevealed = revealed[cur] === true;
 
     if (showResults) {
@@ -7932,7 +8054,7 @@ export default function App() {
 
           <div className="progress-info">
             <span>Question {cur + 1} of {Qs.length}</span>
-            <span>{q.multi ? "Select all that apply" : "Select one answer"}</span>
+            <span>{isTableInput ? "Fill in the table" : isOpenEnded ? "Open answer" : q.multi ? "Select all that apply" : "Select one answer"}</span>
           </div>
 
           <div className="progress-bar-container">
@@ -7967,6 +8089,25 @@ export default function App() {
                   </button>
                 );
               })}
+            </div>
+          )}
+
+          {isTableInput && tableInputs[cur] && (
+            <div className="openended-container">
+              <TableInputWidget
+                tableInput={q.tableInput}
+                qState={tableInputs[cur]}
+                onValChange={updateTableVal}
+                onCheck={checkTableAnswers}
+              />
+              {tableInputs[cur].checked && q.explanation && (
+                <details className="table-answer-details">
+                  <summary></summary>
+                  <div className="openended-answer-body">
+                    <MathText text={q.explanation} />
+                  </div>
+                </details>
+              )}
             </div>
           )}
 
@@ -8018,12 +8159,16 @@ export default function App() {
 
           <div className="action-buttons">
             {cur > 0 && <button onClick={() => setCur(c => c - 1)} className="btn btn-secondary">← Back</button>}
-            {!isOpenEnded && !isDone && <button onClick={submit} className="btn btn-primary" disabled={curSel.length === 0}>Check answer</button>}
-            {!isOpenEnded && isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-primary">Next →</button>}
-            {!isOpenEnded && !isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-secondary">Skip →</button>}
+            {!isOpenEnded && !isTableInput && !isDone && <button onClick={submit} className="btn btn-primary" disabled={curSel.length === 0}>Check answer</button>}
+            {!isOpenEnded && !isTableInput && isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-primary">Next →</button>}
+            {!isOpenEnded && !isTableInput && !isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-secondary">Skip →</button>}
             {isOpenEnded && isRevealed && cur < Qs.length - 1 && <button onClick={continueOpenEnded} className="btn btn-primary">Continue →</button>}
             {isOpenEnded && !isRevealed && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-secondary">Skip →</button>}
             {isOpenEnded && isRevealed && cur === Qs.length - 1 && !isDone && <button onClick={continueOpenEnded} className="btn btn-primary">Mark done</button>}
+            {isTableInput && !isDone && cur < Qs.length - 1 && <button onClick={continueTableInput} className="btn btn-secondary">Skip →</button>}
+            {isTableInput && isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-primary">Next →</button>}
+            {isTableInput && !isDone && tableInputs[cur]?.checked && cur < Qs.length - 1 && <button onClick={continueTableInput} className="btn btn-primary">Continue →</button>}
+            {isTableInput && !isDone && cur === Qs.length - 1 && tableInputs[cur]?.checked && <button onClick={continueTableInput} className="btn btn-primary">Mark done</button>}
             {cur === Qs.length - 1 && (
               <button
                 onClick={() => {
