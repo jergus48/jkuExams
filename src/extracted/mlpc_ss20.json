@@ -1,0 +1,294 @@
+{
+  "id": "mlpc_ss20",
+  "title": "MLPC Exam — JKU SS2020",
+  "description": "JKU Machine Learning and Pattern Classification exam, Summer Semester 2020. Covers Bayesian classification, k-NN, decision trees, classifier evaluation, neural networks, and deep learning.",
+  "questions": [
+    {
+      "context": "Bayesian Classification. Consider Bayes' Rule for classification: \\(P(\\omega_i \\mid \\mathbf{x}) = \\frac{p(\\mathbf{x} \\mid \\omega_i)P(\\omega_i)}{p(\\mathbf{x})} \\propto p(\\mathbf{x} \\mid \\omega_i)P(\\omega_i)\\). Consider a binary classification task over a set of classes \\(\\Omega = \\{\\omega_1, \\omega_2\\}\\), and answer each of the following questions in one sentence.",
+      "q": "Why can we say that \\(p(\\mathbf{x})\\) is irrelevant for determining the MAP class?",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Open-ended. \\(p(\\mathbf{x})\\) is the same for all classes, so it does not affect which class maximises the posterior."
+    },
+    {
+      "context": "Bayesian Classification. Consider Bayes' Rule for classification: \\(P(\\omega_i \\mid \\mathbf{x}) = \\frac{p(\\mathbf{x} \\mid \\omega_i)P(\\omega_i)}{p(\\mathbf{x})} \\propto p(\\mathbf{x} \\mid \\omega_i)P(\\omega_i)\\). Consider a binary classification task over a set of classes \\(\\Omega = \\{\\omega_1, \\omega_2\\}\\), and answer each of the following questions in one sentence.",
+      "q": "What will happen if the prior \\(P(\\Omega)\\) is very uneven (i.e., with a high value for some class, and a low one for other)?",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Open-ended. The classifier will be biased toward predicting the high-prior class, even when the likelihoods are similar."
+    },
+    {
+      "context": "Bayesian Classification. Consider Bayes' Rule for classification: \\(P(\\omega_i \\mid \\mathbf{x}) = \\frac{p(\\mathbf{x} \\mid \\omega_i)P(\\omega_i)}{p(\\mathbf{x})} \\propto p(\\mathbf{x} \\mid \\omega_i)P(\\omega_i)\\). Consider a binary classification task over a set of classes \\(\\Omega = \\{\\omega_1, \\omega_2\\}\\), and answer each of the following questions in one sentence.",
+      "q": "Assume one particular class (say, \\(\\omega_1\\)) is so critical that we want a classifier that is guaranteed to classify all instances of class \\(\\omega_1\\) as \\(\\omega_1\\), and does not miss a single one. How can we obtain such a classifier?",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Open-ended. Use a cost matrix that assigns infinite (or very high) cost to misclassifying \\(\\omega_1\\) as \\(\\omega_2\\); equivalently, always predict \\(\\omega_1\\) whenever \\(p(\\mathbf{x}\\mid\\omega_1)P(\\omega_1) > 0\\)."
+    },
+    {
+      "context": "Consider the following two loss functions (cost matrices) (where \\(\\lambda_{ij}\\) is the cost of predicting class \\(i\\) if the true class is \\(j\\)): $$\\lambda_1 = \\begin{pmatrix}0 & 1\\\\ 1 & 0\\end{pmatrix} \\qquad \\lambda_2 = \\begin{pmatrix}0 & 10\\\\ 10 & 0\\end{pmatrix}$$",
+      "q": "Do they lead to different values of the Bayes risk?",
+      "opts": ["yes", "no"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Consider the following two loss functions (cost matrices) (where \\(\\lambda_{ij}\\) is the cost of predicting class \\(i\\) if the true class is \\(j\\)): $$\\lambda_1 = \\begin{pmatrix}0 & 1\\\\ 1 & 0\\end{pmatrix} \\qquad \\lambda_2 = \\begin{pmatrix}0 & 10\\\\ 10 & 0\\end{pmatrix}$$",
+      "q": "Do they lead a Bayesian classifier to make different predictions?",
+      "opts": ["yes", "no"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "The k-Nearest-Neighbor Classifier. Which of the following statements is true (assume a numeric feature space, and Euclidean distance as our distance measure):",
+      "q": "For \\(k = 1\\), the k-NN classifier cannot overfit the training data.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "The k-Nearest-Neighbor Classifier. Which of the following statements is true (assume a numeric feature space, and Euclidean distance as our distance measure):",
+      "q": "Increasing \\(k\\) will increase the danger of overfitting.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "The k-Nearest-Neighbor Classifier. Which of the following statements is true (assume a numeric feature space, and Euclidean distance as our distance measure):",
+      "q": "Setting \\(k\\) to a high value will lower the bias of the classifier.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "The k-Nearest-Neighbor Classifier. Which of the following statements is true (assume a numeric feature space, and Euclidean distance as our distance measure):",
+      "q": "If we add additional redundant features to the data (e.g., identical copies of some feature), the predictions of the k-NN classifier can change.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "The k-Nearest-Neighbor Classifier. Which of the following statements is true (assume a numeric feature space, and Euclidean distance as our distance measure):",
+      "q": "If we change the scale of one of the features (e.g., by multiplying all values by 1000), the predictions of the k-NN classifier can change.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Decision Tree Learning. Consider the following simple one-dimensional (i.e., one numeric feature X only) training set in a two-class classification task. Along the X axis the labels appear in this order: `+ + - + + + - + - - -`.",
+      "q": "What is the minimum depth of a decision tree with binary splits on X that has an error of 0 on this dataset? (The depth of a tree that only consists of 1 node (the root) is 0; the depth of an arbitrary tree is the length of its longest branch).",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "The correct answer is: 3"
+    },
+    {
+      "q": "Why can the same numeric feature be used several times along some path in a decision tree, but a symbolic feature can not?",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Open-ended. A numeric split partitions the range (e.g., X<a), so further splits on subranges still provide information; a symbolic feature is fully determined by a single split on its discrete value, so reusing it provides no new information."
+    },
+    {
+      "context": "Consider the following stop criterion for ID3: \"If a node contains \\(\\leq k\\) examples, do not further split it; turn it into a leaf that predicts the majority class in these \\(\\leq k\\) examples.\"",
+      "q": "Can this help against overfitting?",
+      "opts": ["Yes", "No"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Consider the following stop criterion for ID3: \"If a node contains \\(\\leq k\\) examples, do not further split it; turn it into a leaf that predicts the majority class in these \\(\\leq k\\) examples.\" If we make \\(k\\) larger for this stop criterion, which of the following statements are true:",
+      "q": "... the error on the training data cannot go down",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Consider the following stop criterion for ID3: \"If a node contains \\(\\leq k\\) examples, do not further split it; turn it into a leaf that predicts the majority class in these \\(\\leq k\\) examples.\" If we make \\(k\\) larger for this stop criterion, which of the following statements are true:",
+      "q": "... the error on independent test data cannot go up",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Consider the following stop criterion for ID3: \"If a node contains \\(\\leq k\\) examples, do not further split it; turn it into a leaf that predicts the majority class in these \\(\\leq k\\) examples.\" If we make \\(k\\) larger for this stop criterion, which of the following statements are true:",
+      "q": "... the error on independent test data cannot go down",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Classifier Evaluation. Consider a binary classification task over a set of classes \\(\\Omega = \\{\\omega_1, \\omega_2\\}\\). Which of the following statements on precision and recall are true?",
+      "q": "A classifier cannot have both Recall = 1.0 and Precision = 1.0 on class \\(\\omega_1\\)",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Classifier Evaluation. Consider a binary classification task over a set of classes \\(\\Omega = \\{\\omega_1, \\omega_2\\}\\). Which of the following statements on precision and recall are true?",
+      "q": "A classifier cannot have both Recall = 1.0 and Precision = 0.0 on class \\(\\omega_1\\).",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Classifier Evaluation. Consider a binary classification task over a set of classes \\(\\Omega = \\{\\omega_1, \\omega_2\\}\\). Which of the following statements on precision and recall are true?",
+      "q": "If, on a specific dataset, a classifier A has a higher recall on class \\(\\omega_1\\) than another classifier B, then A must have lower precision on \\(\\omega_1\\) than B",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Which of the following statements on ROC analysis are true?",
+      "q": "No line segment of the ROC convex hull can be strictly horizontal.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Which of the following statements on ROC analysis are true?",
+      "q": "Classifiers in different places on the ROC convex hull can have the same classification accuracy.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Which of the following statements on ROC analysis are true?",
+      "q": "If two classifiers C1 and C2 have the same accuracy, then the difference between their TPRs \\((TPR_1 - TPR_2)\\) must be exactly compensated by a corresponding difference in FPR: \\((TPR_1 - TPR_2) = (FPR_1 - FPR_2)\\).",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "If we multiply every entry in the cost matrix by 2.0, ...",
+      "opts": [
+        "... the optimal classifier will stay where it is",
+        "... the optimal classifier will move",
+        "... the optimal classifier becomes undefined"
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "Would you rather be in ROC heaven or in ROC hell?",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Open-ended. ROC heaven (TPR=1, FPR=0) is the ideal classifier; ROC hell (TPR=0, FPR=1) is the worst, but it can be inverted into a perfect classifier — so either is informative, but heaven is preferable."
+    },
+    {
+      "context": "Neural Networks. Consider the following three possible loss functions for a regression problem, where \\(y_i\\) is the true target value for input example \\(x_i\\) and \\(\\hat{y}(x_i)\\) is the value predicted by the model from input \\(x_i\\): $$L_1 = \\sqrt{\\frac{1}{|\\mathcal{D}|}\\sum_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))^2}$$ $$L_2 = \\sum_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))$$ $$L_3 = \\max_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))^2$$ Which of these would be meaningful loss functions for a regression problem (and for a feed-forward neural network)?",
+      "q": "\\(L_1\\)",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Neural Networks. Consider the following three possible loss functions for a regression problem, where \\(y_i\\) is the true target value for input example \\(x_i\\) and \\(\\hat{y}(x_i)\\) is the value predicted by the model from input \\(x_i\\): $$L_1 = \\sqrt{\\frac{1}{|\\mathcal{D}|}\\sum_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))^2}$$ $$L_2 = \\sum_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))$$ $$L_3 = \\max_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))^2$$ Which of these would be meaningful loss functions for a regression problem (and for a feed-forward neural network)?",
+      "q": "\\(L_2\\)",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Neural Networks. Consider the following three possible loss functions for a regression problem, where \\(y_i\\) is the true target value for input example \\(x_i\\) and \\(\\hat{y}(x_i)\\) is the value predicted by the model from input \\(x_i\\): $$L_1 = \\sqrt{\\frac{1}{|\\mathcal{D}|}\\sum_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))^2}$$ $$L_2 = \\sum_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))$$ $$L_3 = \\max_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))^2$$ Which of these would be meaningful loss functions for a regression problem (and for a feed-forward neural network)?",
+      "q": "\\(L_3\\)",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "Which of these three loss functions could be problematic for the backpropagation algorithm, and why? Answer in one sentence!",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Open-ended. \\(L_3\\) (the max) is problematic because gradients flow only through the single worst example each step, giving very sparse / unstable updates."
+    },
+    {
+      "q": "When you add an additional hidden layer to a feed-forward network, how does that affect the bias of the network model?",
+      "opts": ["it decreases", "it increases", "it stays the same"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "And how does add an additional hidden layer affect the variance of the network model?",
+      "opts": ["it decreases", "it increases", "it stays the same"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Deep Learning. Which of the following statements are true:",
+      "q": "Deep learning researches the simulation of biological neurons with computers.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Deep Learning. Which of the following statements are true:",
+      "q": "Artificial neural networks are mappings from tensors (vectors, matrices, or higher-order tensors) to other tensors.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Deep Learning. Which of the following statements are true:",
+      "q": "The majority of parameters in a deep neural network is specified by hand.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "In the two-player game \"Connect Four\", players take turns inserting a chip of their player color (which is either red or yellow) into one of the board's seven slots, where it falls down to occupy the bottom-most free window. The game ends if one of the players manages to fill four connected windows (horizontally, vertically or diagonally) with their own color, or if the board is full. (The page shows a photo of a standard yellow Connect Four board with red and yellow chips already inserted.) You want to train a deep neural network to play the yellow player, by teaching it to look at the current board state (= network input) and suggest a move (= network output).",
+      "q": "How would you represent the board state for the neural network?",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Open-ended. A common answer: a 6x7x2 tensor (one channel per player) with one-hot indicators marking occupied cells; alternatively a 6x7 integer matrix with values {-1, 0, +1}."
+    },
+    {
+      "context": "In the two-player game \"Connect Four\", players take turns inserting a chip of their player color (which is either red or yellow) into one of the board's seven slots, where it falls down to occupy the bottom-most free window. The game ends if one of the players manages to fill four connected windows (horizontally, vertically or diagonally) with their own color, or if the board is full. You want to train a deep neural network to play the yellow player, by teaching it to look at the current board state (= network input) and suggest a move (= network output).",
+      "q": "How would you represent the expected output of the neural network?",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Open-ended. A 7-dimensional softmax output, one probability per column, indicating in which column to drop the next chip."
+    },
+    {
+      "context": "In the two-player game \"Connect Four\", players take turns inserting a chip of their player color (which is either red or yellow) into one of the board's seven slots, where it falls down to occupy the bottom-most free window. The game ends if one of the players manages to fill four connected windows (horizontally, vertically or diagonally) with their own color, or if the board is full. You want to train a deep neural network to play the yellow player, by teaching it to look at the current board state (= network input) and suggest a move (= network output).",
+      "q": "You are training it on recorded games of \"Connect Four\" experts. What is a possible data augmentation method you can use to derive additional training examples from the recordings? (Note that data augmentation is allowed to modify the targets.)",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Open-ended. Mirror the board horizontally (and mirror the chosen column accordingly), since Connect Four is symmetric under left-right reflection."
+    },
+    {
+      "context": "In the two-player game \"Connect Four\", players take turns inserting a chip of their player color (which is either red or yellow) into one of the board's seven slots, where it falls down to occupy the bottom-most free window. The game ends if one of the players manages to fill four connected windows (horizontally, vertically or diagonally) with their own color, or if the board is full. You want to train a deep neural network to play the yellow player, by teaching it to look at the current board state (= network input) and suggest a move (= network output).",
+      "q": "Would you recommend only fully-connected (= dense) layers or also include convolutional layers for this task?",
+      "opts": ["Only fully-connected (dense) layers", "Include convolutional layers"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "What was the worst / most difficult part of the ML group project?",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Open-ended feedback question."
+    },
+    {
+      "q": "Was there anything you liked about it?",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Open-ended feedback question."
+    },
+    {
+      "q": "I hereby declare that I did work on the exam independently and only the permitted aids were used, and, in particular, that no communication took place with a third party at any time during the examination.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    }
+  ]
+}

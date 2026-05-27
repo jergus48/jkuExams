@@ -1,0 +1,790 @@
+Retake Exam: Attempt review (page 2 of 8)  https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Dashboard / My courses / VL MLPC (2023S) / Exam / Retake Exam
+
+             Information
+
+            Bayesian Classification
+
+              Consider minimum risk classification as introduced in the lecture, with the Conditional Risk formula reproduced below, for
+              your convenience:
+
+                                                             R(i  x) = cj=1 (i  j)P (j  x)
+             Assume we have  = {1, . . . , c}, a list of actions {i = " predict class i "}, a given cost function
+              = {ij = (i  j)}, and known probability distributions P () and P (X  ).
+
+             Information
+
+              Which of the following statements are correct?
+
+           Question 1
+
+             Correct
+             Mark 1.00 out of 1.00
+
+              MAP classification behaviour can be obtained by an appropriate setting of the cost function
+
+              Select one:
+                   True 
+                   False
+
+           Question 2
+
+             Correct
+             Mark 1.00 out of 1.00
+
+              The effect of any change to the cost function can also be achieved by leaving the cost function unchanged and modifying the
+
+             likelihoods P (X  j) accordingly
+
+              Select one:
+                   True
+                   False 
+
+1 of 3                                     07/07/2023, 09:21
+Retake Exam: Attempt review (page 2 of 8)  https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Question 3
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          Written as a matrix, the above cost function  is of quadratic shape
+
+          Select one:
+              True 
+              False
+
+        Question 4
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          For any cost function, the expected cost is equal to the Bayes Error
+
+          Select one:
+              True
+              False 
+
+        Question 5
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          The expected risk defines decision boundaries only in a two-dimensional feature space
+
+          Select one:
+              True
+              False 
+
+        Information
+
+          Answer the following questions:
+
+2 of 3                                                                                           07/07/2023, 09:21
+Retake Exam: Attempt review (page 2 of 8)   https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Question 6
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+         If we multiply the cost function with a constant k, the probability of all classes will
+
+          (multiple answers possible)
+
+                remain the same
+
+               sum to 1.0  k
+
+                change so that probable classes become less probable, and vice versa ("smoothing") 
+
+               increase by a factor k
+               be reduced by a factor k 
+
+          Your answer is incorrect.
+
+        Question 7
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+         If we set the cost function to all 1 (i.e., all ij = 1),
+
+          (multiple answers possible)
+
+                minimum risk classification becomes the same as MAP classification
+
+               the risk for all actions becomes c, for any x, where c > 1 is the number of classes 
+               all decisions will have the same cost, for any x
+               the risk for all actions becomes 1, for any x
+               for any x, every decision is equally good
+
+        Your answer is incorrect.
+
+         Virtual lecture hall for the exam
+        Jump to...
+
+                                                                                                     First Exam 
+
+3 of 3                                                                                               07/07/2023, 09:21
+Retake Exam: Attempt review (page 3 of 8)                                https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Dashboard / My courses / VL MLPC (2023S) / Exam / Retake Exam
+
+        Information
+
+         Classifier Evaluation
+
+          Consider a two-class classification problem with classes p and n, and a test set T with 1000 test examples and class
+          distribution P:N = 3:7. For each of the following classifiers, specify what the expected confusion matrix will look like when the
+          classifier is tested on T (give the numbers for the four entries of the table; arithmetic expressions (e.g. 3/5 instead of 0.6) are
+          also accepted). For each classifier, also give the expected values for Recall and Precision. If one of these is not defined,
+          enter -1.
+
+        Question 8
+
+        Not answered
+        Marked out of 3.00
+
+        A classifier that randomly predicts n or p with probability 0.5
+
+        TP:                  FP:                   
+
+        FN:                  TN:                   
+
+        Recall:             
+
+        Precision:            
+
+        Question 9
+
+        Not answered
+        Marked out of 3.00
+
+        A classifier that always predicts class n
+
+        TP:                  FP:                   
+
+        FN:                  TN:                   
+
+        Recall:             
+
+        Precision:            
+
+        Information
+
+          Which of the following statements are true:
+
+1 of 2                                                                   07/07/2023, 09:22
+Retake Exam: Attempt review (page 3 of 8)   https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Question 10
+
+        Correct
+        Mark 1.00 out of 1.00
+
+         The iso-performance line cannot go through points (0, 0) and (1, 1)
+
+          Select one:
+              True
+              False 
+
+        Question 11
+
+        Correct
+        Mark 1.00 out of 1.00
+
+         For any classifier C and any dataset D, Recall(C, D) + Precision(C, D) = 1.0
+
+          Select one:
+              True
+              False 
+
+        Question 12
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          If two classifiers C1, C2 have the same True Positive Rates (TPRs), but different False Positive Rates, they cannot have the same
+          accuracy on any given fixed test set T.
+
+          Select one:
+              True 
+              False
+
+        Question 13
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          Two classifiers with the same accuracy cannot occupy different places in ROC space.
+
+          Select one:
+              True
+              False 
+
+         Virtual lecture hall for the exam
+        Jump to...
+
+                                            First Exam 
+
+2 of 2                                      07/07/2023, 09:22
+Retake Exam: Attempt review (page 4 of 8)                              https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Dashboard / My courses / VL MLPC (2023S) / Exam / Retake Exam
+
+        Information
+
+        Decision Trees
+
+        Consider the following alternative criterion (instead of information gain) for evaluating a feature A for splitting in the ID3
+        algorithm, in a binary classification task with two classes  = {+, -} and pi(ni) = number of pos (neg) examples in Di,
+
+        the i-th branch (notation as in the lecture slides):
+
+                                           GD(A) = viA                 |Di |    |pi -ni |
+                                                                       |D|      pi +ni
+
+        Answer the following questions:
+
+        Question 14
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+          The best feature is the one that minimises  this measure
+
+          Your answer is incorrect.
+
+        Question 15
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+          This measure will become maximal when each branch only contains examples of one class
+
+          Select one:
+              True
+              False 
+
+1 of 3                                                                                                                                  07/07/2023, 09:22
+Retake Exam: Attempt review (page 4 of 8)  https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Question 16
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+         When a feature A perfectly discriminates between the classes in D, GD(A)
+
+               < 0.0
+
+                is useless
+
+               = 1.0
+
+                is undefined
+                is equal to the information gain
+
+               > 1.0
+               = 0.0
+
+          Your answer is incorrect.
+
+        Information
+
+          Consider a variant "ID3-S" of the ID3 algorithm that learns only trees that are at most one level deep. It chooses a feature for
+          the root, using the Information Gain heuristic, and labels each of the resulting nodes with the class that is most frequent in
+          that node (in case of a tie, it randomly chooses between one of the competing classes).
+          Which of the following statements about ID3-S are true:
+
+        Question 17
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          This is not a valid learning algorithm
+
+          Select one:
+              True
+              False 
+
+        Question 18
+
+        Correct
+        Mark 1.00 out of 1.00
+
+         This algorithm cannot result in a classifier with an accuracy of 1.0 on the training set
+
+          Select one:
+              True
+              False 
+
+2 of 3                                                                                             07/07/2023, 09:22
+Retake Exam: Attempt review (page 4 of 8)   https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Question 19
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          This is a high-bias learner
+
+          Select one:
+              True 
+              False
+
+        Question 20
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          Combining different such trees via voting can improve accuracy on some dataset
+
+          Select one:
+              True 
+              False
+
+         Virtual lecture hall for the exam
+        Jump to...
+
+                                                                                          First Exam 
+
+3 of 3                                                                                    07/07/2023, 09:22
+Retake Exam: Attempt review (page 5 of 8)  https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Dashboard / My courses / VL MLPC (2023S) / Exam / Retake Exam
+
+             Information
+
+            Neural Networks and Deep Learning
+
+             Consider the simple neural network from the lecture slides, with 1 input unit (for a feature x), one hidden unit, and one
+             output unit y, where the hidden unit uses the tanh as activation function, and the output unit y uses the identity function
+
+              (i.e., just outputs what comes in as net input).
+              Also assume that the loss function is the sum squared error (as defined in the slides).
+
+          Which of the following statements are correct for this network?
+
+        Question 21
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          A training set for this network will have to consist of pairs of numbers
+
+          Select one:
+              True 
+              False
+
+        Question 22
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+         Changing the output activation function from linear (identity) to tanh will not make any difference, as the hidden unit
+         already uses the tanh activation
+
+          Select one:
+              True 
+              False
+
+1 of 3                                                                                                                                    07/07/2023, 09:23
+Retake Exam: Attempt review (page 5 of 8)  https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Question 23
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+         If we change the output of the bias unit from 1.0 to 2.0, the result is no longer a valid neural network
+
+          Select one:
+              True 
+              False
+
+        Question 24
+
+        Correct
+        Mark 1.00 out of 1.00
+
+         Changing the output of the bias unit from 1.0 to 2.0 will change the absolute value of the Sum Squared Error on the training
+         set D, but will not change the values of the network weights that minimise the error on D
+
+          Select one:
+              True
+              False 
+
+        Question 25
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+          The loss function is defined over a four-dimensional parameter space
+
+          Select one:
+              True
+              False 
+
+        Information
+
+          Now assume we use the above simple network for a binary classification task. We encode the class labels in the training data
+
+         D as 1 and 0, respectively, equip the output unit y with a logistic activation function (see slides), and use the Binary Cross-
+         Entropy CE (as defined in the lecture slides) as the loss function:
+
+                                                      CE(xi) = -yi log y^i - (1 - yi) log(1 - y^i)
+         where yi is the true class of example xi (0 or 1), and y^i is the value predicted by output unit y.
+         An example xi is classified as class 1 iff the output y^i calculated by the network from input x is  0.5.
+
+          Which of the following statements are correct?
+
+2 of 3                                     07/07/2023, 09:23
+Retake Exam: Attempt review (page 5 of 8)                   https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+Question 26
+
+Correct
+Mark 1.00 out of 1.00
+
+  This classifier can only learn decision boundaries that split the feature space into two regions
+
+  Select one:
+      True 
+      False
+
+Question 27
+
+Correct
+Mark 1.00 out of 1.00
+
+ If we make the network deeper by adding additional hidden layers, the CE function must be extended with corresponding
+
+  additional terms
+
+  Select one:
+      True
+      False 
+
+Question 28
+
+Incorrect
+Mark 0.00 out of 1.00
+
+ If the class distribution in the training set is 50:50, the binary cross-entropy CE encourages the network to predict values
+
+  close to 0.5
+
+  Select one:
+      True 
+      False
+
+Question 29
+
+Incorrect
+Mark 0.00 out of 1.00
+
+  This classifier can easily overfit because the cross-entropy is non-linear
+
+  Select one:
+      True 
+      False
+
+                         Virtual lecture hall for the exam  First Exam 
+                        Jump to...
+                                                                         07/07/2023, 09:23
+3 of 3
+Retake Exam: Attempt review (page 6 of 8)  https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Dashboard / My courses / VL MLPC (2023S) / Exam / Retake Exam
+
+             Information
+
+            Unsupervised Learning
+
+             Consider the task of k-means clustering with N observations described in terms of D numeric features, with the Euclidean
+             distance as distance measure. Assume we have set the number k of clusters to k = 5.
+
+               Which of the following statements are correct?
+
+           Question 30
+
+             Incorrect
+             Mark 0.00 out of 1.00
+
+              When we increase the number of features, the model complexity penalty term in the Bayes Information Criterion will
+              automatically grow larger
+
+              Select one:
+                   True
+                   False 
+
+           Question 31
+
+             Correct
+             Mark 1.00 out of 1.00
+
+             In k-means, k has to be at least N/2
+
+              Select one:
+                   True
+                   False 
+
+           Question 32
+
+             Correct
+             Mark 1.00 out of 1.00
+
+             To use the Bayes Information Criterion for selecting an appropriate value for k, a k-means cluster model must be converted
+
+              into a probabilistic model
+
+              Select one:
+                   True 
+                   False
+
+1 of 3                                                                                                                                   07/07/2023, 09:23
+Retake Exam: Attempt review (page 6 of 8)   https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Question 33
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          The cluster with the smallest number of members will have the lowest (best) MQE
+
+          Select one:
+              True
+              False 
+
+        Question 34
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          Feature normalisation will change the MQE, but not the clusters found
+
+          Select one:
+              True
+              False 
+
+        Information
+
+         Consider a Gaussian Mixture Model (GMM) with k components that was learned from a dataset of N examples over a
+         D-dimensional numeric feature space.
+
+        Question 35
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+          How many parameters (numbers) does a specification of this GMM consist of (ignoring possible redundancies because of
+          distribution constraints and symmetries)?
+
+               k + kD + D
+               k(D  N)
+               k + kD + kD2
+               3kD
+               kD + N 
+               kN + kD + kD2
+               3k
+
+        Your answer is incorrect.
+
+         Virtual lecture hall for the exam
+
+2 of 3                                                                                                                          07/07/2023, 09:23
+Retake Exam: Attempt review (page 6 of 8)  https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+                        Jump to...                                                                     First Exam 
+
+3 of 3                                     07/07/2023, 09:23
+Retake Exam: Attempt review (page 7 of 8)                              https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Dashboard / My courses / VL MLPC (2023S) / Exam / Retake Exam
+
+        Information
+
+         Markov Models
+
+         Consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model A, and a uniform prior state
+         distribution  = [1/3, 1/3, 1/3]:
+
+                                                                           0.4 0.3 0.3 
+                                                                   A =  0.2 0.6 0.2 
+
+                                                                           0.1 0.1 0.8 
+
+          Which of the following statements are true?
+
+1 of 4  Question 36
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+         If we changed some aij to be zero (0.0), then also aji would have to be changed to zero for a valid Markov process
+
+          Select one:
+              True 
+              False
+
+        Question 37
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+          If we made one of these numbers smaller, then at least one number in the same column would have to become larger
+
+          Select one:
+              True 
+              False
+
+        Question 38
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+          If we made one of these numbers smaller, then at least one number in the same row would have to become larger
+
+          Select one:
+              True
+              False 
+
+                                                                                                                                                                                     
+
+                                                                                                                                                        07/07/2023, 09:23
+Retake Exam: Attempt review (page 7 of 8)       https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Question 39
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          The expected number of consecutive occurrences of state S2 is higher than the expected number of consecutive occurrences
+          of state S1
+
+          Select one:
+              True 
+              False
+
+        Information
+
+         Now consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model A, and a uniform prior
+         state distribution  = [1/3, 1/3, 1/3]:
+
+                                                                             1 0 0
+                                                                      A = 0 1 0
+
+                                                                             0 0 1
+         What is the probability of the following state sequences, according to this model M :
+
+        Question 40
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+         P ((S1, S1, S2, S2, S3, S3)  M) = ...
+
+        Answer: 0.5                             
+
+        Question 41
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+         P ((S1, S1, S1, S1, S1)  M) = ...
+
+        Answer: 0.5                             
+
+        Question 42
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+         P ((S1, S2, S3, S1, S2, S3)  M) = ...
+
+        Answer: 0.5                             
+
+2 of 4                                                  
+
+                                                  07/07/2023, 09:23
+Retake Exam: Attempt review (page 7 of 8)              https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Information
+
+          Consider the classification task of identifying one of two cities A or B, based on a sequence of weather observations. We have
+
+         learned two Markov models MA and MB that model the weather in cities A and B, respectively. Now, given a sequence S of
+         10 consecutive weather observations, you want to decide which of the two cities this sequence is from, based on the MAP
+         principle. Model MA stands for city A, MB for B.
+
+        Question 43
+
+        Partially correct
+        Mark 0.50 out of 1.00
+
+          Which of the following quantities are needed for making this decision?
+
+               P (A)
+               P (S|MB)
+               P (MB|MA)
+               P (S|MA)
+               P (B)
+
+          Your answer is partially correct.
+          You have correctly selected 2.
+
+        Information
+
+          Which of the following statements are true?
+
+        Question 44
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          If we produce a new sequence S2 by concatenating two copies of S, the likelihoods will change, but the MAP decision will
+          always remain the same
+
+          Select one:
+              True
+              False 
+
+3 of 4                                                                                                                                    
+
+                                                                                                                                    07/07/2023, 09:23
+Retake Exam: Attempt review (page 7 of 8)   https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+
+        Question 45
+
+        Correct
+        Mark 1.00 out of 1.00
+
+          This kind of classification procedure is only possible if the length of S is at least 2
+
+          Select one:
+              True
+              False 
+
+        Question 46
+
+        Incorrect
+        Mark 0.00 out of 1.00
+
+          The same decision could be made without a Markov model, by counting the different states in S
+
+          Select one:
+              True 
+              False
+
+         Virtual lecture hall for the exam
+        Jump to...
+
+                                                                                                         First Exam 
+
+4 of 4                                                                                                         
+
+                                                                                                         07/07/2023, 09:23
+

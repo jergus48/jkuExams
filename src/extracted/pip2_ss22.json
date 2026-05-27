@@ -1,0 +1,519 @@
+{
+  "id": "pip2_ss22",
+  "title": "Python Exam — JKU SS2022",
+  "description": "JKU Programming in Python II exam from summer semester 2022 (45 graded questions on PyTorch, datasets, training, and ML basics).",
+  "questions": [
+    {
+      "q": "What is the main purpose of a version control system (VCS)?",
+      "opts": [
+        "Automatic usage of the most recent Python package versions.",
+        "Efficient tracking of files and their changes.",
+        "Keeping all software versions up to date.",
+        "Fast integration of unit tests."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "Assume that you have a classification task where you want to classify images into either \"dog\" or \"cat\". Each image only contains a single dog or a single cat on some arbitrary background. Which of the following data augmentation techniques does NOT make sense?",
+      "opts": [
+        "adding noise",
+        "applying input dropout",
+        "zooming into the background",
+        "flipping horizontally"
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "q": "Which of the following is NOT a typical data normalization/scaling approach?",
+      "opts": [
+        "Scaling to range [-1, 1].",
+        "Scaling to zero (0) mean and unit (1) variance.",
+        "Scaling to range [0, 1].",
+        "Scaling to range \\(\\,[0, 10^{-15}]\\,\\)"
+      ],
+      "ans": [3],
+      "multi": false
+    },
+    {
+      "q": "What is one primary purpose of the automatic parameter registration of `torch.nn.Module`?",
+      "opts": [
+        "To allow for easier debugging.",
+        "To allow more inputs to the `forward` method.",
+        "To collect all trainable parameters and provide convenient acces to them via the module's `parameters` method.",
+        "To keep track of all parameters and assess whether they can be removed in order to increase performance."
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "context": "Assume you have the raw model outputs `logits` as a PyTorch tensor with arbitrary floating point numbers in the range [-100, 100].",
+      "q": "Which of the following code snippets is correct when the task is to get binary classification predictions `preds` (integer, either 0 or 1), given some prediction threshold `t` (float) in the range [0, 1] (assume correct imports)?",
+      "opts": [
+        "```python\npreds = (logits >= t).long()\n```",
+        "```python\npreds = (torch.sigmoid(logits) * t).long()\n```",
+        "```python\npreds = (torch.sigmoid(logits) >= t).long()\n```",
+        "```python\npreds = logits.long() >= t\n```",
+        "```python\npreds = (logits * t).long()\n```",
+        "```python\npreds = torch.sigmoid(logits).long() >= t\n```"
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "context": "What does the following PyTorch image transformation composition do when applied on an image?\n\n```python\ntransforms = transforms.Compose([\n    transforms.Resize(4),\n    transforms.Grayscale(),\n    transforms.RandomRotation(degrees=180),\n    transforms.ToTensor()\n])\n```",
+      "q": "Which statement describes its behavior?",
+      "opts": [
+        "It sequentially resizes an image, converts it to grayscale, applies randomized rotation and transforms it to a Pytorch tensor.",
+        "It randomly performs one of the four transformations on an image.",
+        "It randomly performs arbitrary many of the four transformations on an image.",
+        "It sequentially transforms an image to a PyTorch tensor, applies randomized rotation, converts it to grayscale and resizes it."
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "Select the correct solution when asked to normalize (scale to range [0, 1]) some numpy array `arr`.",
+      "opts": [
+        "```python\narr * 0 + (1 * arr)\n```",
+        "```python\n(arr - arr.mean()) / arr.std()\n```",
+        "```python\narr / 255\n```",
+        "```python\n(arr - arr.min()) / (arr.max() - arr.min())\n```"
+      ],
+      "ans": [3],
+      "multi": false
+    },
+    {
+      "q": "You get data that measures the times it took for trees to grow. The measured times can be any real numbers in range [0, 1000]. Which type of data is this?",
+      "opts": [
+        "categorical data",
+        "continuous data",
+        "ordinal data",
+        "discrete data"
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "The `forward` method in context of `torch.nn.Module`...",
+      "opts": [
+        "...defines the module architecture.",
+        "...specifies how a PyTorch module is applied (the \"flow\" through the module architecture).",
+        "...pushes a PyTorch module to a given device.",
+        "...adds a new forward layer to the network architecture of a module."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "Categorical data can be described as:",
+      "opts": [
+        "Quantitative data with mathematical meaning and a natural ordering.",
+        "A subset of numerical data with continuous values.",
+        "Qualitative data without mathematical meaning but with a natural ordering.",
+        "Qualitative data without mathematical meaning."
+      ],
+      "ans": [3],
+      "multi": false
+    },
+    {
+      "q": "What does independently and identically distributed (i.i.d.) mean?",
+      "opts": [
+        "Each sample has the same probability distribution as the others and all are mutually independent.",
+        "Each sample has a different probability distribution as the others and all are mutually dependent.",
+        "Each sample has the same probability distribution as the others and all are mutually dependent.",
+        "Each sample has a different probability distribution as the others and all are mutually independent."
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "What is the purpose of a loss function?",
+      "opts": [
+        "To get the predictions of a model.",
+        "To change the model parameters.",
+        "To compute the difference between the model ouput and the actual targets (ground truth).",
+        "To compute the gradients for gradient-based iterative methods."
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "context": "Assume that `MyModule` is a class properly derived from the `torch.nn.Module` class and `tensor_a` is a PyTorch tensor.\n\n```python\nmy_module = MyModule()\nmy_module(tensor_a)\n```",
+      "q": "What does the code above do?",
+      "opts": [
+        "It raises an exception, since one can not create instances of `MyModule`.",
+        "Creates an instance of `MyModule`. Then reads a sample into `tensor_a`.",
+        "Creates an instance of `MyModule`. Then applies the `forward` method of `my_module` with argument `tensor_a`.",
+        "Creates an instance of `MyModule`. Then calls the `__getitem__` method of `my_module` with argument `tensor_a`."
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "context": "```python\nimport torch\nfrom torch.utils.data import Dataset, DataLoader\n\nclass MyDataset(Dataset):\n    def __getitem__(self, index):\n        return torch.tensor([1, 2, 3])\n\n    def __len__(self):\n        return 4\n\ndataset = MyDataset()\nloader = DataLoader(dataset, batch_size=2)\n\nfor i, x in enumerate(loader):\n    print(f\"{i}: {tuple(x.shape)}\")\n```",
+      "q": "What is the output of the code above?",
+      "opts": [
+        "```\n0: (3, 2)\n1: (3, 2)\n```",
+        "```\n0: (2, 3)\n1: (2, 3)\n```",
+        "```\n0: (4, 3)\n```",
+        "```\n0: (6,)\n```",
+        "```\n0: (4, 2, 3)\n```",
+        "```\n0: (3,)\n1: (3,)\n2: (3,)\n3: (3,)\n```"
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "What can be a potential risk of data augmentation?",
+      "opts": [
+        "It can introduce artifacts or even change the task.",
+        "There are no risks, data augmentation is always safe.",
+        "It can increase the model complexity.",
+        "It can increase the number of trainable parameters of a model."
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "```python\nimport torch\n\nclass MyModule(torch.nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.conv = torch.nn.Conv2d(...)\n\n    def forward(self, x):\n        out1 = self.conv(x)\n        ...  # process \"out1\" so it can be an input to \"linear\"\n        linear = torch.nn.Linear(...)\n        out2 = linear(out1)\n        return out2\n```",
+      "q": "Why is the code above problematic (you can assume correct inputs, shapes and arguments)?",
+      "opts": [
+        "`torch.nn.Linear` is assigned to a local identifier but `torch.nn.Conv2d` is not. Both should be defined to locals or the code will suffer from reproducibility.",
+        "`torch.nn.Linear` must be invoked before passing the data to the convolutional layer.",
+        "`torch.nn.Conv2d` can never be combined with `torch.nn.Linear`.",
+        "The submodule `torch.nn.Linear` is created inside the `forward` method rather than the `__init__` method. This means that the submodule is repeatedly created in every `forward` call, including its random parameter initialization."
+      ],
+      "ans": [3],
+      "multi": false
+    },
+    {
+      "q": "`torch.utils.data.Dataset` can be used to derive a custom class that...",
+      "opts": [
+        "...specifies that architecture of a neural network model.",
+        "...provides access to data via a standardized interface.",
+        "...takes care of multiprocessing.",
+        "...creates minibatches from samples."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "```python\nimport torch\n\nclass MyModule(torch.nn.Module):\n    def __init__(self, a):\n        super().__init__()\n        self.a = a\n\n    def forward(self, x):\n        output = x + self.a\n        return output\n\nmy_module = MyModule(2.0)\nc = my_module(5.0)\nprint(c)\n```",
+      "q": "What is the output of the code above?",
+      "opts": [
+        "It raises an exception because `super().__init__()` should not be used with `torch.nn.Module`.",
+        "It raises an exception because the `__getitem__` method is missing in `MyModule`.",
+        "`7.0`",
+        "It raises an exception at `self.a = a` because only PyTorch trainable parameters and submodules can be used as attribute."
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "q": "Consider a binary classification task, where you have to classify patients into either healthy (negative) or diseased (positive). Your dataset is imbalanced, there are far more healthy patients than diseased patients. Which of the following evaluation metrics is the most fitting one to assess a model performance?",
+      "opts": [
+        "area under the receiver operating characteristic (ROC) curve (AUC)",
+        "true negative rate (TNR)",
+        "mean squared error (MSE)",
+        "accuracy (ACC)"
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "Assume you want to normalize your data and compute a normalization constant from your dataset (e.g., the mean over many samples). What would be the correct way to proceed in terms of training and test set?",
+      "opts": [
+        "Determine the constant for normalization on the training data and apply it also to the test data.",
+        "Determine the constant for normalization on the whole dataset and apply it to training and test data.",
+        "Determine the constant for normalization on the test data and apply it also to the training data.",
+        "Determine the constant for normalization on a random set of samples from training and test data and apply it to training and test data."
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "```python\ndef my_hash(x):\n    return 125\n```",
+      "q": "Which of the following statements is NOT correct regarding the hash function above?",
+      "opts": [
+        "The hash value is the same in different Python interpreter sessions.",
+        "The computation of the hash value is fast.",
+        "Up to 125 hash collisions can occur for unequal inputs.",
+        "The hash function will work on any input."
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "q": "When translating PyTorch/Python code into a TorchScript program, there are two ways: scripting and tracing. Which of the following statements is correct?",
+      "opts": [
+        "Scripting: recording the operations of a PyTorch/Python program given some example input; control flow is ignored. Tracing: writing a TorchScript program directly; control flow is supported.",
+        "Scripting: writing a TorchScript program directly; control flow is ignored. Tracing: recording the operations of a PyTorch/Python program given some example input; control flow is supported.",
+        "Scripting: recording the operations of a PyTorch/Python program given some example input; control flow is supported. Tracing: writing a TorchScript program directly; control flow is ignored.",
+        "Scripting: writing a TorchScript program directly; control flow is supported. Tracing: recording the operations of a PyTorch/Python program given some example input; control flow is ignored."
+      ],
+      "ans": [3],
+      "multi": false
+    },
+    {
+      "context": "Consider the following incomplete implementation of a custom Dataset which should return image data as numpy arrays (assume `read_image` to be fully implemented):\n\n```python\nimport numpy as np\nfrom torch.utils.data import Dataset\n\ndef read_image(path: str) -> np.ndarray:\n    # reads an image from the path and returns a numpy array\n    ...\n\nclass MyDataset(Dataset):\n    def __init__(self, image_paths: list[str]):\n        self.image_paths = image_paths\n```",
+      "q": "Which of the following is the correct implementation of the missing `__getitem__` method?",
+      "opts": [
+        "```python\ndef __getitem__(self, path):\n    return read_image(path)\n```",
+        "```python\ndef __getitem__(self, index):\n    return np.array([index])\n```",
+        "```python\ndef __getitem__(self, index):\n    path = self.image_paths[index]\n    return read_image(path)\n```",
+        "```python\ndef __getitem__(self, index):\n    data = []\n    for path in self.image_paths:\n        data.append(read_image(path))\n    return data\n```"
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "q": "Which is the correct way to perform an update step on network parameters after the forward pass in PyTorch?",
+      "opts": [
+        "Set gradients to zero, calculate the loss, call `backward()` on the optimizer, call `step()` on the optimizer.",
+        "Set gradients to zero, calculate the loss, call `backward()` on the loss, call `step()` on the optimizer.",
+        "Set gradients to zero, calculate the loss, call `backward()` on the optimizer, call `step()` on the network.",
+        "Set gradients to zero, calculate the loss, call `backward()` on the loss, call `step()` on the network."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "What does `collate_fn` (collate function) do in terms of `torch.utils.data.DataLoader`?",
+      "opts": [
+        "Specifies how a sample is loaded from the disk.",
+        "Applies data augmentation methods to the samples.",
+        "Specifies how the samples are combined into minibatches.",
+        "Specifies the size of the subsets of the dataset."
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "q": "What is the purpose of the `zero_grad` method?",
+      "opts": [
+        "It is called on the loss (`loss.zero_grad()`) to set the associated trainable parameters to values for which the loss is zero.",
+        "It is called on the optimizer (`optim.zero_grad()`) in order to set the associated trainable parameters to zero after a gradient update.",
+        "It is called on the optimizer (`optim.zero_grad()`) in order to set the gradients of the associated trainable parameters to zero.",
+        "It is called on the loss (`loss.zero_grad()`) to set the associated trainable parameters to values for which the loss has a vanishing gradient."
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "q": "An instance of the `torch.utils.data.DataLoader` class...",
+      "opts": [
+        "...creates minibatches from the samples returned by a `torch.utils.data.Dataset` instance.",
+        "...represents a PyTorch Dataset and must include a `__getitem__` method.",
+        "...splits the dataset into training and test set automatically.",
+        "...must be passed to a PyTorch model and will automatically train it on all samples in the dataset."
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "The `__init__` method in context of `torch.nn.Module`...",
+      "opts": [
+        "...specifies how a PyTorch module is applied (the \"flow\" through the module architecture).",
+        "...defines the module architecture.",
+        "...initializes all sub-modules based on the super-class.",
+        "...is a replacement for `torch.nn.init`."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "What can be a potential benefit of data augmentation?",
+      "opts": [
+        "Overfitting can be reduced.",
+        "The computational run time of the model can be increased.",
+        "The computational run time of the model can be reduced.",
+        "Overfitting can be increased."
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "```python\nimport torch\n\ndef function(x: torch.Tensor):\n    return x if x.min() >= 0 else x * -1\n\nscripted_function = torch.jit.script(function)\ntraced_function = torch.jit.trace(function, example_inputs=torch.tensor([1, 2, 3]))\n\nactual_input = torch.tensor([-4, -5, -6])\nprint(\"s:\", scripted_function(actual_input).tolist())\nprint(\"t:\", traced_function(actual_input).tolist())\n```",
+      "q": "What is the output of the code above?",
+      "opts": [
+        "```\ns: [-4, -5, -6]\nt: [4, 5, 6]\n```",
+        "```\ns: [4, 5, 6]\nt: [-1, -2, -3]\n```",
+        "```\ns: [-4, -5, -6]\nt: [-1, -2, -3]\n```",
+        "```\ns: [4, 5, 6]\nt: [1, 2, 3]\n```",
+        "```\ns: [4, 5, 6]\nt: [-4, -5, -6]\n```",
+        "```\ns: [-4, -5, -6]\nt: [-4, -5, -6]\n```",
+        "```\ns: [4, 5, 6]\nt: [4, 5, 6]\n```",
+        "```\ns: [-4, -5, -6]\nt: [1, 2, 3]\n```"
+      ],
+      "ans": [4],
+      "multi": false
+    },
+    {
+      "q": "Given a PyTorch optimizer `optim = torch.optim.SGD(my_model.parameters(), lr=0.01)`, what does `optim.step()` do and when should it be called?",
+      "opts": [
+        "It carries out an update on the registered trainable parameters of `my_model`. It should be called after the loss of the output of `my_model` has been calculated and `loss.backward()` has been called.",
+        "It iterates to the next batch of training data in the training loop of `my_model`. It should be called after a the the parameters of `my_model` were updated.",
+        "It increases the step size of `optim`. It should only be called before the loss of the output of `my_model` has been calculated and `loss.backward()` has been called.",
+        "It calculates the gradients of `my_model` in the training loop. It should be called after the loss of the output of `my_model` has been calculated and `loss.backward()` has been called."
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "What is a common loss function for regression tasks?",
+      "opts": [
+        "mean squared error",
+        "cross entropy",
+        "binary cross entropy",
+        "stochastic gradient descent"
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "What is the primary task of a hash function?",
+      "opts": [
+        "To compute whether two objects are equal.",
+        "To compute a fixed-sized data vector for a given input.",
+        "To make implementations of dictionaries and sets fast (high run-time performance).",
+        "To compare image data."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "Which statement is NOT true about `torch.nn.Module`?",
+      "opts": [
+        "Trainable parameters are automatically registered when specified as attributes in the `__init__` method.",
+        "`torch.nn.Module` can be used to implement custom neural networks in PyTorch.",
+        "PyTorch datasets are automatically registered when specified as attributes in the `__init__` method.",
+        "Other PyTorch modules are automatically registered when specified as attributes in the `__init__` method."
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "q": "When training a model using some gradient-based iterative method, how should the loss (computed with some loss function) change?",
+      "opts": [
+        "The loss should be minimized.",
+        "The loss is irrelevant when training a model.",
+        "The loss should be maximized.",
+        "The loss should nearly stay constant (given some user-defined value)."
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "When creating randomized data splits, a common thing to do is setting the seed of the used random number generators. Why is that?",
+      "opts": [
+        "To enable shuffling in the DataLoader istances.",
+        "To make different libraries compatible with each other (e.g., data from numpy and data from torch).",
+        "To allow for a faster program execution, as the seed is now just a constant.",
+        "To get reproducible results, so that the splits always contain the same (randomized) samples."
+      ],
+      "ans": [3],
+      "multi": false
+    },
+    {
+      "q": "What does a binary confusion matrix contain?",
+      "opts": [
+        "Given regression predictions and the actual targets, it contains the counts how often the model was close, given some threshold.",
+        "It contains the loss values of all iterations of a nested cross validation.",
+        "Given some loss functions, it contains the minimum and maximum loss values of these functions.",
+        "Given classification predictions and the actual targets, it contains the counts how often the model was correct and incorrect."
+      ],
+      "ans": [3],
+      "multi": false
+    },
+    {
+      "q": "In a supervised setting, how can one determine the performance of some machine learning model?",
+      "opts": [
+        "By using a loss function to compute the deviation between the model prediction and the true target.",
+        "By averaging the gradients of the model and compare it to a specified threshold.",
+        "By running a performance profiler on the model.",
+        "By comparing the model input and the model prediction with each other."
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "`torch.utils.data.Subset` can be used to...",
+      "opts": [
+        "...derive a custom class that creates minibatches from samples.",
+        "...generate a Dataset from a subset of the original Dataset according to a list of indices.",
+        "...distribute the sampling process over multiple sub-processes.",
+        "...find a good subset of the input features, e.g., for dimensionality reduction."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "Given a sample image `img` (type `PIL.Image`) and a PyTorch transformation pipeline `transforms` (type `torchvision.transforms.Compose`), which of the following is the correct way of applying the transformations on the image?",
+      "opts": [
+        "```python\ntransformed_img = img.apply(transforms)\n```",
+        "```python\ntransformed_img = transforms(img)\n```",
+        "```python\ntransformed_img = img(transforms)\n```",
+        "```python\ntransformed_img = transforms.apply(img)\n```"
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "Which training method corresponds to full-batch learning?",
+      "opts": [
+        "Train a model on individual data samples from the training dataset in each update.",
+        "Divide the full training dataset into batches of several samples and use one batch per update.",
+        "Train a model on the whole training dataset in each update.",
+        "Divide the full training and test dataset into batches of several samples and use one batch per update."
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "q": "The special method `__getitem__` in a `torch.utils.data.Dataset` derived class should...",
+      "opts": [
+        "...calculate the mean of all samples.",
+        "...return minibatched samples.",
+        "...return one sample.",
+        "...return the index of a specified sample."
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "q": "What is a hash collision?",
+      "opts": [
+        "Equal inputs result in the same hash code.",
+        "Different inputs result in different hash codes.",
+        "Equal inputs result in different hash codes.",
+        "Different inputs result in the same hash code."
+      ],
+      "ans": [3],
+      "multi": false
+    },
+    {
+      "q": "What is data augmentation?",
+      "opts": [
+        "Creating new artificial samples by modifying existing samples.",
+        "Randomly swapping targets/labels of samples while keeping the features the same.",
+        "Creating data splits (training, validation, test splits).",
+        "Creating new models by choosing different parameters."
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "Training a neural network for one epoch will...",
+      "opts": [
+        "...perform one weight update.",
+        "...perform training until the model overfits on all training samples.",
+        "...perform training for a fixed number of seconds.",
+        "...perform one training iteration over all training samples."
+      ],
+      "ans": [3],
+      "multi": false
+    }
+  ]
+}

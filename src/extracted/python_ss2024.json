@@ -1,0 +1,438 @@
+{
+  "id": "python_ss2024",
+  "title": "Python Exam — JKU SS2024",
+  "description": "Final exam for the Python course at JKU, SS2024. 41 questions covering PyTorch, TorchScript, data preprocessing, ML workflow and theory.",
+  "questions": [
+    {
+      "q": "By selecting \"I confirm\", I hereby declare under oath that I will work on this examination on my own without any help or any third-party assistance.\n\nBy selecting \"I confirm\", I understand that noncompliance results in invalidation of the assessment, whereby the invalidated exam is added to the total number of retakes and noncompliance may result in further legal action.",
+      "opts": ["I confirm", "I confirm"],
+      "ans": [0, 1],
+      "multi": true
+    },
+    {
+      "q": "Given a sample image `img` (type `PIL.Image`) and a PyTorch transformation pipeline `transforms` (type `torchvision.transforms.v2.Compose`), which of the following is the correct way of applying the transformations on the image?",
+      "opts": [
+        "`transformed_img = transforms(img)`",
+        "`transformed_img = img(transforms)`",
+        "`transformed_img = transforms.apply(img)`",
+        "`transformed_img = img.apply(transforms)`"
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "Which of the following statements are correct regarding TorchScript?",
+      "opts": [
+        "TorchScript creates serializable and optimizable models from PyTorch code.",
+        "With TorchScript, serialized models can be deployed in environments other than Python (e.g., C++).",
+        "Every TorchScript code is also valid Python code.",
+        "Every Python code is also valid TorchScript code."
+      ],
+      "ans": [0, 1, 2],
+      "multi": true
+    },
+    {
+      "q": "What is the output of the following code?\n\n```python\nimport torch\n\ndef function(x: torch.Tensor):\n    if x.sum() < 0:\n        return x * -1\n    return x\n\nscripted_function = torch.jit.script(function)\ntraced_function = torch.jit.trace(function, example_inputs=torch.tensor([3, 4]))\nactual_input = torch.tensor([-1, -2])\nprint(\"s:\", scripted_function(actual_input).tolist())\nprint(\"t:\", traced_function(actual_input).tolist())\n```",
+      "opts": [
+        "s: [-1, -2] t: [3, 4]",
+        "s: [-1, -2] t: [-1, -2]",
+        "s: [-1, -2] t: [-3, -4]",
+        "s: [1, 2] t: [3, 4]",
+        "s: [1, 2] t: [-3, -4]",
+        "s: [-1, -2] t: [1, 2]",
+        "s: [1, 2] t: [-1, -2]",
+        "s: [1, 2] t: [1, 2]"
+      ],
+      "ans": [6],
+      "multi": false
+    },
+    {
+      "q": "You are measuring the air temperature every day (e.g., 14.23°C, 15.01°C, etc.). Which type of data is this?",
+      "opts": ["Continuous numerical data", "Discrete numerical data", "Categorical data", "Ordinal data"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "You are given a data set from your employer for a new machine learning project. Which of the following statements should be taken into account?",
+      "opts": [
+        "The data might require preprocessing to make it work with machine learning models.",
+        "The data might be incorrect (e.g., incorrect labeling).",
+        "There might be more data (which your employer might not have considered as important but could still be useful).",
+        "The data might include outlier values."
+      ],
+      "ans": [0, 1, 2, 3],
+      "multi": true
+    },
+    {
+      "q": "What is the output of the following code?\n\n```python\nimport torch\n\nclass MyModule(torch.nn.Module):\n    def __init__(self, a):\n        super().__init__()\n        self.a = a\n    def forward(self, x):\n        return x + (2 * self.a)\n\nmy_module = MyModule(3)\nc = my_module(4)\nprint(c)\n```",
+      "opts": [
+        "10",
+        "It raises an exception because the parameter x is not specified as a PyTorch tensor.",
+        "It raises an exception because MyModule does not have any trainable parameters.",
+        "It raises an exception because self.a is not a (sub)module."
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "Which of the following statements are correct regarding model parameters and hyperparameters?",
+      "opts": [
+        "Model parameters are adjusted during model training.",
+        "Hyperparameters are a subset of the model parameters.",
+        "Hyperparameters might influence the model architecture.",
+        "Hyperparameters and model parameters are the same thing."
+      ],
+      "ans": [0, 2],
+      "multi": true
+    },
+    {
+      "q": "Assume that `MyModule` is a class properly derived from the `torch.nn.Module` class and `x, y, z` are PyTorch tensors. What does the following code do?\n\n```python\nmy_module = MyModule()\nmy_module(x, y, z)\n```",
+      "opts": [
+        "It creates an instance of MyModule. Then it (ultimately) calls the `__getitem__` method of my_module with arguments x, y, z.",
+        "It creates an instance of MyModule. Then it (ultimately) calls the `backward` method of my_module with arguments x, y, z.",
+        "It creates an instance of MyModule. Then it (ultimately) calls the `forward` method of my_module with arguments x, y, z.",
+        "It creates an instance of MyModule. Then it (ultimately) calls the `__init__` method of my_module with arguments x, y, z."
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "q": "Which of the following are typical data normalization/scaling approaches?",
+      "opts": [
+        "Scaling to range [-1, 1].",
+        "Scaling to zero (0) mean and unit (1) variance.",
+        "Scaling to range [min, max], where min and max are the minimum and maximum values of the data set.",
+        "Scaling to range [0, 100]."
+      ],
+      "ans": [0, 1],
+      "multi": true
+    },
+    {
+      "q": "What is the shape of the output tensor `result` when running the following code?\n\n```python\nimport torch\n\nclass MyModule(torch.nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.chain = torch.nn.Sequential(\n            torch.nn.Linear(in_features=16, out_features=24),\n            torch.nn.Sigmoid(),\n            torch.nn.Linear(in_features=24, out_features=2)\n        )\n    def forward(self, x):\n        return self.chain(x)\n\ninp = torch.rand(size=(32, 16))\nmy_module = MyModule()\nresult = my_module(inp)\n```",
+      "opts": ["(16, 2)", "(32, 16)", "(32, 16, 2)", "(32, 24, 16, 2)", "(32, 24)", "(32, 24, 2)", "(24, 2)", "(32, 2)"],
+      "ans": [7],
+      "multi": false
+    },
+    {
+      "q": "Which of the following statements are correct regarding early stopping?",
+      "opts": [
+        "Early stopping cannot guarantee the best possible model.",
+        "Early stopping can reduce the number of model parameters.",
+        "Early stopping cannot be applied if the loss continuously changes.",
+        "Early stopping can reduce the training duration."
+      ],
+      "ans": [0, 3],
+      "multi": true
+    },
+    {
+      "q": "Which of the following is the correct order of performing one weight update in PyTorch (you can assume that `optimizer` is a valid optimizer object)?",
+      "opts": [
+        "1. Compute loss 2. Compute gradients `loss.backward()` 3. Update weights `optimizer.step()` 4. Reset gradients `optimizer.zero_grad()`",
+        "1. Compute loss 2. Compute gradients `loss.backward()` 3. Reset gradients `optimizer.zero_grad()` 4. Update weights `optimizer.step()`",
+        "1. Compute loss 2. Update weights `optimizer.step()` 3. Compute gradients `loss.backward()` 4. Reset gradients `optimizer.zero_grad()`",
+        "1. Reset gradients `optimizer.zero_grad()` 2. Compute loss 3. Update weights `optimizer.step()` 4. Compute gradients `loss.backward()`"
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "Which of the following statements are correct regarding scripting and tracing to create TorchScript programs?",
+      "opts": [
+        "Scripting requires an example input.",
+        "With tracing, control flow such as branching is lost.",
+        "The entire program must either be scripted or traced, mixing both approaches is not allowed.",
+        "Scripting and tracing can be combined."
+      ],
+      "ans": [1, 3],
+      "multi": true
+    },
+    {
+      "q": "Which of the following are common steps when designing a machine learning project?",
+      "opts": [
+        "Assessing which software and hardware can and/or should be available.",
+        "Considering which machine learning methods are fitting.",
+        "Getting an overview of the data which is going to be used.",
+        "Getting a clear definition and understanding of the project goal."
+      ],
+      "ans": [0, 1, 2, 3],
+      "multi": true
+    },
+    {
+      "q": "What is the primary purpose of a `torch.utils.data.DataLoader`?",
+      "opts": [
+        "Loading the hyperparameters of a neural network model.",
+        "Extracting the gradients from a gradient-based model.",
+        "Extracting minibatches of samples from a `torch.utils.data.Dataset` instance.",
+        "Loading the parameters of a neural network model."
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "q": "Assume you apply the following PyTorch image transformation `transform_chain` to some example RGB image:\n\n```python\nimport torch\nfrom torchvision.transforms import v2\n\ntransform_chain = v2.Compose([\n    v2.PILToTensor(),\n    v2.ToDtype(torch.float32, scale=True),\n    v2.Resize(size=100),\n    v2.ColorJitter(),\n    v2.RandomRotation(degrees=180),\n    v2.RandomVerticalFlip(p=0.5),\n    v2.RandomHorizontalFlip(p=0.5)\n])\n```\n\nWhich of the following statements are correct?",
+      "opts": [
+        "The resulting image might be rotated.",
+        "The resulting image will be in grayscale.",
+        "The resulting image might be vertically flipped.",
+        "The resulting image will be horizontally flipped.",
+        "The resulting image is either both horizontally and vertically flipped, or not flipped at all.",
+        "The resulting image will be a PyTorch tensor."
+      ],
+      "ans": [0, 2, 5],
+      "multi": true
+    },
+    {
+      "q": "In a supervised setting, how can one determine the prediction performance of some machine learning model?",
+      "opts": [
+        "By averaging the gradients of the model and comparing it to a specified threshold.",
+        "By using a loss function to compute the deviation between the model prediction and the true target.",
+        "By running a performance profiler on the model.",
+        "By comparing the model input and the model prediction with each other."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "The `forward` method of a class derived from `torch.nn.Module` ...",
+      "opts": [
+        "... pushes a PyTorch module to a given device.",
+        "... specifies how an input is transformed into an output (the \"flow\" through the architecture).",
+        "... adds a new forward layer to the network architecture of a module.",
+        "... sets up the module architecture.",
+        "... performs one weight update during training."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "Which of the following statements must be taken into consideration when doing a literature review regarding a new machine learning project?",
+      "opts": [
+        "Wikis, blog posts, reddit and other similar sites can provide a good overview and introduction.",
+        "If there is no matching literature, it means that the project cannot be done using machine learning.",
+        "There can be research biases.",
+        "Peer-reviewed literature can be a good way to get state-of-the-art information."
+      ],
+      "ans": [0, 2, 3],
+      "multi": true
+    },
+    {
+      "q": "Which of the following statements are correct regarding online learning?",
+      "opts": [
+        "The batch size is a hyperparameter.",
+        "Gradients might be contradicting.",
+        "A single training sample is used for one update.",
+        "It leads to smooth gradients."
+      ],
+      "ans": [1, 2],
+      "multi": true
+    },
+    {
+      "q": "Which of the following statements are correct when talking about normalization/scaling?",
+      "opts": [
+        "It could be that applying normalization/scaling does not have any beneficial effects.",
+        "Normalization/scaling cannot be used in conjunction with cross validation.",
+        "Normalization/scaling is independent from the method/model.",
+        "When applying normalization/scaling in a setting with a dedicated training and test set, care must be taken which data sets to use for computing normalization constants."
+      ],
+      "ans": [0, 3],
+      "multi": true
+    },
+    {
+      "q": "Training a neural network for one epoch will ...",
+      "opts": [
+        "... perform training for a fixed number of seconds.",
+        "... perform one training iteration over all training samples.",
+        "... perform one weight update.",
+        "... perform training until the model overfits on all training samples."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "Which of the following statements are correct regarding the following code (you can assume correct imports)?\n\n```python\ndef function(x):\n    if x.min() <= 0:\n        return 0\n    return x\n```",
+      "opts": [
+        "The code:\n```python\nscripted_function = torch.jit.script(function)\nscripted_function(torch.ones(3,))\n```\nworks.",
+        "The code:\n```python\ntraced_function = torch.jit.trace(function, (torch.rand(5),))\ntraced_function(torch.ones(3,))\n```\nworks.",
+        "The code:\n```python\ntraced_function = torch.jit.trace(function, (torch.rand(5),))\ntraced_function(123)\n```\nworks.",
+        "The code:\n```python\nscripted_function = torch.jit.script(function)\nscripted_function(123)\n```\nworks."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "Which of the following code snippets are correct (you can assume correct imports and that `MyDataset(...)` returns a valid `torch.utils.data.Dataset` instance)?",
+      "opts": [
+        "```python\ndataset = MyDataset(...)\nloader = DataLoader(shuffle=True, batch_size=16)\nfor data in loader(dataset):\n    # do something\n```",
+        "```python\ndataset = MyDataset(...)\nfor data in dataset:\n    loader = DataLoader(data, shuffle=True, batch_size=16)\n    samples = loader.get_minibatch()\n    # do something\n```",
+        "```python\ndataset = MyDataset(...)\nloader = DataLoader(dataset, shuffle=True, batch_size=16)\nfor data in loader:\n    # do something\n```",
+        "```python\ndataset = MyDataset(...)\nloader = DataLoader(dataset, shuffle=True, batch_size=16)\ndata = loader.get_minibatch()\n```"
+      ],
+      "ans": [2],
+      "multi": false
+    },
+    {
+      "q": "Which of the following statements are correct regarding a hash function?",
+      "opts": [
+        "A hash function is typically used as a non-linear activation function.",
+        "A hash function is used to compute a fixed-sized data vector for a given input.",
+        "A hash function should have a minimal number of (hash) collisions.",
+        "A hash function can be used to hash the inputs of a neural network for improved performance."
+      ],
+      "ans": [1, 2],
+      "multi": true
+    },
+    {
+      "q": "Assume you want to normalize your data and compute a normalization constant from your data set (e.g., the mean over many samples). What would be the correct way to proceed in terms of training, validation and test set?",
+      "opts": [
+        "Determine the constant for normalization on the training data and apply it also to the validation and test data.",
+        "Determine the constant for normalization on the training and test data and apply it also to the validation data.",
+        "Determine the constant for normalization on the training and validation data and apply it also to the test data.",
+        "Determine the constant for normalization on the whole data set and apply it to training, validation and test data.",
+        "Determine the constant for normalization on the validation and test data and apply it also to the training data."
+      ],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "Assume a classification task where you want to predict the time of day based on images of analog clocks (clocks with a minute hand and an hour hand) that do not have any numbers on them. In a preprocessing step, all images were centered and aligned. Which of the following data augmentation techniques might be problematic?",
+      "opts": ["Rotating by 180 degrees", "Flipping vertically", "Flipping horizontally", "Rotating by 90 degrees"],
+      "ans": [0, 1, 2, 3],
+      "multi": true
+    },
+    {
+      "q": "Which of the following statements are correct regarding cross validation?",
+      "opts": [
+        "Cross validation is helpful to utilize all samples for evaluating the model performance.",
+        "k-fold cross validation means that the entire data set is split into k non-overlapping parts, (k-1) of which are used for training and the remaining one for testing (per iteration).",
+        "Cross validation can only be used for small data sets.",
+        "k-fold cross validation means that the entire data set is split into k non-overlapping parts, (k-1) of which are used for testing and the remaining one for training (per iteration)."
+      ],
+      "ans": [0, 1],
+      "multi": true
+    },
+    {
+      "q": "The special method `__getitem__` in a `torch.utils.data.Dataset` derived class should ...",
+      "opts": ["... return one sample.", "... return all samples.", "... return minibatched samples.", "... return the data set."],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "Assume you have the following categorical data in exactly this fixed order:\n\n**flower, tree, earth, water**\n\nYou are asked to create a one-hot encoding. Which of the following is the correct one-hot encoded representation of **earth**?",
+      "opts": ["(0, 0, 1, 0)", "(1, 1, 1, 1)", "(0, 1, 0, 0)", "(1, 0, 0, 0)", "(0, 0, 0, 0)", "(0, 0, 0, 1)", "(1, 0, 1, 1)"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "q": "Which of the following statements are correct regarding monitoring a model during training?",
+      "opts": [
+        "Switching on monitoring improves the performance of the model.",
+        "It enables an easier detection of over- or underfitting.",
+        "It allows inspecting weights and gradients and how they change during training.",
+        "It allows inspecting the losses and how they change during training."
+      ],
+      "ans": [1, 2, 3],
+      "multi": true
+    },
+    {
+      "q": "Assume you have the following binary confusion matrix:\n\n```\n                 Predicted\n              positive negative\n             -------------------------\nActual positive |   40   |   10   |\n       negative |   35   |   15   |\n             -------------------------\n```\n\nWhich of the following statements are correct?",
+      "opts": [
+        "There are 35 true positives.",
+        "The classification performance is perfect.",
+        "Out of all samples, the used model predicted 50 to be positive.",
+        "The used model is more likely to predict the positive class."
+      ],
+      "ans": [3],
+      "multi": false
+    },
+    {
+      "q": "Which statements regarding PyTorch's `torch.nn.Module` are correct?",
+      "opts": [
+        "The `__init__` method sets up the model architecture.",
+        "`__getitem__` method specifies how an input is transformed into an output (the \"flow\" through the architecture).",
+        "It must not contain trainable parameters (`torch.nn.Parameter`).",
+        "It is the base class for all neural network modules."
+      ],
+      "ans": [0, 3],
+      "multi": true
+    },
+    {
+      "q": "You are training a neural network model using some gradient-based iterative method. The first training loss that you compute is non-zero, but continuing the training process does not change the loss in any way, i.e., it remains constant. Which of the following statements is correct?",
+      "opts": [
+        "The gradients are too big.",
+        "The model is overfitting.",
+        "The model is perfect (for every sample, it computes the expected output value).",
+        "The model weights are not changed."
+      ],
+      "ans": [3],
+      "multi": false
+    },
+    {
+      "q": "What is the term \"generalization\" about?",
+      "opts": [
+        "It tells us how well our model will perform on future (unseen) data.",
+        "A model that fits the training data well will also generalize well.",
+        "It is about trying to find a model which overfits the data.",
+        "Using a dedicated test set is important for evaluating the generalization capability of a model."
+      ],
+      "ans": [0, 3],
+      "multi": true
+    },
+    {
+      "q": "Which of the following statements are true regarding data augmentation?",
+      "opts": [
+        "Data augmentation can reduce overfitting.",
+        "Data augmentation can have a negative impact on the model performance.",
+        "Data augmentation must only be applied on the evaluation set, not on the training set.",
+        "Data augmentation is about deleting existing samples to balance the data set."
+      ],
+      "ans": [0, 1],
+      "multi": true
+    },
+    {
+      "q": "Categorical data can be described as:",
+      "opts": [
+        "Quantitative data with mathematical meaning but without a natural ordering.",
+        "Qualitative data without mathematical meaning.",
+        "Quantitative data with mathematical meaning.",
+        "Qualitative data with mathematical meaning.",
+        "Quantitative data without mathematical meaning.",
+        "Qualitative data without mathematical meaning but with a natural ordering."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "Which statements regarding PyTorch's automatic parameter registration of a `torch.nn.Module` are correct?",
+      "opts": [
+        "When assigned as attribute, a `torch.Tensor` will automatically be registered.",
+        "When assigned as attribute, the trainable parameters of a `torch.nn.Module` (or submodule) will automatically be registered.",
+        "If a module does not have any automatically registered parameters, an exception is raised.",
+        "Calling the `forward` method of a `torch.nn.Module` is redundant if all parameters have already been registered automatically."
+      ],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "q": "Which of the following statements regarding loss functions are correct?",
+      "opts": [
+        "There are different loss functions for different purposes (e.g., classification and regression).",
+        "In gradient-based iterative methods, the derivative of the loss function (with respect to the model weights) must be computed.",
+        "Typically, the lower the loss, the closer the model output is to the true target value.",
+        "Loss functions play an essential role in Empirical Risk Minimization (ERM) and assessing the generalization capability of a model."
+      ],
+      "ans": [0, 1, 2, 3],
+      "multi": true
+    },
+    {
+      "q": "Which of the following are benefits of a version control system (VCS) such as git?",
+      "opts": [
+        "Deployment of machine learning models into high performance environments (e.g., C++).",
+        "Improved performance for deep neural networks.",
+        "Efficient tracking of files and their changes.",
+        "Automatic monitoring of neural network parameters."
+      ],
+      "ans": [2],
+      "multi": false
+    }
+  ]
+}

@@ -1,0 +1,576 @@
+Information
+Information
+Question 1
+Correct
+Mark 1.00 out of 1.00
+Question 2
+Correct
+Mark 1.00 out of 1.00
+Dashboard / My courses / VL MLPC (2023S) / Exam / Retake Exam
+Bayesian Classification
+Consider minimum risk classification as introduced in the lecture, with the Conditional Risk formula reproduced below, for
+your convenience:
+Assume we have , a list of actions  predict class , a given cost function
+, and known probability distributions  and .
+R(∣x) =λ(∣) P(∣ x)αi ∑c
+j=1 αi ωj ωj
+Ω= { , . . . , }ω1 ωc { = "αi "}ωi
+λ= { = λ(∣)}λij αi ωj P(Ω) P(X∣ Ω)
+Which of the following statements are correct?
+MAP classification behaviour can be obtained by an appropriate setting of the cost function
+Select one:
+True 
+False
+The effect of any change to the cost function can also be achieved by leaving the cost function unchanged and modifying the
+likelihoods  accordingly
+Select one:
+True
+False 
+P(X ∣)ωj
+Retake Exam: Attempt review (page 2 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+1 of 3 07/07/2023, 09:21
+Question 3
+Correct
+Mark 1.00 out of 1.00
+Question 4
+Correct
+Mark 1.00 out of 1.00
+Question 5
+Correct
+Mark 1.00 out of 1.00
+Information
+ Written as a matrix, the above cost function  is of quadratic shape
+Select one:
+True 
+False
+λ
+For any cost function, the expected cost is equal to the Bayes Error
+Select one:
+True
+False 
+The expected risk defines decision boundaries only in a two-dimensional feature space
+Select one:
+True
+False 
+Answer the following questions:
+Retake Exam: Attempt review (page 2 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+2 of 3 07/07/2023, 09:21
+Question 6
+Incorrect
+Mark 0.00 out of 1.00
+Question 7
+Incorrect
+Mark 0.00 out of 1.00
+If we multiply the cost function with a constant , the probability of all classes will
+(multiple answers possible)
+remain the same
+sum to 
+change so that probable classes become less probable, and vice versa ("smoothing")
+increase by a factor 
+be reduced by a factor 
+k
+1.0∗k
+k
+k
+Your answer is incorrect.
+If we set the cost function to all 1 (i.e., all ),
+(multiple answers possible)
+minimum risk classification becomes the same as MAP classification
+the risk for all actions becomes , for any , where  is the number of classes 
+all decisions will have the same cost, for any 
+the risk for all actions becomes 1, for any 
+for any , every decision is equally good
+= 1λij
+c xc> 1
+x
+x
+x
+Your answer is incorrect.
+◄ Virtual lecture hall for the exam
+Jump to...
+First Exam ►
+Retake Exam: Attempt review (page 2 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+3 of 3 07/07/2023, 09:21
+Information
+Question 8
+Not answered
+Marked out of 3.00
+Question 9
+Not answered
+Marked out of 3.00
+Information
+Dashboard / My courses / VL MLPC (2023S) / Exam / Retake Exam
+Classifier Evaluation
+Consider a two-class classification problem with classes p and n, and a test set T with 1000 test examples and class
+distribution P:N = 3:7. For each of the following classifiers, specify what the expected confusion matrix will look like when the
+classifier is tested on T (give the numbers for the four entries of the table; arithmetic expressions (e.g. 3/5 instead of 0.6) are
+also accepted). For each classifier, also give the expected values for Recall andPrecision. If one of these is not defined,
+enter -1.
+ A classifier that randomly predicts n or p with probability 0.5
+TP:      FP: 
+FN:      TN: 
+Recall: 
+Precision: 
+A classifier that always predicts class n
+TP:      FP: 
+FN:      TN: 
+Recall: 
+Precision: 
+Which of the following statements are true:
+Retake Exam: Attempt review (page 3 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+1 of 2 07/07/2023, 09:22
+Question 10
+Correct
+Mark 1.00 out of 1.00
+Question 11
+Correct
+Mark 1.00 out of 1.00
+Question 12
+Correct
+Mark 1.00 out of 1.00
+Question 13
+Correct
+Mark 1.00 out of 1.00
+The iso-performance line cannot go through points  and 
+Select one:
+True
+False 
+(0, 0) (1, 1)
+For any classifier  and any dataset , 
+Select one:
+True
+False 
+C D Recall(C, D) +Pr ecision(C, D) = 1.0
+If two classifiers C1, C2 have the same True Positive Rates (TPRs), but different False Positive Rates, they cannot have the same
+accuracy on any given fixed test set T.
+Select one:
+True 
+False
+Two classifiers with the same accuracy cannot occupy different places in ROC space.
+Select one:
+True
+False 
+◄ Virtual lecture hall for the exam
+Jump to...
+First Exam ►
+Retake Exam: Attempt review (page 3 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+2 of 2 07/07/2023, 09:22
+Information
+Question 14
+Incorrect
+Mark 0.00 out of 1.00
+Question 15
+Incorrect
+Mark 0.00 out of 1.00
+Dashboard / My courses / VL MLPC (2023S) / Exam / Retake Exam
+Decision Trees
+Consider the following alternative criterion (instead of information gain) for evaluating a feature  for splitting in the ID3
+algorithm, in a binary classification task with two classes  and  number of pos (neg) examples in ,
+the i-th branch (notation as in the lecture slides):
+Answer the following questions:
+A
+Ω= {+,−} ( ) = pi ni Di
+(A) =⋅GD ∑ ∈Avi
+| |Di
+|D|
+|−|pi ni
++pi ni
+The best feature is the one that minimises   this measure
+Your answer is incorrect.
+This measure will become maximal when each branch only contains examples of one class
+Select one:
+True
+False 
+Retake Exam: Attempt review (page 4 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+1 of 3 07/07/2023, 09:22
+Question 16
+Incorrect
+Mark 0.00 out of 1.00
+Information
+Question 17
+Correct
+Mark 1.00 out of 1.00
+Question 18
+Correct
+Mark 1.00 out of 1.00
+When a feature A perfectly discriminates between the classes in , 
+is useless
+is undefined
+is equal to the information gain
+
+D(A)GD
+< 0.0
+= 1.0
+> 1.0
+= 0.0
+Your answer is incorrect.
+Consider a variant "ID3-S" of the ID3 algorithm that learns only trees that are at most one level deep. It chooses a feature for
+the root, using the Information Gain heuristic, and labels each of the resulting nodes with the class that is most frequent in
+that node (in case of a tie, it randomly chooses between one of the competing classes).
+       
+Which of the following statements about ID3-S are true:
+This is not a valid learning algorithm
+Select one:
+True
+False 
+This algorithm cannot result in a classifier with an accuracy of  on the training set
+Select one:
+True
+False 
+1.0
+Retake Exam: Attempt review (page 4 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+2 of 3 07/07/2023, 09:22
+Question 19
+Correct
+Mark 1.00 out of 1.00
+Question 20
+Correct
+Mark 1.00 out of 1.00
+This is a high-bias learner
+Select one:
+True 
+False
+Combining different such trees via voting can improve accuracy on some dataset
+Select one:
+True 
+False
+◄ Virtual lecture hall for the exam
+Jump to...
+First Exam ►
+Retake Exam: Attempt review (page 4 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+3 of 3 07/07/2023, 09:22
+Information
+Question 21
+Correct
+Mark 1.00 out of 1.00
+Question 22
+Incorrect
+Mark 0.00 out of 1.00
+Dashboard / My courses / VL MLPC (2023S) / Exam / Retake Exam
+Neural Networks and Deep Learning
+Consider the simple neural network from the lecture slides, with 1 input unit (for a feature ), one hidden unit, and one
+output unit , where the hidden unit uses the  as activation function, and the output unit  uses the identity function
+(i.e., just outputs what comes in as net input).
+Also assume that the loss function is the sum squared error (as defined in the slides).
+Which of the following statements are correct for this network?
+x
+y tanh y
+A training set for this network will have to consist of pairs of numbers
+Select one:
+True 
+False
+Changing the output activation function from  (identity) to  will not make any difference, as the hidden unit
+already uses the  activation
+Select one:
+True 
+False
+linear tanh
+tanh
+Retake Exam: Attempt review (page 5 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+1 of 3 07/07/2023, 09:23
+Question 23
+Incorrect
+Mark 0.00 out of 1.00
+Question 24
+Correct
+Mark 1.00 out of 1.00
+Question 25
+Incorrect
+Mark 0.00 out of 1.00
+Information
+If we change the output of the bias unit from  to , the result is no longer a valid neural network
+Select one:
+True 
+False
+1.0 2.0
+Changing the output of the bias unit from  to  will change the absolute value of the Sum Squared Error on the training
+set , but will not change the values of the network weights that minimise the error on 
+Select one:
+True
+False 
+1.0 2.0
+D D
+The loss function is defined over a four-dimensional parameter space
+Select one:
+True
+False 
+Now assume we use the above simple network for a binary classification task. We encode the class labels in the training data
+ as 1 and 0, respectively, equip the output unit  with a logistic activation function (see slides), and use the Binary Cross-
+Entropy (as defined in the lecture slides) as the loss function:
+where  is the true class of example  (  or ), and  is the value predicted by output unit .
+          
+An example  is classified as class 1 iff the output  calculated by the network from input  is .
+          
+Which of the following statements are correct?
+D y
+CE
+CE( ) =−log−(1−) log(1−)xi yi y^i yi y^i
+yi xi 0 1 y^i y
+xi y^i x ≥0.5
+Retake Exam: Attempt review (page 5 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+2 of 3 07/07/2023, 09:23
+Question 26
+Correct
+Mark 1.00 out of 1.00
+Question 27
+Correct
+Mark 1.00 out of 1.00
+Question 28
+Incorrect
+Mark 0.00 out of 1.00
+Question 29
+Incorrect
+Mark 0.00 out of 1.00
+This classifier can only learn decision boundaries that split the feature space into two regions
+Select one:
+True 
+False
+If we make the network deeper by adding additional hidden layers, the  function must be extended with corresponding
+additional terms
+Select one:
+True
+False 
+CE
+If the class distribution in the training set is 50:50, the binary cross-entropy  encourages the network to predict values
+close to 0.5
+Select one:
+True 
+False
+CE
+This classifier can easily overfit because the cross-entropy is non-linear
+Select one:
+True 
+False
+◄ Virtual lecture hall for the exam
+Jump to...
+First Exam ►
+Retake Exam: Attempt review (page 5 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+3 of 3 07/07/2023, 09:23
+Information
+Question 30
+Incorrect
+Mark 0.00 out of 1.00
+Question 31
+Correct
+Mark 1.00 out of 1.00
+Question 32
+Correct
+Mark 1.00 out of 1.00
+Dashboard / My courses / VL MLPC (2023S) / Exam / Retake Exam
+Unsupervised Learning
+Consider the task of k-means clustering with  observations described in terms of  numeric features, with the Euclidean
+distance as distance measure. Assume we have set the number  of clusters to .
+ 
+ Which of the following statements are correct?
+N D
+k k= 5
+When we increase the number of features, the model complexity penalty term in the Bayes Information Criterion will
+automatically grow larger
+Select one:
+True
+False 
+In k-means, k has to be at least 
+Select one:
+True
+False 
+N/2
+To use the Bayes Information Criterion for selecting an appropriate value for , a k-means cluster model must be converted
+into a probabilistic model
+Select one:
+True 
+False
+k
+Retake Exam: Attempt review (page 6 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+1 of 3 07/07/2023, 09:23
+Question 33
+Correct
+Mark 1.00 out of 1.00
+Question 34
+Correct
+Mark 1.00 out of 1.00
+Information
+Question 35
+Incorrect
+Mark 0.00 out of 1.00
+The cluster with the smallest number of members will have the lowest (best) MQE
+Select one:
+True
+False 
+Feature normalisation will change the MQE, but not the clusters found
+Select one:
+True
+False 
+Consider a Gaussian Mixture Model (GMM) with  components that was learned from a dataset of  examples over a
+-dimensional numeric feature space.
+k N
+D
+How many parameters (numbers) does a specification of this GMM consist of (ignoring possible redundancies because of
+distribution constraints and symmetries)?
+
+k+kD+ D
+k(D⋅N)
+k+kD+kD 2
+3kD
+kD+ N
+kN+k D +kD 2
+3k
+Your answer is incorrect.
+◄ Virtual lecture hall for the exam
+Retake Exam: Attempt review (page 6 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+2 of 3 07/07/2023, 09:23
+Jump to...
+First Exam ►
+Retake Exam: Attempt review (page 6 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+3 of 3 07/07/2023, 09:23
+Information
+Question 36
+Incorrect
+Mark 0.00 out of 1.00
+Question 37
+Incorrect
+Mark 0.00 out of 1.00
+Question 38
+Incorrect
+Mark 0.00 out of 1.00
+Dashboard / My courses / VL MLPC (2023S) / Exam / Retake Exam
+Markov Models
+Consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model , and a uniform prior state
+distribution :
+Which of the following statements are true?
+A
+Π= [1/ 3, 1/3, 1/3]
+A=
+⎡
+⎣
+⎢
+0.4
+0.2
+0.1
+0.3
+0.6
+0.1
+0.3
+0.2
+0.8
+⎤
+⎦
+⎥
+If we changed some  to be zero (0.0), then also  would have to be changed to zero for a valid Markov process
+Select one:
+True 
+False
+aij aji
+If we made one of these numbers smaller, then at least one number in the same column would have to become larger
+Select one:
+True 
+False
+If we made one of these numbers smaller, then at least one number in the same row would have to become larger
+Select one:
+True
+False 
+
+Retake Exam: Attempt review (page 7 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+1 of 4 07/07/2023, 09:23
+Question 39
+Correct
+Mark 1.00 out of 1.00
+Information
+Question 40
+Incorrect
+Mark 0.00 out of 1.00
+Question 41
+Incorrect
+Mark 0.00 out of 1.00
+Question 42
+Incorrect
+Mark 0.00 out of 1.00
+The expected number of consecutive occurrences of state S2 is higher than the expected number of consecutive occurrences
+of state S1
+Select one:
+True 
+False
+Now consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model , and a uniform prior
+state distribution :
+What is the probability of the following state sequences, according to this model :
+A
+Π= [1/3, 1/3, 1/3]
+A=
+⎡
+⎣
+⎢
+1
+0
+0
+0
+1
+0
+0
+0
+1
+⎤
+⎦
+⎥
+M
+Answer: 0.5 
+P((S1,S1,S2,S2,S3,S3)∣M) = …
+Answer: 0.5 
+P((S1,S1,S1,S1,S1)∣M) = …
+Answer: 0.5 
+P((S1,S2,S3,S1,S2,S3)∣M) = …
+
+Retake Exam: Attempt review (page 7 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+2 of 4 07/07/2023, 09:23
+Information
+Question 43
+Partially correct
+Mark 0.50 out of 1.00
+Information
+Question 44
+Correct
+Mark 1.00 out of 1.00
+Consider the classification task of identifying one of two cities A or B, based on a sequence of weather observations. We have
+learned two Markov models  and  that model the weather in cities A and B, respectively. Now, given a sequence  of
+ consecutive weather observations, you want to decide which of the two cities this sequence is from, based on the MAP
+principle. Model  stands for city A,  for B.
+MA MB S
+10
+MA MB
+Which of the following quantities are needed for making this decision?
+
+
+P(A)
+P(S| )MB
+P( | )MB MA
+P(S| )MA
+P(B)
+Your answer is partially correct.
+You have correctly selected 2.
+Which of the following statements are true?
+If we produce a new sequence S2 by concatenating two copies of S, the likelihoods will change, but the MAP decision will
+always remain the same
+Select one:
+True
+False 
+
+Retake Exam: Attempt review (page 7 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+3 of 4 07/07/2023, 09:23
+Question 45
+Correct
+Mark 1.00 out of 1.00
+Question 46
+Incorrect
+Mark 0.00 out of 1.00
+This kind of classification procedure is only possible if the length of S is at least 2
+Select one:
+True
+False 
+The same decision could be made without a Markov model, by counting the different states in S
+Select one:
+True 
+False
+◄ Virtual lecture hall for the exam
+Jump to...
+First Exam ►
+
+Retake Exam: Attempt review (page 7 of 8) https://moodle.jku.at/jku/mod/quiz/review.php?attempt=1192595&cmi...
+4 of 4 07/07/2023, 09:23

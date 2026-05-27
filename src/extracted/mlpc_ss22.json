@@ -1,0 +1,606 @@
+{
+  "id": "mlpc_ss22",
+  "title": "MLPC Exam — JKU SS2022",
+  "description": "Machine Learning and Pattern Classification final exam",
+  "questions": [
+    {
+      "context": "1. Bayesian Classification\n\nConsider the following decision strategies for classifying an object (feature vector) \\(\\mathbf{x}\\) in a two-class problem with classes \\(\\omega_1, \\omega_2\\):\n- S1. Predict \\(\\omega_1\\) iff \\(P(\\omega_1) > P(\\omega_2)\\)\n- S2. Predict \\(\\omega_1\\) iff \\(p(\\mathbf{x} \\mid \\omega_1) > p(\\mathbf{x} \\mid \\omega_2)\\)\n- S3. Predict \\(\\omega_1\\) iff \\(P(\\omega_1 \\mid \\mathbf{x}) > P(\\omega_2 \\mid \\mathbf{x})\\)\n- S4. Predict \\(\\omega_1\\) iff \\(P(\\omega_1) > 0.5\\)\n- S5. Predict \\(\\omega_1\\) iff \\(p(\\mathbf{x} \\mid \\omega_1) > p(\\mathbf{x})\\)\n- S6. Predict \\(\\omega_1\\) iff \\(P(\\omega_1 \\mid \\mathbf{x}) > P(\\omega_1)\\)\n\nand assume that we know the true values of the various probabilities appearing above.",
+      "q": "Which of these strategies result in the baseline accuracy?",
+      "opts": ["S1", "S2", "S3", "S4", "S5", "S6"],
+      "ans": [0, 3],
+      "multi": true,
+      "explanation": "S1 and S4 only use priors \\(P(\\omega_i)\\), so they always predict the majority class, giving baseline accuracy."
+    },
+    {
+      "context": "1. Bayesian Classification\n\nConsider the following decision strategies for classifying an object (feature vector) \\(\\mathbf{x}\\) in a two-class problem with classes \\(\\omega_1, \\omega_2\\):\n- S1. Predict \\(\\omega_1\\) iff \\(P(\\omega_1) > P(\\omega_2)\\)\n- S2. Predict \\(\\omega_1\\) iff \\(p(\\mathbf{x} \\mid \\omega_1) > p(\\mathbf{x} \\mid \\omega_2)\\)\n- S3. Predict \\(\\omega_1\\) iff \\(P(\\omega_1 \\mid \\mathbf{x}) > P(\\omega_2 \\mid \\mathbf{x})\\)\n- S4. Predict \\(\\omega_1\\) iff \\(P(\\omega_1) > 0.5\\)\n- S5. Predict \\(\\omega_1\\) iff \\(p(\\mathbf{x} \\mid \\omega_1) > p(\\mathbf{x})\\)\n- S6. Predict \\(\\omega_1\\) iff \\(P(\\omega_1 \\mid \\mathbf{x}) > P(\\omega_1)\\)\n\nand assume that we know the true values of the various probabilities appearing above.",
+      "q": "Which of these strategies are guaranteed to have the Bayes Error?",
+      "opts": ["S1", "S2", "S3", "S4", "S5", "S6"],
+      "ans": [2],
+      "multi": true,
+      "explanation": "S3 uses the posterior \\(P(\\omega_i \\mid \\mathbf{x})\\), which is the Bayes-optimal decision rule."
+    },
+    {
+      "context": "1. Bayesian Classification\n\nConsider the following decision strategies for classifying an object (feature vector) \\(\\mathbf{x}\\) in a two-class problem with classes \\(\\omega_1, \\omega_2\\):\n- S1. Predict \\(\\omega_1\\) iff \\(P(\\omega_1) > P(\\omega_2)\\)\n- S2. Predict \\(\\omega_1\\) iff \\(p(\\mathbf{x} \\mid \\omega_1) > p(\\mathbf{x} \\mid \\omega_2)\\)\n- S3. Predict \\(\\omega_1\\) iff \\(P(\\omega_1 \\mid \\mathbf{x}) > P(\\omega_2 \\mid \\mathbf{x})\\)\n- S4. Predict \\(\\omega_1\\) iff \\(P(\\omega_1) > 0.5\\)\n- S5. Predict \\(\\omega_1\\) iff \\(p(\\mathbf{x} \\mid \\omega_1) > p(\\mathbf{x})\\)\n- S6. Predict \\(\\omega_1\\) iff \\(P(\\omega_1 \\mid \\mathbf{x}) > P(\\omega_1)\\)\n\nand assume that we know the true values of the various probabilities appearing above.",
+      "q": "Which of these strategies take into account both prior and likelihood?",
+      "opts": ["S1", "S2", "S3", "S4", "S5", "S6"],
+      "ans": [2, 5],
+      "multi": true,
+      "explanation": "S3 and S6 use the posterior, which by Bayes' rule combines both prior and likelihood."
+    },
+    {
+      "context": "1. Bayesian Classification — Under which conditions will S2 and S3 make identical predictions?\n\n(S2: predict \\(\\omega_1\\) iff \\(p(\\mathbf{x} \\mid \\omega_1) > p(\\mathbf{x} \\mid \\omega_2)\\); S3: predict \\(\\omega_1\\) iff \\(P(\\omega_1 \\mid \\mathbf{x}) > P(\\omega_2 \\mid \\mathbf{x})\\).)",
+      "q": "\\(P(\\omega_1) = 0\\)",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "If \\(P(\\omega_1)=0\\), S3 always predicts \\(\\omega_2\\), but S2 still depends on likelihoods, so they don't always agree."
+    },
+    {
+      "context": "1. Bayesian Classification — Under which conditions will S2 and S3 make identical predictions?\n\n(S2: predict \\(\\omega_1\\) iff \\(p(\\mathbf{x} \\mid \\omega_1) > p(\\mathbf{x} \\mid \\omega_2)\\); S3: predict \\(\\omega_1\\) iff \\(P(\\omega_1 \\mid \\mathbf{x}) > P(\\omega_2 \\mid \\mathbf{x})\\).)",
+      "q": "\\(P(\\omega_1) = P(\\omega_2)\\)",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Equal priors cancel in Bayes' rule, so comparing posteriors reduces to comparing likelihoods."
+    },
+    {
+      "context": "1. Bayesian Classification — Under which conditions will S2 and S3 make identical predictions?\n\n(S2: predict \\(\\omega_1\\) iff \\(p(\\mathbf{x} \\mid \\omega_1) > p(\\mathbf{x} \\mid \\omega_2)\\); S3: predict \\(\\omega_1\\) iff \\(P(\\omega_1 \\mid \\mathbf{x}) > P(\\omega_2 \\mid \\mathbf{x})\\).)",
+      "q": "\\(p(\\mathbf{x} \\mid \\omega_1) = p(\\mathbf{x} \\mid \\omega_2)\\)",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "If likelihoods are equal, S2 is undecided/tied, but S3 depends on priors and would pick the higher-prior class."
+    },
+    {
+      "context": "1. Bayesian Classification — Under which conditions will S2 and S3 make identical predictions?\n\n(S2: predict \\(\\omega_1\\) iff \\(p(\\mathbf{x} \\mid \\omega_1) > p(\\mathbf{x} \\mid \\omega_2)\\); S3: predict \\(\\omega_1\\) iff \\(P(\\omega_1 \\mid \\mathbf{x}) > P(\\omega_2 \\mid \\mathbf{x})\\).)",
+      "q": "\\(P(\\omega_1) = 1\\)",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "S3 always predicts \\(\\omega_1\\) regardless of \\(\\mathbf{x}\\), but S2 still depends on likelihoods."
+    },
+    {
+      "context": "1. Bayesian Classification — Which of the following statements are true?",
+      "q": "If the two classes are equally frequent (\\(P(\\omega_1) = P(\\omega_2)\\)), then S2 and S3 are equivalent.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "With equal priors, the posterior comparison reduces to the likelihood comparison."
+    },
+    {
+      "context": "1. Bayesian Classification — Which of the following statements are true?",
+      "q": "If \\(P(\\omega_1 \\mid \\mathbf{x}) > P(\\omega_1)\\), then \\(P(\\omega_2 \\mid \\mathbf{x}) < P(\\omega_2)\\).",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Since \\(P(\\omega_1 \\mid \\mathbf{x}) + P(\\omega_2 \\mid \\mathbf{x}) = 1\\) and \\(P(\\omega_1) + P(\\omega_2) = 1\\), an increase on one side forces a decrease on the other."
+    },
+    {
+      "context": "1. Bayesian Classification — Which of the following statements are true?",
+      "q": "If \\(p(\\mathbf{x} \\mid \\omega_1) > p(\\mathbf{x})\\), then \\(p(\\mathbf{x} \\mid \\omega_2) < p(\\mathbf{x})\\).",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "\\(p(\\mathbf{x}) = P(\\omega_1) p(\\mathbf{x} \\mid \\omega_1) + P(\\omega_2) p(\\mathbf{x} \\mid \\omega_2)\\) is a convex combination, so if one likelihood is above the mixture the other must be below."
+    },
+    {
+      "context": "2. Classifier Evaluation (a)\n\nConsider an arbitrary classifier X for a binary classification problem, with unknown classification behavior. If this classifier were evaluated on a test set T consisting only of positive examples (i.e., if the test examples all belong to the positive class), which of the following statements would be correct, and which would be wrong:\n\nThe accuracy of X, as measured on T, can be expected to be ...",
+      "q": "... equal to the baseline accuracy (on T).",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Baseline accuracy on T (all positives) is 1.0 (always-positive baseline), while X's accuracy is unknown."
+    },
+    {
+      "context": "2. Classifier Evaluation (a)\n\nConsider an arbitrary classifier X for a binary classification problem, with unknown classification behavior. If this classifier were evaluated on a test set T consisting only of positive examples (i.e., if the test examples all belong to the positive class), which of the following statements would be correct, and which would be wrong:\n\nThe accuracy of X, as measured on T, can be expected to be ...",
+      "q": "... 0.0",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "X may correctly classify some positives, so accuracy isn't necessarily 0."
+    },
+    {
+      "context": "2. Classifier Evaluation (a)\n\nConsider an arbitrary classifier X for a binary classification problem, with unknown classification behavior. If this classifier were evaluated on a test set T consisting only of positive examples (i.e., if the test examples all belong to the positive class), which of the following statements would be correct, and which would be wrong:\n\nThe accuracy of X, as measured on T, can be expected to be ...",
+      "q": "... equal to its recall (on T).",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "When all examples are positive, accuracy = TP/(TP+FN) = recall."
+    },
+    {
+      "context": "2. Classifier Evaluation (a)\n\nConsider an arbitrary classifier X for a binary classification problem, with unknown classification behavior. If this classifier were evaluated on a test set T consisting only of positive examples (i.e., if the test examples all belong to the positive class), which of the following statements would be correct, and which would be wrong:\n\nThe accuracy of X, as measured on T, can be expected to be ...",
+      "q": "... equal to the accuracy (on T) of a classifier that always predicts the positive class.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "A classifier always predicting positive achieves accuracy 1.0 on T, but X's accuracy is unknown."
+    },
+    {
+      "context": "2. Classifier Evaluation (a)\n\nConsider an arbitrary classifier X for a binary classification problem, with unknown classification behavior. If this classifier were evaluated on a test set T consisting only of positive examples (i.e., if the test examples all belong to the positive class), which of the following statements would be correct, and which would be wrong:\n\nThe accuracy of X, as measured on T, can be expected to be ...",
+      "q": "... 1.0 (100%)",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "X's accuracy is unknown; it need not be perfect."
+    },
+    {
+      "context": "2. Classifier Evaluation (b)\n\nConsider a 2-class classification problem with classes p and n, and a 2D \"Recall-Precision (RP) Space\" (in analogy to ROC space), where the horizontal axis (\\(x\\)) is recall on class p, and the vertical axis (\\(y\\)) is precision on class p.\n\nWhich points in this RP space correspond to the following default classifiers:",
+      "q": "All p classifier (a classifier that always predicts class p):",
+      "opts": [
+        "lower left corner",
+        "upper left corner",
+        "upper right corner",
+        "lower right corner",
+        "possibly some other point in the space",
+        "one of the measures is undefined"
+      ],
+      "ans": [2, 4],
+      "multi": true,
+      "explanation": "Recall on p = 1 (all p are recovered). Precision = fraction of p in dataset, so it lies on \\(x=1\\) somewhere between 0 and 1 depending on prior."
+    },
+    {
+      "context": "2. Classifier Evaluation (b)\n\nConsider a 2-class classification problem with classes p and n, and a 2D \"Recall-Precision (RP) Space\" (in analogy to ROC space), where the horizontal axis (\\(x\\)) is recall on class p, and the vertical axis (\\(y\\)) is precision on class p.\n\nWhich points in this RP space correspond to the following default classifiers:",
+      "q": "All n classifier:",
+      "opts": [
+        "lower left corner",
+        "upper left corner",
+        "upper right corner",
+        "lower right corner",
+        "possibly some other point in the space",
+        "one of the measures is undefined"
+      ],
+      "ans": [5],
+      "multi": false,
+      "explanation": "No p predicted: precision = 0/0 is undefined."
+    },
+    {
+      "context": "2. Classifier Evaluation (b)\n\nConsider a 2-class classification problem with classes p and n, and a 2D \"Recall-Precision (RP) Space\" (in analogy to ROC space), where the horizontal axis (\\(x\\)) is recall on class p, and the vertical axis (\\(y\\)) is precision on class p.\n\nWhich points in this RP space correspond to the following default classifiers:",
+      "q": "Random 50:50 guessing classifier:",
+      "opts": [
+        "point \\((x=1.0; y=0.5)\\)",
+        "point \\((x=0.5; y=1.0)\\)",
+        "point \\((x=0.5; y=0.5)\\)",
+        "possibly some other point in the space",
+        "one of the measures is undefined"
+      ],
+      "ans": [2, 3],
+      "multi": true,
+      "explanation": "Recall = 0.5 (half of p caught). Precision = class prior of p, so it lies at \\(x=0.5\\) with \\(y =\\) prior."
+    },
+    {
+      "context": "2. Classifier Evaluation (c)\n\nWhich of the following statements are true, and which are false (always relative to some fixed dataset D)?",
+      "q": "A classifier that predicts between the two classes randomly will have Recall = Precision = 0.5.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Recall would be 0.5, but precision equals the prior of the positive class, not necessarily 0.5."
+    },
+    {
+      "context": "2. Classifier Evaluation (c)\n\nWhich of the following statements are true, and which are false (always relative to some fixed dataset D)?",
+      "q": "Two classifiers with the same recall and same precision can have different accuracy.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Given a fixed dataset, the same recall and precision determine TP, FP, FN, and hence TN and accuracy."
+    },
+    {
+      "context": "2. Classifier Evaluation (c)\n\nWhich of the following statements are true, and which are false (always relative to some fixed dataset D)?",
+      "q": "If a classifier A has higher recall than B on a dataset D, it must have lower precision than B.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "There is no strict tradeoff; both can improve simultaneously."
+    },
+    {
+      "context": "3. Classifiers\n\nAssume a binary classification task with classes \\(\\Omega = \\{salmon, bass\\}\\) and two (heavily discretized) features \\(x_1\\) (Length) and \\(x_2\\) (Lightness).\n\nAlso assume we have a training set \\(\\mathcal{D}\\) consisting of four fish only:\n- [short, dark], salmon\n- [short, light], salmon\n- [long, dark], bass\n- [long, light], bass\n\n3. Classifiers (a)",
+      "q": "Calculate the empirical entropy (log base 2) of the class distribution in \\(\\mathcal{D}\\) (no calculator needed).",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Two salmon, two bass; entropy \\(= -2 \\cdot 0.5 \\log_2 0.5 = 1\\)."
+    },
+    {
+      "context": "3. Classifiers\n\nAssume a binary classification task with classes \\(\\Omega = \\{salmon, bass\\}\\) and two (heavily discretized) features \\(x_1\\) (Length) and \\(x_2\\) (Lightness).\n\nAlso assume we have a training set \\(\\mathcal{D}\\) consisting of four fish only:\n- [short, dark], salmon\n- [short, light], salmon\n- [long, dark], bass\n- [long, light], bass\n\n3. Classifiers (a)",
+      "q": "Calculate the information gains of the two features Length and Lightness on \\(\\mathcal{D}\\) (no calculator needed). (Answer for Length.)",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Length splits perfectly (short→salmon, long→bass), so IG(Length) = 1. Lightness gives no information, IG(Lightness) = 0."
+    },
+    {
+      "context": "3. Classifiers\n\nAssume a binary classification task with classes \\(\\Omega = \\{salmon, bass\\}\\) and two (heavily discretized) features \\(x_1\\) (Length) and \\(x_2\\) (Lightness).\n\nAlso assume we have a training set \\(\\mathcal{D}\\) consisting of four fish only:\n- [short, dark], salmon\n- [short, light], salmon\n- [long, dark], bass\n- [long, light], bass\n\n3. Classifiers (a)",
+      "q": "What is the depth of the simplest decision tree consistent with this dataset? (The depth of a tree that only consists of 1 node (the root) is 0; the depth of an arbitrary tree is the length of its longest branch).",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "Splitting on Length alone gives pure leaves, so depth = 1."
+    },
+    {
+      "context": "3. Classifiers\n\nAssume a binary classification task with classes \\(\\Omega = \\{salmon, bass\\}\\) and two (heavily discretized) features \\(x_1\\) (Length) and \\(x_2\\) (Lightness).\n\nAlso assume we have a training set \\(\\mathcal{D}\\) consisting of four fish only:\n- [short, dark], salmon\n- [short, light], salmon\n- [long, dark], bass\n- [long, light], bass\n\n3. Classifiers (a)",
+      "q": "On this dataset, would the ID3 algorithm be guaranteed to find the simplest possible tree?",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "ID3 picks the feature with highest information gain (Length), producing the depth-1 optimal tree."
+    },
+    {
+      "context": "3. Classifiers\n\nAssume a binary classification task with classes \\(\\Omega = \\{salmon, bass\\}\\) and two (heavily discretized) features \\(x_1\\) (Length) and \\(x_2\\) (Lightness).\n\nAlso assume we have a training set \\(\\mathcal{D}\\) consisting of four fish only:\n- [short, dark], salmon\n- [short, light], salmon\n- [long, dark], bass\n- [long, light], bass\n\n3. Classifiers (a)",
+      "q": "Specify the probability distributions that Naive Bayes would use for classification, given this dataset for training. Fill in: \\(P(Class) = [salmon=?, bass=?]\\); \\(P(Length \\mid Class=salmon) = [short=?, long=?]\\); \\(P(Length \\mid Class=bass) = [short=?, long=?]\\); \\(P(Lightness \\mid Class=salmon) = [dark=?, light=?]\\); \\(P(Lightness \\mid Class=bass) = [dark=?, light=?]\\).",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "\\(P(Class) = [0.5, 0.5]\\); \\(P(Length \\mid salmon) = [1, 0]\\); \\(P(Length \\mid bass) = [0, 1]\\); \\(P(Lightness \\mid salmon) = [0.5, 0.5]\\); \\(P(Lightness \\mid bass) = [0.5, 0.5]\\)."
+    },
+    {
+      "context": "3. Classifiers (a) — If we added 5 copies of the fourth example ([long, light]; bass) as additional training examples to \\(\\mathcal{D}\\), which of the following statements would be true?",
+      "q": "The decision tree learned by ID3 would degenerate to a root node that predicts the majority class (bass).",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Length still perfectly separates the classes (all salmon are short, all bass are long), so the tree retains the Length split."
+    },
+    {
+      "context": "3. Classifiers (a) — If we added 5 copies of the fourth example ([long, light]; bass) as additional training examples to \\(\\mathcal{D}\\), which of the following statements would be true?",
+      "q": "The bass examples from D would end up in the same leaf.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "All bass have Length = long, so they sit in the long-leaf together."
+    },
+    {
+      "context": "3. Classifiers (a) — If we added 5 copies of the fourth example ([long, light]; bass) as additional training examples to \\(\\mathcal{D}\\), which of the following statements would be true?",
+      "q": "The prior for Naive Bayes would change.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Adding bass examples shifts the empirical class frequencies."
+    },
+    {
+      "context": "3. Classifiers (a) — If we added 5 copies of the fourth example ([long, light]; bass) as additional training examples to \\(\\mathcal{D}\\), which of the following statements would be true?",
+      "q": "The decision tree learned by ID3 would get one level deeper.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Length still gives a perfect split; no extra depth needed."
+    },
+    {
+      "context": "3. Classifiers (a) — If we added 5 copies of the fourth example ([long, light]; bass) as additional training examples to \\(\\mathcal{D}\\), which of the following statements would be true?",
+      "q": "The decision tree learned by ID3 would stay exactly the same.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "ID3 still chooses Length and obtains pure leaves; tree is identical."
+    },
+    {
+      "context": "3. Classifiers (b)\n\nNow suppose we encode the features and class labels in the above dataset as numbers (short = 0, long = 1; dark = 0, light = 1; salmon = 0, bass = 1).",
+      "q": "Are the classes linearly separable?",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "The hyperplane \\(x_1 = 0.5\\) (i.e., Length) separates salmon from bass."
+    },
+    {
+      "context": "3. Classifiers (b)\n\nNow suppose we encode the features and class labels in the above dataset as numbers (short = 0, long = 1; dark = 0, light = 1; salmon = 0, bass = 1).",
+      "q": "How many units do we need to express a classifier (without hidden layer) that predicts \\(P(bass \\mid Features)\\) as a feed-forward neural network? (Don't forget the bias unit!)",
+      "opts": [],
+      "ans": [],
+      "multi": false,
+      "explanation": "2 input units + 1 bias unit + 1 output unit = 4."
+    },
+    {
+      "context": "3. Classifiers (b)\n\nNow suppose we encode the features and class labels in the above dataset as numbers (short = 0, long = 1; dark = 0, light = 1; salmon = 0, bass = 1).",
+      "q": "Which examples in \\(\\mathcal{D}\\) are exactly on the margin (i.e., are support vectors) in a maximum margin linear classifier?",
+      "opts": [
+        "([short, dark], salmon), ([short, light], salmon)",
+        "([short, dark], salmon), ([long, light], bass)",
+        "([short, dark], salmon)",
+        "all four",
+        "none of them",
+        "a maximum margin linear classifier does not exist for this dataset"
+      ],
+      "ans": [3],
+      "multi": false,
+      "explanation": "With the symmetric 4-point layout, all four points lie at equal distance from the optimal separating hyperplane."
+    },
+    {
+      "context": "3. Classifiers (b) — If we added four (4) copies of the fourth example ([long, light]; bass) as additional training examples to \\(\\mathcal{D}\\), which of the following statements would be true?",
+      "q": "The decision boundary for a k-NN classifier with \\(k=4\\) would look different than the boundary with \\(k=1\\).",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "With duplicated bass examples, the k=4 neighborhood is dominated by bass in regions where k=1 would not be."
+    },
+    {
+      "context": "3. Classifiers (b) — If we added four (4) copies of the fourth example ([long, light]; bass) as additional training examples to \\(\\mathcal{D}\\), which of the following statements would be true?",
+      "q": "A feed-forward neural network for this dataset would require twice as many input units (not considering the bias unit).",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "The input dimensionality depends on features, not the number of examples."
+    },
+    {
+      "context": "3. Classifiers (b) — If we added four (4) copies of the fourth example ([long, light]; bass) as additional training examples to \\(\\mathcal{D}\\), which of the following statements would be true?",
+      "q": "A k-NN classifier with \\(k=1\\) would change its prediction behaviour.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Duplicates at the same location don't change the 1-NN decision regions."
+    },
+    {
+      "context": "3. Classifiers (b) — If we added four (4) copies of the fourth example ([long, light]; bass) as additional training examples to \\(\\mathcal{D}\\), which of the following statements would be true?",
+      "q": "A k-NN classifier with \\(k=9\\) would always predict class bass.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "With 8 examples in total (4 original + 4 duplicates of bass), there are 5 bass and 3 salmon (wait: 2 salmon + 6 bass = 8) — bass dominate in any 9-neighborhood, but since |D|<9 all examples are neighbors, giving majority bass."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (a)\n\nConsider the following four possible loss functions for a regression problem, where\n- \\(y_i\\) ... true target value for example \\(\\mathbf{x}_i\\)\n- \\(\\hat{y}(\\mathbf{x}_i)\\) ... value predicted by model from input vector \\(\\mathbf{x}_i\\)\n\nWhich of these measures are not meaningful as error measures on a numeric regression task?",
+      "q": "$$L_1 = \\frac{1}{|\\mathcal{D}|} \\sum_{\\mathbf{x}_i \\in \\mathcal{D}} (y_i - \\hat{y}(\\mathbf{x}_i))$$\n\nNot meaningful?",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Errors can cancel out (positive and negative), so this signed mean error is not a meaningful loss."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (a)\n\nConsider the following four possible loss functions for a regression problem, where\n- \\(y_i\\) ... true target value for example \\(\\mathbf{x}_i\\)\n- \\(\\hat{y}(\\mathbf{x}_i)\\) ... value predicted by model from input vector \\(\\mathbf{x}_i\\)\n\nWhich of these measures are not meaningful as error measures on a numeric regression task?",
+      "q": "$$L_4 = \\frac{1}{|\\mathcal{D}|} \\sum_{\\mathbf{x}_i \\in \\mathcal{D}} e^{|y_i - \\hat{y}(\\mathbf{x}_i)|}$$\n\nNot meaningful?",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Exponential of absolute error is a valid (monotonic) loss, minimized at perfect prediction (value 1)."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (a)\n\nConsider the following four possible loss functions for a regression problem, where\n- \\(y_i\\) ... true target value for example \\(\\mathbf{x}_i\\)\n- \\(\\hat{y}(\\mathbf{x}_i)\\) ... value predicted by model from input vector \\(\\mathbf{x}_i\\)\n\nWhich of these measures are not meaningful as error measures on a numeric regression task?",
+      "q": "$$L_2 = \\frac{1}{|\\mathcal{D}|} \\sum_{\\mathbf{x}_i \\in \\mathcal{D}} |y_i - \\hat{y}(\\mathbf{x}_i)|$$\n\nNot meaningful?",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "This is the Mean Absolute Error — a standard regression loss."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (a)\n\nConsider the following four possible loss functions for a regression problem, where\n- \\(y_i\\) ... true target value for example \\(\\mathbf{x}_i\\)\n- \\(\\hat{y}(\\mathbf{x}_i)\\) ... value predicted by model from input vector \\(\\mathbf{x}_i\\)\n\nWhich of these measures are not meaningful as error measures on a numeric regression task?",
+      "q": "$$L_3 = \\frac{1}{|\\mathcal{D}|} \\sum_{\\mathbf{x}_i \\in \\mathcal{D}} (y_i - \\hat{y}(\\mathbf{x}_i))^2$$\n\nNot meaningful?",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "This is the Mean Squared Error — the classic regression loss."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (b)\n\nWeight Learning by Gradient Descent: Which of the following statements are true?",
+      "q": "A loss function can also be defined over several (more than one) output units.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Multi-output losses (e.g., multi-class cross-entropy, multi-task losses) are common."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (b)\n\nWeight Learning by Gradient Descent: Which of the following statements are true?",
+      "q": "A gradient of zero will result in unchanged weights.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Update \\(w \\leftarrow w - \\eta \\nabla L\\); with \\(\\nabla L = 0\\), \\(w\\) stays the same."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (b)\n\nWeight Learning by Gradient Descent: Which of the following statements are true?",
+      "q": "A large learning rate may lead to convergence more quickly.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Larger steps can speed convergence (though too large causes divergence)."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (b)\n\nWeight Learning by Gradient Descent: Which of the following statements are true?",
+      "q": "The gradient must be calculated for each weight in the network.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Every trainable weight needs its own partial derivative to be updated."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (b)\n\nWeight Learning by Gradient Descent: Which of the following statements are true?",
+      "q": "A loss function can have more than one minimum.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Non-convex losses (typical for neural nets) have multiple local minima."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (b)\n\nWeight Learning by Gradient Descent: Which of the following statements are true?",
+      "q": "A small learning rate leads to more complex neural network models.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Learning rate affects optimization speed, not model complexity (which is determined by architecture)."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (b)\n\nWeight Learning by Gradient Descent: Which of the following statements are true?",
+      "q": "The gradient is a number in the range [-1,1].",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Gradients can be arbitrarily large in magnitude."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (c)\n\nOverfitting Avoidance: Which of the following strategies could help prevent overfitting in a neural network?",
+      "q": "Decrease the number of hidden units.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Fewer units reduces model capacity, helping prevent overfitting."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (c)\n\nOverfitting Avoidance: Which of the following strategies could help prevent overfitting in a neural network?",
+      "q": "Decrease the number of hidden layers.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Reducing depth reduces capacity, mitigating overfitting."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (c)\n\nOverfitting Avoidance: Which of the following strategies could help prevent overfitting in a neural network?",
+      "q": "Reduce learning rate.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Learning rate affects optimization, not generalization."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (c)\n\nOverfitting Avoidance: Which of the following strategies could help prevent overfitting in a neural network?",
+      "q": "Reduce the number of training iterations.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Early stopping is a classic overfitting-avoidance technique."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (c)\n\nOverfitting Avoidance: Which of the following strategies could help prevent overfitting in a neural network?",
+      "q": "Limit the size of gradient; crop if too large.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Gradient clipping addresses exploding gradients, not overfitting."
+    },
+    {
+      "context": "4. Neural Networks and Deep Learning (c)\n\nOverfitting Avoidance: Which of the following strategies could help prevent overfitting in a neural network?",
+      "q": "Change weights in direction of the gradient (instead of in the negative direction).",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "That would maximize loss, not avoid overfitting."
+    },
+    {
+      "context": "5. Unsupervised Learning\n\nConsider the k-means clustering algorithm as described in the lecture slides.\n\n5. Unsupervised Learning (a)",
+      "q": "What qualities of a cluster partitioning does the Mean Quantisation Error (MQE) implicitly try to encode?",
+      "opts": [
+        "The average size of the cluster centers",
+        "The compactness of the clusters",
+        "The average distance between cluster centers",
+        "Equal distribution of examples among clusters",
+        "The number of resulting clusters"
+      ],
+      "ans": [1],
+      "multi": false,
+      "explanation": "MQE = mean distance of examples to their cluster center, which measures cluster compactness."
+    },
+    {
+      "context": "5. Unsupervised Learning (b)\n\nWhich of the following definition variants of the Mean Quantisation Error (MQE) are equivalent, in the sense of leading to exact same behavior of the k-means algorithm?\n\n(1) $$\\frac{1}{|\\mathcal{D}|} \\sum_{\\mathbf{x}_i \\in \\mathcal{D}} D(\\mathbf{x}_i, c(\\mathbf{x}_i))$$\n\n(2) $$\\frac{1}{2} \\sum_{\\mathbf{x}_i \\in \\mathcal{D}} D(\\mathbf{x}_i, c(\\mathbf{x}_i))$$\n\n(3) $$\\frac{1}{|\\mathcal{D}|} \\sum_{\\mathbf{x}_i \\in \\mathcal{D}} e^{D(\\mathbf{x}_i, c(\\mathbf{x}_i))}$$",
+      "q": "Which of the variants are equivalent?",
+      "opts": [
+        "all three are equivalent",
+        "only (2) and (3) are equivalent",
+        "only (1) and (2) are equivalent",
+        "none; they may all lead to different behaviour",
+        "only (1) and (3) are equivalent"
+      ],
+      "ans": [0],
+      "multi": false,
+      "explanation": "All three are monotonic transformations of each other in the relevant sense; minimizing any of them assigns each point to its nearest center."
+    },
+    {
+      "context": "5. Unsupervised Learning (c)\n\nWhich of the following statements about the Bayes Information Criterion (BIC) are true (here it is once more so that you don't have to look it up):\n\n$$BIC(M : \\mathcal{D}) = \\log P(\\mathcal{D} \\mid M) - p \\cdot \\frac{\\log |\\mathcal{D}|}{2}$$",
+      "q": "If we multiplied the BIC score by some constant \\(c > 1\\), a model selection algorithm using this score would tend to return simpler models.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Multiplying by a positive constant doesn't change the argmax."
+    },
+    {
+      "context": "5. Unsupervised Learning (c)\n\nWhich of the following statements about the Bayes Information Criterion (BIC) are true (here it is once more so that you don't have to look it up):\n\n$$BIC(M : \\mathcal{D}) = \\log P(\\mathcal{D} \\mid M) - p \\cdot \\frac{\\log |\\mathcal{D}|}{2}$$",
+      "q": "If we removed the second term from the formula, leaving only \\(\\log P(\\mathcal{D} \\mid M)\\), the resulting measure would favor simple models, without regard to how well they fit the data.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Removing the complexity penalty leaves only the data fit term — favoring complex models that fit best."
+    },
+    {
+      "context": "5. Unsupervised Learning (c)\n\nWhich of the following statements about the Bayes Information Criterion (BIC) are true (here it is once more so that you don't have to look it up):\n\n$$BIC(M : \\mathcal{D}) = \\log P(\\mathcal{D} \\mid M) - p \\cdot \\frac{\\log |\\mathcal{D}|}{2}$$",
+      "q": "The second term of the formula puts a penalty on cluster partitionings that have a large number of objects per cluster.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "The penalty depends on the number of parameters \\(p\\), not on cluster occupancy."
+    },
+    {
+      "context": "5. Unsupervised Learning (c)\n\nWhich of the following statements about the Bayes Information Criterion (BIC) are true (here it is once more so that you don't have to look it up):\n\n$$BIC(M : \\mathcal{D}) = \\log P(\\mathcal{D} \\mid M) - p \\cdot \\frac{\\log |\\mathcal{D}|}{2}$$",
+      "q": "If we removed the second term from the formula, leaving only \\(\\log P(\\mathcal{D} \\mid M)\\), the resulting measure would favor models that maximally fit the data.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Without the complexity penalty, maximum likelihood is selected — i.e., maximal data fit."
+    },
+    {
+      "context": "6. Hidden Markov Models\n\nWhich of the following statements about Hidden Markov Models (HMMs) are true?",
+      "q": "In MAP classification of a particular observation sequence, the prior in Bayes' rule can be calculated from the HMM.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "The HMM gives the likelihood of observations; the class prior comes from outside the HMM."
+    },
+    {
+      "context": "6. Hidden Markov Models\n\nWhich of the following statements about Hidden Markov Models (HMMs) are true?",
+      "q": "The number of observation symbols must be equal to the number of states.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "These are independent dimensions of the HMM."
+    },
+    {
+      "context": "6. Hidden Markov Models\n\nWhich of the following statements about Hidden Markov Models (HMMs) are true?",
+      "q": "An observation matrix \\(\\mathbf{B}\\) may contain columns that consist of zeroes only.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "A column of zeroes would mean no state can emit that symbol, making it a useless symbol; furthermore columns aren't constrained to sum to one in B (rows are), but an all-zero column means an unreachable observation."
+    },
+    {
+      "context": "6. Hidden Markov Models\n\nWhich of the following statements about Hidden Markov Models (HMMs) are true?",
+      "q": "The state transition matrix \\(\\mathbf{A}\\) is always of square shape.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "\\(\\mathbf{A}\\) is N×N where N is the number of states."
+    },
+    {
+      "context": "6. Hidden Markov Models\n\nWhich of the following statements about Hidden Markov Models (HMMs) are true?",
+      "q": "The Forward Algorithm calculates the probability of a state sequence.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "It calculates the probability of an observation sequence (marginalizing over state sequences)."
+    },
+    {
+      "context": "6. Hidden Markov Models\n\nWhich of the following statements about Hidden Markov Models (HMMs) are true?",
+      "q": "If, in a given HMM with N states \\(s_1, \\ldots, s_N\\), \\(a_{ij} = P(s_i \\to s_j) = 1/N\\) for all \\(i, j\\), the same process could be modelled with just a single state.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Different states can still have different observation distributions, so they aren't reducible to a single state."
+    },
+    {
+      "context": "6. Hidden Markov Models\n\nWhich of the following statements about Hidden Markov Models (HMMs) are true?",
+      "q": "An observation model matrix \\(\\mathbf{B}\\) may contain zeroes.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Individual entries can be zero (a state may not emit a specific symbol)."
+    },
+    {
+      "context": "6. Hidden Markov Models\n\nWhich of the following statements about Hidden Markov Models (HMMs) are true?",
+      "q": "The Forward Algorithm calculates the probability of an observation sequence.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Yes — \\(P(O \\mid \\lambda)\\) summed over all state paths."
+    },
+    {
+      "context": "6. Hidden Markov Models\n\nWhich of the following statements about Hidden Markov Models (HMMs) are true?",
+      "q": "A HMM permits us to calculate the probability of any state sequence (disregarding observations) of arbitrary length.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Using initial probabilities and transition matrix \\(\\mathbf{A}\\), one can compute the probability of any state sequence."
+    }
+  ]
+}

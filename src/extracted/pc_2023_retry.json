@@ -1,0 +1,361 @@
+{
+  "id": "pc_2023_retry",
+  "title": "MLPC Exam 2023 Retry — JKU",
+  "description": "Retake exam covering core MLPC topics",
+  "questions": [
+    {
+      "context": "Bayesian Classification. Consider minimum risk classification as introduced in the lecture, with the Conditional Risk formula: $$R(\\alpha_i \\mid x) = \\sum_{j=1}^{c} \\lambda(\\alpha_i \\mid \\omega_j) P(\\omega_j \\mid x)$$ Assume we have \\(\\Omega = \\{\\omega_1, \\ldots, \\omega_c\\}\\), a list of actions \\(\\{\\alpha_i = \\text{\"predict class } i\\text{\"}\\}\\), a given cost function \\(\\Lambda = \\{\\lambda_{ij} = \\lambda(\\alpha_i \\mid \\omega_j)\\}\\), and known probability distributions \\(P(\\Omega)\\) and \\(P(X \\mid \\Omega)\\). Which of the following statements are correct?",
+      "q": "MAP classification behaviour can be obtained by an appropriate setting of the cost function.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Bayesian Classification. Consider minimum risk classification as introduced in the lecture, with the Conditional Risk formula: $$R(\\alpha_i \\mid x) = \\sum_{j=1}^{c} \\lambda(\\alpha_i \\mid \\omega_j) P(\\omega_j \\mid x)$$ Assume we have \\(\\Omega = \\{\\omega_1, \\ldots, \\omega_c\\}\\), a list of actions \\(\\{\\alpha_i = \\text{\"predict class } i\\text{\"}\\}\\), a given cost function \\(\\Lambda = \\{\\lambda_{ij} = \\lambda(\\alpha_i \\mid \\omega_j)\\}\\), and known probability distributions \\(P(\\Omega)\\) and \\(P(X \\mid \\Omega)\\). Which of the following statements are correct?",
+      "q": "The effect of any change to the cost function can also be achieved by leaving the cost function unchanged and modifying the likelihoods \\(P(X \\mid \\omega_j)\\) accordingly.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Bayesian Classification. Consider minimum risk classification as introduced in the lecture, with the Conditional Risk formula: $$R(\\alpha_i \\mid x) = \\sum_{j=1}^{c} \\lambda(\\alpha_i \\mid \\omega_j) P(\\omega_j \\mid x)$$ Assume we have \\(\\Omega = \\{\\omega_1, \\ldots, \\omega_c\\}\\), a list of actions \\(\\{\\alpha_i = \\text{\"predict class } i\\text{\"}\\}\\), a given cost function \\(\\Lambda = \\{\\lambda_{ij} = \\lambda(\\alpha_i \\mid \\omega_j)\\}\\), and known probability distributions \\(P(\\Omega)\\) and \\(P(X \\mid \\Omega)\\). Which of the following statements are correct?",
+      "q": "Written as a matrix, the above cost function \\(\\Lambda\\) is of quadratic shape.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Bayesian Classification. Consider minimum risk classification as introduced in the lecture, with the Conditional Risk formula: $$R(\\alpha_i \\mid x) = \\sum_{j=1}^{c} \\lambda(\\alpha_i \\mid \\omega_j) P(\\omega_j \\mid x)$$ Assume we have \\(\\Omega = \\{\\omega_1, \\ldots, \\omega_c\\}\\), a list of actions \\(\\{\\alpha_i = \\text{\"predict class } i\\text{\"}\\}\\), a given cost function \\(\\Lambda = \\{\\lambda_{ij} = \\lambda(\\alpha_i \\mid \\omega_j)\\}\\), and known probability distributions \\(P(\\Omega)\\) and \\(P(X \\mid \\Omega)\\). Which of the following statements are correct?",
+      "q": "For any cost function, the expected cost is equal to the Bayes Error.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Bayesian Classification. Consider minimum risk classification as introduced in the lecture, with the Conditional Risk formula: $$R(\\alpha_i \\mid x) = \\sum_{j=1}^{c} \\lambda(\\alpha_i \\mid \\omega_j) P(\\omega_j \\mid x)$$ Assume we have \\(\\Omega = \\{\\omega_1, \\ldots, \\omega_c\\}\\), a list of actions \\(\\{\\alpha_i = \\text{\"predict class } i\\text{\"}\\}\\), a given cost function \\(\\Lambda = \\{\\lambda_{ij} = \\lambda(\\alpha_i \\mid \\omega_j)\\}\\), and known probability distributions \\(P(\\Omega)\\) and \\(P(X \\mid \\Omega)\\). Which of the following statements are correct?",
+      "q": "The expected risk defines decision boundaries only in a two-dimensional feature space.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Bayesian Classification / Minimum Risk. Consider the same setup as above with cost function \\(\\Lambda\\) and conditional risk \\(R(\\alpha_i \\mid x) = \\sum_j \\lambda_{ij} P(\\omega_j \\mid x)\\).",
+      "q": "If we multiply the cost function with a constant \\(k\\), the probability of all classes will (multiple answers possible):",
+      "opts": [
+        "remain the same",
+        "sum to \\(1.0 \\cdot k\\)",
+        "change so that probable classes become less probable, and vice versa (\"smoothing\")",
+        "increase by a factor \\(k\\)",
+        "be reduced by a factor \\(k\\)"
+      ],
+      "ans": [0],
+      "multi": true,
+      "explanation": "Multiplying costs by a constant rescales risks uniformly but does not affect class posterior probabilities."
+    },
+    {
+      "context": "Bayesian Classification / Minimum Risk. Consider the same setup as above with cost function \\(\\Lambda\\) and conditional risk \\(R(\\alpha_i \\mid x) = \\sum_j \\lambda_{ij} P(\\omega_j \\mid x)\\).",
+      "q": "If we set the cost function to all 1 (i.e., all \\(\\lambda_{ij} = 1\\)), then (multiple answers possible):",
+      "opts": [
+        "minimum risk classification becomes the same as MAP classification",
+        "the risk for all actions becomes \\(c\\), for any \\(x\\), where \\(c > 1\\) is the number of classes",
+        "all decisions will have the same cost, for any \\(x\\)",
+        "the risk for all actions becomes 1, for any \\(x\\)",
+        "for any \\(x\\), every decision is equally good"
+      ],
+      "ans": [2, 3, 4],
+      "multi": true,
+      "explanation": "With all \\(\\lambda_{ij}=1\\): \\(R(\\alpha_i \\mid x) = \\sum_j P(\\omega_j \\mid x) = 1\\) for every action, so all decisions have equal cost and are equally good."
+    },
+    {
+      "context": "Classifier Evaluation. Consider a two-class classification problem with classes p and n, and a test set T with 1000 test examples and class distribution P:N = 3:7. Which of the following statements are true?",
+      "q": "The iso-performance line cannot go through points (0, 0) and (1, 1).",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Classifier Evaluation. Consider a two-class classification problem with classes p and n, and a test set T with 1000 test examples and class distribution P:N = 3:7. Which of the following statements are true?",
+      "q": "For any classifier C and any dataset D, \\(\\text{Recall}(C, D) + \\text{Precision}(C, D) = 1.0\\).",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Classifier Evaluation. Consider a two-class classification problem with classes p and n, and a test set T with 1000 test examples and class distribution P:N = 3:7. Which of the following statements are true?",
+      "q": "If two classifiers \\(C_1, C_2\\) have the same True Positive Rates (TPRs), but different False Positive Rates, they cannot have the same accuracy on any given fixed test set T.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Classifier Evaluation. Consider a two-class classification problem with classes p and n, and a test set T with 1000 test examples and class distribution P:N = 3:7. Which of the following statements are true?",
+      "q": "Two classifiers with the same accuracy cannot occupy different places in ROC space.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Decision Trees. Consider the following alternative criterion (instead of information gain) for evaluating a feature \\(A\\) for splitting in the ID3 algorithm, in a binary classification task with two classes \\(\\Omega = \\{+, -\\}\\) and \\(p_i\\) (\\(n_i\\)) = number of pos (neg) examples in \\(D_i\\), the \\(i\\)-th branch: $$G_D(A) = \\sum_{v_i \\in A} \\frac{|D_i|}{|D|} \\cdot \\frac{|p_i - n_i|}{p_i + n_i}$$",
+      "q": "The best feature is the one that minimises this measure.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Pure branches yield \\(|p_i - n_i|/(p_i+n_i) = 1\\); the measure is maximised for purer splits, so the best feature maximises it."
+    },
+    {
+      "context": "Decision Trees. Consider the following alternative criterion (instead of information gain) for evaluating a feature \\(A\\) for splitting in the ID3 algorithm, in a binary classification task with two classes \\(\\Omega = \\{+, -\\}\\) and \\(p_i\\) (\\(n_i\\)) = number of pos (neg) examples in \\(D_i\\), the \\(i\\)-th branch: $$G_D(A) = \\sum_{v_i \\in A} \\frac{|D_i|}{|D|} \\cdot \\frac{|p_i - n_i|}{p_i + n_i}$$",
+      "q": "This measure will become maximal when each branch only contains examples of one class.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Decision Trees. Consider the following alternative criterion (instead of information gain) for evaluating a feature \\(A\\) for splitting in the ID3 algorithm, in a binary classification task with two classes \\(\\Omega = \\{+, -\\}\\) and \\(p_i\\) (\\(n_i\\)) = number of pos (neg) examples in \\(D_i\\), the \\(i\\)-th branch: $$G_D(A) = \\sum_{v_i \\in A} \\frac{|D_i|}{|D|} \\cdot \\frac{|p_i - n_i|}{p_i + n_i}$$",
+      "q": "When a feature \\(A\\) perfectly discriminates between the classes in \\(D\\), \\(G_D(A)\\):",
+      "opts": [
+        "\\(< 0.0\\)",
+        "is useless",
+        "\\(= 1.0\\)",
+        "is undefined",
+        "is equal to the information gain",
+        "\\(> 1.0\\)",
+        "\\(= 0.0\\)"
+      ],
+      "ans": [2],
+      "multi": false,
+      "explanation": "When \\(A\\) perfectly separates classes, every branch has either all \\(+\\) or all \\(-\\) examples, so each \\(|p_i-n_i|/(p_i+n_i)=1\\) and the weighted sum equals 1."
+    },
+    {
+      "context": "Decision Trees — ID3-S variant. Consider a variant \"ID3-S\" of the ID3 algorithm that learns only trees that are at most one level deep. It chooses a feature for the root, using the Information Gain heuristic, and labels each of the resulting nodes with the class that is most frequent in that node (in case of a tie, it randomly chooses between one of the competing classes). Which of the following statements about ID3-S are true:",
+      "q": "This is not a valid learning algorithm.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Decision Trees — ID3-S variant. Consider a variant \"ID3-S\" of the ID3 algorithm that learns only trees that are at most one level deep. It chooses a feature for the root, using the Information Gain heuristic, and labels each of the resulting nodes with the class that is most frequent in that node (in case of a tie, it randomly chooses between one of the competing classes). Which of the following statements about ID3-S are true:",
+      "q": "This algorithm cannot result in a classifier with an accuracy of 1.0 on the training set.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Decision Trees — ID3-S variant. Consider a variant \"ID3-S\" of the ID3 algorithm that learns only trees that are at most one level deep. It chooses a feature for the root, using the Information Gain heuristic, and labels each of the resulting nodes with the class that is most frequent in that node (in case of a tie, it randomly chooses between one of the competing classes). Which of the following statements about ID3-S are true:",
+      "q": "This is a high-bias learner.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Decision Trees — ID3-S variant. Consider a variant \"ID3-S\" of the ID3 algorithm that learns only trees that are at most one level deep. It chooses a feature for the root, using the Information Gain heuristic, and labels each of the resulting nodes with the class that is most frequent in that node (in case of a tie, it randomly chooses between one of the competing classes). Which of the following statements about ID3-S are true:",
+      "q": "Combining different such trees via voting can improve accuracy on some dataset.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Neural Networks and Deep Learning. Consider the simple neural network from the lecture slides, with 1 input unit (for a feature \\(x\\)), one hidden unit, and one output unit \\(y\\), where the hidden unit uses tanh as activation function, and the output unit \\(y\\) uses the identity function (i.e., just outputs what comes in as net input). Also assume that the loss function is the sum squared error. Which of the following statements are correct for this network?",
+      "q": "A training set for this network will have to consist of pairs of numbers.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Neural Networks and Deep Learning. Consider the simple neural network from the lecture slides, with 1 input unit (for a feature \\(x\\)), one hidden unit, and one output unit \\(y\\), where the hidden unit uses tanh as activation function, and the output unit \\(y\\) uses the identity function (i.e., just outputs what comes in as net input). Also assume that the loss function is the sum squared error. Which of the following statements are correct for this network?",
+      "q": "Changing the output activation function from linear (identity) to tanh will not make any difference, as the hidden unit already uses the tanh activation.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Neural Networks and Deep Learning. Consider the simple neural network from the lecture slides, with 1 input unit (for a feature \\(x\\)), one hidden unit, and one output unit \\(y\\), where the hidden unit uses tanh as activation function, and the output unit \\(y\\) uses the identity function (i.e., just outputs what comes in as net input). Also assume that the loss function is the sum squared error. Which of the following statements are correct for this network?",
+      "q": "If we change the output of the bias unit from 1.0 to 2.0, the result is no longer a valid neural network.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Neural Networks and Deep Learning. Consider the simple neural network from the lecture slides, with 1 input unit (for a feature \\(x\\)), one hidden unit, and one output unit \\(y\\), where the hidden unit uses tanh as activation function, and the output unit \\(y\\) uses the identity function (i.e., just outputs what comes in as net input). Also assume that the loss function is the sum squared error. Which of the following statements are correct for this network?",
+      "q": "Changing the output of the bias unit from 1.0 to 2.0 will change the absolute value of the Sum Squared Error on the training set \\(D\\), but will not change the values of the network weights that minimise the error on \\(D\\).",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Neural Networks and Deep Learning. Consider the simple neural network from the lecture slides, with 1 input unit (for a feature \\(x\\)), one hidden unit, and one output unit \\(y\\), where the hidden unit uses tanh as activation function, and the output unit \\(y\\) uses the identity function (i.e., just outputs what comes in as net input). Also assume that the loss function is the sum squared error. Which of the following statements are correct for this network?",
+      "q": "The loss function is defined over a four-dimensional parameter space.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Parameters: input-to-hidden weight, hidden bias, hidden-to-output weight, output bias — four total."
+    },
+    {
+      "context": "Neural Networks — Binary Classification. Now assume we use the above simple network for a binary classification task. We encode the class labels as 1 and 0, equip the output unit \\(y\\) with a logistic activation function, and use the Binary Cross-Entropy as the loss function: $$CE(x_i) = -y_i \\log \\hat{y}_i - (1 - y_i) \\log(1 - \\hat{y}_i)$$ where \\(y_i\\) is the true class of example \\(x_i\\) (0 or 1), and \\(\\hat{y}_i\\) is the value predicted by output unit \\(y\\). An example \\(x_i\\) is classified as class 1 iff \\(\\hat{y}_i \\geq 0.5\\). Which of the following statements are correct?",
+      "q": "This classifier can only learn decision boundaries that split the feature space into two regions.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Neural Networks — Binary Classification. Now assume we use the above simple network for a binary classification task. We encode the class labels as 1 and 0, equip the output unit \\(y\\) with a logistic activation function, and use the Binary Cross-Entropy as the loss function: $$CE(x_i) = -y_i \\log \\hat{y}_i - (1 - y_i) \\log(1 - \\hat{y}_i)$$ where \\(y_i\\) is the true class of example \\(x_i\\) (0 or 1), and \\(\\hat{y}_i\\) is the value predicted by output unit \\(y\\). An example \\(x_i\\) is classified as class 1 iff \\(\\hat{y}_i \\geq 0.5\\). Which of the following statements are correct?",
+      "q": "If we make the network deeper by adding additional hidden layers, the CE function must be extended with corresponding additional terms.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Neural Networks — Binary Classification. Now assume we use the above simple network for a binary classification task. We encode the class labels as 1 and 0, equip the output unit \\(y\\) with a logistic activation function, and use the Binary Cross-Entropy as the loss function: $$CE(x_i) = -y_i \\log \\hat{y}_i - (1 - y_i) \\log(1 - \\hat{y}_i)$$ where \\(y_i\\) is the true class of example \\(x_i\\) (0 or 1), and \\(\\hat{y}_i\\) is the value predicted by output unit \\(y\\). An example \\(x_i\\) is classified as class 1 iff \\(\\hat{y}_i \\geq 0.5\\). Which of the following statements are correct?",
+      "q": "If the class distribution in the training set is 50:50, the binary cross-entropy CE encourages the network to predict values close to 0.5.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Neural Networks — Binary Classification. Now assume we use the above simple network for a binary classification task. We encode the class labels as 1 and 0, equip the output unit \\(y\\) with a logistic activation function, and use the Binary Cross-Entropy as the loss function: $$CE(x_i) = -y_i \\log \\hat{y}_i - (1 - y_i) \\log(1 - \\hat{y}_i)$$ where \\(y_i\\) is the true class of example \\(x_i\\) (0 or 1), and \\(\\hat{y}_i\\) is the value predicted by output unit \\(y\\). An example \\(x_i\\) is classified as class 1 iff \\(\\hat{y}_i \\geq 0.5\\). Which of the following statements are correct?",
+      "q": "This classifier can easily overfit because the cross-entropy is non-linear.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Unsupervised Learning / k-means. Consider the task of k-means clustering with \\(N\\) observations described in terms of \\(D\\) numeric features, with the Euclidean distance as distance measure. Assume we have set the number \\(k\\) of clusters to \\(k = 5\\). Which of the following statements are correct?",
+      "q": "When we increase the number of features, the model complexity penalty term in the Bayes Information Criterion will automatically grow larger.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Unsupervised Learning / k-means. Consider the task of k-means clustering with \\(N\\) observations described in terms of \\(D\\) numeric features, with the Euclidean distance as distance measure. Assume we have set the number \\(k\\) of clusters to \\(k = 5\\). Which of the following statements are correct?",
+      "q": "In k-means, \\(k\\) has to be at least \\(N/2\\).",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Unsupervised Learning / k-means. Consider the task of k-means clustering with \\(N\\) observations described in terms of \\(D\\) numeric features, with the Euclidean distance as distance measure. Assume we have set the number \\(k\\) of clusters to \\(k = 5\\). Which of the following statements are correct?",
+      "q": "To use the Bayes Information Criterion for selecting an appropriate value for \\(k\\), a k-means cluster model must be converted into a probabilistic model.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Unsupervised Learning / k-means. Consider the task of k-means clustering with \\(N\\) observations described in terms of \\(D\\) numeric features, with the Euclidean distance as distance measure. Assume we have set the number \\(k\\) of clusters to \\(k = 5\\). Which of the following statements are correct?",
+      "q": "The cluster with the smallest number of members will have the lowest (best) MQE.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Unsupervised Learning / k-means. Consider the task of k-means clustering with \\(N\\) observations described in terms of \\(D\\) numeric features, with the Euclidean distance as distance measure. Assume we have set the number \\(k\\) of clusters to \\(k = 5\\). Which of the following statements are correct?",
+      "q": "Feature normalisation will change the MQE, but not the clusters found.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Unsupervised Learning — Gaussian Mixture Models. Consider a Gaussian Mixture Model (GMM) with \\(k\\) components that was learned from a dataset of \\(N\\) examples over a \\(D\\)-dimensional numeric feature space.",
+      "q": "How many parameters (numbers) does a specification of this GMM consist of (ignoring possible redundancies because of distribution constraints and symmetries)?",
+      "opts": [
+        "\\(k + kD + D\\)",
+        "\\(k(D \\cdot N)\\)",
+        "\\(k + kD + kD^2\\)",
+        "\\(3kD\\)",
+        "\\(kD + N\\)",
+        "\\(kN + kD + kD^2\\)",
+        "\\(3k\\)"
+      ],
+      "ans": [2],
+      "multi": false,
+      "explanation": "\\(k\\) mixture weights + \\(kD\\) mean parameters + \\(kD^2\\) covariance-matrix entries."
+    },
+    {
+      "context": "Markov Models. Consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model and a uniform prior state distribution \\(\\pi = [1/3, 1/3, 1/3]\\): $$A = \\begin{pmatrix} 0.4 & 0.3 & 0.3 \\\\ 0.2 & 0.6 & 0.2 \\\\ 0.1 & 0.1 & 0.8 \\end{pmatrix}$$ Which of the following statements are true?",
+      "q": "If we changed some \\(a_{ij}\\) to be zero (0.0), then also \\(a_{ji}\\) would have to be changed to zero for a valid Markov process.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Markov Models. Consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model and a uniform prior state distribution \\(\\pi = [1/3, 1/3, 1/3]\\): $$A = \\begin{pmatrix} 0.4 & 0.3 & 0.3 \\\\ 0.2 & 0.6 & 0.2 \\\\ 0.1 & 0.1 & 0.8 \\end{pmatrix}$$ Which of the following statements are true?",
+      "q": "If we made one of these numbers smaller, then at least one number in the same column would have to become larger.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "Rows of \\(A\\) must sum to 1 (not columns), so the constraint is on rows."
+    },
+    {
+      "context": "Markov Models. Consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model and a uniform prior state distribution \\(\\pi = [1/3, 1/3, 1/3]\\): $$A = \\begin{pmatrix} 0.4 & 0.3 & 0.3 \\\\ 0.2 & 0.6 & 0.2 \\\\ 0.1 & 0.1 & 0.8 \\end{pmatrix}$$ Which of the following statements are true?",
+      "q": "If we made one of these numbers smaller, then at least one number in the same row would have to become larger.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false
+    },
+    {
+      "context": "Markov Models. Consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model and a uniform prior state distribution \\(\\pi = [1/3, 1/3, 1/3]\\): $$A = \\begin{pmatrix} 0.4 & 0.3 & 0.3 \\\\ 0.2 & 0.6 & 0.2 \\\\ 0.1 & 0.1 & 0.8 \\end{pmatrix}$$ Which of the following statements are true?",
+      "q": "The expected number of consecutive occurrences of state S2 is higher than the expected number of consecutive occurrences of state S1.",
+      "opts": ["True", "False"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Self-loop probabilities: \\(a_{22} = 0.6 > a_{11} = 0.4\\), so expected run length in S2 is larger."
+    },
+    {
+      "context": "Markov Models — Identity transition. Now consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model and a uniform prior state distribution \\(\\pi = [1/3, 1/3, 1/3]\\): $$A = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$$ What is the probability of the following state sequences, according to this model \\(M\\)?",
+      "q": "\\(P((S_1, S_1, S_2, S_2, S_3, S_3) \\mid M) = \\)?",
+      "opts": ["0", "1/3", "1/9", "1/27", "1"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "With identity transition matrix, transitioning from S1 to S2 has probability 0, so the whole sequence has probability 0."
+    },
+    {
+      "context": "Markov Models — Identity transition. Now consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model and a uniform prior state distribution \\(\\pi = [1/3, 1/3, 1/3]\\): $$A = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$$ What is the probability of the following state sequences, according to this model \\(M\\)?",
+      "q": "\\(P((S_1, S_1, S_1, S_1, S_1) \\mid M) = \\)?",
+      "opts": ["0", "1/3", "1/9", "1/27", "1"],
+      "ans": [1],
+      "multi": false,
+      "explanation": "\\(\\pi_1 = 1/3\\) and each self-transition has probability 1."
+    },
+    {
+      "context": "Markov Models — Identity transition. Now consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model and a uniform prior state distribution \\(\\pi = [1/3, 1/3, 1/3]\\): $$A = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$$ What is the probability of the following state sequences, according to this model \\(M\\)?",
+      "q": "\\(P((S_1, S_2, S_3, S_1, S_2, S_3) \\mid M) = \\)?",
+      "opts": ["0", "1/3", "1/9", "1/27", "1"],
+      "ans": [0],
+      "multi": false,
+      "explanation": "Any transition between distinct states has probability 0."
+    },
+    {
+      "context": "Markov Models — Two-City Classification. Consider the classification task of identifying one of two cities A or B, based on a sequence of weather observations. We have learned two Markov models \\(M_A\\) and \\(M_B\\) that model the weather in cities A and B, respectively. Now, given a sequence \\(S\\) of 10 consecutive weather observations, you want to decide which of the two cities this sequence is from, based on the MAP principle.",
+      "q": "Which of the following quantities are needed for making this decision?",
+      "opts": [
+        "\\(P(A)\\)",
+        "\\(P(S \\mid M_B)\\)",
+        "\\(P(M_B \\mid M_A)\\)",
+        "\\(P(S \\mid M_A)\\)",
+        "\\(P(B)\\)"
+      ],
+      "ans": [0, 1, 3, 4],
+      "multi": true,
+      "explanation": "MAP: choose argmax of \\(P(M_c) P(S \\mid M_c)\\) for \\(c \\in \\{A, B\\}\\)."
+    },
+    {
+      "context": "Markov Models — Two-City Classification. Consider the classification task of identifying one of two cities A or B, based on a sequence of weather observations. We have learned two Markov models \\(M_A\\) and \\(M_B\\) that model the weather in cities A and B, respectively. Now, given a sequence \\(S\\) of 10 consecutive weather observations, you want to decide which of the two cities this sequence is from, based on the MAP principle. Which of the following statements are true?",
+      "q": "If we produce a new sequence \\(S_2\\) by concatenating two copies of \\(S\\), the likelihoods will change, but the MAP decision will always remain the same.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Markov Models — Two-City Classification. Consider the classification task of identifying one of two cities A or B, based on a sequence of weather observations. We have learned two Markov models \\(M_A\\) and \\(M_B\\) that model the weather in cities A and B, respectively. Now, given a sequence \\(S\\) of 10 consecutive weather observations, you want to decide which of the two cities this sequence is from, based on the MAP principle. Which of the following statements are true?",
+      "q": "This kind of classification procedure is only possible if the length of \\(S\\) is at least 2.",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    },
+    {
+      "context": "Markov Models — Two-City Classification. Consider the classification task of identifying one of two cities A or B, based on a sequence of weather observations. We have learned two Markov models \\(M_A\\) and \\(M_B\\) that model the weather in cities A and B, respectively. Now, given a sequence \\(S\\) of 10 consecutive weather observations, you want to decide which of the two cities this sequence is from, based on the MAP principle. Which of the following statements are true?",
+      "q": "The same decision could be made without a Markov model, by counting the different states in \\(S\\).",
+      "opts": ["True", "False"],
+      "ans": [1],
+      "multi": false
+    }
+  ]
+}
