@@ -7735,6 +7735,10 @@ export default function App() {
     localStorage.setItem("quiz_stats", JSON.stringify(quizStats));
   }, [quizStats]);
 
+  // Tracks the (activeQuizId) for which we've already saved the current attempt,
+  // so the recording useEffect fires exactly once per attempt.
+  const [recordedFor, setRecordedFor] = useState(null);
+
   function recordAttempt(quizId, pct) {
     setQuizStats(prev => {
       const cur = prev[quizId] || { best: 0, attempts: 0, lastPct: 0, lastAt: 0 };
@@ -7768,6 +7772,23 @@ export default function App() {
       document.body.classList.remove("dark-theme");
     }
   }, [theme]);
+
+  // Safety-net: whenever the results screen becomes visible for the active quiz,
+  // record the attempt exactly once. Resets when user leaves the quiz.
+  useEffect(() => {
+    if (showResults && activeQuizId && state && recordedFor !== activeQuizId) {
+      const quiz = QUIZ_BANK.find(q => q.id === activeQuizId);
+      if (!quiz) return;
+      const total = quiz.questions.length;
+      const correct = state.scores.filter(s => s === true).length;
+      const pct = Math.round((correct / total) * 100);
+      recordAttempt(activeQuizId, pct);
+      setRecordedFor(activeQuizId);
+    }
+    if (!showResults && recordedFor) {
+      setRecordedFor(null);
+    }
+  }, [showResults, activeQuizId, state, recordedFor]);
 
   function startQuiz(id) {
     setActiveQuizId(id);
@@ -7957,7 +7978,17 @@ export default function App() {
             {!isDone && <button onClick={submit} className="btn btn-primary" disabled={curSel.length === 0}>Check answer</button>}
             {isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-primary">Next →</button>}
             {!isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-secondary">Skip →</button>}
-            {allDone && cur === Qs.length - 1 && <button onClick={() => { recordAttempt(activeQuizId, Math.round(correctCount / Qs.length * 100)); setShowResults(true); }} className="btn btn-success">See results</button>}
+            {cur === Qs.length - 1 && (
+              <button
+                onClick={() => {
+                  if (!allDone && !confirm("Some questions are not answered — they will count as wrong. See results anyway?")) return;
+                  setShowResults(true);
+                }}
+                className="btn btn-success"
+              >
+                See results
+              </button>
+            )}
           </div>
 
           <div className="dot-navigation">

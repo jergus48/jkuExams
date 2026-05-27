@@ -1,0 +1,70 @@
+Summer semester 2022
+06.07.2022, 10:0013:00 Uhr
+M. Ullrich
+Final exam:
+Mathematics for Articial Intelligence 2
+Duration: 180 minutes
+Maximum of 50 points
+Rules:
+• Put your name and matriculation nr. on every sheet!
+• Use a new sheet for every exercise!
+• Electronic devices are not allowed!
+• Do not use pencil or a red pen.
+• The whole procedure of solution is required.
+• All results must be simplied as far as possible.
+Good luck!
+
+Exercise 1: Derivatives (4 points)
+Find the derivatives of the following functions:
+• f1(x) =
+x
+2 + sin(x2),
+x ∈R
+• f2(x) = ln (3 · 2x) ,
+x ∈R
+Simplify the results, and determine the value of the derivative at x0 = √π.
+Exercise 2: Limits (4 points)
+Determine if the following proper or improper limits exist and, if applicable, determine
+the value.
+a)
+lim
+x→0
+cos(x) −1
+x2
+b)
+lim
+x→1
+x3 −2x + 1
+(x + 1)2
+Exercise 3: Global and Local Extrema (10 points)
+Consider the function f : [0, ∞) →R with f(x) = x · e−x.
+a) Determine all local and global extrema and extreme values of f.
+b) Where is f monotonically increasing/decreasing?
+c) Where is f convex/concave?
+Exercise 4: Taylor series (10 points)
+Determine the Taylor polynomial T3(x) of order 3 and the Taylor series T(x) of the
+function
+f : R →R, f(x) = (x2 −3)2
+around x0 = 1. Where does the Taylor series converge?
+Exercise 5: Integrals (6 points)
+Compute
+Z π
+0
+x2 · sin(x) dx.
+Exercise 6: Fourier series (8 points)
+Compute all Fourier coecients and the Fourier series Sh(x) of the function h: [0, 1) →R
+with h(x) = eπix. Simplify the result! (Complex numbers in canonical form.)
+Does the Fourier series converge in (0, 1)? Justify your answer!
+(Ignore the point x = 0.)
+Exercise 7: Multivariate derivatives (8 points)
+Let f : R2 →R be given by
+f(x, y) :=
+
+
+
+xy
+x −y,
+if x ̸= y,
+0,
+if x = y
+Where is f partially/totally dierentiable? Find the gradient there.
