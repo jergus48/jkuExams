@@ -7724,6 +7724,42 @@ export default function App() {
     return saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
   });
 
+  // Per-quiz attempt history. Stored in localStorage under "quiz_stats".
+  // Shape: { [quizId]: { best:number, attempts:number, lastPct:number, lastAt:number } }
+  const [quizStats, setQuizStats] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("quiz_stats") || "{}"); }
+    catch { return {}; }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("quiz_stats", JSON.stringify(quizStats));
+  }, [quizStats]);
+
+  function recordAttempt(quizId, pct) {
+    setQuizStats(prev => {
+      const cur = prev[quizId] || { best: 0, attempts: 0, lastPct: 0, lastAt: 0 };
+      return {
+        ...prev,
+        [quizId]: {
+          best: Math.max(cur.best, pct),
+          attempts: cur.attempts + 1,
+          lastPct: pct,
+          lastAt: Date.now(),
+        }
+      };
+    });
+  }
+
+  function resetQuizStats(quizId, e) {
+    e.stopPropagation();
+    if (!confirm("Clear saved results for this quiz?")) return;
+    setQuizStats(prev => {
+      const next = { ...prev };
+      delete next[quizId];
+      return next;
+    });
+  }
+
   useEffect(() => {
     localStorage.setItem("theme", theme);
     if (theme === "dark") {
@@ -7752,13 +7788,31 @@ export default function App() {
         <div className="quiz-list-title">JKU Second Semester Pass Master Plan</div>
         <div className="quiz-list-subtitle">Select a quiz to practice exam questions locally</div>
         <div className="quiz-grid">
-          {QUIZ_BANK.map(quiz => (
-            <div key={quiz.id} onClick={() => startQuiz(quiz.id)} className="quiz-card">
-              <div className="quiz-card-title">{quiz.title}</div>
-              <div className="quiz-card-desc">{quiz.description}</div>
-              <div className="quiz-card-meta">{quiz.questions.length} questions</div>
-            </div>
-          ))}
+          {QUIZ_BANK.map(quiz => {
+            const stats = quizStats[quiz.id];
+            const bestClass = stats
+              ? (stats.best >= 90 ? "stat-excellent"
+                : stats.best >= 75 ? "stat-great"
+                : stats.best >= 60 ? "stat-good"
+                : "stat-poor")
+              : "";
+            return (
+              <div key={quiz.id} onClick={() => startQuiz(quiz.id)} className={`quiz-card ${stats ? "quiz-card-completed" : ""}`}>
+                {stats && <div className="quiz-card-completed-badge">✓ Completed</div>}
+                <div className="quiz-card-title">{quiz.title}</div>
+                <div className="quiz-card-desc">{quiz.description}</div>
+                <div className="quiz-card-meta">{quiz.questions.length} questions</div>
+                {stats && (
+                  <div className="quiz-card-stats">
+                    <span className={`quiz-card-best ${bestClass}`}>Best: {stats.best}%</span>
+                    <span className="quiz-card-attempts">{stats.attempts} attempt{stats.attempts === 1 ? "" : "s"}</span>
+                    <span className="quiz-card-last">Last: {stats.lastPct}%</span>
+                    <button className="quiz-card-reset" onClick={(e) => resetQuizStats(quiz.id, e)} title="Clear saved results">✕</button>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     );
@@ -7903,7 +7957,7 @@ export default function App() {
             {!isDone && <button onClick={submit} className="btn btn-primary" disabled={curSel.length === 0}>Check answer</button>}
             {isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-primary">Next →</button>}
             {!isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-secondary">Skip →</button>}
-            {allDone && cur === Qs.length - 1 && <button onClick={() => setShowResults(true)} className="btn btn-success">See results</button>}
+            {allDone && cur === Qs.length - 1 && <button onClick={() => { recordAttempt(activeQuizId, Math.round(correctCount / Qs.length * 100)); setShowResults(true); }} className="btn btn-success">See results</button>}
           </div>
 
           <div className="dot-navigation">

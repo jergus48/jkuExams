@@ -620,3 +620,62 @@ body {
 /* Make math inside questions/options scale with surrounding text */
 .question-text .katex,
 .option-button .katex { font-size: 1em; }
+
+/* === Quiz card: completed state + best/attempts stats === */
+.quiz-card { position: relative; }
+.quiz-card-completed { border-color: var(--correct-border); }
+.quiz-card-completed-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--correct-bg);
+  color: var(--correct-text);
+  border: 1px solid var(--correct-border);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.quiz-card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-color);
+  font-size: 0.82rem;
+}
+.quiz-card-best {
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: var(--card-hover-bg);
+}
+.quiz-card-best.stat-excellent { background: var(--correct-bg); color: var(--correct-text); }
+.quiz-card-best.stat-great     { background: rgba(59, 130, 246, 0.15); color: var(--primary-color); }
+.quiz-card-best.stat-good      { background: rgba(234, 179, 8, 0.15); color: #b45309; }
+.dark-theme .quiz-card-best.stat-good { color: #fbbf24; }
+.quiz-card-best.stat-poor      { background: var(--wrong-bg); color: var(--wrong-text); }
+.quiz-card-attempts, .quiz-card-last {
+  color: var(--text-muted);
+}
+.quiz-card-reset {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  line-height: 1;
+  padding: 0;
+  transition: all 0.15s;
+}
+.quiz-card-reset:hover {
+  background: var(--wrong-bg);
+  color: var(--wrong-text);
+  border-color: var(--wrong-border);
+}
