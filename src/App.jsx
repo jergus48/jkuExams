@@ -3017,7 +3017,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "λ₂ = 10·λ₁; the Bayes risk under λ₂ is 10 times that under λ₁, so the numerical values differ."
       },
       {
         "context": "Consider the following two loss functions (cost matrices) (where \\(\\lambda_{ij}\\) is the cost of predicting class \\(i\\) if the true class is \\(j\\)): $$\\lambda_1 = \\begin{pmatrix}0 & 1\\\\ 1 & 0\\end{pmatrix} \\qquad \\lambda_2 = \\begin{pmatrix}0 & 10\\\\ 10 & 0\\end{pmatrix}$$",
@@ -3029,7 +3030,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Both are symmetric 0-off-diagonal loss matrices; the decision rule R(α₁|x) < R(α₂|x) simplifies to the same comparison of P(ω₁|x) vs P(ω₂|x) under either cost."
       },
       {
         "context": "The k-Nearest-Neighbor Classifier. Which of the following statements is true (assume a numeric feature space, and Euclidean distance as our distance measure):",
@@ -3041,7 +3043,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "k=1 NN memorises the training data perfectly — it achieves 0 training error but can have very high test error, which is a classic form of overfitting."
       },
       {
         "context": "The k-Nearest-Neighbor Classifier. Which of the following statements is true (assume a numeric feature space, and Euclidean distance as our distance measure):",
@@ -3053,7 +3056,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Larger k smooths the decision boundary by averaging more neighbours, reducing variance and the danger of overfitting."
       },
       {
         "context": "The k-Nearest-Neighbor Classifier. Which of the following statements is true (assume a numeric feature space, and Euclidean distance as our distance measure):",
@@ -3065,7 +3069,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Higher k produces a smoother, more global classifier, which increases bias (the model is less responsive to local structure)."
       },
       {
         "context": "The k-Nearest-Neighbor Classifier. Which of the following statements is true (assume a numeric feature space, and Euclidean distance as our distance measure):",
@@ -3077,7 +3082,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Redundant features increase the weight of that feature dimension in Euclidean distance, changing the set of nearest neighbours and thus predictions."
       },
       {
         "context": "The k-Nearest-Neighbor Classifier. Which of the following statements is true (assume a numeric feature space, and Euclidean distance as our distance measure):",
@@ -3089,15 +3095,16 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Euclidean distance is not scale-invariant; multiplying a feature by 1000 dominates the distance calculation, changing nearest-neighbour relationships."
       },
       {
         "context": "Decision Tree Learning. Consider the following simple one-dimensional (i.e., one numeric feature X only) training set in a two-class classification task. Along the X axis the labels appear in this order: `+ + - + + + - + - - -`.",
         "q": "What is the minimum depth of a decision tree with binary splits on X that has an error of 0 on this dataset? (The depth of a tree that only consists of 1 node (the root) is 0; the depth of an arbitrary tree is the length of its longest branch).",
-        "opts": [],
-        "ans": [],
+        "opts": ["0","1","2","3","4"],
+        "ans": [3],
         "multi": false,
-        "explanation": "The correct answer is: 3"
+        "explanation": "The minimum depth is 3. The pattern + + - + + + - + - - - requires at least 3 binary splits to separate all classes perfectly."
       },
       {
         "q": "Why can the same numeric feature be used several times along some path in a decision tree, but a symbolic feature can not?",
@@ -3116,7 +3123,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Stopping early (before pure leaves) limits tree depth, reducing variance and thus overfitting."
       },
       {
         "context": "Consider the following stop criterion for ID3: \"If a node contains \\(\\leq k\\) examples, do not further split it; turn it into a leaf that predicts the majority class in these \\(\\leq k\\) examples.\" If we make \\(k\\) larger for this stop criterion, which of the following statements are true:",
@@ -3128,7 +3136,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "A larger k means we stop splitting earlier, so training error can only stay the same or increase (not decrease) when k grows."
       },
       {
         "context": "Consider the following stop criterion for ID3: \"If a node contains \\(\\leq k\\) examples, do not further split it; turn it into a leaf that predicts the majority class in these \\(\\leq k\\) examples.\" If we make \\(k\\) larger for this stop criterion, which of the following statements are true:",
@@ -3140,7 +3149,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Increasing k reduces variance (less overfitting), but whether test error actually drops depends on whether the original tree was overfitting."
       },
       {
         "context": "Consider the following stop criterion for ID3: \"If a node contains \\(\\leq k\\) examples, do not further split it; turn it into a leaf that predicts the majority class in these \\(\\leq k\\) examples.\" If we make \\(k\\) larger for this stop criterion, which of the following statements are true:",
@@ -3152,7 +3162,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Both directions are possible: a larger k may improve generalisation (less overfit) or hurt it (more underfit), so test error can go either way."
       },
       {
         "context": "Classifier Evaluation. Consider a binary classification task over a set of classes \\(\\Omega = \\{\\omega_1, \\omega_2\\}\\). Which of the following statements on precision and recall are true?",
@@ -3164,7 +3175,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "If all class ω₁ examples are correctly labelled and no ω₂ example is mislabelled as ω₁, both Recall = 1.0 and Precision = 1.0 hold simultaneously."
       },
       {
         "context": "Classifier Evaluation. Consider a binary classification task over a set of classes \\(\\Omega = \\{\\omega_1, \\omega_2\\}\\). Which of the following statements on precision and recall are true?",
@@ -3176,7 +3188,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Recall = 1.0 requires TP > 0; Precision = TP/(TP+FP). If TP > 0, Precision > 0 always, so Precision = 0.0 is impossible when Recall = 1.0."
       },
       {
         "context": "Classifier Evaluation. Consider a binary classification task over a set of classes \\(\\Omega = \\{\\omega_1, \\omega_2\\}\\). Which of the following statements on precision and recall are true?",
@@ -3188,7 +3201,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Higher recall does not necessarily imply lower precision; both can improve or worsen independently depending on the classifier and dataset."
       },
       {
         "context": "Which of the following statements on ROC analysis are true?",
@@ -3200,7 +3214,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "A horizontal line segment in ROC space means increasing FPR with constant TPR, which is achievable by randomised classifiers that only add negative examples to the positive predictions."
       },
       {
         "context": "Which of the following statements on ROC analysis are true?",
@@ -3212,7 +3227,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Accuracy is constant along iso-performance lines (diagonals with slope P/N in ROC space). Multiple ROC convex hull points can lie on the same iso-performance line."
       },
       {
         "context": "Which of the following statements on ROC analysis are true?",
@@ -3224,7 +3240,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Equal accuracy means N·ΔFPR = P·ΔTPR, so ΔTPR = (N/P)·ΔFPR. Only when P = N does ΔTPR = ΔFPR."
       },
       {
         "q": "If we multiply every entry in the cost matrix by 2.0, ...",
@@ -3236,7 +3253,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Multiplying all costs by a constant k scales all conditional risks uniformly; the action with minimum risk remains the same."
       },
       {
         "q": "Would you rather be in ROC heaven or in ROC hell?",
@@ -3255,7 +3273,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "L₁ is the RMSE — always non-negative, differentiable (except at 0), and penalises large errors. It is a valid and commonly used loss."
       },
       {
         "context": "Neural Networks. Consider the following three possible loss functions for a regression problem, where \\(y_i\\) is the true target value for input example \\(x_i\\) and \\(\\hat{y}(x_i)\\) is the value predicted by the model from input \\(x_i\\): $$L_1 = \\sqrt{\\frac{1}{|\\mathcal{D}|}\\sum_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))^2}$$ $$L_2 = \\sum_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))$$ $$L_3 = \\max_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))^2$$ Which of these would be meaningful loss functions for a regression problem (and for a feed-forward neural network)?",
@@ -3267,7 +3286,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "L₂ sums signed residuals y_i − ŷ(x_i); positive and negative errors cancel out, so the loss can be zero even for a terrible model."
       },
       {
         "context": "Neural Networks. Consider the following three possible loss functions for a regression problem, where \\(y_i\\) is the true target value for input example \\(x_i\\) and \\(\\hat{y}(x_i)\\) is the value predicted by the model from input \\(x_i\\): $$L_1 = \\sqrt{\\frac{1}{|\\mathcal{D}|}\\sum_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))^2}$$ $$L_2 = \\sum_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))$$ $$L_3 = \\max_{x_i\\in\\mathcal{D}}(y_i - \\hat{y}(x_i))^2$$ Which of these would be meaningful loss functions for a regression problem (and for a feed-forward neural network)?",
@@ -3279,7 +3299,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "L₃ is the max squared error — always non-negative and differentiable. However, gradients only flow through the single worst example, making it problematic for backpropagation (already noted in the next question)."
       },
       {
         "q": "Which of these three loss functions could be problematic for the backpropagation algorithm, and why? Answer in one sentence!",
@@ -3298,7 +3319,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "More hidden layers increase the model's expressive capacity, allowing it to fit more complex functions — this reduces inductive bias."
       },
       {
         "q": "And how does add an additional hidden layer affect the variance of the network model?",
@@ -3310,7 +3332,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "More parameters and higher capacity make the model more sensitive to specific training data, increasing variance."
       },
       {
         "context": "Deep Learning. Which of the following statements are true:",
@@ -3322,7 +3345,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Deep learning is a subfield of machine learning focused on deep neural networks; it is inspired by, but does not attempt to simulate, biological neurons."
       },
       {
         "context": "Deep Learning. Which of the following statements are true:",
@@ -3334,7 +3358,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "ANNs take input tensors (scalars, vectors, matrices, or higher-order tensors) and produce output tensors through a series of parameterised transformations."
       },
       {
         "context": "Deep Learning. Which of the following statements are true:",
@@ -3346,7 +3371,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "The vast majority of parameters (weights and biases) are learned automatically via backpropagation; only hyperparameters are specified by hand."
       },
       {
         "context": "In the two-player game \"Connect Four\", players take turns inserting a chip of their player color (which is either red or yellow) into one of the board's seven slots, where it falls down to occupy the bottom-most free window. The game ends if one of the players manages to fill four connected windows (horizontally, vertically or diagonally) with their own color, or if the board is full. (The page shows a photo of a standard yellow Connect Four board with red and yellow chips already inserted.) You want to train a deep neural network to play the yellow player, by teaching it to look at the current board state (= network input) and suggest a move (= network output).",
@@ -3382,7 +3408,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Convolutional layers exploit spatial locality and translation invariance — useful for grid-structured inputs like the 6×7 Connect Four board."
       },
       {
         "q": "What was the worst / most difficult part of the ML group project?",
@@ -7070,7 +7097,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Setting λ_ij = 0 for i=j and λ_ij = 1 for i≠j (the 0-1 loss) reduces minimum-risk to MAP classification."
       },
       {
         "context": "Bayesian Classification. Consider minimum risk classification as introduced in the lecture, with the Conditional Risk formula: $$R(\\alpha_i \\mid x) = \\sum_{j=1}^{c} \\lambda(\\alpha_i \\mid \\omega_j) P(\\omega_j \\mid x)$$ Assume we have \\(\\Omega = \\{\\omega_1, \\ldots, \\omega_c\\}\\), a list of actions \\(\\{\\alpha_i = \\text{\"predict class } i\\text{\"}\\}\\), a given cost function \\(\\Lambda = \\{\\lambda_{ij} = \\lambda(\\alpha_i \\mid \\omega_j)\\}\\), and known probability distributions \\(P(\\Omega)\\) and \\(P(X \\mid \\Omega)\\). Which of the following statements are correct?",
@@ -7082,7 +7110,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "The cost function changes decision thresholds; this cannot generally be replicated by modifying P(X|ω_j), which are fixed likelihood functions determined by the data."
       },
       {
         "context": "Bayesian Classification. Consider minimum risk classification as introduced in the lecture, with the Conditional Risk formula: $$R(\\alpha_i \\mid x) = \\sum_{j=1}^{c} \\lambda(\\alpha_i \\mid \\omega_j) P(\\omega_j \\mid x)$$ Assume we have \\(\\Omega = \\{\\omega_1, \\ldots, \\omega_c\\}\\), a list of actions \\(\\{\\alpha_i = \\text{\"predict class } i\\text{\"}\\}\\), a given cost function \\(\\Lambda = \\{\\lambda_{ij} = \\lambda(\\alpha_i \\mid \\omega_j)\\}\\), and known probability distributions \\(P(\\Omega)\\) and \\(P(X \\mid \\Omega)\\). Which of the following statements are correct?",
@@ -7094,7 +7123,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "There are c possible actions and c possible classes, so Λ has c rows and c columns — a c×c square (quadratic) matrix."
       },
       {
         "context": "Bayesian Classification. Consider minimum risk classification as introduced in the lecture, with the Conditional Risk formula: $$R(\\alpha_i \\mid x) = \\sum_{j=1}^{c} \\lambda(\\alpha_i \\mid \\omega_j) P(\\omega_j \\mid x)$$ Assume we have \\(\\Omega = \\{\\omega_1, \\ldots, \\omega_c\\}\\), a list of actions \\(\\{\\alpha_i = \\text{\"predict class } i\\text{\"}\\}\\), a given cost function \\(\\Lambda = \\{\\lambda_{ij} = \\lambda(\\alpha_i \\mid \\omega_j)\\}\\), and known probability distributions \\(P(\\Omega)\\) and \\(P(X \\mid \\Omega)\\). Which of the following statements are correct?",
@@ -7106,7 +7136,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Bayes error is the minimum achievable error under the 0-1 loss. Under a different cost function, the expected risk has a different numerical value and interpretation."
       },
       {
         "context": "Bayesian Classification. Consider minimum risk classification as introduced in the lecture, with the Conditional Risk formula: $$R(\\alpha_i \\mid x) = \\sum_{j=1}^{c} \\lambda(\\alpha_i \\mid \\omega_j) P(\\omega_j \\mid x)$$ Assume we have \\(\\Omega = \\{\\omega_1, \\ldots, \\omega_c\\}\\), a list of actions \\(\\{\\alpha_i = \\text{\"predict class } i\\text{\"}\\}\\), a given cost function \\(\\Lambda = \\{\\lambda_{ij} = \\lambda(\\alpha_i \\mid \\omega_j)\\}\\), and known probability distributions \\(P(\\Omega)\\) and \\(P(X \\mid \\Omega)\\). Which of the following statements are correct?",
@@ -7118,7 +7149,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Minimum-risk decision boundaries are defined wherever two conditional risks are equal, which can occur in any feature space dimensionality."
       },
       {
         "context": "Bayesian Classification / Minimum Risk. Consider the same setup as above with cost function \\(\\Lambda\\) and conditional risk \\(R(\\alpha_i \\mid x) = \\sum_j \\lambda_{ij} P(\\omega_j \\mid x)\\).",
@@ -7164,7 +7196,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "The diagonal line TPR = FPR passes through (0,0) and (1,1) and represents a random classifier — it is a valid iso-performance line."
       },
       {
         "context": "Classifier Evaluation. Consider a two-class classification problem with classes p and n, and a test set T with 1000 test examples and class distribution P:N = 3:7. Which of the following statements are true?",
@@ -7176,7 +7209,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Precision = TP/(TP+FP) and Recall = TP/(TP+FN) are independent quantities; they generally do not sum to 1."
       },
       {
         "context": "Classifier Evaluation. Consider a two-class classification problem with classes p and n, and a test set T with 1000 test examples and class distribution P:N = 3:7. Which of the following statements are true?",
@@ -7188,7 +7222,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Accuracy = (TP + TN)/(P+N). With fixed TPR = TP/P, different FPR changes TN = N·(1−FPR), hence changing total correct predictions and accuracy."
       },
       {
         "context": "Classifier Evaluation. Consider a two-class classification problem with classes p and n, and a test set T with 1000 test examples and class distribution P:N = 3:7. Which of the following statements are true?",
@@ -7200,7 +7235,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Different (TPR, FPR) pairs can yield the same accuracy on an imbalanced dataset; accuracy is constant along iso-performance lines, which cross multiple ROC positions."
       },
       {
         "context": "Decision Trees. Consider the following alternative criterion (instead of information gain) for evaluating a feature \\(A\\) for splitting in the ID3 algorithm, in a binary classification task with two classes \\(\\Omega = \\{+, -\\}\\) and \\(p_i\\) (\\(n_i\\)) = number of pos (neg) examples in \\(D_i\\), the \\(i\\)-th branch: $$G_D(A) = \\sum_{v_i \\in A} \\frac{|D_i|}{|D|} \\cdot \\frac{|p_i - n_i|}{p_i + n_i}$$",
@@ -7225,7 +7261,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "When a branch is pure, |p_i − n_i|/(p_i+n_i) = 1; the weighted sum is maximised at 1.0 — consistent with the note that G_D is already documented to equal 1.0 for a perfect feature."
       },
       {
         "context": "Decision Trees. Consider the following alternative criterion (instead of information gain) for evaluating a feature \\(A\\) for splitting in the ID3 algorithm, in a binary classification task with two classes \\(\\Omega = \\{+, -\\}\\) and \\(p_i\\) (\\(n_i\\)) = number of pos (neg) examples in \\(D_i\\), the \\(i\\)-th branch: $$G_D(A) = \\sum_{v_i \\in A} \\frac{|D_i|}{|D|} \\cdot \\frac{|p_i - n_i|}{p_i + n_i}$$",
@@ -7255,7 +7292,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "ID3-S terminates and produces a consistent classifier (depth-1 decision stump); it is a valid, if restricted, learning algorithm."
       },
       {
         "context": "Decision Trees — ID3-S variant. Consider a variant \"ID3-S\" of the ID3 algorithm that learns only trees that are at most one level deep. It chooses a feature for the root, using the Information Gain heuristic, and labels each of the resulting nodes with the class that is most frequent in that node (in case of a tie, it randomly chooses between one of the competing classes). Which of the following statements about ID3-S are true:",
@@ -7267,7 +7305,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "If a single feature perfectly separates all training examples into pure branches, the depth-1 tree achieves 100% training accuracy."
       },
       {
         "context": "Decision Trees — ID3-S variant. Consider a variant \"ID3-S\" of the ID3 algorithm that learns only trees that are at most one level deep. It chooses a feature for the root, using the Information Gain heuristic, and labels each of the resulting nodes with the class that is most frequent in that node (in case of a tie, it randomly chooses between one of the competing classes). Which of the following statements about ID3-S are true:",
@@ -7279,7 +7318,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Limiting depth to 1 severely restricts the hypothesis space — the learner cannot express non-linear or multi-feature patterns, which is the definition of high inductive bias."
       },
       {
         "context": "Decision Trees — ID3-S variant. Consider a variant \"ID3-S\" of the ID3 algorithm that learns only trees that are at most one level deep. It chooses a feature for the root, using the Information Gain heuristic, and labels each of the resulting nodes with the class that is most frequent in that node (in case of a tie, it randomly chooses between one of the competing classes). Which of the following statements about ID3-S are true:",
@@ -7291,7 +7331,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Ensembles of weak learners (stumps) can overcome individual bias via voting, as demonstrated by AdaBoost and random forests of decision stumps."
       },
       {
         "context": "Neural Networks and Deep Learning. Consider the simple neural network from the lecture slides, with 1 input unit (for a feature \\(x\\)), one hidden unit, and one output unit \\(y\\), where the hidden unit uses tanh as activation function, and the output unit \\(y\\) uses the identity function (i.e., just outputs what comes in as net input). Also assume that the loss function is the sum squared error. Which of the following statements are correct for this network?",
@@ -7303,7 +7344,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "The network maps a scalar input x to a scalar output y, so each training example is an (x, y) pair of numbers."
       },
       {
         "context": "Neural Networks and Deep Learning. Consider the simple neural network from the lecture slides, with 1 input unit (for a feature \\(x\\)), one hidden unit, and one output unit \\(y\\), where the hidden unit uses tanh as activation function, and the output unit \\(y\\) uses the identity function (i.e., just outputs what comes in as net input). Also assume that the loss function is the sum squared error. Which of the following statements are correct for this network?",
@@ -7315,7 +7357,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "The identity output is unbounded; replacing it with tanh restricts predictions to (−1, 1) and changes gradients during backpropagation — a significant difference."
       },
       {
         "context": "Neural Networks and Deep Learning. Consider the simple neural network from the lecture slides, with 1 input unit (for a feature \\(x\\)), one hidden unit, and one output unit \\(y\\), where the hidden unit uses tanh as activation function, and the output unit \\(y\\) uses the identity function (i.e., just outputs what comes in as net input). Also assume that the loss function is the sum squared error. Which of the following statements are correct for this network?",
@@ -7327,7 +7370,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "The bias output value is a design choice; 2.0 is equivalent to a standard bias with its weights halved. The network remains fully valid."
       },
       {
         "context": "Neural Networks and Deep Learning. Consider the simple neural network from the lecture slides, with 1 input unit (for a feature \\(x\\)), one hidden unit, and one output unit \\(y\\), where the hidden unit uses tanh as activation function, and the output unit \\(y\\) uses the identity function (i.e., just outputs what comes in as net input). Also assume that the loss function is the sum squared error. Which of the following statements are correct for this network?",
@@ -7339,7 +7383,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "With bias output 2.0, the effective bias contribution doubles for any given weight; optimal weights that minimise SSE will therefore be different (halved bias weights achieve the same fit)."
       },
       {
         "context": "Neural Networks and Deep Learning. Consider the simple neural network from the lecture slides, with 1 input unit (for a feature \\(x\\)), one hidden unit, and one output unit \\(y\\), where the hidden unit uses tanh as activation function, and the output unit \\(y\\) uses the identity function (i.e., just outputs what comes in as net input). Also assume that the loss function is the sum squared error. Which of the following statements are correct for this network?",
@@ -7364,7 +7409,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "The single logistic output with threshold ŷ ≥ 0.5 defines one decision boundary, partitioning the feature space into exactly two regions."
       },
       {
         "context": "Neural Networks — Binary Classification. Now assume we use the above simple network for a binary classification task. We encode the class labels as 1 and 0, equip the output unit \\(y\\) with a logistic activation function, and use the Binary Cross-Entropy as the loss function: $$CE(x_i) = -y_i \\log \\hat{y}_i - (1 - y_i) \\log(1 - \\hat{y}_i)$$ where \\(y_i\\) is the true class of example \\(x_i\\) (0 or 1), and \\(\\hat{y}_i\\) is the value predicted by output unit \\(y\\). An example \\(x_i\\) is classified as class 1 iff \\(\\hat{y}_i \\geq 0.5\\). Which of the following statements are correct?",
@@ -7376,7 +7422,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Binary cross-entropy is defined only on the final output prediction ŷ_i and the true label y_i; adding hidden layers does not add terms to the CE formula."
       },
       {
         "context": "Neural Networks — Binary Classification. Now assume we use the above simple network for a binary classification task. We encode the class labels as 1 and 0, equip the output unit \\(y\\) with a logistic activation function, and use the Binary Cross-Entropy as the loss function: $$CE(x_i) = -y_i \\log \\hat{y}_i - (1 - y_i) \\log(1 - \\hat{y}_i)$$ where \\(y_i\\) is the true class of example \\(x_i\\) (0 or 1), and \\(\\hat{y}_i\\) is the value predicted by output unit \\(y\\). An example \\(x_i\\) is classified as class 1 iff \\(\\hat{y}_i \\geq 0.5\\). Which of the following statements are correct?",
@@ -7388,7 +7435,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "CE is minimised when ŷ_i matches the true label (0 or 1). With balanced data, the network learns to predict close to 1 for class-1 inputs and close to 0 for class-0 inputs."
       },
       {
         "context": "Neural Networks — Binary Classification. Now assume we use the above simple network for a binary classification task. We encode the class labels as 1 and 0, equip the output unit \\(y\\) with a logistic activation function, and use the Binary Cross-Entropy as the loss function: $$CE(x_i) = -y_i \\log \\hat{y}_i - (1 - y_i) \\log(1 - \\hat{y}_i)$$ where \\(y_i\\) is the true class of example \\(x_i\\) (0 or 1), and \\(\\hat{y}_i\\) is the value predicted by output unit \\(y\\). An example \\(x_i\\) is classified as class 1 iff \\(\\hat{y}_i \\geq 0.5\\). Which of the following statements are correct?",
@@ -7400,7 +7448,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Overfitting is caused by too many free parameters relative to training data, not by the non-linearity of the loss function."
       },
       {
         "context": "Unsupervised Learning / k-means. Consider the task of k-means clustering with \\(N\\) observations described in terms of \\(D\\) numeric features, with the Euclidean distance as distance measure. Assume we have set the number \\(k\\) of clusters to \\(k = 5\\). Which of the following statements are correct?",
@@ -7412,7 +7461,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "BIC penalises the number of free parameters p. Each GMM component has a D-dimensional mean vector, so p grows with D, increasing the BIC penalty."
       },
       {
         "context": "Unsupervised Learning / k-means. Consider the task of k-means clustering with \\(N\\) observations described in terms of \\(D\\) numeric features, with the Euclidean distance as distance measure. Assume we have set the number \\(k\\) of clusters to \\(k = 5\\). Which of the following statements are correct?",
@@ -7424,7 +7474,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "k can be any value from 1 to N; there is no lower bound based on the data size."
       },
       {
         "context": "Unsupervised Learning / k-means. Consider the task of k-means clustering with \\(N\\) observations described in terms of \\(D\\) numeric features, with the Euclidean distance as distance measure. Assume we have set the number \\(k\\) of clusters to \\(k = 5\\). Which of the following statements are correct?",
@@ -7436,7 +7487,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "BIC is defined for probabilistic (likelihood-based) models. Pure k-means has no likelihood; it must be reinterpreted as a Gaussian mixture model to compute P(data | model)."
       },
       {
         "context": "Unsupervised Learning / k-means. Consider the task of k-means clustering with \\(N\\) observations described in terms of \\(D\\) numeric features, with the Euclidean distance as distance measure. Assume we have set the number \\(k\\) of clusters to \\(k = 5\\). Which of the following statements are correct?",
@@ -7448,7 +7500,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "MQE = mean squared distance to centroid. A small cluster with spread-out members can have higher MQE than a large, compact cluster."
       },
       {
         "context": "Unsupervised Learning / k-means. Consider the task of k-means clustering with \\(N\\) observations described in terms of \\(D\\) numeric features, with the Euclidean distance as distance measure. Assume we have set the number \\(k\\) of clusters to \\(k = 5\\). Which of the following statements are correct?",
@@ -7460,7 +7513,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Normalisation changes Euclidean distances, which alters which centroid each point is closest to — changing both the cluster assignments and the MQE."
       },
       {
         "context": "Unsupervised Learning — Gaussian Mixture Models. Consider a Gaussian Mixture Model (GMM) with \\(k\\) components that was learned from a dataset of \\(N\\) examples over a \\(D\\)-dimensional numeric feature space.",
@@ -7490,7 +7544,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Transition probabilities are not required to be symmetric. a_ij = 0 means state i cannot transition to j; a_ji can remain positive without violating any Markov property."
       },
       {
         "context": "Markov Models. Consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model and a uniform prior state distribution \\(\\pi = [1/3, 1/3, 1/3]\\): $$A = \\begin{pmatrix} 0.4 & 0.3 & 0.3 \\\\ 0.2 & 0.6 & 0.2 \\\\ 0.1 & 0.1 & 0.8 \\end{pmatrix}$$ Which of the following statements are true?",
@@ -7515,7 +7570,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           0
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Rows of a Markov transition matrix must sum to 1, so decreasing one entry requires increasing at least one other entry in the same row."
       },
       {
         "context": "Markov Models. Consider a simple Markov process with 3 states (S1, S2, S3), the following state transition model and a uniform prior state distribution \\(\\pi = [1/3, 1/3, 1/3]\\): $$A = \\begin{pmatrix} 0.4 & 0.3 & 0.3 \\\\ 0.2 & 0.6 & 0.2 \\\\ 0.1 & 0.1 & 0.8 \\end{pmatrix}$$ Which of the following statements are true?",
@@ -7607,7 +7663,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "P(S₂|M) includes an extra junction transition factor a_{s₁₀,s₁} that differs between M_A and M_B; this extra factor can flip the MAP decision even if the original S favoured one city."
       },
       {
         "context": "Markov Models — Two-City Classification. Consider the classification task of identifying one of two cities A or B, based on a sequence of weather observations. We have learned two Markov models \\(M_A\\) and \\(M_B\\) that model the weather in cities A and B, respectively. Now, given a sequence \\(S\\) of 10 consecutive weather observations, you want to decide which of the two cities this sequence is from, based on the MAP principle. Which of the following statements are true?",
@@ -7619,7 +7676,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "Even a single-state sequence can be classified using the prior P(city) and the initial state probability π(s₁) from each model."
       },
       {
         "context": "Markov Models — Two-City Classification. Consider the classification task of identifying one of two cities A or B, based on a sequence of weather observations. We have learned two Markov models \\(M_A\\) and \\(M_B\\) that model the weather in cities A and B, respectively. Now, given a sequence \\(S\\) of 10 consecutive weather observations, you want to decide which of the two cities this sequence is from, based on the MAP principle. Which of the following statements are true?",
@@ -7631,7 +7689,8 @@ const QUIZ_BANK_OLD = [
         "ans": [
           1
         ],
-        "multi": false
+        "multi": false,
+        "explanation": "The Markov model captures transition probabilities (sequential structure). Two sequences with identical state counts but different orderings can have very different likelihoods under the model."
       }
     ]
   }
