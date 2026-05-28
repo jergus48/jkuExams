@@ -4402,7 +4402,7 @@ const QUIZ_BANK = [
         "multi": false
       },
       {
-        "q": "Die richtigen Antworten sind: It means that the model outputs are getting farther away from the true target values., It means that the model is not learning properly. What is a hyperparameter in the setting of machine learning?",
+        "q": " What is a hyperparameter in the setting of machine learning?",
         "opts": [
           "It represents an internal model parameter that is adjusted during training.",
           "It represents a user-specified parameter that typically influences the model and/or training procedure.",
@@ -4547,7 +4547,7 @@ const QUIZ_BANK = [
         "multi": false
       },
       {
-        "q": "Die richtigen Antworten sind: An instance of this class would produce infinitely many samples., A sample returned by the __getitem__ method always contains the index and a randomly generated number. What is the output of the following code? import torch class MyModule(torch.nn.Module): def __init__(self, a): self.a = a def forward(self, x): output = x + self.a return output my_module = MyModule(2.0) c = my_module(5.0)print(c)",
+        "q": "What is the output of the following code? import torch class MyModule(torch.nn.Module): def __init__(self, a): self.a = a def forward(self, x): output = x + self.a return output my_module = MyModule(2.0) c = my_module(5.0)print(c)",
         "opts": [
           "It raises an exception because the forward method is not called.",
           "It raises an exception because super().__init__() is missing in the __init__ method.",
@@ -4578,7 +4578,7 @@ const QUIZ_BANK = [
         "multi": true
       },
       {
-        "q": "Die richtigen Antworten sind: Flipping horizontally, Applying input dropout, Adding slight noise Ordinal data can be described as:",
+        "q": "Ordinal data can be described as:",
         "opts": [
           "Quantitative data with mathematical meaning but without a natural ordering.",
           "Qualitative data without mathematical meaning.",
@@ -4606,7 +4606,7 @@ const QUIZ_BANK = [
         "multi": false
       },
       {
-        "q": "Die richtigen Antworten sind: Monitoring might help in finding issues during training., Monitoring might aid in determining over- or underfitting. torch.utils.data.Subset can be used to ...",
+        "q": "torch.utils.data.Subset can be used to ...",
         "opts": [
           "... generate a Dataset from a subset of the original Dataset according to a list of indices.",
           "... find a good subset of the input features, e.g., for dimensionality reduction.",

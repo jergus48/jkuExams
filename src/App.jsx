@@ -2695,16 +2695,17 @@ const QUIZ_BANK_OLD = [
   },
   {
     "id": "ss2023",
-    "title": "ML Exam — JKU June 2023",
+    "title": "Python Exam 2 — June 2023",
     "description": "Bayesian classification, version control, early stopping, PyTorch submodules",
     "questions": [
       {
-        "q": "Consider the following Dataset implementation: import numpy as np from torch.utils.data import Dataset class MyDataset(Dataset): def __init__(self, seed): self.rng = np.random.default_rng(seed) def __getitem__(self, index): return self.rng.uniform(size=(5,)) Which of the following statements are true?",
+        "q": "Which of the following statements are true?",
+        "context": "Consider the following Dataset implementation:\n```\nimport numpy as np\nfrom torch.utils.data import Dataset\n\nclass MyDataset(Dataset):\n    def __init__(self, seed):\n        self.rng = np.random.default_rng(seed)\n    def __getitem__(self, index):\n        return self.rng.uniform(size=(5,))\n```",
         "opts": [
           "An instance of this class would produce infinitely many samples.",
-          "In a multi-processed data loading setting, the returned samples might not be reproducible because the seed of the",
+          "In a multi-processed data loading setting, the returned samples might not be reproducible because the seed of the random number generator is set only in the __init__ method.",
           "The implementation is incorrect since the __getitem__ method should return a PyTorch tensor and not a NumPy array.",
-          "The __len__ method should be implemented if it is intended to be used in combination with a default DataLoader"
+          "The __len__ method should be implemented if it is intended to be used in combination with a default DataLoader (with default Sampler)."
         ],
         "ans": [
           0,
@@ -2714,7 +2715,7 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "setting, the returned samples might not be reproducible because the seed of the random number generator is set only in the __init__ method., The __len__ method should be implemented if it is intended to be used in combination with a default DataLoader (with default Sampler). Which of the following are benefits of a version control system (VCS) such as git?",
+        "q": "Which of the following are benefits of a version control system (VCS) such as git?",
         "opts": [
           "Efficient tracking of files and their changes.",
           "Automatic integration of unit tests.",
@@ -2729,7 +2730,8 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "The correct answer is: Determine the constant for normalization on the training data and apply it also to the validation and test data. Assume you have the following binary confusion matrix: Predicted positive negative ------------------------------------ Actual positive | 30 0 | negative | 5 10 | ------------------------------------ Which of the following statements are correct?",
+        "q": "Which of the following statements are correct?",
+        "context": "Assume you have the following binary confusion matrix:\n```\n             Predicted\n              pos   neg\n            +-----+-----+\nActual  pos |  30 |   0 |\n        neg |   5 |  10 |\n            +-----+-----+\n```",
         "opts": [
           "The total number of samples is 45.",
           "The used model is more likely to predict the negative class.",
@@ -2743,7 +2745,8 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "Assume you apply the following PyTorch image transformation to some example RGB image: transforms.Compose([ transforms.Grayscale(), transforms.RandomHorizontalFlip(0.5), transforms.RandomVerticalFlip(0.5), transforms.ToTensor() ]) Which of the following statements are correct?",
+        "q": "Which of the following statements are correct?",
+        "context": "Assume you apply the following PyTorch image transformation to some example RGB image:\n```\ntransforms.Compose([\n    transforms.Grayscale(),\n    transforms.RandomHorizontalFlip(0.5),\n    transforms.RandomVerticalFlip(0.5),\n    transforms.ToTensor()\n])\n```",
         "opts": [
           "The resulting image might be both horizontally and vertically flipped.",
           "The resulting image might not be flipped at all (neither horizontally nor vertically).",
@@ -2763,7 +2766,7 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "2. Compute gradients loss.backward() 3. Reset gradients optimizer.zero_grad() 4. Update weights optimizer.step() The correct answer is: 1. Compute loss 2. Compute gradients loss.backward() 3. Update weights optimizer.step() 4. Reset gradients optimizer.zero_grad() Which of the following statements are true regarding early stopping?",
+        "q": "Which of the following statements are true regarding early stopping?",
         "opts": [
           "The stopping can be achieved by some heuristic (e.g., no validation loss improvement for a defined number of",
           "Using some validation set, early stopping can be applied to cancel/stop the training early.",
@@ -2792,7 +2795,7 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "The correct answer is: color jittering When creating minibatches and trying to stack input arrays in PyTorch (using torch.utils.data.DataLoader), it can happen that not all arrays of a batch are of the same shape. Which of the following statements are correct?",
+        "q": "When creating minibatches and trying to stack input arrays in PyTorch (using `torch.utils.data.DataLoader`), it can happen that not all arrays of a batch are of the same shape. Which of the following statements are correct?",
         "opts": [
           "Stacking can be skipped and the arrays can just be kept in a list.",
           "A DataLoader cannot actually be used in this case.",
@@ -2806,7 +2809,7 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "The correct answer is: The attribute linear_list is a plain Python list and will thus be ignored by the automatic parameter registration. Which statements regarding PyTorch's parameter registration of a torch.nn.Module are true?",
+        "q": "Which statements regarding PyTorch's parameter registration of a `torch.nn.Module` are true?",
         "opts": [
           "When assigned as attribute, a torch.nn.Parameter will automatically be registered.",
           "A torch.nn.Module must always contain at least one (trainable) parameter.",
@@ -2821,7 +2824,7 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "The correct answer is: It means that the model is able to compute outputs that are close to the true target. Consider a binary classification task where you want to classify sensors into either working (negative class) or faulty (positive class). There are roughly equally many working as faulty sensors. Which of the following evaluation metrics are appropriate for measuring the model performance?",
+        "q": "Consider a binary classification task where you want to classify sensors into either working (negative class) or faulty (positive class). There are roughly equally many working as faulty sensors. Which of the following evaluation metrics are appropriate for measuring the model performance?",
         "opts": [
           "accuracy (ACC)",
           "mean-squared error (MSE)",
@@ -2849,7 +2852,8 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "Which of the following statements are correct regarding the following hash function: def my_hash(x): return 304",
+        "q": "Which of the following statements are correct regarding the following hash function?",
+        "context": "```\ndef my_hash(x):\n    return 304\n```",
         "opts": [
           "The hash value is the same in different Python interpreter sessions.",
           "Up to 304 hash collisions can occur for unequal inputs.",
@@ -2864,7 +2868,7 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "The correct answer is: categorical data Which of the following statements are correct regarding a class that derives from torch.nn.Module?",
+        "q": "Which of the following statements are correct regarding a class that derives from `torch.nn.Module`?",
         "opts": [
           "The class must not contain other Modules.",
           "The __getitem__ method returns the training samples.",
@@ -2878,7 +2882,7 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "architecture)., The __init__ method sets up the model architecture. Which of the following are typical data normalization/scaling approaches?",
+        "q": "Which of the following are typical data normalization/scaling approaches?",
         "opts": [
           "Scaling to range [1, 2].",
           "Scaling to range [-1, 1].",
@@ -2908,7 +2912,7 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "The correct answer is: ...perform one weight update. Which of the following data augmentation techniques can be applied to image data?",
+        "q": "Which of the following data augmentation techniques can be applied to image data?",
         "opts": [
           "dropping out pixels",
           "rotating",
@@ -2957,7 +2961,7 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "method/model. Which of the following statements are true regarding loss functions in the area of supervised learning?",
+        "q": "Which of the following statements are true regarding loss functions in the area of supervised learning?",
         "opts": [
           "Depending on the task (e.g., regression vs. classification), different loss functions might be appropriate.",
           "A loss function measures the distance between the model prediction and the true target value.",
@@ -5565,7 +5569,7 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "q": "Die richtigen Antworten sind: It means that the model outputs are getting farther away from the true target values., It means that the model is not learning properly. What is a hyperparameter in the setting of machine learning?",
+        "q": "What is a hyperparameter in the setting of machine learning?",
         "opts": [
           "It represents an internal model parameter that is adjusted during training.",
           "It represents a user-specified parameter that typically influences the model and/or training procedure.",
@@ -5710,7 +5714,7 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "q": "Die richtigen Antworten sind: An instance of this class would produce infinitely many samples., A sample returned by the __getitem__ method always contains the index and a randomly generated number. What is the output of the following code? import torch class MyModule(torch.nn.Module): def __init__(self, a): self.a = a def forward(self, x): output = x + self.a return output my_module = MyModule(2.0) c = my_module(5.0)print(c)",
+        "q": "What is the output of the following code? import torch class MyModule(torch.nn.Module): def __init__(self, a): self.a = a def forward(self, x): output = x + self.a return output my_module = MyModule(2.0) c = my_module(5.0)print(c)",
         "opts": [
           "It raises an exception because the forward method is not called.",
           "It raises an exception because super().__init__() is missing in the __init__ method.",
@@ -5741,7 +5745,7 @@ const QUIZ_BANK_OLD = [
         "multi": true
       },
       {
-        "q": "Die richtigen Antworten sind: Flipping horizontally, Applying input dropout, Adding slight noise Ordinal data can be described as:",
+        "q": "Ordinal data can be described as:",
         "opts": [
           "Quantitative data with mathematical meaning but without a natural ordering.",
           "Qualitative data without mathematical meaning.",
@@ -5769,7 +5773,7 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "q": "Die richtigen Antworten sind: Monitoring might help in finding issues during training., Monitoring might aid in determining over- or underfitting. torch.utils.data.Subset can be used to ...",
+        "q": "torch.utils.data.Subset can be used to ...",
         "opts": [
           "... generate a Dataset from a subset of the original Dataset according to a list of indices.",
           "... find a good subset of the input features, e.g., for dimensionality reduction.",
@@ -7888,17 +7892,23 @@ export default function App() {
             return (
               <div key={quiz.id} onClick={() => startQuiz(quiz.id)} className={`quiz-card ${stats ? "quiz-card-completed" : ""}`}>
                 {stats && <div className="quiz-card-completed-badge">✓ Completed</div>}
-                <div className="quiz-card-title">{quiz.title}</div>
-                <div className="quiz-card-desc">{quiz.description}</div>
-                <div className="quiz-card-meta">{quiz.questions.length} questions</div>
-                {stats && (
-                  <div className="quiz-card-stats">
-                    <span className={`quiz-card-best ${bestClass}`}>Best: {stats.best}%</span>
-                    <span className="quiz-card-attempts">{stats.attempts} attempt{stats.attempts === 1 ? "" : "s"}</span>
-                    <span className="quiz-card-last">Last: {stats.lastPct}%</span>
-                    <button className="quiz-card-reset" onClick={(e) => resetQuizStats(quiz.id, e)} title="Clear saved results">✕</button>
+                <div className="quiz-card-inner">
+                  <div>
+                    <div className="quiz-card-title">{quiz.title}</div>
+                    <div className="quiz-card-desc">{quiz.description}</div>
                   </div>
-                )}
+                  <div className="quiz-card-footer">
+                    <div className="quiz-card-meta">{quiz.questions.length} questions</div>
+                    {stats && (
+                      <div className="quiz-card-stats">
+                        <span className={`quiz-card-best ${bestClass}`}>Best: {stats.best}%</span>
+                        <span className="quiz-card-attempts">{stats.attempts} attempt{stats.attempts === 1 ? "" : "s"}</span>
+                        <span className="quiz-card-last">Last: {stats.lastPct}%</span>
+                        <button className="quiz-card-reset" onClick={(e) => resetQuizStats(quiz.id, e)} title="Clear saved results">✕</button>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             );
           })}
@@ -8102,7 +8112,7 @@ export default function App() {
               />
               {tableInputs[cur].checked && q.explanation && (
                 <details className="table-answer-details">
-                  <summary></summary>
+                  <summary>Show full reference answer</summary>
                   <div className="openended-answer-body">
                     <MathText text={q.explanation} />
                   </div>
