@@ -5582,27 +5582,25 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "q": "Which of the following is the correct order of performing one weight update in PyTorch (you can assume that optimizer is a valid PyTorch optimizer object)?",
+        "q": "Which of the following is the correct order of performing one weight update in PyTorch (you can assume that `optimizer` is a valid PyTorch optimizer object)?",
         "opts": [
-          "1. Compute loss",
-          "1. Compute loss",
-          "1. Compute loss",
-          "1. Reset gradients optimizer.zero_grad()"
+          "1. Compute loss  2. Compute gradients `loss.backward()`  3. Update weights `optimizer.step()`  4. Reset gradients `optimizer.zero_grad()`",
+          "1. Compute loss  2. Compute gradients `loss.backward()`  3. Reset gradients `optimizer.zero_grad()`  4. Update weights `optimizer.step()`",
+          "1. Compute loss  2. Update weights `optimizer.step()`  3. Compute gradients `loss.backward()`  4. Reset gradients `optimizer.zero_grad()`",
+          "1. Reset gradients `optimizer.zero_grad()`  2. Compute loss  3. Update weights `optimizer.step()`  4. Compute gradients `loss.backward()`"
         ],
         "ans": [
-          0,
-          1,
-          2
+          0
         ],
-        "multi": true
+        "multi": false
       },
       {
-        "q": "2. Compute gradients loss.backward() 3. Update weights optimizer.step() 4. Reset gradients optimizer.zero_grad() Assume that you have one of many arbitrary 8 bit grayscale images img (NumPy array) that you want to globally normalize (=normalization on complete data set) to the range [0, 1]. Which of the following code snippets achieve this normalization?",
+        "q": "Assume that you have one of many arbitrary 8-bit grayscale images `img` (NumPy array) that you want to globally normalize to the range [0, 1]. Which of the following code snippets achieves this normalization?",
         "opts": [
-          "(img - img.mean()) / img.std()",
-          "(img - img.min()) / (img.max() - img.min())",
-          "img * 0 + (1 * img)",
-          "img / 255"
+          "`(img - img.mean()) / img.std()`",
+          "`(img - img.min()) / (img.max() - img.min())`",
+          "`img * 0 + (1 * img)`",
+          "`img / 255`"
         ],
         "ans": [
           3
@@ -5623,7 +5621,8 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "q": "Assume that MyModule is a class properly derived from the torch.nn.Module class and tensor_a and tensor_b are PyTorch tensors. What does the following code do? my_module = MyModule()my_module(tensor_a, tensor_b)",
+        "context": "Assume that `MyModule` is a class properly derived from the `torch.nn.Module` class and `tensor_a`, `tensor_b` are PyTorch tensors.\n```python\nmy_module = MyModule()\nmy_module(tensor_a, tensor_b)\n```",
+        "q": "What does the code above do?",
         "opts": [
           "It creates an instance of MyModule. Then it applies the forward method of my_module with arguments tensor_a and tensor_b.",
           "It raises an exception, since only a single argument can be provided when calling my_module.",
@@ -5636,7 +5635,7 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "q": "tensor_b. What does independently and identically distributed (i.i.d.) mean?",
+        "q": "What does independently and identically distributed (i.i.d.) mean?",
         "opts": [
           "Each sample has the same probability distribution as the others and all are mutually dependent.",
           "Each sample has the same probability distribution as the others and all are mutually independent.",
@@ -5688,7 +5687,8 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "q": "Why is the following code problematic (you can assume correct inputs, shapes and arguments)? import torch class MyModule(torch.nn.Module): def __init__(self): super().__init__() self.conv = torch.nn.Conv2d(...) def forward(self, x): out1 = self.conv(x) ... # process \"out1\" so it can be an input to \"linear\" linear = torch.nn.Linear(...) out2 = linear(out1) return out2",
+        "context": "```python\nimport torch\n\nclass MyModule(torch.nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.conv = torch.nn.Conv2d(...)\n\n    def forward(self, x):\n        out1 = self.conv(x)\n        ...  # process \"out1\" so it can be an input to \"linear\"\n        linear = torch.nn.Linear(...)\n        out2 = linear(out1)\n        return out2\n```",
+        "q": "Why is the code above problematic (you can assume correct inputs, shapes and arguments)?",
         "opts": [
           "The submodule torch.nn.Linear is created inside the forward method rather than the __init__ method. This means that the",
           "torch.nn.Linear must be invoked before passing the data to the convolutional layer.",
@@ -5701,7 +5701,7 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "q": "that the submodule is repeatedly created in every forward call, including its random parameter initialization. The special method __getitem__ in a torch.utils.data.Dataset derived class should ...",
+        "q": "The special method `__getitem__` in a `torch.utils.data.Dataset` derived class should ...",
         "opts": [
           "... return minibatched samples.",
           "... return all samples.",
@@ -5714,7 +5714,8 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "q": "What is the output of the following code? import torch class MyModule(torch.nn.Module): def __init__(self, a): self.a = a def forward(self, x): output = x + self.a return output my_module = MyModule(2.0) c = my_module(5.0)print(c)",
+        "context": "```python\nimport torch\n\nclass MyModule(torch.nn.Module):\n    def __init__(self, a):\n        self.a = a\n\n    def forward(self, x):\n        output = x + self.a\n        return output\n\nmy_module = MyModule(2.0)\nc = my_module(5.0)\nprint(c)\n```",
+        "q": "What is the output of the code above?",
         "opts": [
           "It raises an exception because the forward method is not called.",
           "It raises an exception because super().__init__() is missing in the __init__ method.",
@@ -5727,22 +5728,18 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "q": "What is the output of the following code? import torch def function(x: torch.Tensor): return x if x.min() < 0 else x * -1 scripted_function = torch.jit.script(function)traced_function = torch.jit.trace(function, example_inputs=torch.tensor([1, 2, 3])) actual_input = torch.tensor([-4, -5, -6])print(\"s:\", scripted_function(actual_input).tolist()) print(\"t:\", traced_function(actual_input).tolist())",
+        "context": "```python\nimport torch\n\ndef function(x: torch.Tensor):\n    return x if x.min() < 0 else x * -1\n\nscripted_function = torch.jit.script(function)\ntraced_function = torch.jit.trace(function, example_inputs=torch.tensor([1, 2, 3]))\nactual_input = torch.tensor([-4, -5, -6])\nprint(\"s:\", scripted_function(actual_input).tolist())\nprint(\"t:\", traced_function(actual_input).tolist())\n```",
+        "q": "What is the output of the code above?",
         "opts": [
-          "s: [-4, -5, -6]",
-          "s: [4, 5, 6]t: [4, 5, 6]",
-          "s: [4, 5, 6]t: [1, 2, 3]",
-          "s: [4, 5, 6]t: [-1, -2, -3]",
-          "s: [-4, -5, -6]",
-          "s: [-4, -5, -6]",
-          "s: [-4, -5, -6]t: [-4, -5, -6]"
+          "s: [-4, -5, -6]  t: [4, 5, 6]",
+          "s: [4, 5, 6]  t: [4, 5, 6]",
+          "s: [4, 5, 6]  t: [1, 2, 3]",
+          "s: [-4, -5, -6]  t: [-4, -5, -6]"
         ],
         "ans": [
-          0,
-          4,
-          5
+          0
         ],
-        "multi": true
+        "multi": false
       },
       {
         "q": "Ordinal data can be described as:",
@@ -5799,7 +5796,8 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "q": "What is the shape of the output tensor result when running the following code? import torch class MyModule(torch.nn.Module): def __init__(self): super().__init__() self.linear = torch.nn.Linear(in_features=4, out_features=6) def forward(self, x): out = self.linear(x) return torch.sigmoid(out) inp = torch.rand(size=(12, 4)) my_module = MyModule()result = my_module(inp)",
+        "context": "```python\nimport torch\n\nclass MyModule(torch.nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.linear = torch.nn.Linear(in_features=4, out_features=6)\n\n    def forward(self, x):\n        out = self.linear(x)\n        return torch.sigmoid(out)\n\ninp = torch.rand(size=(12, 4))\nmy_module = MyModule()\nresult = my_module(inp)\n```",
+        "q": "What is the shape of the output tensor `result`?",
         "opts": [
           "(12, 4)",
           "(4, 6)",
@@ -5828,7 +5826,8 @@ const QUIZ_BANK_OLD = [
         "multi": false
       },
       {
-        "q": "What is the output of the following code? import torch from torch.utils.data import Dataset, DataLoader class MyDataset(Dataset): def __getitem__(self, index): return torch.tensor([1, 2, 3, 4]) def __len__(self): return 12 dataset = MyDataset() loader = DataLoader(dataset, batch_size=4) for i, x in enumerate(loader): print(f\"{i}: {tuple(x.shape)}\")",
+        "context": "```python\nimport torch\nfrom torch.utils.data import Dataset, DataLoader\n\nclass MyDataset(Dataset):\n    def __getitem__(self, index):\n        return torch.tensor([1, 2, 3, 4])\n\n    def __len__(self):\n        return 12\n\ndataset = MyDataset()\nloader = DataLoader(dataset, batch_size=4)\nfor i, x in enumerate(loader):\n    print(f\"{i}: {tuple(x.shape)}\")\n```",
+        "q": "What is the output of the code above?",
         "opts": [
           "0: (36,)",
           "0: (12, 4, 4)",
