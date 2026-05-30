@@ -1,0 +1,1892 @@
+Here is the complete content of all 11 PDF files:
+
+---
+
+# FILE 1: Exercise Exam Statistics AI 2020S - HackMD.pdf
+
+**Tags:** Exam Statistics 2020S
+
+---
+
+## Question 1 — Spam Filter (Bayes' Theorem)
+
+**Problem:** A spam filter works by having users training the filter. It looks for patterns in the words in mails marked as spam by the user. For example, it may have learned that the word "win" appears in 30% of the mails marked as spam. It can be assumed that 0.9% of non-spam mail includes the word "win" and 40% of all mails received by the user are spam.
+
+- a) Calculate the total probability that the word "win" appears in a mail regardless the type of the mail. [15 points]
+- b) Calculate the probability that a mail is not a spam mail, given the word "win" appears in it. [15 points]
+
+**Solution:**
+
+**a) Answer: 0.1254**
+
+**b)**
+- p(win | no spam) = 0.009
+- p(win | spam) = 0.3
+- P(spam) = 0.4
+- P(no spam) = 0.6
+
+P(no spam | win) = 0.009 * 0.6 / (0.009 * 0.6 + 0.3 * 0.4) = **0.043**
+
+---
+
+## Question 2 — Steel Bolts (Normal Distribution)
+
+**Problem:** Steel bolts are being manufactured to a specification which requires that their lengths be between 8.50 cm and 8.60 cm. A machine produces these bolts so that their lengths are normally distributed about a mean of 8.54 cm with a standard deviation of 0.02 cm.
+
+- a) Calculate the percentage of bolts produced with a length of more than 8.54 cm. [10 points]
+- b) Calculate the percentage of bolts produced that will not be within the required limits of length. [20 points]
+
+**Solution:**
+
+**a)** 0.5 = **50%**
+
+**b)** Norml(8.54, 0.02)
+- P(8.50 < X < 5.60) = 0.9759
+- 1 - P(8.50 < X < 5.60) = **0.0241**
+
+---
+
+## Question 3 — BMI Table (Descriptive Statistics)
+
+**Problem:** In the table below the body-mass-index (BMI) of a population of 50 people is given.
+
+| Class limits [e_{i-1}; e_i] | Frequency |
+|---|---|
+| [16; 20) | 6 |
+| [20; 24) | 20 |
+| [24; 28) | 17 |
+| [28; 32) | 7 |
+
+- a) Calculate the arithmetic mean for the given data. [10 points]
+- b) Calculate the median for the given data. [10 points]
+- c) Above which value are 70% of the distribution mass? [20 points]
+
+**Solution:**
+
+**a)** 1/N * SUM(f_i * e_{i-1} + e_i)/2) -> 1200/50 -> **Mean = 24**
+
+**b)** **23.8**
+
+**c)** x_0.3 = e_{i-1} + d_i/f_i * (N*P - F_{i-1}) = 20 + 4/20 * 50 * 0.3 - 6 = **21.8**
+
+---
+
+# FILE 2: Exercise Exam Statistics for AI SS2021 (Group 1) - HackMD.pdf
+
+---
+
+## Question 1 — Normal Distribution (Temperature)
+
+**Problem:** The temperature in June is normally distributed with an expected value of 22 degrees Celsius and a standard deviation of 5 degrees Celsius.
+
+- a) Calculate the probability that on a random day in June the temperature is between 20 and 27 degrees of Celsius. [6 points]
+- b) Calculate the probability that on a random day in June the temperature is at most 22 degrees of Celsius. [6 points]
+- c) Calculate the probability that on a random day in June the temperature is at least 24 degrees of Celsius. [6 points]
+- d) Calculate a symmetrical interval around the expected value in which the temperature in June lays with a probability of 60%. [6 points]
+
+**Answers:**
+- a) 0.496766 = **49.677 %**
+- b) 0.50 = **50 %**
+- c) 0.344578 = **34.458 %**
+- d) **[17.79 ; 26.21]**
+
+---
+
+## Question 2 — Probability (Eye/Hair Color)
+
+**Problem:** In a class of 30 children 10 have blond hair, 4 red hair, and 16 dark hair. At this same time 5 have green eyes, 2 hazel eyes, 10 blue eyes, and 13 grey eyes. One child is drawn from this class at random.
+
+- a) What is the probability that this child has green eyes or blue eyes? [6 points]
+- b) What is the probability that this child has green eyes or red hair? [6 points]
+- c) What is the probability that this child has hazel eyes or not dark hair? [6 points]
+
+**Answers:**
+- a) **50 %**
+- b) **27.778 %**
+- c) **50.222 %**
+
+**Note:** For a) you can simply multiply the probabilities for the eye colors. For b) and c) you have to assume that hair color and eye color are not conditionally dependent. Then you can calculate the result with the rule for joint sets: P(a or b) = P(a) + P(b) - P(a and b) and the AND is simply the product of the probabilities because of the independence.
+
+---
+
+## Question 3 — Continuous Random Variable (PDF)
+
+**Problem:** A continuous random variable X has the density f(x) = k*x + k*0.5 for 0 ≤ x ≤ 6 (0 else).
+
+- a) Calculate the constant k so that the probability density function is valid. [7 points]
+- b) State the cumulative distribution function F(x). [7 points]
+- c) Calculate the probability of P(X ≥ 4). [6 points]
+
+**Answers:**
+- a) k = **1/21**
+- b) F(x) = **x/42 + x²/42**
+- c) **11/21**
+
+---
+
+## Question 4 — Correlation and Linear Regression
+
+**Problem:** A metallurgist measures the length of copper rods at various temperatures and observes the following results. Furthermore, it can be assumed that there is a linear relationship between the length of cooper rods and temperature.
+
+- Temperature [degrees Celsius]: 20.4 ; 27.3 ; 39.0 ; 42.9 ; 58.3
+- Length of the Rod [mm]: 461.12 ; 462.41 ; 464.88 ; 465.69 ; 466.00
+
+- a) Calculate an appropriate summary statistic to quantify the linear relationship between the length of cooper rods and temperature. [15 points]
+- b) Which length of a copper rod can be expected at a temperature of 65 degrees Celsius? [15 points]
+
+**Solution:**
+
+**a)**
+- mean x = 37.58
+- mean y = 464.02
+- covariance = 23.5008
+- variance x = 172.0936
+- variance y = 3.6902
+- **Bravais-Pearson Correlation Coefficient: 0.93256 (positive linear correlation)**
+
+**b)**
+- a = 458.888
+- b = 0.136558245
+- xi = 65
+- yi = 458.888 + (0.136558245 * 65) = **466.8762859 [mm]**
+
+---
+
+## Question 5 — Set Theory / Probability
+
+**Problem:** The probability that a visit to a particular car dealer results in buying a second-hand car or a Japanese car is 45%. It is known that of those coming to this car dealer 25% buy a second-hand car. It is also known that of those coming to this car dealer 30% buy a Japanese car. What is the probability that a visit leads to buying a second-hand Japanese car? [8 points]
+
+**Answer: 10 %**
+
+---
+
+# FILE 3: Lecture Exam Statistics AI 2020S - HackMD.pdf
+
+**Tags:** Exam Statistics 2020S
+
+---
+
+## Example 1a-c — Conceptual Questions
+
+- a) Explain with a few words, the difference between an ordinal attribute and a quantitative attribute in descriptive statistics. State one example for each kind of these attributes. [4 points]
+- b) Explain with a few words, what is meant by a "type I error" and a "type II error" in inductive statistics. [4 points]
+- c) Explain with a few words, what is meant by the term "confidence level" in the context of confidence intervals in inductive statistics. [4 points]
+
+---
+
+## Example 1d — Multiple Choice
+
+Mark **only** the **correct** statements. None, one or more of the 4 given statements may be correct. [4 points, no minus points for wrong answers]
+
+Select one or more:
+- [ ] The covariance has a range from 0 to +∞.
+- [ ] The standard error is a summary statistic which is completely independent from the sample size.
+- [ ] The median is an appropriate measure of location for ordinal data.
+- [ ] Especially for nominal data the mean is an appropriate summary statistic because of its efficient use of the available information.
+
+**Correct answer: 3. (The median is an appropriate measure of location for ordinal data.)**
+
+---
+
+## Example 2 — Binomial Distribution
+
+**Problem:** Out of a box containing 5 red and 6 green balls, a sample of 4 balls is drawn with replacement. Calculate the exact probability that there is exactly 1 green ball in the drawn sample. [10 points]
+
+**Answer: 20.49**
+
+---
+
+## Example 3a-b — Descriptive Statistics (Climbing)
+
+**Problem:** During a mountain climbing tour of 6 days, the climbed distances for each day (rounded to whole meters) were recorded: 214 ; 179 ; 195 ; 222 ; 24 ; 178
+
+- a) Calculate the average climbed distance and the median climbed distance. [7 points]
+- b) Calculate the variance and the standard deviation of this population. [8 points]
+
+**Solution:**
+- a)
+  - mean = **168.667**
+  - median = **187**
+- b)
+  - varPop = **4452.56**
+  - stDevPop = **66.7275**
+
+---
+
+## Example 4 — Conditional Probability (Shooting)
+
+**Problem:** Sue and Bob are on a shooting range. They shoot alternately. Sue is the better shooter with a hit rate of 90%. Bob has a hit rate of 70%. Someone hears a shot, but does not see the person shooting. There is no hit on the target. With what probability did Bob shoot, if Sue and Bob are the only possible shooters? [15 points]
+
+**Formula:** (1 - bob's hit rate) / (1 - sue's hit rate + 1 - bob's hit rate)
+
+**Answer: 75%**
+
+---
+
+## Example 5a-b — Linear Regression (TV Time & Weight)
+
+**Problem:** The television time in hours per day and the weight in kilograms of a population of 15 children were examined. The following results were obtained:
+
+| | mean | SUM(x_i - x̄)² (i=1 to 15) | covariance |
+|---|---|---|---|
+| television time | 4.733 | 42.933 | 15.973 |
+| weight | 52.400 | 2561.600 | |
+
+Furthermore, it is known that there is a linear relationship between television time and weight.
+
+- a) Using the above information, show that the variance of the television time is 2.862 h² and the variance of the weight 170.773 kg². (Note: numbers are rounded to 3 decimal places, the 15 children are considered as a population) [8 points]
+- b) Determine a linear regression model to predict the weight of a child with 6 hours of television time. State the predicted weight and the parameters of the linear regression model. [12 points]
+
+**Solution:**
+
+**a)**
+- 1/15 * 42.933 = **2.8622**
+- 1/15 * 2561.600 = **170.773**
+
+**b)** y = a + b * x_i
+- b = Cov(x,y) / Var(x) -> 15.973 / 2.862 = **5.581**
+- a = y_mean - b * x_mean = 52.400 - 5.581 * 4.733 = **25.985**
+- y = 25.985 + 5.581 * x_i
+- 25.985 + 5.581 * 6 = **59.4715 kg**
+
+---
+
+## Example 6a-b — Confidence Interval and Hypothesis Test
+
+**Problem:** The effect of a drug on diastolic blood pressure should be investigated. For this purpose, the drug is administered to a sample of 6 patients.
+
+| diastolic blood pressure [mmHg] |
+|---|
+| 71 | 73 | 74 | 82 | 90 | 60 |
+
+- a) Calculate a 95% confidence interval for the "true" mean diastolic blood pressure based on the above sample. The unbiased and consistent point estimator for the mean has already been calculated and is 75 mmHg. [10 points]
+- b) Based on the above sample, test the research question that the diastolic blood pressure under the influence of this drug, is statistically significant different from the reference value of 70 mmHg. Formulate the corresponding statistical hypotheses. State the test statistic, the critical value and the test decision. This statistical test should have a type I error of α = 5%. The data can be considered to be normally distribution. [14 points]
+
+**Solution:**
+
+**a)**
+- sd = **10.198**
+- CI = **[64.2978 - 85.7022]**
+
+**b)**
+- Hypotheses:
+  - H0: μ = 70
+  - H1: μ ≠ 70
+- Test: T(x) = **1.20096**
+- t_5,0.957 = **2.57**
+- 1.2 < 2.57 -> **null hypothesis cannot be rejected**
+- pVal: 0.28355 > α 5% -> **cannot be rejected**
+
+---
+
+# FILE 4: Lecture Exam Statistics for AI SS2021 Group 2 - HackMD.pdf
+
+---
+
+## Question 1 — Basic Probability (Paint Cans)
+
+**Problem:** A decorator has a stock of 50 cans of paint. 10 cans contain white paint, 5 cans blue paint, 8 cans green paint, 3 cans yellow paint, 6 cans red paint, 10 cans orange paint, and 8 cans grey paint. If he chooses a can at random, what is the probability that this can contains blue paint or green paint or orange paint? [10 points]
+
+**Solution:**
+- 5 + 8 + 10 = 23
+- 23/50 = 0.46 = **46 %**
+
+---
+
+## Question 2 — Conceptual Questions (Multiple Parts)
+
+- 2a) Why plays the "normal distribution" such an important role in inductive statistics? [4 points]
+- 2b) Explain with a few words, what is meant by a "type I error" and a "type II error" in inductive statistics. [4 points]
+- 2c) Explain with a few words, what is understood under the term "p-value" in inductive statistics. [4 points]
+- 2d) Explain with a few words, the difference between a metric-continuous and a metric-discrete attribute in descriptive statistics. State one example for each kind of these attributes. [4 points]
+- 2e) Describe with a few words the advantage and disadvantage of the "arithmetic mean" and "mode" (= modal value) as measures of location. [4 points]
+
+**Answers:**
+
+**2a)** The central limit theorem tells us that a population with high sample size is normal distributed, many things in "Nature" are normally distributed (IQ, height of humans) and other distributions can be transformed into a normal distribution.
+
+**2b)** A type I error is the rejection of a true null hypothesis ("false positive" finding); example: an innocent person is convicted. A type II error is the non-rejection of a false null hypothesis ("false negative" finding); example: a guilty person is not convicted.
+
+**2c)** The p-value is the probability — under the null hypothesis — of obtaining a "result". (The p-value is the concrete type I error of a data situation.) If the p-value is high, there is a high likelihood of obtaining said result under the null hypothesis; therefore the null hypothesis is not rejected. If the p-value is small --> the null hypothesis is rejected.
+
+**2d)** Metric discrete data = values from a fixed list of numbers (= counting apples on a tree). Metric continuous data = values can be determined with infinite precision (= measuring the weight of an apple in grams -> theoretically the weight can be measured with infinite precision).
+
+**2e)** "Arithmetic mean" = disadvantages: can only be used for metric data, not stable against great outliers in the data. Advantages = if the data has no great outliers, it is a great measure of location (we get the middle of the data). "Mode" = disadvantage = must not be unique. Advantage = we get the attribute with the highest frequency.
+
+---
+
+## Question 3 — Total Probability (Radar Traps)
+
+**Problem:** The police plans to enforce speed limits by using radar traps at three different locations within the city limits. The radar traps at each of the locations L1, L2, and L3 will be operated 40%, 30%, and 50% of the time. If a person who is speeding on her way to work has probabilities of 20%, 10%, 70%, respectively, of passing through these locations, what is the probability that she will receive a speeding ticket? [10 points]
+
+**Solution:**
+- 40 * 0.2 = 8
+- 30 * 0.1 = 3
+- 50 * 0.7 = 35
+- in total = 46 --> **46 %**
+
+The probability that she will receive a speeding ticket is **46 %**.
+
+---
+
+## Question 4 — Mean, Variance, Linear Regression (Guinea Pigs)
+
+**Problem:** Someone has a population of 100 guinea pigs and has calculated the following information about the age in months X of these guinea pigs.
+
+- SUM(x_i, i=1 to 100) = 12776
+- SUM((x_i - x̄)², i=1 to 100) = 54534
+
+Furthermore, it's known that these guinea pigs weigh on average 1106 grams with a standard deviation of 43 grams and that the covariance Cov(x,y) between age and weight is 753.119.
+
+- a) Calculate the arithmetic mean of this population of 100 guinea pigs. [5 points]
+- b) Calculate the variance and standard deviation of this population of 100 guinea pigs. [8 points]
+- c) Estimate the weight of a guinea pig which is 37 months old based on a linear regression model using the provided information. [15 points]
+
+**Solution:**
+
+**a)** (1/100) * 12776 = **127.76**
+
+**b)** Var = (1/100) * 54534 = **545.34**, standard deviation = **23.3525**
+
+**c)**
+- CoVar = 753.119
+- Var = 1849 [Note: variance of weight = 43² = 1849]
+- b = CocVar / Var(x) = 753.119 / 545.34 = **1.381**
+- a = y - (b * x) = 1106 - (1.381 * 127.76) = **929.56344**
+- yi = a + b * xi = 929.56344 + 1.381 * 37 = **980.6644 grams**
+
+---
+
+## Question 5 — Hypothesis Test and Confidence Interval (Wine Bottles)
+
+**Problem:** On behalf of the owner of a winery, the normally distributed average bottled quantity of wine, which is bottled in 750 ml wine bottles, should be investigated. 10 bottles are randomly selected, and the filling quantities of these bottles are checked and the following results were calculated based on this sample:
+- x̄ = 749.8 ml, s = 4.97 ml
+
+- a) Use an appropriate statistical test, to verify if there is a statistically significant difference from the reference value 750 ml which the filled wine bottles should have. State appropriate statistical hypotheses, the test statistic, the critical value and the test decision (type I error α = 5%, data is normally distributed). [10 points]
+- b) The owner of this winery needs cork plugs to close the wine bottles. Based on a sample of 1000 cork plugs, he found out that 10% of these cork plugs were defective and cannot be used to close the wine bottles. Calculate based on this sample a 95% confidence interval for the true unknown percentage of defective cork plugs. [8 points]
+- c) Someone else has performed a "two sample t-test" (type I error α = 5%) on the research question "Is there a difference between group X and group Y regarding mean cholesterol levels?" and got a p-value of 74.1%. What is the test decision? [4 points]
+
+**Solution:**
+
+**a)**
+- H₀: μ = 750 ml
+- H₁: μ_not-equal = 750 ml (write "not-equal" because don't know how to make it otherwise)
+- t₉,0.975 = critical value = **2.26**
+- test = ((749.8 - 750) / 4.97) * sqrt(10) = **-0.127255**
+- |-0.127255| < 2.26 --> **H₀ cannot be rejected**
+
+**b)** **8.14% - 11.86%**
+
+**c)** The null hypothesis is **not rejected**.
+
+---
+
+## Question 6 — Binomial Distribution (Bicycle Rental)
+
+**Problem:** A small bicycle rental shop has only 10 bicycles available for rent. According to previous experience with a probability of 80% one bicycle is rented. Furthermore, it can be assumed that the individual bicycles are rented independently of each other. Calculate the probability that at most 9 of the bicycles are rented. [10 points]
+
+**Solution:**
+- k = 9
+- n = 10
+- p = 80 % for one cycle
+- result = **0.892626 = 89.263 %**
+
+---
+
+# FILE 5: Stats.pdf — Statistics for AI - Exercise Exam Group 2 - SS2021
+
+---
+
+## Question 1 — Combinatorics (Committee Selection)
+
+**Problem:** A committee of 5 people is to be selected from 10 men and 10 women.
+
+- a) Calculate the probability that the committee will consist of 3 women and 2 men. [6 points]
+- b) Calculate the probability that the committee will consist of at least 2 women. [6 points]
+- c) Calculate the probability that the committee will consist of at most 1 man. [6 points]
+
+**Answers:**
+- a) **34.83 %**
+- b) **84.83 %**
+- c) **15.17 %**
+
+---
+
+## Question 2 — Continuous Random Variable (PDF)
+
+**Problem:** A continuous random variable X has the density f(x) = k*0.5 + k*x for 0 ≤ x ≤ 9 (0 else).
+
+- a) Calculate the constant k so that the probability density function is valid. [7 points]
+- b) State the cumulative distribution function F(x). [7 points]
+- c) Calculate the probability of P(1 ≤ X ≤ 4). [6 points]
+
+**Answers:**
+- a) k = **1/45 = 0.222**
+- b) F(x) = 1/45 * 1/2 * x + 1/45 * 1/2 * x² = **x/90 + (x²)/90**
+- c) **0.2**
+
+---
+
+## Question 3 — Combinatorics (Seating)
+
+**Problem:** Three friends and seven other people are randomly seated in a row. What is the probability that all three friends will sit next to each other? [8 points]
+
+**Answer:** A: (8 * 7! * 3!) / 10! = **0.0667 = 6.67 %**
+
+---
+
+## Question 4 — Correlation and Linear Regression (Intelligence Test)
+
+**Problem:** The following fictitious data gives the results of an intelligence test in points and the reading time in seconds of a standardized text of 5 students.
+
+- Points on the intelligence test: 124 ; 126 ; 130 ; 119 ; 120
+- Reading time in seconds: 46 ; 44 ; 40 ; 42 ; 45
+
+- a) Calculate an appropriate summary statistic to quantify the assumed linear relationship between the results of the intelligence test and the reading time. [15 points]
+- b) Which reading time can be expected for a student who scored 115 points on this intelligence test? [15 points]
+
+**Solution:**
+
+**a)**
+- mean x = 123.8
+- mean y = 43.4
+- variance x = 16.16
+- variance y = 4.64
+- covariance = -3.72
+- **Bravais-Pearson Correlation Coefficient = r_xy = -0.430**
+
+**b)**
+- y = a + b * x
+- b = covariance / variance_x = -3.72 / 16.16 = **-0.230198**
+- a = mean_y - b * mean_x = 43.4 - (-0.230198) * 123.8 = **71.8985**
+- yi = a + b*xi = 71.8985 + (-0.230198) * 115 = **45.426**
+
+---
+
+## Question 5 — Normal Distribution (Salmon Length)
+
+**Problem:** The length of salmons living in a specific river is normally distributed with an expected value of 71 cm and a variance of 36 cm². Now a bear catches a salmon at random.
+
+- a) Calculate the probability that the length of this salmon is between 75 cm and 85 cm. [6 points]
+- b) Calculate the probability that the length of this salmon is at most 71 cm. [6 points]
+- c) Calculate the probability that the length of this salmon is at least 80 cm. [6 points]
+- d) Calculate a symmetrical interval around the expected value in which the length of these salmons lays with a probability of 80%. [6 points]
+
+**Answers:**
+- a) **0.243**
+- b) **0.5**
+- c) **0.067**
+- d) **[63.311 ; 78.689]**
+
+---
+
+# FILE 6: lecture_exam_23-1.pdf — Mathematics for AI 2 Exam 2023
+
+---
+
+## Question 1 — Antiderivatives and Integrals
+
+**(a)** Write down an antiderivative for the function g(x) = x² + 2x + 3.
+
+**(b)** Let f: R → R be given by f(x) = xe^x.
+- i. Write down an antiderivative F for the function f.
+- ii. Write down the antiderivative F for the function f which satisfies the condition F(0) = 2.
+
+**(c)** Calculate the following integral:
+
+∫₀^(√(π/2)) x · cos(x² - π/2) dx
+
+---
+
+## Question 2 — Derivatives
+
+**(a)** Let I = (a,b), x₀ ∈ I, and f: I → R. Suppose that f is differentiable at x₀. Give the definition of the derivative f'(x₀).
+
+**(b)** Let n ∈ N, let I = (a,b) and let f: I → R be given by f(x) = xⁿ. Use the definition from part (a) of this question to prove that, for all x ∈ I:
+f'(x) = nx^(n-1)
+
+**(c)** Let f: R → R be given by f(x) = e^(x³ - 12x).
+- i. Calculate f'(x).
+- ii. Write down all stationary points of f.
+- iii. Use the second derivative test to determine whether these stationary points are local maxima or minima, if possible.
+
+---
+
+## Question 3 — Sequences
+
+**(a)** Let (a_n)_{n∈N} be a complex-valued sequence. Give the definition of what it means to say that (a_n)_{n∈N} is **bounded**.
+
+**(b)** Let (a_n)_{n∈N} be a complex-valued sequence and a ∈ C. Give the definition of what it means to say that (a_n)_{n∈N} **converges** to a.
+
+**(c)** Let (a_n)_{n∈N} be a convergent complex-valued sequence. Prove that (a_n)_{n∈N} is bounded.
+
+**(d)** Give an example of a real-valued sequence (a_n)_{n∈N} such that:
+lim_{n→∞} a_n = ∞
+
+**(e)** Let a, b > 0 be fixed. Use the Sandwich Rule to show that:
+lim_{n→∞} ⁿ√(aⁿ + bⁿ) = max{a, b}
+
+You may also use, without proof, the fact that lim_{n→∞} ⁿ√2 = 1.
+
+---
+
+## Question 4 — Continuity
+
+**(a)** Let D ⊂ R, x₀ ∈ D and f: D → R. Complete the following definition. We call f **continuous at x₀** if and only if, for all sequences (x_n)_{n∈N} in D such that x_n → x₀ ...
+
+**(b)** Give an example of a function f: [-1, 1] → R which is not continuous at 0.
+
+**(c)** Let D ⊂ R, x₀ ∈ D and f: D → R. Using the definition from part (a) of this question, prove that f is continuous at x₀ if and only if:
+∀ε > 0, ∃δ > 0 : |x₀ - x| < δ and x ∈ D ⇒ |f(x₀) - f(x)| < ε
+
+**(d)** Use the result from part (c) of this question to show that the function f: R → R given by f(x) = x² is continuous at x₀ = 1.
+
+---
+
+# FILE 7: 2022SS-Math4AI2-Exam1.pdf
+**Summer semester 2022, 06.07.2022, 10:00–13:00 Uhr**
+**1st Final Exam: Mathematics for Artificial Intelligence 2**
+Duration: 180 minutes, Maximum of 50 points
+
+---
+
+## Exercise 1: Derivatives (4 points)
+
+Find the derivatives of the following functions:
+- f₁(x) = x / (2 + sin(x²)), x ∈ R
+- f₂(x) = ln(3 · 2^x), x ∈ R
+
+Simplify the results, and determine the value of the derivative at x₀ = √π.
+
+---
+
+## Exercise 2: Limits (4 points)
+
+Determine if the following proper or improper limits exist and, if applicable, determine the value.
+
+**a)** lim_{x→0} (cos(x) - 1) / x²
+
+**b)** lim_{x→1} (x³ - 2x + 1) / (x + 1)²
+
+---
+
+## Exercise 3: Global and Local Extrema (10 points)
+
+Consider the function f: [0,∞) → R with f(x) = x · e^(-x).
+
+**a)** Determine all local and global extrema and extreme values of f.
+
+**b)** Where is f monotonically increasing/decreasing?
+
+**c)** Where is f convex/concave?
+
+---
+
+## Exercise 4: Taylor Series (10 points)
+
+Determine the Taylor polynomial T₃(x) of order 3 and the Taylor series T(x) of the function:
+f: R → R, f(x) = (x² - 3)²
+
+around x₀ = 1. Where does the Taylor series converge?
+
+---
+
+## Exercise 5: Integrals (6 points)
+
+Compute:
+∫₀^π x² · sin(x) dx
+
+---
+
+## Exercise 6: Fourier Series (8 points)
+
+Compute all Fourier coefficients and the Fourier series Sh(x) of the function h: [0, 1) → R with h(x) = e^(πix). Simplify the result! (Complex numbers in canonical form.)
+
+Does the Fourier series converge in (0, 1)? Justify your answer!
+(Ignore the point x = 0.)
+
+---
+
+## Exercise 7: Multivariate Derivatives (8 points)
+
+Let f: R² → R be given by:
+
+f(x, y) := { xy/(x - y), if x ≠ y;
+             0,          if x = y }
+
+Where is f partially/totally differentiable? Find the gradient there.
+
+---
+
+# FILE 8: 2022SS-Math4AI2-Exam3.pdf
+**Summer semester 2022, 22.09.2022, 10:00–13:00 Uhr**
+**3rd Final Exam: Mathematics for Artificial Intelligence 2**
+Duration: 180 minutes, Maximum of 58 points
+
+---
+
+## Exercise 1: Curve Sketching (20 points)
+
+Consider the function f: R → R with:
+
+f(x) := { (1/x) · e^(-1/x²),  x ≠ 0;
+           0,                   x = 0 }
+
+**a)** Where is f continuous and differentiable, respectively?
+
+**b)** Determine all local and global extrema and extreme values of f.
+
+**c)** Where is f non-decreasing/non-increasing?
+
+**d)** Make a sketch of the graph of f.
+
+---
+
+## Exercise 2: Taylor Series (12 points)
+
+Determine the Taylor polynomial T₅(x) of order 5 of the function:
+f: (0,∞) → R, f(x) = x² · ln(x)
+
+around x₀ = 1.
+
+---
+
+## Exercise 3: Antiderivatives (8 points)
+
+**a)** Find one antiderivative of the following functions, respectively:
+- f₁(x) = (x + 1)eˣ
+- f₂(x) = (x² + 2x + 2) / (x³ + 3x² + 6x + 6)
+- f₃(x) = x⁴ · cos(x⁵ + π)
+
+**b)** Find the function f on R, which satisfies f'(x) = f₃(x) for all x ∈ R and f(0) = 42.
+
+---
+
+## Exercise 4: Extrema under Constraints (12 points)
+
+Calculate the global extrema of:
+f(x₁, x₂) = (x₁ + 4)² + (x₂ - 4)²
+
+under the constraint:
+x₁² + x₂² ≤ 8
+
+(You do not have to prove that an extremum exists.)
+
+---
+
+## Exercise 5: Jacobian (6 points)
+
+We consider the function F = f ∘ g, where:
+- f: R² → R³, f(a, b) = (a², b², a² - b²)
+- g: R² → R², g(x, y) = (x² + y², 1 + sin(x - y))
+
+Compute the Jacobian of F at the point (x₀, y₀) = (1/2, 1/2).
+
+---
+
+# FILE 9: Math2_Exam04092024.pdf — Math II Exam, 04.09.2024
+
+---
+
+## Question 1 (25 points) — Curve Analysis
+
+Consider the function f(x) = x / ln(x)
+
+**(a)** Determine the domain of f(x).
+
+**(b)** Determine the following limits:
+lim_{x→0+} f(x), lim_{x→1⁻} f(x), lim_{x→1+} f(x), lim_{x→∞} f(x)
+
+**(c)** Compute the minima and maxima of f(x) without the use of the second derivative.
+
+**(d)** Sketch the graph of f(x) by using the above information.
+
+---
+
+## Question 2 (20 points)
+
+**(a)** Calculate the integral:
+∫₀^(1/3) 27πx²e^(3x) dx
+
+**(b)** Calculate the limit:
+lim_{x→0} (e^(2x) - 2sin(x) - 1 - 2x²) / (sin(πx) - πx)
+
+---
+
+## Question 3 (10 points)
+
+Find all parameters x ∈ R such that the matrix
+
+A = | 1    2    0   |
+    | 2    5    x-1 |
+    | 0    x-1  1   |
+
+is positive definite.
+
+---
+
+## Question 4 (20 points) — Glass Plate Optimization
+
+The figure depicts a rectangular glass plate where a triangular corner is broken off. The broken glass plate has width a and height b. The triangular corner has width c and height d such that 0 < c < a and 0 < d < b. We would like to cut out of the remaining glass plate, a rectangular glass plate P such that this new plate has maximal area. The south-west corner O denotes the origin (0, 0) of a coordinate system.
+
+**(a)** Express y as a function of x so that the graph of this function is the line that passes through (0, d) and (c, 0).
+
+**(b)** Express the area of the rectangular glass plate P as a polynomial A(x) in terms of x.
+
+**(c)** Calculate A'(x) and A''(x).
+
+**(d)** Determine x* ∈ R such that the value of the polynomial A(x*) is as large as possible.
+
+---
+
+## Question 5 (25 points) — Constrained Optimization
+
+For the function f: R² → R, find the global minimum and maximum on the closed and bounded set Ω = {(x, y) : x² + y² = 4}, where:
+
+f(x, y) = (1/2)x²y - 2y
+
+---
+
+# FILE 10: Math_for_AI_II_quiz.pdf — Online Quizzes (Multiple Quiz Sets)
+
+This file contains multiple quiz sets from Johannes Kepler Universität Linz, Mathematics for AI II.
+
+---
+
+## QUIZ CF1Q — Continuity Fundamentals 1 (Questions)
+
+### Question 1 (Mark 0.00/2.00 — Incorrect)
+
+Let f: R → R, x ↦ x³ and g: R → R, x ↦ ⌊x⌋.
+
+Is the following argument logically correct?
+"The functions f and g are both continuous at x = 6. Therefore, also f - g is continuous at x = 6."
+
+- No
+- Yes
+
+**Correct answer: No**
+
+---
+
+### Question 2 (Mark 0.00/2.00 — Incorrect)
+
+Consider the functions defined on R:
+- a(x) = H(x - 3) + 4
+- b(x) = { 13(x-3)    if x < 3;   sin(x-3) - 8  if x ≥ 3 }
+- c(x) = e^(x-3)
+- d(x) = { 13(x-3) - 4   if x < 3;   cos(x-3) + 3  if x ≥ 3 }
+- e(x) = ⌊x - 3⌋
+
+**Choose two** of the given functions such that:
+- **both** are **discontinuous** at x = 3 and
+- their **difference** is **continuous** at x = 3.
+
+Choices: c ✗, a, b, e ✓, Two such functions cannot exist, f(x) := 1.62, d
+
+**Correct answers: a, e**
+
+---
+
+### Question 3 (Mark 2.00/2.00 — Correct)
+
+Let f: R → R, x ↦ { 1(x+1) + 6  if x < -1;  10.5  if -1 ≤ x ≤ 9;  (x-9)⁷ + 15  if x > 9 }
+
+Determine the largest set U, such that f is continuous on U.
+
+- R
+- R \ {9}
+- R \ {-1}
+- R \ {-1, 9} ✓
+
+**Correct answer: R \ {-1, 9}**
+
+---
+
+### Question 4 (Mark 2.00/4.00 — Partially correct)
+
+For a, b ∈ R consider the function:
+G_{a,b}(x) := { |7(x-a)|      if x ≤ a;   |3(x-a)| + b   if x > a }
+
+Now take a = 2 and b = 9. From the graphical representation of the function one may conclude that G_{2,9} is [**discontinuous**] at x₀ = [**2**].
+
+In order to **prove this using the ε-δ-criterion**, we have to show that:
+∃ε > 0 ∀δ > 0 ∃x ∈ R : |x - 2| < δ ∧ |G_{2,9}(x) - G_{2,9}(2)| ≥ ε
+
+**Part 1:** Which of the following is a suitable choice for ε?
+- ε = 10
+- ε = 9 ✓
+- ε = 27
+- ε = π/(5δ)
+
+**Correct answer: ε = 9**
+
+**Part 2:** Let now δ > 0 arbitrary but fixed. Which of the following is a suitable choice for x that proves that G_{2,9} is discontinuous at x₀ = 2?
+- x = 2 + 1/5
+- x = 2 + δ/5 ✓
+- x = δ/5
+- x = 2 - δ/5
+
+**Correct answer: x = 2 + δ/5**
+
+---
+
+## QUIZ CF1B — Continuity Fundamentals 1 (Bonus/Exam)
+
+### Question 1 (Mark 0.33/1.00 — Partially correct)
+
+For a ∈ R consider the **modified Heaviside function**:
+H_a(x) := { 1  if x > a;   0  if x ≤ a }
+
+Now take a = 66. From the graphical representation of the function one may conclude that H₆₆ is [**continuous**] at x₀ if and only if x₀ [**≠ 66**].
+
+**Part 1:** Which of the following sequences proves the discontinuity of H₆₆ at x₀ = 66?
+- x_n = 66 + 7/n
+- x_n = 132 + 1/n
+- x_n = 66 + e^(-n) ✓ (correct answer)
+- x_n = 66 - 1/n²
+
+**Correct answer: x_n = 66 + e^(-n)**
+
+**Part 2:** We show that H₆₆ is continuous at x ≠ 66 by the ε-δ-criterion. Which of the following is a suitable choice for δ?
+- δ = 2|x₀ - 66|
+- δ = |x₀ + 66|
+- δ = (1/6)|x₀ - 66| ✓ (correct answer)
+- δ = ε/7
+
+**Correct answer: δ = (1/6)|x₀ - 66|**
+
+---
+
+## QUIZ CF2Q — Continuity Fundamentals 2 (Questions)
+
+### Question 1 (Mark 0.00/3.00 — Incorrect)
+
+Let f: R \ {-3, -3/5} → R, x ↦ (x+3) / (-5x² - 18x - 9)
+
+Which of the following limits is +∞?
+- lim_{x→-3/5⁻} f(x)
+- lim_{x→(-3/5)⁺} f(x)
+- lim_{x→-3} f(x)
+- lim_{x→-3⁻} f(x)
+- lim_{x→-3⁺} f(x)
+- lim_{x→(-3/5)⁺} f(x) ✓
+
+**Correct answer: lim_{x→(-3/5)⁺} f(x)**
+
+---
+
+### Question 2 (Mark 3.00/3.00 — Correct)
+
+Let f: R \ {5/3} → R, x ↦ (3x² + 7x - 20) / (3x - 5)
+
+Compute lim_{x→5/3} f(x) = [**17/3**] (round to 2 decimal places)
+
+**Correct answer: 5.67**
+
+---
+
+### Question 3 (Mark 2.00/2.00 — Correct)
+
+Consider the following calculation:
+
+lim_{x→0} sgn(sin(x) + (6x² - 2x + 3)/(x⁶ + 36))
+= sgn(lim_{x→0} sin(x) + lim_{x→0} (6x² - 2x + 3)/(x⁶ + 36))
+= sgn(0 + 1/12)
+= sgn(1/12)
+= 1
+
+Which statement applies?
+- Incorrect because in step 1 we must not push the "lim" inside the "sgn"-function
+- Incorrect because in step 2 there is an error in the calculation of the limits
+- Perfectly correct! ✓
+- Incorrect because in step 3 there is an error in the calculation
+- Incorrect because in step 4 there is an error in the calculation of the "sgn"-function
+- Incorrect because in step 1 we must not split the "lim" into a sum of limits
+
+**Correct answer: Perfectly correct!**
+
+---
+
+### Question 4 (Mark 0.67/2.00 — Partially correct)
+
+Select all values that are accumulation points of [-9, 6).
+
+- -36
+- -15
+- -1 ✓
+- -9 ✓
+- 24
+- 6 ✓ (student selected this)
+- 16
+
+**Correct answers: -9, 6, -1**
+
+---
+
+## QUIZ CF2B — Continuity Fundamentals 2 (Bonus)
+
+### Question 1 (Mark 1.00/1.00 — Correct)
+
+Consider the functions:
+- f₁: R → R, x ↦ { 9eˣ          if x < 0;   -7sin(x) + 9  if x ≥ 0 }
+- f₂: R → R, x ↦ { 9ln(x+1)     if x ≤ 0;   -7x⁹ + 4      if x > 0 }
+
+Which of the functions fᵢ satisfies:
+lim_{x→0⁻} fᵢ = 9, lim_{x→0⁺} fᵢ = 9, and lim_{x→0} fᵢ = 0?
+
+- f₂
+- f₁
+- None of them, because the two one-sided limits cannot be equal.
+- None of them, because if the limit is 0 the two one-sided limits cannot be equal to 9. ✓
+
+**Correct answer: None of them, because if the limit is 0 the two one-sided limits cannot be equal to 9.**
+
+---
+
+### Question 2 (Mark 1.00/1.00 — Correct)
+
+Which of the following sets has R ∪ {-∞, ∞} as its set of accumulation points?
+
+- R \ (-6, 3]
+- R⁺
+- {-6, 3}
+- R \ {-6, 3, 12} ✓
+
+**Correct answer: R \ {-6, 3, 12}**
+
+---
+
+## QUIZ CF3Q — Continuity Fundamentals 3 (Questions)
+
+### Question 1 (Mark 0.00/2.00 — Incorrect)
+
+Consider the functions:
+- g₁: [-9, 9] → R, x ↦ { 9eˣ    if x < 0;   7x⁹ + 9  if x ≥ 0 }
+- g₂: [-11, 11] → R, x ↦ { 9ln(x+1) - 7   if x ≤ 0;   7sin(x) - 7cos(x)  if x > 0 }
+
+Which of the functions gᵢ is **uniformly continuous** but **not continuous**?
+- g₁
+- g₂
+- None of them, because every uniformly continuous function would also be continuous. ✓
+- None of them, because both are not uniformly continuous.
+
+**Correct answer: None of them, because every uniformly continuous function would also be continuous.**
+
+---
+
+### Question 2 (Mark 0.00/2.00 — Incorrect, appears twice)
+
+Consider the function f: [-1, 1] → R, x ↦ sin(π(x + 0.74))² + 8.7. Find the biggest interval I ⊆ [-1, -0.11], such that f is strictly increasing on I.
+
+I = [**-0.74**, **-0.24**]
+
+**Correct answer: -0.74, -0.24**
+
+---
+
+### Question 3 (Mark 3.00/3.00 — Correct)
+
+Consider the function f: (0, 2] → R, x ↦ 5/x + 4.
+
+We show that f is **not uniformly continuous**:
+1. In order to prove that f is not uniformly continuous, we need to find two sequences (x_n) and (y_n) in (0, 2], s.t.:
+   lim_{n→∞} |x_n - y_n| = 0 and lim_{n→∞} |f(x_n) - f(y_n)| ≠ 0.
+
+2. Let now x_n := 1/n and y_n := 2/n.
+
+3. It is straightforward to see that:
+   lim_{n→∞} |x_n - y_n| = lim_{n→∞} |1/n - 2/n| = lim_{n→∞} 1/n = 0.
+
+4. We also see that:
+   lim_{n→∞} |f(x_n) - f(y_n)| = lim_{n→∞} |5n + 4 - 5n/2 - 4| = lim_{n→∞} 5n/2 = ∞ ≠ 0.
+
+5. This shows that f is not uniformly continuous!
+
+**On the other hand**, a theorem says that every continuous function on a closed interval must also be uniformly continuous. Since this applies to f, there must be an error in the "proof" above. What is the error?
+
+- In step 1, the formula does not correspond to what it means to be not uniformly continuous.
+- In step 2, the sequences do not have values in (0, 2].
+- In step 3, the limit calculation is incorrect.
+- In step 4, the limit calculation is incorrect.
+- **The proof is correct, but the theorem mentioned does not apply to this example.** ✓
+
+**Correct answer: The proof is correct, but the theorem mentioned does not apply to this example.**
+
+---
+
+### Question 4 (Mark 0.00/3.00 — Incorrect)
+
+Let f: R → R, x ↦ 2|x-1||x| - 3|x+1| + 7. Note that f(-4) = 4 and f(4) = -6. Note also that the function is linear in any interval bounded by consecutive integers between -4 and 4. Compute a number w such that f(w) = 1.5.
+
+w = [1.5] ✗
+
+**One possible correct answer: 42**
+
+---
+
+## QUIZ CF3B — Continuity Fundamentals 3 (Bonus)
+
+### Question 1 (Mark 2.00/2.00 — Correct)
+
+Consider the function f: [0, 9] → R, x ↦ 5 ln(x) + 5.
+
+We show that f is **not uniformly continuous** in a similar way as it is done for f(x) = x² in the lecture notes.
+
+[Steps 1-5 shown as above with sequences x_n = 1/n and y_n = 2/n]
+
+The error in the "proof" is:
+- The proof is correct, but the **theorem mentioned does not apply** because the logarithm function cannot be defined on the closed interval [0, 9]. ✓
+
+**Correct answer: The proof is correct, but the theorem mentioned does not apply because the logarithm function cannot be defined on the closed interval [0, 9].**
+
+---
+
+## QUIZ DC1Q — Differential Calculus 1 (Questions)
+
+### Question 1 (Mark 0.00/2.50 — Incorrect)
+
+The graph of which function describes the **tangent line** of f(x) := ln x at 9?
+
+- T(x) = ln 9 + x
+- T(x) = ln 9 + 1 - x/9
+- T(x) = ln 9 - 1 + x/9 ✓
+- T(x) = (ln 9)/9 + x
+
+**Correct answer: T(x) = ln 9 - 1 + x/9**
+
+---
+
+### Question 2 (Mark 0.00/2.50 — Incorrect)
+
+Given the function f(x) := x² + 2x + 72, we compute its derivative at 8:
+
+f'(8) = (1) lim_{h→0} ((8+h)² + 2(8+h) + 72 - 64 - 16 - 72) / h
+      = (2) lim_{h→0} (h² + 17h + 2h) / h
+      = (3) lim_{h→0} (h + 17 + 2)
+      = (4) 19
+
+Which of the equalities is incorrect?
+- (1)
+- (2) ✓
+- (3)
+- (4)
+- Computation is correct
+
+**Correct answer: (2)**
+
+---
+
+### Question 3 (Mark 2.50/2.50 — Correct)
+
+Let f: R⁺ → R be the function:
+f(x) = { x² - 3x + 30   if x < 3;   3x + 21   if x ≥ 3 }
+
+Which of the following statements is correct?
+- The function is differentiable but not continuous at 3.
+- The function is neither differentiable nor continuous at 3.
+- The function is not differentiable but continuous at 3.
+- The function is differentiable and continuous at 3. ✓
+
+**Correct answer: The function is differentiable and continuous at 3.**
+
+---
+
+### Question 4 (Mark 0.00/2.50 — Incorrect)
+
+The function f(x) := x³ - 48x - 32 is strictly increasing at:
+- 3.65
+- 4
+- -4.11 ✓
+- -3.62
+
+**Correct answer: -4.11**
+
+---
+
+## QUIZ DC1B — Differential Calculus 1 (Bonus)
+
+### Question 1 (Mark 1.00/1.00 — Correct)
+
+Let f: R⁺ → R be the function:
+f(x) = { x² - 5x + 103   if x < 10;   15x + 3   if x ≥ 10 }
+
+Which of the following statements is correct?
+- The function is **differentiable** and **continuous** at 10. ✓
+
+**Correct answer: The function is differentiable and continuous at 10.**
+
+---
+
+### Question 2 (Mark 1.00/1.00 — Correct)
+
+Consider the function f: [-2, 3] → R, whose graph looks as follows:
+
+Which statement is correct?
+- f'(a) < f'(b) for all a ∈ (-1, 2) and b ∈ (2, 3) ✓
+- f'(-1.2) < 0
+- f'(2.35) < 0
+- f'(a) > f'(b) for some a ∈ (-1, 2) and b ∈ (2, 3)
+- f'(-1) = f'(0)
+
+**Correct answer: f'(a) < f'(b) for all a ∈ (-1, 2) and b ∈ (2, 3)**
+
+---
+
+## QUIZ DC2Q — Differential Calculus 2 (Questions)
+
+### Question 1 (Mark 2.00/2.00 — Correct)
+
+Let f: R → R be given by:
+f(x) = (4/(π + 16)) · x² · sin(5x - 8) + 17
+
+Calculate the derivative of f at x = (π+16)/10.
+
+f'((π+16)/10) = [**4/5**]
+
+**Correct answer: 0.8**
+
+---
+
+### Question 2 (Mark 3.00/3.00 — Correct)
+
+Given f: R → R with f(x) = cos(4x). Compute f^(10)(x).
+
+f^(10)(x) = [**-4^10**] · cos([**4x**])
+
+**Correct answer: (-1)^5 * 4^10, 4*x**
+
+---
+
+### Question 3 (Mark 3.00/3.00 — Correct)
+
+The function f: R → R, f(x) = x³ - 2x² + 7 has stationary points.
+
+Let u be the largest number at which f is stationary. Compute u.
+
+u = [**4/3**]
+
+**Correct answer: 1.333333333333**
+
+The stationary point is:
+- a local minimum ✓
+- a local maximum
+- neither local minimum nor local maximum
+
+**Correct answer: a local minimum**
+
+---
+
+### Question 4 (Mark 1.33/2.00 — Partially correct)
+
+Let f, g: R → R be differentiable functions at x ∈ R. Select the correct statement(s):
+
+- Suppose that f is differentiable at g(x) ∈ R. Then (f ∘ g)'(x) = g'(f(x)) · f'(x).
+- Let r ∈ R. Then f'(r · x) = r · f'(x). ✗
+- It is true that (f · g)'(x) = f'(x) · g(x) - f(x) · g'(x).
+- It is true that (f/g)'(x) = (f'(x)·g(x) - f(x)·g'(x)) / g(x)² ✓
+- It is true that (f + g)'(x) = f'(x) + g'(x) ✓
+
+**Correct answers:**
+- (f/g)'(x) = (f'(x)·g(x) - f(x)·g'(x)) / g(x)²
+- (f + g)'(x) = f'(x) + g'(x)
+
+---
+
+## QUIZ DC2B — Differential Calculus 2 (Bonus)
+
+### Question 1 (Mark 1.00/1.00 — Correct)
+
+Given the function f: R → R with f(x) = x³ + 15x² - 168x + 19. Calculate the **local minimum** and the **local maximum** of f.
+
+- The local minimum is at x = **4**.
+- The local maximum is at x = **-14**.
+
+**Correct answers: 4, -14**
+
+---
+
+### Question 2 (Mark 1.00/1.00 — Correct)
+
+Given f: R → R with f(x) = e^(5x). Compute f^(12)(x).
+
+f^(12)(x) = [**5^12**] · e^([**5x**])
+
+**Correct answer: 5^12, 5*x**
+
+---
+
+## QUIZ DC3Q — Differential Calculus 3 (Questions)
+
+### Question 1 (Mark 0.60/3.00 — Partially correct)
+
+Suppose you want to **approximate** the function f: R → R with f(x) = 4e^(3(x+1)) + 4 in a **neighborhood of c = -1** by a **polynomial function of degree 3**.
+
+How would you choose the **coefficients** in the polynomial given below?
+
+[**4**] + [**12**](x+1) + [**36**](x+1)² + [**108**](x+1)³
+
+Use this polynomial to compute an **approximation** of e^(1.2):
+e^(1.2) ≈ [**0.2/3**]
+
+**Correct answer: 8, 12, 18, 18, 3.208**
+
+---
+
+### Question 2 (Mark 0.00/2.00 — Incorrect)
+
+Given the function f: R⁺ → R defined by f(x) = 9 ln(5x) + 4.
+
+The derivatives of f are as follows:
+- f'(x) = 9/x
+- f''(x) = -9/x²
+- f^(3)(x) = 18/x³
+- f^(n)(x) = (-1)^(n-1) · 9(n-1)! / x^n
+
+The Taylor polynomial T₁₁(x) of f at 1 of order 11 is a sum of powers of the form t_k · (x-1)^k. What is the coefficient t₇ at power 7 in this Taylor polynomial?
+
+t₇ = [**9*720**] ✗
+
+**Correct answer: 1.2857142857143**
+
+---
+
+### Question 3 (Mark 0.00/2.00 — Incorrect)
+
+Let f: R → R be the function f(x) = 6x³ + 5x² + 8x + 8. There is a number B such that f is concave in (-∞, B) and convex in (B, ∞). Compute B.
+
+B = [**36**] ✗
+
+**Correct answer: -0.27777777777778**
+
+---
+
+### Question 4 (Mark 0.00/3.00 — Incorrect)
+
+We want to use **L'Hopital's rule (LH)** to study the following limit:
+lim_{x→9} 11 sin(πx) / (x² - 81)
+
+Examining this limit, we find:
+- LH is not applicable for this problem.
+- LH is applicable for this problem, but not decisive.
+- LH is applicable for this problem, but using LH, we find the limit does not exist.
+- LH is applicable, and using LH, we find the limit is -1.
+- LH is applicable, and using LH, we find the limit is π/2.
+- LH is applicable, and using LH, we find the limit is 1.
+- LH is applicable, and using LH, we find the limit is **0**.
+- LH is applicable, and using LH, we find the limit is 11/18.
+- LH is applicable, and using LH, we find the limit is -11/18.
+- LH is applicable, and using LH, we find the limit is -11π/18.
+
+**Correct answer: LH is applicable, and using LH, we find the limit is -11π/18.**
+
+---
+
+## QUIZ DC3B — Differential Calculus 3 (Bonus)
+
+### Question 1 (Mark 1.00/1.00 — Correct)
+
+We want to use **L'Hopital's rule (LH)** to study:
+lim_{x→2} (-114x² + 209x + 19x³ - 114) / (-66 + 11x³ - 66x² + 121x)
+
+The result is:
+- LH is applicable, and using LH, we find the limit is **19/11**. ✓
+
+**Correct answer: 19/11**
+
+---
+
+### Question 2 (Mark 1.00/1.00 — Correct)
+
+Suppose from an "unknown" function f you know:
+- f(4) = -5
+- f'(4) = -7
+- f''(4) = -8
+- f^(3)(4) = 6
+- f(5.81) = -24.84
+
+**(a)** If you want to approximate f(x) for x near 4 using the given information, you would use a Taylor polynomial at [**4**] of order [**3**].
+
+**(b)** Compute an approximation of f(4.07) using the "best possible" Taylor polynomial.
+
+f(4.07) ≈ **-5.509**
+
+**Correct answer: -5.51**
+
+---
+
+## QUIZ BIT1Q — Basic Integration Theory 1 (Questions)
+
+### Question 1 (Mark 2.00/2.00 — Correct)
+
+Let the function f: R → R be defined by f(x) = (x⁵ + 1)e^(x² + 6x + 6).
+
+Consider the function F(x) such that F'(x) = f(x). Which of the following is a possible form of F(x)?
+
+- (x⁵ + 1)²e^(x² + 6x + 6)
+- e^(x² + 6x + 6)
+- (1/6)e^(x² + 6x + 6) ✓
+- e^(x² + 6x + 6) + ∫(x⁵ + 1)e^(x² + 6x + 6) dx
+
+**Correct answer: (1/6)e^(x² + 6x + 6)**
+
+---
+
+### Question 2 (Mark 2.00/2.00 — Correct)
+
+Use **Integration by Substitution** to compute:
+I = ∫ (ln(cos x))² sin x / cos x dx
+
+Which of the following is a correct expression for I?
+- -(1/3)(ln(cos x))³ ✓
+- (1/3)(ln(cos x))³
+- (1/2)(ln(cos x))²
+- -(ln(cos x))²
+
+**Correct answer: -(1/3)(ln(cos x))³**
+
+---
+
+### Question 3 (Mark 2.40/3.00 — Partially correct)
+
+Consider the **polynomial function** f: R → R with:
+f(x) = SUM_{i=0}^{3} 5aᵢxⁱ
+
+where the coefficients aᵢ are as follows:
+
+| a₀ | a₁ | a₂ | a₃ |
+|---|---|---|---|
+| 5  | 2  | -6 | 1  |
+
+Find an **antiderivative** g = ∫f(x)dx that satisfies g(0) = 7 in the form of a **polynomial function of degree 4**, i.e., a function g: R → R with:
+g(x) = SUM_{i=0}^{4} bᵢxⁱ
+
+Fill in the coefficients of g:
+
+| b₀ | b₁ | b₂ | b₃  | b₄  |
+|---|---|---|---|---|
+| 1  | 25 | 5  | -10 | 5/4 |
+
+**Correct answer: 7, 25, 5, -10, 1.25**
+
+---
+
+### Question 4 (Mark 1.50/3.00 — Partially correct)
+
+Use **Integration by Parts** to evaluate the integral:
+I = ∫ 3(x+1)² ln(x+1) dx
+
+The result can be expressed in the form:
+I = A(x+1)^B ln(x+1) - C(x+1)^D
+
+Calculate the values of A, B, C, and D:
+- A = 1
+- B = 3
+- C = 2 (student) → should be 0.33
+- D = 2 (student) → should be 3
+
+**Correct answer: 1, 3, 0.33, 3**
+
+---
+
+## QUIZ BIT1B — Basic Integration Theory 1 (Bonus)
+
+### Question 1 (Mark 0.67/1.00 — Partially correct)
+
+We calculate ∫ x²(x+10)^55 dx and obtain:
+
+x^a · (x+10)^56 / b - x^c · (x+10)^57 / d + (x+10)^e / f
+
+where:
+- a = 2, b = 56, c = 1, d = 3192, e = 58, f = 92664 (student entered)
+
+**Correct answer: 2, 56, 1, 1596, 58, 92568**
+
+---
+
+### Question 2 (Mark 0.33/1.00 — Partially correct)
+
+Use **Integration by Parts** to compute:
+I = ∫ -9x² sin(-7x) dx
+
+The result can be expressed in the form:
+Ax² cos(Bx) + C cos(Dx) + Ex sin(Fx)
+
+where B, D, and F have the same sign as -7.
+
+- A = -1.29, B = 7 (student entered -7 would be correct), C = 0.05, D = 7 (student), E = 0.37 (student entered, correct would be...), F = 7
+
+**Correct answer: -1.29, -7, -0.37, -7, 0.05, -7**
+
+---
+
+## QUIZ BIT2Q — Basic Integration Theory 2 (Questions)
+
+### Question 1 (Mark 0.00/3.00 — Incorrect)
+
+Let f: R → R, f(x) = √(1 + 2^x(63 - 63x)).
+
+Compute ∫₀¹ f'(x)dx.
+
+[1] ✗
+
+**Correct answer: -7**
+
+---
+
+### Question 2 (Mark 0.00/3.00 — Incorrect)
+
+Consider the function f: [0, 2] → R defined by:
+f(x) = { 14x        0 ≤ x ≤ 1;   28x - 14   1 ≤ x ≤ 2 }
+
+Compute the lower sum L₂(f).
+
+[49] ✗
+
+**Correct answer: 14**
+
+---
+
+### Question 3 (Mark 0.00/2.00 — Incorrect)
+
+If the graph of the linear function f: [2, 4] → R, f(x) = 3x rotates around the x-axis, it generates a truncated cone.
+
+The formula for the volume of a body of revolution generated by a rotating graph of f is π ∫ₐ^b (f(x))² dx. Compute the volume of the truncated cone divided by π.
+
+[168*pi] ✗
+
+**Correct answer: 168**
+
+---
+
+### Question 4 (Mark 0.00/2.00 — Incorrect)
+
+Calculate the following integral:
+I = ∫₁^16 4/√x dx
+
+[4] ✗
+
+**Correct answer: 24**
+
+---
+
+## QUIZ BIT2B — Basic Integration Theory 2 (Bonus)
+
+### Question 1 (Mark 1.00/1.00 — Correct)
+
+Calculate the following integral:
+I = ∫₂^19.5 2/√(2x - 3) dx
+
+Answer: **10**
+
+**Correct answer: 10**
+
+---
+
+### Question 2 (Mark 1.00/1.00 — Correct)
+
+Let f: [0, 1] → R be the function f(x) = 5x² + 3x + 4.
+
+Compute the upper sum U₄(f).
+
+**8.218**
+
+**Correct answer: 8.21875**
+
+---
+
+## QUIZ BIT3Q — Basic Integration Theory 3 (Questions)
+
+### Question 1 (Mark 0.00/3.00 — Incorrect)
+
+A random quantity has probability density function p: R → R, p(x) = e^(-|x|)/2.
+
+Compute P(x ∈ [-ln(2), ln(2)]).
+
+[0] ✗
+
+**Correct answer: 0.5**
+
+---
+
+### Question 2 (Mark 3.00/3.00 — Correct)
+
+Compute ∫₃^4 (x - 3)^(-0.6) dx.
+
+[1^0.4/0.4] ✓
+
+**Correct answer: 2.5**
+
+---
+
+### Question 3 (Mark 0.00/4.00 — Incorrect)
+
+The graph of the function f: [e⁴, e^12] → R, f(x) = 5/√x rotates around the x-axis.
+
+The volume of revolution is given by V = πA. Determine the rational number A.
+
+A = [(5/2)*30] ✗
+
+**Correct answer: 200**
+
+---
+
+## QUIZ BIT3B — Basic Integration Theory 3 (Bonus)
+
+### Question 1 (Mark 1.00/1.00 — Correct)
+
+A random quantity X is uniformly distributed in [3, 8]. Compute the expectation value of (X - 1)².
+
+**67/3**
+
+**Correct answer: 22.333333333333**
+
+---
+
+### Question 2 (Mark 0.00/1.00 — Incorrect)
+
+Compute ∫₁^∞ 1/(x+2)^(2.3) dx.
+
+[0.1234] ✗
+
+**Correct answer: 0.18441617777561**
+
+---
+
+## QUIZ MC1Q — Multivariate Calculus 1 (Questions)
+
+### Question 1 (Mark 3.00/3.00 — Correct)
+
+Consider the vector v = (1, -2, 2)ᵀ.
+
+Fill in the appropriate norm of vectors in the table below:
+
+| ||v||₂ | ||v||₁ | ||-2v||∞ |
+|---|---|---|
+| 3 | 5 | 4 |
+
+**Correct answer: 3, 5, 4**
+
+---
+
+### Question 2 (Mark 3.00/3.00 — Correct)
+
+Let f: R² → R be given by:
+f(x,y) = { (2x+y+7)/(x²+2y²+1),   if (x,y) ≠ (-2,-1);   c,   if (x,y) = (-2,-1) }
+
+for a real parameter c. Determine c such that the function f is continuous everywhere.
+
+c = [**2/7**]
+
+**Correct answer: 0.28571428571429**
+
+---
+
+### Question 3 (Mark 4.00/4.00 — Correct)
+
+Determine the limit lim_{k→∞} s^(k), where s: N → R⁴ and:
+
+s^(k) = ((-2) · ⁴√2, (3k² - 4k + 4)/(2k² + 5k + 8), sin(8/k), cos(4/k))
+
+Denote the limit by y = (y₁, y₂, y₃, y₄). Fill in the appropriate numbers:
+
+| y₁ | y₂  | y₃ | y₄ |
+|---|---|---|---|
+| -2 | 6/4 | 0  | 1  |
+
+**Correct answer: -2, 1.5, 0, 1**
+
+---
+
+## QUIZ MC1B — Multivariate Calculus 1 (Bonus)
+
+### Question 1 (Mark 1.00/1.00 — Correct)
+
+Let f: R² → R be given by:
+f(x₁, x₂) = { 3(x₁² - x₂²)/(x₁² + x₂²),   if x ≠ (0,0);   0,   if x = (0,0) }
+
+Furthermore, let s: N → R² be defined as:
+s^(k) = (k⁻¹ · cos(1/2 · π), k⁻¹ · sin(1/2 · π))
+
+Determine lim_{k→∞} f(s^(k)).
+
+lim_{k→∞} f(s^(k)) = **-3**
+
+**Correct answer: -3**
+
+---
+
+### Question 2 (Mark 0.67/1.00 — Partially correct)
+
+Determine the limit lim_{k→∞} s^(k), where s: N → R³ and:
+
+s^(k) = ((-2) · ⁶√k, (3k² - 4k + 4)/((4k-5)(k+8)), cos(4/k) + ln((k+1/k)^(6k)))
+
+Denote the limit by y = (y₁, y₂, y₃). Fill in:
+
+| y₁ | y₂   | y₃ |
+|---|---|---|
+| 0  | 0.75 | 7  |
+
+**Correct answer: -2, 0.75, 7**
+
+---
+
+## QUIZ MC2Q — Multivariate Calculus 2 (Questions)
+
+### Question 1 (Mark 0.00/4.00 — Incorrect)
+
+Let f: R² → R given by f(x, y) = 2e^(xy) + 3x sin(y - 3).
+
+Determine the tangent plane of the function f at the point P = (0, 3).
+
+T(x, y) = [**6**] + [**3**]x + [**3**](y - 3)
+
+**Correct answer: 2, 6, 0**
+
+---
+
+### Question 2 (Mark 0.00/4.00 — Incorrect)
+
+Let f: R² → R be given by f(x, y) = 26 · √(x² + 3y²).
+
+We wish to determine the directional derivative D_u f(2, 2) when the direction is given by u = (12/13, 5/13).
+
+**Step 1:** Compute the 1st order partial derivatives:
+- ∂f/∂x (2, 2) = [**12**] ✗ (Correct: 13)
+- ∂f/∂y (2, 2) = [**78**] ✗ (Correct: 39)
+
+**Step 2:** By the gradient formula, compute the directional derivative.
+D_u f(2, 2) = [(12*(12/13)) + (...)] ✗
+
+**Correct answer for D_u f: 27**
+
+---
+
+### Question 3 (Mark 2.00/2.00 — Correct)
+
+Let f: R² → R be defined by f(x, y) = 2x²y² + 7y².
+
+Compute all the second-order partial derivatives of f:
+
+- ∂²f/∂x∂y (x,y) = [**8**]xy
+- ∂²f/∂y∂x (x,y) = [**8**]xy
+- ∂²f/∂x² (x,y) = [**4**]y²
+- ∂²f/∂y² (x,y) = [**4**]x² + [**14**]
+
+**Correct answer: 8, 8, 4, 4, 14**
+
+---
+
+## QUIZ MC2B — Multivariate Calculus 2 (Bonus)
+
+### Question 1 (Mark 1.00/1.00 — Correct)
+
+Compute the Hessian of the following function at the point P₀ = (1, 0):
+f(x, y) = cos(3y) - 3x²y - 5x³
+
+For entering the Hessian, we define H_f(P₀) = ((a, b), (c, d)).
+
+- a = **-30**
+- b = **-6**
+- c = **-6**
+- d = **-9**
+
+**Correct answer: -30, -6, -6, -9**
+
+---
+
+### Question 2 (Mark 1.00/1.00 — Correct)
+
+Determine if the vector defines a direction in R²/R³:
+
+- (2/5, 2/5) in R²: **no** (correct)
+- (3/5, 4/5) in R²: **yes** (correct)
+- (-5/4, 1/2, 1/2) in R³: **no** (correct)
+- (4/9, 4/9, 7/9) in R³: **yes** (correct)
+
+**Correct answer: no, yes, no, yes**
+
+---
+
+# FILE 11: 2022SS-Math4AI2-Exam2solutions.pdf
+**Summer semester 2022, 16.08.2022, 10:00–13:00 Uhr**
+**2nd Final Exam: Mathematics for Artificial Intelligence 2**
+Duration: 180 minutes, Maximum of 58 points
+
+---
+
+## Exercise 1: Limits (8 points)
+
+Determine if the following proper or improper limits exist and, if applicable, determine the value.
+
+**a)** lim_{x→0} (e^(2x) - 2x - 1) / x²
+
+**b)** lim_{x→1/2} 2^(6x) / 3^(4x)
+
+**c)** lim_{x→0} e^(-1/x)
+
+**Solution:**
+
+**a)** Use L'Hopital's rule. Answer: **2**
+
+**b)** Just substitute. Answer: **8/9**
+
+**c)** Answer: **no limit** (one-sided limits differ; argument via one-sided limits)
+
+---
+
+## Exercise 2: Global and Local Extrema (15 points)
+
+Consider the function f: R → R with f(x) = e^(-x²/2) · x.
+
+**a)** Determine all local and global extrema and extreme values of f.
+
+**b)** Where is f monotonically increasing/decreasing?
+
+**c)** Where is f convex/concave?
+
+**Solution:**
+
+We have:
+- f'(x) = e^(-x²/2)(1 - x²)
+- f''(x) = e^(-x²/2) · x(x² - 3)
+
+**a)** Setting f'(x) = 0: x₁ = 1 and x₂ = -1.
+- f''(1) = -2/√e < 0 → **local maximum at x₁ = 1**, value f(1) = 1/√e
+- f''(-1) = 2/√e > 0 → **local minimum at x₂ = -1**, value f(-1) = -1/√e
+
+Since lim_{x→±∞} f(x) = 0:
+- **Global minimum at x₂ = -1** with value f(-1) = -1/√e
+- **Global maximum at x₁ = 1** with value f(1) = 1/√e
+
+**b)** f is **decreasing** in (-∞, -1) ∪ (1, ∞) and **increasing** in (-1, 1).
+
+**c)** f is **concave** in [-∞, -√3] ∪ [0, √3] and **convex** in [-√3, 0] ∪ [√3, ∞).
+
+---
+
+## Exercise 3: Taylor Series (7 points)
+
+Determine the Taylor polynomial T₄(x) of order 4 of the function:
+f: R → R, f(x) = x + (sin(x))²
+
+around x₀ = π.
+
+**Solution:**
+
+We compute:
+- f'(x) = 1 + 2sin(x)cos(x)
+- f''(x) = 2(cos²(x) - sin²(x))
+- f'''(x) = -8sin(x)cos(x)
+- f^(4)(x) = -8(cos²(x) - sin²(x))
+
+Values at x₀ = π:
+- f(π) = π
+- f'(π) = 1
+- f''(π) = 2
+- f'''(π) = 0
+- f^(4)(π) = -8
+
+Hence:
+T₄(x) = π + (x - π) + (x - π)² - (1/3)(x - π)⁴
+       = **x + (x - π)² - (1/3)(x - π)⁴**
+
+---
+
+## Exercise 4: Antiderivatives (8 points)
+
+**a)** Compute the integral ∫₁^e f₁(x) dx for f₁(x) = 3x² · ln(x³).
+
+**b)** Find the function f₂ on (0,∞) with f₂'(x) = 1/(x ln(x)) for all x ∈ (0,∞) and f₂(e) = 1.
+
+**Solution:**
+
+**a)** Use partial integration with f'(x) = 3x² and g(x) = ln(x³) = 3 ln(x):
+- f(x) = x³ and g'(x) = 3/x
+
+∫ f₁(x)dx = 3x³ ln(x) - ∫ 3x² dx = 3x³ ln(x) - x³
+
+Hence:
+∫₁^e f₁(x) dx = **2e³ + 1**
+
+**b)** Use the substitution t = ln(x), dt = dx/x:
+
+f₂(x) = ∫ f₂'(x)dx = ∫ (1/t)dt = ln(t) + C = ln ln(x) + C
+
+We get f₂(e) = C, so **f₂(x) = 1 + ln ln(x)**
+
+---
+
+## Exercise 5: Fourier Series (10 points)
+
+Compute the Fourier series Sh(x) of the function h: [0, 1) → R with h(x) = 2x - 1.
+
+Simplify the result! (Complex numbers in canonical form.)
+
+Determine all x ∈ [0, 1) for which Sh(x) equals h(x).
+
+**Solution:**
+
+We compute Fourier coefficients according to Definition 7.14:
+
+f̂(k) = 2∫₀¹ xe^(-2πikx)dx - ∫₀¹ e^(-2πik)dx = -1/(πik) = i/(πk) for k ≠ 0.
+
+For k = 0: f̂(0) = 0.
+
+Thus:
+**Sh(x) = (i/π) · SUM_{k≠0} (1/k) · e^(2πikx)**
+
+Since h: [0, 1) → R is piecewise continuous, by Dirichlet's theorem (Theorem 7.39):
+- h is differentiable in x ∈ (0, 1), therefore for those x, **Sh(x) = h(x)**.
+- For x = 0: h(0) = -1 but Sh(0) = 0 → **no convergence at x = 0**.
+
+Therefore Sh(x) = h(x) for all x ∈ **(0, 1)**, but not at x = 0.
+
+---
+
+## Exercise 6: Extrema under Constraints (10 points)
+
+Calculate the global extrema of:
+f(x₁, x₂) = 2(x₂ - 1)² + (x₁ + 1)²
+
+under the constraint:
+x₁² + 2x₂² ≤ 1/3
+
+**Solution:**
+
+First: the only stationary point of f on R² is at (x₁, x₂) = (-1, 1), which does not fulfill the constraint. Hence no extrema in the interior Ω° = {x₁² + 2x₂² < 1/3}.
+
+Use Lagrange multipliers on the boundary x₁² + 2x₂² = 1/3:
+
+Lagrange function:
+L(x₁, x₂, λ) = (x₁ + 1)² + 2(x₂ - 1)² + λ(x₁² + 2x₂² - 1/3)
+
+∇_x L = (2(x₁ + 1) + λ2x₁, 4(x₂ - 1) + λ4x₂)
+
+Solve:
+- 2(x₁ + 1) + λ2x₁ = 0
+- 4(x₂ - 1) + λ4x₂ = 0
+- x₁² + 2x₂² = 1/3
+
+From first two equations (λ ≠ -1):
+- x₁ = -1/(1+λ)
+- x₂ = 1/(1+λ)
+
+Substituting into constraint:
+(-1/(1+λ))² + 2(1/(1+λ))² = 1/3
+→ 9 = (1+λ)² → 3 = |1+λ| → **λ = 2 or λ = -4**
+
+Critical points:
+- λ = 2: (-1/3, 1/3) → f(-1/3, 1/3) = **4/3 (global minimum)**
+- λ = -4: (1/3, -1/3) → f(1/3, -1/3) = **16/3 ≈ 5.33 (global maximum)**
+
+---
+
+This completes the full content of all 11 PDF files. The files cover:
+- **Files 1–5:** Statistics for AI (SS2020, SS2021) — Bayesian probability, normal distributions, descriptive statistics, regression, hypothesis testing, confidence intervals
+- **File 6:** Math for AI 2 Exam 2023 — Calculus, sequences, continuity, derivatives
+- **Files 7–8:** Math for AI 2 Exam 1 and 3 (SS2022) — Derivatives, limits, extrema, Taylor series, integrals, Fourier series, Jacobians
+- **File 9:** Math II Exam 04.09.2024 — Curve analysis, integrals, positive definiteness, optimization, constrained extrema
+- **File 10:** Math for AI II online quizzes — Continuity (CF1Q/B, CF2Q/B, CF3Q/B), Derivatives (DC1Q/B, DC2Q/B, DC3Q/B), Integration (BIT1Q/B, BIT2Q/B, BIT3Q/B), Multivariate calculus (MC1Q/B, MC2Q/B)
+- **File 11:** Math for AI 2 Exam 2 with full solutions (SS2022) — Limits, extrema, Taylor series, antiderivatives, Fourier series, Lagrange multipliers

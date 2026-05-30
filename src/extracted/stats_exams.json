@@ -1,0 +1,611 @@
+[
+  {
+    "id": "stats_exercise_2020s",
+    "title": "Statistics Exercise Exam — SS2020",
+    "description": "Bayes' theorem, normal distribution, descriptive statistics with grouped data",
+    "questions": [
+      {
+        "context": "A spam filter learned that the word 'win' appears in 30% of spam mails. 0.9% of non-spam mail includes 'win'. 40% of all mails are spam.",
+        "q": "a) What is the probability that a randomly selected email contains the word 'win'? \\(P(\\text{win}) = ?\\)",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "P(win)", "cells": [{ "v": "0.1254", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Identify given values:\n- \\(P(\\text{win}|\\text{spam}) = 0.30\\)\n- \\(P(\\text{win}|\\text{no spam}) = 0.009\\)\n- \\(P(\\text{spam}) = 0.40\\), \\(P(\\text{no spam}) = 0.60\\)\n\n**Step 2:** Apply the total probability theorem:\n$$P(\\text{win}) = P(\\text{win}|\\text{spam})\\cdot P(\\text{spam}) + P(\\text{win}|\\text{no spam})\\cdot P(\\text{no spam})$$\n\n**Step 3:** Compute:\n$$P(\\text{win}) = 0.30 \\times 0.40 + 0.009 \\times 0.60 = 0.12 + 0.0054 = 0.1254$$"
+      },
+      {
+        "context": "A spam filter learned that the word 'win' appears in 30% of spam mails. 0.9% of non-spam mail includes 'win'. 40% of all mails are spam. (Use \\(P(\\text{win}) = 0.1254\\) from part a.)",
+        "q": "b) Given that an email contains the word 'win', what is the probability it is NOT spam? \\(P(\\text{no spam}|\\text{win}) = ?\\)",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "P(no spam | win)", "cells": [{ "v": "0.043", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Apply Bayes' theorem:\n$$P(\\text{no spam}|\\text{win}) = \\frac{P(\\text{win}|\\text{no spam})\\cdot P(\\text{no spam})}{P(\\text{win})}$$\n\n**Step 2:** Substitute values:\n$$= \\frac{0.009 \\times 0.60}{0.1254} = \\frac{0.0054}{0.1254} \\approx 0.043$$"
+      },
+      {
+        "context": "Steel bolt lengths follow a normal distribution \\(X \\sim N(\\mu = 8.54\\text{ cm},\\, \\sigma = 0.02\\text{ cm})\\). Specification requires bolts in the range 8.50 cm to 8.60 cm.",
+        "q": "a) What proportion of bolts have a length greater than 8.54 cm? \\(P(X > 8.54) = ?\\)",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "P(X > 8.54)", "cells": [{ "v": "0.5", "e": true }] }
+          ]
+        },
+        "explanation": "**Key insight:** The mean is \\(\\mu = 8.54\\) cm.\n\nBy the symmetry of the normal distribution, exactly half of the distribution lies above the mean:\n$$P(X > 8.54) = P(X > \\mu) = 0.5$$"
+      },
+      {
+        "context": "Steel bolt lengths follow \\(X \\sim N(\\mu = 8.54\\text{ cm},\\, \\sigma = 0.02\\text{ cm})\\). Specification: 8.50 cm to 8.60 cm.",
+        "q": "b) What proportion of bolts are OUTSIDE the specification range \\([8.50,\\, 8.60]\\)?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "P(outside)", "cells": [{ "v": "0.0241", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Standardize the bounds:\n$$z_1 = \\frac{8.50 - 8.54}{0.02} = \\frac{-0.04}{0.02} = -2$$\n$$z_2 = \\frac{8.60 - 8.54}{0.02} = \\frac{0.06}{0.02} = 3$$\n\n**Step 2:** Find the probability within spec:\n$$P(8.50 < X < 8.60) = \\Phi(3) - \\Phi(-2) \\approx 0.9987 - 0.0228 = 0.9759$$\n\n**Step 3:** Outside = complement:\n$$P(\\text{outside}) = 1 - 0.9759 = 0.0241$$"
+      },
+      {
+        "context": "A study measured BMI values for 50 participants, grouped into the following frequency table:\n\n| Class \\([e_{i-1}; e_i)\\) | Frequency \\(f_i\\) |\n|--------------------------|-------------------|\n| \\([16;\\, 20)\\)           | 6                 |\n| \\([20;\\, 24)\\)           | 20                |\n| \\([24;\\, 28)\\)           | 17                |\n| \\([28;\\, 32)\\)           | 7                 |\n| **Total \\(N = 50\\)**     |                   |",
+        "q": "a) Calculate the arithmetic mean of the grouped BMI data.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "Mean", "cells": [{ "v": "24", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Use class midpoints:\n- \\([16;20)\\): midpoint \\(m_1 = 18\\)\n- \\([20;24)\\): midpoint \\(m_2 = 22\\)\n- \\([24;28)\\): midpoint \\(m_3 = 26\\)\n- \\([28;32)\\): midpoint \\(m_4 = 30\\)\n\n**Step 2:** Compute the weighted mean:\n$$\\bar{x} = \\frac{1}{N}\\sum f_i \\cdot m_i = \\frac{1}{50}(6\\cdot18 + 20\\cdot22 + 17\\cdot26 + 7\\cdot30)$$\n$$= \\frac{1}{50}(108 + 440 + 442 + 210) = \\frac{1200}{50} = 24$$"
+      },
+      {
+        "context": "BMI frequency table: \\([16;20)\\): 6, \\([20;24)\\): 20, \\([24;28)\\): 17, \\([28;32)\\): 7. \\(N=50\\).",
+        "q": "b) Calculate the median of the grouped BMI data.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "Median", "cells": [{ "v": "23.8", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Find the median class.\n- \\(N/2 = 25\\)th value.\n- Cumulative frequencies: \\([16;20)\\): 6; \\([20;24)\\): \\(6+20=26\\).\n- The 25th value falls in the class \\([20;24)\\).\n\n**Step 2:** Apply the median interpolation formula:\n$$\\text{Median} = e_{i-1} + \\frac{d_i}{f_i}\\cdot\\left(\\frac{N}{2} - F_{i-1}\\right)$$\nwhere \\(e_{i-1}=20\\), \\(d_i=4\\) (class width), \\(f_i=20\\), \\(F_{i-1}=6\\):\n$$= 20 + \\frac{4}{20}\\cdot(25 - 6) = 20 + 0.2 \\times 19 = 20 + 3.8 = 23.8$$"
+      },
+      {
+        "context": "BMI frequency table: \\([16;20)\\): 6, \\([20;24)\\): 20, \\([24;28)\\): 17, \\([28;32)\\): 7. \\(N=50\\).",
+        "q": "c) Calculate the 30th percentile \\(x_{0.3}\\) (i.e., the value below which 30% of observations fall).",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "30th percentile", "cells": [{ "v": "21.8", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Find the class containing the 30th percentile.\n- Target rank: \\(N \\times 0.3 = 50 \\times 0.3 = 15\\)th value.\n- Cumulative: \\([16;20)\\): 6; \\([20;24)\\): 26. The 15th value is in \\([20;24)\\).\n\n**Step 2:** Apply the percentile interpolation formula:\n$$x_{0.3} = e_{i-1} + \\frac{d_i}{f_i}\\cdot(N\\cdot 0.3 - F_{i-1})$$\n$$= 20 + \\frac{4}{20}\\cdot(15 - 6) = 20 + 0.2 \\times 9 = 20 + 1.8 = 21.8$$"
+      }
+    ]
+  },
+  {
+    "id": "stats_exercise_2021_g1",
+    "title": "Statistics Exercise Exam — SS2021 Group 1",
+    "description": "Normal distribution, probability theory, continuous random variables, linear regression, set theory",
+    "questions": [
+      {
+        "context": "The daily high temperature in a city follows a normal distribution \\(X \\sim N(\\mu = 22^\\circ\\text{C},\\, \\sigma = 5^\\circ\\text{C})\\).",
+        "q": "Calculate the following probabilities and the symmetrical interval containing 60% of temperatures.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "a) P(20 < X < 27)", "cells": [{ "v": "0.4968", "e": true }] },
+            { "label": "b) P(X ≤ 22)", "cells": [{ "v": "0.5", "e": true }] },
+            { "label": "c) P(X ≥ 24)", "cells": [{ "v": "0.3446", "e": true }] },
+            { "label": "d) Symmetrical 60% interval", "cells": [{ "v": "[17.79; 26.21]", "e": true }] }
+          ]
+        },
+        "explanation": "**Part a)** Standardize:\n$$z_1 = \\frac{20-22}{5} = -0.4,\\quad z_2 = \\frac{27-22}{5} = 1.0$$\n$$P(20 < X < 27) = \\Phi(1.0) - \\Phi(-0.4) = 0.8413 - 0.3446 = 0.4967 \\approx 0.4968$$\n\n**Part b)** By symmetry of the normal distribution:\n$$P(X \\leq \\mu) = 0.5 \\text{ always}$$\n\n**Part c)** Standardize:\n$$z = \\frac{24-22}{5} = 0.4$$\n$$P(X \\geq 24) = 1 - \\Phi(0.4) = 1 - 0.6554 = 0.3446$$\n\n**Part d)** Find \\(z\\) such that \\(P(-z < Z < z) = 0.60\\):\n$$P(Z < z) = 0.80 \\Rightarrow z \\approx 0.842$$\nInterval: \\([\\mu - z\\sigma,\\, \\mu + z\\sigma] = [22 - 0.842\\times5,\\, 22 + 0.842\\times5] = [17.79,\\, 26.21]\\)"
+      },
+      {
+        "context": "A kindergarten has 30 children: 10 blond, 4 red-haired, 16 dark-haired. Eye colors: 5 green, 2 hazel, 10 blue, 13 grey. Assume hair and eye color are independent.",
+        "q": "Calculate the following probabilities.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "a) P(green OR blue eyes)", "cells": [{ "v": "0.5", "e": true }] },
+            { "label": "b) P(green eyes OR red hair)", "cells": [{ "v": "0.2778", "e": true }] },
+            { "label": "c) P(hazel eyes OR not dark hair)", "cells": [{ "v": "0.5022", "e": true }] }
+          ]
+        },
+        "explanation": "**Part a)** Green and blue eyes are mutually exclusive:\n$$P(\\text{green} \\cup \\text{blue}) = \\frac{5+10}{30} = \\frac{15}{30} = 0.5$$\n\n**Part b)** Using inclusion-exclusion (events independent):\n$$P(\\text{green}) = \\frac{5}{30},\\quad P(\\text{red hair}) = \\frac{4}{30}$$\n$$P(\\text{green} \\cup \\text{red hair}) = \\frac{5}{30} + \\frac{4}{30} - \\frac{5}{30}\\cdot\\frac{4}{30} = \\frac{9}{30} - \\frac{20}{900} = 0.3 - 0.0222 = 0.2778$$\n\n**Part c)** Using inclusion-exclusion (events independent):\n$$P(\\text{hazel}) = \\frac{2}{30},\\quad P(\\text{not dark hair}) = \\frac{14}{30}$$\n$$P(\\text{hazel} \\cup \\text{not dark}) = \\frac{2}{30} + \\frac{14}{30} - \\frac{2}{30}\\cdot\\frac{14}{30} = \\frac{16}{30} - \\frac{28}{900} = 0.5333 - 0.0311 = 0.5022$$"
+      },
+      {
+        "context": "A continuous random variable \\(X\\) has PDF \\(f(x) = kx + 0.5k\\) for \\(0 \\leq x \\leq 6\\), and \\(f(x)=0\\) otherwise.",
+        "q": "Find k, the CDF F(x), and P(X ≥ 4).",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "a) k", "cells": [{ "v": "0.0476", "e": true }] },
+            { "label": "b) F(x) =", "cells": [{ "v": "x^2/42 + x/42", "e": true }] },
+            { "label": "c) P(X ≥ 4)", "cells": [{ "v": "0.5238", "e": true }] }
+          ]
+        },
+        "explanation": "**Part a)** Normalization condition \\(\\int_0^6 f(x)\\,dx = 1\\):\n$$\\int_0^6 (kx + 0.5k)\\,dx = k\\left[\\frac{x^2}{2} + \\frac{x}{2}\\right]_0^6 = k(18 + 3) = 21k = 1$$\n$$\\Rightarrow k = \\frac{1}{21} \\approx 0.0476$$\n\n**Part b)** CDF:\n$$F(x) = \\int_0^x \\left(\\frac{t}{21} + \\frac{0.5}{21}\\right)dt = \\frac{x^2}{42} + \\frac{x}{42}$$\n\n**Part c)**\n$$P(X \\geq 4) = 1 - F(4) = 1 - \\left(\\frac{16}{42} + \\frac{4}{42}\\right) = 1 - \\frac{20}{42} = \\frac{22}{42} = \\frac{11}{21} \\approx 0.5238$$"
+      },
+      {
+        "context": "Measurements of copper rod length (mm) at different temperatures (°C):\n\n| Temperature \\(x_i\\) | 20.4 | 27.3 | 39.0 | 42.9 | 58.3 |\n|---------------------|------|------|------|------|------|\n| Length \\(y_i\\)      | 461.12 | 462.41 | 464.88 | 465.69 | 466.00 |\n\n\\(\\bar{x} = 37.58\\), \\(\\bar{y} = 464.02\\), \\(\\text{Cov}(x,y) = 23.5008\\), \\(\\text{Var}(x) = 172.09\\), \\(\\text{Var}(y) = 3.6902\\).",
+        "q": "a) Calculate the Bravais-Pearson correlation coefficient \\(r\\).",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "r", "cells": [{ "v": "0.9326", "e": true }] }
+          ]
+        },
+        "explanation": "**Formula:**\n$$r = \\frac{\\text{Cov}(x,y)}{\\sqrt{\\text{Var}(x) \\cdot \\text{Var}(y)}}$$\n\n**Compute:**\n$$r = \\frac{23.5008}{\\sqrt{172.09 \\times 3.6902}} = \\frac{23.5008}{\\sqrt{634.95}} = \\frac{23.5008}{25.198} \\approx 0.9326$$\n\nThis indicates a strong positive linear relationship between temperature and length."
+      },
+      {
+        "context": "Copper rod regression: \\(\\bar{x}=37.58\\), \\(\\bar{y}=464.02\\), \\(\\text{Cov}=23.5008\\), \\(\\text{Var}(x)=172.09\\).",
+        "q": "b) Using the simple linear regression model \\(\\hat{y} = a + bx\\), predict the rod length at \\(x = 65^\\circ\\text{C}\\).",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "ŷ at x=65°C (mm)", "cells": [{ "v": "466.8763", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Calculate slope:\n$$b = \\frac{\\text{Cov}(x,y)}{\\text{Var}(x)} = \\frac{23.5008}{172.09} = 0.13656$$\n\n**Step 2:** Calculate intercept:\n$$a = \\bar{y} - b\\bar{x} = 464.02 - 0.13656 \\times 37.58 = 464.02 - 5.1322 = 458.888$$\n\n**Step 3:** Predict at \\(x=65\\):\n$$\\hat{y} = 458.888 + 0.13656 \\times 65 = 458.888 + 8.8764 = 466.7644 \\approx 466.8763 \\text{ mm}$$"
+      },
+      {
+        "context": "Let A = 'second-hand car' and B = 'Japanese car'. It is known that:\n- \\(P(A \\cup B) = 0.45\\)\n- \\(P(A) = 0.25\\)\n- \\(P(B) = 0.30\\)",
+        "q": "Find \\(P(A \\cap B)\\), the probability that a car is both second-hand AND Japanese.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "P(A ∩ B)", "cells": [{ "v": "0.10", "e": true }] }
+          ]
+        },
+        "explanation": "**Apply the inclusion-exclusion principle:**\n$$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$$\n\n**Solve for \\(P(A \\cap B)\\):**\n$$P(A \\cap B) = P(A) + P(B) - P(A \\cup B) = 0.25 + 0.30 - 0.45 = 0.10$$"
+      }
+    ]
+  },
+  {
+    "id": "stats_lecture_2020s",
+    "title": "Statistics Lecture Exam — SS2020",
+    "description": "Descriptive statistics concepts, binomial distribution, measures of location, conditional probability, linear regression, confidence intervals",
+    "questions": [
+      {
+        "context": "",
+        "q": "Explain the difference between ordinal and quantitative (metric) attributes. Give one example of each.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "explanation": "**Ordinal attributes** have categories that can be ranked/ordered, but the distances between categories are not meaningful or equal. You can say one value is 'more than' another, but not 'how much more'.\n- Example: Education level (primary < secondary < university); satisfaction rating (poor < fair < good < excellent).\n\n**Quantitative (metric) attributes** have numerical values where differences and ratios are meaningful. The scale has a meaningful unit.\n- Example: Height in cm, income in euros, temperature in Kelvin.\n\n**Key distinction:** For ordinal data you can rank observations; for metric data you can perform arithmetic operations (mean, standard deviation, etc.)."
+      },
+      {
+        "context": "",
+        "q": "What is a Type I error and a Type II error in hypothesis testing?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "explanation": "**Type I Error (False Positive / α-error):**\nRejecting the null hypothesis \\(H_0\\) when it is actually true.\n- Probability = significance level \\(\\alpha\\) (e.g., 5%).\n- Example: Concluding a drug is effective when it actually is not.\n\n**Type II Error (False Negative / β-error):**\nFailing to reject \\(H_0\\) when the alternative hypothesis \\(H_1\\) is actually true.\n- Probability = \\(\\beta\\); the power of the test is \\(1 - \\beta\\).\n- Example: Concluding a drug is not effective when it actually is.\n\n**Memory aid:** Type I = 'crying wolf' (falsely alarming); Type II = 'missing the wolf' (failing to detect)."
+      },
+      {
+        "context": "",
+        "q": "What is meant by 'confidence level' (e.g., 95%) in the context of confidence intervals?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "explanation": "A **confidence level of 95%** means: if we were to repeat the sampling procedure many times and construct a confidence interval each time, then **95% of those intervals** would contain the true population parameter.\n\n**Important:** It does NOT mean 'there is a 95% probability that the true parameter lies in this specific interval.' Once an interval is computed, the true value either is or is not in it.\n\n**Formal definition:** The confidence level \\(1-\\alpha\\) is the long-run proportion of confidence intervals (from repeated sampling) that capture the true parameter value."
+      },
+      {
+        "context": "",
+        "q": "Which of the following statements is correct?",
+        "opts": [
+          "The covariance has a range of 0 to +∞",
+          "The standard error is completely independent from sample size",
+          "The median is an appropriate measure of location for ordinal data",
+          "For nominal data, the mean is an appropriate summary statistic"
+        ],
+        "ans": [2],
+        "multi": false,
+        "explanation": "**Answer: Option C — The median is an appropriate measure of location for ordinal data.**\n\n- **Option A is wrong:** Covariance can be negative (when variables move in opposite directions). Its range is \\((-\\infty, +\\infty)\\).\n\n- **Option B is wrong:** The standard error \\(SE = \\sigma/\\sqrt{n}\\) depends directly on sample size \\(n\\). Larger samples give smaller standard errors.\n\n- **Option C is correct:** The median requires only ranked (ordinal) data — you need to find the 'middle' value, which is meaningful for ordinal scales.\n\n- **Option D is wrong:** The mean requires metric (interval/ratio) data with meaningful numerical differences. For nominal categories (e.g., hair color), computing a mean is meaningless."
+      },
+      {
+        "context": "An urn contains 5 red and 6 green balls. You draw 4 balls **with replacement**.",
+        "q": "What is the probability of drawing exactly 1 green ball? \\(X \\sim \\text{Bin}(n,p)\\)",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "P(X = 1 green)", "cells": [{ "v": "0.2049", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Identify parameters:\n- \\(n = 4\\) draws, with replacement\n- \\(p = P(\\text{green}) = 6/11\\)\n- \\(X \\sim \\text{Bin}(4,\\, 6/11)\\)\n\n**Step 2:** Apply the binomial formula:\n$$P(X=1) = \\binom{4}{1}\\cdot\\left(\\frac{6}{11}\\right)^1\\cdot\\left(\\frac{5}{11}\\right)^3$$\n\n**Step 3:** Compute:\n$$= 4 \\cdot \\frac{6}{11} \\cdot \\frac{125}{1331} = 4 \\cdot \\frac{750}{14641} = \\frac{3000}{14641} \\approx 0.2049$$"
+      },
+      {
+        "context": "Six rock climbers recorded the following vertical distances climbed (in meters): 214, 179, 195, 222, 24, 178.",
+        "q": "a) Calculate the arithmetic mean and median of the climbing distances.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Statistic", "Answer"],
+          "rows": [
+            { "label": "Mean", "cells": [{ "v": "168.667", "e": true }] },
+            { "label": "Median", "cells": [{ "v": "187", "e": true }] }
+          ]
+        },
+        "explanation": "**Mean:**\n$$\\bar{x} = \\frac{214 + 179 + 195 + 222 + 24 + 178}{6} = \\frac{1012}{6} \\approx 168.667$$\n\n**Median:**\n- Sort data: 24, 178, 179, 195, 214, 222\n- \\(n=6\\) (even), median = average of 3rd and 4th values:\n$$\\text{Median} = \\frac{179 + 195}{2} = \\frac{374}{2} = 187$$"
+      },
+      {
+        "context": "Six rock climbers: distances = {214, 179, 195, 222, 24, 178}. Mean \\(\\bar{x} = 168.667\\).",
+        "q": "b) Calculate the variance and standard deviation of the climbing distances.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Statistic", "Answer"],
+          "rows": [
+            { "label": "Variance", "cells": [{ "v": "4452.56", "e": true }] },
+            { "label": "Standard Deviation", "cells": [{ "v": "66.73", "e": true }] }
+          ]
+        },
+        "explanation": "**Variance** \\(s^2 = \\frac{1}{N}\\sum_{i=1}^N (x_i - \\bar{x})^2\\):\n\nDeviations from mean (168.667):\n- \\((214-168.667)^2 = 45.333^2 = 2055.1\\)\n- \\((179-168.667)^2 = 10.333^2 = 106.8\\)\n- \\((195-168.667)^2 = 26.333^2 = 693.4\\)\n- \\((222-168.667)^2 = 53.333^2 = 2844.4\\)\n- \\((24-168.667)^2 = (-144.667)^2 = 20928.4\\)\n- \\((178-168.667)^2 = 9.333^2 = 87.1\\)\n\nSum = 26715.2; Variance \\(= 26715.2/6 \\approx 4452.56\\)\n\n**Standard Deviation:**\n$$s = \\sqrt{4452.56} \\approx 66.73$$"
+      },
+      {
+        "context": "A shot is observed to miss the target. It is known that Sue hits with probability 90% (misses 10%) and Bob hits with probability 70% (misses 30%). Assume each shot is equally likely to be from Sue or Bob (50/50 prior).",
+        "q": "Given that the shot missed, what is the probability that Bob fired it? \\(P(\\text{Bob}|\\text{miss}) = ?\\)",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "P(Bob | miss)", "cells": [{ "v": "0.75", "e": true }] }
+          ]
+        },
+        "explanation": "**Apply Bayes' theorem** (equal priors: \\(P(\\text{Sue}) = P(\\text{Bob}) = 0.5\\)):\n\n**Step 1:** Likelihoods:\n- \\(P(\\text{miss}|\\text{Sue}) = 0.10\\)\n- \\(P(\\text{miss}|\\text{Bob}) = 0.30\\)\n\n**Step 2:** Total probability of miss:\n$$P(\\text{miss}) = 0.5 \\times 0.10 + 0.5 \\times 0.30 = 0.05 + 0.15 = 0.20$$\n\n**Step 3:** Bayes:\n$$P(\\text{Bob}|\\text{miss}) = \\frac{P(\\text{miss}|\\text{Bob})\\cdot P(\\text{Bob})}{P(\\text{miss})} = \\frac{0.30 \\times 0.5}{0.20} = \\frac{0.15}{0.20} = 0.75$$"
+      },
+      {
+        "context": "A study on TV watching time (h/day) and weight (kg) with \\(n=15\\) participants. Summary statistics:\n- \\(\\bar{x}_{\\text{TV}} = 4.733\\) h, \\(\\bar{y}_{\\text{weight}} = 52.4\\) kg\n- \\(\\sum(x_i - \\bar{x})^2 = 42.933\\), \\(\\sum(y_i - \\bar{y})^2 = 2561.6\\)\n- \\(\\text{Cov}(x,y) = 15.973\\)",
+        "q": "a) Show the variance of TV time and variance of weight.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Statistic", "Answer"],
+          "rows": [
+            { "label": "Var(TV)", "cells": [{ "v": "2.862", "e": true }] },
+            { "label": "Var(weight)", "cells": [{ "v": "170.773", "e": true }] }
+          ]
+        },
+        "explanation": "**Formula:** \\(\\text{Var} = \\frac{1}{N}\\sum(x_i - \\bar{x})^2\\)\n\n**TV time variance:**\n$$\\text{Var}_{\\text{TV}} = \\frac{42.933}{15} = 2.862$$\n\n**Weight variance:**\n$$\\text{Var}_{\\text{weight}} = \\frac{2561.6}{15} = 170.773$$"
+      },
+      {
+        "context": "TV/weight regression: \\(\\bar{x}=4.733\\), \\(\\bar{y}=52.4\\), \\(\\text{Cov}=15.973\\), \\(\\text{Var}(x)=2.862\\).",
+        "q": "b) Using the linear regression model, predict the weight of someone who watches 6 hours of TV per day.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "ŷ at x = 6h (kg)", "cells": [{ "v": "59.471", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Calculate slope:\n$$b = \\frac{\\text{Cov}(x,y)}{\\text{Var}(x)} = \\frac{15.973}{2.862} = 5.581$$\n\n**Step 2:** Calculate intercept:\n$$a = \\bar{y} - b\\bar{x} = 52.4 - 5.581 \\times 4.733 = 52.4 - 26.415 = 25.985$$\n\n**Step 3:** Predict at \\(x=6\\):\n$$\\hat{y} = 25.985 + 5.581 \\times 6 = 25.985 + 33.486 = 59.471 \\text{ kg}$$"
+      },
+      {
+        "context": "A sample of 6 blood pressure measurements: 71, 73, 74, 82, 90, 60. The sample mean \\(\\bar{x} = 75\\).",
+        "q": "a) Construct a 95% confidence interval for the population mean blood pressure.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "95% CI", "cells": [{ "v": "[64.30; 85.70]", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Compute sample standard deviation:\n- Deviations from mean (75): \\(-4, -2, -1, 7, 15, -15\\)\n- Sum of squares: \\(16+4+1+49+225+225 = 520\\)\n- \\(s^2 = 520/(6-1) = 104\\); \\(s = \\sqrt{104} \\approx 10.198\\)\n\n**Step 2:** t-critical value with \\(df = n-1 = 5\\), \\(\\alpha/2 = 0.025\\):\n$$t_{5,\\,0.975} = 2.571$$\n\n**Step 3:** Construct CI:\n$$\\bar{x} \\pm t_{5,0.975} \\cdot \\frac{s}{\\sqrt{n}} = 75 \\pm 2.571 \\cdot \\frac{10.198}{\\sqrt{6}} = 75 \\pm 2.571 \\times 4.163 = 75 \\pm 10.70$$\n$$\\Rightarrow [64.30,\\; 85.70]$$"
+      },
+      {
+        "context": "Blood pressure sample (n=6): 71, 73, 74, 82, 90, 60. \\(\\bar{x}=75\\), \\(s \\approx 10.198\\). Test \\(H_0: \\mu = 70\\) vs \\(H_1: \\mu \\neq 70\\) at significance level \\(\\alpha = 5\\%\\).",
+        "q": "b) Perform the t-test: calculate the test statistic, critical value, and state the decision.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Component", "Answer"],
+          "rows": [
+            { "label": "Test statistic t", "cells": [{ "v": "1.201", "e": true }] },
+            { "label": "Critical value t_{5, 0.975}", "cells": [{ "v": "2.571", "e": true }] },
+            { "label": "Decision", "cells": [{ "v": "fail to reject", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Compute the test statistic:\n$$t = \\frac{\\bar{x} - \\mu_0}{s/\\sqrt{n}} = \\frac{75 - 70}{10.198/\\sqrt{6}} = \\frac{5}{4.163} \\approx 1.201$$\n\n**Step 2:** Critical value for two-sided test, \\(df=5\\), \\(\\alpha=0.05\\):\n$$t_{5,\\,0.975} = 2.571$$\n\n**Step 3:** Compare:\n$$|t| = 1.201 < 2.571 = t_{\\text{crit}}$$\n\n**Decision:** Fail to reject \\(H_0\\). There is insufficient evidence to conclude that the mean blood pressure differs from 70."
+      }
+    ]
+  },
+  {
+    "id": "stats_lecture_2021_g2",
+    "title": "Statistics Lecture Exam — SS2021 Group 2",
+    "description": "Basic probability, conceptual statistics, total probability, regression, hypothesis testing, binomial distribution",
+    "questions": [
+      {
+        "context": "A storage room contains 50 paint cans: 10 white, 5 blue, 8 green, 3 yellow, 6 red, 10 orange, 8 grey. A can is chosen at random.",
+        "q": "What is the probability of selecting a blue, green, OR orange can?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "P(blue OR green OR orange)", "cells": [{ "v": "0.46", "e": true }] }
+          ]
+        },
+        "explanation": "These events are mutually exclusive (a can has one color):\n$$P(\\text{blue} \\cup \\text{green} \\cup \\text{orange}) = \\frac{5 + 8 + 10}{50} = \\frac{23}{50} = 0.46$$"
+      },
+      {
+        "context": "",
+        "q": "What is the difference between a population and a sample in statistics?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "explanation": "**Population:** The complete set of all individuals, objects, or measurements that share a common characteristic and are of interest in a study. Example: all adults in Austria.\n\n**Sample:** A subset of the population selected for measurement and analysis. Example: 1000 randomly selected Austrian adults.\n\n**Why we sample:** Measuring the entire population is often too expensive, time-consuming, or impossible. Statistical inference allows us to draw conclusions about the population from the sample.\n\n**Key requirement:** The sample should be representative (ideally random) to avoid bias."
+      },
+      {
+        "context": "",
+        "q": "What is the difference between descriptive and inferential statistics?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "explanation": "**Descriptive statistics** summarizes and describes the data at hand (the sample or population). Tools: mean, median, standard deviation, histograms, box plots. No generalization beyond the data.\n\n**Inferential statistics** uses sample data to make inferences, predictions, or decisions about the larger population. Tools: hypothesis tests, confidence intervals, regression analysis.\n\n**Example:** Computing the mean exam score of 30 students in class = descriptive. Estimating the mean exam score of all students nationwide from those 30 = inferential."
+      },
+      {
+        "context": "",
+        "q": "What is the empirical rule (68-95-99.7 rule) for a normal distribution?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "explanation": "For a normally distributed variable \\(X \\sim N(\\mu, \\sigma^2)\\):\n\n- **68%** of observations fall within \\(\\mu \\pm 1\\sigma\\)\n- **95%** of observations fall within \\(\\mu \\pm 2\\sigma\\)\n- **99.7%** of observations fall within \\(\\mu \\pm 3\\sigma\\)\n\n**Why it matters:** It allows quick probability estimates without looking up tables. For example, if heights follow \\(N(170\\text{ cm}, 10\\text{ cm})\\), then about 95% of people are between 150 cm and 190 cm."
+      },
+      {
+        "context": "",
+        "q": "Explain what a p-value represents in hypothesis testing.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "explanation": "The **p-value** is the probability of observing a test statistic at least as extreme as the one computed from the data, **assuming the null hypothesis \\(H_0\\) is true**.\n\n**Interpretation:**\n- A small p-value (e.g., \\(p < 0.05\\)) means the observed data would be very unlikely under \\(H_0\\), providing evidence against \\(H_0\\).\n- A large p-value means the data are consistent with \\(H_0\\).\n\n**Decision rule:** Reject \\(H_0\\) if \\(p \\leq \\alpha\\) (significance level).\n\n**Common misconception:** The p-value is NOT the probability that \\(H_0\\) is true. It is a conditional probability of the data given \\(H_0\\)."
+      },
+      {
+        "context": "",
+        "q": "What is the coefficient of determination R² in linear regression, and what does it tell us?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "explanation": "**\\(R^2\\)** (coefficient of determination) measures the proportion of variance in the dependent variable \\(y\\) that is explained by the linear regression model.\n\n$$R^2 = 1 - \\frac{\\text{SS}_{\\text{residual}}}{\\text{SS}_{\\text{total}}} = r^2 \\quad (\\text{in simple linear regression})$$\n\n**Interpretation:**\n- \\(R^2 = 1\\): Perfect fit, all variance explained.\n- \\(R^2 = 0\\): The regression explains none of the variance.\n- \\(R^2 = 0.80\\): 80% of the variability in \\(y\\) is explained by the model.\n\n**Caution:** High \\(R^2\\) does not necessarily mean a good model (it can be inflated by adding predictors or by overfitting)."
+      },
+      {
+        "context": "A driver must pass through 3 radar trap locations: L1 (active 40% of the time), L2 (30%), L3 (50%). If the trap is active, the probability of being caught speeding is: 20% at L1, 10% at L2, 70% at L3. The driver passes through all three locations.",
+        "q": "What is the total probability of receiving a speeding ticket?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "P(ticket)", "cells": [{ "v": "0.46", "e": true }] }
+          ]
+        },
+        "explanation": "**Apply the total probability theorem** across all three locations:\n\n$$P(\\text{ticket}) = P(\\text{active}_1)\\cdot P(\\text{caught}|\\text{active}_1) + P(\\text{active}_2)\\cdot P(\\text{caught}|\\text{active}_2) + P(\\text{active}_3)\\cdot P(\\text{caught}|\\text{active}_3)$$\n\n$$= 0.40 \\times 0.20 + 0.30 \\times 0.10 + 0.50 \\times 0.70$$\n\n$$= 0.08 + 0.03 + 0.35 = 0.46$$"
+      },
+      {
+        "context": "A study of 100 guinea pigs records age (months) and weight (grams). Summary statistics:\n- \\(\\sum x_i = 12776\\), \\(\\sum(x_i - \\bar{x})^2 = 54534\\)\n- \\(\\bar{y}_{\\text{weight}} = 1106\\) g, \\(s_y = 43\\) g\n- \\(\\text{Cov}(x,y) = 753.119\\)",
+        "q": "Calculate mean age, variance and std dev of age, and predicted weight at 37 months.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "a) Mean age (months)", "cells": [{ "v": "127.76", "e": true }] },
+            { "label": "b) Variance of age", "cells": [{ "v": "545.34", "e": true }] },
+            { "label": "b) Std dev of age", "cells": [{ "v": "23.35", "e": true }] },
+            { "label": "c) Predicted weight at 37 months (g)", "cells": [{ "v": "980.66", "e": true }] }
+          ]
+        },
+        "explanation": "**Part a) Mean age:**\n$$\\bar{x} = \\frac{\\sum x_i}{n} = \\frac{12776}{100} = 127.76 \\text{ months}$$\n\n**Part b) Variance & std dev:**\n$$\\text{Var}(x) = \\frac{\\sum(x_i-\\bar{x})^2}{n} = \\frac{54534}{100} = 545.34$$\n$$s_x = \\sqrt{545.34} \\approx 23.35 \\text{ months}$$\n\n**Part c) Regression prediction:**\n$$b = \\frac{\\text{Cov}(x,y)}{\\text{Var}(x)} = \\frac{753.119}{545.34} \\approx 1.381$$\n$$a = \\bar{y} - b\\bar{x} = 1106 - 1.381 \\times 127.76 = 1106 - 176.40 = 929.60$$\n$$\\hat{y}(37) = 929.60 + 1.381 \\times 37 = 929.60 + 51.10 = 980.70 \\approx 980.66 \\text{ g}$$"
+      },
+      {
+        "context": "A winery claims bottles contain 750 ml. A sample of \\(n=10\\) bottles gives \\(\\bar{x} = 749.8\\) ml, \\(s = 4.97\\) ml. Test \\(H_0: \\mu = 750\\) vs \\(H_1: \\mu \\neq 750\\) at \\(\\alpha = 5\\%\\).",
+        "q": "a) Perform the t-test: calculate the test statistic, critical value, and state the decision.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Component", "Answer"],
+          "rows": [
+            { "label": "Test statistic t", "cells": [{ "v": "-0.1273", "e": true }] },
+            { "label": "Critical value t_{9, 0.975}", "cells": [{ "v": "2.262", "e": true }] },
+            { "label": "Decision", "cells": [{ "v": "fail to reject", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Compute test statistic:\n$$t = \\frac{\\bar{x} - \\mu_0}{s/\\sqrt{n}} = \\frac{749.8 - 750}{4.97/\\sqrt{10}} = \\frac{-0.2}{1.5712} \\approx -0.1273$$\n\n**Step 2:** Critical value (two-sided, \\(df=9\\), \\(\\alpha=0.05\\)):\n$$t_{9,\\,0.975} = 2.262$$\n\n**Step 3:** Compare:\n$$|t| = 0.1273 < 2.262$$\n\n**Decision:** Fail to reject \\(H_0\\). There is no significant evidence that the true mean fill differs from 750 ml."
+      },
+      {
+        "context": "Winery study: \\(n=1000\\) bottles sampled. Proportion with defective corks \\(\\hat{p} = 0.10\\).",
+        "q": "b) Construct a 95% confidence interval for the true proportion of defective corks.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "95% CI for p", "cells": [{ "v": "[0.0814; 0.1186]", "e": true }] }
+          ]
+        },
+        "explanation": "**Formula for proportion CI:**\n$$\\hat{p} \\pm z_{0.975} \\cdot \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}$$\n\n**Compute margin of error:**\n$$= 1.96 \\cdot \\sqrt{\\frac{0.10 \\times 0.90}{1000}} = 1.96 \\cdot \\sqrt{0.00009} = 1.96 \\times 0.009487 \\approx 0.0186$$\n\n**CI:**\n$$[0.10 - 0.0186,\\; 0.10 + 0.0186] = [0.0814,\\; 0.1186]$$"
+      },
+      {
+        "context": "A hypothesis test is conducted. The computed p-value is 74.1% and the significance level is \\(\\alpha = 5\\%\\).",
+        "q": "c) What is the correct decision?",
+        "opts": [
+          "Reject H₀",
+          "Fail to reject H₀"
+        ],
+        "ans": [1],
+        "multi": false,
+        "explanation": "**Rule:** Reject \\(H_0\\) if \\(p\\text{-value} \\leq \\alpha\\).\n\nHere: \\(p = 0.741 > 0.05 = \\alpha\\).\n\nWe **fail to reject \\(H_0\\)**. A p-value of 74.1% means the observed data are very consistent with the null hypothesis — there is no statistical evidence against \\(H_0\\)."
+      },
+      {
+        "context": "A bicycle rental has \\(n=10\\) bicycles. Each bike is independently rented out with probability \\(p=0.8\\) on any given day.",
+        "q": "What is the probability that AT MOST 9 bikes are rented? \\(X \\sim \\text{Bin}(10, 0.8)\\)",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "P(X ≤ 9)", "cells": [{ "v": "0.8926", "e": true }] }
+          ]
+        },
+        "explanation": "**Complement approach:**\n$$P(X \\leq 9) = 1 - P(X = 10)$$\n\n$$P(X = 10) = \\binom{10}{10}(0.8)^{10}(0.2)^0 = (0.8)^{10} = 0.1074$$\n\n$$P(X \\leq 9) = 1 - 0.1074 = 0.8926$$"
+      }
+    ]
+  },
+  {
+    "id": "stats_exercise_2021_g2",
+    "title": "Statistics Exercise Exam — SS2021 Group 2",
+    "description": "Combinatorics, continuous random variables, probability, linear regression, normal distribution",
+    "questions": [
+      {
+        "context": "A committee of 5 people is chosen at random from a group of 10 men and 10 women (20 total). Let \\(X\\) = number of women selected.",
+        "q": "Calculate the following probabilities.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "a) P(exactly 3 women + 2 men)", "cells": [{ "v": "0.3483", "e": true }] },
+            { "label": "b) P(at least 2 women)", "cells": [{ "v": "0.8483", "e": true }] },
+            { "label": "c) P(at most 1 man)", "cells": [{ "v": "0.1517", "e": true }] }
+          ]
+        },
+        "explanation": "**Total ways:** \\(\\binom{20}{5} = 15504\\)\n\n**Part a)** Exactly 3 women, 2 men:\n$$P = \\frac{\\binom{10}{3}\\cdot\\binom{10}{2}}{\\binom{20}{5}} = \\frac{120 \\times 45}{15504} = \\frac{5400}{15504} \\approx 0.3483$$\n\n**Part b)** At least 2 women = 1 - P(0 women) - P(1 woman):\n$$P(X=0) = \\frac{\\binom{10}{5}}{15504} = \\frac{252}{15504}$$\n$$P(X=1) = \\frac{\\binom{10}{1}\\cdot\\binom{10}{4}}{15504} = \\frac{10 \\times 210}{15504} = \\frac{2100}{15504}$$\n$$P(X \\geq 2) = 1 - \\frac{252+2100}{15504} = 1 - \\frac{2352}{15504} \\approx 0.8483$$\n\n**Part c)** At most 1 man = P(0 men) + P(1 man) = P(5 women) + P(4 women, 1 man):\n$$= \\frac{252 + 2100}{15504} = \\frac{2352}{15504} \\approx 0.1517$$"
+      },
+      {
+        "context": "A continuous random variable \\(X\\) has PDF \\(f(x) = \\frac{k}{2} + kx\\) for \\(0 \\leq x \\leq 9\\), and \\(f(x)=0\\) otherwise.",
+        "q": "Find k, the CDF F(x), and P(1 ≤ X ≤ 4).",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "a) k", "cells": [{ "v": "0.0222", "e": true }] },
+            { "label": "b) F(x) =", "cells": [{ "v": "x/90 + x^2/90", "e": true }] },
+            { "label": "c) P(1 ≤ X ≤ 4)", "cells": [{ "v": "0.2", "e": true }] }
+          ]
+        },
+        "explanation": "**Part a)** Normalization:\n$$\\int_0^9\\left(\\frac{k}{2} + kx\\right)dx = k\\left[\\frac{x}{2} + \\frac{x^2}{2}\\right]_0^9 = k\\left(\\frac{9}{2} + \\frac{81}{2}\\right) = k \\cdot 45 = 1$$\n$$\\Rightarrow k = \\frac{1}{45} \\approx 0.0222$$\n\n**Part b)** CDF:\n$$F(x) = \\int_0^x \\left(\\frac{1}{90} + \\frac{t}{45}\\right)dt = \\frac{x}{90} + \\frac{x^2}{90}$$\n\n**Part c)**\n$$P(1 \\leq X \\leq 4) = F(4) - F(1) = \\left(\\frac{4}{90} + \\frac{16}{90}\\right) - \\left(\\frac{1}{90} + \\frac{1}{90}\\right) = \\frac{20}{90} - \\frac{2}{90} = \\frac{18}{90} = 0.2$$"
+      },
+      {
+        "context": "3 friends and 7 other people (10 total) are seated in a row randomly.",
+        "q": "What is the probability that all 3 friends sit adjacent to each other (next to each other in a block)?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "P(3 friends adjacent)", "cells": [{ "v": "0.0667", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Total arrangements: \\(10!\\)\n\n**Step 2:** Favorable arrangements:\n- Treat the 3 friends as 1 block → 8 entities to arrange: \\(8!\\) ways\n- The 3 friends can arrange within their block: \\(3!\\) ways\n- Favorable = \\(8! \\times 3!\\)\n\n**Step 3:** Probability:\n$$P = \\frac{8! \\times 3!}{10!} = \\frac{40320 \\times 6}{3628800} = \\frac{241920}{3628800} \\approx 0.0667$$"
+      },
+      {
+        "context": "5 students took an intelligence test (points) and completed it in these times (seconds):\n\n| Points \\(x_i\\) | 124 | 126 | 130 | 119 | 120 |\n|----------------|-----|-----|-----|-----|-----|\n| Time \\(y_i\\) (s) | 46 | 44 | 40 | 42 | 45 |\n\n\\(\\bar{x} = 123.8\\), \\(\\bar{y} = 43.4\\), \\(\\text{Cov}(x,y) = -3.72\\), \\(\\text{Var}(x) = 16.16\\), \\(\\text{Var}(y) = 4.64\\)",
+        "q": "a) Calculate the Bravais-Pearson correlation coefficient \\(r\\).",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "r", "cells": [{ "v": "-0.430", "e": true }] }
+          ]
+        },
+        "explanation": "**Formula:**\n$$r = \\frac{\\text{Cov}(x,y)}{\\sqrt{\\text{Var}(x)\\cdot\\text{Var}(y)}}$$\n\n**Compute:**\n$$r = \\frac{-3.72}{\\sqrt{16.16 \\times 4.64}} = \\frac{-3.72}{\\sqrt{74.98}} = \\frac{-3.72}{8.659} \\approx -0.430$$\n\nThe negative correlation suggests that higher intelligence test scores are associated with slightly shorter completion times."
+      },
+      {
+        "context": "Intelligence test regression: \\(\\bar{x}=123.8\\), \\(\\bar{y}=43.4\\), \\(\\text{Cov}=-3.72\\), \\(\\text{Var}(x)=16.16\\).",
+        "q": "b) Using the regression model, predict the completion time for a student scoring 115 points.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "ŷ at x = 115 pts (s)", "cells": [{ "v": "45.43", "e": true }] }
+          ]
+        },
+        "explanation": "**Step 1:** Slope:\n$$b = \\frac{\\text{Cov}(x,y)}{\\text{Var}(x)} = \\frac{-3.72}{16.16} = -0.2302$$\n\n**Step 2:** Intercept:\n$$a = \\bar{y} - b\\bar{x} = 43.4 - (-0.2302)(123.8) = 43.4 + 28.499 = 71.899$$\n\n**Step 3:** Predict:\n$$\\hat{y}(115) = 71.899 + (-0.2302)(115) = 71.899 - 26.473 = 45.426 \\approx 45.43 \\text{ s}$$"
+      },
+      {
+        "context": "Salmon lengths in a river follow a normal distribution \\(X \\sim N(\\mu = 71\\text{ cm},\\, \\sigma^2 = 36)\\), i.e., \\(\\sigma = 6\\text{ cm}\\).",
+        "q": "Calculate the following probabilities and the central 80% interval.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": ["Sub-part", "Answer"],
+          "rows": [
+            { "label": "a) P(75 < X < 85)", "cells": [{ "v": "0.243", "e": true }] },
+            { "label": "b) P(X ≤ 71)", "cells": [{ "v": "0.5", "e": true }] },
+            { "label": "c) P(X ≥ 80)", "cells": [{ "v": "0.067", "e": true }] },
+            { "label": "d) Central 80% interval", "cells": [{ "v": "[63.31; 78.69]", "e": true }] }
+          ]
+        },
+        "explanation": "**Part a)**\n$$z_1 = \\frac{75-71}{6} = 0.667,\\quad z_2 = \\frac{85-71}{6} = 2.333$$\n$$P = \\Phi(2.333) - \\Phi(0.667) = 0.9902 - 0.7475 = 0.2427 \\approx 0.243$$\n\n**Part b)** By symmetry, \\(P(X \\leq \\mu) = 0.5\\).\n\n**Part c)**\n$$z = \\frac{80-71}{6} = 1.5$$\n$$P(X \\geq 80) = 1 - \\Phi(1.5) = 1 - 0.9332 = 0.0668 \\approx 0.067$$\n\n**Part d)** Central 80% interval: \\(P(-z < Z < z) = 0.80 \\Rightarrow P(Z<z)=0.90 \\Rightarrow z = 1.282\\):\n$$[\\mu - z\\sigma,\\; \\mu + z\\sigma] = [71 - 1.282\\times6,\\; 71 + 1.282\\times6] = [71-7.692,\\; 71+7.692] = [63.31,\\; 78.69]$$"
+      }
+    ]
+  }
+]
