@@ -5,12 +5,12 @@
     "description": "Derivatives, limits, extrema, Taylor series, integrals, Fourier series, multivariate derivatives",
     "questions": [
       {
-        "context": "Consider the functions:\n$$f_1(x) = \\frac{x}{2 + \\sin(x^2)}, \\qquad f_2(x) = \\ln(3 \\cdot 2^x)$$",
+        "context": "Consider the functions:\\n$$f_1(x) = \\frac{x}{2 + \\sin(x^2)}, \\qquad f_2(x) = \\ln(3 \\cdot 2^x)$$",
         "q": "Differentiate \\(f_1\\) and \\(f_2\\). Evaluate both derivatives at \\(x_0 = \\sqrt{\\pi}\\).",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Differentiating \\(f_1\\) (Quotient Rule + Chain Rule):**\n$$f_1'(x) = \\frac{(2+\\sin(x^2)) \\cdot 1 - x \\cdot \\cos(x^2)\\cdot 2x}{(2+\\sin(x^2))^2} = \\frac{2+\\sin(x^2) - 2x^2\\cos(x^2)}{(2+\\sin(x^2))^2}$$\n\n**Evaluate at \\(x_0 = \\sqrt{\\pi}\\):**\n- \\(\\sin((\\sqrt{\\pi})^2) = \\sin(\\pi) = 0\\)\n- \\(\\cos(\\pi) = -1\\)\n- Numerator: \\(2 + 0 - 2\\pi\\cdot(-1) = 2 + 2\\pi\\)\n- Denominator: \\((2+0)^2 = 4\\)\n$$f_1'(\\sqrt{\\pi}) = \\frac{2 + 2\\pi}{4} = \\frac{1+\\pi}{2}$$\n\n**Differentiating \\(f_2\\) (Logarithm rules):**\n$$f_2(x) = \\ln(3) + \\ln(2^x) = \\ln(3) + x\\ln(2)$$\n$$f_2'(x) = \\ln(2) \\quad \\text{(constant)}$$\n\n**Evaluate at \\(x_0 = \\sqrt{\\pi}\\):**\n$$f_2'(\\sqrt{\\pi}) = \\ln(2) \\approx 0.6931$$",
+        "explanation": "**Differentiating \\(f_1\\) (Quotient Rule + Chain Rule):**\\n$$f_1'(x) = \\frac{(2+\\sin(x^2)) \\cdot 1 - x \\cdot \\cos(x^2)\\cdot 2x}{(2+\\sin(x^2))^2} = \\frac{2+\\sin(x^2) - 2x^2\\cos(x^2)}{(2+\\sin(x^2))^2}$$\\n\\n**Evaluate at \\(x_0 = \\sqrt{\\pi}\\):**\\n- \\(\\sin((\\sqrt{\\pi})^2) = \\sin(\\pi) = 0\\)\\n- \\(\\cos(\\pi) = -1\\)\\n- Numerator: \\(2 + 0 - 2\\pi\\cdot(-1) = 2 + 2\\pi\\)\\n- Denominator: \\((2+0)^2 = 4\\)\\n$$f_1'(\\sqrt{\\pi}) = \\frac{2 + 2\\pi}{4} = \\frac{1+\\pi}{2}$$\\n\\n**Differentiating \\(f_2\\) (Logarithm rules):**\\n$$f_2(x) = \\ln(3) + \\ln(2^x) = \\ln(3) + x\\ln(2)$$\\n$$f_2'(x) = \\ln(2) \\quad \\text{(constant)}$$\\n\\n**Evaluate at \\(x_0 = \\sqrt{\\pi}\\):**\\n$$f_2'(\\sqrt{\\pi}) = \\ln(2) \\approx 0.6931$$",
         "tableInput": {
           "headers": [
             "Part",
@@ -40,11 +40,11 @@
       },
       {
         "context": "",
-        "q": "Evaluate the following limits:\n\na) \\(\\displaystyle\\lim_{x \\to 0} \\frac{\\cos(x) - 1}{x^2}\\)\n\nb) \\(\\displaystyle\\lim_{x \\to 1} \\frac{x^3 - 2x + 1}{(x+1)^2}\\)",
+        "q": "Evaluate the following limits:\\n\\na) \\(\\displaystyle\\lim_{x \\to 0} \\frac{\\cos(x) - 1}{x^2}\\)\\n\\nb) \\(\\displaystyle\\lim_{x \\to 1} \\frac{x^3 - 2x + 1}{(x+1)^2}\\)",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Part a)** The form is \\(0/0\\), apply L'Hôpital's rule twice:\n$$\\lim_{x\\to0}\\frac{\\cos(x)-1}{x^2} \\overset{H}{=} \\lim_{x\\to0}\\frac{-\\sin(x)}{2x} \\overset{H}{=} \\lim_{x\\to0}\\frac{-\\cos(x)}{2} = \\frac{-1}{2}$$\n\n*Alternative (Taylor expansion):* \\(\\cos(x) = 1 - x^2/2 + O(x^4)\\), so \\(\\frac{\\cos(x)-1}{x^2} = \\frac{-x^2/2 + O(x^4)}{x^2} \\to -\\frac{1}{2}\\).\n\n$$\\boxed{\\lim_{x\\to 0}\\frac{\\cos(x)-1}{x^2} = -\\frac{1}{2}}$$\n\n**Part b)** Check if direct substitution works:\n- Numerator: \\(1^3 - 2(1) + 1 = 0\\)\n- Denominator: \\((1+1)^2 = 4 \\neq 0\\)\n\nSince denominator \\(\\neq 0\\), the limit is simply \\(0/4 = 0\\):\n$$\\lim_{x\\to 1}\\frac{x^3-2x+1}{(x+1)^2} = \\frac{0}{4} = 0$$",
+        "explanation": "**Part a)** The form is \\(0/0\\), apply L'Hôpital's rule twice:\\n$$\\lim_{x\\to0}\\frac{\\cos(x)-1}{x^2} \\overset{H}{=} \\lim_{x\\to0}\\frac{-\\sin(x)}{2x} \\overset{H}{=} \\lim_{x\\to0}\\frac{-\\cos(x)}{2} = \\frac{-1}{2}$$\\n\\n*Alternative (Taylor expansion):* \\(\\cos(x) = 1 - x^2/2 + O(x^4)\\), so \\(\\frac{\\cos(x)-1}{x^2} = \\frac{-x^2/2 + O(x^4)}{x^2} \\to -\\frac{1}{2}\\).\\n\\n$$\\boxed{\\lim_{x\\to 0}\\frac{\\cos(x)-1}{x^2} = -\\frac{1}{2}}$$\\n\\n**Part b)** Check if direct substitution works:\\n- Numerator: \\(1^3 - 2(1) + 1 = 0\\)\\n- Denominator: \\((1+1)^2 = 4 \\neq 0\\)\\n\\nSince denominator \\(\\neq 0\\), the limit is simply \\(0/4 = 0\\):\\n$$\\lim_{x\\to 1}\\frac{x^3-2x+1}{(x+1)^2} = \\frac{0}{4} = 0$$",
         "tableInput": {
           "headers": [
             "Part",
@@ -74,11 +74,11 @@
       },
       {
         "context": "Consider \\(f(x) = xe^{-x}\\) on \\([0, \\infty)\\).",
-        "q": "a) Find all local and global extrema of \\(f\\).\nb) Determine the intervals of monotonicity (increasing/decreasing).\nc) Find inflection points and intervals of convexity/concavity.",
+        "q": "a) Find all local and global extrema of \\(f\\).\\nb) Determine the intervals of monotonicity (increasing/decreasing).\\nc) Find inflection points and intervals of convexity/concavity.",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Derivatives:**\n$$f'(x) = e^{-x} - xe^{-x} = (1-x)e^{-x}$$\n$$f''(x) = -e^{-x} - (1-x)(-e^{-x}) = e^{-x}(-1+1-x) = (x-2)e^{-x}$$\n\n**Part a) Extrema:**\n- Critical point: \\(f'(x)=0 \\Rightarrow x=1\\)\n- \\(f(1) = e^{-1} = 1/e \\approx 0.368\\)\n- \\(f(0) = 0\\) (boundary)\n- As \\(x\\to\\infty\\): \\(f(x)\\to 0\\)\n- \\(f''(1) = (1-2)e^{-1} = -e^{-1} < 0\\) → **local maximum** at \\(x=1\\), \\(f(1)=1/e\\)\n- **Global max** at \\(x=1\\), value \\(1/e\\)\n- **Global min** at \\(x=0\\), \\(f(0)=0\\) (on \\([0,\\infty)\\))\n\n**Part b) Monotonicity:**\n- \\(f'(x) > 0\\) when \\(x < 1\\) → **increasing on \\([0, 1)\\)**\n- \\(f'(x) < 0\\) when \\(x > 1\\) → **decreasing on \\((1, \\infty)\\)**\n\n**Part c) Convexity:**\n- \\(f''(x) = 0 \\Rightarrow x=2\\) → **inflection point** at \\(x=2\\), \\(f(2)=2e^{-2}\\)\n- \\(f''(x) < 0\\) for \\(0 < x < 2\\) → **concave (convex downward)** on \\((0,2)\\)\n- \\(f''(x) > 0\\) for \\(x > 2\\) → **convex (convex upward)** on \\((2,\\infty)\\)",
+        "explanation": "**Derivatives:**\\n$$f'(x) = e^{-x} - xe^{-x} = (1-x)e^{-x}$$\\n$$f''(x) = -e^{-x} - (1-x)(-e^{-x}) = e^{-x}(-1+1-x) = (x-2)e^{-x}$$\\n\\n**Part a) Extrema:**\\n- Critical point: \\(f'(x)=0 \\Rightarrow x=1\\)\\n- \\(f(1) = e^{-1} = 1/e \\approx 0.368\\)\\n- \\(f(0) = 0\\) (boundary)\\n- As \\(x\\to\\infty\\): \\(f(x)\\to 0\\)\\n- \\(f''(1) = (1-2)e^{-1} = -e^{-1} < 0\\) → **local maximum** at \\(x=1\\), \\(f(1)=1/e\\)\\n- **Global max** at \\(x=1\\), value \\(1/e\\)\\n- **Global min** at \\(x=0\\), \\(f(0)=0\\) (on \\([0,\\infty)\\))\\n\\n**Part b) Monotonicity:**\\n- \\(f'(x) > 0\\) when \\(x < 1\\) → **increasing on \\([0, 1)\\)**\\n- \\(f'(x) < 0\\) when \\(x > 1\\) → **decreasing on \\((1, \\infty)\\)**\\n\\n**Part c) Convexity:**\\n- \\(f''(x) = 0 \\Rightarrow x=2\\) → **inflection point** at \\(x=2\\), \\(f(2)=2e^{-2}\\)\\n- \\(f''(x) < 0\\) for \\(0 < x < 2\\) → **concave (convex downward)** on \\((0,2)\\)\\n- \\(f''(x) > 0\\) for \\(x > 2\\) → **convex (convex upward)** on \\((2,\\infty)\\)",
         "tableInput": {
           "headers": [
             "Part",
@@ -139,7 +139,7 @@
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Compute derivatives at \\(x_0 = 1\\):**\n- \\(f(x) = x^4 - 6x^2 + 9\\)\n- \\(f(1) = 1 - 6 + 9 = 4\\)\n- \\(f'(x) = 4x^3 - 12x\\); \\(f'(1) = 4 - 12 = -8\\)\n- \\(f''(x) = 12x^2 - 12\\); \\(f''(1) = 12 - 12 = 0\\)\n- \\(f'''(x) = 24x\\); \\(f'''(1) = 24\\)\n\n**Taylor polynomial:**\n$$T_3(x) = f(1) + f'(1)(x-1) + \\frac{f''(1)}{2!}(x-1)^2 + \\frac{f'''(1)}{3!}(x-1)^3$$\n$$= 4 - 8(x-1) + \\frac{0}{2}(x-1)^2 + \\frac{24}{6}(x-1)^3$$\n$$= 4 - 8(x-1) + 4(x-1)^3$$\n\n**Radius of convergence:** Since \\(f(x) = x^4-6x^2+9\\) is a polynomial, its Taylor series is exact (terminates at degree 4) and converges for **all** \\(x \\in \\mathbb{R}\\), i.e., \\(R = \\infty\\).",
+        "explanation": "**Compute derivatives at \\(x_0 = 1\\):**\\n- \\(f(x) = x^4 - 6x^2 + 9\\)\\n- \\(f(1) = 1 - 6 + 9 = 4\\)\\n- \\(f'(x) = 4x^3 - 12x\\); \\(f'(1) = 4 - 12 = -8\\)\\n- \\(f''(x) = 12x^2 - 12\\); \\(f''(1) = 12 - 12 = 0\\)\\n- \\(f'''(x) = 24x\\); \\(f'''(1) = 24\\)\\n\\n**Taylor polynomial:**\\n$$T_3(x) = f(1) + f'(1)(x-1) + \\frac{f''(1)}{2!}(x-1)^2 + \\frac{f'''(1)}{3!}(x-1)^3$$\\n$$= 4 - 8(x-1) + \\frac{0}{2}(x-1)^2 + \\frac{24}{6}(x-1)^3$$\\n$$= 4 - 8(x-1) + 4(x-1)^3$$\\n\\n**Radius of convergence:** Since \\(f(x) = x^4-6x^2+9\\) is a polynomial, its Taylor series is exact (terminates at degree 4) and converges for **all** \\(x \\in \\mathbb{R}\\), i.e., \\(R = \\infty\\).",
         "tableInput": {
           "headers": [
             "Part",
@@ -178,11 +178,11 @@
       },
       {
         "context": "",
-        "q": "Evaluate the definite integral:\n$$\\int_0^\\pi x^2 \\sin(x)\\, dx$$",
+        "q": "Evaluate the definite integral:\\n$$\\int_0^\\pi x^2 \\sin(x)\\, dx$$",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Apply integration by parts twice.** Let \\(u = x^2\\), \\(dv = \\sin(x)dx\\):\n\n**First step:**\n$$\\int_0^\\pi x^2\\sin(x)\\,dx = \\left[-x^2\\cos(x)\\right]_0^\\pi + 2\\int_0^\\pi x\\cos(x)\\,dx$$\n$$= (-\\pi^2\\cos(\\pi) + 0) + 2\\int_0^\\pi x\\cos(x)\\,dx = \\pi^2 + 2\\int_0^\\pi x\\cos(x)\\,dx$$\n\n**Second step** (by parts again, \\(u=x\\), \\(dv=\\cos(x)dx\\)):\n$$\\int_0^\\pi x\\cos(x)\\,dx = \\left[x\\sin(x)\\right]_0^\\pi - \\int_0^\\pi \\sin(x)\\,dx = 0 - \\left[-\\cos(x)\\right]_0^\\pi$$\n$$= -[\\cos(\\pi) - \\cos(0)] = -[-1-1] = 2$$\n\n**Combine:**\n$$\\int_0^\\pi x^2\\sin(x)\\,dx = \\pi^2 + 2\\cdot(-2) = \\pi^2 - 4$$",
+        "explanation": "**Apply integration by parts twice.** Let \\(u = x^2\\), \\(dv = \\sin(x)dx\\):\\n\\n**First step:**\\n$$\\int_0^\\pi x^2\\sin(x)\\,dx = \\left[-x^2\\cos(x)\\right]_0^\\pi + 2\\int_0^\\pi x\\cos(x)\\,dx$$\\n$$= (-\\pi^2\\cos(\\pi) + 0) + 2\\int_0^\\pi x\\cos(x)\\,dx = \\pi^2 + 2\\int_0^\\pi x\\cos(x)\\,dx$$\\n\\n**Second step** (by parts again, \\(u=x\\), \\(dv=\\cos(x)dx\\)):\\n$$\\int_0^\\pi x\\cos(x)\\,dx = \\left[x\\sin(x)\\right]_0^\\pi - \\int_0^\\pi \\sin(x)\\,dx = 0 - \\left[-\\cos(x)\\right]_0^\\pi$$\\n$$= -[\\cos(\\pi) - \\cos(0)] = -[-1-1] = 2$$\\n\\n**Combine:**\\n$$\\int_0^\\pi x^2\\sin(x)\\,dx = \\pi^2 + 2\\cdot(-2) = \\pi^2 - 4$$",
         "tableInput": {
           "headers": [
             "Part",
@@ -207,15 +207,15 @@
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Fourier coefficients** (complex exponential basis \\(e^{2\\pi inx}\\)):\n$$c_n = \\int_0^1 h(x)\\,e^{-2\\pi inx}\\,dx = \\int_0^1 e^{\\pi ix}\\cdot e^{-2\\pi inx}\\,dx = \\int_0^1 e^{\\pi i(1-2n)x}\\,dx$$\n\n**For \\(1 - 2n \\neq 0\\)** (i.e., \\(n \\neq 1/2\\), which is always true for integer \\(n\\)):\n$$c_n = \\left[\\frac{e^{\\pi i(1-2n)x}}{\\pi i(1-2n)}\\right]_0^1 = \\frac{e^{\\pi i(1-2n)} - 1}{\\pi i(1-2n)}$$\n\n**Simplify numerator:** \\(e^{\\pi i(1-2n)} = e^{\\pi i}\\cdot e^{-2\\pi in} = (-1)\\cdot 1 = -1\\)\n$$c_n = \\frac{-1-1}{\\pi i(1-2n)} = \\frac{-2}{\\pi i(1-2n)} = \\frac{2i}{\\pi(1-2n)} = \\frac{2}{\\pi(2n-1)i} \\cdot (-1) \\cdot (-i^2)$$\n\nSimplified: $$\\boxed{c_n = \\frac{-2}{\\pi i(1-2n)} = \\frac{2i}{\\pi(2n-1)}}$$\n\n**Convergence:** Since \\(h(x) = e^{\\pi ix}\\) is infinitely differentiable (\\(C^\\infty\\)) on \\((0,1)\\), the Fourier series converges uniformly on any compact subset of \\((0,1)\\). At the boundary (periodization creates a jump discontinuity at \\(x=0\\equiv x=1\\)), the series converges to the average of the left and right limits."
+        "explanation": "**Fourier coefficients** (complex exponential basis \\(e^{2\\pi inx}\\)):\\n$$c_n = \\int_0^1 h(x)\\,e^{-2\\pi inx}\\,dx = \\int_0^1 e^{\\pi ix}\\cdot e^{-2\\pi inx}\\,dx = \\int_0^1 e^{\\pi i(1-2n)x}\\,dx$$\\n\\n**For \\(1 - 2n \\neq 0\\)** (i.e., \\(n \\neq 1/2\\), which is always true for integer \\(n\\)):\\n$$c_n = \\left[\\frac{e^{\\pi i(1-2n)x}}{\\pi i(1-2n)}\\right]_0^1 = \\frac{e^{\\pi i(1-2n)} - 1}{\\pi i(1-2n)}$$\\n\\n**Simplify numerator:** \\(e^{\\pi i(1-2n)} = e^{\\pi i}\\cdot e^{-2\\pi in} = (-1)\\cdot 1 = -1\\)\\n$$c_n = \\frac{-1-1}{\\pi i(1-2n)} = \\frac{-2}{\\pi i(1-2n)} = \\frac{2i}{\\pi(1-2n)} = \\frac{2}{\\pi(2n-1)i} \\cdot (-1) \\cdot (-i^2)$$\\n\\nSimplified: $$\\boxed{c_n = \\frac{-2}{\\pi i(1-2n)} = \\frac{2i}{\\pi(2n-1)}}$$\\n\\n**Convergence:** Since \\(h(x) = e^{\\pi ix}\\) is infinitely differentiable (\\(C^\\infty\\)) on \\((0,1)\\), the Fourier series converges uniformly on any compact subset of \\((0,1)\\). At the boundary (periodization creates a jump discontinuity at \\(x=0\\equiv x=1\\)), the series converges to the average of the left and right limits."
       },
       {
-        "context": "Consider\n$$f(x,y) = \\frac{xy}{x - y} \\quad \\text{for } x \\neq y$$",
+        "context": "Consider\\n$$f(x,y) = \\frac{xy}{x - y} \\quad \\text{for } x \\neq y$$",
         "q": "Determine where \\(f\\) is partially differentiable. Compute the partial derivatives \\(\\partial f/\\partial x\\) and \\(\\partial f/\\partial y\\) wherever they exist.",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Domain:** \\(f\\) is defined and smooth wherever \\(x \\neq y\\). The function is not defined (or can be continuously extended) on the line \\(x = y\\).\n\n**Partial derivative with respect to \\(x\\) (quotient rule):**\n$$\\frac{\\partial f}{\\partial x} = \\frac{y(x-y) - xy\\cdot 1}{(x-y)^2} = \\frac{xy - y^2 - xy}{(x-y)^2} = \\frac{-y^2}{(x-y)^2}$$\n\n**Partial derivative with respect to \\(y\\) (quotient rule):**\n$$\\frac{\\partial f}{\\partial y} = \\frac{x(x-y) - xy\\cdot(-1)}{(x-y)^2} = \\frac{x^2 - xy + xy}{(x-y)^2} = \\frac{x^2}{(x-y)^2}$$\n\n**Summary:**\n- Both partial derivatives exist for all \\((x,y)\\) with \\(x \\neq y\\).\n- \\(f\\) is totally differentiable on \\(\\{(x,y) : x \\neq y\\}\\).\n- On the line \\(x = y\\), \\(f\\) is not defined, so partial differentiability fails there.\n- Gradient: \\(\\nabla f = \\left(\\dfrac{-y^2}{(x-y)^2},\\, \\dfrac{x^2}{(x-y)^2}\\right)\\)"
+        "explanation": "**Domain:** \\(f\\) is defined and smooth wherever \\(x \\neq y\\). The function is not defined (or can be continuously extended) on the line \\(x = y\\).\\n\\n**Partial derivative with respect to \\(x\\) (quotient rule):**\\n$$\\frac{\\partial f}{\\partial x} = \\frac{y(x-y) - xy\\cdot 1}{(x-y)^2} = \\frac{xy - y^2 - xy}{(x-y)^2} = \\frac{-y^2}{(x-y)^2}$$\\n\\n**Partial derivative with respect to \\(y\\) (quotient rule):**\\n$$\\frac{\\partial f}{\\partial y} = \\frac{x(x-y) - xy\\cdot(-1)}{(x-y)^2} = \\frac{x^2 - xy + xy}{(x-y)^2} = \\frac{x^2}{(x-y)^2}$$\\n\\n**Summary:**\\n- Both partial derivatives exist for all \\((x,y)\\) with \\(x \\neq y\\).\\n- \\(f\\) is totally differentiable on \\(\\{(x,y) : x \\neq y\\}\\).\\n- On the line \\(x = y\\), \\(f\\) is not defined, so partial differentiability fails there.\\n- Gradient: \\(\\nabla f = \\left(\\dfrac{-y^2}{(x-y)^2},\\, \\dfrac{x^2}{(x-y)^2}\\right)\\)"
       }
     ]
   },
@@ -225,12 +225,12 @@
     "description": "Curve sketching, Taylor series, antiderivatives, constrained extrema, Jacobian matrix",
     "questions": [
       {
-        "context": "Define\n$$f(x) = \\begin{cases} \\dfrac{1}{x}\\, e^{-1/x^2} & x \\neq 0 \\\\ 0 & x = 0 \\end{cases}$$",
+        "context": "Define\\n$$f(x) = \\begin{cases} \\dfrac{1}{x}\\, e^{-1/x^2} & x \\neq 0 \\\\ 0 & x = 0 \\end{cases}$$",
         "q": "Perform a complete curve sketch: (a) continuity and differentiability, (b) local and global extrema, (c) monotonicity, (d) sketch.",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Part a) Continuity:**\nFor \\(x\\neq 0\\): \\(f\\) is a composition of smooth functions, hence \\(C^\\infty\\).\nAt \\(x=0\\): \\(\\lim_{x\\to 0^+} \\frac{1}{x}e^{-1/x^2}\\). Let \\(t=1/x\\to+\\infty\\): \\(te^{-t^2}\\to 0\\). Similarly for \\(x\\to 0^-\\). So \\(f\\) is **continuous everywhere**.\n\n**Differentiability at \\(x=0\\):** \\(f'(0) = \\lim_{h\\to 0}\\frac{f(h)}{h} = \\lim_{h\\to 0}\\frac{1}{h^2}e^{-1/h^2} = \\lim_{t\\to\\infty}t^2e^{-t^2} = 0\\). So \\(f\\) is **differentiable everywhere**.\n\n**Part b) Derivative (for \\(x\\neq 0\\)):**\n$$f'(x) = \\frac{d}{dx}\\left(\\frac{1}{x}e^{-1/x^2}\\right) = \\left(-\\frac{1}{x^2} + \\frac{2}{x^4}\\right)e^{-1/x^2} = \\frac{2-x^2}{x^4}\\,e^{-1/x^2}$$\n\nCritical points: \\(2-x^2=0 \\Rightarrow x = \\pm\\sqrt{2} = \\pm\\frac{1}{\\sqrt{0.5}}\\).\n\nActually \\(f'(x)=0\\) when \\(2 - x^2 = 0\\), i.e., \\(x = \\pm\\sqrt{2}\\).\n- Sign of \\(f'\\): positive for \\(0 < x < \\sqrt{2}\\) (since \\(2-x^2>0\\)), negative for \\(x > \\sqrt{2}\\)\n- For \\(x < 0\\): \\(x^4 > 0\\) and \\((2-x^2)\\) is positive for \\(|x|<\\sqrt{2}\\)\n  - \\(-\\sqrt{2} < x < 0\\): \\(f'(x) > 0\\) (increasing)\n  - \\(x < -\\sqrt{2}\\): \\(f'(x) < 0\\) (decreasing)\n\n**Extrema:**\n- **Local maximum** at \\(x = \\frac{1}{\\sqrt{2}}\\): \\(f\\left(\\frac{1}{\\sqrt{2}}\\right) = \\sqrt{2}\\,e^{-2}\\)\n- **Local minimum** at \\(x = -\\frac{1}{\\sqrt{2}}\\): \\(f\\left(-\\frac{1}{\\sqrt{2}}\\right) = -\\sqrt{2}\\,e^{-2}\\)\n- No global extrema (\\(f\\to 0\\) as \\(x\\to\\pm\\infty\\) and \\(f(0)=0\\), so max/min are only local)\n\n**Part c) Monotonicity:**\n- Decreasing on \\((-\\infty, -\\frac{1}{\\sqrt{2}}]\\)\n- Increasing on \\([-\\frac{1}{\\sqrt{2}}, 0)\\)\n- Increasing on \\((0, \\frac{1}{\\sqrt{2}}]\\)\n- Decreasing on \\([\\frac{1}{\\sqrt{2}}, \\infty)\\)\n\n**Part d) Sketch key features:**\n- Antisymmetric: \\(f(-x) = -f(x)\\) (odd function)\n- Passes through \\((0,0)\\); smooth bump above x-axis for \\(x>0\\), mirror below for \\(x<0\\)\n- Max \\(\\approx 0.271\\) at \\(x\\approx 0.707\\)"
+        "explanation": "**Part a) Continuity:**\\nFor \\(x\\neq 0\\): \\(f\\) is a composition of smooth functions, hence \\(C^\\infty\\).\\nAt \\(x=0\\): \\(\\lim_{x\\to 0^+} \\frac{1}{x}e^{-1/x^2}\\). Let \\(t=1/x\\to+\\infty\\): \\(te^{-t^2}\\to 0\\). Similarly for \\(x\\to 0^-\\). So \\(f\\) is **continuous everywhere**.\\n\\n**Differentiability at \\(x=0\\):** \\(f'(0) = \\lim_{h\\to 0}\\frac{f(h)}{h} = \\lim_{h\\to 0}\\frac{1}{h^2}e^{-1/h^2} = \\lim_{t\\to\\infty}t^2e^{-t^2} = 0\\). So \\(f\\) is **differentiable everywhere**.\\n\\n**Part b) Derivative (for \\(x\\neq 0\\)):**\\n$$f'(x) = \\frac{d}{dx}\\left(\\frac{1}{x}e^{-1/x^2}\\right) = \\left(-\\frac{1}{x^2} + \\frac{2}{x^4}\\right)e^{-1/x^2} = \\frac{2-x^2}{x^4}\\,e^{-1/x^2}$$\\n\\nCritical points: \\(2-x^2=0 \\Rightarrow x = \\pm\\sqrt{2} = \\pm\\frac{1}{\\sqrt{0.5}}\\).\\n\\nActually \\(f'(x)=0\\) when \\(2 - x^2 = 0\\), i.e., \\(x = \\pm\\sqrt{2}\\).\\n- Sign of \\(f'\\): positive for \\(0 < x < \\sqrt{2}\\) (since \\(2-x^2>0\\)), negative for \\(x > \\sqrt{2}\\)\\n- For \\(x < 0\\): \\(x^4 > 0\\) and \\((2-x^2)\\) is positive for \\(|x|<\\sqrt{2}\\)\\n  - \\(-\\sqrt{2} < x < 0\\): \\(f'(x) > 0\\) (increasing)\\n  - \\(x < -\\sqrt{2}\\): \\(f'(x) < 0\\) (decreasing)\\n\\n**Extrema:**\\n- **Local maximum** at \\(x = \\frac{1}{\\sqrt{2}}\\): \\(f\\left(\\frac{1}{\\sqrt{2}}\\right) = \\sqrt{2}\\,e^{-2}\\)\\n- **Local minimum** at \\(x = -\\frac{1}{\\sqrt{2}}\\): \\(f\\left(-\\frac{1}{\\sqrt{2}}\\right) = -\\sqrt{2}\\,e^{-2}\\)\\n- No global extrema (\\(f\\to 0\\) as \\(x\\to\\pm\\infty\\) and \\(f(0)=0\\), so max/min are only local)\\n\\n**Part c) Monotonicity:**\\n- Decreasing on \\((-\\infty, -\\frac{1}{\\sqrt{2}}]\\)\\n- Increasing on \\([-\\frac{1}{\\sqrt{2}}, 0)\\)\\n- Increasing on \\((0, \\frac{1}{\\sqrt{2}}]\\)\\n- Decreasing on \\([\\frac{1}{\\sqrt{2}}, \\infty)\\)\\n\\n**Part d) Sketch key features:**\\n- Antisymmetric: \\(f(-x) = -f(x)\\) (odd function)\\n- Passes through \\((0,0)\\); smooth bump above x-axis for \\(x>0\\), mirror below for \\(x<0\\)\\n- Max \\(\\approx 0.271\\) at \\(x\\approx 0.707\\)"
       },
       {
         "context": "Consider \\(f(x) = x^2 \\ln(x)\\), expanded around \\(x_0 = 1\\).",
@@ -238,7 +238,7 @@
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Compute derivatives at \\(x=1\\):**\n- \\(f(x) = x^2\\ln x\\); \\(f(1) = 0\\)\n- \\(f'(x) = 2x\\ln x + x\\); \\(f'(1) = 0 + 1 = 1\\)\n\nWait — more carefully:\n- \\(f'(x) = 2x\\ln x + x^2\\cdot\\frac{1}{x} = 2x\\ln x + x\\); \\(f'(1) = 0 + 1 = 1\\)\n- \\(f''(x) = 2\\ln x + 2x\\cdot\\frac{1}{x} + 1 = 2\\ln x + 3\\); \\(f''(1) = 0 + 3 = 3\\)\n- \\(f'''(x) = \\frac{2}{x}\\); \\(f'''(1) = 2\\)\n- \\(f^{(4)}(x) = -\\frac{2}{x^2}\\); \\(f^{(4)}(1) = -2\\)\n- \\(f^{(5)}(x) = \\frac{4}{x^3}\\); \\(f^{(5)}(1) = 4\\)\n\n**Taylor polynomial:**\n$$T_5(x) = \\sum_{k=0}^5 \\frac{f^{(k)}(1)}{k!}(x-1)^k$$\n$$= 0 + 1\\cdot(x-1) + \\frac{3}{2}(x-1)^2 + \\frac{2}{6}(x-1)^3 + \\frac{-2}{24}(x-1)^4 + \\frac{4}{120}(x-1)^5$$\n$$= (x-1) + \\frac{3}{2}(x-1)^2 + \\frac{1}{3}(x-1)^3 - \\frac{1}{12}(x-1)^4 + \\frac{1}{30}(x-1)^5$$",
+        "explanation": "**Compute derivatives at \\(x=1\\):**\\n- \\(f(x) = x^2\\ln x\\); \\(f(1) = 0\\)\\n- \\(f'(x) = 2x\\ln x + x\\); \\(f'(1) = 0 + 1 = 1\\)\\n\\nWait — more carefully:\\n- \\(f'(x) = 2x\\ln x + x^2\\cdot\\frac{1}{x} = 2x\\ln x + x\\); \\(f'(1) = 0 + 1 = 1\\)\\n- \\(f''(x) = 2\\ln x + 2x\\cdot\\frac{1}{x} + 1 = 2\\ln x + 3\\); \\(f''(1) = 0 + 3 = 3\\)\\n- \\(f'''(x) = \\frac{2}{x}\\); \\(f'''(1) = 2\\)\\n- \\(f^{(4)}(x) = -\\frac{2}{x^2}\\); \\(f^{(4)}(1) = -2\\)\\n- \\(f^{(5)}(x) = \\frac{4}{x^3}\\); \\(f^{(5)}(1) = 4\\)\\n\\n**Taylor polynomial:**\\n$$T_5(x) = \\sum_{k=0}^5 \\frac{f^{(k)}(1)}{k!}(x-1)^k$$\\n$$= 0 + 1\\cdot(x-1) + \\frac{3}{2}(x-1)^2 + \\frac{2}{6}(x-1)^3 + \\frac{-2}{24}(x-1)^4 + \\frac{4}{120}(x-1)^5$$\\n$$= (x-1) + \\frac{3}{2}(x-1)^2 + \\frac{1}{3}(x-1)^3 - \\frac{1}{12}(x-1)^4 + \\frac{1}{30}(x-1)^5$$",
         "tableInput": {
           "headers": [
             "Part",
@@ -277,11 +277,11 @@
       },
       {
         "context": "",
-        "q": "Find antiderivatives (indefinite integrals) for:\n\na) \\(\\int xe^x\\,dx\\)\n\nb) \\(\\int \\frac{e^x}{e^x + 3}\\,dx\\)\n\nc) Find \\(F(x)\\) with \\(F'(x) = \\cos(x^5 + \\pi)\\cdot 5x^4\\) and \\(F(0) = 42\\).",
+        "q": "Find antiderivatives (indefinite integrals) for:\\n\\na) \\(\\int xe^x\\,dx\\)\\n\\nb) \\(\\int \\frac{e^x}{e^x + 3}\\,dx\\)\\n\\nc) Find \\(F(x)\\) with \\(F'(x) = \\cos(x^5 + \\pi)\\cdot 5x^4\\) and \\(F(0) = 42\\).",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Part a)** Integration by parts: \\(u=x\\), \\(dv=e^x dx\\):\n$$\\int xe^x\\,dx = xe^x - \\int e^x\\,dx = xe^x - e^x + C = (x-1)e^x + C$$\n\n**Part b)** Substitution \\(u = e^x + 3\\), \\(du = e^x\\,dx\\):\n$$\\int \\frac{e^x}{e^x+3}\\,dx = \\int \\frac{du}{u} = \\ln|u| + C = \\ln|e^x+3| + C = \\ln(e^x+3) + C$$\n\n**Part c)** Recognise \\(F'(x) = 5x^4\\cos(x^5+\\pi)\\). Let \\(u = x^5+\\pi\\), \\(du = 5x^4\\,dx\\):\n$$F(x) = \\int \\cos(x^5+\\pi)\\cdot 5x^4\\,dx = \\sin(x^5+\\pi) + C$$\n\nApply initial condition \\(F(0) = 42\\):\n$$F(0) = \\sin(0^5+\\pi) + C = \\sin(\\pi) + C = 0 + C = C = 42$$\n\n$$\\boxed{F(x) = \\sin(x^5+\\pi) + 42}$$",
+        "explanation": "**Part a)** Integration by parts: \\(u=x\\), \\(dv=e^x dx\\):\\n$$\\int xe^x\\,dx = xe^x - \\int e^x\\,dx = xe^x - e^x + C = (x-1)e^x + C$$\\n\\n**Part b)** Substitution \\(u = e^x + 3\\), \\(du = e^x\\,dx\\):\\n$$\\int \\frac{e^x}{e^x+3}\\,dx = \\int \\frac{du}{u} = \\ln|u| + C = \\ln|e^x+3| + C = \\ln(e^x+3) + C$$\\n\\n**Part c)** Recognise \\(F'(x) = 5x^4\\cos(x^5+\\pi)\\). Let \\(u = x^5+\\pi\\), \\(du = 5x^4\\,dx\\):\\n$$F(x) = \\int \\cos(x^5+\\pi)\\cdot 5x^4\\,dx = \\sin(x^5+\\pi) + C$$\\n\\nApply initial condition \\(F(0) = 42\\):\\n$$F(0) = \\sin(0^5+\\pi) + C = \\sin(\\pi) + C = 0 + C = C = 42$$\\n\\n$$\\boxed{F(x) = \\sin(x^5+\\pi) + 42}$$",
         "tableInput": {
           "headers": [
             "Part",
@@ -324,7 +324,7 @@
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "Geometrically, \\(f(x_1,x_2)\\) is the squared Euclidean distance from the point \\((-4, 4)\\) to \\((x_1,x_2)\\).\n\n**Step 1: Interior check.**\n\\(\\nabla f = (2(x_1+4),\\, 2(x_2-4)) = 0 \\Rightarrow x_1=-4,\\, x_2=4\\).\nCheck: \\((-4)^2+4^2=32 > 8\\), so the unconstrained minimum is **outside** the feasible region.\n\n**Step 2: Boundary (\\(x_1^2+x_2^2=8\\), i.e., circle of radius \\(\\sqrt{8}=2\\sqrt{2}\\)).**\nThe point \\((-4,4)\\) is at distance \\(\\sqrt{16+16}=4\\sqrt{2}\\) from the origin.\n\n- **Closest point on boundary** to \\((-4,4)\\): along direction \\(\\frac{(-4,4)}{4\\sqrt{2}} = \\left(-\\frac{1}{\\sqrt{2}}, \\frac{1}{\\sqrt{2}}\\right)\\); point: \\(2\\sqrt{2}\\cdot\\left(-\\frac{1}{\\sqrt{2}},\\frac{1}{\\sqrt{2}}\\right) = (-2, 2)\\)\n- **Farthest point** (diametrically opposite): \\((2, -2)\\)\n\n**Step 3: Function values.**\n- \\(f(-2,2) = (-2+4)^2+(2-4)^2 = 4+4 = 8\\) → **global minimum**\n- \\(f(2,-2) = (2+4)^2+(-2-4)^2 = 36+36 = 72\\) → **global maximum**\n\n**Conclusion:**\n- Global minimum: \\(f=8\\) at \\((-2, 2)\\)\n- Global maximum: \\(f=72\\) at \\((2, -2)\\)",
+        "explanation": "Geometrically, \\(f(x_1,x_2)\\) is the squared Euclidean distance from the point \\((-4, 4)\\) to \\((x_1,x_2)\\).\\n\\n**Step 1: Interior check.**\\n\\(\\nabla f = (2(x_1+4),\\, 2(x_2-4)) = 0 \\Rightarrow x_1=-4,\\, x_2=4\\).\\nCheck: \\((-4)^2+4^2=32 > 8\\), so the unconstrained minimum is **outside** the feasible region.\\n\\n**Step 2: Boundary (\\(x_1^2+x_2^2=8\\), i.e., circle of radius \\(\\sqrt{8}=2\\sqrt{2}\\)).**\\nThe point \\((-4,4)\\) is at distance \\(\\sqrt{16+16}=4\\sqrt{2}\\) from the origin.\\n\\n- **Closest point on boundary** to \\((-4,4)\\): along direction \\(\\frac{(-4,4)}{4\\sqrt{2}} = \\left(-\\frac{1}{\\sqrt{2}}, \\frac{1}{\\sqrt{2}}\\right)\\); point: \\(2\\sqrt{2}\\cdot\\left(-\\frac{1}{\\sqrt{2}},\\frac{1}{\\sqrt{2}}\\right) = (-2, 2)\\)\\n- **Farthest point** (diametrically opposite): \\((2, -2)\\)\\n\\n**Step 3: Function values.**\\n- \\(f(-2,2) = (-2+4)^2+(2-4)^2 = 4+4 = 8\\) → **global minimum**\\n- \\(f(2,-2) = (2+4)^2+(-2-4)^2 = 36+36 = 72\\) → **global maximum**\\n\\n**Conclusion:**\\n- Global minimum: \\(f=8\\) at \\((-2, 2)\\)\\n- Global maximum: \\(f=72\\) at \\((2, -2)\\)",
         "tableInput": {
           "headers": [
             "Part",
@@ -371,12 +371,12 @@
         }
       },
       {
-        "context": "Let \\(f: \\mathbb{R}^3 \\to \\mathbb{R}^3\\) and \\(g: \\mathbb{R}^2 \\to \\mathbb{R}^3\\) be given by:\n$$f(u,v,w) = (u^2,\\, v^2,\\, u-w), \\qquad g(x,y) = (xy,\\, x^2+y^2,\\, \\cos(x-y))$$\nConsider the composition \\(F = f \\circ g\\).",
+        "context": "Let \\(f: \\mathbb{R}^3 \\to \\mathbb{R}^3\\) and \\(g: \\mathbb{R}^2 \\to \\mathbb{R}^3\\) be given by:\\n$$f(u,v,w) = (u^2,\\, v^2,\\, u-w), \\qquad g(x,y) = (xy,\\, x^2+y^2,\\, \\cos(x-y))$$\\nConsider the composition \\(F = f \\circ g\\).",
         "q": "Compute the Jacobian matrix \\(J_F\\) at the point \\((x,y) = \\left(\\frac{1}{2}, \\frac{1}{2}\\right)\\) using the chain rule.",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Step 1: Evaluate \\(g\\left(\\frac12,\\frac12\\right)\\):**\n$$g\\left(\\tfrac12,\\tfrac12\\right) = \\left(\\tfrac12\\cdot\\tfrac12,\\; \\tfrac14+\\tfrac14,\\; \\cos(0)\\right) = \\left(\\tfrac14,\\; \\tfrac12,\\; 1\\right)$$\n\n**Step 2: Jacobian of \\(f\\) at \\((u,v,w) = \\left(\\frac14,\\frac12,1\\right)\\):**\n$$J_f = \\begin{pmatrix} 2u & 0 & 0 \\\\ 0 & 2v & 0 \\\\ 1 & 0 & -1 \\end{pmatrix}\\Bigg|_{(1/4,\\,1/2,\\,1)} = \\begin{pmatrix} 1/2 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 1 & 0 & -1 \\end{pmatrix}$$\n\n**Step 3: Jacobian of \\(g\\) at \\(\\left(\\frac12,\\frac12\\right)\\):**\n$$g_1 = xy:\\; \\partial/\\partial x = y = 1/2,\\; \\partial/\\partial y = x = 1/2$$\n$$g_2 = x^2+y^2:\\; \\partial/\\partial x = 2x = 1,\\; \\partial/\\partial y = 2y = 1$$\n$$g_3 = \\cos(x-y):\\; \\partial/\\partial x = -\\sin(x-y) = 0,\\; \\partial/\\partial y = \\sin(x-y) = 0$$\n$$J_g = \\begin{pmatrix} 1/2 & 1/2 \\\\ 1 & 1 \\\\ 0 & 0 \\end{pmatrix}$$\n\n**Step 4: Chain rule \\(J_F = J_f \\cdot J_g\\):**\n$$J_F = \\begin{pmatrix} 1/2 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 1 & 0 & -1 \\end{pmatrix} \\begin{pmatrix} 1/2 & 1/2 \\\\ 1 & 1 \\\\ 0 & 0 \\end{pmatrix} = \\begin{pmatrix} 1/4 & 1/4 \\\\ 1 & 1 \\\\ 1/2 & 1/2 \\end{pmatrix}$$"
+        "explanation": "**Step 1: Evaluate \\(g\\left(\\frac12,\\frac12\\right)\\):**\\n$$g\\left(\\tfrac12,\\tfrac12\\right) = \\left(\\tfrac12\\cdot\\tfrac12,\\; \\tfrac14+\\tfrac14,\\; \\cos(0)\\right) = \\left(\\tfrac14,\\; \\tfrac12,\\; 1\\right)$$\\n\\n**Step 2: Jacobian of \\(f\\) at \\((u,v,w) = \\left(\\frac14,\\frac12,1\\right)\\):**\\n$$J_f = \\begin{pmatrix} 2u & 0 & 0 \\\\ 0 & 2v & 0 \\\\ 1 & 0 & -1 \\end{pmatrix}\\Bigg|_{(1/4,\\,1/2,\\,1)} = \\begin{pmatrix} 1/2 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 1 & 0 & -1 \\end{pmatrix}$$\\n\\n**Step 3: Jacobian of \\(g\\) at \\(\\left(\\frac12,\\frac12\\right)\\):**\\n$$g_1 = xy:\\; \\partial/\\partial x = y = 1/2,\\; \\partial/\\partial y = x = 1/2$$\\n$$g_2 = x^2+y^2:\\; \\partial/\\partial x = 2x = 1,\\; \\partial/\\partial y = 2y = 1$$\\n$$g_3 = \\cos(x-y):\\; \\partial/\\partial x = -\\sin(x-y) = 0,\\; \\partial/\\partial y = \\sin(x-y) = 0$$\\n$$J_g = \\begin{pmatrix} 1/2 & 1/2 \\\\ 1 & 1 \\\\ 0 & 0 \\end{pmatrix}$$\\n\\n**Step 4: Chain rule \\(J_F = J_f \\cdot J_g\\):**\\n$$J_F = \\begin{pmatrix} 1/2 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 1 & 0 & -1 \\end{pmatrix} \\begin{pmatrix} 1/2 & 1/2 \\\\ 1 & 1 \\\\ 0 & 0 \\end{pmatrix} = \\begin{pmatrix} 1/4 & 1/4 \\\\ 1 & 1 \\\\ 1/2 & 1/2 \\end{pmatrix}$$"
       }
     ]
   },
@@ -391,7 +391,7 @@
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "Apply the power rule term by term:\n$$G(x) = \\int (x^2 + 2x + 3)\\,dx = \\frac{x^3}{3} + x^2 + 3x + C$$\n\n**Verification:** \\(G'(x) = x^2 + 2x + 3 = g(x)\\) ✓",
+        "explanation": "Apply the power rule term by term:\\n$$G(x) = \\int (x^2 + 2x + 3)\\,dx = \\frac{x^3}{3} + x^2 + 3x + C$$\\n\\n**Verification:** \\(G'(x) = x^2 + 2x + 3 = g(x)\\) ✓",
         "tableInput": {
           "headers": [
             "Part",
@@ -412,11 +412,11 @@
       },
       {
         "context": "",
-        "q": "a) Find an antiderivative \\(F(x)\\) of \\(f(x) = xe^x\\).\n\nb) Find \\(F(x)\\) with \\(F'(x) = xe^x\\) and \\(F(0) = 2\\).",
+        "q": "a) Find an antiderivative \\(F(x)\\) of \\(f(x) = xe^x\\).\\n\\nb) Find \\(F(x)\\) with \\(F'(x) = xe^x\\) and \\(F(0) = 2\\).",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Part a) Integration by parts:** Let \\(u=x\\), \\(dv=e^x\\,dx\\), so \\(du=dx\\), \\(v=e^x\\):\n$$F(x) = \\int xe^x\\,dx = xe^x - \\int e^x\\,dx = xe^x - e^x + C = (x-1)e^x + C$$\n\n**Part b) Apply initial condition \\(F(0)=2\\):**\n$$F(0) = (0-1)e^0 + C = -1 + C = 2 \\Rightarrow C = 3$$\n$$\\boxed{F(x) = (x-1)e^x + 3}$$",
+        "explanation": "**Part a) Integration by parts:** Let \\(u=x\\), \\(dv=e^x\\,dx\\), so \\(du=dx\\), \\(v=e^x\\):\\n$$F(x) = \\int xe^x\\,dx = xe^x - \\int e^x\\,dx = xe^x - e^x + C = (x-1)e^x + C$$\\n\\n**Part b) Apply initial condition \\(F(0)=2\\):**\\n$$F(0) = (0-1)e^0 + C = -1 + C = 2 \\Rightarrow C = 3$$\\n$$\\boxed{F(x) = (x-1)e^x + 3}$$",
         "tableInput": {
           "headers": [
             "Part",
@@ -446,11 +446,11 @@
       },
       {
         "context": "",
-        "q": "Evaluate the definite integral:\n$$\\int_0^{\\sqrt{\\pi/2}} x\\cos\\!\\left(x^2 - \\frac{\\pi}{2}\\right)dx$$",
+        "q": "Evaluate the definite integral:\\n$$\\int_0^{\\sqrt{\\pi/2}} x\\cos\\!\\left(x^2 - \\frac{\\pi}{2}\\right)dx$$",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Substitution:** Let \\(u = x^2 - \\frac{\\pi}{2}\\), so \\(du = 2x\\,dx\\), i.e., \\(x\\,dx = \\frac{1}{2}du\\).\n\n**New limits:**\n- \\(x=0 \\Rightarrow u = -\\pi/2\\)\n- \\(x=\\sqrt{\\pi/2} \\Rightarrow u = \\pi/2 - \\pi/2 = 0\\)\n\n**Integral:**\n$$\\int_0^{\\sqrt{\\pi/2}} x\\cos(x^2-\\pi/2)\\,dx = \\frac{1}{2}\\int_{-\\pi/2}^0 \\cos(u)\\,du = \\frac{1}{2}\\left[\\sin(u)\\right]_{-\\pi/2}^0$$\n$$= \\frac{1}{2}(\\sin(0) - \\sin(-\\pi/2)) = \\frac{1}{2}(0 - (-1)) = \\frac{1}{2}$$",
+        "explanation": "**Substitution:** Let \\(u = x^2 - \\frac{\\pi}{2}\\), so \\(du = 2x\\,dx\\), i.e., \\(x\\,dx = \\frac{1}{2}du\\).\\n\\n**New limits:**\\n- \\(x=0 \\Rightarrow u = -\\pi/2\\)\\n- \\(x=\\sqrt{\\pi/2} \\Rightarrow u = \\pi/2 - \\pi/2 = 0\\)\\n\\n**Integral:**\\n$$\\int_0^{\\sqrt{\\pi/2}} x\\cos(x^2-\\pi/2)\\,dx = \\frac{1}{2}\\int_{-\\pi/2}^0 \\cos(u)\\,du = \\frac{1}{2}\\left[\\sin(u)\\right]_{-\\pi/2}^0$$\\n$$= \\frac{1}{2}(\\sin(0) - \\sin(-\\pi/2)) = \\frac{1}{2}(0 - (-1)) = \\frac{1}{2}$$",
         "tableInput": {
           "headers": [
             "Part",
@@ -475,7 +475,7 @@
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Definition:**\n$$f'(x_0) = \\lim_{h \\to 0} \\frac{f(x_0 + h) - f(x_0)}{h}$$\n\nprovided this limit exists.\n\n**Alternative form:**\n$$f'(x_0) = \\lim_{x \\to x_0} \\frac{f(x) - f(x_0)}{x - x_0}$$\n\n**Geometric interpretation:** The derivative gives the slope of the tangent line to the graph of \\(f\\) at the point \\((x_0, f(x_0))\\)."
+        "explanation": "**Definition:**\\n$$f'(x_0) = \\lim_{h \\to 0} \\frac{f(x_0 + h) - f(x_0)}{h}$$\\n\\nprovided this limit exists.\\n\\n**Alternative form:**\\n$$f'(x_0) = \\lim_{x \\to x_0} \\frac{f(x) - f(x_0)}{x - x_0}$$\\n\\n**Geometric interpretation:** The derivative gives the slope of the tangent line to the graph of \\(f\\) at the point \\((x_0, f(x_0))\\)."
       },
       {
         "context": "",
@@ -483,15 +483,15 @@
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**From the definition:**\n$$f'(x) = \\lim_{h\\to 0} \\frac{(x+h)^n - x^n}{h}$$\n\n**Apply the Binomial Theorem:**\n$$(x+h)^n = \\sum_{k=0}^n \\binom{n}{k} x^{n-k}h^k = x^n + nx^{n-1}h + \\binom{n}{2}x^{n-2}h^2 + \\cdots + h^n$$\n\n**Subtract and divide by \\(h\\):**\n$$\\frac{(x+h)^n - x^n}{h} = nx^{n-1} + \\binom{n}{2}x^{n-2}h + \\cdots + h^{n-1}$$\n\n**Take limit as \\(h\\to 0\\):** All terms containing \\(h\\) vanish:\n$$f'(x) = nx^{n-1} \\qquad \\square$$"
+        "explanation": "**From the definition:**\\n$$f'(x) = \\lim_{h\\to 0} \\frac{(x+h)^n - x^n}{h}$$\\n\\n**Apply the Binomial Theorem:**\\n$$(x+h)^n = \\sum_{k=0}^n \\binom{n}{k} x^{n-k}h^k = x^n + nx^{n-1}h + \\binom{n}{2}x^{n-2}h^2 + \\cdots + h^n$$\\n\\n**Subtract and divide by \\(h\\):**\\n$$\\frac{(x+h)^n - x^n}{h} = nx^{n-1} + \\binom{n}{2}x^{n-2}h + \\cdots + h^{n-1}$$\\n\\n**Take limit as \\(h\\to 0\\):** All terms containing \\(h\\) vanish:\\n$$f'(x) = nx^{n-1} \\qquad \\square$$"
       },
       {
         "context": "Consider the function \\(f(x) = e^{x^3 - 12x}\\).",
-        "q": "i) Find \\(f'(x)\\).\nii) Find all stationary points.\niii) Classify each stationary point using \\(f''(x)\\).",
+        "q": "i) Find \\(f'(x)\\).\\nii) Find all stationary points.\\niii) Classify each stationary point using \\(f''(x)\\).",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Part i) Chain rule:**\n$$f'(x) = e^{x^3-12x} \\cdot (3x^2 - 12)$$\n\n**Part ii) Stationary points** (\\(f'(x)=0\\)):\nSince \\(e^{x^3-12x} > 0\\) always, set \\(3x^2-12=0\\):\n$$3(x^2-4) = 0 \\Rightarrow x = \\pm 2$$\n\n**Part iii) Second derivative:**\n$$f''(x) = e^{x^3-12x}\\cdot(3x^2-12)^2 + e^{x^3-12x}\\cdot 6x = e^{x^3-12x}\\left[(3x^2-12)^2 + 6x\\right]$$\n\nAt \\(x=2\\): \\((3\\cdot4-12)^2 + 12 = 0 + 12 = 12 > 0\\), and \\(e^{8-24} = e^{-16} > 0\\):\n$$f''(2) = 12e^{-16} > 0 \\Rightarrow \\textbf{local minimum at } x=2$$\n\nAt \\(x=-2\\): \\((12-12)^2 + 6(-2) = 0 - 12 = -12 < 0\\), and \\(e^{-8+24} = e^{16} > 0\\):\n$$f''(-2) = -12e^{16} < 0 \\Rightarrow \\textbf{local maximum at } x=-2$$",
+        "explanation": "**Part i) Chain rule:**\\n$$f'(x) = e^{x^3-12x} \\cdot (3x^2 - 12)$$\\n\\n**Part ii) Stationary points** (\\(f'(x)=0\\)):\\nSince \\(e^{x^3-12x} > 0\\) always, set \\(3x^2-12=0\\):\\n$$3(x^2-4) = 0 \\Rightarrow x = \\pm 2$$\\n\\n**Part iii) Second derivative:**\\n$$f''(x) = e^{x^3-12x}\\cdot(3x^2-12)^2 + e^{x^3-12x}\\cdot 6x = e^{x^3-12x}\\left[(3x^2-12)^2 + 6x\\right]$$\\n\\nAt \\(x=2\\): \\((3\\cdot4-12)^2 + 12 = 0 + 12 = 12 > 0\\), and \\(e^{8-24} = e^{-16} > 0\\):\\n$$f''(2) = 12e^{-16} > 0 \\Rightarrow \\textbf{local minimum at } x=2$$\\n\\nAt \\(x=-2\\): \\((12-12)^2 + 6(-2) = 0 - 12 = -12 < 0\\), and \\(e^{-8+24} = e^{16} > 0\\):\\n$$f''(-2) = -12e^{16} < 0 \\Rightarrow \\textbf{local maximum at } x=-2$$",
         "tableInput": {
           "headers": [
             "Part",
@@ -543,7 +543,7 @@
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Definition (\\(\\varepsilon\\)-\\(N\\) convergence):**\n\nA sequence \\((a_n)\\) converges to \\(L \\in \\mathbb{R}\\), written \\(\\lim_{n\\to\\infty} a_n = L\\), if:\n$$\\forall\\, \\varepsilon > 0,\\; \\exists\\, N \\in \\mathbb{N}\\; \\text{ such that }\\; \\forall\\, n > N:\\; |a_n - L| < \\varepsilon$$\n\n**Intuition:** For every desired precision \\(\\varepsilon > 0\\), there is a point in the sequence after which all terms stay within distance \\(\\varepsilon\\) of \\(L\\).\n\n**Example:** Show \\(a_n = 1/n \\to 0\\).\nGiven \\(\\varepsilon > 0\\), choose \\(N > 1/\\varepsilon\\). Then for \\(n > N\\):\n$$|a_n - 0| = \\frac{1}{n} < \\frac{1}{N} < \\varepsilon \\qquad \\square$$"
+        "explanation": "**Definition (\\(\\varepsilon\\)-\\(N\\) convergence):**\\n\\nA sequence \\((a_n)\\) converges to \\(L \\in \\mathbb{R}\\), written \\(\\lim_{n\\to\\infty} a_n = L\\), if:\\n$$\\forall\\, \\varepsilon > 0,\\; \\exists\\, N \\in \\mathbb{N}\\; \\text{ such that }\\; \\forall\\, n > N:\\; |a_n - L| < \\varepsilon$$\\n\\n**Intuition:** For every desired precision \\(\\varepsilon > 0\\), there is a point in the sequence after which all terms stay within distance \\(\\varepsilon\\) of \\(L\\).\\n\\n**Example:** Show \\(a_n = 1/n \\to 0\\).\\nGiven \\(\\varepsilon > 0\\), choose \\(N > 1/\\varepsilon\\). Then for \\(n > N\\):\\n$$|a_n - 0| = \\frac{1}{n} < \\frac{1}{N} < \\varepsilon \\qquad \\square$$"
       },
       {
         "context": "",
@@ -551,7 +551,7 @@
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Definition:** \\(f\\) is continuous at \\(x_0\\) if:\n$$\\forall\\,\\varepsilon > 0,\\; \\exists\\,\\delta > 0\\; \\text{ such that }\\; |x - x_0| < \\delta \\Rightarrow |f(x) - f(x_0)| < \\varepsilon$$\n\n**Proof for \\(f(x) = 2x+1\\) at \\(x_0=3\\):**\n\n\\(f(x_0) = f(3) = 7\\). We need \\(|f(x) - 7| < \\varepsilon\\) whenever \\(|x-3| < \\delta\\).\n\n$$|f(x) - f(x_0)| = |(2x+1) - 7| = |2x - 6| = 2|x-3|$$\n\nGiven \\(\\varepsilon > 0\\), choose \\(\\delta = \\varepsilon/2\\). Then:\n$$|x-3| < \\delta \\Rightarrow |f(x)-f(3)| = 2|x-3| < 2\\cdot\\frac{\\varepsilon}{2} = \\varepsilon$$\n\nSince \\(\\delta > 0\\) exists for every \\(\\varepsilon > 0\\), \\(f\\) is continuous at \\(x_0=3\\). \\(\\square\\)"
+        "explanation": "**Definition:** \\(f\\) is continuous at \\(x_0\\) if:\\n$$\\forall\\,\\varepsilon > 0,\\; \\exists\\,\\delta > 0\\; \\text{ such that }\\; |x - x_0| < \\delta \\Rightarrow |f(x) - f(x_0)| < \\varepsilon$$\\n\\n**Proof for \\(f(x) = 2x+1\\) at \\(x_0=3\\):**\\n\\n\\(f(x_0) = f(3) = 7\\). We need \\(|f(x) - 7| < \\varepsilon\\) whenever \\(|x-3| < \\delta\\).\\n\\n$$|f(x) - f(x_0)| = |(2x+1) - 7| = |2x - 6| = 2|x-3|$$\\n\\nGiven \\(\\varepsilon > 0\\), choose \\(\\delta = \\varepsilon/2\\). Then:\\n$$|x-3| < \\delta \\Rightarrow |f(x)-f(3)| = 2|x-3| < 2\\cdot\\frac{\\varepsilon}{2} = \\varepsilon$$\\n\\nSince \\(\\delta > 0\\) exists for every \\(\\varepsilon > 0\\), \\(f\\) is continuous at \\(x_0=3\\). \\(\\square\\)"
       }
     ]
   },
@@ -562,11 +562,11 @@
     "questions": [
       {
         "context": "Consider \\(f(x) = \\dfrac{x}{\\ln(x)}\\).",
-        "q": "a) State the domain of \\(f\\).\nb) Compute all relevant limits (as \\(x\\to 0^+\\), \\(x\\to 1^\\pm\\), \\(x\\to\\infty\\)).\nc) Find all stationary points and classify them.\nd) Sketch the function.",
+        "q": "a) State the domain of \\(f\\).\\nb) Compute all relevant limits (as \\(x\\to 0^+\\), \\(x\\to 1^\\pm\\), \\(x\\to\\infty\\)).\\nc) Find all stationary points and classify them.\\nd) Sketch the function.",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Part a) Domain:**\n\\(\\ln(x)\\) is defined for \\(x > 0\\), but we must exclude \\(x=1\\) (where \\(\\ln(1)=0\\)).\n$$\\text{Domain} = (0,1) \\cup (1, \\infty)$$\n\n**Part b) Limits:**\n- \\(\\lim_{x\\to 0^+} f(x) = \\lim_{x\\to 0^+} \\frac{x}{\\ln x}\\): numerator \\(\\to 0\\), denominator \\(\\to -\\infty\\), so \\(f(x)\\to 0^-\\) (from below)\n- \\(\\lim_{x\\to 1^-} f(x)\\): \\(x\\to1\\), \\(\\ln x\\to 0^-\\), so \\(f(x)\\to 1/0^- = -\\infty\\)\n- \\(\\lim_{x\\to 1^+} f(x)\\): \\(\\ln x\\to 0^+\\), so \\(f(x)\\to +\\infty\\)\n- \\(\\lim_{x\\to\\infty} f(x) = \\infty\\) (since \\(x\\) grows faster than \\(\\ln x\\) in terms of divergence, but actually both go to \\(+\\infty\\); by L'Hôpital: \\(\\frac{x}{\\ln x}\\overset{H}{\\sim}\\frac{1}{1/x}=x\\to\\infty\\))\n\n**Part c) Stationary points:**\n$$f'(x) = \\frac{\\ln(x) \\cdot 1 - x \\cdot \\frac{1}{x}}{(\\ln x)^2} = \\frac{\\ln x - 1}{(\\ln x)^2}$$\n\nSet \\(f'(x)=0\\): \\(\\ln x - 1 = 0 \\Rightarrow \\ln x = 1 \\Rightarrow x = e\\).\n\n- For \\(x \\in (1,e)\\): \\(\\ln x < 1\\), so \\(f'(x) < 0\\) (decreasing)\n- For \\(x > e\\): \\(\\ln x > 1\\), so \\(f'(x) > 0\\) (increasing)\n- **Local (and global on \\((1,\\infty)\\)) minimum at \\(x=e\\):** \\(f(e) = e/1 = e\\)\n\n**Part d) Sketch features:**\n- Vertical asymptote at \\(x=1\\) (\\(-\\infty\\) from left, \\(+\\infty\\) from right)\n- Approaches 0 as \\(x\\to 0^+\\) (from below, on \\((0,1)\\))\n- On \\((1,\\infty)\\): decreases to minimum \\(e\\) at \\(x=e\\), then increases to \\(\\infty\\)",
+        "explanation": "**Part a) Domain:**\\n\\(\\ln(x)\\) is defined for \\(x > 0\\), but we must exclude \\(x=1\\) (where \\(\\ln(1)=0\\)).\\n$$\\text{Domain} = (0,1) \\cup (1, \\infty)$$\\n\\n**Part b) Limits:**\\n- \\(\\lim_{x\\to 0^+} f(x) = \\lim_{x\\to 0^+} \\frac{x}{\\ln x}\\): numerator \\(\\to 0\\), denominator \\(\\to -\\infty\\), so \\(f(x)\\to 0^-\\) (from below)\\n- \\(\\lim_{x\\to 1^-} f(x)\\): \\(x\\to1\\), \\(\\ln x\\to 0^-\\), so \\(f(x)\\to 1/0^- = -\\infty\\)\\n- \\(\\lim_{x\\to 1^+} f(x)\\): \\(\\ln x\\to 0^+\\), so \\(f(x)\\to +\\infty\\)\\n- \\(\\lim_{x\\to\\infty} f(x) = \\infty\\) (since \\(x\\) grows faster than \\(\\ln x\\) in terms of divergence, but actually both go to \\(+\\infty\\); by L'Hôpital: \\(\\frac{x}{\\ln x}\\overset{H}{\\sim}\\frac{1}{1/x}=x\\to\\infty\\))\\n\\n**Part c) Stationary points:**\\n$$f'(x) = \\frac{\\ln(x) \\cdot 1 - x \\cdot \\frac{1}{x}}{(\\ln x)^2} = \\frac{\\ln x - 1}{(\\ln x)^2}$$\\n\\nSet \\(f'(x)=0\\): \\(\\ln x - 1 = 0 \\Rightarrow \\ln x = 1 \\Rightarrow x = e\\).\\n\\n- For \\(x \\in (1,e)\\): \\(\\ln x < 1\\), so \\(f'(x) < 0\\) (decreasing)\\n- For \\(x > e\\): \\(\\ln x > 1\\), so \\(f'(x) > 0\\) (increasing)\\n- **Local (and global on \\((1,\\infty)\\)) minimum at \\(x=e\\):** \\(f(e) = e/1 = e\\)\\n\\n**Part d) Sketch features:**\\n- Vertical asymptote at \\(x=1\\) (\\(-\\infty\\) from left, \\(+\\infty\\) from right)\\n- Approaches 0 as \\(x\\to 0^+\\) (from below, on \\((0,1)\\))\\n- On \\((1,\\infty)\\): decreases to minimum \\(e\\) at \\(x=e\\), then increases to \\(\\infty\\)",
         "tableInput": {
           "headers": [
             "Part",
@@ -641,11 +641,11 @@
       },
       {
         "context": "",
-        "q": "Evaluate:\na) \\(\\displaystyle\\int_0^{1/3} 27\\pi x^2 e^{3x}\\,dx\\)\n\nb) \\(\\displaystyle\\lim_{x\\to 0} \\frac{e^{2x} - 2\\sin(x) - 1 - 2x^2}{\\sin(\\pi x) - \\pi x}\\)",
+        "q": "Evaluate:\\na) \\(\\displaystyle\\int_0^{1/3} 27\\pi x^2 e^{3x}\\,dx\\)\\n\\nb) \\(\\displaystyle\\lim_{x\\to 0} \\frac{e^{2x} - 2\\sin(x) - 1 - 2x^2}{\\sin(\\pi x) - \\pi x}\\)",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Part a)** Use integration by parts for \\(\\int x^2 e^{3x}\\,dx\\).\n\nLet \\(I = \\int x^2e^{3x}\\,dx\\). Apply IBP twice:\n- First: \\(u=x^2\\), \\(dv=e^{3x}dx\\):\n$$I = \\frac{x^2e^{3x}}{3} - \\frac{2}{3}\\int xe^{3x}\\,dx$$\n- Second: \\(u=x\\), \\(dv=e^{3x}dx\\):\n$$\\int xe^{3x}\\,dx = \\frac{xe^{3x}}{3} - \\frac{e^{3x}}{9}$$\n- Therefore:\n$$I = \\frac{x^2e^{3x}}{3} - \\frac{2}{3}\\left(\\frac{xe^{3x}}{3} - \\frac{e^{3x}}{9}\\right) = e^{3x}\\left(\\frac{x^2}{3} - \\frac{2x}{9} + \\frac{2}{27}\\right)$$\n\nEvaluate \\(27\\pi\\int_0^{1/3}x^2e^{3x}\\,dx = 27\\pi\\left[e^{3x}\\left(\\frac{x^2}{3}-\\frac{2x}{9}+\\frac{2}{27}\\right)\\right]_0^{1/3}\\):\n- At \\(x=1/3\\): \\(e^1\\left(\\frac{1/9}{3}-\\frac{2/3}{9}+\\frac{2}{27}\\right) = e\\left(\\frac{1}{27}-\\frac{2}{27}+\\frac{2}{27}\\right) = \\frac{e}{27}\\)\n- At \\(x=0\\): \\(\\frac{2}{27}\\)\n$$27\\pi\\left(\\frac{e}{27}-\\frac{2}{27}\\right) = 27\\pi\\cdot\\frac{e-2}{27} = \\pi(e-2)$$\n\n**Part b)** Both numerator and denominator approach 0. Use Taylor expansions around \\(x=0\\):\n\nNumerator: \\(e^{2x} = 1+2x+2x^2+\\frac{4x^3}{3}+\\frac{2x^4}{3}+\\cdots\\)\n\\(2\\sin(x) = 2x-\\frac{x^3}{3}+\\cdots\\)\n\\(e^{2x}-2\\sin(x)-1-2x^2 = (1+2x+2x^2+\\frac{4x^3}{3}+\\cdots) - (2x-\\frac{x^3}{3}+\\cdots) - 1 - 2x^2\\)\n\\(= \\frac{4x^3}{3}+\\frac{x^3}{3}+O(x^4) = \\frac{5x^3}{3}+O(x^4)\\)\n\nDenominator: \\(\\sin(\\pi x) = \\pi x - \\frac{(\\pi x)^3}{6}+\\cdots\\)\n\\(\\sin(\\pi x)-\\pi x = -\\frac{\\pi^3 x^3}{6}+O(x^5)\\)\n\n**Limit:**\n$$\\lim_{x\\to 0}\\frac{5x^3/3 + O(x^4)}{-\\pi^3x^3/6+O(x^5)} = \\frac{5/3}{-\\pi^3/6} = \\frac{5}{3}\\cdot\\frac{-6}{\\pi^3} = \\frac{-10}{\\pi^3}$$",
+        "explanation": "**Part a)** Use integration by parts for \\(\\int x^2 e^{3x}\\,dx\\).\\n\\nLet \\(I = \\int x^2e^{3x}\\,dx\\). Apply IBP twice:\\n- First: \\(u=x^2\\), \\(dv=e^{3x}dx\\):\\n$$I = \\frac{x^2e^{3x}}{3} - \\frac{2}{3}\\int xe^{3x}\\,dx$$\\n- Second: \\(u=x\\), \\(dv=e^{3x}dx\\):\\n$$\\int xe^{3x}\\,dx = \\frac{xe^{3x}}{3} - \\frac{e^{3x}}{9}$$\\n- Therefore:\\n$$I = \\frac{x^2e^{3x}}{3} - \\frac{2}{3}\\left(\\frac{xe^{3x}}{3} - \\frac{e^{3x}}{9}\\right) = e^{3x}\\left(\\frac{x^2}{3} - \\frac{2x}{9} + \\frac{2}{27}\\right)$$\\n\\nEvaluate \\(27\\pi\\int_0^{1/3}x^2e^{3x}\\,dx = 27\\pi\\left[e^{3x}\\left(\\frac{x^2}{3}-\\frac{2x}{9}+\\frac{2}{27}\\right)\\right]_0^{1/3}\\):\\n- At \\(x=1/3\\): \\(e^1\\left(\\frac{1/9}{3}-\\frac{2/3}{9}+\\frac{2}{27}\\right) = e\\left(\\frac{1}{27}-\\frac{2}{27}+\\frac{2}{27}\\right) = \\frac{e}{27}\\)\\n- At \\(x=0\\): \\(\\frac{2}{27}\\)\\n$$27\\pi\\left(\\frac{e}{27}-\\frac{2}{27}\\right) = 27\\pi\\cdot\\frac{e-2}{27} = \\pi(e-2)$$\\n\\n**Part b)** Both numerator and denominator approach 0. Use Taylor expansions around \\(x=0\\):\\n\\nNumerator: \\(e^{2x} = 1+2x+2x^2+\\frac{4x^3}{3}+\\frac{2x^4}{3}+\\cdots\\)\\n\\(2\\sin(x) = 2x-\\frac{x^3}{3}+\\cdots\\)\\n\\(e^{2x}-2\\sin(x)-1-2x^2 = (1+2x+2x^2+\\frac{4x^3}{3}+\\cdots) - (2x-\\frac{x^3}{3}+\\cdots) - 1 - 2x^2\\)\\n\\(= \\frac{4x^3}{3}+\\frac{x^3}{3}+O(x^4) = \\frac{5x^3}{3}+O(x^4)\\)\\n\\nDenominator: \\(\\sin(\\pi x) = \\pi x - \\frac{(\\pi x)^3}{6}+\\cdots\\)\\n\\(\\sin(\\pi x)-\\pi x = -\\frac{\\pi^3 x^3}{6}+O(x^5)\\)\\n\\n**Limit:**\\n$$\\lim_{x\\to 0}\\frac{5x^3/3 + O(x^4)}{-\\pi^3x^3/6+O(x^5)} = \\frac{5/3}{-\\pi^3/6} = \\frac{5}{3}\\cdot\\frac{-6}{\\pi^3} = \\frac{-10}{\\pi^3}$$",
         "tableInput": {
           "headers": [
             "Part",
@@ -674,12 +674,12 @@
         }
       },
       {
-        "context": "Consider the symmetric matrix\n$$A = \\begin{pmatrix} 1 & 2 & 0 \\\\ 2 & 5 & x-1 \\\\ 0 & x-1 & 1 \\end{pmatrix}$$",
+        "context": "Consider the symmetric matrix\\n$$A = \\begin{pmatrix} 1 & 2 & 0 \\\\ 2 & 5 & x-1 \\\\ 0 & x-1 & 1 \\end{pmatrix}$$",
         "q": "Find all values of \\(x \\in \\mathbb{R}\\) for which \\(A\\) is positive definite.",
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Sylvester's criterion:** A symmetric matrix is positive definite iff all leading principal minors are positive.\n\n**Minor 1:** \\(D_1 = 1 > 0\\) ✓ (always)\n\n**Minor 2:** \\(D_2 = \\begin{vmatrix} 1 & 2 \\\\ 2 & 5 \\end{vmatrix} = 5 - 4 = 1 > 0\\) ✓ (always)\n\n**Minor 3:** \\(D_3 = \\det(A)\\). Expand along first row:\n$$\\det(A) = 1\\cdot\\begin{vmatrix}5 & x-1 \\\\ x-1 & 1\\end{vmatrix} - 2\\cdot\\begin{vmatrix}2 & x-1 \\\\ 0 & 1\\end{vmatrix} + 0$$\n$$= (5 - (x-1)^2) - 2(2) = 5 - (x-1)^2 - 4 = 1 - (x-1)^2$$\n\nRequire \\(D_3 > 0\\):\n$$1 - (x-1)^2 > 0 \\Rightarrow (x-1)^2 < 1 \\Rightarrow |x-1| < 1 \\Rightarrow 0 < x < 2$$\n\n$$\\boxed{A \\text{ is positive definite iff } x \\in (0, 2)}$$",
+        "explanation": "**Sylvester's criterion:** A symmetric matrix is positive definite iff all leading principal minors are positive.\\n\\n**Minor 1:** \\(D_1 = 1 > 0\\) ✓ (always)\\n\\n**Minor 2:** \\(D_2 = \\begin{vmatrix} 1 & 2 \\\\ 2 & 5 \\end{vmatrix} = 5 - 4 = 1 > 0\\) ✓ (always)\\n\\n**Minor 3:** \\(D_3 = \\det(A)\\). Expand along first row:\\n$$\\det(A) = 1\\cdot\\begin{vmatrix}5 & x-1 \\\\ x-1 & 1\\end{vmatrix} - 2\\cdot\\begin{vmatrix}2 & x-1 \\\\ 0 & 1\\end{vmatrix} + 0$$\\n$$= (5 - (x-1)^2) - 2(2) = 5 - (x-1)^2 - 4 = 1 - (x-1)^2$$\\n\\nRequire \\(D_3 > 0\\):\\n$$1 - (x-1)^2 > 0 \\Rightarrow (x-1)^2 < 1 \\Rightarrow |x-1| < 1 \\Rightarrow 0 < x < 2$$\\n\\n$$\\boxed{A \\text{ is positive definite iff } x \\in (0, 2)}$$",
         "tableInput": {
           "headers": [
             "Part",
@@ -704,7 +704,7 @@
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Part a) Equation of the hypotenuse:**\nLine through \\((c,0)\\) and \\((0,d)\\): \\(\\frac{x}{c}+\\frac{y}{d}=1 \\Rightarrow y = d\\left(1-\\frac{x}{c}\\right)\\)\n\n**Part b) Rectangle area:**\nA rectangle with corner at the origin and opposite corner at \\((x, y(x))\\) has area:\n$$A(x) = x \\cdot y(x) = x\\cdot d\\left(1-\\frac{x}{c}\\right) = dx - \\frac{d}{c}x^2, \\quad 0 < x < c$$\n\n**Part c) Optimize:**\n$$A'(x) = d - \\frac{2d}{c}x = d\\left(1-\\frac{2x}{c}\\right)$$\n$$A'(x) = 0 \\Rightarrow x^* = \\frac{c}{2}$$\n$$A''(x) = -\\frac{2d}{c} < 0 \\Rightarrow \\text{maximum confirmed}$$\n\n**Part d) Maximum area:**\n$$y^* = d\\left(1-\\frac{c/2}{c}\\right) = \\frac{d}{2}$$\n$$A\\left(\\frac{c}{2}\\right) = \\frac{c}{2}\\cdot\\frac{d}{2} = \\frac{cd}{4}$$\n\n**Optimal rectangle:** width \\(= c/2\\), height \\(= d/2\\), maximum area \\(= cd/4\\).",
+        "explanation": "**Part a) Equation of the hypotenuse:**\\nLine through \\((c,0)\\) and \\((0,d)\\): \\(\\frac{x}{c}+\\frac{y}{d}=1 \\Rightarrow y = d\\left(1-\\frac{x}{c}\\right)\\)\\n\\n**Part b) Rectangle area:**\\nA rectangle with corner at the origin and opposite corner at \\((x, y(x))\\) has area:\\n$$A(x) = x \\cdot y(x) = x\\cdot d\\left(1-\\frac{x}{c}\\right) = dx - \\frac{d}{c}x^2, \\quad 0 < x < c$$\\n\\n**Part c) Optimize:**\\n$$A'(x) = d - \\frac{2d}{c}x = d\\left(1-\\frac{2x}{c}\\right)$$\\n$$A'(x) = 0 \\Rightarrow x^* = \\frac{c}{2}$$\\n$$A''(x) = -\\frac{2d}{c} < 0 \\Rightarrow \\text{maximum confirmed}$$\\n\\n**Part d) Maximum area:**\\n$$y^* = d\\left(1-\\frac{c/2}{c}\\right) = \\frac{d}{2}$$\\n$$A\\left(\\frac{c}{2}\\right) = \\frac{c}{2}\\cdot\\frac{d}{2} = \\frac{cd}{4}$$\\n\\n**Optimal rectangle:** width \\(= c/2\\), height \\(= d/2\\), maximum area \\(= cd/4\\).",
         "tableInput": {
           "headers": [
             "Part",
@@ -738,7 +738,7 @@
         "opts": [],
         "ans": [],
         "multi": false,
-        "explanation": "**Lagrange conditions:** \\(\\nabla f = \\lambda \\nabla g\\)\n\n$$\\frac{\\partial f}{\\partial x_1} = x_1 x_2 = \\lambda \\cdot 2x_1 \\quad (1)$$\n$$\\frac{\\partial f}{\\partial x_2} = \\frac{x_1^2}{2} - 2 = \\lambda \\cdot 2x_2 \\quad (2)$$\n$$x_1^2 + x_2^2 = 4 \\quad (3)$$\n\n**Case 1: \\(x_1 = 0\\)**\nFrom (3): \\(x_2 = \\pm 2\\). From (2): \\(-2 = \\pm 4\\lambda \\Rightarrow \\lambda = \\mp 1/2\\).\nPoints: \\((0,2)\\) and \\((0,-2)\\).\n\\(f(0,2) = 0-4 = -4\\); \\(f(0,-2)=0+4=4\\)\n\n**Case 2: \\(x_1 \\neq 0\\)**\nFrom (1): \\(x_2 = 2\\lambda\\)\nFrom (2): \\(\\frac{x_1^2}{2}-2 = 2\\lambda x_2 = 2\\lambda\\cdot 2\\lambda = 4\\lambda^2\\)\nFrom (3): \\(x_1^2 = 4-x_2^2 = 4-4\\lambda^2\\)\nSubstitute: \\(\\frac{4-4\\lambda^2}{2}-2 = 4\\lambda^2 \\Rightarrow 2-2\\lambda^2-2=4\\lambda^2 \\Rightarrow 0=6\\lambda^2 \\Rightarrow \\lambda=0\\)\nThen \\(x_2=0\\), \\(x_1^2=4\\), i.e., \\(x_1=\\pm 2\\).\n\\(f(2,0)=0\\); \\(f(-2,0)=0\\)\n\n**Summary:**\n- **Maximum:** \\(f=4\\) at \\((0,-2)\\)\n- **Minimum:** \\(f=-4\\) at \\((0,2)\\)\n- Saddle points (equal value): \\(f=0\\) at \\((\\pm2, 0)\\)",
+        "explanation": "**Lagrange conditions:** \\(\\nabla f = \\lambda \\nabla g\\)\\n\\n$$\\frac{\\partial f}{\\partial x_1} = x_1 x_2 = \\lambda \\cdot 2x_1 \\quad (1)$$\\n$$\\frac{\\partial f}{\\partial x_2} = \\frac{x_1^2}{2} - 2 = \\lambda \\cdot 2x_2 \\quad (2)$$\\n$$x_1^2 + x_2^2 = 4 \\quad (3)$$\\n\\n**Case 1: \\(x_1 = 0\\)**\\nFrom (3): \\(x_2 = \\pm 2\\). From (2): \\(-2 = \\pm 4\\lambda \\Rightarrow \\lambda = \\mp 1/2\\).\\nPoints: \\((0,2)\\) and \\((0,-2)\\).\\n\\(f(0,2) = 0-4 = -4\\); \\(f(0,-2)=0+4=4\\)\\n\\n**Case 2: \\(x_1 \\neq 0\\)**\\nFrom (1): \\(x_2 = 2\\lambda\\)\\nFrom (2): \\(\\frac{x_1^2}{2}-2 = 2\\lambda x_2 = 2\\lambda\\cdot 2\\lambda = 4\\lambda^2\\)\\nFrom (3): \\(x_1^2 = 4-x_2^2 = 4-4\\lambda^2\\)\\nSubstitute: \\(\\frac{4-4\\lambda^2}{2}-2 = 4\\lambda^2 \\Rightarrow 2-2\\lambda^2-2=4\\lambda^2 \\Rightarrow 0=6\\lambda^2 \\Rightarrow \\lambda=0\\)\\nThen \\(x_2=0\\), \\(x_1^2=4\\), i.e., \\(x_1=\\pm 2\\).\\n\\(f(2,0)=0\\); \\(f(-2,0)=0\\)\\n\\n**Summary:**\\n- **Maximum:** \\(f=4\\) at \\((0,-2)\\)\\n- **Minimum:** \\(f=-4\\) at \\((0,2)\\)\\n- Saddle points (equal value): \\(f=0\\) at \\((\\pm2, 0)\\)",
         "tableInput": {
           "headers": [
             "Part",
@@ -802,10 +802,10 @@
           1
         ],
         "multi": false,
-        "explanation": "**The answer is No — and the premise is false.**\n\n\\(f(x)=x^3\\) is continuous everywhere (polynomial). However, \\(g(x)=\\lfloor x \\rfloor\\) (the floor/integer-part function) is **not** continuous at integer values. At \\(x=6\\):\n- \\(\\lim_{x\\to 6^-}\\lfloor x\\rfloor = 5\\)\n- \\(\\lim_{x\\to 6^+}\\lfloor x\\rfloor = 6\\)\nSo \\(g\\) has a jump discontinuity at \\(x=6\\).\n\nSince \\(g\\) is not continuous at \\(x=6\\), the difference \\(f-g\\) is also **not continuous** there (a continuous function minus a discontinuous one is discontinuous).\n\n**Lesson:** The claim in the premise (that \\(g\\) is continuous at 6) is wrong. One cannot apply the sum/difference rule for continuity when the premise fails."
+        "explanation": "**The answer is No — and the premise is false.**\\n\\n\\(f(x)=x^3\\) is continuous everywhere (polynomial). However, \\(g(x)=\\lfloor x \\rfloor\\) (the floor/integer-part function) is **not** continuous at integer values. At \\(x=6\\):\\n- \\(\\lim_{x\\to 6^-}\\lfloor x\\rfloor = 5\\)\\n- \\(\\lim_{x\\to 6^+}\\lfloor x\\rfloor = 6\\)\\nSo \\(g\\) has a jump discontinuity at \\(x=6\\).\\n\\nSince \\(g\\) is not continuous at \\(x=6\\), the difference \\(f-g\\) is also **not continuous** there (a continuous function minus a discontinuous one is discontinuous).\\n\\n**Lesson:** The claim in the premise (that \\(g\\) is continuous at 6) is wrong. One cannot apply the sum/difference rule for continuity when the premise fails."
       },
       {
-        "context": "Consider the functions:\n- \\(a(x) = H(x-3) + 4\\) (where \\(H\\) is the Heaviside step function)\n- \\(e(x) = \\lfloor x-3 \\rfloor\\) (floor function)",
+        "context": "Consider the functions:\\n- \\(a(x) = H(x-3) + 4\\) (where \\(H\\) is the Heaviside step function)\\n- \\(e(x) = \\lfloor x-3 \\rfloor\\) (floor function)",
         "q": "Which pair of functions is such that both are discontinuous at \\(x=3\\), but their DIFFERENCE is continuous at \\(x=3\\)?",
         "opts": [
           "Only a(x)",
@@ -817,10 +817,10 @@
           1
         ],
         "multi": false,
-        "explanation": "**Check each function at \\(x=3\\):**\n\n**\\(a(x) = H(x-3)+4\\):**\n- For \\(x<3\\): \\(H(x-3)=0\\), so \\(a(x)=4\\)\n- For \\(x\\geq3\\): \\(H(x-3)=1\\), so \\(a(x)=5\\)\n- Jump from 4 to 5 at \\(x=3\\) → **discontinuous**\n\n**\\(e(x) = \\lfloor x-3 \\rfloor\\):**\n- For \\(x\\in(-1+3, 3) = (2,3)\\): \\(x-3\\in(-1,0)\\), so \\(\\lfloor x-3\\rfloor = -1\\)\n- For \\(x\\geq3\\): \\(x-3\\geq0\\), so \\(\\lfloor x-3\\rfloor = 0\\)\n- Jump from \\(-1\\) to \\(0\\) at \\(x=3\\) → **discontinuous**\n\n**Difference \\(a(x)-e(x)\\):**\n- For \\(x\\in(2,3)\\): \\(a-e = 4-(-1) = 5\\)\n- For \\(x\\geq3\\): \\(a-e = 5-0 = 5\\)\n- The difference equals 5 on both sides → **continuous!**\n\nBoth jumps cancel out perfectly."
+        "explanation": "**Check each function at \\(x=3\\):**\\n\\n**\\(a(x) = H(x-3)+4\\):**\\n- For \\(x<3\\): \\(H(x-3)=0\\), so \\(a(x)=4\\)\\n- For \\(x\\geq3\\): \\(H(x-3)=1\\), so \\(a(x)=5\\)\\n- Jump from 4 to 5 at \\(x=3\\) → **discontinuous**\\n\\n**\\(e(x) = \\lfloor x-3 \\rfloor\\):**\\n- For \\(x\\in(-1+3, 3) = (2,3)\\): \\(x-3\\in(-1,0)\\), so \\(\\lfloor x-3\\rfloor = -1\\)\\n- For \\(x\\geq3\\): \\(x-3\\geq0\\), so \\(\\lfloor x-3\\rfloor = 0\\)\\n- Jump from \\(-1\\) to \\(0\\) at \\(x=3\\) → **discontinuous**\\n\\n**Difference \\(a(x)-e(x)\\):**\\n- For \\(x\\in(2,3)\\): \\(a-e = 4-(-1) = 5\\)\\n- For \\(x\\geq3\\): \\(a-e = 5-0 = 5\\)\\n- The difference equals 5 on both sides → **continuous!**\\n\\nBoth jumps cancel out perfectly."
       },
       {
-        "context": "Consider:\n$$f(x) = \\begin{cases} (x+1) + 6 & x < -1 \\\\ 10.5 & -1 \\leq x \\leq 9 \\\\ (x-9)^7 + 15 & x > 9 \\end{cases}$$",
+        "context": "Consider:\\n$$f(x) = \\begin{cases} (x+1) + 6 & x < -1 \\\\ 10.5 & -1 \\leq x \\leq 9 \\\\ (x-9)^7 + 15 & x > 9 \\end{cases}$$",
         "q": "What is the largest set \\(U\\) on which \\(f\\) is continuous?",
         "opts": [
           "\\(\\mathbb{R}\\)",
@@ -832,10 +832,10 @@
           3
         ],
         "multi": false,
-        "explanation": "**Check continuity at each boundary:**\n\n**At \\(x=-1\\):**\n- Left limit: \\(\\lim_{x\\to -1^-}(x+1+6) = 0+6 = 6\\)\n- Right limit (and value): \\(10.5\\)\n- \\(6 \\neq 10.5\\) → **discontinuity at \\(x=-1\\)**\n\n**At \\(x=9\\):**\n- Left limit (and value for \\(x\\leq9\\)): \\(10.5\\)\n- Right limit: \\(\\lim_{x\\to 9^+}(x-9)^7+15 = 0+15 = 15\\)\n- \\(10.5 \\neq 15\\) → **discontinuity at \\(x=9\\)**\n\n**Elsewhere:** Each piece is a polynomial or constant, hence continuous on its open domain.\n\n**Largest set of continuity:** \\(\\mathbb{R}\\setminus\\{-1, 9\\}\\)"
+        "explanation": "**Check continuity at each boundary:**\\n\\n**At \\(x=-1\\):**\\n- Left limit: \\(\\lim_{x\\to -1^-}(x+1+6) = 0+6 = 6\\)\\n- Right limit (and value): \\(10.5\\)\\n- \\(6 \\neq 10.5\\) → **discontinuity at \\(x=-1\\)**\\n\\n**At \\(x=9\\):**\\n- Left limit (and value for \\(x\\leq9\\)): \\(10.5\\)\\n- Right limit: \\(\\lim_{x\\to 9^+}(x-9)^7+15 = 0+15 = 15\\)\\n- \\(10.5 \\neq 15\\) → **discontinuity at \\(x=9\\)**\\n\\n**Elsewhere:** Each piece is a polynomial or constant, hence continuous on its open domain.\\n\\n**Largest set of continuity:** \\(\\mathbb{R}\\setminus\\{-1, 9\\}\\)"
       },
       {
-        "context": "Consider the function:\n$$G_{2,9}(x) = \\begin{cases} |7(x-2)| & x \\leq 2 \\\\ |3(x-2)| + 9 & x > 2 \\end{cases}$$\nNote: \\(G_{2,9}(2) = 0\\). For \\(x>2\\): \\(G_{2,9}(x) = 3(x-2)+9 > 9\\), so the function jumps by at least 9 at \\(x=2\\).",
+        "context": "Consider the function:\\n$$G_{2,9}(x) = \\begin{cases} |7(x-2)| & x \\leq 2 \\\\ |3(x-2)| + 9 & x > 2 \\end{cases}$$\\nNote: \\(G_{2,9}(2) = 0\\). For \\(x>2\\): \\(G_{2,9}(x) = 3(x-2)+9 > 9\\), so the function jumps by at least 9 at \\(x=2\\).",
         "q": "Part 1: Which \\(\\varepsilon\\) is suitable to prove \\(G_{2,9}\\) is NOT continuous at \\(x=2\\)?",
         "opts": [
           "\\(\\varepsilon = 10\\)",
@@ -847,7 +847,7 @@
           1
         ],
         "multi": false,
-        "explanation": "To prove discontinuity at \\(x=2\\), we need to find \\(\\varepsilon > 0\\) such that for ALL \\(\\delta > 0\\), there exists \\(x\\) with \\(|x-2|<\\delta\\) but \\(|G(x)-G(2)| \\geq \\varepsilon\\).\n\n**\\(G_{2,9}(2)=0\\).** For any \\(x>2\\) (no matter how close to 2), \\(G_{2,9}(x) = 3(x-2)+9 > 9\\).\n\nSo \\(|G_{2,9}(x)-0| > 9\\) for all \\(x>2\\).\n\nChoose \\(\\varepsilon = 9\\): then no matter how small \\(\\delta\\) is, there exists \\(x = 2+\\delta/2 \\in (2-\\delta, 2+\\delta)\\) with \\(|G_{2,9}(x)-0|>9=\\varepsilon\\).\n\nOptions \\(\\varepsilon=10\\) would also work (jump > 9 but we need \\(>\\varepsilon\\), not \\(\\geq\\varepsilon\\) in strict form). \\(\\varepsilon=9\\) is the tightest correct choice."
+        "explanation": "To prove discontinuity at \\(x=2\\), we need to find \\(\\varepsilon > 0\\) such that for ALL \\(\\delta > 0\\), there exists \\(x\\) with \\(|x-2|<\\delta\\) but \\(|G(x)-G(2)| \\geq \\varepsilon\\).\\n\\n**\\(G_{2,9}(2)=0\\).** For any \\(x>2\\) (no matter how close to 2), \\(G_{2,9}(x) = 3(x-2)+9 > 9\\).\\n\\nSo \\(|G_{2,9}(x)-0| > 9\\) for all \\(x>2\\).\\n\\nChoose \\(\\varepsilon = 9\\): then no matter how small \\(\\delta\\) is, there exists \\(x = 2+\\delta/2 \\in (2-\\delta, 2+\\delta)\\) with \\(|G_{2,9}(x)-0|>9=\\varepsilon\\).\\n\\nOptions \\(\\varepsilon=10\\) would also work (jump > 9 but we need \\(>\\varepsilon\\), not \\(\\geq\\varepsilon\\) in strict form). \\(\\varepsilon=9\\) is the tightest correct choice."
       },
       {
         "context": "Same function \\(G_{2,9}\\) as above. We use \\(\\varepsilon=9\\) to prove discontinuity.",
@@ -862,7 +862,7 @@
           1
         ],
         "multi": false,
-        "explanation": "We need \\(x\\) to satisfy:\n1. \\(|x-2|<\\delta\\) (within \\(\\delta\\)-neighborhood)\n2. \\(|G_{2,9}(x)-0|\\geq 9\\)\n\nFor condition 2, we need \\(x>2\\) (to get the jump).\n\n**Option A:** \\(x=2+1/5\\). For small \\(\\delta < 1/5\\), this is not in the \\(\\delta\\)-neighborhood. Fails for small \\(\\delta\\).\n\n**Option B:** \\(x=2+\\delta/5\\). Then \\(|x-2|=\\delta/5<\\delta\\) ✓. And \\(x>2\\) so \\(G(x)=3(\\delta/5)+9>9\\geq\\varepsilon\\) ✓. Works for all \\(\\delta>0\\).\n\n**Option C:** \\(x=\\delta/5\\) could be less than 2 for small \\(\\delta\\). Fails.\n\n**Option D:** \\(x=2-\\delta/5<2\\) always. Then \\(G(x)=|7(-\\delta/5)|=7\\delta/5\\to 0\\). Fails.\n\n**Correct answer: \\(x=2+\\delta/5\\)**."
+        "explanation": "We need \\(x\\) to satisfy:\\n1. \\(|x-2|<\\delta\\) (within \\(\\delta\\)-neighborhood)\\n2. \\(|G_{2,9}(x)-0|\\geq 9\\)\\n\\nFor condition 2, we need \\(x>2\\) (to get the jump).\\n\\n**Option A:** \\(x=2+1/5\\). For small \\(\\delta < 1/5\\), this is not in the \\(\\delta\\)-neighborhood. Fails for small \\(\\delta\\).\\n\\n**Option B:** \\(x=2+\\delta/5\\). Then \\(|x-2|=\\delta/5<\\delta\\) ✓. And \\(x>2\\) so \\(G(x)=3(\\delta/5)+9>9\\geq\\varepsilon\\) ✓. Works for all \\(\\delta>0\\).\\n\\n**Option C:** \\(x=\\delta/5\\) could be less than 2 for small \\(\\delta\\). Fails.\\n\\n**Option D:** \\(x=2-\\delta/5<2\\) always. Then \\(G(x)=|7(-\\delta/5)|=7\\delta/5\\to 0\\). Fails.\\n\\n**Correct answer: \\(x=2+\\delta/5\\)**."
       },
       {
         "context": "Consider \\(f(x) = \\ln(x)\\).",
@@ -877,7 +877,7 @@
           2
         ],
         "multi": false,
-        "explanation": "**Tangent line formula:** \\(T(x) = f(x_0) + f'(x_0)(x-x_0)\\)\n\n- \\(f(9) = \\ln 9\\)\n- \\(f'(x) = 1/x\\), so \\(f'(9) = 1/9\\)\n\n$$T(x) = \\ln 9 + \\frac{1}{9}(x-9) = \\ln 9 + \\frac{x}{9} - 1 = \\ln 9 - 1 + \\frac{x}{9}$$\n\nThis matches **option C**: \\(T(x) = \\ln 9 - 1 + x/9\\)."
+        "explanation": "**Tangent line formula:** \\(T(x) = f(x_0) + f'(x_0)(x-x_0)\\)\\n\\n- \\(f(9) = \\ln 9\\)\\n- \\(f'(x) = 1/x\\), so \\(f'(9) = 1/9\\)\\n\\n$$T(x) = \\ln 9 + \\frac{1}{9}(x-9) = \\ln 9 + \\frac{x}{9} - 1 = \\ln 9 - 1 + \\frac{x}{9}$$\\n\\nThis matches **option C**: \\(T(x) = \\ln 9 - 1 + x/9\\)."
       },
       {
         "context": "Consider the interval \\([-9, 6)\\) on the real line.",
@@ -892,10 +892,10 @@
           1
         ],
         "multi": false,
-        "explanation": "**Definition:** \\(x\\) is an accumulation point of \\(S\\) if every neighborhood of \\(x\\) contains a point of \\(S\\) different from \\(x\\).\n\n**For \\([-9,6)\\):**\n- Every interior point \\(x\\in(-9,6)\\) has sequences from \\([-9,6)\\) converging to it ✓\n- **\\(x=-9\\):** Sequence \\(-9+1/n \\in [-9,6)\\) converges to \\(-9\\) ✓ → accumulation point\n- **\\(x=6\\):** Sequence \\(6-1/n \\in [-9,6)\\) converges to \\(6\\) ✓ → accumulation point (even though \\(6\\notin[-9,6)\\)!)\n\nTherefore, the set of all accumulation points is **\\([-9, 6]\\)** (closed interval, including 6)."
+        "explanation": "**Definition:** \\(x\\) is an accumulation point of \\(S\\) if every neighborhood of \\(x\\) contains a point of \\(S\\) different from \\(x\\).\\n\\n**For \\([-9,6)\\):**\\n- Every interior point \\(x\\in(-9,6)\\) has sequences from \\([-9,6)\\) converging to it ✓\\n- **\\(x=-9\\):** Sequence \\(-9+1/n \\in [-9,6)\\) converges to \\(-9\\) ✓ → accumulation point\\n- **\\(x=6\\):** Sequence \\(6-1/n \\in [-9,6)\\) converges to \\(6\\) ✓ → accumulation point (even though \\(6\\notin[-9,6)\\)!)\\n\\nTherefore, the set of all accumulation points is **\\([-9, 6]\\)** (closed interval, including 6)."
       },
       {
-        "context": "A student attempts to compute \\(f'(8)\\) for \\(f(x) = x^2+2x+72\\) from the definition. The steps are:\n\n(1) \\(f'(8) = \\lim_{h\\to0}\\frac{f(8+h)-f(8)}{h}\\)\n\n(2) \\(= \\lim_{h\\to0}\\frac{(8+h)^2+2(8+h)+72-(64+16+72)}{h} = \\lim_{h\\to0}\\frac{h^2+19h}{h}\\)\n\n(3) \\(= \\lim_{h\\to0}\\frac{h(h+19)}{h} = \\lim_{h\\to0}(h+19)\\)\n\n(4) \\(= 19\\)",
+        "context": "A student attempts to compute \\(f'(8)\\) for \\(f(x) = x^2+2x+72\\) from the definition. The steps are:\\n\\n(1) \\(f'(8) = \\lim_{h\\to0}\\frac{f(8+h)-f(8)}{h}\\)\\n\\n(2) \\(= \\lim_{h\\to0}\\frac{(8+h)^2+2(8+h)+72-(64+16+72)}{h} = \\lim_{h\\to0}\\frac{h^2+19h}{h}\\)\\n\\n(3) \\(= \\lim_{h\\to0}\\frac{h(h+19)}{h} = \\lim_{h\\to0}(h+19)\\)\\n\\n(4) \\(= 19\\)",
         "q": "Which step contains an error?",
         "opts": [
           "Step (1)",
@@ -908,10 +908,10 @@
           1
         ],
         "multi": false,
-        "explanation": "**Identify the error in Step (2):**\n\nExpand \\(f(8+h)\\) correctly:\n$$(8+h)^2 + 2(8+h) + 72 = 64 + 16h + h^2 + 16 + 2h + 72 = h^2 + 18h + 152$$\n\nSubtract \\(f(8) = 64+16+72 = 152\\):\n$$f(8+h)-f(8) = h^2 + 18h + 152 - 152 = h^2 + 18h$$\n\nSo the numerator should be \\(h^2 + 18h\\), not \\(h^2+19h\\).\n\n**Step (2) has an arithmetic error.** The coefficient of \\(h\\) should be \\(2\\times8=16\\) from \\((8+h)^2\\) plus \\(2\\) from \\(2(8+h)\\), giving \\(18\\), not \\(19\\).\n\n*Correct result:* \\(f'(8) = 18\\) (also confirmed by \\(f'(x)=2x+2\\), \\(f'(8)=18\\))."
+        "explanation": "**Identify the error in Step (2):**\\n\\nExpand \\(f(8+h)\\) correctly:\\n$$(8+h)^2 + 2(8+h) + 72 = 64 + 16h + h^2 + 16 + 2h + 72 = h^2 + 18h + 152$$\\n\\nSubtract \\(f(8) = 64+16+72 = 152\\):\\n$$f(8+h)-f(8) = h^2 + 18h + 152 - 152 = h^2 + 18h$$\\n\\nSo the numerator should be \\(h^2 + 18h\\), not \\(h^2+19h\\).\\n\\n**Step (2) has an arithmetic error.** The coefficient of \\(h\\) should be \\(2\\times8=16\\) from \\((8+h)^2\\) plus \\(2\\) from \\(2(8+h)\\), giving \\(18\\), not \\(19\\).\\n\\n*Correct result:* \\(f'(8) = 18\\) (also confirmed by \\(f'(x)=2x+2\\), \\(f'(8)=18\\))."
       },
       {
-        "context": "Consider:\n$$f(x) = \\begin{cases} x^2-3x+30 & x < 3 \\\\ 3x+21 & x \\geq 3 \\end{cases}$$",
+        "context": "Consider:\\n$$f(x) = \\begin{cases} x^2-3x+30 & x < 3 \\\\ 3x+21 & x \\geq 3 \\end{cases}$$",
         "q": "Is \\(f\\) continuous and/or differentiable at \\(x=3\\)?",
         "opts": [
           "Differentiable but not continuous",
@@ -923,7 +923,243 @@
           3
         ],
         "multi": false,
-        "explanation": "**Check continuity at \\(x=3\\):**\n- Left limit: \\(\\lim_{x\\to3^-}(x^2-3x+30) = 9-9+30 = 30\\)\n- Right value: \\(f(3) = 3(3)+21 = 30\\)\n- Both equal \\(30\\) → \\(f\\) is **continuous** at \\(x=3\\) ✓\n\n**Check differentiability at \\(x=3\\):**\n- Left derivative: \\(f'(x)=2x-3\\); at \\(x=3\\): \\(2(3)-3=3\\)\n- Right derivative: \\(f'(x)=3\\); at \\(x=3\\): \\(3\\)\n- Both one-sided derivatives equal \\(3\\) → \\(f\\) is **differentiable** at \\(x=3\\) ✓\n\n**Answer: Both differentiable and continuous.**"
+        "explanation": "**Check continuity at \\(x=3\\):**\\n- Left limit: \\(\\lim_{x\\to3^-}(x^2-3x+30) = 9-9+30 = 30\\)\\n- Right value: \\(f(3) = 3(3)+21 = 30\\)\\n- Both equal \\(30\\) → \\(f\\) is **continuous** at \\(x=3\\) ✓\\n\\n**Check differentiability at \\(x=3\\):**\\n- Left derivative: \\(f'(x)=2x-3\\); at \\(x=3\\): \\(2(3)-3=3\\)\\n- Right derivative: \\(f'(x)=3\\); at \\(x=3\\): \\(3\\)\\n- Both one-sided derivatives equal \\(3\\) → \\(f\\) is **differentiable** at \\(x=3\\) ✓\\n\\n**Answer: Both differentiable and continuous.**"
+      }
+    ]
+  },
+  {
+    "id": "math2_retake_2024",
+    "title": "Mathematics for AI 2 — Retake Exam 2024",
+    "description": "Curve analysis (x·ln x), limit with Taylor, integrals, IVT proof, multivariate stationary points",
+    "questions": [
+      {
+        "context": "Consider \\(f(x) := x \\cdot \\ln x\\).",
+        "q": "(a) Domain \\(D\\) and zeros of \\(f\\).\n(b) Compute \\(\\lim_{x \\to 0^+} f(x)\\) and \\(\\lim_{x \\to \\infty} f(x)\\).\n(c) All local and global minima/maxima.\n(d) Sketch the graph.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "Domain D",
+              "cells": [
+                {
+                  "v": "(0, ∞)",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "Zero(s) of f",
+              "cells": [
+                {
+                  "v": "x = 1",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "lim x→0⁺",
+              "cells": [
+                {
+                  "v": "0",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "lim x→∞",
+              "cells": [
+                {
+                  "v": "+∞",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "x of global minimum",
+              "cells": [
+                {
+                  "v": "1/e",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "Minimum value f(1/e)",
+              "cells": [
+                {
+                  "v": "-1/e",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Domain:** \\(\\ln x\\) requires \\(x>0\\), so \\(D=(0,\\infty)\\).\n\n**Zeros:** \\(x\\ln x=0 \\Rightarrow \\ln x=0 \\Rightarrow x=1\\).\n\n**Limits:**\n- \\(\\lim_{x\\to 0^+} x\\ln x\\): write as \\(\\frac{\\ln x}{1/x}\\), L'Hôpital: \\(\\frac{1/x}{-1/x^2}=-x\\to 0\\)\n- \\(\\lim_{x\\to\\infty} x\\ln x = +\\infty\\)\n\n**Derivative:** \\(f'(x)=\\ln x+1=0 \\Rightarrow x=1/e\\). Since \\(f''(x)=1/x>0\\), this is a **global minimum** with \\(f(1/e)=-1/e\\approx -0.368\\). No maximum."
+      },
+      {
+        "context": "Let \\(\\omega \\in \\mathbb{R}_{>0}\\) be a constant.",
+        "q": "Compute: \\(\\displaystyle\\lim_{x \\to 0} \\dfrac{\\sin(\\omega x) - \\omega x}{x^3}\\)",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "Limit (in terms of ω)",
+              "cells": [
+                {
+                  "v": "-ω³/6",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Taylor:** \\(\\sin(\\omega x)=\\omega x - \\frac{\\omega^3 x^3}{6}+O(x^5)\\)\n\nSo \\(\\sin(\\omega x)-\\omega x = -\\frac{\\omega^3 x^3}{6}+O(x^5)\\)\n\nDivide by \\(x^3\\) and take limit: \\(\\displaystyle\\lim_{x\\to 0}\\frac{\\sin(\\omega x)-\\omega x}{x^3} = -\\frac{\\omega^3}{6}\\)"
+      },
+      {
+        "q": "(a) Calculate: \\(\\displaystyle\\int_0^{\\pi/2}\\bigl(\\sin^3(x)+1\\bigr)\\cos(x)\\,dx\\)",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "(a) Integral value",
+              "cells": [
+                {
+                  "v": "5/4",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Sub:** \\(u=\\sin x\\), \\(du=\\cos x\\,dx\\), limits \\(0\\to 1\\).\n\n\\(\\displaystyle\\int_0^1(u^3+1)\\,du=\\left[\\frac{u^4}{4}+u\\right]_0^1=\\frac{1}{4}+1=\\frac{5}{4}\\)"
+      },
+      {
+        "q": "(b) Calculate the improper integral: \\(\\displaystyle\\int_5^{\\infty}\\frac{6}{(x-1)(x-3)}\\,dx\\)",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "(b) Integral value",
+              "cells": [
+                {
+                  "v": "3·ln(2)",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Partial fractions:** \\(\\frac{6}{(x-1)(x-3)}=\\frac{-3}{x-1}+\\frac{3}{x-3}\\)\n\n\\(\\displaystyle\\int_5^{\\infty}\\left(\\frac{-3}{x-1}+\\frac{3}{x-3}\\right)dx=\\left[3\\ln\\left|\\frac{x-3}{x-1}\\right|\\right]_5^{\\infty}\\)\n\n- \\(x\\to\\infty\\): \\(\\frac{x-3}{x-1}\\to 1\\), \\(\\ln 1=0\\)\n- \\(x=5\\): \\(3\\ln\\frac{2}{4}=-3\\ln 2\\)\n\nResult: \\(0-(-3\\ln 2)=3\\ln 2\\)"
+      },
+      {
+        "q": "Prove that \\(\\exists\\, x\\in[-1,1]\\) such that \\(xe^x = x^3+1\\). (Hint: IVT)",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "explanation": "**Define** \\(g(x)=xe^x-x^3-1\\), continuous on \\([-1,1]\\).\n\n**Endpoints:**\n- \\(g(-1)=-e^{-1}+1-1=-1/e<0\\)\n- \\(g(1)=e-1-1=e-2>0\\)\n\n**IVT:** \\(g(-1)<0<g(1)\\) and \\(g\\) continuous \\(\\Rightarrow\\) \\(\\exists\\, x^*\\in(-1,1)\\) with \\(g(x^*)=0\\). \\(\\blacksquare\\)"
+      },
+      {
+        "context": "Let \\(\\Omega=\\{(x,y):x^2+y^2<9\\}\\) and \\(f(x,y)=(x^2-5)(y^2-4)+x^2(y-2)\\).",
+        "q": "(a) Find all stationary points in \\(\\Omega\\).\n(b) Classify each (local min/max or saddle).",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "Stationary pt 1",
+              "cells": [
+                {
+                  "v": "(0, 0)",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "Type at (0,0)",
+              "cells": [
+                {
+                  "v": "local max",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "f(0,0)",
+              "cells": [
+                {
+                  "v": "20",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "Stationary pt 2",
+              "cells": [
+                {
+                  "v": "(2, 2)",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "Type at (2,2)",
+              "cells": [
+                {
+                  "v": "saddle point",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "Stationary pt 3",
+              "cells": [
+                {
+                  "v": "(-2, 2)",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "Type at (-2,2)",
+              "cells": [
+                {
+                  "v": "saddle point",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Expand:** \\(f=x^2y^2+x^2y-6x^2-5y^2+20\\)\n\n**Partials:**\n\\(f_x=2x(y+3)(y-2)\\)\n\\(f_y=x^2(2y+1)-10y\\)\n\n**\\(f_x=0\\):** \\(x=0\\), \\(y=2\\), or \\(y=-3\\)\n- \\(x=0\\Rightarrow f_y=-10y=0\\Rightarrow (0,0)\\) ✓\n- \\(y=2\\Rightarrow 5x^2=20\\Rightarrow x=\\pm2\\), points \\((\\pm2,2)\\) ✓ (inside Ω)\n- \\(y=-3\\Rightarrow x^2=6\\), but \\(6+9>9\\) ✗\n\n**Hessian at (0,0):** \\(H=\\begin{pmatrix}-12&0\\\\0&-10\\end{pmatrix}\\), \\(\\det H=120>0\\), \\(f_{xx}<0\\) → **local max**, \\(f(0,0)=20\\)\n\n**Hessian at (\\(\\pm2,2)\\):** \\(f_{xx}=0\\), \\(f_{xy}=\\pm20\\), \\(f_{yy}=-2\\); \\(\\det H=-400<0\\) → **saddle points**"
       }
     ]
   }
