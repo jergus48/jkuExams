@@ -7727,7 +7727,8 @@ const QUIZ_BANK_OLD = [
   }
 ];
 
-const QUIZ_BANK = [...QUIZ_BANK_OLD, ...groupedQuizzes];
+const rawQuizBank = [...QUIZ_BANK_OLD, ...groupedQuizzes];
+const QUIZ_BANK = Array.from(new Map(rawQuizBank.map(q => [q.id, q])).values());
 
 function getSubject(title) {
   if (title.includes("Hands on AI")) return "Hands on AI";
