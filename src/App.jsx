@@ -8000,7 +8000,7 @@ export default function App() {
         <div className="quiz-list-title">JKU Second Semester Pass Master Plan</div>
         <div className="quiz-list-subtitle">Select a quiz to practice exam questions locally</div>
         
-        <div className="subject-filter-container" style={{ marginBottom: "20px", display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "center", alignItems: "center" }}>
+        <div className="subject-filter-container" style={{ marginBottom: "20px", paddingTop: "20px", display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "center", alignItems: "center" }}>
           <span style={{fontWeight: "bold", color: "var(--text-main)"}}>Hide Subjects:</span>
           {ALL_SUBJECTS.map(subject => (
             <label key={subject} style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", padding: "6px 12px", background: "var(--bg-card)", borderRadius: "20px", border: "1px solid var(--border-color)", color: "var(--text-main)", fontSize: "0.9rem", userSelect: "none" }}>
