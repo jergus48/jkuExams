@@ -7729,6 +7729,19 @@ const QUIZ_BANK_OLD = [
 
 const QUIZ_BANK = [...QUIZ_BANK_OLD, ...groupedQuizzes];
 
+function getSubject(title) {
+  if (title.includes("Hands on AI")) return "Hands on AI";
+  if (title.includes("MLPC")) return "MLPC";
+  if (title.includes("Python")) return "Python";
+  if (title.includes("Algorithms")) return "Algorithms";
+  if (title.includes("Statistics")) return "Statistics";
+  if (title.includes("Mathematics for AI")) return "Mathematics for AI 2";
+  if (title.includes("ML Exam")) return "Machine Learning";
+  return "Other";
+}
+
+const ALL_SUBJECTS = Array.from(new Set(QUIZ_BANK.map(q => getSubject(q.title)))).sort();
+
 function InlineMathText({ text }) {
   if (!text) return null;
   const parts = [];
@@ -7885,6 +7898,21 @@ export default function App() {
     return saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
   });
 
+  const [hiddenSubjects, setHiddenSubjects] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("hidden_subjects") || "[]"); }
+    catch { return []; }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("hidden_subjects", JSON.stringify(hiddenSubjects));
+  }, [hiddenSubjects]);
+
+  function toggleHiddenSubject(subject) {
+    setHiddenSubjects(prev => 
+      prev.includes(subject) ? prev.filter(s => s !== subject) : [...prev, subject]
+    );
+  }
+
   // Per-quiz attempt history. Stored in localStorage under "quiz_stats".
   // Shape: { [quizId]: { best:number, attempts:number, lastPct:number, lastAt:number } }
   const [quizStats, setQuizStats] = useState(() => {
@@ -7965,12 +7993,30 @@ export default function App() {
   let mainContent;
 
   if (!activeQuizId) {
+    const visibleQuizzes = QUIZ_BANK.filter(q => !hiddenSubjects.includes(getSubject(q.title)));
+
     mainContent = (
       <div className="quiz-menu-container">
         <div className="quiz-list-title">JKU Second Semester Pass Master Plan</div>
         <div className="quiz-list-subtitle">Select a quiz to practice exam questions locally</div>
+        
+        <div className="subject-filter-container" style={{ marginBottom: "20px", display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "center", alignItems: "center" }}>
+          <span style={{fontWeight: "bold", color: "var(--text-main)"}}>Hide Subjects:</span>
+          {ALL_SUBJECTS.map(subject => (
+            <label key={subject} style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", padding: "6px 12px", background: "var(--bg-card)", borderRadius: "20px", border: "1px solid var(--border-color)", color: "var(--text-main)", fontSize: "0.9rem", userSelect: "none" }}>
+              <input 
+                type="checkbox" 
+                checked={hiddenSubjects.includes(subject)} 
+                onChange={() => toggleHiddenSubject(subject)} 
+                style={{ cursor: "pointer", margin: 0 }}
+              />
+              {subject}
+            </label>
+          ))}
+        </div>
+
         <div className="quiz-grid">
-          {QUIZ_BANK.map(quiz => {
+          {visibleQuizzes.map(quiz => {
             const stats = quizStats[quiz.id];
             const bestClass = stats
               ? (stats.best >= 90 ? "stat-excellent"
