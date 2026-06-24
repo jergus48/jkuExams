@@ -7823,8 +7823,8 @@ function TableInputWidget({ tableInput, qState, onValChange, onCheck }) {
           {headers && (
             <thead>
               <tr>
-                <th className="table-row-hdr-th"></th>
-                {headers.map((h, i) => <th key={i} className="table-col-hdr">{h}</th>)}
+                <th className="table-row-hdr-th">{headers[0] ?? ""}</th>
+                {headers.slice(1).map((h, i) => <th key={i} className="table-col-hdr">{h}</th>)}
               </tr>
             </thead>
           )}
