@@ -2303,7 +2303,7 @@
         "explanation": "Insert with levels from random sequence:\n```\nElement  Random  Levels\n  21       0     S0\n   7       8     S0–S4 (capped)\n  12       0     S0\n  38       2     S0, S1, S2\n  25       0     S0\n  19       1     S0, S1\n  30       4     S0–S4\n  24       0     S0\n  10       8     S0–S4 (capped)\n\nResulting skip list:\nS4: -∞ ——→  7 ————————————→ 10 ——→ 30 ——→ +∞\nS3: -∞ ——→  7 ————————————→ 10 ——→ 30 ——→ +∞\nS2: -∞ ——→  7 ————→ 10 ——→ 30 ——→ 38 ——→ +∞\nS1: -∞ ——→  7 ——→ 10 ——→ 19 ——→ 30 ——→ 38 ——→ +∞\nS0: -∞ → 7 → 10 → 12 → 19 → 21 → 24 → 25 → 30 → 38 → +∞\n```"
       },
       {
-        "context": "Skip Lists (2)\n\nThe following skip list is given:\n```\nS4: -∞ ————————————————————————————————→ +∞\nS3: -∞ ——————→ 10 ——————————————————→  +∞\nS2: -∞ ——→  7 → 10 ——→ 12 ——→ 18 ——→  +∞\nS1: -∞ ——→  7 →  9 → 10 → 12 → 15 → 18 → 21 → +∞\nS0: -∞ →  7 →  9 → 10 → 11 → 12 → 15 → 18 → 21 → +∞\n```\n\nCount the number of comparisons needed to find each number (each node visited counts as one comparison).",
+        "context": "Skip Lists (2)\n\nThe following skip list is given:\n\nCount the number of comparisons needed to find each number (each node visited counts as one comparison).",
         "q": "Q2) Determine the number of comparisons needed to find each value in the skip list. Fill in the table:",
         "opts": [],
         "ans": [],
@@ -2318,7 +2318,7 @@
               "label": "9",
               "cells": [
                 {
-                  "v": "1",
+                  "v": "6",
                   "e": true
                 }
               ]
@@ -2327,7 +2327,7 @@
               "label": "12",
               "cells": [
                 {
-                  "v": "4",
+                  "v": "5",
                   "e": true
                 }
               ]
@@ -2336,7 +2336,7 @@
               "label": "21",
               "cells": [
                 {
-                  "v": "4",
+                  "v": "8",
                   "e": true
                 }
               ]
@@ -2345,14 +2345,58 @@
               "label": "27 (not in list)",
               "cells": [
                 {
-                  "v": "6",
+                  "v": "9",
                   "e": true
                 }
               ]
             }
           ]
         },
-        "explanation": "Search paths:\n- 9: Start S4→skip, S3→10(>9,drop), S2→7(<9,step)→10(>9,drop), S1→7→9 found. **1 comparison**\n- 12: S3→10(<12,step)→+∞(drop), S2(at 10)→12 found. **4 comparisons**\n- 21: S3→10(<21,step)→+∞(drop), S2(at 10)→12→18→+∞(drop), S1(at 18)→21 found. **4 comparisons**\n- 27: S3→10→+∞, S2(at 10)→12→18→+∞, S1(at 18)→21→+∞, S0→+∞. Not found. **6 comparisons**"
+        "explanation": "Search paths (each node visited = 1 comparison):\n\nFind 9:\n  -∞(S4) → -∞(S3) → -∞(S2) → 7(S2) → 7(S1) → 9(S1) = 6 comparisons\n\nFind 12:\n  -∞(S4) → -∞(S3) → 10(S3) → 10(S2) → 12(S2) = 5 comparisons\n\nFind 21:\n  -∞(S4) → -∞(S3) → 10(S3) → 10(S2) → 12(S2) → 18(S2) → 18(S1) → 21(S1) = 8 comparisons\n\nFind 27 (not in list):\n  -∞(S4) → -∞(S3) → 10(S3) → 10(S2) → 12(S2) → 18(S2) → 18(S1) → 21(S1) → 21(S0) = 9 comparisons\n  (right of 21 at S0 is +∞ > 27 and we are at the bottom level → not found)",
+        "skipList": {
+          "levels": [
+            [
+              "-∞",
+              "+∞"
+            ],
+            [
+              "-∞",
+              "10",
+              "+∞"
+            ],
+            [
+              "-∞",
+              "7",
+              "10",
+              "12",
+              "18",
+              "+∞"
+            ],
+            [
+              "-∞",
+              "7",
+              "9",
+              "10",
+              "12",
+              "15",
+              "18",
+              "21",
+              "+∞"
+            ],
+            [
+              "-∞",
+              "7",
+              "9",
+              "10",
+              "11",
+              "12",
+              "15",
+              "18",
+              "21",
+              "+∞"
+            ]
+          ]
+        }
       },
       {
         "context": "Doubly Linked List\n\n```python\nclass MySortedDLL:\n    def __init__(self, newHead=None, newTail=None, newSize=0):\n        self.head = newHead\n        self.tail = newTail\n        self.size = newSize\n\nclass MyListNode:\n    def __init__(self, elem=0, prev=None, next=None):\n        self.elem = elem\n        self.prev = prev\n        self.next = next\n```\n\nPre-filled ascending list:\n```\nhead                                        tail\n |                                           |\n[1] ↔ [3] ↔ [4] ↔ [5] ↔ [6] ↔ [7] ↔ [9] ↔ [11] ↔ [12]\n```",
@@ -3975,7 +4019,7 @@
         "explanation": "Levels assigned (random→level):\n```\n21→0(S0), 7→8(S0-S4), 12→0(S0), 38→2(S0-S2)\n25→0(S0), 19→1(S0-S1), 30→4(S0-S4), 24→0(S0), 10→8(S0-S4)\n\nResulting skip list:\nS4: -∞ ——→ 7 ————————→ 10 ——→ 30 ——→ +∞\nS3: -∞ ——→ 7 ————————→ 10 ——→ 30 ——→ +∞\nS2: -∞ ——→ 7 ——→ 10 ——→ 30 ——→ 38 ——→ +∞\nS1: -∞ ——→ 7 ——→ 10 ——→ 19 ——→ 30 ——→ 38 ——→ +∞\nS0: -∞ → 7→10→12→19→21→24→25→30→38 → +∞\n```"
       },
       {
-        "context": "Skip Lists — Comparison count\n\n```\nS4: -∞ ————————————————————→ +∞\nS3: -∞ ——→ 10 ——————————→  +∞\nS2: -∞ ——→  7→10→12→18→  +∞\nS1: -∞ ——→  7→ 9→10→12→15→18→21→ +∞\nS0: -∞ →  7→ 9→10→11→12→15→18→21→ +∞\n```",
+        "context": "Skip Lists — Comparison count",
         "q": "Q2) Count comparisons to find each value. Fill in the table:",
         "opts": [],
         "ans": [],
@@ -3990,7 +4034,7 @@
               "label": "9",
               "cells": [
                 {
-                  "v": "1",
+                  "v": "6",
                   "e": true
                 }
               ]
@@ -3999,7 +4043,7 @@
               "label": "12",
               "cells": [
                 {
-                  "v": "4",
+                  "v": "5",
                   "e": true
                 }
               ]
@@ -4008,7 +4052,7 @@
               "label": "21",
               "cells": [
                 {
-                  "v": "4",
+                  "v": "8",
                   "e": true
                 }
               ]
@@ -4017,14 +4061,58 @@
               "label": "27 (not in list)",
               "cells": [
                 {
-                  "v": "6",
+                  "v": "9",
                   "e": true
                 }
               ]
             }
           ]
         },
-        "explanation": "- 9: 1 comparison (found at S1 after dropping from S3→S2→S1)\n- 12: 4 comparisons (S3→10, skip; S2→12)\n- 21: 4 comparisons (S3→10→+∞; S2→18→+∞; S1→21)\n- 27: 6 comparisons (traverse to +∞, not found)"
+        "explanation": "Search paths (each node visited = 1 comparison):\n\nFind 9:\n  -∞(S4) → -∞(S3) → -∞(S2) → 7(S2) → 7(S1) → 9(S1) = 6 comparisons\n\nFind 12:\n  -∞(S4) → -∞(S3) → 10(S3) → 10(S2) → 12(S2) = 5 comparisons\n\nFind 21:\n  -∞(S4) → -∞(S3) → 10(S3) → 10(S2) → 12(S2) → 18(S2) → 18(S1) → 21(S1) = 8 comparisons\n\nFind 27 (not in list):\n  -∞(S4) → -∞(S3) → 10(S3) → 10(S2) → 12(S2) → 18(S2) → 18(S1) → 21(S1) → 21(S0) = 9 comparisons\n  (right of 21 at S0 is +∞ > 27 and we are at the bottom level → not found)",
+        "skipList": {
+          "levels": [
+            [
+              "-∞",
+              "+∞"
+            ],
+            [
+              "-∞",
+              "10",
+              "+∞"
+            ],
+            [
+              "-∞",
+              "7",
+              "10",
+              "12",
+              "18",
+              "+∞"
+            ],
+            [
+              "-∞",
+              "7",
+              "9",
+              "10",
+              "12",
+              "15",
+              "18",
+              "21",
+              "+∞"
+            ],
+            [
+              "-∞",
+              "7",
+              "9",
+              "10",
+              "11",
+              "12",
+              "15",
+              "18",
+              "21",
+              "+∞"
+            ]
+          ]
+        }
       },
       {
         "context": "Doubly Linked List\n\n```python\nclass MySortedDLL:\n    def __init__(self, newHead=None, newTail=None, newSize=0):\n        self.head = newHead; self.tail = newTail; self.size = newSize\n\nclass MyListNode:\n    def __init__(self, elem=0, prev=None, next=None):\n        self.elem=elem; self.prev=prev; self.next=next\n```\nPre-filled list: [1]↔[3]↔[4]↔[5]↔[6]↔[7]↔[9]↔[11]↔[12]",

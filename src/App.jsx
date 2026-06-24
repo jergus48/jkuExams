@@ -7805,6 +7805,37 @@ function arrMatch(a, b) {
   return a.length === b.length && [...a].sort().join() === [...b].sort().join();
 }
 
+// ── Skip-list diagram ────────────────────────────────────────────────────────
+function SkipListDiagram({ skipList }) {
+  const { levels } = skipList;
+  const numLevels = levels.length;
+  // S0 (bottom level) has all values → defines the columns
+  const allValues = levels[numLevels - 1];
+  return (
+    <div className="skiplist-diagram">
+      {levels.map((levelNodes, li) => {
+        const levelIdx = numLevels - 1 - li;
+        const nodeSet = new Set(levelNodes.map(String));
+        return (
+          <div key={li} className="sl-row">
+            <span className="sl-level-label">S{levelIdx}:</span>
+            <div className="sl-cells-wrap">
+              {allValues.map((v, vi) => {
+                const isNode = nodeSet.has(String(v));
+                return (
+                  <div key={vi} className={"sl-cell" + (isNode ? " sl-node" : " sl-pass")}>
+                    {isNode && <span className="sl-node-box">{v}</span>}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 // ── Interactive table input widget ────────────────────────────────────────────
 function TableInputWidget({ tableInput, qState, onValChange, onCheck }) {
   const { headers, rows } = tableInput;
@@ -8210,6 +8241,7 @@ export default function App() {
           {q.context && (
             <div className="question-context">
               <MathText text={q.context} />
+              {q.skipList && <SkipListDiagram skipList={q.skipList} />}
             </div>
           )}
           <div className="question-text">
