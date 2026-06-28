@@ -8000,9 +8000,14 @@ export default function App() {
     if (showResults && activeQuizId && state && recordedFor !== activeQuizId) {
       const quiz = QUIZ_BANK.find(q => q.id === activeQuizId);
       if (!quiz) return;
+      // Score as fraction: full credit for true, partial for fractional, 0 for false
+      let earned = 0;
+      state.scores.forEach(s => {
+        if (s === true) earned += 1;
+        else if (typeof s === "number") earned += s;
+      });
       const total = quiz.questions.length;
-      const correct = state.scores.filter(s => s === true).length;
-      const pct = Math.round((correct / total) * 100);
+      const pct = Math.round((earned / total) * 100);
       recordAttempt(activeQuizId, pct);
       setRecordedFor(activeQuizId);
     }
@@ -8089,8 +8094,20 @@ export default function App() {
     const q = Qs[cur];
     const isDone = done[cur];
     const curSel = sel[cur];
-    const correctCount = scores.filter(s => s === true).length;
-    const wrongCount = scores.filter(s => s === false).length;
+    // Count correct/wrong: for table-input questions, count individual cells;
+    // for MCQ/open-ended, count whole question as 1 unit.
+    let correctCount = 0, wrongCount = 0;
+    scores.forEach((s, i) => {
+      const ti = tableInputs[i];
+      if (ti && ti.checked && typeof ti.totalCells === "number") {
+        correctCount += ti.correctCells || 0;
+        wrongCount += (ti.totalCells || 0) - (ti.correctCells || 0);
+      } else if (s === true) {
+        correctCount += 1;
+      } else if (s === false) {
+        wrongCount += 1;
+      }
+    });
     const allDone = done.every(Boolean);
 
     function toggle(oi) {
@@ -8146,29 +8163,39 @@ export default function App() {
         return { ...prev, tableInputs: ti };
       });
     }
+    function normalizeAns(s) {
+      return s.trim().toLowerCase()
+        .replace(/[\[\](){}]/g, "")    // strip brackets
+        .replace(/[;,]/g, ",")          // normalize separators
+        .replace(/\s+/g, "");           // strip spaces
+    }
     function checkTableAnswers() {
       const tInput = q.tableInput;
       const ti = tableInputs[cur] || { vals: {} };
       const results = {};
-      let allCorrect = true;
+      let correctCells = 0, totalCells = 0;
       tInput.rows.forEach((row, ri) => {
         row.cells.forEach((cell, ci) => {
           if (cell.e) {
+            totalCells += 1;
             const key = `${ri}-${ci}`;
-            const userVal = (ti.vals[key] || "").trim().toLowerCase().replace(/\s+/g, "");
-            const correctVal = cell.v.trim().toLowerCase().replace(/\s+/g, "");
+            const userVal = normalizeAns(ti.vals[key] || "");
+            const correctVal = normalizeAns(cell.v);
             const ok = userVal === correctVal;
             results[key] = ok;
-            if (!ok) allCorrect = false;
+            if (ok) correctCells += 1;
           }
         });
       });
       setState(prev => {
         const newTi = [...(prev.tableInputs || [])];
-        newTi[cur] = { ...newTi[cur], results, checked: true };
+        newTi[cur] = { ...newTi[cur], results, checked: true,
+                       correctCells, totalCells };
         const newDone = [...prev.done];
         const newScores = [...prev.scores];
-        if (allCorrect) { newDone[cur] = true; newScores[cur] = true; }
+        // Mark done with partial-credit score (fraction 0..1)
+        newDone[cur] = true;
+        newScores[cur] = totalCells > 0 ? correctCells / totalCells : 0;
         return { ...prev, tableInputs: newTi, done: newDone, scores: newScores };
       });
     }
@@ -8176,9 +8203,14 @@ export default function App() {
       setState(prev => {
         const next = { ...prev, done: [...prev.done], scores: [...prev.scores] };
         next.done[cur] = true;
-        next.scores[cur] = tableInputs[cur]?.checked
-          ? (Object.values(tableInputs[cur].results).every(Boolean) ? true : false)
-          : false;
+        const ti = prev.tableInputs && prev.tableInputs[cur];
+        if (ti && ti.checked && typeof ti.totalCells === "number" && ti.totalCells > 0) {
+          next.scores[cur] = ti.correctCells / ti.totalCells;
+        } else if (ti && ti.checked) {
+          next.scores[cur] = Object.values(ti.results || {}).every(Boolean);
+        } else {
+          next.scores[cur] = false;
+        }
         return next;
       });
       if (cur < Qs.length - 1) setCur(c => c + 1);
@@ -8364,7 +8396,12 @@ export default function App() {
             {Qs.map((_, i) => {
               let dotClass = "nav-dot";
               if (i === cur) dotClass += " current";
-              else if (done[i]) dotClass += scores[i] ? " correct" : " wrong";
+              else if (done[i]) {
+                const sc = scores[i];
+                if (sc === true || sc === 1) dotClass += " correct";
+                else if (typeof sc === "number" && sc > 0) dotClass += " correct";
+                else dotClass += " wrong";
+              }
               else dotClass += " unvisited";
 
               return (

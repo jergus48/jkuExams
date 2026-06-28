@@ -5558,10 +5558,14 @@
               ]
             },
             {
-              "label": "d) Symmetrical 60% interval",
+              "label": "d) Symmetrical 60% interval  (lower, upper)",
               "cells": [
                 {
-                  "v": "[17.79; 26.21]",
+                  "v": "17.79",
+                  "e": true
+                },
+                {
+                  "v": "26.21",
                   "e": true
                 }
               ]
@@ -5967,10 +5971,14 @@
           ],
           "rows": [
             {
-              "label": "95% CI",
+              "label": "95% CI  (lower, upper)",
               "cells": [
                 {
-                  "v": "[64.30; 85.70]",
+                  "v": "64.30",
+                  "e": true
+                },
+                {
+                  "v": "85.70",
                   "e": true
                 }
               ]
@@ -6227,10 +6235,14 @@
           ],
           "rows": [
             {
-              "label": "95% CI for p",
+              "label": "95% CI for p  (lower, upper)",
               "cells": [
                 {
-                  "v": "[0.0814; 0.1186]",
+                  "v": "0.0814",
+                  "e": true
+                },
+                {
+                  "v": "0.1186",
                   "e": true
                 }
               ]
@@ -6485,10 +6497,14 @@
               ]
             },
             {
-              "label": "d) Central 80% interval",
+              "label": "d) Central 80% interval  (lower, upper)",
               "cells": [
                 {
-                  "v": "[63.31; 78.69]",
+                  "v": "63.31",
+                  "e": true
+                },
+                {
+                  "v": "78.69",
                   "e": true
                 }
               ]
