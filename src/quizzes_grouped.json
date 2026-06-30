@@ -8384,7 +8384,7 @@
     "description": "Two-sample t-test, combinatorics, Poisson approximation, Bayes' theorem, confidence interval, normal distribution",
     "questions": [
       {
-        "context": "A researcher compares the effectiveness of two diet plans (A and B) on weight loss (kg) over 8 weeks.\n\n| | Diet A | Diet B |\n|---|---|---|\n| Mean weight loss | 4.31 | 2.84 |\n| SD of weight loss | 1.2 | 1.4 |\n| Number of participants | 8 | 8 |",
+        "context": "A researcher compares the effectiveness of two diet plans (A and B) on weight loss (kg) over 8 weeks.\n\n| Statistic | Diet A | Diet B |\n|---|---|---|\n| Mean weight loss | 4.31 | 2.84 |\n| SD of weight loss | 1.2 | 1.4 |\n| Number of participants | 8 | 8 |",
         "q": "a) Formulate the hypotheses for \"Is there a difference in true mean weight loss between diet A and diet B?\" b) Use an appropriate test: state the test statistic, critical value, and test decision (type I error \\(\\alpha = 5\\%\\)).",
         "opts": [],
         "ans": [],
