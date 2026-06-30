@@ -8569,7 +8569,7 @@
     "questions": [
       {
         "context": "A company manufactures light bulbs. A random sample of 15 bulbs had an average lifetime of 780 hours with standard deviation 40 hours.",
-        "q": "[2023] Calculate a 95% confidence interval for the true mean lifetime.",
+        "q": "Calculate a 95% confidence interval for the true mean lifetime.",
         "opts": [],
         "ans": [],
         "multi": false,
@@ -8594,7 +8594,7 @@
       },
       {
         "context": "A continuous random variable has density \\(f(x) = \\tfrac{2x}{5} + \\tfrac{4}{5}\\) for \\(0 \\le x \\le 1\\), and 0 otherwise.",
-        "q": "[2023] a) P(X ≤ 1). b) Expected value. c) Variance.",
+        "q": "a) P(X ≤ 1). b) Expected value. c) Variance.",
         "opts": [],
         "ans": [],
         "multi": false,
@@ -8637,7 +8637,7 @@
       },
       {
         "context": "On an average weekend night, 1 out of every 10 drivers is drunk. 400 drivers are randomly checked. (Approximate solution sufficient.)",
-        "q": "[2023] What is the probability that the number of drunk drivers is at most 35?",
+        "q": "What is the probability that the number of drunk drivers is at most 35?",
         "opts": [],
         "ans": [],
         "multi": false,
@@ -8662,7 +8662,7 @@
       },
       {
         "context": "There are 4 Austrian and 6 German students.",
-        "q": "[2023] a) In how many ways can they stand in a line if all Austrians stand together? b) In how many ways can a committee of 3 be chosen that is either all Austrian or all German?",
+        "q": "a) In how many ways can they stand in a line if all Austrians stand together? b) In how many ways can a committee of 3 be chosen that is either all Austrian or all German?",
         "opts": [],
         "ans": [],
         "multi": false,
@@ -8696,7 +8696,7 @@
       },
       {
         "context": "BMI of a population of 100. Classes [16;20), [20;24), [24;28), [28;32), [32;36) with frequencies 18, 30, 42, 6, 4.",
-        "q": "[2023] a) Arithmetic mean. b) Variance and standard deviation. c) Below which value lies 60% of the distribution mass?",
+        "q": "a) Arithmetic mean. b) Variance and standard deviation. c) Below which value lies 60% of the distribution mass?",
         "opts": [],
         "ans": [],
         "multi": false,
@@ -8748,7 +8748,7 @@
       },
       {
         "context": "A random sample with a 95% confidence interval [3.39%, 14.61%] and point estimator \\(\\hat p = 9\\%\\).",
-        "q": "[2022] Calculate the sample size of this random sample.",
+        "q": "Calculate the sample size of this random sample.",
         "opts": [],
         "ans": [],
         "multi": false,
@@ -8773,7 +8773,7 @@
       },
       {
         "context": "2% of all credit card transactions per day are fraudulent. There are 50 transactions per day.",
-        "q": "[2022] a) Exact probability of 0 fraudulent transactions. b) Exact probability of at least one fraudulent transaction.",
+        "q": "a) Exact probability of 0 fraudulent transactions. b) Exact probability of at least one fraudulent transaction.",
         "opts": [],
         "ans": [],
         "multi": false,
@@ -8807,7 +8807,7 @@
       },
       {
         "context": "There are 4 math books, 3 chemistry books and 2 physics books.",
-        "q": "[2022] How many arrangements are there if all math books, all chemistry books, and all physics books are each kept together?",
+        "q": "How many arrangements are there if all math books, all chemistry books, and all physics books are each kept together?",
         "opts": [],
         "ans": [],
         "multi": false,
@@ -8832,7 +8832,7 @@
       },
       {
         "context": "An insurance company insures 2000 car drivers, 3000 motorbike drivers and 5000 truck drivers (10,000 total). Accident probabilities are 0.01, 0.03 and 0.015 respectively.",
-        "q": "[2022] a) Probability of an accident in the whole population. b) Given an accident, probability the driver is a car driver. c) Given an accident, probability the driver is a motorbike or truck driver.",
+        "q": "a) Probability of an accident in the whole population. b) Given an accident, probability the driver is a car driver. c) Given an accident, probability the driver is a motorbike or truck driver.",
         "opts": [],
         "ans": [],
         "multi": false,
@@ -8875,7 +8875,7 @@
       },
       {
         "context": "Study of 30 students. Time spent on TV (h): mean 6.95, SD 3.16. Amount of errors: mean 4.63, SD 2.93. Covariance = 5.01.",
-        "q": "[2022] a) Calculate a summary statistic for the linear relationship between TV time and errors. b) Expected number of errors for a student who watches 6 h of TV (linear regression).",
+        "q": "a) Calculate a summary statistic for the linear relationship between TV time and errors. b) Expected number of errors for a student who watches 6 h of TV (linear regression).",
         "opts": [],
         "ans": [],
         "multi": false,
