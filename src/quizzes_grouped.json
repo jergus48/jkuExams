@@ -8523,10 +8523,14 @@
           ],
           "rows": [
             {
-              "label": "95% CI (ms)",
+              "label": "95% CI (ms)  (lower, upper)",
               "cells": [
                 {
-                  "v": "[108.47; 131.53]",
+                  "v": "108.47",
+                  "e": true
+                },
+                {
+                  "v": "131.53",
                   "e": true
                 }
               ]
@@ -8580,10 +8584,14 @@
           ],
           "rows": [
             {
-              "label": "95% CI (hours)",
+              "label": "95% CI (hours)  (lower, upper)",
               "cells": [
                 {
-                  "v": "[757.85; 802.15]",
+                  "v": "757.85",
+                  "e": true
+                },
+                {
+                  "v": "802.15",
                   "e": true
                 }
               ]
