@@ -8216,5 +8216,697 @@
         "explanation": "`transform` applies a function and **preserves the original index/shape**, making it useful inside `groupby` to broadcast group-level results back to the original rows. `apply` is more flexible but may change the shape."
       }
     ]
+  },
+  {
+    "id": "stats_exam_password_bayes_normal_ttest",
+    "title": "Statistics Exam — Combinatorics, Bayes, Normal & t-Test",
+    "description": "Password counting, total probability & Bayes' theorem, normal distribution, one-sample t-test",
+    "questions": [
+      {
+        "context": "A password consists of exactly 7 characters. Each character can be any lower case letter (a to z) or any digit (0 to 9). Repetition of characters is permitted.",
+        "q": "a) How many different passwords are possible? b) How many of these passwords contain at least one digit?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "a) Total passwords",
+              "cells": [
+                {
+                  "v": "78,364,164,096",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) At least one digit",
+              "cells": [
+                {
+                  "v": "70,332,353,920",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Alphabet size:** 26 letters + 10 digits = 36 symbols, with repetition over 7 positions.\n\n**Part a)** Each of the 7 positions can be any of 36 characters:\n$$36^7 = 78{,}364{,}164{,}096$$\n\n**Part b)** Use the complement. Passwords with **no** digit use only the 26 letters:\n$$26^7 = 8{,}031{,}810{,}176$$\nSo passwords with at least one digit:\n$$36^7 - 26^7 = 78{,}364{,}164{,}096 - 8{,}031{,}810{,}176 = 70{,}332{,}353{,}920$$"
+      },
+      {
+        "context": "In a company, 60% of the employees are men and 40% are women. 70% of men and 90% of women arrive at work on time.",
+        "q": "a) Probability a randomly selected employee arrives on time. b) Given an employee arrives on time, the probability this employee is a woman.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "a) P(on time)",
+              "cells": [
+                {
+                  "v": "0.78",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) P(woman | on time)",
+              "cells": [
+                {
+                  "v": "0.4615",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Given:** \\(P(M)=0.6,\\ P(W)=0.4,\\ P(\\text{on time}|M)=0.7,\\ P(\\text{on time}|W)=0.9\\).\n\n**Part a) Total probability:**\n$$P(\\text{on time}) = 0.6\\times0.7 + 0.4\\times0.9 = 0.42 + 0.36 = 0.78$$\n\n**Part b) Bayes' theorem:**\n$$P(W|\\text{on time}) = \\frac{P(\\text{on time}|W)\\,P(W)}{P(\\text{on time})} = \\frac{0.9\\times0.4}{0.78} = \\frac{0.36}{0.78} \\approx 0.4615$$"
+      },
+      {
+        "context": "A machine produces water pipes with normally distributed diameter, mean \\(\\mu = 50\\) mm and standard deviation \\(\\sigma = 2\\) mm.",
+        "q": "a) Probability a randomly selected pipe has diameter more than 53 mm. b) After modification, 99% of pipes have diameter less than 52 mm (\\(\\sigma\\) unchanged). Find the new mean.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "a) P(X > 53)",
+              "cells": [
+                {
+                  "v": "0.0668",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) New mean \\(\\mu\\) (mm)",
+              "cells": [
+                {
+                  "v": "47.35",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Part a)** Standardize:\n$$z = \\frac{53-50}{2} = 1.5$$\n$$P(X>53) = 1 - \\Phi(1.5) = 1 - 0.9332 = 0.0668$$\n\n**Part b)** We need \\(P(X<52)=0.99\\). The 99th percentile has \\(z_{0.99}=2.326\\):\n$$\\frac{52-\\mu}{2} = 2.326 \\;\\Rightarrow\\; \\mu = 52 - 2.326\\times2 = 52 - 4.652 = 47.35 \\text{ mm}$$"
+      },
+      {
+        "context": "A study checks whether the average normally distributed study time of students deviates significantly from the target value of 6 years. A random sample of 15 students gave an average study time of 6.2 years with standard deviation 0.8 years.",
+        "q": "a) Formulate the statistical hypotheses for \"Is there a difference from the target value of 6 years?\" b) Use an appropriate test: state the test statistic, critical value, and test decision (type I error \\(\\alpha = 5\\%\\)).",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Component",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "a) Hypotheses",
+              "cells": [
+                {
+                  "v": "H0: mu = 6  vs  H1: mu != 6",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) Test statistic t",
+              "cells": [
+                {
+                  "v": "0.968",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) Critical value t_{14, 0.975}",
+              "cells": [
+                {
+                  "v": "2.145",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) Decision",
+              "cells": [
+                {
+                  "v": "fail to reject H0",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Part a)** Two-sided hypotheses about the mean:\n$$H_0: \\mu = 6 \\qquad H_1: \\mu \\neq 6$$\n\n**Part b)** One-sample t-test (\\(\\sigma\\) unknown, \\(n=15\\), \\(df=14\\)).\n$$t = \\frac{\\bar{x}-\\mu_0}{s/\\sqrt{n}} = \\frac{6.2-6}{0.8/\\sqrt{15}} = \\frac{0.2}{0.2066} \\approx 0.968$$\n\n**Critical value** (two-sided, \\(\\alpha=0.05\\), \\(df=14\\)): \\(t_{14,\\,0.975} = 2.145\\).\n\n**Decision:** \\(|t| = 0.968 < 2.145\\) → **fail to reject \\(H_0\\)**. There is no statistically significant difference from the target value of 6 years."
+      }
+    ]
+  },
+  {
+    "id": "stats_exam_2025_06_24",
+    "title": "Statistics Exam — 24 June 2025",
+    "description": "Two-sample t-test, combinatorics, Poisson approximation, Bayes' theorem, confidence interval, normal distribution",
+    "questions": [
+      {
+        "context": "A researcher compares the effectiveness of two diet plans (A and B) on weight loss (kg) over 8 weeks.\n\n| | Diet A | Diet B |\n|---|---|---|\n| Mean weight loss | 4.31 | 2.84 |\n| SD of weight loss | 1.2 | 1.4 |\n| Number of participants | 8 | 8 |",
+        "q": "a) Formulate the hypotheses for \"Is there a difference in true mean weight loss between diet A and diet B?\" b) Use an appropriate test: state the test statistic, critical value, and test decision (type I error \\(\\alpha = 5\\%\\)).",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Component",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "a) Hypotheses",
+              "cells": [
+                {
+                  "v": "H0: muA = muB  vs  H1: muA != muB",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) Test statistic t",
+              "cells": [
+                {
+                  "v": "2.255",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) Critical value t_{14, 0.975}",
+              "cells": [
+                {
+                  "v": "2.145",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) Decision",
+              "cells": [
+                {
+                  "v": "reject H0 (significant)",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Part a)** Two-sided two-sample hypotheses:\n$$H_0: \\mu_A = \\mu_B \\qquad H_1: \\mu_A \\neq \\mu_B$$\n\n**Part b)** Two-sample t-test with pooled variance (\\(n_A=n_B=8\\), \\(df = 8+8-2 = 14\\)).\n\n**Pooled variance:**\n$$s_p^2 = \\frac{(n_A-1)s_A^2 + (n_B-1)s_B^2}{n_A+n_B-2} = \\frac{7(1.2^2) + 7(1.4^2)}{14} = \\frac{10.08 + 13.72}{14} = 1.70$$\n$$s_p = 1.304$$\n\n**Test statistic:**\n$$t = \\frac{\\bar{x}_A - \\bar{x}_B}{s_p\\sqrt{\\tfrac{1}{n_A}+\\tfrac{1}{n_B}}} = \\frac{4.31-2.84}{1.304\\sqrt{0.25}} = \\frac{1.47}{0.652} \\approx 2.255$$\n\n**Critical value:** \\(t_{14,\\,0.975} = 2.145\\).\n\n**Decision:** \\(|t| = 2.255 > 2.145\\) → **reject \\(H_0\\)**. There is a statistically significant difference in mean weight loss between the diets."
+      },
+      {
+        "context": "There are 7 books: 4 fiction books and 3 non-fiction books. They are arranged so that all fiction books stay together and all non-fiction books stay together.",
+        "q": "How many different arrangements are possible?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "Number of arrangements",
+              "cells": [
+                {
+                  "v": "288",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "Treat each group as one block. There are 2 blocks (fiction, non-fiction), arranged in \\(2!\\) orders. Within the blocks the books permute in \\(4!\\) and \\(3!\\) ways:\n$$2! \\times 4! \\times 3! = 2 \\times 24 \\times 6 = 288$$"
+      },
+      {
+        "context": "A website is visited on average by 10 people per hour. The number of visitors per hour follows a Poisson distribution.",
+        "q": "What is the approximate probability that exactly 9 people visit the website in 1 hour?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "P(X = 9)",
+              "cells": [
+                {
+                  "v": "0.1251",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "Poisson with \\(\\lambda = 10\\):\n$$P(X=9) = \\frac{e^{-\\lambda}\\lambda^{9}}{9!} = \\frac{e^{-10}\\,10^{9}}{362880} \\approx 0.1251$$"
+      },
+      {
+        "context": "An algorithm detects fraudulent credit card transactions. 4% of all transactions are fraudulent. The algorithm correctly identifies 90% of fraudulent transactions but flags 2% of legitimate transactions as fraudulent.",
+        "q": "Given that a transaction is flagged as fraudulent, what is the probability that it actually is fraudulent?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "P(fraud | flagged)",
+              "cells": [
+                {
+                  "v": "0.6522",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Given:** \\(P(F)=0.04,\\ P(+|F)=0.90,\\ P(+|\\bar F)=0.02\\).\n\n**Total probability of a flag:**\n$$P(+) = 0.04\\times0.90 + 0.96\\times0.02 = 0.036 + 0.0192 = 0.0552$$\n\n**Bayes' theorem:**\n$$P(F|+) = \\frac{0.036}{0.0552} \\approx 0.6522$$"
+      },
+      {
+        "context": "A company tests the normally distributed runtime (ms) of its AI model. For a random sample of 9 test cases, the mean runtime was 120 ms with standard deviation 15 ms.",
+        "q": "State a 95% confidence interval for the true mean runtime.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "95% CI (ms)",
+              "cells": [
+                {
+                  "v": "[108.47; 131.53]",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "Small sample (\\(n=9\\), \\(\\sigma\\) unknown) → t-interval with \\(df = 8\\), \\(t_{8,\\,0.975} = 2.306\\):\n$$\\bar{x} \\pm t\\,\\frac{s}{\\sqrt{n}} = 120 \\pm 2.306\\,\\frac{15}{\\sqrt{9}} = 120 \\pm 2.306\\times5 = 120 \\pm 11.53$$\n$$\\Rightarrow [108.47,\\; 131.53]$$"
+      },
+      {
+        "context": "The body height of adults in a population is normally distributed with mean 160 cm and standard deviation 8 cm.",
+        "q": "If a person is randomly selected, what is the probability that their height is between 152 and 168 cm?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "P(152 < X < 168)",
+              "cells": [
+                {
+                  "v": "0.6827",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "Standardize the bounds:\n$$z_1 = \\frac{152-160}{8} = -1, \\qquad z_2 = \\frac{168-160}{8} = 1$$\n$$P(152<X<168) = \\Phi(1) - \\Phi(-1) = 0.8413 - 0.1587 = 0.6827$$\n(This is the 68% within \\(\\mu \\pm 1\\sigma\\) from the empirical rule.)"
+      }
+    ]
+  },
+  {
+    "id": "stats_ue_exercise_exams_2022_2023",
+    "title": "Statistics UE — Exercise Exams 2022 & 2023",
+    "description": "Confidence interval, continuous random variable, normal approximation, combinatorics, grouped data, sample size, binomial, total probability & Bayes, linear regression",
+    "questions": [
+      {
+        "context": "A company manufactures light bulbs. A random sample of 15 bulbs had an average lifetime of 780 hours with standard deviation 40 hours.",
+        "q": "[2023] Calculate a 95% confidence interval for the true mean lifetime.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "95% CI (hours)",
+              "cells": [
+                {
+                  "v": "[757.85; 802.15]",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "Small sample t-interval, \\(df = 14\\), \\(t_{14,\\,0.975} = 2.145\\):\n$$780 \\pm 2.145\\,\\frac{40}{\\sqrt{15}} = 780 \\pm 2.145\\times10.328 = 780 \\pm 22.15$$\n$$\\Rightarrow [757.85,\\; 802.15]$$"
+      },
+      {
+        "context": "A continuous random variable has density \\(f(x) = \\tfrac{2x}{5} + \\tfrac{4}{5}\\) for \\(0 \\le x \\le 1\\), and 0 otherwise.",
+        "q": "[2023] a) P(X ≤ 1). b) Expected value. c) Variance.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "a) P(X ≤ 1)",
+              "cells": [
+                {
+                  "v": "1",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) E[X]",
+              "cells": [
+                {
+                  "v": "0.5333",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "c) Var(X)",
+              "cells": [
+                {
+                  "v": "0.0822",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Part a)** The density integrates to 1 over its whole support, so \\(P(X\\le1)=1\\). (Check: \\(\\int_0^1(\\tfrac{2x}{5}+\\tfrac{4}{5})dx = \\tfrac{1}{5}+\\tfrac{4}{5}=1\\).)\n\n**Part b)**\n$$E[X] = \\int_0^1 x\\left(\\tfrac{2x}{5}+\\tfrac{4}{5}\\right)dx = \\int_0^1\\left(\\tfrac{2x^2}{5}+\\tfrac{4x}{5}\\right)dx = \\tfrac{2}{15}+\\tfrac{2}{5} = \\tfrac{8}{15} \\approx 0.5333$$\n\n**Part c)**\n$$E[X^2] = \\int_0^1 x^2\\left(\\tfrac{2x}{5}+\\tfrac{4}{5}\\right)dx = \\tfrac{2}{20}+\\tfrac{4}{15} = \\tfrac{11}{30} \\approx 0.3667$$\n$$\\text{Var}(X) = E[X^2]-(E[X])^2 = 0.3667 - 0.5333^2 = 0.3667 - 0.2844 \\approx 0.0822$$"
+      },
+      {
+        "context": "On an average weekend night, 1 out of every 10 drivers is drunk. 400 drivers are randomly checked. (Approximate solution sufficient.)",
+        "q": "[2023] What is the probability that the number of drunk drivers is at most 35?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "P(X ≤ 35)",
+              "cells": [
+                {
+                  "v": "0.2266",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "\\(X \\sim \\text{Bin}(400,\\,0.1)\\). Normal approximation: \\(\\mu = np = 40\\), \\(\\sigma = \\sqrt{np(1-p)} = \\sqrt{36} = 6\\).\n\nWith continuity correction:\n$$P(X \\le 35) \\approx \\Phi\\!\\left(\\frac{35.5-40}{6}\\right) = \\Phi(-0.75) = 0.2266$$"
+      },
+      {
+        "context": "There are 4 Austrian and 6 German students.",
+        "q": "[2023] a) In how many ways can they stand in a line if all Austrians stand together? b) In how many ways can a committee of 3 be chosen that is either all Austrian or all German?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "a) Arrangements (Austrians together)",
+              "cells": [
+                {
+                  "v": "120,960",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) All-Austrian or all-German committees",
+              "cells": [
+                {
+                  "v": "24",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Part a)** Treat the 4 Austrians as one block → 7 entities arranged in \\(7!\\) ways, with \\(4!\\) internal orders:\n$$7! \\times 4! = 5040 \\times 24 = 120{,}960$$\n\n**Part b)** Mutually exclusive choices:\n$$\\binom{4}{3} + \\binom{6}{3} = 4 + 20 = 24$$"
+      },
+      {
+        "context": "BMI of a population of 100. Classes [16;20), [20;24), [24;28), [28;32), [32;36) with frequencies 18, 30, 42, 6, 4.",
+        "q": "[2023] a) Arithmetic mean. b) Variance and standard deviation. c) Below which value lies 60% of the distribution mass?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "a) Mean",
+              "cells": [
+                {
+                  "v": "23.92",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) Variance",
+              "cells": [
+                {
+                  "v": "15.51",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) Standard deviation",
+              "cells": [
+                {
+                  "v": "3.94",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "c) 60th percentile",
+              "cells": [
+                {
+                  "v": "25.14",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "Class midpoints: 18, 22, 26, 30, 34.\n\n**Part a) Mean:**\n$$\\bar{x} = \\tfrac{1}{100}(18\\cdot18 + 22\\cdot30 + 26\\cdot42 + 30\\cdot6 + 34\\cdot4) = \\tfrac{2392}{100} = 23.92$$\n\n**Part b) Variance:**\n$$\\tfrac{1}{100}\\sum f_i m_i^2 = \\tfrac{58768}{100} = 587.68$$\n$$\\text{Var} = 587.68 - 23.92^2 = 587.68 - 572.17 = 15.51,\\quad s = \\sqrt{15.51} \\approx 3.94$$\n\n**Part c) 60th percentile:** rank \\(0.6\\times100 = 60\\). Cumulative: 18, 48, 90 → falls in [24;28), with \\(F_{prev}=48\\), \\(f=42\\), width 4:\n$$x_{0.6} = 24 + \\tfrac{4}{42}(60-48) = 24 + 1.143 \\approx 25.14$$"
+      },
+      {
+        "context": "A random sample with a 95% confidence interval [3.39%, 14.61%] and point estimator \\(\\hat p = 9\\%\\).",
+        "q": "[2022] Calculate the sample size of this random sample.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "Sample size n",
+              "cells": [
+                {
+                  "v": "100",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "The margin of error is \\(14.61\\% - 9\\% = 5.61\\% = 0.0561\\), with \\(z_{0.975}=1.96\\):\n$$0.0561 = 1.96\\sqrt{\\frac{0.09\\times0.91}{n}}$$\n$$\\sqrt{\\frac{0.0819}{n}} = \\frac{0.0561}{1.96} = 0.02862 \\;\\Rightarrow\\; \\frac{0.0819}{n} = 0.000819 \\;\\Rightarrow\\; n = 100$$"
+      },
+      {
+        "context": "2% of all credit card transactions per day are fraudulent. There are 50 transactions per day.",
+        "q": "[2022] a) Exact probability of 0 fraudulent transactions. b) Exact probability of at least one fraudulent transaction.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "a) P(X = 0)",
+              "cells": [
+                {
+                  "v": "0.3642",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) P(X ≥ 1)",
+              "cells": [
+                {
+                  "v": "0.6358",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "\\(X \\sim \\text{Bin}(50,\\,0.02)\\).\n\n**Part a)**\n$$P(X=0) = (1-0.02)^{50} = 0.98^{50} \\approx 0.3642$$\n\n**Part b)**\n$$P(X\\ge1) = 1 - 0.3642 = 0.6358$$"
+      },
+      {
+        "context": "There are 4 math books, 3 chemistry books and 2 physics books.",
+        "q": "[2022] How many arrangements are there if all math books, all chemistry books, and all physics books are each kept together?",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "Number of arrangements",
+              "cells": [
+                {
+                  "v": "1728",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "Three blocks arranged in \\(3!\\) orders, with internal permutations \\(4!,\\,3!,\\,2!\\):\n$$3! \\times 4! \\times 3! \\times 2! = 6 \\times 24 \\times 6 \\times 2 = 1728$$"
+      },
+      {
+        "context": "An insurance company insures 2000 car drivers, 3000 motorbike drivers and 5000 truck drivers (10,000 total). Accident probabilities are 0.01, 0.03 and 0.015 respectively.",
+        "q": "[2022] a) Probability of an accident in the whole population. b) Given an accident, probability the driver is a car driver. c) Given an accident, probability the driver is a motorbike or truck driver.",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "a) P(accident)",
+              "cells": [
+                {
+                  "v": "0.0185",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) P(car | accident)",
+              "cells": [
+                {
+                  "v": "0.1081",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "c) P(motorbike or truck | accident)",
+              "cells": [
+                {
+                  "v": "0.8919",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "Group shares: car 0.2, motorbike 0.3, truck 0.5.\n\n**Part a) Total probability:**\n$$P(A) = 0.2\\times0.01 + 0.3\\times0.03 + 0.5\\times0.015 = 0.002 + 0.009 + 0.0075 = 0.0185$$\n\n**Part b) Bayes:**\n$$P(\\text{car}|A) = \\frac{0.002}{0.0185} \\approx 0.1081$$\n\n**Part c)** Complement of (b), or directly:\n$$P(\\text{moto or truck}|A) = \\frac{0.009 + 0.0075}{0.0185} = \\frac{0.0165}{0.0185} \\approx 0.8919$$"
+      },
+      {
+        "context": "Study of 30 students. Time spent on TV (h): mean 6.95, SD 3.16. Amount of errors: mean 4.63, SD 2.93. Covariance = 5.01.",
+        "q": "[2022] a) Calculate a summary statistic for the linear relationship between TV time and errors. b) Expected number of errors for a student who watches 6 h of TV (linear regression).",
+        "opts": [],
+        "ans": [],
+        "multi": false,
+        "tableInput": {
+          "headers": [
+            "Sub-part",
+            "Answer"
+          ],
+          "rows": [
+            {
+              "label": "a) Correlation r",
+              "cells": [
+                {
+                  "v": "0.541",
+                  "e": true
+                }
+              ]
+            },
+            {
+              "label": "b) Predicted errors at 6 h",
+              "cells": [
+                {
+                  "v": "4.15",
+                  "e": true
+                }
+              ]
+            }
+          ]
+        },
+        "explanation": "**Part a) Bravais-Pearson correlation:**\n$$r = \\frac{\\text{Cov}(x,y)}{s_x s_y} = \\frac{5.01}{3.16\\times2.93} = \\frac{5.01}{9.259} \\approx 0.541$$\n\n**Part b) Regression \\(\\hat{y}=a+bx\\):**\n$$b = \\frac{\\text{Cov}(x,y)}{s_x^2} = \\frac{5.01}{3.16^2} = \\frac{5.01}{9.9856} \\approx 0.5017$$\n$$a = \\bar{y} - b\\bar{x} = 4.63 - 0.5017\\times6.95 \\approx 1.143$$\n$$\\hat{y}(6) = 1.143 + 0.5017\\times6 \\approx 4.15 \\text{ errors}$$"
+      }
+    ]
   }
 ]
