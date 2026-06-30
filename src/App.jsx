@@ -8096,14 +8096,16 @@ export default function App() {
     const curSel = sel[cur];
     // Count correct/wrong: for table-input questions, count individual cells;
     // for MCQ/open-ended, count whole question as 1 unit.
-    let correctCount = 0, wrongCount = 0;
+    let correctCount = 0, wrongCount = 0, scoreSum = 0;
     scores.forEach((s, i) => {
       const ti = tableInputs[i];
       if (ti && ti.checked && typeof ti.totalCells === "number") {
-        correctCount += ti.correctCells || 0;
-        wrongCount += (ti.totalCells || 0) - (ti.correctCells || 0);
+        const frac = ti.totalCells ? (ti.correctCells || 0) / ti.totalCells : 0;
+        scoreSum += frac;
+        if (frac >= 1) correctCount += 1; else wrongCount += 1;
       } else if (s === true) {
         correctCount += 1;
+        scoreSum += 1;
       } else if (s === false) {
         wrongCount += 1;
       }
@@ -8221,7 +8223,7 @@ export default function App() {
     const isRevealed = revealed[cur] === true;
 
     if (showResults) {
-      const pct = Math.round(correctCount / Qs.length * 100);
+      const pct = Math.round(scoreSum / Qs.length * 100);
       const grade = pct >= 90 ? "Excellent! 🏆" : pct >= 75 ? "Great job! ⭐" : pct >= 60 ? "Good effort! 👍" : "Keep studying! 📚";
       mainContent = (
         <div className="quiz-container results-container">
