@@ -2365,3 +2365,23 @@ body {
   min-width: 1.5rem;
   text-align: center;
 }
+
+.quiz-card-progress {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent, #4f8cff);
+}
+
+.question-figures {
+  margin: 12px 0 4px;
+  overflow-x: auto;
+}
+.question-figures img {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto 8px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px;
+}

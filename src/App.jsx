@@ -3,6 +3,7 @@ import katex from "katex";
 import "katex/dist/katex.min.css";
 import "./App.css";
 import groupedQuizzes from "./quizzes_grouped.json";
+import medQuizzes from "./med_quizzes.json";
 
 const QUIZ_BANK_OLD = [
   {
@@ -7727,10 +7728,12 @@ const QUIZ_BANK_OLD = [
   }
 ];
 
-const rawQuizBank = [...QUIZ_BANK_OLD, ...groupedQuizzes];
+const rawQuizBank = [...QUIZ_BANK_OLD, ...groupedQuizzes, ...medQuizzes];
 const QUIZ_BANK = Array.from(new Map(rawQuizBank.map(q => [q.id, q])).values());
 
 function getSubject(title) {
+  if (title.includes("Chémia")) return "Chémia";
+  if (title.includes("Biológia")) return "Biológia";
   if (title.includes("Hands on AI")) return "Hands on AI";
   if (title.includes("MLPC")) return "MLPC";
   if (title.includes("Python")) return "Python";
@@ -7741,7 +7744,21 @@ function getSubject(title) {
   return "Other";
 }
 
-const ALL_SUBJECTS = Array.from(new Set(QUIZ_BANK.map(q => getSubject(q.title)))).sort();
+// Top-level sections. Every quiz belongs to exactly one section; quizzes without
+// an explicit `section` field are the original JKU 2nd-semester exams.
+const SECTIONS = [
+  { id: "semester2", title: "Semester 2", icon: "\u{1F4DA}", desc: "JKU second semester exams — ML, MLPC, Python, Algorithms, Statistics, Math for AI." },
+  { id: "medicina", title: "Medicína prijímacky", icon: "\u{1FA7A}", desc: "Prijímacie skúšky na medicínu." },
+  { id: "semester3", title: "Semester 3", icon: "\u{1F5D3}️", desc: "JKU third semester exams." },
+];
+
+function getSection(quiz) {
+  return quiz.section || "semester2";
+}
+
+function subjectsOf(quizzes) {
+  return Array.from(new Set(quizzes.map(q => getSubject(q.title)))).sort();
+}
 
 function InlineMathText({ text }) {
   if (!text) return null;
@@ -7908,6 +7925,22 @@ function TableInputWidget({ tableInput, qState, onValChange, onCheck }) {
   );
 }
 
+// In-progress attempts are persisted per quiz so a session can be resumed on
+// another day/device-local browser. Shape:
+// { [quizId]: { cur, state, answered, total, at } }
+const PROGRESS_KEY = "quiz_progress";
+
+// Saved attempts are only resumed when the quiz still holds the same questions,
+// so a content update can never restore answers onto different questions.
+function quizSignature(quiz) {
+  return quiz.questions.length + "|" + (quiz.questions[0]?.q || "").slice(0, 60);
+}
+
+function loadProgress() {
+  try { return JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}"); }
+  catch { return {}; }
+}
+
 function freshState(questions) {
   return {
     sel: questions.map(() => []),
@@ -7929,6 +7962,38 @@ export default function App() {
     const saved = localStorage.getItem("theme");
     return saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
   });
+
+  const [activeSection, setActiveSection] = useState(null);
+
+  const [progress, setProgress] = useState(loadProgress);
+
+  useEffect(() => {
+    try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); }
+    catch { /* quota exceeded — progress is best-effort */ }
+  }, [progress]);
+
+  // Autosave the running attempt after every answer / navigation.
+  useEffect(() => {
+    if (!activeQuizId || !state || showResults) return;
+    const answered = state.done.filter(Boolean).length;
+    const quiz = QUIZ_BANK.find(q => q.id === activeQuizId);
+    setProgress(prev => ({
+      ...prev,
+      [activeQuizId]: {
+        cur, state, answered, total: state.done.length, at: Date.now(),
+        sig: quiz ? quizSignature(quiz) : undefined,
+      },
+    }));
+  }, [activeQuizId, state, cur, showResults]);
+
+  function clearProgress(quizId) {
+    setProgress(prev => {
+      if (!(quizId in prev)) return prev;
+      const next = { ...prev };
+      delete next[quizId];
+      return next;
+    });
+  }
 
   const [hiddenSubjects, setHiddenSubjects] = useState(() => {
     try { return JSON.parse(localStorage.getItem("hidden_subjects") || "[]"); }
@@ -8009,6 +8074,7 @@ export default function App() {
       const total = quiz.questions.length;
       const pct = Math.round((earned / total) * 100);
       recordAttempt(activeQuizId, pct);
+      clearProgress(activeQuizId);
       setRecordedFor(activeQuizId);
     }
     if (!showResults && recordedFor) {
@@ -8016,11 +8082,17 @@ export default function App() {
     }
   }, [showResults, activeQuizId, state, recordedFor]);
 
-  function startQuiz(id) {
+  function startQuiz(id, restart = false) {
+    const quiz = QUIZ_BANK.find(q => q.id === id);
+    const saved = restart ? null : progress[id];
+    const usable = saved && saved.state && saved.state.done
+      && saved.state.done.length === quiz.questions.length
+      && saved.sig === quizSignature(quiz);
     setActiveQuizId(id);
-    setCur(0);
-    setState(freshState(QUIZ_BANK.find(q => q.id === id).questions));
+    setCur(usable ? Math.min(saved.cur || 0, quiz.questions.length - 1) : 0);
+    setState(usable ? saved.state : freshState(quiz.questions));
     setShowResults(false);
+    if (restart) clearProgress(id);
   }
 
   function backToMenu() { setActiveQuizId(null); setShowResults(false); }
@@ -8029,17 +8101,47 @@ export default function App() {
 
   let mainContent;
 
-  if (!activeQuizId) {
-    const visibleQuizzes = QUIZ_BANK.filter(q => !hiddenSubjects.includes(getSubject(q.title)));
+  if (!activeQuizId && !activeSection) {
+    mainContent = (
+      <div className="quiz-menu-container">
+        <div className="quiz-list-title">#thanksclaude Exam Trainer</div>
+        <div className="quiz-list-subtitle">Pick a section</div>
+
+        <div className="quiz-grid">
+          {SECTIONS.map(section => {
+            const count = QUIZ_BANK.filter(q => getSection(q) === section.id).length;
+            return (
+              <div key={section.id} onClick={() => setActiveSection(section.id)} className="quiz-card">
+                <div className="quiz-card-inner">
+                  <div>
+                    <div className="quiz-card-title">{section.icon} {section.title}</div>
+                    <div className="quiz-card-desc">{section.desc}</div>
+                  </div>
+                  <div className="quiz-card-footer">
+                    <div className="quiz-card-meta">{count} quiz{count === 1 ? "" : "zes"}</div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  } else if (!activeQuizId) {
+    const section = SECTIONS.find(s => s.id === activeSection);
+    const sectionQuizzes = QUIZ_BANK.filter(q => getSection(q) === activeSection);
+    const sectionSubjects = subjectsOf(sectionQuizzes);
+    const visibleQuizzes = sectionQuizzes.filter(q => !hiddenSubjects.includes(getSubject(q.title)));
 
     mainContent = (
       <div className="quiz-menu-container">
-        <div className="quiz-list-title">JKU Second Semester Pass Master Plan</div>
-        <div className="quiz-list-subtitle">Select a quiz to practice exam questions locally</div>
-        
-        <div className="subject-filter-container" style={{ marginBottom: "20px", paddingTop: "20px", display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "center", alignItems: "center" }}>
+        <button onClick={() => setActiveSection(null)} className="btn btn-secondary" style={{ marginBottom: "16px" }}>← Sections</button>
+        <div className="quiz-list-title">{section.icon} {section.title}</div>
+        <div className="quiz-list-subtitle">{sectionQuizzes.length ? "Select a quiz to practice exam questions locally" : "No quizzes here yet — coming soon."}</div>
+
+        <div className="subject-filter-container" style={{ marginBottom: "20px", paddingTop: "20px", display: sectionSubjects.length > 1 ? "flex" : "none", flexWrap: "wrap", gap: "10px", justifyContent: "center", alignItems: "center" }}>
           <span style={{fontWeight: "bold", color: "var(--text-main)"}}>Hide Subjects:</span>
-          {ALL_SUBJECTS.map(subject => (
+          {sectionSubjects.map(subject => (
             <label key={subject} style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", padding: "6px 12px", background: "var(--bg-card)", borderRadius: "20px", border: "1px solid var(--border-color)", color: "var(--text-main)", fontSize: "0.9rem", userSelect: "none" }}>
               <input 
                 type="checkbox" 
@@ -8055,6 +8157,7 @@ export default function App() {
         <div className="quiz-grid">
           {visibleQuizzes.map(quiz => {
             const stats = quizStats[quiz.id];
+            const prog = progress[quiz.id];
             const bestClass = stats
               ? (stats.best >= 90 ? "stat-excellent"
                 : stats.best >= 75 ? "stat-great"
@@ -8071,6 +8174,11 @@ export default function App() {
                   </div>
                   <div className="quiz-card-footer">
                     <div className="quiz-card-meta">{quiz.questions.length} questions</div>
+                    {prog && (
+                      <div className="quiz-card-progress">
+                        ▶ Resume — {prog.answered}/{prog.total} answered
+                      </div>
+                    )}
                     {stats && (
                       <div className="quiz-card-stats">
                         <span className={`quiz-card-best ${bestClass}`}>Best: {stats.best}%</span>
@@ -8125,7 +8233,9 @@ export default function App() {
     }
 
     function submit() {
-      if (curSel.length === 0) return;
+      // Multi-select questions may legitimately have no correct option (the
+      // LF UK books contain keys that are all "N"), so an empty answer is valid.
+      if (curSel.length === 0 && !q.multi) return;
       const correct = arrMatch(curSel, Qs[cur].ans);
       setState(prev => {
         const next = { ...prev, done: [...prev.done], scores: [...prev.scores] };
@@ -8247,7 +8357,7 @@ export default function App() {
           </div>
 
           <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
-            <button onClick={() => startQuiz(activeQuizId)} className="btn btn-primary">Restart quiz</button>
+            <button onClick={() => startQuiz(activeQuizId, true)} className="btn btn-primary">Restart quiz</button>
             <button onClick={backToMenu} className="btn btn-secondary">← All quizzes</button>
           </div>
         </div>
@@ -8257,7 +8367,12 @@ export default function App() {
         <div className="quiz-container">
           <div className="quiz-header">
             <button onClick={backToMenu} className="back-button">← Quizzes</button>
-            <div style={{ display: "flex", gap: 8 }}>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <button
+                onClick={() => { if (confirm("Start this quiz over? Saved progress will be cleared.")) startQuiz(activeQuizId, true); }}
+                className="back-button"
+                title="Restart quiz"
+              >⟳ Restart</button>
               <span className="score-badge-correct">✓ {correctCount}</span>
               <span className="score-badge-wrong">✗ {wrongCount}</span>
             </div>
@@ -8281,6 +8396,14 @@ export default function App() {
           <div className="question-text">
             <MathText text={q.q} />
           </div>
+
+          {q.figures && (
+            <div className="question-figures">
+              {q.figures.map((src, i) => (
+                <img key={i} src={src} alt={`Možnosti ${i + 1}`} />
+              ))}
+            </div>
+          )}
 
           {!isOpenEnded && (
             <div className="options-container">
@@ -8349,6 +8472,11 @@ export default function App() {
               <span style={{ fontSize: "18px" }}>{scores[cur] ? "✓" : "✗"}</span>
               <div>
                 <div>{scores[cur] ? "Correct!" : "Not quite."}</div>
+                {!scores[cur] && q.ans.length === 0 && (
+                  <div className="feedback-correct-answer">
+                    <strong>Correct answer:</strong> none of the options (the key marks all eight as wrong) — leave everything unselected.
+                  </div>
+                )}
                 {!scores[cur] && q.ans.length > 0 && (
                   <div className="feedback-correct-answer">
                     <strong>Correct {q.ans.length === 1 ? "answer" : "answers"}:</strong>{" "}
@@ -8371,7 +8499,7 @@ export default function App() {
 
           <div className="action-buttons">
             {cur > 0 && <button onClick={() => setCur(c => c - 1)} className="btn btn-secondary">← Back</button>}
-            {!isOpenEnded && !isTableInput && !isDone && <button onClick={submit} className="btn btn-primary" disabled={curSel.length === 0}>Check answer</button>}
+            {!isOpenEnded && !isTableInput && !isDone && <button onClick={submit} className="btn btn-primary" disabled={curSel.length === 0 && !q.multi}>Check answer</button>}
             {!isOpenEnded && !isTableInput && isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-primary">Next →</button>}
             {!isOpenEnded && !isTableInput && !isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-secondary">Skip →</button>}
             {isOpenEnded && isRevealed && cur < Qs.length - 1 && <button onClick={continueOpenEnded} className="btn btn-primary">Continue →</button>}
@@ -8419,7 +8547,7 @@ export default function App() {
   return (
     <div className="app-wrapper">
       <header className="app-header">
-        <div className="header-brand" onClick={backToMenu} style={{ cursor: "pointer" }}>
+        <div className="header-brand" onClick={() => { backToMenu(); setActiveSection(null); }} style={{ cursor: "pointer" }}>
           <span className="brand-logo">🎓</span>
           <span className="brand-name">#thanksclaude</span>
         </div>
