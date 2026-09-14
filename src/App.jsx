@@ -4,6 +4,7 @@ import "katex/dist/katex.min.css";
 import "./App.css";
 import groupedQuizzes from "./quizzes_grouped.json";
 import medQuizzes from "./med_quizzes.json";
+import scioQuizzes from "./scio_quizzes.json";
 
 const QUIZ_BANK_OLD = [
   {
@@ -7728,10 +7729,14 @@ const QUIZ_BANK_OLD = [
   }
 ];
 
-const rawQuizBank = [...QUIZ_BANK_OLD, ...groupedQuizzes, ...medQuizzes];
+const rawQuizBank = [...QUIZ_BANK_OLD, ...groupedQuizzes, ...medQuizzes, ...scioQuizzes];
 const QUIZ_BANK = Array.from(new Map(rawQuizBank.map(q => [q.id, q])).values());
 
 function getSubject(title) {
+  // Scio kurzy dostavaju vlastne chipy, preto musia byt pred vseobecnou
+  // Chemiou/Biologiou - inak by sa zliali s prijimackami z LF UK.
+  if (title.includes("Chémia SCIO")) return "Chémia SCIO";
+  if (title.includes("Biológia SCIO")) return "Biológia SCIO";
   if (title.includes("Chémia")) return "Chémia";
   if (title.includes("Biológia")) return "Biológia";
   if (title.includes("Hands on AI")) return "Hands on AI";
@@ -8387,6 +8392,20 @@ export default function App() {
             <div className="progress-bar" style={{ width: `${Math.round((cur + 1) / Qs.length * 100)}%` }} />
           </div>
 
+          {quiz.theory && (
+            <details className="lesson-theory">
+              <summary>Teória k lekcii</summary>
+              <div className="lesson-theory-body">
+                {quiz.theory.split("\n").map(t => t.trim()).filter(Boolean).map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+                {quiz.theoryFigures && quiz.theoryFigures.map((src, i) => (
+                  <img key={i} src={src} alt={`Obrázok ${i + 1}`} />
+                ))}
+              </div>
+            </details>
+          )}
+
           {q.context && (
             <div className="question-context">
               <MathText text={q.context} />
@@ -8405,7 +8424,7 @@ export default function App() {
             </div>
           )}
 
-          {!isOpenEnded && (
+          {!isOpenEnded && !isTableInput && (
             <div className="options-container">
               {q.opts.map((o, oi) => {
                 const isC = q.ans.includes(oi), isS = curSel.includes(oi);
@@ -8467,7 +8486,7 @@ export default function App() {
             </div>
           )}
 
-          {!isOpenEnded && isDone && (
+          {!isOpenEnded && !isTableInput && isDone && (
             <div className={`feedback-container ${scores[cur] ? "feedback-correct" : "feedback-wrong"}`}>
               <span style={{ fontSize: "18px" }}>{scores[cur] ? "✓" : "✗"}</span>
               <div>

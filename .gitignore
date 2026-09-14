@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Surove HTML dumpy zo Scio scrapera (da sa znovu stiahnut)
+scratch/med/scio/raw/
+__pycache__/

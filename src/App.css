@@ -2385,3 +2385,26 @@ body {
   border-radius: 8px;
   padding: 6px;
 }
+
+/* Teória k lekcii (Scio kurzy) */
+.lesson-theory {
+  margin: 0 0 18px;
+  border: 1px solid var(--border, #d7dee8);
+  border-radius: 10px;
+  background: var(--card-bg, #f7f9fc);
+  overflow: hidden;
+}
+.lesson-theory > summary {
+  cursor: pointer;
+  padding: 10px 14px;
+  font-weight: 600;
+  user-select: none;
+}
+.lesson-theory-body {
+  padding: 0 14px 12px;
+  max-height: 420px;
+  overflow-y: auto;
+  line-height: 1.55;
+}
+.lesson-theory-body p { margin: 0 0 10px; }
+.lesson-theory-body img { max-width: 100%; height: auto; display: block; margin: 10px 0; }
