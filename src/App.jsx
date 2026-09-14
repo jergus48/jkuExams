@@ -8029,6 +8029,23 @@ function loadProgress() {
   catch { return {}; }
 }
 
+// Ulozeny postup moze pochadzat z verzie, ktora este nepoznala niektory typ
+// otazky. Chybajuce polia sa doplnia, inak by sa widget vobec nevykreslil.
+function migrateState(questions, state) {
+  const fresh = freshState(questions);
+  const out = { ...fresh, ...state };
+  ["sel", "done", "scores", "revealed", "tableInputs", "matchings"].forEach(k => {
+    const got = Array.isArray(out[k]) ? out[k] : [];
+    out[k] = fresh[k].map((def, i) => {
+      const v = got[i];
+      if (v === undefined) return def;
+      if (def && typeof def === "object" && (v === null || typeof v !== "object")) return def;
+      return v;
+    });
+  });
+  return out;
+}
+
 function freshState(questions) {
   return {
     sel: questions.map(() => []),
@@ -8181,7 +8198,8 @@ export default function App() {
       && saved.sig === quizSignature(quiz);
     setActiveQuizId(id);
     setCur(usable ? Math.min(saved.cur || 0, quiz.questions.length - 1) : 0);
-    setState(usable ? saved.state : freshState(quiz.questions));
+    setState(usable ? migrateState(quiz.questions, saved.state)
+                    : freshState(quiz.questions));
     setShowResults(false);
     if (restart) clearProgress(id);
   }
