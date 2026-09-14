@@ -7858,6 +7858,17 @@ function SkipListDiagram({ skipList }) {
   );
 }
 
+// Obsah zo Scia je ulozeny ako HTML, aby sa nestratilo formatovanie
+// (horne/dolne indexy, tabulky, zoznamy). Parser pri scrapovani povoluje len
+// formatovacie znacky, takze sem uz neprichadza ziadny skript ani atribut.
+function Rich({ html, text, className }) {
+  if (html) {
+    return <div className={className ? `rich ${className}` : "rich"}
+                dangerouslySetInnerHTML={{ __html: html }} />;
+  }
+  return <MathText text={text} />;
+}
+
 // ── Priradovacie otazky (Scio) ─────────────────────────────────────
 // Kazdy riadok ma zadanie a vyber z rovnakej ponuky moznosti, tak ako na Sciu.
 function MatchingWidget({ matching, qState, onPick, onCheck }) {
@@ -7890,7 +7901,8 @@ function MatchingWidget({ matching, qState, onPick, onCheck }) {
               <tr key={ri}>
                 <td className="matching-label">
                   {row.img && <img src={row.img} alt="" />}
-                  {row.label && <MathText text={row.label} />}
+                  {(row.html || row.label) &&
+                    <Rich html={row.html} text={row.label} />}
                 </td>
                 <td className="matching-pick">
                   <select
@@ -8505,12 +8517,14 @@ export default function App() {
             <details className="lesson-theory" open>
               <summary>Teória k lekcii</summary>
               <div className="lesson-theory-body">
-                {quiz.theory.split("\n").map(t => t.trim()).filter(Boolean).map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
-                {quiz.theoryFigures && quiz.theoryFigures.map((src, i) => (
-                  <img key={i} src={src} alt={`Obrázok ${i + 1}`} />
-                ))}
+                {quiz.theoryHtml
+                  ? <Rich html={quiz.theoryHtml} />
+                  : quiz.theory.split("\n").map(t => t.trim()).filter(Boolean)
+                      .map((para, i) => <p key={i}>{para}</p>)}
+                {!quiz.theoryHtml && quiz.theoryFigures &&
+                  quiz.theoryFigures.map((src, i) => (
+                    <img key={i} src={src} alt={`Obrázok ${i + 1}`} />
+                  ))}
               </div>
             </details>
           )}
@@ -8522,7 +8536,7 @@ export default function App() {
             </div>
           )}
           <div className="question-text">
-            <MathText text={q.q} />
+            <Rich html={q.qHtml} text={q.q} />
           </div>
 
           {q.figures && (
@@ -8548,7 +8562,7 @@ export default function App() {
                 return (
                   <button key={oi} onClick={() => toggle(oi)} disabled={isDone} className={btnClass}>
                     <span style={{ fontWeight: "700", marginRight: "8px" }}>{String.fromCharCode(65 + oi)}.</span>
-                    <MathText text={o} />
+                    <Rich html={q.optsHtml && q.optsHtml[oi]} text={o} />
                   </button>
                 );
               })}
@@ -8567,7 +8581,7 @@ export default function App() {
                 <details className="table-answer-details">
                   <summary>Postup riešenia</summary>
                   <div className="openended-answer-body">
-                    <MathText text={q.explanation} />
+                    <Rich html={q.explanationHtml} text={q.explanation} />
                   </div>
                 </details>
               )}
@@ -8586,7 +8600,7 @@ export default function App() {
                 <details className="table-answer-details">
                   <summary>Show full reference answer</summary>
                   <div className="openended-answer-body">
-                    <MathText text={q.explanation} />
+                    <Rich html={q.explanationHtml} text={q.explanation} />
                   </div>
                 </details>
               )}
@@ -8630,14 +8644,15 @@ export default function App() {
                     {q.ans.map((i, idx) => (
                       <span key={i}>
                         {idx > 0 && " | "}
-                        <strong>{String.fromCharCode(65 + i)}.</strong> <MathText text={q.opts[i]} />
+                        <strong>{String.fromCharCode(65 + i)}.</strong>{" "}
+                        <Rich html={q.optsHtml && q.optsHtml[i]} text={q.opts[i]} className="inline" />
                       </span>
                     ))}
                   </div>
                 )}
-                {q.explanation && (
+                {(q.explanationHtml || q.explanation) && (
                   <div className="feedback-explanation">
-                    <MathText text={q.explanation} />
+                    <Rich html={q.explanationHtml} text={q.explanation} />
                   </div>
                 )}
               </div>

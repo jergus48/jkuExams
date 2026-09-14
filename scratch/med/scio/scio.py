@@ -8,7 +8,7 @@ Rezimy:
 
 Prihlasovacie udaje z env: SCIO_LOGIN, SCIO_PASSWORD
 """
-import io, os, re, sys, json, time, glob
+import io, os, re, sys, json, time, glob, copy
 import requests
 from bs4 import BeautifulSoup
 
@@ -235,6 +235,51 @@ def rich(el):
     return re.sub(r"\s+", " ", txt).strip()
 
 
+# Znacky, ktore sa v obsahu Scia realne vyskytuju a nesu formatovanie.
+# Bez <sup>/<sub> by sa p^2 rozpadlo na "p" a "2" na dalsom riadku.
+HTML_OK = {"p", "br", "b", "strong", "i", "em", "u", "sup", "sub", "span",
+           "div", "ul", "ol", "li", "table", "thead", "tbody", "tr", "td",
+           "th", "img"}
+HTML_DROP = {"script", "style", "iframe", "input", "button", "form",
+             "object", "embed", "link", "meta"}
+
+
+def rich_html(el):
+    """Ocisteny HTML obsah elementu - zachova formatovanie (indexy, tabulky,
+    zoznamy) a obrazkom prepise src na lokalnu cestu."""
+    if el is None:
+        return ""
+    el = copy.copy(el)
+    for bad in el.find_all(list(HTML_DROP)):
+        bad.decompose()
+    for t in el.find_all(True):
+        if t.name not in HTML_OK:
+            t.unwrap()
+            continue
+        if t.name == "img":
+            src = t.get("src", "")
+            local = IMGMAP.get(src)
+            if local is None:
+                m = re.search(r"/Item/Image/([^?]+)", src)
+                local = "/medimg/scio/" + m.group(1) + ".png" if m else None
+            if not local:
+                t.decompose()
+                continue
+            t.attrs = {"src": local, "alt": t.get("alt", "")}
+        else:
+            keep = {}
+            if t.name in ("td", "th"):
+                for a in ("colspan", "rowspan"):
+                    if t.get(a):
+                        keep[a] = t[a]
+            t.attrs = keep
+    out = el.decode_contents() if hasattr(el, "decode_contents") else str(el)
+    out = re.sub(r"[ \t]*\n[ \t]*", "\n", out)
+    return re.sub(r"\n{3,}", "\n\n", out).strip()
+
+
+ASSIGN = re.compile(r'\bassignment\b')
+
 IMGMAP = {}
 
 
@@ -299,8 +344,9 @@ def hidden_map(body):
 
 
 def parse_multiple_choice(item):
-    q = rich(item.find("div", class_=re.compile(r"\bassignment\b")))
-    opts, ans = [], []
+    a = item.find("div", class_=ASSIGN)
+    q, q_html = rich(a), rich_html(a)
+    opts, opts_html, ans = [], [], []
     for i, o in enumerate(item.select(".options .option-item")):
         lab = o.find("label")
         if lab:
@@ -308,24 +354,25 @@ def parse_multiple_choice(item):
             if key:
                 key.decompose()
         opts.append(rich(lab))
+        opts_html.append(rich_html(lab))
         if opt_is_correct(o.get("class", [])):
             ans.append(i)
     mx = item.find("input", class_="MaxAnswers")
     multi = not (mx is not None and mx.get("value") == "1")
-    a = item.find("div", class_=re.compile(r"\bassignment\b"))
     figs = imgs(a)
     for o in item.select(".options .option-item"):
         for f in imgs(o):
             if f not in figs:
                 figs.append(f)
-    d = {"type": "choice", "q": q, "opts": opts, "ans": ans, "multi": multi}
+    d = {"type": "choice", "q": q, "qHtml": q_html, "opts": opts,
+         "optsHtml": opts_html, "ans": ans, "multi": multi}
     if figs:
         d["figures"] = figs
     return d
 
 
 def parse_matching(item):
-    q = rich(item.find("div", class_=re.compile(r"\bassignment\b")))
+    q = rich(item.find("div", class_=ASSIGN))
     # Skryty _input mapuje id presuvatelnej polozky -> nazov cieloveho slotu
     # ("ans3"). Slot "ansN" sedi v N-tom riadku tabulky, takze spravny par je
     # (fixny text riadku N, text polozky priradenej do ansN). Samotne polozky
@@ -334,7 +381,8 @@ def parse_matching(item):
     slot_of = hidden_map(body)
     by_slot, choices = {}, []
     for drag in body.select(".matching-item-moveable"):
-        val = {"text": rich(drag), "img": (imgs(drag) or [None])[0]}
+        val = {"text": rich(drag), "html": rich_html(drag),
+               "img": (imgs(drag) or [None])[0]}
         choices.append(val)                       # poradie ako ich vidi student
         slot = slot_of.get(drag.get("id"))
         if slot:
@@ -347,12 +395,16 @@ def parse_matching(item):
             continue
         slot = row.find("td", class_=re.compile(r"matching-item-answer"))
         name = slot.get("name") if slot is not None else None
-        val = by_slot.get(name) or {"text": "", "img": None}
+        val = by_slot.get(name) or {"text": "", "html": "", "img": None}
         # Zadanie aj priradovana polozka moze byt obrazok namiesto textu.
-        pairs.append({"l": rich(fixed), "limg": (imgs(fixed) or [None])[0],
-                      "r": val["text"], "rimg": val["img"]})
-    d = {"type": "matching", "q": q, "pairs": pairs, "choices": choices}
-    figs = imgs(item.find("div", class_=re.compile(r"\bassignment\b")))
+        pairs.append({"l": rich(fixed), "lHtml": rich_html(fixed),
+                      "limg": (imgs(fixed) or [None])[0],
+                      "r": val["text"], "rHtml": val.get("html", ""),
+                      "rimg": val["img"]})
+    d = {"type": "matching", "q": q,
+         "qHtml": rich_html(item.find("div", class_=ASSIGN)),
+         "pairs": pairs, "choices": choices}
+    figs = imgs(item.find("div", class_=ASSIGN))
     if figs:
         d["figures"] = figs
     return d
@@ -362,26 +414,28 @@ def parse_sorting(item):
     """Zoradovacia otazka. Skryte _inputevaluated mapuje id polozky na poziciu
     ("0", "1", ...) alebo na "binN" pri polozkach, ktore do zoradenia nepatria
     (Scio ma pre ne samostatny kos)."""
-    q = rich(item.find("div", class_=re.compile(r"\bassignment\b")))
+    q = rich(item.find("div", class_=ASSIGN))
     body = pick_body(item, "sorting-item")
     slot = hidden_map(body)
     items, ok = [], True
     for li in body.select("ul.sorting-item-sortlist > li, ul.sorting-item-binlist > li"):
         val = str(slot.get(li.get("id"), ""))
-        text = rich(li)
+        text, thtml = rich(li), rich_html(li)
         if val.isdigit():
-            items.append({"t": text, "pos": int(val)})
+            items.append({"t": text, "html": thtml, "pos": int(val)})
         elif val.startswith("bin"):
-            items.append({"t": text, "pos": None})   # nepatri sem
+            items.append({"t": text, "html": thtml, "pos": None})  # nepatri sem
         else:
-            items.append({"t": text, "pos": None})
+            items.append({"t": text, "html": thtml, "pos": None})
             ok = False
         if not text:
             ok = False
-    d = {"type": "sorting", "q": q, "items": items, "reliable": ok,
+    d = {"type": "sorting", "q": q,
+         "qHtml": rich_html(item.find("div", class_=ASSIGN)),
+         "items": items, "reliable": ok,
          "order": [i["t"] for i in sorted(
              (x for x in items if x["pos"] is not None), key=lambda x: x["pos"])]}
-    figs = imgs(item.find("div", class_=re.compile(r"\bassignment\b")))
+    figs = imgs(item.find("div", class_=ASSIGN))
     if figs:
         d["figures"] = figs
     return d
@@ -389,8 +443,11 @@ def parse_sorting(item):
 
 def parse_open(item):
     """Otvorena otazka: spravna odpoved je v title atribute .open-item-evaluated-input."""
-    instr = rich(item.find("div", class_=re.compile(r"item-isntruction")))
-    q = instr or rich(item.find("div", class_=re.compile(r"\bassignment\b")))
+    # "isntruction" nie je preklep tu, ale v markupe Scia.
+    box = item.find("div", class_=re.compile(r"item-isntruction"))
+    assign = item.find("div", class_=ASSIGN)
+    q = rich(box) or rich(assign)
+    q_html = rich_html(box) or rich_html(assign)
     answers = []
     for sp in item.select(".open-item-evaluated-input"):
         t = sp.get("title")
@@ -398,8 +455,8 @@ def parse_open(item):
             inp = sp.find("input")
             t = inp.get("value", "") if inp else ""
         answers.append((t or "").strip())
-    d = {"type": "open", "q": q, "answers": answers}
-    figs = imgs(item.find("div", class_=re.compile(r"item-isntruction"))) or         imgs(item.find("div", class_=re.compile(r"\bassignment\b")))
+    d = {"type": "open", "q": q, "qHtml": q_html, "answers": answers}
+    figs = imgs(box) or imgs(assign)
     if figs:
         d["figures"] = figs
     return d
@@ -412,7 +469,7 @@ def parse_workbook(html):
         return None
     t = soup.find("title")
     title = t.get_text(strip=True) if t else ""
-    questions, theory_parts, theory_imgs = [], [], []
+    questions, theory_parts, theory_html, theory_imgs = [], [], [], []
     for item in root.find_all("div", class_="item", recursive=False):
         if "instruction-box" in item.get("class", []):
             # Lekcia moze mat aj viac teoretickych blokov, vsetky sa spoja.
@@ -420,6 +477,9 @@ def parse_workbook(html):
             part = item.get_text("\n", strip=True)
             if part:
                 theory_parts.append(part)
+            part_html = rich_html(item)
+            if part_html:
+                theory_html.append(part_html)
             continue
         body = item.find(class_=re.compile(r"answerable-item"))
         if body is None:
@@ -442,8 +502,13 @@ def parse_workbook(html):
         exp = " ".join(x for x in steps if x)
         if exp:
             qd["explanation"] = exp
+        steps_html = [rich_html(s) for s in item.select(".step.rich-content")]
+        exp_html = "".join(x for x in steps_html if x)
+        if exp_html:
+            qd["explanationHtml"] = exp_html
         questions.append(qd)
     return {"title": title, "theory": "\n\n".join(theory_parts),
+            "theoryHtml": "".join(theory_html),
             "theory_figures": theory_imgs,
             "questions": questions}
 
@@ -469,6 +534,7 @@ def parse_all():
                 stats[q["type"]] += 1
             lessons_out.append({"wb": l["wb"], "name": l["name"],
                                 "section": l["section"], "theory": wb["theory"],
+                                "theoryHtml": wb["theoryHtml"],
                                 "theory_figures": wb["theory_figures"],
                                 "questions": wb["questions"]})
         out = os.path.join(HERE, "scio_%s.json" % slug)

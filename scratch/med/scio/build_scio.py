@@ -21,6 +21,15 @@ def table(headers, rows):
                      for lab, val in rows]}
 
 
+def numbered(n, html):
+    """Cislo otazky vlozi do prveho odstavca, aby nesedelo na samostatnom riadku."""
+    if not html:
+        return html
+    if html.startswith("<p>"):
+        return "<p>%d. %s" % (n, html[3:])
+    return "%d. %s" % (n, html)
+
+
 def convert_matching(q, base, text):
     """Priradovacia otazka: riadok so zadanim + vyber z ponuky, ako na Sciu.
     Ponuka je v poradi, v akom polozky vidi student (vratane rozptylovacov)."""
@@ -32,7 +41,7 @@ def convert_matching(q, base, text):
     options = []
     for c in q.get("choices", []):
         if c.get("text"):
-            options.append({"t": c["text"]})
+            options.append({"t": c["text"], "html": c.get("html") or ""})
         elif c.get("img"):
             options.append({"img": c["img"]})
         else:
@@ -53,7 +62,7 @@ def convert_matching(q, base, text):
         i = index_of(p)
         if i is None:
             return None
-        row = {"label": p["l"]}
+        row = {"label": p["l"], "html": p.get("lHtml") or ""}
         if p["limg"]:
             row["img"] = p["limg"]
         out_rows.append(row)
@@ -61,6 +70,8 @@ def convert_matching(q, base, text):
 
     base.update({"q": text,
                  "matching": {"rows": out_rows, "options": options, "ans": ans}})
+    if q.get("qHtml"):
+        base["qHtml"] = numbered(q["n"], q["qHtml"])
     return base
 
 
@@ -71,6 +82,8 @@ def convert(q):
         base["figures"] = q["figures"]
     if q.get("explanation"):
         base["explanation"] = q["explanation"]
+    if q.get("explanationHtml"):
+        base["explanationHtml"] = q["explanationHtml"]
     text = "%d. %s" % (q["n"], q["q"])
 
     if q["type"] == "choice":
@@ -78,6 +91,10 @@ def convert(q):
             return None
         base.update({"q": text, "opts": q["opts"], "ans": q["ans"],
                      "multi": bool(q["multi"])})
+        if q.get("qHtml"):
+            base["qHtml"] = numbered(q["n"], q["qHtml"])
+        if q.get("optsHtml"):
+            base["optsHtml"] = q["optsHtml"]
         return base
 
     if q["type"] == "matching":
@@ -94,11 +111,15 @@ def convert(q):
         options.append({"t": "nepatrí sem"})
         base.update({"q": text,
                      "matching": {
-                         "rows": [{"label": i["t"]} for i in items],
+                         "rows": [{"label": i["t"],
+                                   "html": i.get("html") or ""}
+                                  for i in items],
                          "options": options,
                          "ans": [n if i["pos"] is None else i["pos"]
                                  for i in items],
                          "prompt": "Poradie"}})
+        if q.get("qHtml"):
+            base["qHtml"] = numbered(q["n"], q["qHtml"])
         return base
 
     if q["type"] == "open":
@@ -108,6 +129,8 @@ def convert(q):
         rows = [("Odpoveď" if len(answers) == 1 else "Odpoveď %d" % (i + 1), a)
                 for i, a in enumerate(answers)]
         base.update({"q": text, "tableInput": table(["", "Hodnota"], rows)})
+        if q.get("qHtml"):
+            base["qHtml"] = numbered(q["n"], q["qHtml"])
         return base
 
     return None
@@ -140,6 +163,8 @@ def main():
             }
             if lesson.get("theory"):
                 quiz["theory"] = lesson["theory"]
+            if lesson.get("theoryHtml"):
+                quiz["theoryHtml"] = lesson["theoryHtml"]
             if lesson.get("theory_figures"):
                 quiz["theoryFigures"] = lesson["theory_figures"]
             quizzes.append(quiz)

@@ -2440,3 +2440,15 @@ body {
 .matching-msg { font-weight: 600; }
 .matching-msg.ok { color: var(--correct-text); }
 .matching-msg.bad { color: var(--wrong-text); }
+
+/* Obsah zo Scia vykreslený ako HTML */
+.rich p { margin: 0 0 10px; }
+.rich p:last-child { margin-bottom: 0; }
+.rich img { max-width: 100%; height: auto; display: block; margin: 10px 0; border-radius: 8px; }
+.rich ul, .rich ol { margin: 0 0 10px; padding-left: 22px; }
+.rich li { margin-bottom: 4px; }
+.rich table { border-collapse: collapse; margin: 10px 0; }
+.rich td, .rich th { border: 1px solid var(--border-color); padding: 5px 9px; }
+.rich sup { font-size: .72em; vertical-align: super; line-height: 0; }
+.rich sub { font-size: .72em; vertical-align: sub; line-height: 0; }
+.rich.inline, .rich.inline p { display: inline; margin: 0; }
