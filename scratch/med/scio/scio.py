@@ -359,19 +359,28 @@ def parse_matching(item):
 
 
 def parse_sorting(item):
-    """Zoradovacia otazka: spravne poradie je v skrytom _input (id polozky -> index)."""
+    """Zoradovacia otazka. Skryte _inputevaluated mapuje id polozky na poziciu
+    ("0", "1", ...) alebo na "binN" pri polozkach, ktore do zoradenia nepatria
+    (Scio ma pre ne samostatny kos)."""
     q = rich(item.find("div", class_=re.compile(r"\bassignment\b")))
     body = pick_body(item, "sorting-item")
-    order = hidden_map(body)
-    lis = body.select("ul.sorting-item-sortlist > li")
-    items = []
-    for li in lis:
-        pos = order.get(li.get("id"))
-        items.append((int(pos) if pos is not None and str(pos).isdigit() else 999,
-                      rich(li)))
-    items.sort(key=lambda x: x[0])
-    ok = all(i[0] != 999 for i in items)
-    d = {"type": "sorting", "q": q, "order": [t for _, t in items], "reliable": ok}
+    slot = hidden_map(body)
+    items, ok = [], True
+    for li in body.select("ul.sorting-item-sortlist > li, ul.sorting-item-binlist > li"):
+        val = str(slot.get(li.get("id"), ""))
+        text = rich(li)
+        if val.isdigit():
+            items.append({"t": text, "pos": int(val)})
+        elif val.startswith("bin"):
+            items.append({"t": text, "pos": None})   # nepatri sem
+        else:
+            items.append({"t": text, "pos": None})
+            ok = False
+        if not text:
+            ok = False
+    d = {"type": "sorting", "q": q, "items": items, "reliable": ok,
+         "order": [i["t"] for i in sorted(
+             (x for x in items if x["pos"] is not None), key=lambda x: x["pos"])]}
     figs = imgs(item.find("div", class_=re.compile(r"\bassignment\b")))
     if figs:
         d["figures"] = figs
@@ -403,11 +412,14 @@ def parse_workbook(html):
         return None
     t = soup.find("title")
     title = t.get_text(strip=True) if t else ""
-    theory, questions, theory_imgs = "", [], []
+    questions, theory_parts, theory_imgs = [], [], []
     for item in root.find_all("div", class_="item", recursive=False):
         if "instruction-box" in item.get("class", []):
+            # Lekcia moze mat aj viac teoretickych blokov, vsetky sa spoja.
             theory_imgs.extend(imgs(item))
-            theory = item.get_text("\n", strip=True)
+            part = item.get_text("\n", strip=True)
+            if part:
+                theory_parts.append(part)
             continue
         body = item.find(class_=re.compile(r"answerable-item"))
         if body is None:
@@ -431,7 +443,8 @@ def parse_workbook(html):
         if exp:
             qd["explanation"] = exp
         questions.append(qd)
-    return {"title": title, "theory": theory, "theory_figures": theory_imgs,
+    return {"title": title, "theory": "\n\n".join(theory_parts),
+            "theory_figures": theory_imgs,
             "questions": questions}
 
 

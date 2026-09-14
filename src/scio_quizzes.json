@@ -484,39 +484,42 @@
     "matching": {
      "rows": [
       {
-       "label": "1."
+       "label": "G2 fáza"
       },
       {
-       "label": "2."
+       "label": "M fáza (mitóza)"
       },
       {
-       "label": "3."
+       "label": "S fáza"
       },
       {
-       "label": "4."
+       "label": "G1 fáza"
       }
      ],
      "options": [
       {
-       "t": "G1 fáza"
+       "t": "1."
       },
       {
-       "t": "G2 fáza"
+       "t": "2."
       },
       {
-       "t": "M fáza (mitóza)"
+       "t": "3."
       },
       {
-       "t": "S fáza"
+       "t": "4."
+      },
+      {
+       "t": "nepatrí sem"
       }
      ],
      "ans": [
-      0,
+      2,
       3,
       1,
-      2
+      0
      ],
-     "prompt": "Zoraď"
+     "prompt": "Poradie"
     }
    },
    {
@@ -653,39 +656,42 @@
     "matching": {
      "rows": [
       {
-       "label": "1."
+       "label": "anafáza"
       },
       {
-       "label": "2."
+       "label": "telofáza"
       },
       {
-       "label": "3."
+       "label": "metafáza"
       },
       {
-       "label": "4."
+       "label": "profáza"
       }
      ],
      "options": [
       {
-       "t": "anafáza"
+       "t": "1."
       },
       {
-       "t": "metafáza"
+       "t": "2."
       },
       {
-       "t": "profáza"
+       "t": "3."
       },
       {
-       "t": "telofáza"
+       "t": "4."
+      },
+      {
+       "t": "nepatrí sem"
       }
      ],
      "ans": [
       2,
+      3,
       1,
-      0,
-      3
+      0
      ],
-     "prompt": "Zoraď"
+     "prompt": "Poradie"
     }
    },
    {
@@ -2232,6 +2238,7 @@
     }
    }
   ],
+  "theory": "TRANSLÁCIA (= PROTEOSYNTÉZA)\nTranslácia (= proteosyntéza) je prepis mRNA do polypeptidového reťazca (sekvencia aminokyselín; bielkoviny). Odohráva sa na ribozómoch (v cytoplazme, v mitochodrii, v chloroplaste). Pravidlá prepisu sú dané genetickým kódom.\nGENETICKÝ KÓD\nGenetický kód je vlastne taká \"šifrovacia tabuľka\", v ktorej je uvedené, podľa ktorej kombinácie nukleotidov obsahujúcich bázy A (adenín), U (uracil), C (cytozín), G (guanín) sú zaradené do polypeptidu jednotlivé aminokyseliny. Je to teda súhrn biologicky podmienených pravidiel, podľa ktorých dochádza k prepisu genetickej informácie do bielkovín (súčasť génovej expresie).\nGenetický kód je\ntripletový, univerzálny, neprekryvný a degenerovaný\n(=\nredundantný\n).\nTo, že genetický kód je tripletový znamená, že zaradenie jednej aminokyseliny do polypeptidového reťazca je určené trojicou nukleotidov (tzv.\nkodón\nalebo\ntriplet\n).\nNiektoré kodóny majú špeciálnu funkciu. U väčšiny organizmov vrátane človeka je kodón\nAUG iniciačný kodón\n(= štart kodón; začína transláciu, kóduje aminokyselinu metionín). Na ukončenie translácie potom slúžia tzv.\nstop kodóny\n, ktoré sú u človeka 3 (jedná sa o kodóny UGA, UAA, UAG).\nTo, že je genetický kód neprekryvný, znamená, že každý nukleotid je súčasťou iba jedného kodónu. Kodóny sa teda pri čítaní (v tzv. čítacom rámci) nemôžu prekrývať.\nMožných trojpísmenných kombinácií A, U, C, G je 43 = 64. Proteinogénnych základných aminokyselín je u človeka 20. To znamená, že možných kodónov je viac ako aminokyselín (aj s pripočítaním stop kodónov). V reále teda dochádza k tomu, že jedna aminokyselina môže byť kódovaná viacerými kodónmi (triplety nukleotidov). Vzhľadom na túto vlastnosť genetického kódu sa hovorí, že je genetický kód degenerovaný (= redundantný).\nGenetický kód je ďalej univerzálny (až na výnimky). Genetický kód je teda skoro totožný pre prokaryotné aj eukaryotné organizmy. Teda súbor pravidiel na\nprepis genetickej informácie do bielkoviny je prakticky rovnaký u baktérií, rastlín, húb, živočíchov aj človeka\n.\nPRIEBEH TRANSLÁCIE\nDôležitú úlohu pri translácii zohrávajú transferové RNA (tRNA). Transferové RNA majú tvar ďatelinového listu (pozri obrázok). Nesú na sebe naviazanú špecifickú aminokyselinu. Kľúčovú úlohu má ďalšia časť tRNA, tzv.\nantikodón\n. Medzi antikodónom tRNA a kodónom mRNA sa uplatňuje komplementartita báz. A tRNA nesie práve tú aminokyselinu, ktorú komplementárny kodón mRNA k antikodónu tRNA kóduje podľa genetického kódu.\nV transferových RNA (tRNA) sa tiež vyskytujú minoritné dusíkaté bázy. V tRNA sa z týchto minoritných dusíkatých báz vyskytuje dihydrouracil a ribosylthymin (ribosyltymín).\nAko matrica pri translácii slúži mRNA. Messeger RNA (mRNA) prechádza ribozómom, na ktorý svojim antikodónom komplementárne nasadá tRNA nesúca špecifickú aminokyselinu. Tá je začlenená do polypetidového reťazca. Messenger RNA (mRNA) prechádza ribozómom, opakuje sa nasadanie tRNA svojim antikodónom a začlenenie aminokyseliny nesenej tRNA do polypeptidového reťazca.\nTranslácia má podobne ako replikácia a transkripcia tieto tri časti:\niniciácia\nelongácia\nterminácia\nIniciačným kodónom na mRNA pri translácii je AUG, ktorý zaraďuje na začiatok polypeptidu metionín. Tým dochádza k spusteniu translácie. Metionín býva potom väčšinou z hotovej aminokyseliny po translácii odstránený.\nTranslácia je ukončená jedným z možných stop kodónov (UGA, UAA, UAG).",
   "theoryFigures": [
    "/medimg/scio/CIS-00229816.png",
    "/medimg/scio/CIS-00229815.png",
@@ -7522,7 +7529,7 @@
     "multi": true
    }
   ],
-  "theory": "TRÁVIACIA SÚSTAVA\nTRÁVIACIA SÚSTAVA BEZSTAVOVCOV\nNiektoré bezstavovce prijímajú živiny celým povrchom tela - napríklad pásomnice.\nPolypovce (napríklad nezmar) prijíma potravu mechúrikom. V prípade mechúrika dochádza k prijímaniu živín a tráveniu bunkami entodermu.\nPloskavce majú vyvinutú gastrovaskulárnu sústavu a vychlípiteľný hltan. Majú teda ústny otvor, hltan a rozvetvené črevo.\nMäkkýše už majú trubicovitú tráviacu sústavu alebo tráviacu trubicu - majú teda prijímací a análny otvor. U mäkkýšov slúži na príjem potravy, posúvanie a prvotné rozdrvenie potravy (strúhanie potravy) radula (chitinózna blanka so zúbkami).\nObrúčkavce majú tiež trubicovitú tráviacu sústavu.\nČlánkonožce majú taktiež trubicovitú tráviacu sústavu. Pavúkovce majú mimotelové trávenie - korisť je rozložená tráviacimi enzýmami mimo tela pavúkovca, pavúkovce majú úzky ústny otvor a svalnatý hltan, ktorým nasávajú potravu.\nHmyz má podľa typu potravy špeciálne upravené ústne ústrojenstvo. Hryzacie ústrojenstvo majú napríklad osy, koníky, kobylky alebo vážky. Bodavo sacie ústrojenstvo má napríklad komár, ploštice a vošky. Sacie ústrojenstvo je typické pre motýle.\nTRÁVIACIA SÚSTAVA STAVOVCOV\nStavovce majú trubicovú tráviacu sústavu.\nBylinožravé stavovce majú dlhšiu a komplikovanejšiu tráviacu sústavu ako mäsožravé stavovce.\nTráviaca trubica sa vytvára z entodermy (okrem úst, hltana a riti, časti pažeráka a konečníka - tie sú ektodermálneho pôvodu). Pečeň a pankreas ako žľazy majúce vyústenie do tráviacej trubice sú tiež entodermálneho pôvodu.\nVtáky majú tvar zobáka prispôsobený druhu a spôsobu prijímania potravy. Napríklad zobák kačíc je prispôsobený filtrovaniu potravy, zobák pelikána na lov rýb v plytkej vode, zobák volavky na harpúnovanie koristi vo vode, zobák papagájov na lúskanie plodov a semien, zobák glezga na lúskanie semien, zobák dravcov na trhanie koristi či zobák kolibríka prispôsobený saniu kvetných štiav.\nNiektoré vtáky majú pažerák vakovito rozšírený, toto vakovité rozšírenie sa nazýva hrvoľ, jedná sa o slepý zásobný vak, ktorý zmäkčí potravu.\nVtáky majú dva žalúdky (žľaznatý a svalnatý). Prežúvavce majú štvordielny žalúdok s názvami jednotlivých častí bachor, čepiec, kniha a slez.\nČrevo môže byť zakončené ritným otvorom alebo kloakou. Kloaka je spoločné vyústenie vylučovacej, tráviacej a pohlavnej sústavy. V embryonálnom období majú kloaku všetky stavovce, ale v priebehu vývoja u placentálnych cicavcov zaniká. Kloaku majú aj kloakovce (vtákopysk a ježura).",
+  "theory": "POROVNÁVACIA ANATÓMIA TRÁVIACEJ SÚSTAVY\nTRÁVIACIA SÚSTAVA BEZSTAVOVCOV\nHubky\npohlcujú potravu pomocou\nchoanocytov\n= golierikovitých buniek.\nPŕhlivce\nmajú tzv.\nmechúrik\n, teda tráviacu sústavu s jedným otvorom, ktorý slúži zároveň ako prijímací a vyvrhovací. Mechúrik je vystlaný bunkami entodermy, ktoré zabezpečujú trávenie a vstrebávanie.\nPloskavce\nmajú tráviacu dutinu s jediným otvorom, slúžiacim aj na vyvrhovanie nestrávených zvyškov. Výnimkou sú pásomnice, pri ktorých vzhľadom na parazitický spôsob života tráviaca sústava kompletne chýba, živiny získavajú difúziou povrchom tela. Dravé ploskule majú\nvychlípiteľný hltan\na črevo bohato vetvené, aby sa z neho živiny dostali ku všetkým bunkám tela - hovoríme o tzv.\ngastrovaskulárnej sústave\n. Gastrovaskulárna sústava ploskulí má za cieľ rozprestretím tráviacej sústavy skrátiť difúznu vzdialenosť pre dodaj živín do buniek.\nU voľne žijúcich aj parazitických\nhlístic\nsa nachádza tráviaca sústava v podobe\ntráviacej trubice\n- majú teda ústny a análny otvor.\nMäkkýšom\nslúži na príjem potravy, posúvanie a prvotné rozdrvenie potravy (strúhanie potravy)\nradula\n(chitinózna blanka so zúbkami).\nObrúčkavce\nmajú tiež tráviacu trubicu.\nAj tráviaca sústava\nčlánkonožcov\nje trubicovitého typu. Pavúkovce využívajú\nmimotelové trávenie\n- korisť je rozložená tráviacimi enzýmami mimo tela pavúkovca, pavúkovce majú úzky ústny otvor a svalnatý hltan, ktorým nasávajú už natrávenú potravu. Hmyz má podľa typu potravy špeciálne upravené ústne ústrojenstvo. S\nhryzacím ústrojenstvom\nsa stretávame napríklad u ôs, koníkov, kobyliek alebo vážok.\nBodavo sacie ústrojenstvo\nsa vyskytuje napríklad u komárov, ploštíc a vošiek.\nSacie ústrojenstvo\nje typické pre motýle.\nObrázok 1: Mravce majú hryzacie ústrojenstvo, vošky majú bodavo sacie ústrojenstvo; medzi mravcami a voškami je symbióza (mutualistický vzťah); vošky nabodávajú vodivé pletivá rastlín a sajú šťavu bohatú na cukry, ale chudobnú na bielkoviny; prebytočné cukry vylučujú vo forme medovice, ktorú zbierajú a konzumujú mravce, ktoré naopak vošky chránia pred predátormi (niekedy mravce vošky vyslovene \"chovajú\")\nObrázok 2: Koníky majú hryzacie ústrojenstvo\nObrázok 3: Hryzacie ústrojenstvo svižníka\nObrázok 4: Sacie ústrojenstvo (chlpačka, drvojkrídlovce)\nTRÁVIACIA SÚSTAVA STAVOVCOV\nStavovce majú trubicovú tráviacu sústavu.\nBylinožravé stavovce majú dlhšiu a komplikovanejšiu tráviacu sústavu ako mäsožravé stavovce.\nTráviaca trubica sa vytvára z\nentodermy\n(okrem úst, hltana a riti, časti pažeráka a konečníka - tie sú ektodermálneho pôvodu). Pečeň a pankreas ako žľazy majúce vyústenie do tráviacej trubice sú tiež entodermálneho pôvodu.\nVtáky majú tvar zobáka prispôsobený druhu a spôsobu prijímania potravy. Napríklad zobák kačíc je prispôsobený filtrovaniu potravy, zobák pelikána na lov rýb v plytkej vode, zobák volavky na harpúnovanie koristi vo vode, zobák papagájov na lúskanie plodov a semien, zobák glezga na lúskanie semien, zobák dravcov na trhanie koristi či zobák kolibríka prispôsobený saniu kvetných štiav.\nNiektoré vtáky majú pažerák vakovito rozšírený, toto vakovité rozšírenie sa nazýva\nhrvoľ\n, jedná sa o slepý zásobný vak, ktorý zmäkčí potravu.\nVtáky majú dva žalúdky (\nžľaznatý\na\nsvalnatý\n). Prežúvavce majú štvordielny žalúdok s názvami jednotlivých častí\nbachor\n,\nčepiec\n,\nkniha\na\nslez\n.\nČrevo môže byť zakončené ritným otvorom alebo kloakou.\nKloaka\nje spoločné vyústenie vylučovacej, tráviacej a pohlavnej sústavy. V embryonálnom období majú kloaku všetky stavovce, ale v priebehu vývoja u placentálnych cicavcov zaniká. Kloaku majú aj vtákoritné cicavce (vtákopysk a ježura).\n\nTRÁVIACIA SÚSTAVA\nTRÁVIACIA SÚSTAVA BEZSTAVOVCOV\nNiektoré bezstavovce prijímajú živiny celým povrchom tela - napríklad pásomnice.\nPolypovce (napríklad nezmar) prijíma potravu mechúrikom. V prípade mechúrika dochádza k prijímaniu živín a tráveniu bunkami entodermu.\nPloskavce majú vyvinutú gastrovaskulárnu sústavu a vychlípiteľný hltan. Majú teda ústny otvor, hltan a rozvetvené črevo.\nMäkkýše už majú trubicovitú tráviacu sústavu alebo tráviacu trubicu - majú teda prijímací a análny otvor. U mäkkýšov slúži na príjem potravy, posúvanie a prvotné rozdrvenie potravy (strúhanie potravy) radula (chitinózna blanka so zúbkami).\nObrúčkavce majú tiež trubicovitú tráviacu sústavu.\nČlánkonožce majú taktiež trubicovitú tráviacu sústavu. Pavúkovce majú mimotelové trávenie - korisť je rozložená tráviacimi enzýmami mimo tela pavúkovca, pavúkovce majú úzky ústny otvor a svalnatý hltan, ktorým nasávajú potravu.\nHmyz má podľa typu potravy špeciálne upravené ústne ústrojenstvo. Hryzacie ústrojenstvo majú napríklad osy, koníky, kobylky alebo vážky. Bodavo sacie ústrojenstvo má napríklad komár, ploštice a vošky. Sacie ústrojenstvo je typické pre motýle.\nTRÁVIACIA SÚSTAVA STAVOVCOV\nStavovce majú trubicovú tráviacu sústavu.\nBylinožravé stavovce majú dlhšiu a komplikovanejšiu tráviacu sústavu ako mäsožravé stavovce.\nTráviaca trubica sa vytvára z entodermy (okrem úst, hltana a riti, časti pažeráka a konečníka - tie sú ektodermálneho pôvodu). Pečeň a pankreas ako žľazy majúce vyústenie do tráviacej trubice sú tiež entodermálneho pôvodu.\nVtáky majú tvar zobáka prispôsobený druhu a spôsobu prijímania potravy. Napríklad zobák kačíc je prispôsobený filtrovaniu potravy, zobák pelikána na lov rýb v plytkej vode, zobák volavky na harpúnovanie koristi vo vode, zobák papagájov na lúskanie plodov a semien, zobák glezga na lúskanie semien, zobák dravcov na trhanie koristi či zobák kolibríka prispôsobený saniu kvetných štiav.\nNiektoré vtáky majú pažerák vakovito rozšírený, toto vakovité rozšírenie sa nazýva hrvoľ, jedná sa o slepý zásobný vak, ktorý zmäkčí potravu.\nVtáky majú dva žalúdky (žľaznatý a svalnatý). Prežúvavce majú štvordielny žalúdok s názvami jednotlivých častí bachor, čepiec, kniha a slez.\nČrevo môže byť zakončené ritným otvorom alebo kloakou. Kloaka je spoločné vyústenie vylučovacej, tráviacej a pohlavnej sústavy. V embryonálnom období majú kloaku všetky stavovce, ale v priebehu vývoja u placentálnych cicavcov zaniká. Kloaku majú aj kloakovce (vtákopysk a ježura).",
   "theoryFigures": [
    "/medimg/scio/CIS-00220946.png",
    "/medimg/scio/CIS-00220947.png",
@@ -7871,7 +7878,7 @@
     "multi": false
    }
   ],
-  "theory": "Rebríčkovú nervovú sústavu či formy odvodené od nej  nájdeme u obrúčkavcov a u článkonožcov.\nNajväčším a najvyvinutejším oddielom mozgu pri rybách je stredný mozog.\nU ploskulí vytvárajú neuróny zhluky a pruhy. Nervová sústava ploskulí je tvorená okolohltanovou obrúčkou (gangliónom) a pozdĺžnymi pruhmi bez ganglií.\nNervová sústava mäkkýšov je gangliová. Nervová sústava ulitníkov je tvorená 5 pármi ganglií. Nervová sústava hlavonožcov je veľmi vyvinutá. Hlavonožci majú veľmi vyvinutú nervovú sústavu, majú veľké nervové ganglium uložené v chrupavkovej schránke, pripomínajúce primitívny mozog. Hlavonožce majú veľkú schopnosť učenia, IQ hlavonožcov sa porovnáva aj s cicavcami.\nNervový systém ostnatokožcov je decentralizovaný, jeho priebeh kopíruje ambulakrálnu sústavu.\nNervová sústava vzniká z ektodermu (neuroektodermu)."
+  "theory": "POROVNÁVACIA ANATÓMIA NERVOVEJ SÚSTAVY\nNERVOVÁ SÚSTAVA PRVOÚSTOVCOV\nHubky nervovú sústavu nemajú.\nNervové bunky pŕhlivcov tvoria rozptýlenú sieť, preto sa nervová sústava pŕhlivcov nazýva\nrozptýlená\nalebo\ndifúzna\n.\nU zložitejších prvoústych organizmov sa nervové bunky organizujú do zhlukov, ktoré sú označované ako gangliá. Podľa ich usporiadania sa typ gangliovej nervovej sústavy ďalej delí na nervovú sústavu pásovú a rebríčkovú.\nU ploskavcov vytvárajú neuróny zhluky a pruhy. Nervová sústava ploskavcov je tvorená\ngangliom a pozdĺžnymi pásmi bez ganglií\nspojenými\nokolohltanovou obrúčkou\n. Nervová sústava ploskavcov je teda\npásová\n. Najvyššia koncentrácia neurónov je v prednej časti tela, tu sa u ploskulí nachádzajú aj zmyslové orgány.\nNervová sústava hlístovcov je gangliová, tvorená pažerákovým nervovým prstencom a 4 pozdĺžnymi (longitudinálnymi) nervovými pásmi. Je prítomné dotykové vnímanie a chemorecepcia.\nGangliová nervová sústava mäkkýšov\nje tvorená dvoma nervovými pásmi, na ktorých sú umiestnené párové gangliá. U hlavonožcov hlavové gangliá splývajú za vzniku mozgu chráneného chrupavkovou schránkou. Hlavonožce majú schopnosť učenia a vyznačujú sa najvyššou inteligenciou zo všetkých bezstavovcov.\nRebríčková nervová sústava či formy odvodené od nej sa nachádzjú u obrúčkavcov (kde párové uzly väčšinou splývajú) a u článkonožcov.\nObrúčkavce disponujú\nrebríčkovou gangliovou nervovou sústavou\n, v každom segmente ich tela je umiestnený pár ganglií. U väčšiny obrúčkavcov však párové nervové uzly splývajú do jedného.\nRovnako u článkonožcov nachádzame\ngangliovú nervovú sústavu rebríčkového typu\n, tvorenú dvoma pásmi s párovými gangliami. Hlavové gangliá splývajú.\nNERVOVÁ SÚSTAVA DRUHOÚSTOVCOV\nNervový systém ostnatokožcov je decentralizovaný, jeho priebeh kopíruje ambulakrálnu sústavu.\nNervová sústava chordátov je\nrúrková\n, vzniká z\nchrbtového ektodermu (neuroektodermu)\n.\nU plášťovcov existuje rúrková nervová sústava v štádiu larvy, pri dospievaní zaniká.\nNervová sústava stavovcov sa delí na\ncentrálnu\na\nperiférnu\n. Centrálnu nervovú sústavu tvorí mozog a miecha, periférnu potom nervy miechové a hlavové.\nU drsnokožcov je vyvinutý predovšetkým\nmozoček\na\nčuchové laloky koncového mozgu\n.\nNajväčším a najvyvinutejším oddielom mozgu u rýb je\nstredný mozog\n. Stredný mozog je najdôležitejšou súčasťou mozgu aj u obojživelníkov spolu s rozvíjajúcimi sa hemisférami koncového mozgu.\nKoncový mozog\nje prevládajúcou a rozvíjajúcou sa štruktúrou aj u plazov, vtákov a cicavcov.\n\nRebríčkovú nervovú sústavu či formy odvodené od nej  nájdeme u obrúčkavcov a u článkonožcov.\nNajväčším a najvyvinutejším oddielom mozgu pri rybách je stredný mozog.\nU ploskulí vytvárajú neuróny zhluky a pruhy. Nervová sústava ploskulí je tvorená okolohltanovou obrúčkou (gangliónom) a pozdĺžnymi pruhmi bez ganglií.\nNervová sústava mäkkýšov je gangliová. Nervová sústava ulitníkov je tvorená 5 pármi ganglií. Nervová sústava hlavonožcov je veľmi vyvinutá. Hlavonožci majú veľmi vyvinutú nervovú sústavu, majú veľké nervové ganglium uložené v chrupavkovej schránke, pripomínajúce primitívny mozog. Hlavonožce majú veľkú schopnosť učenia, IQ hlavonožcov sa porovnáva aj s cicavcami.\nNervový systém ostnatokožcov je decentralizovaný, jeho priebeh kopíruje ambulakrálnu sústavu.\nNervová sústava vzniká z ektodermu (neuroektodermu)."
  },
  {
   "id": "scio_bio_2163",
@@ -12548,53 +12555,117 @@
     "matching": {
      "rows": [
       {
-       "label": "1."
+       "label": "perm"
       },
       {
-       "label": "2."
+       "label": "devón"
       },
       {
-       "label": "3."
+       "label": "ordovik"
       },
       {
-       "label": "4."
+       "label": "karbón"
       },
       {
-       "label": "5."
+       "label": "kambrium"
       },
       {
-       "label": "6."
+       "label": "silúr"
       }
      ],
      "options": [
       {
-       "t": "devón"
+       "t": "1."
       },
       {
-       "t": "kambrium"
+       "t": "2."
       },
       {
-       "t": "karbón"
+       "t": "3."
       },
       {
-       "t": "ordovik"
+       "t": "4."
       },
       {
-       "t": "perm"
+       "t": "5."
       },
       {
-       "t": "silúr"
+       "t": "6."
+      },
+      {
+       "t": "nepatrí sem"
       }
      ],
      "ans": [
+      5,
+      3,
+      1,
+      4,
+      0,
+      2
+     ],
+     "prompt": "Poradie"
+    }
+   },
+   {
+    "explanation": "Druhohory majú tieto časti: trias, jura, krieda. Paleocén je súčasťou paleogénu, miocén súčasťou neogénu. Paleogén a neogén sú obdobia treťohôr. Silúr a ordovik je súčasťou prvohôr.",
+    "q": "6. Zoraď správne jednotlivé časti druhôr a vyraď obdobia, ktoré do druhohôr nepatria :",
+    "matching": {
+     "rows": [
+      {
+       "label": "neogén"
+      },
+      {
+       "label": "ordovik"
+      },
+      {
+       "label": "paleogén"
+      },
+      {
+       "label": "paleocén"
+      },
+      {
+       "label": "krieda"
+      },
+      {
+       "label": "jura"
+      },
+      {
+       "label": "silúr"
+      },
+      {
+       "label": "miocén"
+      },
+      {
+       "label": "trias"
+      }
+     ],
+     "options": [
+      {
+       "t": "1."
+      },
+      {
+       "t": "2."
+      },
+      {
+       "t": "3."
+      },
+      {
+       "t": "nepatrí sem"
+      }
+     ],
+     "ans": [
+      3,
+      3,
+      3,
+      3,
+      2,
       1,
       3,
-      5,
-      0,
-      2,
-      4
+      3,
+      0
      ],
-     "prompt": "Zoraď"
+     "prompt": "Poradie"
     }
    },
    {
@@ -12775,60 +12846,63 @@
     "matching": {
      "rows": [
       {
-       "label": "1."
+       "label": "Australopithecus africanus"
       },
       {
-       "label": "2."
+       "label": "Sahelanthropus tchadensis"
       },
       {
-       "label": "3."
+       "label": "Homo sapiens sapiens"
       },
       {
-       "label": "4."
+       "label": "Homo erectus"
       },
       {
-       "label": "5."
+       "label": "Ramapithecus (Sivapithecus)"
       },
       {
-       "label": "6."
+       "label": "Homo habilis"
       },
       {
-       "label": "7."
+       "label": "Proconsul africanus"
       }
      ],
      "options": [
       {
-       "t": "Australopithecus africanus"
+       "t": "1."
       },
       {
-       "t": "Homo erectus"
+       "t": "2."
       },
       {
-       "t": "Homo habilis"
+       "t": "3."
       },
       {
-       "t": "Homo sapiens sapiens"
+       "t": "4."
       },
       {
-       "t": "Proconsul africanus"
+       "t": "5."
       },
       {
-       "t": "Ramapithecus (Sivapithecus)"
+       "t": "6."
       },
       {
-       "t": "Sahelanthropus tchadensis"
+       "t": "7."
+      },
+      {
+       "t": "nepatrí sem"
       }
      ],
      "ans": [
-      4,
-      5,
-      6,
-      0,
+      3,
       2,
+      6,
+      5,
       1,
-      3
+      4,
+      0
      ],
-     "prompt": "Zoraď"
+     "prompt": "Poradie"
     }
    },
    {

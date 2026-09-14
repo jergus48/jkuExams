@@ -84,18 +84,21 @@ def convert(q):
         return convert_matching(q, base, text)
 
     if q["type"] == "sorting":
-        if not q.get("reliable") or not q.get("order") or \
-                any(not t for t in q["order"]):
+        items = q.get("items") or []
+        if not q.get("reliable") or not items:
             return None
-        # Ponuka v abecednom poradi, aby neprezradzala spravne poradie.
-        options = sorted(q["order"])
+        n = sum(1 for i in items if i["pos"] is not None)
+        # Kazda polozka dostane svoje poradove cislo, alebo "nepatri sem"
+        # (Scio ma na to samostatny kos vedla zoznamu).
+        options = [{"t": "%d." % (k + 1)} for k in range(n)]
+        options.append({"t": "nepatrí sem"})
         base.update({"q": text,
                      "matching": {
-                         "rows": [{"label": "%d." % (i + 1)}
-                                  for i in range(len(q["order"]))],
-                         "options": [{"t": t} for t in options],
-                         "ans": [options.index(t) for t in q["order"]],
-                         "prompt": "Zoraď"}})
+                         "rows": [{"label": i["t"]} for i in items],
+                         "options": options,
+                         "ans": [n if i["pos"] is None else i["pos"]
+                                 for i in items],
+                         "prompt": "Poradie"}})
         return base
 
     if q["type"] == "open":
