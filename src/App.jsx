@@ -7858,6 +7858,77 @@ function SkipListDiagram({ skipList }) {
   );
 }
 
+// ── Priradovacie otazky (Scio) ─────────────────────────────────────
+// Kazdy riadok ma zadanie a vyber z rovnakej ponuky moznosti, tak ako na Sciu.
+function MatchingWidget({ matching, qState, onPick, onCheck }) {
+  const { rows, options, prompt } = matching;
+  const { picks, results, checked } = qState;
+  const label = (o, i) => o.img ? `Obrázok ${i + 1}` : o.t;
+  const answered = rows.every((_, ri) => picks[ri] !== undefined && picks[ri] !== "");
+  const nWrong = rows.filter((_, ri) => results[ri] === false).length;
+
+  return (
+    <div className="matching-wrap">
+      {options.some(o => o.img) && (
+        <div className="matching-gallery">
+          {options.map((o, i) => o.img ? (
+            <figure key={i}>
+              <img src={o.img} alt={`Obrázok ${i + 1}`} />
+              <figcaption>{`Obrázok ${i + 1}`}</figcaption>
+            </figure>
+          ) : null)}
+        </div>
+      )}
+      <table className="matching-tbl">
+        <tbody>
+          {rows.map((row, ri) => {
+            const picked = picks[ri];
+            const ok = results[ri];
+            let cls = "matching-select";
+            if (checked) cls += ok ? " correct" : " wrong";
+            return (
+              <tr key={ri}>
+                <td className="matching-label">
+                  {row.img && <img src={row.img} alt="" />}
+                  {row.label && <MathText text={row.label} />}
+                </td>
+                <td className="matching-pick">
+                  <select
+                    className={cls}
+                    value={picked === undefined ? "" : picked}
+                    disabled={checked}
+                    onChange={e => onPick(ri, e.target.value === "" ? "" : Number(e.target.value))}
+                  >
+                    <option value="">{(prompt || "Vyber") + "…"}</option>
+                    {options.map((o, oi) => (
+                      <option key={oi} value={oi}>{label(o, oi)}</option>
+                    ))}
+                  </select>
+                  {checked && !ok && (
+                    <span className="matching-correct">
+                      {"→ " + label(options[matching.ans[ri]], matching.ans[ri])}
+                    </span>
+                  )}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      {!checked && (
+        <button onClick={onCheck} className="btn btn-primary" disabled={!answered}>
+          {"Skontrolovať"}
+        </button>
+      )}
+      {checked && (
+        <div className={nWrong === 0 ? "matching-msg ok" : "matching-msg bad"}>
+          {nWrong === 0 ? "✓ Všetko správne" : `✗ ${nWrong} z ${rows.length} zle`}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ── Interactive table input widget ────────────────────────────────────────────
 function TableInputWidget({ tableInput, qState, onValChange, onCheck }) {
   const { headers, rows } = tableInput;
@@ -7954,6 +8025,9 @@ function freshState(questions) {
     revealed: questions.map(() => false),
     tableInputs: questions.map(q =>
       q.tableInput ? { vals: {}, results: {}, checked: false } : null
+    ),
+    matchings: questions.map(q =>
+      q.matching ? { picks: {}, results: {}, checked: false } : null
     ),
   };
 }
@@ -8203,7 +8277,7 @@ export default function App() {
   } else {
     const quiz = QUIZ_BANK.find(q => q.id === activeQuizId);
     const Qs = quiz.questions;
-    const { sel, done, scores, revealed = [], tableInputs = [] } = state;
+    const { sel, done, scores, revealed = [], tableInputs = [], matchings = [] } = state;
     const q = Qs[cur];
     const isDone = done[cur];
     const curSel = sel[cur];
@@ -8211,6 +8285,13 @@ export default function App() {
     // for MCQ/open-ended, count whole question as 1 unit.
     let correctCount = 0, wrongCount = 0, scoreSum = 0;
     scores.forEach((s, i) => {
+      const mt = matchings[i];
+      if (mt && mt.checked && typeof mt.total === "number") {
+        const frac = mt.total ? (mt.correct || 0) / mt.total : 0;
+        scoreSum += frac;
+        if (frac >= 1) correctCount += 1; else wrongCount += 1;
+        return;
+      }
       const ti = tableInputs[i];
       if (ti && ti.checked && typeof ti.totalCells === "number") {
         const frac = ti.totalCells ? (ti.correctCells || 0) / ti.totalCells : 0;
@@ -8280,6 +8361,33 @@ export default function App() {
         return { ...prev, tableInputs: ti };
       });
     }
+    function pickMatch(ri, oi) {
+      setState(prev => {
+        const ms = [...(prev.matchings || [])];
+        ms[cur] = { ...ms[cur], picks: { ...ms[cur].picks, [ri]: oi } };
+        return { ...prev, matchings: ms };
+      });
+    }
+    function checkMatching() {
+      const m = q.matching;
+      const mt = matchings[cur] || { picks: {} };
+      const results = {};
+      let correct = 0;
+      m.rows.forEach((_, ri) => {
+        const ok = mt.picks[ri] === m.ans[ri];
+        results[ri] = ok;
+        if (ok) correct += 1;
+      });
+      setState(prev => {
+        const ms = [...(prev.matchings || [])];
+        ms[cur] = { ...ms[cur], results, checked: true,
+                    correct, total: m.rows.length };
+        const newDone = [...prev.done], newScores = [...prev.scores];
+        newDone[cur] = true;
+        newScores[cur] = correct / m.rows.length;
+        return { ...prev, matchings: ms, done: newDone, scores: newScores };
+      });
+    }
     function normalizeAns(s) {
       return s.trim().toLowerCase()
         .replace(/[\[\](){}]/g, "")    // strip brackets
@@ -8334,7 +8442,8 @@ export default function App() {
     }
 
     const isTableInput = !!q.tableInput;
-    const isOpenEnded = !isTableInput && (!q.opts || q.opts.length === 0);
+    const isMatching = !!q.matching;
+    const isOpenEnded = !isTableInput && !isMatching && (!q.opts || q.opts.length === 0);
     const isRevealed = revealed[cur] === true;
 
     if (showResults) {
@@ -8385,7 +8494,7 @@ export default function App() {
 
           <div className="progress-info">
             <span>Question {cur + 1} of {Qs.length}</span>
-            <span>{isTableInput ? "Fill in the table" : isOpenEnded ? "Open answer" : q.multi ? "Select all that apply" : "Select one answer"}</span>
+            <span>{isMatching ? "Priraď k sebe" : isTableInput ? "Fill in the table" : isOpenEnded ? "Open answer" : q.multi ? "Select all that apply" : "Select one answer"}</span>
           </div>
 
           <div className="progress-bar-container">
@@ -8393,7 +8502,7 @@ export default function App() {
           </div>
 
           {quiz.theory && (
-            <details className="lesson-theory">
+            <details className="lesson-theory" open>
               <summary>Teória k lekcii</summary>
               <div className="lesson-theory-body">
                 {quiz.theory.split("\n").map(t => t.trim()).filter(Boolean).map((para, i) => (
@@ -8424,7 +8533,7 @@ export default function App() {
             </div>
           )}
 
-          {!isOpenEnded && !isTableInput && (
+          {!isOpenEnded && !isTableInput && !isMatching && (
             <div className="options-container">
               {q.opts.map((o, oi) => {
                 const isC = q.ans.includes(oi), isS = curSel.includes(oi);
@@ -8443,6 +8552,25 @@ export default function App() {
                   </button>
                 );
               })}
+            </div>
+          )}
+
+          {isMatching && matchings[cur] && (
+            <div className="openended-container">
+              <MatchingWidget
+                matching={q.matching}
+                qState={matchings[cur]}
+                onPick={pickMatch}
+                onCheck={checkMatching}
+              />
+              {matchings[cur].checked && q.explanation && (
+                <details className="table-answer-details">
+                  <summary>Postup riešenia</summary>
+                  <div className="openended-answer-body">
+                    <MathText text={q.explanation} />
+                  </div>
+                </details>
+              )}
             </div>
           )}
 
@@ -8486,7 +8614,7 @@ export default function App() {
             </div>
           )}
 
-          {!isOpenEnded && !isTableInput && isDone && (
+          {!isOpenEnded && !isTableInput && !isMatching && isDone && (
             <div className={`feedback-container ${scores[cur] ? "feedback-correct" : "feedback-wrong"}`}>
               <span style={{ fontSize: "18px" }}>{scores[cur] ? "✓" : "✗"}</span>
               <div>
@@ -8518,14 +8646,14 @@ export default function App() {
 
           <div className="action-buttons">
             {cur > 0 && <button onClick={() => setCur(c => c - 1)} className="btn btn-secondary">← Back</button>}
-            {!isOpenEnded && !isTableInput && !isDone && <button onClick={submit} className="btn btn-primary" disabled={curSel.length === 0 && !q.multi}>Check answer</button>}
-            {!isOpenEnded && !isTableInput && isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-primary">Next →</button>}
+            {!isOpenEnded && !isTableInput && !isMatching && !isDone && <button onClick={submit} className="btn btn-primary" disabled={curSel.length === 0 && !q.multi}>Check answer</button>}
+            {!isOpenEnded && !isTableInput && !isMatching && isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-primary">Next →</button>}
             {!isOpenEnded && !isTableInput && !isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-secondary">Skip →</button>}
             {isOpenEnded && isRevealed && cur < Qs.length - 1 && <button onClick={continueOpenEnded} className="btn btn-primary">Continue →</button>}
             {isOpenEnded && !isRevealed && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-secondary">Skip →</button>}
             {isOpenEnded && isRevealed && cur === Qs.length - 1 && !isDone && <button onClick={continueOpenEnded} className="btn btn-primary">Mark done</button>}
             {isTableInput && !isDone && cur < Qs.length - 1 && <button onClick={continueTableInput} className="btn btn-secondary">Skip →</button>}
-            {isTableInput && isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-primary">Next →</button>}
+            {(isTableInput || isMatching) && isDone && cur < Qs.length - 1 && <button onClick={() => setCur(c => c + 1)} className="btn btn-primary">Next →</button>}
             {isTableInput && !isDone && tableInputs[cur]?.checked && cur < Qs.length - 1 && <button onClick={continueTableInput} className="btn btn-primary">Continue →</button>}
             {isTableInput && !isDone && cur === Qs.length - 1 && tableInputs[cur]?.checked && <button onClick={continueTableInput} className="btn btn-primary">Mark done</button>}
             {cur === Qs.length - 1 && (

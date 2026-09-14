@@ -21,6 +21,49 @@ def table(headers, rows):
                      for lab, val in rows]}
 
 
+def convert_matching(q, base, text):
+    """Priradovacia otazka: riadok so zadanim + vyber z ponuky, ako na Sciu.
+    Ponuka je v poradi, v akom polozky vidi student (vratane rozptylovacov)."""
+    rows = [p for p in q["pairs"] if p["l"] or p["limg"]]
+    if not rows:
+        return None
+
+    # Obrazky riadkov aj moznosti vykresluje widget priamo, do figures nejdu.
+    options = []
+    for c in q.get("choices", []):
+        if c.get("text"):
+            options.append({"t": c["text"]})
+        elif c.get("img"):
+            options.append({"img": c["img"]})
+        else:
+            return None
+    if not options:
+        return None
+
+    def index_of(p):
+        for i, c in enumerate(q.get("choices", [])):
+            if p["rimg"] and c.get("img") == p["rimg"]:
+                return i
+            if p["r"] and not p["rimg"] and c.get("text") == p["r"]:
+                return i
+        return None
+
+    out_rows, ans = [], []
+    for p in rows:
+        i = index_of(p)
+        if i is None:
+            return None
+        row = {"label": p["l"]}
+        if p["limg"]:
+            row["img"] = p["limg"]
+        out_rows.append(row)
+        ans.append(i)
+
+    base.update({"q": text,
+                 "matching": {"rows": out_rows, "options": options, "ans": ans}})
+    return base
+
+
 def convert(q):
     """Vrati otazku v formate appky, alebo None ked sa neda spolahlivo previest."""
     base = {}
@@ -38,59 +81,21 @@ def convert(q):
         return base
 
     if q["type"] == "matching":
-        # Riadky bez zadania su len parkovacie miesta pre rozptylovace
-        # (moznosti navyse, ktore sa nikam nepriradzuju).
-        pairs = [p for p in q["pairs"] if p["l"] or p["limg"]]
-        if not pairs:
-            return None
-        figs = list(base.get("figures", []))
-
-        # Priradovane polozky su obrazky: ocisluju sa v poradi, v akom ich
-        # student vidi, a odpoved je cislo obrazka.
-        if any(not p["r"] for p in pairs):
-            order = [c["img"] for c in q.get("choices", []) if c.get("img")]
-            if not order or any(not p["rimg"] for p in pairs):
-                return None
-            num = {img: i + 1 for i, img in enumerate(order)}
-            for img in order:
-                if img not in figs:
-                    figs.append(img)
-            rows = []
-            for p in pairs:
-                if not p["l"] or p["rimg"] not in num:
-                    return None
-                rows.append((p["l"], str(num[p["rimg"]])))
-            base["figures"] = figs
-            base.update({"q": text + " (napíš číslo obrázka)",
-                         "tableInput": table(["Zadanie", "Obrázok č."], rows)})
-            return base
-
-        # Zadanie moze byt obrazok: obrazky idu medzi figures v poradi riadkov
-        # a riadok sa oznaci "Obrázok N".
-        rows, nimg = [], 0
-        for p in pairs:
-            if p["l"]:
-                rows.append((p["l"], p["r"]))
-            elif p["limg"]:
-                nimg += 1
-                if p["limg"] not in figs:
-                    figs.append(p["limg"])
-                rows.append(("Obrázok %d" % nimg, p["r"]))
-            else:
-                return None
-        if figs:
-            base["figures"] = figs
-        base.update({"q": text,
-                     "tableInput": table(["Zadanie", "Priradenie"], rows)})
-        return base
+        return convert_matching(q, base, text)
 
     if q["type"] == "sorting":
         if not q.get("reliable") or not q.get("order") or \
                 any(not t for t in q["order"]):
             return None
-        rows = [("%d." % (i + 1), t) for i, t in enumerate(q["order"])]
-        base.update({"q": text + " (napíš poradie)",
-                     "tableInput": table(["Poradie", "Krok"], rows)})
+        # Ponuka v abecednom poradi, aby neprezradzala spravne poradie.
+        options = sorted(q["order"])
+        base.update({"q": text,
+                     "matching": {
+                         "rows": [{"label": "%d." % (i + 1)}
+                                  for i in range(len(q["order"]))],
+                         "options": [{"t": t} for t in options],
+                         "ans": [options.index(t) for t in q["order"]],
+                         "prompt": "Zoraď"}})
         return base
 
     if q["type"] == "open":

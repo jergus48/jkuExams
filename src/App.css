@@ -2389,22 +2389,54 @@ body {
 /* Teória k lekcii (Scio kurzy) */
 .lesson-theory {
   margin: 0 0 18px;
-  border: 1px solid var(--border, #d7dee8);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary-color);
   border-radius: 10px;
-  background: var(--card-bg, #f7f9fc);
+  background: var(--card-hover-bg);
+  color: var(--text-main);
   overflow: hidden;
 }
 .lesson-theory > summary {
   cursor: pointer;
   padding: 10px 14px;
   font-weight: 600;
+  color: var(--text-main);
   user-select: none;
 }
 .lesson-theory-body {
-  padding: 0 14px 12px;
+  padding: 0 16px 12px;
   max-height: 420px;
   overflow-y: auto;
-  line-height: 1.55;
+  color: var(--text-main);
+  font-size: .97rem;
+  line-height: 1.65;
 }
 .lesson-theory-body p { margin: 0 0 10px; }
-.lesson-theory-body img { max-width: 100%; height: auto; display: block; margin: 10px 0; }
+.lesson-theory-body img { max-width: 100%; height: auto; display: block; margin: 10px 0; border-radius: 8px; }
+
+/* Priraďovacie otázky (Scio) */
+.matching-wrap { display: flex; flex-direction: column; gap: 14px; color: var(--text-main); }
+.matching-gallery { display: flex; flex-wrap: wrap; gap: 14px; }
+.matching-gallery figure { margin: 0; text-align: center; }
+.matching-gallery img { max-width: 220px; height: auto; display: block; border-radius: 8px; }
+.matching-gallery figcaption { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.matching-tbl { width: 100%; border-collapse: collapse; }
+.matching-tbl td { padding: 9px 10px; vertical-align: middle; border-bottom: 1px solid var(--border-color); }
+.matching-label { width: 58%; line-height: 1.5; color: var(--text-main); }
+.matching-label img { max-width: 170px; height: auto; display: block; margin-bottom: 6px; border-radius: 8px; }
+.matching-pick { width: 42%; }
+.matching-select {
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--option-border);
+  background: var(--option-bg);
+  color: var(--text-main);
+  font: inherit;
+}
+.matching-select.correct { border-color: var(--correct-border); background: var(--correct-bg); color: var(--correct-text); }
+.matching-select.wrong { border-color: var(--wrong-border); background: var(--wrong-bg); color: var(--wrong-text); }
+.matching-correct { display: block; margin-top: 5px; font-size: .88rem; color: var(--correct-text); }
+.matching-msg { font-weight: 600; }
+.matching-msg.ok { color: var(--correct-text); }
+.matching-msg.bad { color: var(--wrong-text); }
