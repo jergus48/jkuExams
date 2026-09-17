@@ -8213,7 +8213,7 @@ export default function App() {
   if (!activeQuizId && !activeSection) {
     mainContent = (
       <div className="quiz-menu-container">
-        <div className="quiz-list-title">#thanksclaude Exam Trainer</div>
+        <div className="quiz-list-title">Exam Trainer</div>
         <div className="quiz-list-subtitle">Pick a section</div>
 
         <div className="quiz-grid">
@@ -8729,7 +8729,7 @@ export default function App() {
       <header className="app-header">
         <div className="header-brand" onClick={() => { backToMenu(); setActiveSection(null); }} style={{ cursor: "pointer" }}>
           <span className="brand-logo">🎓</span>
-          <span className="brand-name">#thanksclaude</span>
+          <span className="brand-name">Exam Trainer</span>
         </div>
         <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle Theme">
           {theme === 'light' ? (
