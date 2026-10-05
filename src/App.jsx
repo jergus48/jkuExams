@@ -7737,6 +7737,7 @@ function getSubject(title) {
   // Chemiou/Biologiou - inak by sa zliali s prijimackami z LF UK.
   if (title.includes("Chémia SCIO")) return "Chémia SCIO";
   if (title.includes("Biológia SCIO")) return "Biológia SCIO";
+  if (title.includes("Všeobecné texty SCIO")) return "Všeobecné texty SCIO";
   if (title.includes("Chémia")) return "Chémia";
   if (title.includes("Biológia")) return "Biológia";
   if (title.includes("Hands on AI")) return "Hands on AI";
@@ -7863,8 +7864,10 @@ function SkipListDiagram({ skipList }) {
 // formatovacie znacky, takze sem uz neprichadza ziadny skript ani atribut.
 function Rich({ html, text, className }) {
   if (html) {
+    // Scio zapisuje matematiku ako AsciiMath v spatnych apostrofoch.
+    const withCode = html.replace(/`([^`\n]+)`/g, '<code class="inline-code">$1</code>');
     return <div className={className ? `rich ${className}` : "rich"}
-                dangerouslySetInnerHTML={{ __html: html }} />;
+                dangerouslySetInnerHTML={{ __html: withCode }} />;
   }
   return <MathText text={text} />;
 }
@@ -7895,6 +7898,7 @@ function MatchingWidget({ matching, qState, onPick, onCheck }) {
           {rows.map((row, ri) => {
             const picked = picks[ri];
             const ok = results[ri];
+            const rowOpts = row.options || options;
             let cls = "matching-select";
             if (checked) cls += ok ? " correct" : " wrong";
             return (
@@ -7912,13 +7916,13 @@ function MatchingWidget({ matching, qState, onPick, onCheck }) {
                     onChange={e => onPick(ri, e.target.value === "" ? "" : Number(e.target.value))}
                   >
                     <option value="">{(prompt || "Vyber") + "…"}</option>
-                    {options.map((o, oi) => (
+                    {rowOpts.map((o, oi) => (
                       <option key={oi} value={oi}>{label(o, oi)}</option>
                     ))}
                   </select>
                   {checked && !ok && (
                     <span className="matching-correct">
-                      {"→ " + label(options[matching.ans[ri]], matching.ans[ri])}
+                      {"→ " + label(rowOpts[matching.ans[ri]], matching.ans[ri])}
                     </span>
                   )}
                 </td>
@@ -8547,6 +8551,11 @@ export default function App() {
             </details>
           )}
 
+          {q.contextHtml && (
+            <div className="question-context">
+              <Rich html={q.contextHtml} />
+            </div>
+          )}
           {q.context && (
             <div className="question-context">
               <MathText text={q.context} />

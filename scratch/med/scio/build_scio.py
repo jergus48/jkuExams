@@ -12,6 +12,7 @@ OUT = os.path.join(ROOT, "src", "scio_quizzes.json")
 SUBJECTS = {
     "bio": ("Biológia SCIO", "scio_bio"),
     "chem": ("Chémia SCIO", "scio_chem"),
+    "vseob": ("Všeobecné texty SCIO", "scio_vseob"),
 }
 
 
@@ -75,6 +76,75 @@ def convert_matching(q, base, text):
     return base
 
 
+def convert_selecting(q, base, text):
+    """Oznac spravne polozky (odstavec / veta / slovo / obrazok / bunka tabulky).
+    Jednotky su moznosti viacnasobneho vyberu, ako na Sciu."""
+    units = q.get("units") or []
+    if not units or not q.get("ans"):
+        return None
+    opts, opts_html = [], []
+    for k, u in enumerate(units):
+        if u.get("img"):
+            opts.append("Obrázok %d" % (k + 1))
+            opts_html.append('<img src="%s" alt="">' % u["img"])
+        else:
+            opts.append(u["t"])
+            opts_html.append(u.get("html") or "")
+    stem = numbered(q["n"], q["qHtml"]) if q.get("qHtml") else "%d." % q["n"]
+    # pri vete/slove su jednotky len kusy jedneho textu, ten treba ukazat cely
+    if q["unit"] in ("sentence", "word"):
+        stem += q["assignHtml"]
+    base.update({"q": text, "qHtml": stem, "opts": opts, "ans": q["ans"],
+                 "multi": True})
+    if any(opts_html):
+        base["optsHtml"] = opts_html
+    return base
+
+
+def convert_filling(q, base, text):
+    """Zadanie s ovladacimi prvkami -> priradovaci widget: kazdy prvok je riadok
+    s vyberom zo svojej ponuky (spolocnej pre radio tabulku, vlastnej pri
+    rozbalovacich zoznamoch)."""
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup("<div id=r>%s</div>" % q["qHtml"], "lxml")
+    root = soup.find(id="r")
+    rows, fields = [], q["fields"]
+    for k, f in enumerate(fields):
+        mark = "[[%d]]" % k
+        node = root.find(string=lambda t: t and mark in t)
+        if node is None:
+            return None
+        row = node.find_parent(["tr", "li", "p"])
+        if row is None or sum(len(x) for x in [row.find_all(string=lambda t: t and "[[" in t)]) != 1:
+            return None
+        if row.name == "tr":
+            cells = [td for td in row.find_all("td") if mark not in td.get_text()]
+            html = "".join(td.decode_contents() for td in cells)
+        else:
+            html = row.decode_contents().replace(mark, "…")
+        rows.append({"label": BeautifulSoup("<div>%s</div>" % html, "lxml").get_text(" ", strip=True),
+                     "html": html.strip()})
+        tbl = row.find_parent("table") if row.name == "tr" else None
+        row.decompose()
+        if tbl is not None and not tbl.find("tr"):
+            tbl.decompose()
+    intro = root.decode_contents().strip()
+    intro = intro.replace("<tbody></tbody>", "")
+    shared = all(f["options"] == fields[0]["options"] for f in fields)
+    opts = lambda f: [{"t": t} for t in f["options"]]
+    m = {"rows": rows, "options": opts(fields[0]),
+         "ans": [f["ans"] for f in fields]}
+    if not shared:
+        m["options"] = []
+        for r, f in zip(rows, fields):
+            r["options"] = opts(f)
+    plain = BeautifulSoup("<div>%s</div>" % intro, "lxml").get_text(" ", strip=True)
+    base.update({"q": "%d. %s" % (q["n"], plain) if plain else "%d." % q["n"],
+                 "matching": m,
+                 "qHtml": numbered(q["n"], intro) if intro else "%d." % q["n"]})
+    return base
+
+
 def convert(q):
     """Vrati otazku v formate appky, alebo None ked sa neda spolahlivo previest."""
     base = {}
@@ -122,6 +192,12 @@ def convert(q):
             base["qHtml"] = numbered(q["n"], q["qHtml"])
         return base
 
+    if q["type"] == "selecting":
+        return convert_selecting(q, base, text)
+
+    if q["type"] == "filling":
+        return convert_filling(q, base, text)
+
     if q["type"] == "open":
         answers = [a for a in q.get("answers", []) if a]
         if not answers:
@@ -143,9 +219,29 @@ def main():
                                  encoding="utf-8"))
         for lesson in data["lessons"]:
             qs = []
+            passage = implicit = ""
             for q in lesson["questions"]:
+                # spolocne zadanie a vseobecne pokyny stoja pred skupinou otazok
+                # a platia, kym ich nenahradi dalsie / nezacne nova teoria
+                for blk in q.get("pre", []):
+                    if blk["kind"] == "passage":
+                        passage = "<p><b>%s</b></p>%s" % (
+                            blk.get("title") or "Spoločné zadanie", blk["html"])
+                    elif blk["kind"] == "implicit":
+                        implicit = blk["html"]
+                    else:
+                        implicit = ""
+                if q["type"] == "trailing":
+                    continue
                 total += 1
                 c = convert(q)
+                if c is not None and (passage or implicit):
+                    c["contextHtml"] = implicit + passage
+                if c is not None and slug == "vseob" and c.get("figures"):
+                    shown = (c.get("qHtml") or "") + "".join(c.get("optsHtml") or [])
+                    c["figures"] = [f for f in c["figures"] if f not in shown]
+                    if not c["figures"]:
+                        del c["figures"]
                 if c is None:
                     skipped.append("%s / %s / otazka %d (%s)"
                                    % (subject, lesson["name"], q["n"], q["type"]))
