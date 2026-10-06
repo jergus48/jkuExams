@@ -40,7 +40,8 @@ a{color:var(--acc)}
 .task:last-child{border:0}
 .task input{margin-top:4px;width:17px;height:17px;flex:none}
 .task.done .tt{text-decoration:line-through;color:var(--mute)}
-.res a{display:inline-block;margin:2px 10px 2px 0;font-size:13px}
+.res a,.res span{display:inline-block;margin:2px 14px 2px 0;font-size:13.5px}
+.chap{margin-bottom:10px}.chap summary{cursor:pointer}.chap h4{margin:14px 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}.chap p{margin:10px 0 0}
 .note{background:var(--partbg);border:1px solid var(--part);border-radius:10px;padding:10px 14px;margin:0 0 16px;font-size:13.5px}
 ul.l{margin:6px 0 0;padding-left:18px}
 .jobhead{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
@@ -163,40 +164,175 @@ const JOBS=[
 {co:"Archetype: ML Engineer (Zurich)",loc:"Zurich",role:"Machine Learning Engineer, 2+ years",reg:"CH",src:"composite",req:["Python + PyTorch, JAX or TensorFlow","Training and serving deep models","MLOps: deployment, versioning, monitoring","Docker, APIs, databases, distributed systems","Cloud (Azure often named)","Translating research code to production","Often MSc preferred"]}
 ];
 
+const yt=q=>["YouTube search: "+q,"https://www.youtube.com/results?search_query="+encodeURIComponent(q)];
 const PHASES=[
-{t:"Phase 0: Engineering foundations (weeks 1-4)",d:"Makes everything else employable.",tasks:[
- ["Learn Git properly: branches, rebase, pull requests. Put every project on GitHub.",["Pro Git","https://git-scm.com/book"],["Missing Semester (MIT)","https://missing.csail.mit.edu"]],
- ["Docker: containerize a Python app, use compose.",["Docker get started","https://docs.docker.com/get-started/"]],
- ["Build a REST API with FastAPI and tests with pytest.",["FastAPI tutorial","https://fastapi.tiangolo.com/tutorial/"]],
- ["SQL: joins, aggregates, window functions on a real dataset.",["Kaggle Learn SQL","https://www.kaggle.com/learn"]]]},
-{t:"Phase 1: Deep learning in practice (weeks 5-10)",d:"Turn JKU theory into fluent PyTorch.",tasks:[
- ["Implement a training loop, dataloaders, evaluation in PyTorch without high-level wrappers.",["fast.ai Practical Deep Learning","https://course.fast.ai"]],
- ["Karpathy: Neural Networks Zero to Hero. Build a small GPT from scratch.",["Zero to Hero","https://karpathy.ai/zero-to-hero.html"]],
- ["Read and code along with LLMs-from-scratch.",["Raschka repo","https://github.com/rasbt/LLMs-from-scratch"]],
- ["Do 2 Kaggle competitions or notebooks end to end.",["Kaggle","https://www.kaggle.com/learn"]]]},
-{t:"Phase 2: LLM applications and RAG (weeks 11-16)",d:"Highest hiring demand right now.",tasks:[
- ["Hugging Face LLM course: transformers, tokenizers, datasets.",["HF LLM course","https://huggingface.co/learn/llm-course"]],
- ["Build a RAG system over your own documents: chunking, embeddings, hybrid search, reranking.",["LLM Zoomcamp","https://github.com/DataTalksClub/llm-zoomcamp"],["Qdrant docs","https://qdrant.tech/documentation/"]],
- ["Create an evaluation set and measure retrieval and answer quality. Do not skip this; it separates juniors.",["Ragas docs","https://docs.ragas.io"]],
- ["Build a tool-using agent with LangGraph, with a guardrail and a failure log.",["LangGraph docs","https://langchain-ai.github.io/langgraph/"]]]},
-{t:"Phase 3: Fine-tuning and serving (weeks 17-22)",d:"Differentiator for LLM-focused roles.",tasks:[
- ["Fine-tune a small open model with LoRA/QLoRA on a real task; compare to the base and to prompting.",["PEFT docs","https://huggingface.co/docs/peft"],["TRL docs","https://huggingface.co/docs/trl"]],
- ["Try DPO or another preference method on a small dataset.",["TRL docs","https://huggingface.co/docs/trl"]],
- ["Serve a model with vLLM; benchmark latency and throughput; try quantization.",["vLLM docs","https://docs.vllm.ai"]],
- ["Write up results as a blog post or README with numbers.",[]]]},
-{t:"Phase 4: MLOps and cloud (weeks 23-30)",d:"Where the salary premium shows up.",tasks:[
- ["Follow MLOps Zoomcamp: tracking, orchestration, deployment, monitoring.",["MLOps Zoomcamp","https://github.com/DataTalksClub/mlops-zoomcamp"]],
- ["Track experiments and register models with MLflow.",["MLflow docs","https://mlflow.org/docs/latest/"]],
- ["Kubernetes basics: deploy your API to a local cluster.",["K8s basics tutorial","https://kubernetes.io/docs/tutorials/kubernetes-basics/"]],
- ["GitHub Actions: tests plus container build on every push.",["GitHub Actions docs","https://docs.github.com/en/actions"]],
- ["Pick one cloud and deploy there. Optionally take an associate-level ML certification.",["AWS certifications","https://aws.amazon.com/certification/"]],
- ["Add drift/quality monitoring to a deployed model.",["Evidently docs","https://docs.evidentlyai.com"]]]},
-{t:"Phase 5: Portfolio and job search (ongoing)",d:"Proof beats claims.",tasks:[
- ["One flagship project: deployed RAG or fine-tuned model with eval numbers, CI, Docker, live demo.",[]],
- ["Get real experience: Werkstudent or internship in Linz, Vienna, Munich or Zurich. Use JKU's 'Practical Work in AI' on something real.",[]],
- ["Plan your master (JKU AI master or ETH/TUM/EPFL level) if targeting Swiss research-heavy roles.",[]],
- ["Read Chip Huyen, Designing Machine Learning Systems, and prepare ML system design interviews.",[]],
- ["Optional depth: Stanford CS336 (language models from scratch).",["CS336","https://cs336.stanford.edu"]]]}
+{t:"Phase 0: Engineering foundations",d:"Weeks 1-4. Makes everything else employable. JKU teaches none of this.",chapters:[
+{id:"git",t:"Git and GitHub workflow",
+ why:"Every team works through pull requests. If you cannot branch, rebase and resolve a conflict, you slow everyone down. Your GitHub profile is also your first portfolio.",
+ know:["Commit, branch, merge, rebase, and when to use each","Resolve a merge conflict without panic","Open a pull request, review one, respond to comments","Write a .gitignore and never commit secrets or API keys","Use GitHub Issues and a README properly"],
+ proj:"Put 3 of your existing uni projects on GitHub with clean READMEs and a sensible commit history.",
+ vid:[["Git & GitHub Crash Course for Beginners [2026]","https://www.youtube.com/watch?v=mAFoROnOfHs"]],
+ read:[["Pro Git (free book)","https://git-scm.com/book"],["MIT Missing Semester","https://missing.csail.mit.edu"]]},
+{id:"docker",t:"Docker and containers",
+ why:"A model that only runs on your laptop is not a product. Docker is the unit of deployment for nearly every ML job listing, and it is the prerequisite for Kubernetes.",
+ know:["Image vs container, layers and caching","Write a Dockerfile for a Python app (slim base, pinned deps)","Volumes, ports, environment variables","docker compose for app + database","Run a GPU container (NVIDIA container toolkit idea)"],
+ proj:"Containerize a small ML inference script and run it with docker compose together with Postgres.",
+ vid:[["Docker Tutorial for Beginners - A Full DevOps Course","https://www.youtube.com/watch?v=fqMOX6JJhGo"],["Docker Tutorial for Beginners to Advanced","https://www.youtube.com/watch?v=Tw8i9p_GSpw"]],
+ read:[["Docker: Get started","https://docs.docker.com/get-started/"]]},
+{id:"fastapi",t:"REST APIs with FastAPI and testing",
+ why:"Models are consumed through APIs. Luxoft and many other postings explicitly ask for FastAPI. Tests are what separate a script from software.",
+ know:["Routes, request/response models with Pydantic","Dependency injection, async endpoints","Error handling and status codes","pytest basics, fixtures, testing an API with TestClient","Type hints and a linter (ruff)"],
+ proj:"Wrap a scikit-learn or small PyTorch model in a FastAPI service with 5+ tests, packaged in your Docker image.",
+ vid:[["Python FastAPI Tutorial: Full Course for Beginners","https://www.youtube.com/watch?v=iukOehU5aF4"]],
+ read:[["FastAPI tutorial","https://fastapi.tiangolo.com/tutorial/"],["pytest docs","https://docs.pytest.org"],["Pydantic docs","https://docs.pydantic.dev"]]},
+{id:"sql",t:"SQL and relational databases",
+ why:"Most real ML work starts with getting data out of a database. SQL is asked in screening rounds and is the one skill uni almost never tests properly.",
+ know:["SELECT, WHERE, GROUP BY, HAVING","All join types and when each is used","CTEs and subqueries","Window functions: ROW_NUMBER, RANK, LAG, running totals","Indexes and reading an EXPLAIN plan"],
+ proj:"Load a public dataset into Postgres and answer 15 analytical questions with SQL only.",
+ vid:[["Advanced SQL Full Course","https://www.youtube.com/watch?v=D2xUEYR-GIY"],["SQL Joins Basics (Visually Explained)","https://www.youtube.com/watch?v=aY7z4HcHm5M"],["SQL Window Functions Basics (Visually Explained)","https://www.youtube.com/watch?v=o666k19mZwE"]],
+ read:[["SQLBolt interactive lessons","https://sqlbolt.com"],["PostgreSQL tutorial","https://www.postgresql.org/docs/current/tutorial.html"]]}
+]},
+{t:"Phase 1: Deep learning in practice",d:"Weeks 5-10. Turn JKU theory into fluent PyTorch and understand transformers by building one.",chapters:[
+{id:"nn",t:"Neural networks and backpropagation, intuition",
+ why:"You have the math from JKU. This chapter ties it to code so that autograd stops being magic. Karpathy's micrograd is the best single resource for this.",
+ know:["Forward pass, loss, gradients, chain rule in a computation graph","Why gradients vanish or explode","SGD vs Adam, learning rate effects","Overfitting, regularization, dropout"],
+ proj:"Follow micrograd and reproduce it yourself without looking, then train a tiny MLP on a toy dataset.",
+ vid:[["3Blue1Brown: But what is a neural network?","https://www.youtube.com/watch?v=aircAruvnKk"],["3Blue1Brown: What is backpropagation really doing?","https://www.youtube.com/watch?v=Ilg3gGewQ5U"],["Karpathy: The spelled-out intro to neural networks and backpropagation (micrograd)","https://www.youtube.com/watch?v=VMj-3S1tku0"]],
+ read:[["micrograd repo","https://github.com/karpathy/micrograd"],["Neural Networks: Zero to Hero","https://karpathy.ai/zero-to-hero.html"]]},
+{id:"torch",t:"PyTorch fundamentals and a real training loop",
+ why:"Job ads say PyTorch constantly. Employers want someone who can write, debug and speed up a training loop, not call model.fit.",
+ know:["Tensors, devices, broadcasting, dtype","Dataset and DataLoader","Write the train/validation loop by hand","Checkpointing, early stopping, seeding for reproducibility","Mixed precision (autocast) and gradient accumulation","Profile where the time goes"],
+ proj:"Train a classifier on a dataset of your choice with your own loop, logging curves, and reach a documented baseline.",
+ vid:[["PyTorch for Deep Learning & Machine Learning - Full Course","https://www.youtube.com/watch?v=V_xro1bcAuA"],["Understanding the PyTorch Training Loop","https://www.youtube.com/watch?v=w_L0o3bRD1k"]],
+ read:[["PyTorch tutorials","https://pytorch.org/tutorials/"],["fast.ai Practical Deep Learning","https://course.fast.ai"]]},
+{id:"cv",t:"Convolutional networks and transfer learning",
+ why:"Vision still appears in many German industry roles (automotive, manufacturing). Transfer learning is the practical skill: fine-tune a pretrained model on little data.",
+ know:["Convolution, pooling, receptive field","ResNet idea and skip connections","Fine-tune a pretrained torchvision model","Data augmentation","Confusion matrix and per-class metrics"],
+ proj:"Fine-tune a pretrained ResNet on a small custom image dataset and report per-class metrics.",
+ vid:[["Build Your First CNN with PyTorch: MNIST Image Classification","https://www.youtube.com/watch?v=DqJy5PeV3pg"],["Image Classification CNN in PyTorch","https://www.youtube.com/watch?v=CtzfbUwrYGI"]],
+ read:[["CNN Explainer (interactive)","https://poloclub.github.io/cnn-explainer/"],["PyTorch transfer learning tutorial","https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html"]]},
+{id:"gpt",t:"Transformers and building GPT from scratch",
+ why:"This is the foundation of every LLM job. JKU gives you roughly 3 ECTS of NLP; here you build the whole thing so interviews on attention, KV cache and tokenization are easy.",
+ know:["Self-attention: queries, keys, values, causal masking","Positional information, layer norm, residuals","Tokenization (BPE) and its failure modes","Pretraining vs fine-tuning vs RLHF pipeline","KV cache and why inference is memory bound"],
+ proj:"Build and train a small GPT on a text corpus following Karpathy, then add one change of your own (for example a different positional scheme) and compare.",
+ vid:[["3Blue1Brown: Attention in transformers, visually explained","https://www.youtube.com/watch?v=eMlx5fFNoYc"],["Karpathy: Let's build GPT: from scratch, in code, spelled out","https://www.youtube.com/watch?v=kCc8FmEb1nY"],["Karpathy: Deep Dive into LLMs like ChatGPT","https://www.youtube.com/watch?v=7xTGNNLPyMI"]],
+ read:[["The Illustrated Transformer","https://jalammar.github.io/illustrated-transformer/"],["Raschka: LLMs from scratch","https://github.com/rasbt/LLMs-from-scratch"],["Stanford CS336 (advanced, optional)","https://cs336.stanford.edu"]]}
+]},
+{t:"Phase 2: LLM applications and RAG",d:"Weeks 11-16. The highest hiring demand in the postings I found.",chapters:[
+{id:"hf",t:"Hugging Face ecosystem",
+ why:"Transformers, datasets, tokenizers and the Hub appear in nearly every LLM job ad. Fluency here saves you weeks on the job.",
+ know:["Load a model and tokenizer, generate text, control sampling","Use datasets with map and streaming","Pipelines vs manual inference","Model cards, licenses, picking a model size for your GPU","Push your own model to the Hub"],
+ proj:"Build a notebook that compares 3 open models on one task with the same evaluation set.",
+ vid:[yt("Hugging Face transformers tutorial LLM course")],
+ read:[["Hugging Face LLM course","https://huggingface.co/learn/llm-course"]]},
+{id:"prompt",t:"Prompting, structured output and tool calling",
+ why:"Most production LLM work is careful interface design around a model: schemas, retries, cost and latency control, not clever prompts.",
+ know:["System prompts, few-shot, and when they fail","Structured outputs with JSON schema and Pydantic validation","Tool/function calling loop","Streaming, retries, rate limits, timeouts","Token counting, caching and cost estimation"],
+ proj:"Build a CLI or API that extracts structured data from messy documents, with validation and a retry policy, and log cost per request.",
+ vid:[yt("structured output function calling LLM tutorial pydantic")],
+ read:[["Anthropic docs","https://docs.anthropic.com"],["Pydantic docs","https://docs.pydantic.dev"]]},
+{id:"embed",t:"Embeddings and vector search",
+ why:"Retrieval quality decides whether a RAG system works. Understand what an embedding is and how approximate nearest neighbor search trades accuracy for speed.",
+ know:["Cosine similarity vs dot product","Sentence embedding models and how to pick one","Exact vs approximate search, HNSW idea","Metadata filtering","Hybrid search: BM25 plus dense vectors","pgvector vs dedicated vector DB trade-offs"],
+ proj:"Index 10k+ documents in Qdrant or pgvector and measure recall@k against a brute-force baseline.",
+ vid:[yt("vector database embeddings explained HNSW")],
+ read:[["Qdrant documentation","https://qdrant.tech/documentation/"],["Sentence-Transformers","https://www.sbert.net"],["FAISS wiki","https://github.com/facebookresearch/faiss/wiki"]]},
+{id:"rag",t:"Building a RAG pipeline",
+ why:"RAG is the most commonly requested GenAI skill in DE/CH postings. Good RAG is mostly data work: parsing, chunking and retrieval tuning.",
+ know:["Document parsing (PDF, HTML, tables)","Chunking strategies and overlap","Query rewriting, reranking with a cross-encoder","Prompt assembly and citations","Failure modes: missing context, wrong chunk, hallucination despite context"],
+ proj:"Build RAG over a real document set (for example JKU course PDFs or EU AI Act text) with citations, a reranker and a web UI.",
+ vid:[["Advanced Retrieval Augmented Generation (RAG) Deep Dive","https://www.youtube.com/watch?v=hfx7F7lObdg"]],
+ read:[["LLM Zoomcamp (free course)","https://github.com/DataTalksClub/llm-zoomcamp"]]},
+{id:"eval",t:"Evaluating LLM and RAG systems",
+ why:"This is what separates juniors who demo from engineers who ship. Postings mention evaluation techniques and observability explicitly (IONOS, others).",
+ know:["Build a golden question set from real usage","Retrieval metrics: recall@k, MRR","Answer metrics: faithfulness, relevance, LLM-as-judge and its biases","Regression tests in CI for prompts","Tracing and logging of every call"],
+ proj:"Create a 50-question eval set for your RAG project, score it with Ragas, change one component, and show the numbers before and after.",
+ vid:[yt("evaluating RAG applications Ragas tutorial")],
+ read:[["Ragas docs","https://docs.ragas.io"],["Hamel Husain: Your AI product needs evals","https://hamel.dev/blog/posts/evals/"]]},
+{id:"agents",t:"Agents and orchestration",
+ why:"NETCONOMY and others ask for agent frameworks. Learn the loop (plan, call tool, observe) and its failure modes before relying on a framework.",
+ know:["Agent loop and state machine thinking","Tools with clear schemas and error messages","Memory and context management","Guardrails, human-in-the-loop, loop limits","Model Context Protocol (MCP) basics"],
+ proj:"Build a LangGraph agent with 3 tools, a step limit and a trace log; write down 5 failure cases you found.",
+ vid:[["Agentic AI Full Course with LangGraph (Zero to Hero) - Part 1","https://www.youtube.com/watch?v=4RtKGasvNC0"]],
+ read:[["LangGraph docs","https://langchain-ai.github.io/langgraph/"],["Model Context Protocol","https://modelcontextprotocol.io"]]}
+]},
+{t:"Phase 3: Fine-tuning and serving",d:"Weeks 17-22. Differentiator for LLM-focused and inference roles (for example Nebius Zurich).",chapters:[
+{id:"lora",t:"Supervised fine-tuning with LoRA and QLoRA",
+ why:"You rarely retrain full models. Parameter-efficient methods let you adapt a 7B model on one GPU. Knowing when NOT to fine-tune (prompting or RAG is enough) is part of the skill.",
+ know:["Why low-rank updates work; rank, alpha, target modules","QLoRA: 4-bit base + LoRA adapters","Build an instruction dataset and chat template correctly","Hyperparameters and overfitting signs","Merge adapters and export the model","Compare against prompting baseline"],
+ proj:"Fine-tune a small open model on a narrow task (for example JSON extraction), and prove with an eval whether it beats few-shot prompting.",
+ vid:[["PEFT LoRA Explained in Detail - Fine-Tune your LLM on your local GPU","https://www.youtube.com/watch?v=YVU5wAA6Txo"],["How to Fine-Tune Llama with QLoRA Using HuggingFace's SFT Trainer","https://www.youtube.com/watch?v=XOlyOWE4YaM"]],
+ read:[["PEFT docs","https://huggingface.co/docs/peft"],["TRL docs","https://huggingface.co/docs/trl"],["LoRA paper","https://arxiv.org/abs/2106.09685"],["QLoRA paper","https://arxiv.org/abs/2305.14314"]]},
+{id:"dpo",t:"Preference tuning: RLHF and DPO",
+ why:"Explains how chat models are aligned, and it is a frequent interview topic. DPO makes it practical on small hardware.",
+ know:["SFT, then reward model, then PPO: the RLHF pipeline","DPO objective in plain words","Preference dataset format (chosen/rejected)","Where preference tuning helps vs hurts"],
+ proj:"Run a small DPO job with TRL on a preference dataset and compare outputs before and after.",
+ vid:[["DPO - Part1 - Direct Preference Optimization Paper Explanation","https://www.youtube.com/watch?v=q_BvQyusEjU"]],
+ read:[["DPO paper","https://arxiv.org/abs/2305.18290"],["TRL docs","https://huggingface.co/docs/trl"]]},
+{id:"quant",t:"Quantization",
+ why:"Memory is the bottleneck of inference. Quantization is how a 70B model fits on affordable hardware, and inference roles test it.",
+ know:["FP32, FP16, BF16, INT8, INT4 trade-offs","GPTQ, AWQ, GGUF at a conceptual level","bitsandbytes NF4","Measure quality loss, not just speed","Memory math: params x bytes plus KV cache"],
+ proj:"Quantize one model three ways and tabulate memory, tokens/s and eval score.",
+ vid:[["LLM Quantization Techniques Explained - GPTQ AWQ GGUF HQQ BitNet","https://www.youtube.com/watch?v=0pF6GdbwMo4"],["LLM Quantization Explained: GPTQ, AWQ, QLoRA, GGUF and More","https://www.youtube.com/watch?v=WmvZwR4rKJg"]],
+ read:[["AWQ paper","https://arxiv.org/abs/2306.00978"]]},
+{id:"serve",t:"Inference serving with vLLM",
+ why:"Throughput, latency and GPU utilization are what inference-optimization roles are paid for. vLLM, SGLang, TensorRT-LLM and Triton were named in the Zurich posting I found.",
+ know:["Prefill vs decode phases","PagedAttention and continuous batching","Latency vs throughput trade-off, time to first token","Serve an OpenAI-compatible endpoint","Load test with concurrent requests","Speculative decoding, prefix caching (awareness)"],
+ proj:"Serve a model with vLLM, load test it, and plot throughput vs concurrency, with and without quantization.",
+ vid:[["PagedAttention: Behind vLLM's Insane Speed","https://www.youtube.com/watch?v=6uPnLkCiy5g"],["vLLM Deep Dive: PagedAttention, Continuous Batching","https://www.youtube.com/watch?v=bNIOGEkAI1I"]],
+ read:[["vLLM docs","https://docs.vllm.ai"],["PagedAttention paper","https://arxiv.org/abs/2309.06180"]]}
+]},
+{t:"Phase 4: MLOps and cloud",d:"Weeks 23-30. Where the salary premium shows up in the listings.",chapters:[
+{id:"mlflow",t:"Experiment tracking and model registry",
+ why:"Reproducibility is a hiring filter for mid-level roles. MLflow or similar appears constantly in German postings.",
+ know:["Log params, metrics, artifacts per run","Compare runs and pick a winner reproducibly","Model registry and stages/aliases","Data and code versioning (DVC idea)"],
+ proj:"Add MLflow tracking to your fine-tuning or classifier project and register the best model.",
+ vid:[["Track Your ML Experiments with MLflow","https://www.youtube.com/watch?v=Z4unUK0vn4k"],["MLflow Crash Course - Model Registry and Model Deployment","https://www.youtube.com/watch?v=bDflB17YUNc"]],
+ read:[["MLflow docs","https://mlflow.org/docs/latest/"]]},
+{id:"cicd",t:"CI/CD with GitHub Actions",
+ why:"Automation is how teams keep quality while moving fast. A green pipeline in your repo is visible proof of engineering habits.",
+ know:["Workflow files, triggers, jobs, secrets","Run tests and linting on each pull request","Build and push a Docker image","Deploy on merge to main","Cache dependencies to speed up runs"],
+ proj:"Pipeline for your FastAPI model service: test, build image, push to a registry, deploy.",
+ vid:[["GitHub Actions Tutorial for Beginners","https://www.youtube.com/watch?v=0PbxpIao_EU"],["CI/CD Full Course (2 Hours): GitHub Actions, Docker, Kubernetes","https://www.youtube.com/watch?v=hbeLqL6sjKA"]],
+ read:[["GitHub Actions docs","https://docs.github.com/en/actions"]]},
+{id:"k8s",t:"Kubernetes basics",
+ why:"Named in many MLOps and ML engineer postings. You do not need to be an admin, but you must read manifests and deploy a service.",
+ know:["Pods, Deployments, Services, Ingress","ConfigMaps and Secrets","Resource requests/limits, autoscaling idea","Debugging with kubectl logs/describe","GPU scheduling (awareness)"],
+ proj:"Deploy your Dockerized model API to a local cluster (kind or minikube) with 2 replicas and a rolling update.",
+ vid:[["Complete Kubernetes Course - From BEGINNER to PRO","https://www.youtube.com/watch?v=2T86xAtR6Fo"],["Complete Kubernetes Tutorial for Beginners (playlist)","https://www.youtube.com/playlist?list=PLy7NrYWoggjziYQIDorlXjTvvwweTYoNC"]],
+ read:[["Kubernetes basics tutorial","https://kubernetes.io/docs/tutorials/kubernetes-basics/"]]},
+{id:"cloud",t:"One cloud provider, done properly",
+ why:"Postings list AWS, Azure or GCP; Zurich listings lean Azure, Germany mixes all three. Depth in one transfers to the others.",
+ know:["IAM and least privilege","Compute (VMs, containers, serverless) and GPU instances","Object storage and managed databases","Managed ML or LLM service of that provider","Cost control: budgets, shutting things down"],
+ proj:"Deploy your containerized API to the provider with a budget alert set up first.",
+ vid:[yt("AWS OR Azure machine learning engineer deployment tutorial")],
+ read:[["AWS Skill Builder","https://skillbuilder.aws"],["Microsoft Learn training","https://learn.microsoft.com/training/"],["Google Cloud training","https://cloud.google.com/learn/training"]]},
+{id:"monitor",t:"Pipelines and production monitoring",
+ why:"Models decay. Monitoring for drift and quality is what turns a project into a maintained service.",
+ know:["Orchestrated pipelines (Airflow or Prefect idea)","Data drift vs concept drift","Latency, error rate and quality dashboards","Alerting and rollback strategy","Retraining triggers"],
+ proj:"Add drift and latency monitoring to a deployed model and simulate a drift event.",
+ vid:[["Ultimate MLOps Full Course in One Video","https://www.youtube.com/watch?v=w71RHxAWxaM"]],
+ read:[["MLOps Zoomcamp","https://github.com/DataTalksClub/mlops-zoomcamp"],["Evidently docs","https://docs.evidentlyai.com"],["Apache Airflow docs","https://airflow.apache.org/docs/"]]}
+]},
+{t:"Phase 5: Portfolio, interviews, career",d:"Ongoing. Proof beats claims.",chapters:[
+{id:"design",t:"ML system design and interview prep",
+ why:"Mid and senior loops include an open-ended design round. Practice explaining trade-offs out loud.",
+ know:["Requirements, data, offline and online metrics","Training vs serving architecture","Latency, cost and scale estimates","Failure modes and monitoring plan","Explain one past project end to end in 10 minutes"],
+ proj:"Write design docs for 3 systems (RAG support bot, recommender, fraud detector) and present each to a friend.",
+ vid:[["ML Engineering in 45 minutes (Designing ML systems)","https://www.youtube.com/watch?v=18sMYvzqhTU"],["Chip Huyen on Machine Learning Interviews","https://www.youtube.com/watch?v=pli1K75PSa8"]],
+ read:[["Designing Machine Learning Systems (book, Chip Huyen)",""]]},
+{id:"flagship",t:"Flagship project",
+ why:"One deployed project with numbers beats ten notebooks. This is what you show recruiters.",
+ know:["Real problem with real users or real data","Eval set with before/after metrics","Docker, CI, tests, monitoring","Live demo link and a short write-up","Honest section on limitations"],
+ proj:"Pick a RAG or fine-tuned-model product, ship it using everything from Phases 0-4, and publish a README with architecture diagram and metrics.",
+ vid:[],read:[]},
+{id:"career",t:"Experience, master and job search",
+ why:"Degree plus a Werkstudent or internship plus portfolio is the realistic route to the junior ranges shown in the Salaries tab. Some Swiss research-heavy roles prefer an MSc.",
+ know:["Apply for Werkstudent or internships in Linz, Vienna, Munich, Zurich","Use JKU Practical Work in AI for something real","Decide on master: JKU AI master vs a stronger program abroad","CV with measurable results and links","Practice interviews in English, learn basic German for DE roles"],
+ proj:"Send 5 applications per week for 8 weeks and track outcomes in a sheet.",
+ vid:[],
+ read:[["jobs.ch","https://www.jobs.ch"],["LinkedIn Jobs","https://www.linkedin.com/jobs"]]}
+]}
 ];
 
 const RES=[
@@ -270,14 +406,26 @@ function jobs(){
 }
 $("#jobFilters").onclick=e=>{if(e.target.dataset.c){jf=e.target.dataset.c;jobs()}};
 
-const done=store.get("done",{});
-function progress(){let t=0,d=0;PHASES.forEach((p,i)=>p.tasks.forEach((_,j)=>{t++;if(done[i+"-"+j])d++}));return [d,t]}
+const done=store.get("done2",{});
+const items=c=>[...c.know.map((_,i)=>c.id+":k"+i),c.id+":p"];
+function progress(){let t=0,d=0;PHASES.forEach(p=>p.chapters.forEach(c=>items(c).forEach(k=>{t++;if(done[k])d++})));return [d,t]}
+const lnk=r=>r[1]?`<a href="${r[1]}" target="_blank" rel="noopener">${r[0]}</a>`:`<span class="mute">${r[0]}</span>`;
 function roadmap(){
- $("#phases").innerHTML=PHASES.map((p,i)=>`<div class="card phase"><h2>${p.t}</h2><div class="mute">${p.d}</div>${p.tasks.map((t,j)=>{
-  const k=i+"-"+j;return `<label class="task ${done[k]?"done":""}"><input type="checkbox" data-k="${k}" ${done[k]?"checked":""}><div><div class="tt">${t[0]}</div><div class="res">${t.slice(1).map(r=>`<a href="${r[1]}" target="_blank" rel="noopener">${r[0]}</a>`).join("")}</div></div></label>`}).join("")}</div>`).join("");
+ const op=store.get("open",{});
+ $("#phases").innerHTML=PHASES.map(p=>`<div class="phase"><h2>${p.t}</h2><div class="mute" style="margin-bottom:8px">${p.d}</div>${p.chapters.map(c=>{
+  const ks=items(c),n=ks.filter(k=>done[k]).length,pc=Math.round(n/ks.length*100);
+  return `<details class="card chap" data-id="${c.id}" ${op[c.id]?"open":""}><summary><b>${c.t}</b> <span class="mute">${n}/${ks.length}</span><div class="bar"><i style="width:${pc}%"></i></div></summary>
+  <p>${c.why}</p>
+  <h4>You know it when you can</h4>
+  ${c.know.map((k,i)=>`<label class="task ${done[c.id+":k"+i]?"done":""}"><input type="checkbox" data-k="${c.id}:k${i}" ${done[c.id+":k"+i]?"checked":""}><div class="tt">${k}</div></label>`).join("")}
+  <h4>Project</h4>
+  <label class="task ${done[c.id+":p"]?"done":""}"><input type="checkbox" data-k="${c.id}:p" ${done[c.id+":p"]?"checked":""}><div class="tt">${c.proj}</div></label>
+  ${c.vid.length?`<h4>Videos</h4><div class="res">${c.vid.map(lnk).join("")}</div>`:""}
+  ${c.read.length?`<h4>Read and practice</h4><div class="res">${c.read.map(lnk).join("")}</div>`:""}
+  </details>`}).join("")}</div>`).join("");
  const [d,t]=progress(),p=Math.round(d/t*100);$("#pct").textContent=p+"% ("+d+"/"+t+")";$("#pbar").style.width=p+"%";stats();
 }
-$("#phases").onchange=e=>{const k=e.target.dataset.k;if(k){done[k]=e.target.checked;store.set("done",done);roadmap()}};
+$("#phases").onchange=e=>{const k=e.target.dataset.k;if(k){done[k]=e.target.checked;store.set("done2",done);const o={};$$("#phases details").forEach(x=>{if(x.open)o[x.dataset.id]=1});store.set("open",o);roadmap()}};
 
 let rf="All";
 function res(){
