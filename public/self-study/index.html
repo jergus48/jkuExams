@@ -4,117 +4,242 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Self-Study Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#151a23;--mute:#5d6676;--line:#dfe3ea;--acc:#2f5bea;--ok:#1f9d63;--part:#d98a00;--gap:#d23c3c;--okbg:#e3f5ec;--partbg:#fdf0d9;--gapbg:#fbe4e4}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1218;--card:#181d27;--ink:#e8ebf1;--mute:#98a1b3;--line:#2a3140;--acc:#7b98ff;--ok:#4cd08f;--part:#f0b13b;--gap:#ff7b7b;--okbg:#14301f;--partbg:#3a2d10;--gapbg:#3b1b1b}}
+:root{
+ --bg:#f4f5f9;--panel:#ffffff;--panel2:#f0f2f7;--ink:#0f1424;--ink2:#3a4260;--mute:#6b7494;--line:#e3e6ef;
+ --acc:#4f46e5;--acc2:#7c3aed;--accbg:#eceafd;
+ --ok:#0f9d6b;--okbg:#dff5ec;--part:#c27a00;--partbg:#fcefd2;--gap:#d6394a;--gapbg:#fde3e6;
+ --shadow:0 1px 2px rgba(15,20,36,.05),0 8px 24px rgba(15,20,36,.06);
+}
+:root[data-theme=dark]{
+ --bg:#0b0e17;--panel:#131828;--panel2:#1a2033;--ink:#eef0f8;--ink2:#c3c9de;--mute:#8a93b3;--line:#232a42;
+ --acc:#8b8cff;--acc2:#b48bff;--accbg:#1e2247;
+ --ok:#3ddc9a;--okbg:#10301f;--part:#f5b94a;--partbg:#3a2c0e;--gap:#ff7a8a;--gapbg:#3a1822;
+ --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+ --bg:#0b0e17;--panel:#131828;--panel2:#1a2033;--ink:#eef0f8;--ink2:#c3c9de;--mute:#8a93b3;--line:#232a42;
+ --acc:#8b8cff;--acc2:#b48bff;--accbg:#1e2247;
+ --ok:#3ddc9a;--okbg:#10301f;--part:#f5b94a;--partbg:#3a2c0e;--gap:#ff7a8a;--gapbg:#3a1822;
+ --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,Segoe UI,sans-serif}
-header{padding:20px 24px 0}
-h1{margin:0;font-size:22px}
-.sub{color:var(--mute);margin:2px 0 14px}
-nav{display:flex;gap:4px;flex-wrap:wrap;padding:0 24px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
-nav button{background:none;border:0;border-bottom:2px solid transparent;padding:10px 12px;color:var(--mute);font:inherit;cursor:pointer}
-nav button.on{color:var(--ink);border-color:var(--acc);font-weight:600}
-main{padding:20px 24px 60px;max-width:1150px}
-section{display:none}section.on{display:block}
-.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-.card h3{margin:0 0 6px;font-size:15px}
-.big{font-size:30px;font-weight:700}
-.mute{color:var(--mute);font-size:13px}
-.tag{display:inline-block;padding:1px 8px;border-radius:99px;font-size:12px;font-weight:600}
-.t-ok{background:var(--okbg);color:var(--ok)}.t-part{background:var(--partbg);color:var(--part)}.t-gap{background:var(--gapbg);color:var(--gap)}
-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:14px}
-th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute)}
-tr:last-child td{border-bottom:0}
-.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:8px}
-.bar i{display:block;height:100%;background:var(--acc)}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;align-items:center}
-.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer}
-.chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}
-a{color:var(--acc)}
-.phase{margin-bottom:18px}
-.phase h2{font-size:17px;margin:0 0 4px}
-.task{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
-.task:last-child{border:0}
-.task input{margin-top:4px;width:17px;height:17px;flex:none}
-.task.done .tt{text-decoration:line-through;color:var(--mute)}
-.res a,.res span{display:inline-block;margin:2px 14px 2px 0;font-size:13.5px}
-.chap{margin-bottom:10px}.chap summary{cursor:pointer}.chap h4{margin:14px 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}.chap p{margin:10px 0 0}
-.note{background:var(--partbg);border:1px solid var(--part);border-radius:10px;padding:10px 14px;margin:0 0 16px;font-size:13.5px}
-ul.l{margin:6px 0 0;padding-left:18px}
-.jobhead{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,system-ui,Segoe UI,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.shell{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+aside{position:sticky;top:0;height:100vh;padding:24px 16px;border-right:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;gap:6px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:-.01em;padding:0 10px 18px}
+.logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px}
+.nav button{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;color:var(--ink2);font-weight:500;cursor:pointer}
+.nav button:hover{background:var(--panel2)}
+.nav button.on{background:var(--accbg);color:var(--acc);font-weight:600}
+.nav svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sidefoot{margin-top:auto;padding:14px 10px 0;border-top:1px solid var(--line);font-size:13px;color:var(--mute);display:grid;gap:10px}
+.sidefoot .mini{height:6px;background:var(--panel2);border-radius:9px;overflow:hidden}
+.sidefoot .mini i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:9px}
+.tbtn{all:unset;cursor:pointer;color:var(--mute);font-size:13px}.tbtn:hover{color:var(--ink)}
+main{padding:40px clamp(18px,4vw,56px) 90px;max-width:1120px;width:100%}
+section{display:none;animation:in .25s ease}section.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.15;letter-spacing:-.03em;margin:0 0 10px;font-weight:800}
+h2{font-size:20px;letter-spacing:-.02em;margin:36px 0 14px;font-weight:700}
+.lead{color:var(--ink2);font-size:17px;max-width:720px;margin:0 0 26px}
+.eyebrow{font:500 12px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin-bottom:10px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.kpi .l{font-size:13px;color:var(--mute);font-weight:500}
+.kpi .v{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:6px 0 4px}
+.kpi .s{font-size:13px;color:var(--mute)}
+.hero{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;padding:28px;border-radius:20px;background:linear-gradient(135deg,var(--accbg),var(--panel));border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:20px}
+.ringwrap{position:relative;width:170px;height:170px}
+.ringwrap svg{transform:rotate(-90deg)}
+.ringwrap .c{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ringwrap b{font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.ringwrap span{font-size:12px;color:var(--mute);margin-top:4px}
+.note{border:1px solid var(--line);background:var(--panel2);border-radius:12px;padding:12px 16px;font-size:13.5px;color:var(--ink2);margin:0 0 22px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600;white-space:nowrap}
+.p-ok{background:var(--okbg);color:var(--ok)}.p-part{background:var(--partbg);color:var(--part)}.p-gap{background:var(--gapbg);color:var(--gap)}.p-acc{background:var(--accbg);color:var(--acc)}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.catrow{display:grid;grid-template-columns:130px 1fr 54px;gap:14px;align-items:center;padding:9px 0}
+.catrow .n{font-weight:600;font-size:14px}
+.stack{display:flex;height:12px;border-radius:9px;overflow:hidden;background:var(--panel2)}
+.stack i{display:block;height:100%}
+.catrow .pc{text-align:right;font:500 13px "JetBrains Mono",monospace;color:var(--ink2)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--mute);margin-top:10px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;background:var(--c)}
+.next{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.btn{all:unset;cursor:pointer;background:var(--acc);color:#fff;padding:10px 18px;border-radius:10px;font-weight:600;font-size:14px}
+.btn:hover{filter:brightness(1.1)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.chip{all:unset;cursor:pointer;padding:6px 14px;border:1px solid var(--line);border-radius:99px;background:var(--panel);color:var(--ink2);font-size:13px;font-weight:500}
+.chip:hover{border-color:var(--acc)}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.sk{display:grid;grid-template-columns:1.5fr .8fr .8fr 1.6fr;gap:14px;align-items:start;padding:14px 18px;border-top:1px solid var(--line)}
+.sk:first-child{border-top:0}
+.sk .nm{font-weight:600}.sk .sub{font-size:13px;color:var(--mute)}
+.dots{display:inline-flex;gap:4px;vertical-align:middle}.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}.dots i.f{background:var(--acc)}
+.sk .hd{display:none}
+.tablehead{display:grid;grid-template-columns:1.5fr .8fr .8fr 1.6fr;gap:14px;padding:0 18px 8px;font:500 11px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.list{padding:0;overflow:hidden}
+.job{display:flex;flex-direction:column;gap:12px}
+.jh{display:flex;gap:12px;align-items:center}
+.av{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--acc),var(--acc2));flex:none}
+.jh h3{margin:0;font-size:16px;letter-spacing:-.01em;line-height:1.3}
+.jh .m{font-size:13px;color:var(--mute)}
+.reqs{display:flex;gap:6px;flex-wrap:wrap}
+.req{font-size:12.5px;padding:4px 10px;border-radius:8px;background:var(--panel2);color:var(--ink2);border:1px solid var(--line)}
+.rail{position:relative;margin-left:6px;padding-left:28px;border-left:2px solid var(--line)}
+.phase{margin-bottom:34px}
+.phase>h2{margin:0 0 2px;position:relative}
+.phase>h2::before{content:"";position:absolute;left:-39px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 5px var(--bg)}
+.phase>.d{color:var(--mute);margin:0 0 14px;font-size:14px}
+details.chap{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+details.chap[open]{border-color:var(--acc)}
+.chap summary{list-style:none;cursor:pointer;padding:14px 18px;display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:center}
+.chap summary::-webkit-details-marker{display:none}
+.chap summary b{font-weight:650;font-size:15.5px}
+.chap summary .cnt{font:500 12px "JetBrains Mono",monospace;color:var(--mute)}
+.bar{grid-column:1/-1;height:5px;background:var(--panel2);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:9px;transition:width .3s}
+.body{padding:2px 18px 18px;border-top:1px solid var(--line)}
+.body p{color:var(--ink2);margin:14px 0 0}
+.body h4{margin:18px 0 6px;font:500 11px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.task{display:flex;gap:12px;padding:7px 0;cursor:pointer;align-items:flex-start}
+.task input{appearance:none;width:19px;height:19px;border:2px solid var(--line);border-radius:6px;flex:none;margin-top:2px;cursor:pointer;display:grid;place-content:center;background:var(--panel)}
+.task input:checked{background:var(--acc);border-color:var(--acc)}
+.task input:checked::after{content:"";width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.task.done .tt{color:var(--mute);text-decoration:line-through}
+.links{display:flex;flex-direction:column;gap:6px}
+.lk{display:flex;gap:10px;align-items:center;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--ink);font-size:14px}
+.lk:hover{border-color:var(--acc);text-decoration:none}
+.lk .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:11px;font-weight:800;color:#fff;flex:none}
+.ic.v{background:#e0334c}.ic.r{background:var(--acc)}
+.lk span.t{flex:1}
+.lk .arrow{color:var(--mute)}
+.res{display:block}
+.rcard{display:flex;flex-direction:column;gap:6px}
+.rcard h3{margin:4px 0 0;font-size:15.5px;letter-spacing:-.01em}
+.rcard p{margin:0;color:var(--mute);font-size:13.5px;flex:1}
+.rcard .u{font-size:12.5px;word-break:break-all}
+.sal{display:grid;grid-template-columns:130px 1fr 130px;gap:14px;align-items:center;padding:12px 0}
+.sal .tr{position:relative;height:14px;background:var(--panel2);border-radius:9px}
+.sal .tr i{position:absolute;top:0;bottom:0;border-radius:9px;background:linear-gradient(90deg,var(--acc),var(--acc2))}
+.sal .v{font:500 13px "JetBrains Mono",monospace;text-align:right;color:var(--ink2)}
+.ul{margin:0;padding-left:20px;color:var(--ink2)}.ul li{margin:7px 0}
+@media (max-width:860px){
+ .shell{grid-template-columns:1fr}
+ aside{position:sticky;height:auto;flex-direction:row;overflow-x:auto;padding:10px;border-right:0;border-bottom:1px solid var(--line);z-index:9;gap:4px}
+ .brand,.sidefoot{display:none}
+ .nav{display:flex;gap:4px}.nav button{width:auto;white-space:nowrap;padding:8px 12px}
+ .hero{grid-template-columns:1fr}.ringwrap{margin:0 auto}
+ .sk,.tablehead{grid-template-columns:1fr 1fr}
+ .tablehead{display:none}
+ .sk .hd{display:block;font:500 10px "JetBrains Mono",monospace;text-transform:uppercase;color:var(--mute);margin-bottom:2px}
+ .sk>div:last-child,.sk>div:first-child{grid-column:1/-1}
+ .catrow{grid-template-columns:90px 1fr 46px}
+ .sal{grid-template-columns:1fr;gap:4px}.sal .v{text-align:left}
+}
 </style>
 </head>
 <body>
-<header>
-<p style="margin:0 0 6px"><a href="/">&larr; Back to Exam Trainer</a></p>
-<h1>AI Self-Study Portal</h1>
-<p class="sub">JKU Bachelor AI vs. what ML/AI engineering jobs in Germany and Switzerland ask for. Progress is saved in this browser.</p>
-</header>
-<nav id="nav"></nav>
+<div class="shell">
+<aside>
+ <div class="brand"><div class="logo">AI</div>Self-Study</div>
+ <nav class="nav" id="nav"></nav>
+ <div class="sidefoot">
+  <div><div style="display:flex;justify-content:space-between"><span>Roadmap</span><b id="sbPct" style="color:var(--ink)">0%</b></div><div class="mini"><i id="sbBar" style="width:0"></i></div></div>
+  <a href="/">&larr; Exam Trainer</a>
+  <button class="tbtn" id="themeBtn">Toggle theme</button>
+ </div>
+</aside>
 <main>
 
 <section id="overview" class="on">
-<div class="note">Based on the JKU curriculum (version of 2020, 180 ECTS) and aggregated job postings and salary pages found in October 2026. Your actual course content may differ from the titles. "Partial" means the topic is touched in a course but not to the depth or tooling employers expect. Verify against your own transcript and edit <code>SKILLS</code> in this file if I misjudged.</div>
-<div class="grid" id="stats"></div>
-<h3 style="margin:22px 0 8px">Where JKU is strong</h3>
-<div class="card"><ul class="l">
-<li>Mathematics (31.5 ECTS: linear algebra, analysis, probability, numerical optimization) and statistics. This is a real advantage over bootcamp people and over self-taught candidates.</li>
-<li>Classical ML theory: supervised, unsupervised, reinforcement learning, signal processing, NLP basics.</li>
-<li>Algorithms, data structures, logic, formal models. Useful for interviews and research roles.</li>
-</ul></div>
-<h3 style="margin:22px 0 8px">Where it leaves you exposed</h3>
-<div class="card"><ul class="l">
-<li>Almost nothing on shipping software: Git workflows, testing, Docker, CI/CD, cloud, APIs, monitoring.</li>
-<li>Nothing dedicated to LLMs: transformer internals at depth, fine-tuning (LoRA/QLoRA), RAG, agents, evaluation, inference serving.</li>
-<li>No SQL/data engineering, pipelines or experiment tracking.</li>
-<li>Courses like "Responsible AI", "Gender Studies" and "Technology and Society" (about 10.5 ECTS) do not appear in job requirements, apart from EU AI Act awareness being a small plus.</li>
-</ul></div>
-<h3 style="margin:22px 0 8px">Suggested priority</h3>
-<div class="card">The job market pays for people who can <b>build, deploy and evaluate</b>, not just train. Order of value: (1) Python engineering + Git + Docker, (2) PyTorch and Hugging Face, (3) RAG and LLM apps with evaluation, (4) fine-tuning and serving, (5) MLOps and cloud, (6) one deep specialty. Use the Roadmap tab; it is ordered that way.</div>
+ <div class="eyebrow">JKU Bachelor AI vs. the job market</div>
+ <h1>What your degree covers, and what employers pay for.</h1>
+ <p class="lead">Compared against the JKU curriculum and ML/AI engineering listings in Germany and Switzerland. The gaps are mostly engineering and LLM tooling. The math is a real strength.</p>
+ <div class="hero">
+  <div>
+   <h2 style="margin:0 0 6px">Market readiness</h2>
+   <p style="margin:0 0 16px;color:var(--ink2)">Weighted by how often each skill shows up in postings. Covered counts fully, partial counts half.</p>
+   <div class="next" id="next"></div>
+  </div>
+  <div class="ringwrap" id="ring"></div>
+ </div>
+ <div class="grid g4" id="stats"></div>
+ <h2>Coverage by area</h2>
+ <div class="card" id="cats"></div>
+ <h2>Where JKU is strong</h2>
+ <div class="card"><ul class="ul">
+  <li>Mathematics (31.5 ECTS: linear algebra, analysis, probability, numerical optimization) and statistics. A real edge over bootcamp and self-taught candidates.</li>
+  <li>Classical ML theory: supervised, unsupervised, reinforcement learning, signal processing, NLP basics.</li>
+  <li>Algorithms, data structures, logic, formal models. Useful for interviews and research roles.</li></ul></div>
+ <h2>Where it leaves you exposed</h2>
+ <div class="card"><ul class="ul">
+  <li>Almost nothing on shipping software: Git workflows, testing, Docker, CI/CD, cloud, APIs, monitoring.</li>
+  <li>Nothing dedicated to LLMs: transformer internals at depth, fine-tuning (LoRA/QLoRA), RAG, agents, evaluation, inference serving.</li>
+  <li>No SQL or data engineering, pipelines, or experiment tracking.</li>
+  <li>About 10.5 ECTS (Responsible AI, Gender Studies, Technology and Society) do not appear in job requirements, apart from EU AI Act awareness being a small plus.</li></ul></div>
+ <div class="note" style="margin-top:24px">Based on the JKU curriculum (2020 version, 180 ECTS) and job and salary pages found in October 2026. Your actual course content may differ from the titles. Partial means touched but not at the depth or tooling employers expect.</div>
 </section>
 
 <section id="matrix">
-<div class="row" id="matrixFilters"></div>
-<table><thead><tr><th>Skill</th><th>Demand</th><th>JKU status</th><th>JKU course (closest)</th><th>What is missing</th></tr></thead><tbody id="matrixBody"></tbody></table>
+ <div class="eyebrow">Skill gap matrix</div>
+ <h1>34 skills, rated against the market.</h1>
+ <p class="lead">Demand shows how often a skill appears in postings. Status is my judgement of what the JKU curriculum gives you.</p>
+ <div class="chips" id="matrixFilters"></div>
+ <div class="tablehead"><div>Skill</div><div>Demand</div><div>JKU status</div><div>Closest course / what is missing</div></div>
+ <div class="card list" id="matrixBody"></div>
 </section>
 
 <section id="jobs">
-<div class="note">Postings are summarized from search results (company names are real listings seen, details condensed). Postings expire; treat them as examples of requirement patterns. The "Archetype" cards are composites of the patterns across many listings, not single ads.</div>
-<div class="row" id="jobFilters"></div>
-<div id="jobList" class="grid" style="grid-template-columns:repeat(auto-fit,minmax(330px,1fr))"></div>
+ <div class="eyebrow">Job postings</div>
+ <h1>What real listings ask for.</h1>
+ <p class="lead">Summarized from listings found in search. Postings expire, so read them as patterns. Archetype cards are composites of many listings.</p>
+ <div class="chips" id="jobFilters"></div>
+ <div class="grid g2" id="jobList"></div>
 </section>
 
 <section id="roadmap">
-<div class="card" style="margin-bottom:14px"><div class="mute">Overall progress</div><div class="big" id="pct">0%</div><div class="bar"><i id="pbar" style="width:0"></i></div></div>
-<div id="phases"></div>
+ <div class="eyebrow">Roadmap</div>
+ <h1>30 chapters, in the order that pays off.</h1>
+ <p class="lead">Open a chapter, watch the videos, tick off what you can do, and build the project. Progress is saved in this browser.</p>
+ <div class="card" style="margin-bottom:28px"><div style="display:flex;justify-content:space-between;align-items:baseline"><b>Overall</b><span id="pct" class="cnt" style="font:500 13px 'JetBrains Mono',monospace;color:var(--mute)"></span></div><div class="bar" style="height:8px;margin-top:10px"><i id="pbar" style="width:0"></i></div></div>
+ <div class="rail" id="phases"></div>
 </section>
 
 <section id="resources">
-<div class="note">Links were written from my knowledge of well-known stable sites, not each opened and checked today. If one is dead, search the title.</div>
-<div class="row" id="resFilters"></div>
-<div id="resList" class="grid"></div>
+ <div class="eyebrow">Resources</div>
+ <h1>Courses, docs and books.</h1>
+ <p class="lead">Links come from my knowledge of well-known sites and were not each opened today. If one is dead, search the title.</p>
+ <div class="chips" id="resFilters"></div>
+ <div class="grid g4" id="resList"></div>
 </section>
 
 <section id="salary">
-<div class="note">Gross yearly figures from salary aggregator pages (Glassdoor, Robert Half, Turing and similar). They disagree with each other; use as rough ranges. Swiss cost of living and taxes are much higher than Germany. Big tech and quant packages are outliers above these.</div>
-<table><thead><tr><th>Level</th><th>Germany (EUR)</th><th>Zurich (CHF)</th></tr></thead><tbody>
-<tr><td>Junior (0-2 y)</td><td>55k - 75k (some sources 50-65k)</td><td>90k - 125k (big tech 130-180k total)</td></tr>
-<tr><td>Mid (3-5 y)</td><td>75k - 105k</td><td>125k - 160k</td></tr>
-<tr><td>Senior (6+ y)</td><td>105k - 140k+</td><td>160k - 210k</td></tr>
-</tbody></table>
-<h3 style="margin:22px 0 8px">What moves you up the range</h3>
-<div class="card"><ul class="l">
-<li>Production experience: deployed model serving real users, with monitoring.</li>
-<li>LLM systems skills (RAG, evaluation, inference optimization) are in current demand.</li>
-<li>Cloud + Kubernetes + MLOps pairing is repeatedly named as the biggest premium.</li>
-<li>Location: Munich and Zurich pay the most; Berlin the least of the large hubs.</li>
-<li>Master's degree is often preferred for research/senior roles in Switzerland (ETH, EPFL ecosystem). Consider JKU's AI master or a stronger master abroad; a portfolio can substitute for some engineering roles but not all.</li>
-</ul></div>
+ <div class="eyebrow">Salaries</div>
+ <h1>What the skills are worth.</h1>
+ <p class="lead">Gross yearly figures from salary aggregator pages. They disagree with each other, so use them as rough ranges. Swiss cost of living and taxes are much higher. Big tech and quant packages sit above these.</p>
+ <div class="grid g2">
+  <div class="card"><h3 style="margin:0 0 6px">Germany (EUR, thousands)</h3><div id="salDE"></div></div>
+  <div class="card"><h3 style="margin:0 0 6px">Zurich (CHF, thousands)</h3><div id="salCH"></div></div>
+ </div>
+ <h2>What moves you up the range</h2>
+ <div class="card"><ul class="ul">
+  <li>Production experience: a deployed model serving real users, with monitoring.</li>
+  <li>LLM systems skills (RAG, evaluation, inference optimization) are in current demand.</li>
+  <li>Cloud plus Kubernetes plus MLOps is repeatedly named as the biggest premium.</li>
+  <li>Location: Munich and Zurich pay the most; Berlin the least of the large hubs.</li>
+  <li>An MSc is often preferred for research-heavy and senior roles in Switzerland.</li></ul></div>
 </section>
+
 </main>
+</div>
 
 <script>
 const SKILLS=[
@@ -126,6 +251,10 @@ const SKILLS=[
 ["Classical ML (sklearn, trees, SVM, clustering)",3,"ok","ML: Supervised/Unsupervised, Pattern Classification","Feature engineering on messy real data, Kaggle-style practice","ML"],
 ["Optimization",1,"ok","Numerical Optimization","None for most jobs","ML"],
 ["Reinforcement learning",1,"ok","Reinforcement Learning","Niche in jobs (robotics, games, RLHF)","ML"],
+["NumPy, pandas, matplotlib (data wrangling and EDA)",3,"part","Basic Methods of Data Analysis, Programming in Python","Cleaning messy data, joins, groupby, plotting, EDA habits","Data"],
+["scikit-learn (pipelines, model selection, metrics)",3,"part","Machine Learning: Supervised/Unsupervised (theory-heavy)","Pipelines, cross-validation, hyperparameter search, leakage, calibration","ML"],
+["Gradient boosting (XGBoost, LightGBM)",2,"gap","-","Dominant method for tabular data in industry; tuning and feature importance","ML"],
+["TensorFlow and Keras",2,"gap","-","Named next to PyTorch in German postings; Keras API, tf.data, SavedModel","DL"],
 ["Deep learning with PyTorch",3,"part","Hands-on AI I/II (verify content)","Writing training loops, debugging, mixed precision, multi-GPU basics","DL"],
 ["Transformers and LLM internals",3,"part","Natural Language Processing (3 ECTS)","Attention from scratch, tokenization, KV cache, scaling laws","LLM"],
 ["Hugging Face ecosystem (transformers, datasets)",3,"gap","-","Daily-use library in most LLM job ads","LLM"],
@@ -192,7 +321,25 @@ const PHASES=[
  vid:[["Advanced SQL Full Course","https://www.youtube.com/watch?v=D2xUEYR-GIY"],["SQL Joins Basics (Visually Explained)","https://www.youtube.com/watch?v=aY7z4HcHm5M"],["SQL Window Functions Basics (Visually Explained)","https://www.youtube.com/watch?v=o666k19mZwE"]],
  read:[["SQLBolt interactive lessons","https://sqlbolt.com"],["PostgreSQL tutorial","https://www.postgresql.org/docs/current/tutorial.html"]]}
 ]},
-{t:"Phase 1: Deep learning in practice",d:"Weeks 5-10. Turn JKU theory into fluent PyTorch and understand transformers by building one.",chapters:[
+{t:"Phase 1: Core ML and deep learning in practice",d:"Weeks 5-12. Data tools, scikit-learn, boosting, then PyTorch, TensorFlow and transformers.",chapters:[
+{id:"pydata",t:"NumPy, pandas and matplotlib",
+ why:"Every ML task starts with messy tables. Fluent pandas and honest exploratory analysis is faster and more valuable than any model you will train in the first week of a job.",
+ know:["Vectorized NumPy: broadcasting, indexing, no Python loops","pandas: filtering, groupby, merge, pivot, time series basics","Handle missing values, outliers and duplicates deliberately","Plot distributions and relationships with matplotlib and seaborn","Write a short EDA that states findings, not just charts"],
+ proj:"Take a messy public dataset (for example Austrian open data or Kaggle), clean it in a reproducible script, and write a one-page EDA notebook.",
+ vid:[["Data Analysis with Python - Full Course for Beginners (Numpy, Pandas, Matplotlib, Seaborn)","https://www.youtube.com/watch?v=r-uOLxNrNk8"],["Pandas & Python for Data Analysis by Example","https://www.youtube.com/watch?v=gtjxAH8uaP0"]],
+ read:[["pandas user guide","https://pandas.pydata.org/docs/user_guide/index.html"],["NumPy quickstart","https://numpy.org/doc/stable/user/quickstart.html"],["Kaggle Learn: Pandas","https://www.kaggle.com/learn/pandas"]]},
+{id:"sklearn",t:"scikit-learn properly",
+ why:"JKU explains the algorithms; employers want you to apply them correctly. Most real-world ML projects still use sklearn for baselines, preprocessing and evaluation, and data leakage mistakes are a classic interview filter.",
+ know:["Estimator API: fit, predict, transform","Pipeline and ColumnTransformer for preprocessing without leakage","Train/validation/test split, cross-validation, stratification","Choose metrics: precision, recall, F1, ROC-AUC, PR curves, regression errors","GridSearchCV, RandomizedSearchCV, and why Optuna is often better","Handle class imbalance","Save a model with joblib and load it in a service"],
+ proj:"Build a full tabular pipeline on one dataset: preprocessing in a Pipeline, cross-validated model comparison, tuned best model, error analysis, and a saved artifact loaded by your FastAPI service.",
+ vid:[["Scikit-Learn Full Crash Course - Python Machine Learning","https://www.youtube.com/watch?v=SIEaLBXr0rk"],["Scikit-Learn Course - Machine Learning in Python Tutorial","https://www.youtube.com/watch?v=pqNCD_5r0IU"],["Build Machine Learning Pipelines with Scikit-Learn","https://www.youtube.com/watch?v=HYYvZkS_P4A"]],
+ read:[["scikit-learn user guide","https://scikit-learn.org/stable/user_guide.html"],["scikit-learn tutorials","https://scikit-learn.org/stable/tutorial/index.html"],["Kaggle Learn: Intermediate Machine Learning","https://www.kaggle.com/learn/intermediate-machine-learning"]]},
+{id:"boost",t:"Gradient boosting: XGBoost and LightGBM",
+ why:"For tabular data (finance, insurance, manufacturing, which are huge in DE and CH) boosted trees usually beat neural nets. Employers expect you to know when to reach for them.",
+ know:["Boosting vs bagging, how trees are added sequentially","Key hyperparameters: learning rate, depth, n_estimators, subsample","Early stopping with a validation set","Feature importance and SHAP for explanations","Compare against a neural net baseline honestly"],
+ proj:"Beat your sklearn baseline with XGBoost or LightGBM, tune with Optuna, and explain the top features with SHAP.",
+ vid:[["Visual Guide to Gradient Boosted Trees (xgboost)","https://www.youtube.com/watch?v=TyvYZ26alZs"],["XGBoost 101: eXtreme Gradient Boosting eXplained","https://www.youtube.com/watch?v=E5L3ZBw5zkk"]],
+ read:[["XGBoost docs","https://xgboost.readthedocs.io"],["LightGBM docs","https://lightgbm.readthedocs.io"],["Optuna docs","https://optuna.readthedocs.io"],["SHAP docs","https://shap.readthedocs.io"]]},
 {id:"nn",t:"Neural networks and backpropagation, intuition",
  why:"You have the math from JKU. This chapter ties it to code so that autograd stops being magic. Karpathy's micrograd is the best single resource for this.",
  know:["Forward pass, loss, gradients, chain rule in a computation graph","Why gradients vanish or explode","SGD vs Adam, learning rate effects","Overfitting, regularization, dropout"],
@@ -205,6 +352,12 @@ const PHASES=[
  proj:"Train a classifier on a dataset of your choice with your own loop, logging curves, and reach a documented baseline.",
  vid:[["PyTorch for Deep Learning & Machine Learning - Full Course","https://www.youtube.com/watch?v=V_xro1bcAuA"],["Understanding the PyTorch Training Loop","https://www.youtube.com/watch?v=w_L0o3bRD1k"]],
  read:[["PyTorch tutorials","https://pytorch.org/tutorials/"],["fast.ai Practical Deep Learning","https://course.fast.ai"]]},
+{id:"tf",t:"TensorFlow and Keras",
+ why:"Your degree gave you neither. German industry postings often list TensorFlow beside PyTorch, and many older production systems and mobile/edge deployments still use it. Learn Keras 3 well enough to read and extend existing code.",
+ know:["Keras Sequential and Functional API","Compile, fit, callbacks (EarlyStopping, ModelCheckpoint, TensorBoard)","tf.data input pipelines","Custom training step with GradientTape","Save and load a model, export as SavedModel","Know what you would port to PyTorch and why"],
+ proj:"Reimplement your PyTorch classifier in Keras, log both to TensorBoard, and write down the API differences you hit.",
+ vid:[["Keras with TensorFlow Course - Python Deep Learning and Neural Networks for Beginners","https://www.youtube.com/watch?v=qFJeN9V1ZsI"],["Deep Learning With Tensorflow 2.0, Keras and Python (playlist)","https://www.youtube.com/playlist?list=PLeo1K3hjS3uu7CxAacxVndI4bE_o3BDtO"]],
+ read:[["TensorFlow tutorials","https://www.tensorflow.org/tutorials"],["Keras getting started","https://keras.io/getting_started/"]]},
 {id:"cv",t:"Convolutional networks and transfer learning",
  why:"Vision still appears in many German industry roles (automotive, manufacturing). Transfer learning is the practical skill: fine-tune a pretrained model on little data.",
  know:["Convolution, pooling, receptive field","ResNet idea and skip connections","Fine-tune a pretrained torchvision model","Data augmentation","Confusion matrix and per-class metrics"],
@@ -365,77 +518,125 @@ const RES=[
 ["Book","Pro Git","https://git-scm.com/book","Free online."]
 ];
 
+
+
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-const TABS=[["overview","Overview"],["matrix","Skill Gap Matrix"],["jobs","Job Postings"],["roadmap","Roadmap"],["resources","Resources"],["salary","Salaries"]];
-$("#nav").innerHTML=TABS.map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join("");
-function show(id){$$("section").forEach(s=>s.classList.toggle("on",s.id===id));$$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id));store.set("tab",id)}
-$("#nav").onclick=e=>{if(e.target.dataset.t)show(e.target.dataset.t)};
-show(store.get("tab","overview"));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 
-const lab={ok:"Covered",part:"Partial",gap:"Not taught"},cls={ok:"t-ok",part:"t-part",gap:"t-gap"};
-const dem=n=>["","Nice to have","Common","Very common"][n];
+/* theme */
+function applyTheme(t){if(t)document.documentElement.setAttribute("data-theme",t)}
+applyTheme(store.get("theme",null));
+$("#themeBtn").onclick=()=>{const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");const n=cur==="dark"?"light":"dark";applyTheme(n);store.set("theme",n)};
 
-function stats(){
- const c={ok:0,part:0,gap:0};SKILLS.forEach(s=>c[s.status=s[2]]++);
- const hi=SKILLS.filter(s=>s[1]==3),hiGap=hi.filter(s=>s[2]==="gap").length;
- const [done,total]=progress();
+/* nav */
+const IC={
+ overview:'<path d="M3 11l9-8 9 8M5 10v10h14V10"/>',
+ matrix:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+ jobs:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/>',
+ roadmap:'<path d="M4 19c4 0 4-14 8-14s4 14 8 14"/><circle cx="4" cy="19" r="1.5"/><circle cx="20" cy="19" r="1.5"/>',
+ resources:'<path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2zM4 21V5"/>',
+ salary:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>'
+};
+const TABS=[["overview","Overview"],["matrix","Skill gaps"],["jobs","Job postings"],["roadmap","Roadmap"],["resources","Resources"],["salary","Salaries"]];
+$("#nav").innerHTML=TABS.map(t=>`<button data-t="${t[0]}"><svg viewBox="0 0 24 24">${IC[t[0]]}</svg>${t[1]}</button>`).join("");
+function show(id){$$("section").forEach(s=>s.classList.toggle("on",s.id===id));$$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id));store.set("tab",id);window.scrollTo(0,0)}
+$("#nav").onclick=e=>{const b=e.target.closest("button");if(b)show(b.dataset.t)};
+
+const lab={ok:"Covered",part:"Partial",gap:"Not taught"},pcl={ok:"p-ok",part:"p-part",gap:"p-gap"};
+const dem=n=>`<span class="dots" title="${["","Nice to have","Common","Very common"][n]}">${[1,2,3].map(i=>`<i class="${i<=n?"f":""}"></i>`).join("")}</span> <span class="sub">${["","Nice to have","Common","Very common"][n]}</span>`;
+
+/* overview */
+const CATN={Core:"Core CS and math",ML:"Classical ML",DL:"Deep learning",LLM:"LLMs and RAG",Data:"Data and SQL",Eng:"Software engineering",Ops:"MLOps and cloud",Soft:"Soft skills"};
+function score(list){let w=0,s=0;list.forEach(x=>{w+=x[1];s+=x[1]*(x[2]==="ok"?1:x[2]==="part"?.5:0)});return w?s/w:0}
+function overview(){
+ const sc=Math.round(score(SKILLS)*100);
+ const R=74,C=2*Math.PI*R;
+ $("#ring").innerHTML=`<svg width="170" height="170" viewBox="0 0 170 170"><circle cx="85" cy="85" r="${R}" fill="none" stroke="var(--panel2)" stroke-width="14"/><circle cx="85" cy="85" r="${R}" fill="none" stroke="url(#g)" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-sc/100)}"/><defs><linearGradient id="g"><stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs></svg><div class="c"><b>${sc}%</b><span>of market skills</span></div>`;
+ const c={ok:0,part:0,gap:0};SKILLS.forEach(s=>c[s[2]]++);
+ const hi=SKILLS.filter(s=>s[1]===3),hg=hi.filter(s=>s[2]==="gap").length;
+ const [d,t]=progress();
  $("#stats").innerHTML=`
- <div class="card"><h3>Skills tracked</h3><div class="big">${SKILLS.length}</div><div class="mute">${c.ok} covered, ${c.part} partial, ${c.gap} not taught</div></div>
- <div class="card"><h3>High-demand skills missing</h3><div class="big" style="color:var(--gap)">${hiGap} / ${hi.length}</div><div class="mute">Skills rated "very common" that JKU does not teach</div></div>
- <div class="card"><h3>Roadmap progress</h3><div class="big">${total?Math.round(done/total*100):0}%</div><div class="mute">${done} of ${total} tasks done</div></div>
- <div class="card"><h3>Target pay (junior)</h3><div class="big">55-75k EUR</div><div class="mute">or 90-125k CHF in Zurich</div></div>`;
+ <div class="card kpi"><div class="l">Skills tracked</div><div class="v">${SKILLS.length}</div><div class="s">${c.ok} covered, ${c.part} partial, ${c.gap} not taught</div></div>
+ <div class="card kpi"><div class="l">Top-demand gaps</div><div class="v" style="color:var(--gap)">${hg} of ${hi.length}</div><div class="s">very common skills JKU does not teach</div></div>
+ <div class="card kpi"><div class="l">Roadmap done</div><div class="v">${t?Math.round(d/t*100):0}%</div><div class="s">${d} of ${t} items</div></div>
+ <div class="card kpi"><div class="l">Junior pay</div><div class="v">55-75k</div><div class="s">EUR in Germany, or 90-125k CHF in Zurich</div></div>`;
+ $("#cats").innerHTML=Object.keys(CATN).map(k=>{
+  const l=SKILLS.filter(s=>s[5]===k),w=l.reduce((a,s)=>a+s[1],0);
+  const f=st=>l.filter(s=>s[2]===st).reduce((a,s)=>a+s[1],0)/w*100;
+  return `<div class="catrow"><div class="n">${CATN[k]}</div><div class="stack"><i style="width:${f("ok")}%;background:var(--ok)"></i><i style="width:${f("part")}%;background:var(--part)"></i><i style="width:${f("gap")}%;background:var(--gap)"></i></div><div class="pc">${Math.round(score(l)*100)}%</div></div>`}).join("")+
+  `<div class="legend"><span style="--c:var(--ok)">Covered</span><span style="--c:var(--part)">Partial</span><span style="--c:var(--gap)">Not taught</span></div>`;
+ const nx=nextChapter();
+ $("#next").innerHTML=nx?`<div><div class="sub" style="font-size:12px;color:var(--mute)">Up next</div><b>${nx.t}</b></div><button class="btn" id="goNext">Continue</button>`:`<b>Roadmap complete</b>`;
+ const gb=$("#goNext");if(gb)gb.onclick=()=>{const o=store.get("open",{});o[nx.id]=1;store.set("open",o);roadmap();show("roadmap");setTimeout(()=>{const el=document.querySelector(`details[data-id="${nx.id}"]`);if(el)el.scrollIntoView({block:"start"})},50)};
 }
+function nextChapter(){for(const p of PHASES)for(const c of p.chapters)if(items(c).some(k=>!done[k]))return c;return null}
 
+/* matrix */
 let mf="All";
 function matrix(){
- const cats=["All","Core","ML","DL","LLM","Data","Eng","Ops","Soft"],stt=["All","gap","part","ok"];
- $("#matrixFilters").innerHTML=cats.map(c=>`<button class="chip ${mf===c?"on":""}" data-c="${c}">${c}</button>`).join("")+"<span class='mute'>|</span>"+stt.map(c=>`<button class="chip ${mf===c?"on":""}" data-c="${c}">${c==="All"?"Any status":lab[c]}</button>`).join("");
+ const cats=["All",...Object.keys(CATN)],stt=["gap","part","ok"];
+ $("#matrixFilters").innerHTML=cats.map(c=>`<button class="chip ${mf===c?"on":""}" data-c="${c}">${c==="All"?"All":CATN[c]}</button>`).join("")+stt.map(c=>`<button class="chip ${mf===c?"on":""}" data-c="${c}">${lab[c]}</button>`).join("");
  const rows=SKILLS.filter(s=>mf==="All"||s[5]===mf||s[2]===mf).sort((a,b)=>b[1]-a[1]);
- $("#matrixBody").innerHTML=rows.map(s=>`<tr><td><b>${s[0]}</b></td><td>${dem(s[1])}</td><td><span class="tag ${cls[s[2]]}">${lab[s[2]]}</span></td><td>${s[3]}</td><td>${s[4]}</td></tr>`).join("");
+ $("#matrixBody").innerHTML=rows.map(s=>`<div class="sk"><div><div class="nm">${s[0]}</div><div class="sub">${CATN[s[5]]}</div></div><div><div class="hd">Demand</div>${dem(s[1])}</div><div><div class="hd">Status</div><span class="pill ${pcl[s[2]]}">${lab[s[2]]}</span></div><div><div class="hd">Course / missing</div><div class="sub" style="color:var(--ink2)">${s[3]==="-"?"No matching course":s[3]}</div><div class="sub">${s[4]}</div></div></div>`).join("");
 }
-$("#matrixFilters").onclick=e=>{if(e.target.dataset.c){mf=e.target.dataset.c;matrix()}};
+$("#matrixFilters").onclick=e=>{const b=e.target.closest("[data-c]");if(b){mf=b.dataset.c;matrix()}};
 
+/* jobs */
 let jf="ALL";
 function jobs(){
  $("#jobFilters").innerHTML=[["ALL","All"],["DE","Germany"],["CH","Switzerland"]].map(x=>`<button class="chip ${jf===x[0]?"on":""}" data-c="${x[0]}">${x[1]}</button>`).join("");
- $("#jobList").innerHTML=JOBS.filter(j=>jf==="ALL"||j.reg===jf||j.reg==="BOTH").map(j=>`
- <div class="card"><div class="jobhead"><h3>${j.role}</h3><span class="tag t-part">${j.reg}</span></div>
- <div class="mute">${j.co} - ${j.loc} - ${j.src}</div>
- <ul class="l">${j.req.map(r=>`<li>${r}</li>`).join("")}</ul></div>`).join("");
+ $("#jobList").innerHTML=JOBS.filter(j=>jf==="ALL"||j.reg===jf||j.reg==="BOTH").map(j=>{
+  const arche=j.src==="composite";
+  return `<div class="card job"><div class="jh"><div class="av">${arche?"A":j.co[0]}</div><div><h3>${j.role}</h3><div class="m">${arche?"Composite":j.co} - ${j.loc}</div></div></div>
+  <div><span class="pill p-acc">${j.reg==="BOTH"?"DE + CH":j.reg==="DE"?"Germany":"Switzerland"}</span> <span class="pill ${arche?"p-part":"p-ok"}">${arche?"Archetype":"Listing"}</span></div>
+  <div class="reqs">${j.req.map(r=>`<span class="req">${r}</span>`).join("")}</div></div>`}).join("");
 }
-$("#jobFilters").onclick=e=>{if(e.target.dataset.c){jf=e.target.dataset.c;jobs()}};
+$("#jobFilters").onclick=e=>{const b=e.target.closest("[data-c]");if(b){jf=b.dataset.c;jobs()}};
 
+/* roadmap */
 const done=store.get("done2",{});
 const items=c=>[...c.know.map((_,i)=>c.id+":k"+i),c.id+":p"];
 function progress(){let t=0,d=0;PHASES.forEach(p=>p.chapters.forEach(c=>items(c).forEach(k=>{t++;if(done[k])d++})));return [d,t]}
-const lnk=r=>r[1]?`<a href="${r[1]}" target="_blank" rel="noopener">${r[0]}</a>`:`<span class="mute">${r[0]}</span>`;
+const isYT=u=>/youtube\.com/.test(u);
+const lnk=(r,vid)=>r[1]?`<a class="lk" href="${r[1]}" target="_blank" rel="noopener"><span class="ic ${vid?"v":"r"}">${vid?"&#9654;":"&#9776;"}</span><span class="t">${r[0]}</span><span class="arrow">&#8599;</span></a>`:`<div class="lk"><span class="ic r">&#9776;</span><span class="t">${r[0]}</span></div>`;
 function roadmap(){
  const op=store.get("open",{});
- $("#phases").innerHTML=PHASES.map(p=>`<div class="phase"><h2>${p.t}</h2><div class="mute" style="margin-bottom:8px">${p.d}</div>${p.chapters.map(c=>{
+ $("#phases").innerHTML=PHASES.map(p=>`<div class="phase"><h2>${p.t}</h2><p class="d">${p.d}</p>${p.chapters.map(c=>{
   const ks=items(c),n=ks.filter(k=>done[k]).length,pc=Math.round(n/ks.length*100);
-  return `<details class="card chap" data-id="${c.id}" ${op[c.id]?"open":""}><summary><b>${c.t}</b> <span class="mute">${n}/${ks.length}</span><div class="bar"><i style="width:${pc}%"></i></div></summary>
-  <p>${c.why}</p>
+  return `<details class="chap" data-id="${c.id}" ${op[c.id]?"open":""}><summary><b>${c.t}</b><span class="cnt">${n}/${ks.length}</span><div class="bar"><i style="width:${pc}%"></i></div></summary>
+  <div class="body"><p>${c.why}</p>
   <h4>You know it when you can</h4>
-  ${c.know.map((k,i)=>`<label class="task ${done[c.id+":k"+i]?"done":""}"><input type="checkbox" data-k="${c.id}:k${i}" ${done[c.id+":k"+i]?"checked":""}><div class="tt">${k}</div></label>`).join("")}
+  ${c.know.map((k,i)=>`<label class="task ${done[c.id+":k"+i]?"done":""}"><input type="checkbox" data-k="${c.id}:k${i}" ${done[c.id+":k"+i]?"checked":""}><span class="tt">${k}</span></label>`).join("")}
   <h4>Project</h4>
-  <label class="task ${done[c.id+":p"]?"done":""}"><input type="checkbox" data-k="${c.id}:p" ${done[c.id+":p"]?"checked":""}><div class="tt">${c.proj}</div></label>
-  ${c.vid.length?`<h4>Videos</h4><div class="res">${c.vid.map(lnk).join("")}</div>`:""}
-  ${c.read.length?`<h4>Read and practice</h4><div class="res">${c.read.map(lnk).join("")}</div>`:""}
-  </details>`}).join("")}</div>`).join("");
- const [d,t]=progress(),p=Math.round(d/t*100);$("#pct").textContent=p+"% ("+d+"/"+t+")";$("#pbar").style.width=p+"%";stats();
+  <label class="task ${done[c.id+":p"]?"done":""}"><input type="checkbox" data-k="${c.id}:p" ${done[c.id+":p"]?"checked":""}><span class="tt">${c.proj}</span></label>
+  ${c.vid.length?`<h4>Videos</h4><div class="links">${c.vid.map(r=>lnk(r,true)).join("")}</div>`:""}
+  ${c.read.length?`<h4>Read and practice</h4><div class="links">${c.read.map(r=>lnk(r,false)).join("")}</div>`:""}
+  </div></details>`}).join("")}</div>`).join("");
+ const [d,t]=progress(),p=Math.round(d/t*100);
+ $("#pct").textContent=p+"%  ("+d+" / "+t+")";$("#pbar").style.width=p+"%";
+ $("#sbPct").textContent=p+"%";$("#sbBar").style.width=p+"%";
+ overview();
 }
 $("#phases").onchange=e=>{const k=e.target.dataset.k;if(k){done[k]=e.target.checked;store.set("done2",done);const o={};$$("#phases details").forEach(x=>{if(x.open)o[x.dataset.id]=1});store.set("open",o);roadmap()}};
 
+/* resources */
 let rf="All";
 function res(){
  const cats=["All",...new Set(RES.map(r=>r[0]))];
  $("#resFilters").innerHTML=cats.map(c=>`<button class="chip ${rf===c?"on":""}" data-c="${c}">${c}</button>`).join("");
- $("#resList").innerHTML=RES.filter(r=>rf==="All"||r[0]===rf).map(r=>`<div class="card"><span class="tag t-ok">${r[0]}</span><h3 style="margin-top:6px">${r[1]}</h3><div class="mute">${r[3]}</div>${r[2]?`<a href="${r[2]}" target="_blank" rel="noopener">${r[2].replace(/^https?:\/\//,"")}</a>`:""}</div>`).join("");
+ $("#resList").innerHTML=RES.filter(r=>rf==="All"||r[0]===rf).map(r=>`<div class="card rcard"><div><span class="pill p-acc">${r[0]}</span></div><h3>${r[1]}</h3><p>${r[3]}</p>${r[2]?`<a class="u" href="${r[2]}" target="_blank" rel="noopener">${r[2].replace(/^https?:\/\//,"").replace(/\/$/,"")} &#8599;</a>`:""}</div>`).join("");
 }
-$("#resFilters").onclick=e=>{if(e.target.dataset.c){rf=e.target.dataset.c;res()}};
+$("#resFilters").onclick=e=>{const b=e.target.closest("[data-c]");if(b){rf=b.dataset.c;res()}};
+
+/* salary */
+function sal(el,rows,max){
+ $(el).innerHTML=rows.map(r=>`<div class="sal"><div style="font-weight:600">${r[0]}</div><div class="tr"><i style="left:${r[1]/max*100}%;width:${(r[2]-r[1])/max*100}%"></i></div><div class="v">${r[1]}-${r[2]}k</div></div>`).join("");
+}
+sal("#salDE",[["Junior (0-2 y)",55,75],["Mid (3-5 y)",75,105],["Senior (6+ y)",105,140]],220);
+sal("#salCH",[["Junior (0-2 y)",90,125],["Mid (3-5 y)",125,160],["Senior (6+ y)",160,210]],220);
 
 matrix();jobs();roadmap();res();
+show(store.get("tab","overview"));
 </script>
 </body>
 </html>
