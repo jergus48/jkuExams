@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CTU KyR Exam Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#f4f5f9;--panel:#ffffff;--panel2:#f0f2f7;--ink:#0f1424;--ink2:#3a4260;--mute:#6b7494;--line:#e3e6ef;
+ --acc:#4f46e5;--acc2:#7c3aed;--accbg:#eceafd;
+ --ok:#0f9d6b;--okbg:#dff5ec;--part:#c27a00;--partbg:#fcefd2;--gap:#d6394a;--gapbg:#fde3e6;
+ --shadow:0 1px 2px rgba(15,20,36,.05),0 8px 24px rgba(15,20,36,.06);
+}
+:root[data-theme=dark]{
+ --bg:#0b0e17;--panel:#131828;--panel2:#1a2033;--ink:#eef0f8;--ink2:#c3c9de;--mute:#8a93b3;--line:#232a42;
+ --acc:#8b8cff;--acc2:#b48bff;--accbg:#1e2247;
+ --ok:#3ddc9a;--okbg:#10301f;--part:#f5b94a;--partbg:#3a2c0e;--gap:#ff7a8a;--gapbg:#3a1822;
+ --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+ --bg:#0b0e17;--panel:#131828;--panel2:#1a2033;--ink:#eef0f8;--ink2:#c3c9de;--mute:#8a93b3;--line:#232a42;
+ --acc:#8b8cff;--acc2:#b48bff;--accbg:#1e2247;
+ --ok:#3ddc9a;--okbg:#10301f;--part:#f5b94a;--partbg:#3a2c0e;--gap:#ff7a8a;--gapbg:#3a1822;
+ --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,system-ui,Segoe UI,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.shell{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+aside{position:sticky;top:0;height:100vh;padding:24px 16px;border-right:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;gap:6px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:-.01em;padding:0 10px 18px}
+.logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px}
+.nav button{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;color:var(--ink2);font-weight:500;cursor:pointer}
+.nav button:hover{background:var(--panel2)}
+.nav button.on{background:var(--accbg);color:var(--acc);font-weight:600}
+.nav svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sidefoot{margin-top:auto;padding:14px 10px 0;border-top:1px solid var(--line);font-size:13px;color:var(--mute);display:grid;gap:10px}
+.sidefoot .mini{height:6px;background:var(--panel2);border-radius:9px;overflow:hidden}
+.sidefoot .mini i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:9px}
+.tbtn{all:unset;cursor:pointer;color:var(--mute);font-size:13px}.tbtn:hover{color:var(--ink)}
+main{padding:40px clamp(18px,4vw,56px) 90px;max-width:1120px;width:100%}
+section{display:none;animation:in .25s ease}section.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.15;letter-spacing:-.03em;margin:0 0 10px;font-weight:800}
+h2{font-size:20px;letter-spacing:-.02em;margin:36px 0 14px;font-weight:700}
+.lead{color:var(--ink2);font-size:17px;max-width:720px;margin:0 0 26px}
+.eyebrow{font:500 12px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin-bottom:10px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.kpi .l{font-size:13px;color:var(--mute);font-weight:500}
+.kpi .v{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:6px 0 4px}
+.kpi .s{font-size:13px;color:var(--mute)}
+.hero{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;padding:28px;border-radius:20px;background:linear-gradient(135deg,var(--accbg),var(--panel));border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:20px}
+.ringwrap{position:relative;width:170px;height:170px}
+.ringwrap svg{transform:rotate(-90deg)}
+.ringwrap .c{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ringwrap b{font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.ringwrap span{font-size:12px;color:var(--mute);margin-top:4px}
+.note{border:1px solid var(--line);background:var(--panel2);border-radius:12px;padding:12px 16px;font-size:13.5px;color:var(--ink2);margin:0 0 22px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600;white-space:nowrap}
+.p-ok{background:var(--okbg);color:var(--ok)}.p-part{background:var(--partbg);color:var(--part)}.p-gap{background:var(--gapbg);color:var(--gap)}.p-acc{background:var(--accbg);color:var(--acc)}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.catrow{display:grid;grid-template-columns:130px 1fr 54px;gap:14px;align-items:center;padding:9px 0}
+.catrow .n{font-weight:600;font-size:14px}
+.stack{display:flex;height:12px;border-radius:9px;overflow:hidden;background:var(--panel2)}
+.stack i{display:block;height:100%}
+.catrow .pc{text-align:right;font:500 13px "JetBrains Mono",monospace;color:var(--ink2)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--mute);margin-top:10px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;background:var(--c)}
+.next{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.btn{all:unset;cursor:pointer;background:var(--acc);color:#fff;padding:10px 18px;border-radius:10px;font-weight:600;font-size:14px}
+.btn:hover{filter:brightness(1.1)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.chip{all:unset;cursor:pointer;padding:6px 14px;border:1px solid var(--line);border-radius:99px;background:var(--panel);color:var(--ink2);font-size:13px;font-weight:500}
+.chip:hover{border-color:var(--acc)}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.sk{display:grid;grid-template-columns:1.5fr .8fr .8fr 1.6fr;gap:14px;align-items:start;padding:14px 18px;border-top:1px solid var(--line)}
+.sk:first-child{border-top:0}
+.sk .nm{font-weight:600}.sk .sub{font-size:13px;color:var(--mute)}
+.dots{display:inline-flex;gap:4px;vertical-align:middle}.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}.dots i.f{background:var(--acc)}
+.sk .hd{display:none}
+.tablehead{display:grid;grid-template-columns:1.5fr .8fr .8fr 1.6fr;gap:14px;padding:0 18px 8px;font:500 11px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.list{padding:0;overflow:hidden}
+.job{display:flex;flex-direction:column;gap:12px}
+.jh{display:flex;gap:12px;align-items:center}
+.av{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--acc),var(--acc2));flex:none}
+.jh h3{margin:0;font-size:16px;letter-spacing:-.01em;line-height:1.3}
+.jh .m{font-size:13px;color:var(--mute)}
+.reqs{display:flex;gap:6px;flex-wrap:wrap}
+.req{font-size:12.5px;padding:4px 10px;border-radius:8px;background:var(--panel2);color:var(--ink2);border:1px solid var(--line)}
+.rail{position:relative;margin-left:6px;padding-left:28px;border-left:2px solid var(--line)}
+.phase{margin-bottom:34px}
+.phase>h2{margin:0 0 2px;position:relative}
+.phase>h2::before{content:"";position:absolute;left:-39px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 5px var(--bg)}
+.phase>.d{color:var(--mute);margin:0 0 14px;font-size:14px}
+details.chap{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+details.chap[open]{border-color:var(--acc)}
+.chap summary{list-style:none;cursor:pointer;padding:14px 18px;display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:center}
+.chap summary::-webkit-details-marker{display:none}
+.chap summary b{font-weight:650;font-size:15.5px}
+.chap summary .cnt{font:500 12px "JetBrains Mono",monospace;color:var(--mute)}
+.bar{grid-column:1/-1;height:5px;background:var(--panel2);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:9px;transition:width .3s}
+.body{padding:2px 18px 18px;border-top:1px solid var(--line)}
+.body p{color:var(--ink2);margin:14px 0 0}
+.body h4{margin:18px 0 6px;font:500 11px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.task{display:flex;gap:12px;padding:7px 0;cursor:pointer;align-items:flex-start}
+.task input{appearance:none;width:19px;height:19px;border:2px solid var(--line);border-radius:6px;flex:none;margin-top:2px;cursor:pointer;display:grid;place-content:center;background:var(--panel)}
+.task input:checked{background:var(--acc);border-color:var(--acc)}
+.task input:checked::after{content:"";width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.task.done .tt{color:var(--mute);text-decoration:line-through}
+.links{display:flex;flex-direction:column;gap:6px}
+.lk{display:flex;gap:10px;align-items:center;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--ink);font-size:14px}
+.lk:hover{border-color:var(--acc);text-decoration:none}
+.lk .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:11px;font-weight:800;color:#fff;flex:none}
+.ic.v{background:#e0334c}.ic.r{background:var(--acc)}
+.lk span.t{flex:1}
+.lk .arrow{color:var(--mute)}
+.res{display:block}
+.rcard{display:flex;flex-direction:column;gap:6px}
+.rcard h3{margin:4px 0 0;font-size:15.5px;letter-spacing:-.01em}
+.rcard p{margin:0;color:var(--mute);font-size:13.5px;flex:1}
+.rcard .u{font-size:12.5px;word-break:break-all}
+.sal{display:grid;grid-template-columns:130px 1fr 130px;gap:14px;align-items:center;padding:12px 0}
+.sal .tr{position:relative;height:14px;background:var(--panel2);border-radius:9px}
+.sal .tr i{position:absolute;top:0;bottom:0;border-radius:9px;background:linear-gradient(90deg,var(--acc),var(--acc2))}
+.sal .v{font:500 13px "JetBrains Mono",monospace;text-align:right;color:var(--ink2)}
+.ul{margin:0;padding-left:20px;color:var(--ink2)}.ul li{margin:7px 0}
+@media (max-width:860px){
+ .shell{grid-template-columns:1fr}
+ aside{position:sticky;height:auto;flex-direction:row;overflow-x:auto;padding:10px;border-right:0;border-bottom:1px solid var(--line);z-index:9;gap:4px}
+ .brand,.sidefoot{display:none}
+ .nav{display:flex;gap:4px}.nav button{width:auto;white-space:nowrap;padding:8px 12px}
+ .hero{grid-template-columns:1fr}.ringwrap{margin:0 auto}
+ .sk,.tablehead{grid-template-columns:1fr 1fr}
+ .tablehead{display:none}
+ .sk .hd{display:block;font:500 10px "JetBrains Mono",monospace;text-transform:uppercase;color:var(--mute);margin-bottom:2px}
+ .sk>div:last-child,.sk>div:first-child{grid-column:1/-1}
+ .catrow{grid-template-columns:90px 1fr 46px}
+ .sal{grid-template-columns:1fr;gap:4px}.sal .v{text-align:left}
+}
+table.t{width:100%;border-collapse:collapse;font-size:14px}
+table.t th{font:500 11px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);text-align:left;padding:12px 16px;background:var(--panel2)}
+table.t td{padding:11px 16px;border-top:1px solid var(--line);vertical-align:top;color:var(--ink2)}
+.tw{overflow-x:auto}
+.btn{display:inline-block}
+:root{--acc:#0d8a7e;--acc2:#2f6fd6;--accbg:#dff3f0}
+:root[data-theme=dark]{--acc:#35d3c2;--acc2:#7aa7ff;--accbg:#10302e}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--acc:#35d3c2;--acc2:#7aa7ff;--accbg:#10302e}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+ <div class="brand"><div class="logo">KyR</div>Master Prep</div>
+ <nav class="nav" id="nav"></nav>
+ <div class="sidefoot">
+  <div><div style="display:flex;justify-content:space-between"><span>Chapters done</span><b id="sbPct" style="color:var(--ink)">0%</b></div><div class="mini"><i id="sbBar" style="width:0"></i></div></div>
+  <a href="/">&larr; Exam Trainer</a>
+  <button class="tbtn" id="themeBtn">Toggle theme</button>
+ </div>
+</aside>
+<main>
+
+<section id="overview" class="on">
+ <div class="eyebrow">CTU Prague, Cybernetics and Robotics (KyR)</div>
+ <h1>Master entrance exam prep.</h1>
+ <p class="lead">Research pass of 6 Oct 2026 on official CTU FEL pages. The key finding: FEL publishes a real sample test, and it changes what you should study first.</p>
+
+ <div class="grid g2">
+  <div class="card"><span class="pill p-ok">Realistic</span><h3 style="margin:10px 0 6px">Open to other degrees</h3><p style="margin:0;color:var(--ink2)">No specific bachelor is required. Gaps are filled with electives in year one. You must pass a written test and, as a non-KyR graduate, an oral exam or video interview.</p></div>
+  <div class="card"><span class="pill p-part">Not trivial</span><h3 style="margin:10px 0 6px">JKU AI has no circuits or control</h3><p style="margin:0;color:var(--ink2)">Math, probability, ML and algorithms are strengths. Circuits, op-amps, measurement, control and physics are zero coverage. 17 months is enough if you start now.</p></div>
+ </div>
+
+ <h2>Exam facts</h2>
+ <div class="card list tw"><table class="t">
+  <tr><th>Item</th><th>Fact</th><th>What it means for you</th></tr>
+  <tr><td>Format</td><td>Written test, <b>60 minutes, 18 multiple-choice questions (A to D), in Czech</b>. Pass at 50% (9 points).</td><td>About 3.3 minutes per question. Speed and Czech terms matter.</td></tr>
+  <tr><td>Oral part</td><td>Graduates of other programmes get an oral exam or video interview after the written test. FEL says the oral part can weigh at most 20% by programme decision.</td><td>Prepare both. See chapter E3.</td></tr>
+  <tr><td>Scoring</td><td>KyR bachelor graduates: 50-70% may be accepted on commission recommendation, above 70% typically accepted.</td><td>Aim for 13 of 18 (70%).</td></tr>
+  <tr><td>Exemption</td><td>Needs a related programme (committee decides) and a weighted average of 1.80 or better.</td><td>Do not count on it. JKU AI may not count as related. Ask in the email.</td></tr>
+  <tr><td>Dates (2026 reference)</td><td>The KyR page lists 1 Jun 2026 (backup 26 Jun). The FEL general page lists 25 Aug to 3 Sep 2026. Applications by 31 Mar. Fee 950 CZK.</td><td>The two pages disagree, so check each year. Your cycle is likely spring 2028.</td></tr>
+  <tr><td>Final-year applicants</td><td>Allowed if you will finish before enrolment.</td><td>You can apply in spring of year 3.</td></tr>
+  <tr><td>Documents</td><td>Foreign diplomas need nostrification, except from SK, PL, HU, SI. Czech language proof required for foreigners, except Slovak citizens and Czech-taught graduates.</td><td>Start nostrification a year early.</td></tr>
+  <tr><td>Programme</td><td>4 semesters. Compulsory: Linear Systems, Autonomous Robotics, Diagnostics and Testing. 7 electives, at least 3 from group 1 (Computer Vision Methods, Estimation/Filtration, Optimal and Robust Systems, Statistical ML and others).</td><td>CV and ML background fits group 1.</td></tr>
+ </table></div>
+
+ <h2>What this means for your strategy</h2>
+ <div class="grid g2">
+  <div class="card">
+   <h3 style="margin:0 0 10px">Question mix and JKU coverage</h3>
+   <div class="catrow"><div class="n">Maths (Q1-5)</div><div class="stack"><i style="width:100%;background:var(--ok)"></i></div><div class="pc">5</div></div>
+   <div class="catrow"><div class="n">CS and networks (Q6-7)</div><div class="stack"><i style="width:70%;background:var(--ok)"></i><i style="width:30%;background:var(--part)"></i></div><div class="pc">2</div></div>
+   <div class="catrow"><div class="n">Circuits (Q9-12)</div><div class="stack"><i style="width:100%;background:var(--gap)"></i></div><div class="pc">4</div></div>
+   <div class="catrow"><div class="n">Control (Q13-16)</div><div class="stack"><i style="width:20%;background:var(--part)"></i><i style="width:80%;background:var(--gap)"></i></div><div class="pc">4</div></div>
+   <div class="catrow"><div class="n">Units and sensors (Q8, 17, 18)</div><div class="stack"><i style="width:100%;background:var(--gap)"></i></div><div class="pc">3</div></div>
+   <div class="legend"><span style="--c:var(--ok)">JKU covers</span><span style="--c:var(--part)">partial</span><span style="--c:var(--gap)">not taught</span></div>
+  </div>
+  <div class="card">
+   <h3 style="margin:0 0 10px">The arithmetic of passing</h3>
+   <ul class="ul">
+    <li>You need 9 of 18. Maths and CS are 7 questions, and with timed practice you should get about 6.</li>
+    <li>You then need only 3 more from the 11 electrical, control and measurement questions. That is a realistic target.</li>
+    <li>For a safe 13 of 18 you need about 7 from those 11, which is roughly 65%.</li>
+    <li><b>Highest yield per hour:</b> measurement and units (Q8, 17, 18), PID concept (Q16), Thevenin (Q10), then op-amps and RLC power.</li>
+    <li>Control with Bode matching (Q13-15) is the longest to learn but also the core of the degree, so start early.</li>
+   </ul>
+  </div>
+ </div>
+ <div class="note" style="margin-top:16px"><b>How to use the Study chapters tab:</b> do A and C first (cheap points), then B, then D and E in the final year. Each chapter ends with a practice task that mirrors a sample question. Budget: about 440 hours at 6 h per week over 17 months, and the chapter tags sum to roughly 350 h with the rest for mocks and reviews.</div>
+</section>
+<section id="sample"><div class="eyebrow">Official sample test</div>
+ <h2>The official sample test, question by question</h2>
+ <div class="note">Source: the PDF linked on the <a href="https://kyr.fel.cvut.cz/jak-se-pripravit-na-prijimacky" target="_blank" rel="noopener">KyR preparation page</a>, <a href="https://kyr.fel.cvut.cz/sites/default/files/downloads/staticka-stranka/vzorovy-test-mag.pdf" target="_blank" rel="noopener">vzorovy-test-mag.pdf</a>. I read the question text from the PDF. Some questions depend on figures I could not fully read, and the PDF contains marked answer letters that did not extract reliably, so I give my own worked reasoning only where I could verify it. Always check against the PDF itself. This is one sample, not a guarantee of future tests.</div>
+ <div class="card list tw"><table class="t">
+  <tr><th>Q</th><th>Topic</th><th>FEL bachelor course</th><th>What is tested and a worked hint</th></tr>
+  <tr><td>1</td><td>Linear algebra</td><td>Linear algebra</td><td>How many of the given matrices are singular. Singular means determinant zero.</td></tr>
+  <tr><td>2</td><td>Linear algebra</td><td>Linear algebra</td><td>Three vectors with parameter a are dependent when the determinant is zero: 21 - 7a = 0, so a = 3.</td></tr>
+  <tr><td>3</td><td>Calculus</td><td>Calculus</td><td>Find and classify local extrema of a two-variable function: gradient zero, then the Hessian.</td></tr>
+  <tr><td>4</td><td>Probability</td><td>Probability</td><td>Definition of expectation of a continuous variable: E[X] is the integral of x f(x) dx.</td></tr>
+  <tr><td>5</td><td>Graph theory</td><td>Logic and graphs</td><td>Spanning tree: connected, contains all vertices, and is a tree (no cycle).</td></tr>
+  <tr><td>6</td><td>Programming</td><td>Algorithms / programming</td><td>Trace a recursive function by hand. rfce(3,4) = 12 by repeated addition, rfce(-3,4) = 0 because the base case returns 0.</td></tr>
+  <tr><td>7</td><td>Networks</td><td>Information and networks</td><td>TCP is reliable, ordered stream transport (not UDP, ARP or routing).</td></tr>
+  <tr><td>8</td><td>Physical units</td><td>Physics</td><td>Dimension of the ohm in base units: from P = I^2 R, R = kg m^2 s^-3 A^-2.</td></tr>
+  <tr><td>9</td><td>AC circuit and power</td><td>Electronic circuits</td><td>RLC fed by 100 V DC plus 50 V sine at 100 rad/s. C blocks DC, XL = XC so the AC branch is purely R, P = (50/sqrt 2)^2 / 100 = 12.5 W (if the figure is a series circuit).</td></tr>
+  <tr><td>10</td><td>Thevenin equivalent</td><td>Electronic circuits</td><td>R1 = R2 = 10k, R3 = 1k, 10 V source: Ue = 5 V, Re = R3 + R1||R2 = 6 kohm.</td></tr>
+  <tr><td>11</td><td>Op-amp</td><td>Electronic circuits</td><td>Output voltage with given ui, R1, R2: decide linear mode vs saturation (comparator behaviour). Depends on the figure.</td></tr>
+  <tr><td>12</td><td>Op-amps with capacitors</td><td>Electronic circuits</td><td>Steady-state waveforms of two op-amp stages with C1 and C2 and a +10 V / -10 V supply. Integrators drive the output to saturation.</td></tr>
+  <tr><td>13</td><td>Transfer function</td><td>Automatic control</td><td>Which form describes a continuous system with transport delay and no integrator.</td></tr>
+  <tr><td>14</td><td>Step response and Bode</td><td>Automatic control / signals</td><td>Pick the Bode plot matching a given step response: read DC gain, time constant and order.</td></tr>
+  <tr><td>15</td><td>Poles and zeros</td><td>Automatic control</td><td>Find zeros and poles of a system from a block diagram.</td></tr>
+  <tr><td>16</td><td>PID</td><td>Automatic control</td><td>Benefit of the derivative term: it damps oscillations. (The I term removes steady-state error.)</td></tr>
+  <tr><td>17</td><td>Measurement</td><td>Sensors and measurement</td><td>A DC voltmeter shows the mean of the waveform. For a pulse of 20 V lasting T/4 the mean is 5 V (check the figure).</td></tr>
+  <tr><td>18</td><td>Sensors</td><td>Sensors and measurement</td><td>A Hall probe measures the magnetic field.</td></tr>
+ </table></div>
+</section>
+<section id="chapters"><div class="eyebrow">Study chapters</div><h1>24 chapters, ordered by exam yield.</h1><p class="lead">Do A and C first (cheap points), then B, then D and E in the final year. Each chapter ends with a practice task that mirrors a sample question.</p>
+ 
+ <div class="card" style="margin-bottom:24px"><div style="display:flex;justify-content:space-between;align-items:baseline"><b>Master prep progress</b><span id="mpct" style="font:500 13px 'JetBrains Mono',monospace;color:var(--mute)"></span></div><div class="bar" style="height:8px;margin-top:10px"><i id="mpbar" style="width:0"></i></div></div>
+ <div class="rail" id="mphases"></div>
+</section>
+<section id="plan"><div class="eyebrow">Plan</div><h1>Timeline and vocabulary.</h1>
+ <h2>Timeline (assuming you finish in summer 2028)</h2>
+ <div class="card list tw"><table class="t">
+  <tr><th>When</th><th>Focus</th></tr>
+  <tr><td>Oct 2026 to Jan 2027</td><td>Send the email. Chapters A5 (units and measurement), A1 (DC circuits), C1-C4 (refresh). Start the daily Czech terms habit.</td></tr>
+  <tr><td>Feb to Jun 2027</td><td>A2 (RLC and power), A3 (op-amps), A4 (transients), B1 (Laplace and transfer functions). First sample test attempt to get a baseline.</td></tr>
+  <tr><td>Jul to Sep 2027</td><td>B2 (Bode), B3 (PID). Plan JKU electives. Start D1 (kinematics) and D5 (C++).</td></tr>
+  <tr><td>Oct 2027 to Jan 2028</td><td>B4 (state space), D2 (Kalman), D3, D4, C5 (physics). Start nostrification.</td></tr>
+  <tr><td>Feb to Mar 2028</td><td>Apply. Collect transcript, averages and documents. First timed mock tests.</td></tr>
+  <tr><td>Apr to Jun 2028</td><td>Six timed mocks, error log, interview rehearsal (E2, E3). Dates will shift, so check them.</td></tr>
+ </table></div>
+
+ <h2>Czech glossary</h2>
+ <div class="card list tw"><table class="t">
+  <tr><th>English</th><th>Czech</th><th>English</th><th>Czech</th></tr>
+  <tr><td>transfer function</td><td>přenos / přenosová funkce</td><td>state space</td><td>stavový popis</td></tr>
+  <tr><td>poles and zeros</td><td>póly a nuly</td><td>stability</td><td>stabilita</td></tr>
+  <tr><td>step response</td><td>přechodová charakteristika</td><td>frequency response</td><td>frekvenční charakteristika</td></tr>
+  <tr><td>Bode plot</td><td>Bodeho diagram</td><td>controller</td><td>regulátor</td></tr>
+  <tr><td>feedback</td><td>zpětná vazba</td><td>derivative / integral term</td><td>derivační / integrační složka</td></tr>
+  <tr><td>steady state</td><td>ustálený stav</td><td>transport delay</td><td>dopravní zpoždění</td></tr>
+  <tr><td>resistance, resistor</td><td>odpor, rezistor</td><td>capacitor, inductor</td><td>kondenzátor, cívka</td></tr>
+  <tr><td>voltage, current</td><td>napětí, proud</td><td>active power</td><td>činný výkon</td></tr>
+  <tr><td>RMS value</td><td>efektivní hodnota</td><td>mean / expected value</td><td>střední hodnota</td></tr>
+  <tr><td>operational amplifier</td><td>operační zesilovač</td><td>saturation</td><td>nasycení</td></tr>
+  <tr><td>impedance, phasor</td><td>impedance, fázor</td><td>Kirchhoff's laws</td><td>Kirchhoffovy zákony</td></tr>
+  <tr><td>physical dimension</td><td>fyzikální rozměr</td><td>singular matrix</td><td>singulární matice</td></tr>
+  <tr><td>linearly dependent</td><td>lineárně závislé</td><td>local extremum, saddle point</td><td>lokální extrém, sedlový bod</td></tr>
+  <tr><td>spanning tree</td><td>kostra grafu</td><td>connected graph</td><td>souvislý graf</td></tr>
+  <tr><td>Hall probe</td><td>Hallova sonda</td><td>magnetic field</td><td>magnetické pole</td></tr>
+  <tr><td>eigenvalue</td><td>vlastní číslo</td><td>differential equation</td><td>diferenciální rovnice</td></tr>
+  <tr><td>Laplace transform</td><td>Laplaceova transformace</td><td>rotation matrix</td><td>rotační matice</td></tr>
+ </table></div>
+</section>
+<section id="admin"><div class="eyebrow">Application</div><h1>Email, corrections and sources.</h1>
+ <h2>Email to the programme</h2>
+ <div class="note">The KyR page lists <b>kyr@fel.cvut.cz</b> as contact. You may write in Czech or Slovak. Add the new questions: is the sample test representative, and does the written test follow the bachelor KyR compulsory courses.</div>
+ <div class="card"><pre id="mail" style="white-space:pre-wrap;margin:0 0 14px;font:inherit;font-size:14px;color:var(--ink2)">Subject: Přijímací zkouška do magisterského programu KyR, absolvent JKU Linz BSc Artificial Intelligence
+
+Dobrý den,
+
+jsem studentem 2. ročníku bakalářského programu Artificial Intelligence (BSc) na Johannes Kepler University v Linzi. Zvažuji přihlášku do magisterského programu Kybernetika a robotika a plánuji se přihlásit v roce 2028. Navíc k povinným předmětům mám zapsaný magisterský předmět Computer Vision.
+
+Můj studijní plán obsahuje matematiku, algoritmy, strojové učení a zpracování signálů, ale neobsahuje teorii řízení, elektrické obvody ani fyzikální modelování. Tyto oblasti plánuji doplnit samostudiem a volitelnými předměty.
+
+Prosím o odpověď na čtyři otázky:
+1. Jsou tematické okruhy písemné a ústní přijímací zkoušky do KyR zveřejněny, a je vzorový test na vašich stránkách reprezentativní pro současnou zkoušku?
+2. Které předměty bakalářského programu KyR nejlépe odpovídají obsahu zkoušky, abych se mohl zaměřit na správné materiály?
+3. Je program AI z JKU posuzován jako příbuzný pro účely prominutí zkoušky, nebo mám počítat s absolvováním zkoušky?
+4. Jak probíhá ústní zkouška nebo pohovor (jazyk, délka, okruhy)?
+
+Děkuji za odpověď.
+S pozdravem,
+[Jméno a příjmení]
+JKU Linz, BSc Artificial Intelligence</pre><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('mail').innerText)">Copy email</button></div>
+
+ <h2>Corrections to earlier answers</h2>
+ <div class="card"><ul class="ul">
+  <li><b>A sample test does exist.</b> An earlier pass said FEL does not publish one. It is linked from the KyR preparation page.</li>
+  <li>The test is broad bachelor-level multiple choice, not deep master-level theory: maths, code reading, networks, units, circuits, op-amps, control, sensors.</li>
+  <li>The exam is in Czech; non-KyR graduates also face an oral exam or video interview; Austrian degrees need nostrification; the exemption needs a related programme and a 1.80 average.</li>
+  <li>The programme guarantor name and admission email addresses given earlier by another assistant were not verified. Use kyr@fel.cvut.cz.</li>
+  <li>JKU AI module sums given earlier were wrong; use the official curriculum numbers (Data Science 32.5, AI Basics 26, plus 12 ECTS specialization and 9 free electives).</li>
+ </ul></div>
+
+ <h2>Sources</h2>
+ <div class="card"><ul class="ul">
+  <li><a href="https://kyr.fel.cvut.cz/jak-se-pripravit-na-prijimacky" target="_blank" rel="noopener">KyR: how to prepare for the entrance exams</a> and <a href="https://kyr.fel.cvut.cz/sites/default/files/downloads/staticka-stranka/vzorovy-test-mag.pdf" target="_blank" rel="noopener">official sample test (PDF)</a></li>
+  <li><a href="https://kyr.fel.cvut.cz/prijimacky" target="_blank" rel="noopener">KyR entrance exam page</a> and <a href="https://kyr.fel.cvut.cz/en/entrance-exams" target="_blank" rel="noopener">English version</a></li>
+  <li><a href="https://fel.cvut.cz/cs/uchazeci/prijimaci-rizeni/prijimaci-zkouska/prijimaci-zkouska-do-magisterskeho-studia" target="_blank" rel="noopener">FEL entrance exam to master's</a> and <a href="https://fel.cvut.cz/cs/uchazeci/prijimaci-rizeni/podminky-prijeti/podminky-prijeti-do-magisterskeho-studia" target="_blank" rel="noopener">admission conditions</a></li>
+  <li><a href="https://intranet.fel.cvut.cz/en/education/master/topicsKR" target="_blank" rel="noopener">KyR master state-exam topics</a>, <a href="https://intranet.fel.cvut.cz/cz/education/master/topicsKR2021.html" target="_blank" rel="noopener">2021 Czech version</a> and <a href="https://intranet.fel.cvut.cz/cz/education/bachelor/topicsKR2016.html" target="_blank" rel="noopener">KyR bachelor topics 2016</a></li>
+  <li><a href="https://studienhandbuch.jku.at/texte/798_2_BS_ArtificialIntelligence.pdf" target="_blank" rel="noopener">JKU BSc AI curriculum</a></li>
+ </ul></div>
+</section>
+
+</main>
+</div>
+<script>
+const MPH=[
+{t:"A. Circuits and measurement",d:"About 7 of 18 sample-test questions (circuits, op-amps, units, measurement). Zero coverage at JKU, so this is where the points are.",chapters:[
+{id:"mA1",t:"DC circuit analysis, Thevenin and Norton",tag:"Sample Q10 - about 20 h",
+ why:"The easiest circuit points on the test. Thevenin equivalents (source voltage plus series resistance) are a standard question type and are mechanical once you have the recipe.",
+ know:["Ohm, Kirchhoff current and voltage laws, power P = U*I = I^2*R","Series and parallel resistance, voltage and current dividers","Nodal analysis and mesh analysis for 2-3 loop circuits","Superposition with several sources","Thevenin: open-circuit voltage, then equivalent resistance with sources zeroed (e.g. R3 + R1||R2)","Norton equivalent and source transformation","Maximum power transfer"],
+ proj:"Solve 30 problems (10 divider, 10 Thevenin/Norton, 10 nodal). Redo sample test Q10 without notes in under 3 minutes.",
+ vid:[["The Complete Guide to Thevenin's Theorem","https://www.youtube.com/watch?v=-X7otqsma4Q"],["Two Thevenin and Norton equivalent circuits - clearly explained","https://www.youtube.com/watch?v=2SVBTYWKNYE"]],
+ read:[["MIT OCW 6.002 Circuits and Electronics","https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/"],["All About Circuits textbook","https://www.allaboutcircuits.com/textbook/"],["Falstad circuit simulator (check your answers)","https://falstad.com/circuit/"]]},
+{id:"mA2",t:"AC circuits, RLC, phasors and active power",tag:"Sample Q9 - about 25 h",
+ why:"Q9 mixes a DC offset with a sine in an RLC circuit and asks for active power. It needs three ideas at once: capacitor blocks DC, reactances at the given frequency, and power only dissipates in R.",
+ know:["Sine amplitude vs RMS (U_rms = U_max / sqrt 2)","Complex impedance: Z_R = R, Z_L = jwL, Z_C = 1/(jwC)","Series and parallel impedance, phasor diagrams","Resonance: w0 = 1/sqrt(LC), impedance = R at resonance","Active power P = U_rms * I_rms * cos(phi), reactive power, apparent power, power factor","Superposition for mixed DC + AC sources (powers of different frequencies add)","Worked check of Q9: C blocks DC, at w = 100 rad/s XL = 10 ohm and XC = 10 ohm so Z = R = 100 ohm, P = (50/sqrt2)^2 / 100 = 12.5 W (assuming the series circuit in the figure)"],
+ proj:"Solve 20 problems: 10 impedance and resonance, 10 power. Build one RLC circuit in the Falstad simulator and confirm the resonance frequency.",
+ vid:[["Series RLC Circuit in AC: Phasors, Impedance, and Resonance","https://www.youtube.com/watch?v=yneIxguvtYM"],["RLC Circuit in AC: Resonance and Power Factor Explained","https://www.youtube.com/watch?v=0K0kYLct798"]],
+ read:[["MIT OCW 6.002 Circuits and Electronics","https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/"],["Khan Academy: electrical engineering","https://www.khanacademy.org/science/electrical-engineering"]]},
+{id:"mA3",t:"Operational amplifiers",tag:"Sample Q11, Q12 - about 20 h",
+ why:"Two of 18 sample questions are op-amps. The trick is to know when the op-amp is linear (negative feedback, virtual short) and when it is a comparator (open loop or positive feedback, output at plus or minus saturation).",
+ know:["Ideal op-amp rules: infinite input resistance, virtual short with negative feedback","Inverting amplifier gain -R2/R1, non-inverting 1 + R2/R1, voltage follower","Summing amplifier and difference amplifier","Integrator and differentiator (RC in feedback) and what a constant input does: ramp until saturation","Comparator: no feedback or positive feedback gives output at +U_sat or -U_sat","Check whether the computed output exceeds the supply: if yes the real output saturates","Steady-state analysis: capacitor open for DC, then read off output (Q12 style)"],
+ proj:"Draw and solve 15 op-amp circuits (5 linear, 5 integrators with step input, 5 saturation cases). Redo sample Q11 and Q12 and explain why each wrong option is wrong.",
+ vid:[["Inverting and Non-inverting Amplifiers - Op-amps","https://www.youtube.com/watch?v=EOZyofNXWXc"],["Op-Amp Integrator (with Derivation and Solved Examples)","https://www.youtube.com/watch?v=OPvs7A554Rw"],["Inverting vs Non-Inverting Amplifiers Explained","https://www.youtube.com/watch?v=cPyPr_XnkGo"]],
+ read:[["All About Circuits: operational amplifiers","https://www.allaboutcircuits.com/textbook/semiconductors/chpt-8/"]]},
+{id:"mA4",t:"Transients: RC, RL and second-order circuits",tag:"Supports Q12, control basics - about 15 h",
+ why:"First-order transients are the first dynamic system you will meet, and the same math (time constant, exponential response) reappears in control. It is the bridge from circuits to transfer functions.",
+ know:["Capacitor and inductor: i = C du/dt, u = L di/dt","Initial and final values: C open, L short in DC steady state","First-order step response and time constant tau = RC or L/R","Charge, discharge and the 63% rule","Second-order RLC: damping, oscillation, critical damping","Write the differential equation, then its Laplace transfer function"],
+ proj:"Derive and sketch step responses for 10 RC/RL circuits, then derive one RLC transfer function G(s) = 1/(LC s^2 + RC s + 1) and mark its poles.",
+ vid:[["Series RLC Circuit in AC: Phasors, Impedance, and Resonance","https://www.youtube.com/watch?v=yneIxguvtYM"]],
+ read:[["MIT OCW 6.002 Circuits and Electronics","https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/"],["Paul's Online Math Notes: Laplace and ODE","https://tutorial.math.lamar.edu/"]]},
+{id:"mA5",t:"Measurement, units and sensors",tag:"Sample Q8, Q17, Q18 - about 12 h",
+ why:"Cheapest points on the test. Q8 is dimensional analysis, Q17 asks what a DC voltmeter shows for a given waveform, Q18 is a sensor identification question. A few days of work can win 2-3 points.",
+ know:["SI base units and derived units: V, A, ohm, W, F, H, T in base units","Dimensional analysis: ohm = W/A^2 = kg m^2 s^-3 A^-2 (Q8)","Mean (DC) vs RMS vs peak for sine, square, pulse and triangle waveforms","A DC voltmeter shows the mean value: pulse of 20 V for T/4 per period gives 5 V (Q17, check the figure)","Hall sensor = magnetic field (Q18); thermocouple, RTD, thermistor, strain gauge, photodiode, piezo, LVDT, encoders","Measurement error, resolution, accuracy, noise","ADC: sampling rate, bit depth, quantization step, aliasing"],
+ proj:"Make a one-page table: sensor, measured quantity, principle, typical output. Then compute mean, RMS and peak for 8 waveforms by hand.",
+ vid:[["Search: mean vs RMS voltmeter reading waveform","https://www.youtube.com/results?search_query=mean+vs+RMS+value+waveform+DC+voltmeter+reading"],["Search: sensors for robotics, Hall effect, encoder, IMU","https://www.youtube.com/results?search_query=sensors+Hall+effect+thermocouple+strain+gauge+encoder+explained"]],
+ read:[["Wikipedia: SI derived units","https://en.wikipedia.org/wiki/SI_derived_unit"],["Khan Academy: physics","https://www.khanacademy.org/science/physics"]]}
+]},
+{t:"B. Control, signals and linear systems",d:"About 4 sample questions, and the core of the master programme (Linear Systems is semester 1).",chapters:[
+{id:"mB1",t:"Laplace transform, transfer functions, poles and zeros",tag:"Sample Q13, Q15 - about 25 h",
+ why:"Everything in control is written as a transfer function. Q15 asks for zeros and poles from a block diagram, Q13 for the form of a transfer function with transport delay.",
+ know:["Laplace transform of step, ramp, exponential, sine; derivative rule","Transfer function from ODE and from circuit impedances","Poles = roots of denominator, zeros = roots of numerator","Block diagram algebra: series, parallel, feedback (G/(1+GH))","Astatism: pure integrator 1/s in the loop","Transport delay e^(-sT) and its Bode effect","Initial and final value theorems, DC gain G(0)","Partial fractions to invert Laplace"],
+ proj:"Do 25 block-diagram reductions and transfer function problems. Redo sample Q13 and Q15 and write out the full algebra.",
+ vid:[["Steve Brunton: Control Bootcamp (playlist)","https://www.youtube.com/playlist?list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m"],["Search: Laplace transform transfer function poles zeros lecture","https://www.youtube.com/results?search_query=Laplace+transform+transfer+function+poles+zeros+block+diagram+lecture"]],
+ read:[["MIT OCW 6.003 Signals and Systems","https://ocw.mit.edu/courses/6-003-signals-and-systems-fall-2011/"],["Paul's Online Math Notes (Laplace)","https://tutorial.math.lamar.edu/"]]},
+{id:"mB2",t:"Time response and Bode plots",tag:"Sample Q14 - about 20 h",
+ why:"Q14 gives a step response and asks which Bode plot belongs to it. You need to read DC gain, time constant and order from the step response and translate them to magnitude slope and phase.",
+ know:["First-order lag: time constant at 63%, corner frequency 1/tau","Second-order: damping ratio, natural frequency, overshoot, resonance peak","Bode magnitude in dB: 20*log10|G|; slopes of -20 dB/dec per pole","Phase: -90 degrees per pole at high frequency, plus effect of zeros and delay","Low-frequency gain on Bode equals the steady-state value of the step response","Sketch asymptotic Bode from pole-zero form","Match a Bode plot to a step response (Q14 exactly)"],
+ proj:"For 10 transfer functions: sketch step response and Bode by hand, then verify in Python (scipy.signal) or MATLAB. Redo sample Q14.",
+ vid:[["Bode Plot or frequency response for transfer functions with real zeros and poles","https://www.youtube.com/watch?v=x9LT1R9fotQ"],["Exploring step / Bode / pole locations: Second Order","https://www.youtube.com/watch?v=NvwpbJxGVzo"]],
+ read:[["python-control library docs","https://python-control.readthedocs.io"]]},
+{id:"mB3",t:"Feedback control and PID",tag:"Sample Q16 - about 20 h",
+ why:"One sample question is the role of the D term (answer: damping oscillations, not eliminating steady-state error, which is the I term). Concepts like this are fast to learn and appear in the oral interview too.",
+ know:["Open vs closed loop, sensitivity and disturbance rejection","P: faster response but steady-state error; I: removes steady-state error; D: adds damping and anticipation","Why D amplifies noise and how filtering handles it","Integrator windup and anti-windup with actuator saturation","Steady-state error for step and ramp references (system type)","Routh-Hurwitz stability test","Root locus and gain and phase margin from Bode or Nyquist"],
+ proj:"Simulate a second-order plant in Python with P, PI, PID and plot the effect of each term. Write one sentence on what each term did.",
+ vid:[["PID Controller explained (Engineering Funda)","https://www.youtube.com/watch?v=A6_h2YacMr4"],["Search: Brian Douglas PID control, margins, root locus","https://www.youtube.com/results?search_query=Brian+Douglas+control+systems+lectures+PID"]],
+ read:[["Control Tutorials for MATLAB and Simulink (Michigan/CMU)","https://ctms.engin.umich.edu/CTMS/"]]},
+{id:"mB4",t:"State space and linear systems",tag:"Master LSY - about 30 h",
+ why:"Linear Systems is the first compulsory master course and an oral-interview favourite. Your linear algebra makes this the place where JKU gives you an advantage.",
+ know:["State-space model x' = Ax + Bu, y = Cx + Du","Transfer function G(s) = C(sI - A)^-1 B + D","Eigenvalues of A = poles; stability","Controllability and observability matrices and rank tests","State feedback u = -Kx and pole placement","Observer (Luenberger) and separation principle","Lyapunov stability, nonlinear linearization about an equilibrium"],
+ proj:"Model an inverted pendulum or DC motor in state space, check controllability, place poles, simulate, and add an observer.",
+ vid:[["Control Bootcamp (Steve Brunton) playlist","https://www.youtube.com/playlist?list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m"],["Control Bootcamp: Observability","https://www.youtube.com/watch?v=iRZmJBcg1ZA"]],
+ read:[["KyR master state-exam topics (official)","https://intranet.fel.cvut.cz/en/education/master/topicsKR"]]}
+]},
+{t:"C. Refresh what JKU already taught",d:"About 7 of 18 sample questions are maths, algorithms and basic computing. You should win most of them, but only if the fundamentals are fast and exact.",chapters:[
+{id:"mC1",t:"Linear algebra and multivariable calculus drills",tag:"Sample Q1-3 - about 10 h",
+ why:"The first three sample questions: how many matrices are singular, for which parameter are three vectors dependent, classify local extrema. Your JKU math covers this, but the test is timed.",
+ know:["Singular matrix = determinant zero = not full rank","Linear dependence with a parameter via det = 0 (Q2: det = 21 - 7a so a = 3)","Rank, null space, eigenvalues of 2x2 and 3x3","Gradient = 0, Hessian definiteness: positive definite is minimum, negative is maximum, indefinite is saddle","Lagrange multipliers","Do each in under 3 minutes by hand"],
+ proj:"Do 20 timed problems, 3 minutes each, no calculator. Redo sample Q1-Q3.",
+ vid:[["Search: 3Blue1Brown essence of linear algebra","https://www.youtube.com/results?search_query=3Blue1Brown+essence+of+linear+algebra"]],
+ read:[["MIT OCW 18.02 Multivariable Calculus","https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/"],["MIT OCW 18.06 Linear Algebra","https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"]]},
+{id:"mC2",t:"Probability on the test",tag:"Sample Q4 - about 5 h",
+ why:"Expectation of a continuous random variable is a one-formula question. Fast revision of definitions pays off.",
+ know:["E[X] = integral of x f(x) dx; E[X^2] and variance Var = E[X^2] - E[X]^2","Normalization of a pdf and the cdf","Bayes rule and total probability","Gaussian distribution and standard deviation","Independence, covariance"],
+ proj:"Write a half-page formula sheet and test yourself with 15 short problems.",
+ vid:[["Search: probability density function expectation variance","https://www.youtube.com/results?search_query=continuous+random+variable+expected+value+pdf+explained"]],
+ read:[["Your JKU Statistics for AI notes",""]]},
+{id:"mC3",t:"Graph theory and reading code",tag:"Sample Q5, Q6 - about 8 h",
+ why:"Q5 is a definition (spanning tree), Q6 is tracing a recursive function. Both are free points if you practice tracing by hand.",
+ know:["Spanning tree: connected, contains all vertices, acyclic","BFS, DFS, shortest path, minimum spanning tree (Kruskal, Prim)","Trace recursive functions by hand: Q6 rfce(3,4) = 12 (repeated addition), rfce(-3,4) = 0","C or Java-like syntax: static, int, if/else, return","Big-O of common algorithms"],
+ proj:"Hand-trace 15 short recursive and loop programs. Write the definitions of 10 graph terms.",
+ vid:[["Search: graph theory spanning tree lecture","https://www.youtube.com/results?search_query=graph+theory+spanning+tree+Kruskal+Prim+lecture"]],
+ read:[["Your JKU ADS notes",""]]},
+{id:"mC4",t:"Networks and computer basics",tag:"Sample Q7 - about 8 h",
+ why:"Q7 asks which protocol TCP is. This is general knowledge a CS student should know, but JKU AI may not have drilled the OSI layers.",
+ know:["TCP: reliable ordered byte stream, connection oriented","UDP: unreliable datagrams","ARP: IP to MAC address","ICMP and routing protocols: error messages and route updates","IP, ports, DNS, HTTP basics","Binary, hex, two's complement"],
+ proj:"Make a one-page protocol cheat sheet (TCP, UDP, IP, ARP, ICMP, DNS, HTTP) with one sentence each.",
+ vid:[["Search: TCP vs UDP vs ARP vs ICMP explained","https://www.youtube.com/results?search_query=TCP+vs+UDP+ARP+ICMP+explained"]],
+ read:[["Wikipedia: Internet protocol suite","https://en.wikipedia.org/wiki/Internet_protocol_suite"]]},
+{id:"mC5",t:"Physics: mechanics and electromagnetism basics",tag:"Bachelor FY1/FY2 - about 20 h, lower priority",
+ why:"Not directly visible in the sample test beyond units, but the bachelor topic list names it, and you need it to model motors, pendulums and vehicles in the master.",
+ know:["Newton's laws, energy and work, momentum","Rotational dynamics, moment of inertia, torque","Damped harmonic oscillator","Electric and magnetic fields, induction, Lorentz force","DC motor model: electrical and mechanical equations"],
+ proj:"Derive the equations of a pendulum and a DC motor and put both into state-space form.",
+ vid:[["Search: classical mechanics lecture MIT 8.01","https://www.youtube.com/results?search_query=MIT+8.01+classical+mechanics+lecture"]],
+ read:[["MIT OCW 8.01 Classical Mechanics","https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/"]]}
+]},
+{t:"D. Master-level content (oral interview and semester 1)",d:"Not on the written sample test. The three compulsory master subjects (official state-exam list) are Autonomous Robotics, Diagnostics and Testing, and Linear Systems.",chapters:[
+{id:"mD1",t:"Robot kinematics and dynamics",tag:"ROB - about 25 h",
+ why:"Bridge from your computer vision knowledge to robots and drones. Bachelor topic list: kinematics, dynamics and actuators.",
+ know:["Rotation matrices SO(3), homogeneous transforms SE(3)","Euler angles and quaternions, gimbal lock","Forward and inverse kinematics, Denavit-Hartenberg","Jacobian and velocity kinematics","Manipulator and mobile-robot dynamics (intro)","Actuators: DC motors, steppers, servos"],
+ proj:"Implement forward and inverse kinematics for a 2-link arm in Python and animate it.",
+ vid:[["Search: robot kinematics Denavit Hartenberg lecture","https://www.youtube.com/results?search_query=robot+kinematics+forward+inverse+Denavit+Hartenberg+lecture"]],
+ read:[["Modern Robotics (Lynch and Park)","https://modernrobotics.northwestern.edu/"]]},
+{id:"mD2",t:"Estimation, filtering and Kalman filter",tag:"OFD - about 25 h",
+ why:"Official master subject topics: Bayesian estimation, Kalman filtering, extended Kalman, hypothesis testing. Strongly linked to your probability background.",
+ know:["Bayesian parameter estimation and least squares","Kalman filter: prediction and update with covariance","Extended Kalman filter for nonlinear models","Sensor fusion: IMU plus GNSS or camera","Hypothesis testing and likelihood ratio for fault detection"],
+ proj:"Implement a 1D constant-velocity Kalman filter in NumPy with noisy position data and compare with a moving average.",
+ vid:[["Kalman Filter - VISUALLY EXPLAINED!","https://www.youtube.com/watch?v=-DiZGpAh7T4"],["State Estimation Explained: From Least Squares to Kalman Filters","https://www.youtube.com/watch?v=wjRVPt8shb4"]],
+ read:[["KyR master state-exam topics (official)","https://intranet.fel.cvut.cz/en/education/master/topicsKR"]]},
+{id:"mD3",t:"Autonomous robotics: SLAM and motion planning",tag:"ARO - about 20 h",
+ why:"Official topics: control architectures, planning, localization and mapping (SLAM), sensor calibration. Your CV and AI search background fits well.",
+ know:["Control architectures: reactive, deliberative, hybrid","Path planning: A*, RRT, PRM, potential fields","Localization: particle filter, EKF localization","SLAM concept: front end and back end, loop closure","Sensor calibration (camera intrinsics, extrinsics)","ROS 2 nodes and topics"],
+ proj:"Implement A* and RRT on a 2D grid and compare them. Read one paper summary on ORB-SLAM.",
+ vid:[["Search: SLAM explained for beginners","https://www.youtube.com/results?search_query=SLAM+simultaneous+localization+and+mapping+explained+lecture"],["Search: RRT A* motion planning lecture","https://www.youtube.com/results?search_query=RRT+A*+motion+planning+robotics+lecture"]],
+ read:[["ROS 2 documentation","https://docs.ros.org/"]]},
+{id:"mD4",t:"Diagnostics, reliability and testing",tag:"DIT - about 10 h",
+ why:"One of the three compulsory master subjects: fault detection, fault tolerance, reliability. Mostly conceptual and statistical, so learnable quickly.",
+ know:["Failure rate, MTBF, reliability function R(t) = exp(-lambda t)","Redundancy: series vs parallel reliability","Fault tree analysis","Residual-based fault detection with a model","Fault tolerance and graceful degradation","Testing basics for electronic systems"],
+ proj:"Compute the reliability of a series-parallel system and draw a fault tree for a quadcopter motor failure.",
+ vid:[["Search: reliability engineering MTBF fault tree basics","https://www.youtube.com/results?search_query=reliability+engineering+MTBF+failure+rate+fault+tree+analysis"]],
+ read:[["KyR master state-exam topics (official)","https://intranet.fel.cvut.cz/en/education/master/topicsKR"]]},
+{id:"mD5",t:"C, C++ and ROS 2",tag:"Labs - about 25 h",
+ why:"Embedded and robotics labs use C and C++, while JKU AI only uses Python. The bachelor list also contains embedded programming and multithreading.",
+ know:["Pointers, memory, structs","C++ classes, RAII, STL","Threads and synchronization basics","Cross-compiling and microcontroller basics","A simple ROS 2 publisher and subscriber"],
+ proj:"Write a small C++ program with a class and a thread, and a ROS 2 node that publishes a sensor value.",
+ vid:[["Search: C++ for beginners full course","https://www.youtube.com/results?search_query=C%2B%2B+full+course+for+beginners"]],
+ read:[["learncpp.com","https://www.learncpp.com/"],["ROS 2 documentation","https://docs.ros.org/"]]},
+{id:"mD6",t:"Digital logic and computer architecture",tag:"LSP, APO - about 15 h",
+ why:"The bachelor topic list includes combinational and sequential logic and computer architecture. Lower exam weight in the sample test (none visible), but part of the bachelor base.",
+ know:["Boolean algebra and Karnaugh maps","Adders, multiplexers, decoders","Flip-flops, counters, finite state machines","CPU datapath, caches, interrupts, memory map"],
+ proj:"Design a 3-bit counter and a traffic-light FSM on paper and in a simulator.",
+ vid:[["Search: digital logic design full course","https://www.youtube.com/results?search_query=digital+logic+design+full+course"]],
+ read:[["Nand2Tetris","https://www.nand2tetris.org/"]]}
+]},
+{t:"E. Exam skills and logistics",d:"Czech, time pressure, the interview, and paperwork. Easy to postpone and expensive to get wrong.",chapters:[
+{id:"mE1",t:"Czech technical vocabulary",tag:"Ongoing - 15 min a day",
+ why:"The test is in Czech. Knowing the physics is worthless if you misread a question. Slovak helps, but technical terms differ.",
+ know:["Learn the glossary at the bottom of this page (30 terms and growing)","Read the sample test PDF and underline every unknown term","Study FEL Czech-language lecture slides (e.g. circuits and control) for terms","Practice translating each question into English in your head and answering","Learn the Czech names for unit prefixes, circuit elements and plot types"],
+ proj:"Build a 150-term flashcard deck (Anki) from the sample test and the topic lists.",
+ vid:[],
+ read:[["Official sample test PDF (Czech)","https://kyr.fel.cvut.cz/sites/default/files/downloads/staticka-stranka/vzorovy-test-mag.pdf"],["KyR master state-exam topics 2021 (Czech)","https://intranet.fel.cvut.cz/cz/education/master/topicsKR2021.html"]]},
+{id:"mE2",t:"Timed mock tests",tag:"Start 4 months before - about 20 h",
+ why:"18 questions in 60 minutes is about 3.3 minutes each, which is tight for circuits and Bode matching. Speed is a separate skill.",
+ know:["Complete the sample test in 60 minutes, closed book, no calculator","Score it honestly and categorize each miss (concept, arithmetic, Czech term, time)","Skip hard figure questions first, return at the end","Target 13/18 (70%) in the last 3 mocks","Make your own mocks from textbook and OCW problems in the same format","Keep an error log and repeat the missed topics"],
+ proj:"Do 6 full mocks, one every 2 weeks in the last 3 months, and chart your score.",
+ vid:[],
+ read:[["Official sample test PDF","https://kyr.fel.cvut.cz/sites/default/files/downloads/staticka-stranka/vzorovy-test-mag.pdf"],["KyR: how to prepare","https://kyr.fel.cvut.cz/jak-se-pripravit-na-prijimacky"]]},
+{id:"mE3",t:"Oral exam or video interview",tag:"After a passing written score",
+ why:"Graduates of other programmes get an oral exam or video call after the written test. FEL states the oral part can weigh at most 20% by programme decision. Expect a conversation about motivation, background and basic control and circuits concepts.",
+ know:["Two-minute pitch: why robotics, why CTU, your JKU CV project","How you closed the gaps (control, circuits, physics) with concrete evidence","Explain a transfer function, PID, Kalman filter in plain words","Explain one project end to end: data, model, evaluation, results","Questions you will ask them (research groups, drone lab, thesis topics)","Practice in English or Czech depending on what they request (ask)"],
+ proj:"Record yourself answering 10 interview questions. Do a mock with a friend who plays the committee.",
+ vid:[],
+ read:[["KyR master programme","https://kyr.fel.cvut.cz/en/masters-programme"]]},
+{id:"mE4",t:"Application, nostrification and electives",tag:"Start 12 months before",
+ why:"Paperwork can disqualify you more easily than the test. Nostrification of an Austrian degree takes time, and the application deadline pattern is end of March.",
+ know:["Email the programme and ask for topic list, sample tests and whether JKU AI counts as related (template below)","Plan the JKU Area of Specialization (12 ECTS) and free electives (9 ECTS) for control, robotics or circuits","Check if you need a proof of Czech (Slovak citizens are exempt)","Request transcript and weighted average (exemption needs 1.80 or better and a related programme)","Start nostrification of your diploma and collect certified copies","Watch the yearly dates on the FEL admission pages"],
+ proj:"Send the email this month and save the answer. Create a one-page admin checklist with deadlines.",
+ vid:[],
+ read:[["FEL admission conditions, master's","https://fel.cvut.cz/cs/uchazeci/prijimaci-rizeni/podminky-prijeti/podminky-prijeti-do-magisterskeho-studia"],["FEL entrance exam to master's","https://fel.cvut.cz/cs/uchazeci/prijimaci-rizeni/prijimaci-zkouska/prijimaci-zkouska-do-magisterskeho-studia"]]}
+]}
+];
+
+
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function applyTheme(t){if(t)document.documentElement.setAttribute("data-theme",t)}
+applyTheme(store.get("theme",null));
+$("#themeBtn").onclick=()=>{const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");const n=cur==="dark"?"light":"dark";applyTheme(n);store.set("theme",n)};
+const IC={"overview": "<path d=\"M3 11l9-8 9 8M5 10v10h14V10\"/>", "sample": "<path d=\"M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6\"/>", "chapters": "<path d=\"M4 19c4 0 4-14 8-14s4 14 8 14\"/><circle cx=\"4\" cy=\"19\" r=\"1.5\"/><circle cx=\"20\" cy=\"19\" r=\"1.5\"/>", "plan": "<rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"2\"/><path d=\"M3 10h18M8 3v4M16 3v4\"/>", "admin": "<path d=\"M4 6h16v12H4zM4 7l8 6 8-6\"/>"};
+const TABS=[["overview", "Overview"], ["sample", "Sample test"], ["chapters", "Study chapters"], ["plan", "Plan and glossary"], ["admin", "Email and sources"]];
+$("#nav").innerHTML=TABS.map(t=>`<button data-t="${t[0]}"><svg viewBox="0 0 24 24">${IC[t[0]]}</svg>${t[1]}</button>`).join("");
+function show(id){$$("section").forEach(s=>s.classList.toggle("on",s.id===id));$$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id));store.set("tabM",id);window.scrollTo(0,0)}
+$("#nav").onclick=e=>{const b=e.target.closest("button");if(b)show(b.dataset.t)};
+const doneM=store.get("doneM",{});
+const items=c=>[...c.know.map((_,i)=>c.id+":k"+i),c.id+":p"];
+function countP(phases,d){let t=0,n=0;phases.forEach(p=>p.chapters.forEach(c=>items(c).forEach(k=>{t++;if(d[k])n++})));return [n,t]}
+const lnk=(r,vid)=>r[1]?`<a class="lk" href="${r[1]}" target="_blank" rel="noopener"><span class="ic ${vid?"v":"r"}">${vid?"&#9654;":"&#9776;"}</span><span class="t">${r[0]}</span><span class="arrow">&#8599;</span></a>`:`<div class="lk"><span class="ic r">&#9776;</span><span class="t">${r[0]}</span></div>`;
+function phaseHTML(phases,d,op){
+ return phases.map(p=>`<div class="phase"><h2>${p.t}</h2><p class="d">${p.d}</p>${p.chapters.map(c=>{
+  const ks=items(c),n=ks.filter(k=>d[k]).length,pc=Math.round(n/ks.length*100);
+  return `<details class="chap" data-id="${c.id}" ${op[c.id]?"open":""}><summary><span><b>${c.t}</b>${c.tag?` <span class="pill p-acc" style="margin-left:6px">${c.tag}</span>`:""}</span><span class="cnt">${n}/${ks.length}</span><div class="bar"><i style="width:${pc}%"></i></div></summary>
+  <div class="body"><p>${c.why}</p>
+  <h4>You know it when you can</h4>
+  ${c.know.map((k,i)=>`<label class="task ${d[c.id+":k"+i]?"done":""}"><input type="checkbox" data-k="${c.id}:k${i}" ${d[c.id+":k"+i]?"checked":""}><span class="tt">${k}</span></label>`).join("")}
+  <h4>Practice</h4>
+  <label class="task ${d[c.id+":p"]?"done":""}"><input type="checkbox" data-k="${c.id}:p" ${d[c.id+":p"]?"checked":""}><span class="tt">${c.proj}</span></label>
+  ${c.vid.length?`<h4>Videos</h4><div class="links">${c.vid.map(r=>lnk(r,true)).join("")}</div>`:""}
+  ${c.read.length?`<h4>Read and practice</h4><div class="links">${c.read.map(r=>lnk(r,false)).join("")}</div>`:""}
+  </div></details>`}).join("")}</div>`).join("");
+}
+function master(){
+ $("#mphases").innerHTML=phaseHTML(MPH,doneM,store.get("openM",{}));
+ const [d,t]=countP(MPH,doneM),p=Math.round(d/t*100);
+ $("#mpct").textContent=p+"%  ("+d+" / "+t+")";$("#mpbar").style.width=p+"%";
+ $("#sbPct").textContent=p+"%";$("#sbBar").style.width=p+"%";
+}
+$("#mphases").onchange=e=>{const k=e.target.dataset.k;if(k){doneM[k]=e.target.checked;store.set("doneM",doneM);const o={};$$("#mphases details").forEach(x=>{if(x.open)o[x.dataset.id]=1});store.set("openM",o);master()}};
+master();
+show(store.get("tabM","overview"));
+
+</script>
+</body>
+</html>

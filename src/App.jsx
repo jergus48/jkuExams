@@ -8742,6 +8742,7 @@ export default function App() {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
           <a href="/self-study/" style={{ color: "inherit", fontWeight: 600, fontSize: "14px", textDecoration: "none" }}>AI Self-Study</a>
+          <a href="/master/" style={{ color: "inherit", fontWeight: 600, fontSize: "14px", textDecoration: "none" }}>Master Prep</a>
         <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle Theme">
           {theme === 'light' ? (
             <svg className="theme-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
