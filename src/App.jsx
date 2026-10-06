@@ -8740,6 +8740,8 @@ export default function App() {
           <span className="brand-logo">🎓</span>
           <span className="brand-name">Exam Trainer</span>
         </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+          <a href="/self-study/" style={{ color: "inherit", fontWeight: 600, fontSize: "14px", textDecoration: "none" }}>AI Self-Study</a>
         <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle Theme">
           {theme === 'light' ? (
             <svg className="theme-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -8751,6 +8753,7 @@ export default function App() {
             </svg>
           )}
         </button>
+        </div>
       </header>
       <main className="app-main">
         {mainContent}

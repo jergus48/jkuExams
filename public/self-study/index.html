@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Self-Study Portal</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#151a23;--mute:#5d6676;--line:#dfe3ea;--acc:#2f5bea;--ok:#1f9d63;--part:#d98a00;--gap:#d23c3c;--okbg:#e3f5ec;--partbg:#fdf0d9;--gapbg:#fbe4e4}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1218;--card:#181d27;--ink:#e8ebf1;--mute:#98a1b3;--line:#2a3140;--acc:#7b98ff;--ok:#4cd08f;--part:#f0b13b;--gap:#ff7b7b;--okbg:#14301f;--partbg:#3a2d10;--gapbg:#3b1b1b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,Segoe UI,sans-serif}
+header{padding:20px 24px 0}
+h1{margin:0;font-size:22px}
+.sub{color:var(--mute);margin:2px 0 14px}
+nav{display:flex;gap:4px;flex-wrap:wrap;padding:0 24px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
+nav button{background:none;border:0;border-bottom:2px solid transparent;padding:10px 12px;color:var(--mute);font:inherit;cursor:pointer}
+nav button.on{color:var(--ink);border-color:var(--acc);font-weight:600}
+main{padding:20px 24px 60px;max-width:1150px}
+section{display:none}section.on{display:block}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card h3{margin:0 0 6px;font-size:15px}
+.big{font-size:30px;font-weight:700}
+.mute{color:var(--mute);font-size:13px}
+.tag{display:inline-block;padding:1px 8px;border-radius:99px;font-size:12px;font-weight:600}
+.t-ok{background:var(--okbg);color:var(--ok)}.t-part{background:var(--partbg);color:var(--part)}.t-gap{background:var(--gapbg);color:var(--gap)}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:14px}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute)}
+tr:last-child td{border-bottom:0}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:var(--acc)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;align-items:center}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer}
+.chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+a{color:var(--acc)}
+.phase{margin-bottom:18px}
+.phase h2{font-size:17px;margin:0 0 4px}
+.task{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.task:last-child{border:0}
+.task input{margin-top:4px;width:17px;height:17px;flex:none}
+.task.done .tt{text-decoration:line-through;color:var(--mute)}
+.res a{display:inline-block;margin:2px 10px 2px 0;font-size:13px}
+.note{background:var(--partbg);border:1px solid var(--part);border-radius:10px;padding:10px 14px;margin:0 0 16px;font-size:13.5px}
+ul.l{margin:6px 0 0;padding-left:18px}
+.jobhead{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header>
+<p style="margin:0 0 6px"><a href="/">&larr; Back to Exam Trainer</a></p>
+<h1>AI Self-Study Portal</h1>
+<p class="sub">JKU Bachelor AI vs. what ML/AI engineering jobs in Germany and Switzerland ask for. Progress is saved in this browser.</p>
+</header>
+<nav id="nav"></nav>
+<main>
+
+<section id="overview" class="on">
+<div class="note">Based on the JKU curriculum (version of 2020, 180 ECTS) and aggregated job postings and salary pages found in October 2026. Your actual course content may differ from the titles. "Partial" means the topic is touched in a course but not to the depth or tooling employers expect. Verify against your own transcript and edit <code>SKILLS</code> in this file if I misjudged.</div>
+<div class="grid" id="stats"></div>
+<h3 style="margin:22px 0 8px">Where JKU is strong</h3>
+<div class="card"><ul class="l">
+<li>Mathematics (31.5 ECTS: linear algebra, analysis, probability, numerical optimization) and statistics. This is a real advantage over bootcamp people and over self-taught candidates.</li>
+<li>Classical ML theory: supervised, unsupervised, reinforcement learning, signal processing, NLP basics.</li>
+<li>Algorithms, data structures, logic, formal models. Useful for interviews and research roles.</li>
+</ul></div>
+<h3 style="margin:22px 0 8px">Where it leaves you exposed</h3>
+<div class="card"><ul class="l">
+<li>Almost nothing on shipping software: Git workflows, testing, Docker, CI/CD, cloud, APIs, monitoring.</li>
+<li>Nothing dedicated to LLMs: transformer internals at depth, fine-tuning (LoRA/QLoRA), RAG, agents, evaluation, inference serving.</li>
+<li>No SQL/data engineering, pipelines or experiment tracking.</li>
+<li>Courses like "Responsible AI", "Gender Studies" and "Technology and Society" (about 10.5 ECTS) do not appear in job requirements, apart from EU AI Act awareness being a small plus.</li>
+</ul></div>
+<h3 style="margin:22px 0 8px">Suggested priority</h3>
+<div class="card">The job market pays for people who can <b>build, deploy and evaluate</b>, not just train. Order of value: (1) Python engineering + Git + Docker, (2) PyTorch and Hugging Face, (3) RAG and LLM apps with evaluation, (4) fine-tuning and serving, (5) MLOps and cloud, (6) one deep specialty. Use the Roadmap tab; it is ordered that way.</div>
+</section>
+
+<section id="matrix">
+<div class="row" id="matrixFilters"></div>
+<table><thead><tr><th>Skill</th><th>Demand</th><th>JKU status</th><th>JKU course (closest)</th><th>What is missing</th></tr></thead><tbody id="matrixBody"></tbody></table>
+</section>
+
+<section id="jobs">
+<div class="note">Postings are summarized from search results (company names are real listings seen, details condensed). Postings expire; treat them as examples of requirement patterns. The "Archetype" cards are composites of the patterns across many listings, not single ads.</div>
+<div class="row" id="jobFilters"></div>
+<div id="jobList" class="grid" style="grid-template-columns:repeat(auto-fit,minmax(330px,1fr))"></div>
+</section>
+
+<section id="roadmap">
+<div class="card" style="margin-bottom:14px"><div class="mute">Overall progress</div><div class="big" id="pct">0%</div><div class="bar"><i id="pbar" style="width:0"></i></div></div>
+<div id="phases"></div>
+</section>
+
+<section id="resources">
+<div class="note">Links were written from my knowledge of well-known stable sites, not each opened and checked today. If one is dead, search the title.</div>
+<div class="row" id="resFilters"></div>
+<div id="resList" class="grid"></div>
+</section>
+
+<section id="salary">
+<div class="note">Gross yearly figures from salary aggregator pages (Glassdoor, Robert Half, Turing and similar). They disagree with each other; use as rough ranges. Swiss cost of living and taxes are much higher than Germany. Big tech and quant packages are outliers above these.</div>
+<table><thead><tr><th>Level</th><th>Germany (EUR)</th><th>Zurich (CHF)</th></tr></thead><tbody>
+<tr><td>Junior (0-2 y)</td><td>55k - 75k (some sources 50-65k)</td><td>90k - 125k (big tech 130-180k total)</td></tr>
+<tr><td>Mid (3-5 y)</td><td>75k - 105k</td><td>125k - 160k</td></tr>
+<tr><td>Senior (6+ y)</td><td>105k - 140k+</td><td>160k - 210k</td></tr>
+</tbody></table>
+<h3 style="margin:22px 0 8px">What moves you up the range</h3>
+<div class="card"><ul class="l">
+<li>Production experience: deployed model serving real users, with monitoring.</li>
+<li>LLM systems skills (RAG, evaluation, inference optimization) are in current demand.</li>
+<li>Cloud + Kubernetes + MLOps pairing is repeatedly named as the biggest premium.</li>
+<li>Location: Munich and Zurich pay the most; Berlin the least of the large hubs.</li>
+<li>Master's degree is often preferred for research/senior roles in Switzerland (ETH, EPFL ecosystem). Consider JKU's AI master or a stronger master abroad; a portfolio can substitute for some engineering roles but not all.</li>
+</ul></div>
+</section>
+</main>
+
+<script>
+const SKILLS=[
+// name, demand(1-3), status(ok/part/gap), jku course, missing, cat
+["Python (language)",3,"ok","Programming in Python I/II","Software engineering style: typing, packaging, tests, linters","Core"],
+["Algorithms and data structures",2,"ok","Algorithms and Data Structures 1/2","Mostly interview prep (LeetCode style)","Core"],
+["Linear algebra, calculus, probability",3,"ok","Mathematics for AI I-III","Nothing; keep it fresh","Core"],
+["Statistics, experiment design",2,"ok","Statistics for AI, Computational Statistics","A/B testing in practice","Core"],
+["Classical ML (sklearn, trees, SVM, clustering)",3,"ok","ML: Supervised/Unsupervised, Pattern Classification","Feature engineering on messy real data, Kaggle-style practice","ML"],
+["Optimization",1,"ok","Numerical Optimization","None for most jobs","ML"],
+["Reinforcement learning",1,"ok","Reinforcement Learning","Niche in jobs (robotics, games, RLHF)","ML"],
+["Deep learning with PyTorch",3,"part","Hands-on AI I/II (verify content)","Writing training loops, debugging, mixed precision, multi-GPU basics","DL"],
+["Transformers and LLM internals",3,"part","Natural Language Processing (3 ECTS)","Attention from scratch, tokenization, KV cache, scaling laws","LLM"],
+["Hugging Face ecosystem (transformers, datasets)",3,"gap","-","Daily-use library in most LLM job ads","LLM"],
+["Prompting and LLM API apps",3,"gap","-","Structured outputs, tool calling, cost/latency control","LLM"],
+["RAG (chunking, embeddings, retrieval, reranking)",3,"gap","-","Whole topic; plus hybrid search and evaluation","LLM"],
+["Vector databases (Qdrant, Weaviate, pgvector, FAISS)",2,"gap","-","Indexing, filtering, scaling","LLM"],
+["Agents and orchestration (LangGraph, tool use)",2,"gap","-","State machines, memory, guardrails, MCP","LLM"],
+["LLM evaluation and observability",3,"gap","-","Eval sets, LLM-as-judge, Ragas, tracing","LLM"],
+["Fine-tuning (SFT, LoRA/QLoRA, DPO)",3,"gap","-","PEFT, TRL, dataset curation, evaluating the result","LLM"],
+["Inference serving and optimization (vLLM, quantization)",2,"gap","-","Latency/throughput, GPU memory, batching","LLM"],
+["Computer vision",2,"part","Visual Analytics, Digital Signal Processing","CNNs/ViTs in PyTorch, detection, segmentation","DL"],
+["Git and collaborative workflow",3,"gap","-","Branching, PRs, code review, CI","Eng"],
+["Testing, clean code, packaging",2,"gap","-","pytest, type checking, project structure","Eng"],
+["SQL and relational databases",3,"gap","-","Joins, window functions, query tuning","Data"],
+["Data pipelines (Airflow, Spark, dbt)",2,"gap","-","Orchestration, batch vs streaming","Data"],
+["Docker and containers",3,"gap","-","Images, compose, GPU containers","Ops"],
+["Kubernetes",2,"gap","-","Deployments, services, basics of GPU scheduling","Ops"],
+["CI/CD (GitHub Actions)",2,"gap","-","Automated tests, builds, deploys","Ops"],
+["Cloud (AWS, Azure or GCP)",3,"gap","-","One provider well: compute, storage, managed ML","Ops"],
+["MLOps (MLflow, experiment tracking, model registry, monitoring)",3,"gap","-","Reproducibility, drift detection, retraining","Ops"],
+["REST APIs (FastAPI)",3,"gap","-","Serving a model behind an API, async, auth","Eng"],
+["German/English professional communication",2,"part","Seminar in AI, Practical Work in AI","Writing design docs, presenting trade-offs","Soft"],
+["AI regulation awareness (EU AI Act)",1,"ok","Responsible AI","Small plus, especially in DE/CH enterprise","Soft"]
+];
+
+const JOBS=[
+{co:"NETCONOMY",loc:"Berlin / Dortmund",role:"AI Engineer",reg:"DE",src:"posting",req:["End-to-end generative AI solutions","Scalable AI agents","LangGraph"]},
+{co:"Luxoft",loc:"Munich",role:"Backend Engineer, LLM Integration",reg:"DE",src:"posting",req:["FastAPI microservices","LangChain","Integrating AI features in vehicles","Backend engineering"]},
+{co:"IONOS",loc:"Karlsruhe",role:"AI Developer",reg:"DE",src:"posting",req:["LLM-based workflows","Real-time interaction optimization","Evaluation techniques for output accuracy","LangChain"]},
+{co:"Logicalis",loc:"Frankfurt",role:"AI Engineer, Automation and Data Integration",reg:"DE",src:"posting",req:["Python","AI-driven workflows","Integration and automation systems"]},
+{co:"European Tech Recruit",loc:"Frankfurt",role:"Senior AI Engineer, LLM / RAG Expert",reg:"DE",src:"posting",req:["Production AI systems","Retrieval workflows","Scalable agent platforms","Vector databases"]},
+{co:"Nebius",loc:"Zurich",role:"Senior ML Engineer, LLM Inference Optimization",reg:"CH",src:"posting",req:["Optimize endpoints for latency, throughput, memory, GPU use","vLLM, SGLang, TensorRT-LLM or Triton","PyTorch","Distributed systems"]},
+{co:"Alpine AI",loc:"Switzerland",role:"LLM and Machine Learning Engineer",reg:"CH",src:"posting (page changed, details not re-read)",req:["LLM engineering","Machine learning engineering"]},
+{co:"Archetype: ML Engineer (DE)",loc:"Berlin, Munich, Hamburg",role:"Machine Learning Engineer, mid",reg:"DE",src:"composite",req:["Python, PyTorch or TensorFlow","Hugging Face for LLM fine-tuning","Docker, Kubernetes, MLflow or Kubeflow","AWS / Azure / GCP","Data engineering fundamentals","CI/CD"]},
+{co:"Archetype: RAG / GenAI Engineer",loc:"DE and CH",role:"AI Engineer, applied LLM",reg:"BOTH",src:"composite",req:["Document ingestion, chunking, embedding models","Vector DB: Pinecone, Weaviate, Qdrant, Chroma, FAISS","LangChain, LlamaIndex, Haystack or DSPy","LLM evaluation and observability tools","LoRA / QLoRA fine-tuning","FastAPI, Docker"]},
+{co:"Archetype: ML Engineer (Zurich)",loc:"Zurich",role:"Machine Learning Engineer, 2+ years",reg:"CH",src:"composite",req:["Python + PyTorch, JAX or TensorFlow","Training and serving deep models","MLOps: deployment, versioning, monitoring","Docker, APIs, databases, distributed systems","Cloud (Azure often named)","Translating research code to production","Often MSc preferred"]}
+];
+
+const PHASES=[
+{t:"Phase 0: Engineering foundations (weeks 1-4)",d:"Makes everything else employable.",tasks:[
+ ["Learn Git properly: branches, rebase, pull requests. Put every project on GitHub.",["Pro Git","https://git-scm.com/book"],["Missing Semester (MIT)","https://missing.csail.mit.edu"]],
+ ["Docker: containerize a Python app, use compose.",["Docker get started","https://docs.docker.com/get-started/"]],
+ ["Build a REST API with FastAPI and tests with pytest.",["FastAPI tutorial","https://fastapi.tiangolo.com/tutorial/"]],
+ ["SQL: joins, aggregates, window functions on a real dataset.",["Kaggle Learn SQL","https://www.kaggle.com/learn"]]]},
+{t:"Phase 1: Deep learning in practice (weeks 5-10)",d:"Turn JKU theory into fluent PyTorch.",tasks:[
+ ["Implement a training loop, dataloaders, evaluation in PyTorch without high-level wrappers.",["fast.ai Practical Deep Learning","https://course.fast.ai"]],
+ ["Karpathy: Neural Networks Zero to Hero. Build a small GPT from scratch.",["Zero to Hero","https://karpathy.ai/zero-to-hero.html"]],
+ ["Read and code along with LLMs-from-scratch.",["Raschka repo","https://github.com/rasbt/LLMs-from-scratch"]],
+ ["Do 2 Kaggle competitions or notebooks end to end.",["Kaggle","https://www.kaggle.com/learn"]]]},
+{t:"Phase 2: LLM applications and RAG (weeks 11-16)",d:"Highest hiring demand right now.",tasks:[
+ ["Hugging Face LLM course: transformers, tokenizers, datasets.",["HF LLM course","https://huggingface.co/learn/llm-course"]],
+ ["Build a RAG system over your own documents: chunking, embeddings, hybrid search, reranking.",["LLM Zoomcamp","https://github.com/DataTalksClub/llm-zoomcamp"],["Qdrant docs","https://qdrant.tech/documentation/"]],
+ ["Create an evaluation set and measure retrieval and answer quality. Do not skip this; it separates juniors.",["Ragas docs","https://docs.ragas.io"]],
+ ["Build a tool-using agent with LangGraph, with a guardrail and a failure log.",["LangGraph docs","https://langchain-ai.github.io/langgraph/"]]]},
+{t:"Phase 3: Fine-tuning and serving (weeks 17-22)",d:"Differentiator for LLM-focused roles.",tasks:[
+ ["Fine-tune a small open model with LoRA/QLoRA on a real task; compare to the base and to prompting.",["PEFT docs","https://huggingface.co/docs/peft"],["TRL docs","https://huggingface.co/docs/trl"]],
+ ["Try DPO or another preference method on a small dataset.",["TRL docs","https://huggingface.co/docs/trl"]],
+ ["Serve a model with vLLM; benchmark latency and throughput; try quantization.",["vLLM docs","https://docs.vllm.ai"]],
+ ["Write up results as a blog post or README with numbers.",[]]]},
+{t:"Phase 4: MLOps and cloud (weeks 23-30)",d:"Where the salary premium shows up.",tasks:[
+ ["Follow MLOps Zoomcamp: tracking, orchestration, deployment, monitoring.",["MLOps Zoomcamp","https://github.com/DataTalksClub/mlops-zoomcamp"]],
+ ["Track experiments and register models with MLflow.",["MLflow docs","https://mlflow.org/docs/latest/"]],
+ ["Kubernetes basics: deploy your API to a local cluster.",["K8s basics tutorial","https://kubernetes.io/docs/tutorials/kubernetes-basics/"]],
+ ["GitHub Actions: tests plus container build on every push.",["GitHub Actions docs","https://docs.github.com/en/actions"]],
+ ["Pick one cloud and deploy there. Optionally take an associate-level ML certification.",["AWS certifications","https://aws.amazon.com/certification/"]],
+ ["Add drift/quality monitoring to a deployed model.",["Evidently docs","https://docs.evidentlyai.com"]]]},
+{t:"Phase 5: Portfolio and job search (ongoing)",d:"Proof beats claims.",tasks:[
+ ["One flagship project: deployed RAG or fine-tuned model with eval numbers, CI, Docker, live demo.",[]],
+ ["Get real experience: Werkstudent or internship in Linz, Vienna, Munich or Zurich. Use JKU's 'Practical Work in AI' on something real.",[]],
+ ["Plan your master (JKU AI master or ETH/TUM/EPFL level) if targeting Swiss research-heavy roles.",[]],
+ ["Read Chip Huyen, Designing Machine Learning Systems, and prepare ML system design interviews.",[]],
+ ["Optional depth: Stanford CS336 (language models from scratch).",["CS336","https://cs336.stanford.edu"]]]}
+];
+
+const RES=[
+["Course","fast.ai Practical Deep Learning","https://course.fast.ai","Top-down PyTorch practice."],
+["Course","Karpathy Zero to Hero","https://karpathy.ai/zero-to-hero.html","Build GPT from scratch."],
+["Course","Hugging Face LLM Course","https://huggingface.co/learn/llm-course","Transformers, datasets, fine-tuning."],
+["Course","LLM Zoomcamp","https://github.com/DataTalksClub/llm-zoomcamp","RAG project course, free."],
+["Course","MLOps Zoomcamp","https://github.com/DataTalksClub/mlops-zoomcamp","Tracking, deploy, monitor."],
+["Course","Stanford CS336","https://cs336.stanford.edu","Language models from scratch, advanced."],
+["Course","Made With ML","https://madewithml.com","Production ML workflow."],
+["Course","Full Stack Deep Learning","https://fullstackdeeplearning.com","Shipping DL systems."],
+["Course","MIT Missing Semester","https://missing.csail.mit.edu","Shell, git, tooling."],
+["Docs","Hugging Face PEFT","https://huggingface.co/docs/peft","LoRA / QLoRA."],
+["Docs","Hugging Face TRL","https://huggingface.co/docs/trl","SFT, DPO training."],
+["Docs","vLLM","https://docs.vllm.ai","Inference serving."],
+["Docs","LangGraph","https://langchain-ai.github.io/langgraph/","Agent orchestration."],
+["Docs","Qdrant","https://qdrant.tech/documentation/","Vector database."],
+["Docs","Ragas","https://docs.ragas.io","RAG evaluation."],
+["Docs","MLflow","https://mlflow.org/docs/latest/","Experiment tracking."],
+["Docs","Evidently","https://docs.evidentlyai.com","Monitoring and drift."],
+["Docs","FastAPI","https://fastapi.tiangolo.com/tutorial/","API serving."],
+["Docs","Docker","https://docs.docker.com/get-started/","Containers."],
+["Docs","Kubernetes basics","https://kubernetes.io/docs/tutorials/kubernetes-basics/","Cluster fundamentals."],
+["Docs","GitHub Actions","https://docs.github.com/en/actions","CI/CD."],
+["Docs","Apache Airflow","https://airflow.apache.org/docs/","Pipeline orchestration."],
+["Code","Raschka LLMs-from-scratch","https://github.com/rasbt/LLMs-from-scratch","Book companion code."],
+["Practice","Kaggle Learn","https://www.kaggle.com/learn","Short practical courses, SQL, pandas."],
+["Book","Designing Machine Learning Systems (Chip Huyen)","","System design for ML interviews."],
+["Book","Build a Large Language Model From Scratch (Raschka)","","Pairs with the repo."],
+["Book","Pro Git","https://git-scm.com/book","Free online."]
+];
+
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const TABS=[["overview","Overview"],["matrix","Skill Gap Matrix"],["jobs","Job Postings"],["roadmap","Roadmap"],["resources","Resources"],["salary","Salaries"]];
+$("#nav").innerHTML=TABS.map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join("");
+function show(id){$$("section").forEach(s=>s.classList.toggle("on",s.id===id));$$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id));store.set("tab",id)}
+$("#nav").onclick=e=>{if(e.target.dataset.t)show(e.target.dataset.t)};
+show(store.get("tab","overview"));
+
+const lab={ok:"Covered",part:"Partial",gap:"Not taught"},cls={ok:"t-ok",part:"t-part",gap:"t-gap"};
+const dem=n=>["","Nice to have","Common","Very common"][n];
+
+function stats(){
+ const c={ok:0,part:0,gap:0};SKILLS.forEach(s=>c[s.status=s[2]]++);
+ const hi=SKILLS.filter(s=>s[1]==3),hiGap=hi.filter(s=>s[2]==="gap").length;
+ const [done,total]=progress();
+ $("#stats").innerHTML=`
+ <div class="card"><h3>Skills tracked</h3><div class="big">${SKILLS.length}</div><div class="mute">${c.ok} covered, ${c.part} partial, ${c.gap} not taught</div></div>
+ <div class="card"><h3>High-demand skills missing</h3><div class="big" style="color:var(--gap)">${hiGap} / ${hi.length}</div><div class="mute">Skills rated "very common" that JKU does not teach</div></div>
+ <div class="card"><h3>Roadmap progress</h3><div class="big">${total?Math.round(done/total*100):0}%</div><div class="mute">${done} of ${total} tasks done</div></div>
+ <div class="card"><h3>Target pay (junior)</h3><div class="big">55-75k EUR</div><div class="mute">or 90-125k CHF in Zurich</div></div>`;
+}
+
+let mf="All";
+function matrix(){
+ const cats=["All","Core","ML","DL","LLM","Data","Eng","Ops","Soft"],stt=["All","gap","part","ok"];
+ $("#matrixFilters").innerHTML=cats.map(c=>`<button class="chip ${mf===c?"on":""}" data-c="${c}">${c}</button>`).join("")+"<span class='mute'>|</span>"+stt.map(c=>`<button class="chip ${mf===c?"on":""}" data-c="${c}">${c==="All"?"Any status":lab[c]}</button>`).join("");
+ const rows=SKILLS.filter(s=>mf==="All"||s[5]===mf||s[2]===mf).sort((a,b)=>b[1]-a[1]);
+ $("#matrixBody").innerHTML=rows.map(s=>`<tr><td><b>${s[0]}</b></td><td>${dem(s[1])}</td><td><span class="tag ${cls[s[2]]}">${lab[s[2]]}</span></td><td>${s[3]}</td><td>${s[4]}</td></tr>`).join("");
+}
+$("#matrixFilters").onclick=e=>{if(e.target.dataset.c){mf=e.target.dataset.c;matrix()}};
+
+let jf="ALL";
+function jobs(){
+ $("#jobFilters").innerHTML=[["ALL","All"],["DE","Germany"],["CH","Switzerland"]].map(x=>`<button class="chip ${jf===x[0]?"on":""}" data-c="${x[0]}">${x[1]}</button>`).join("");
+ $("#jobList").innerHTML=JOBS.filter(j=>jf==="ALL"||j.reg===jf||j.reg==="BOTH").map(j=>`
+ <div class="card"><div class="jobhead"><h3>${j.role}</h3><span class="tag t-part">${j.reg}</span></div>
+ <div class="mute">${j.co} - ${j.loc} - ${j.src}</div>
+ <ul class="l">${j.req.map(r=>`<li>${r}</li>`).join("")}</ul></div>`).join("");
+}
+$("#jobFilters").onclick=e=>{if(e.target.dataset.c){jf=e.target.dataset.c;jobs()}};
+
+const done=store.get("done",{});
+function progress(){let t=0,d=0;PHASES.forEach((p,i)=>p.tasks.forEach((_,j)=>{t++;if(done[i+"-"+j])d++}));return [d,t]}
+function roadmap(){
+ $("#phases").innerHTML=PHASES.map((p,i)=>`<div class="card phase"><h2>${p.t}</h2><div class="mute">${p.d}</div>${p.tasks.map((t,j)=>{
+  const k=i+"-"+j;return `<label class="task ${done[k]?"done":""}"><input type="checkbox" data-k="${k}" ${done[k]?"checked":""}><div><div class="tt">${t[0]}</div><div class="res">${t.slice(1).map(r=>`<a href="${r[1]}" target="_blank" rel="noopener">${r[0]}</a>`).join("")}</div></div></label>`}).join("")}</div>`).join("");
+ const [d,t]=progress(),p=Math.round(d/t*100);$("#pct").textContent=p+"% ("+d+"/"+t+")";$("#pbar").style.width=p+"%";stats();
+}
+$("#phases").onchange=e=>{const k=e.target.dataset.k;if(k){done[k]=e.target.checked;store.set("done",done);roadmap()}};
+
+let rf="All";
+function res(){
+ const cats=["All",...new Set(RES.map(r=>r[0]))];
+ $("#resFilters").innerHTML=cats.map(c=>`<button class="chip ${rf===c?"on":""}" data-c="${c}">${c}</button>`).join("");
+ $("#resList").innerHTML=RES.filter(r=>rf==="All"||r[0]===rf).map(r=>`<div class="card"><span class="tag t-ok">${r[0]}</span><h3 style="margin-top:6px">${r[1]}</h3><div class="mute">${r[3]}</div>${r[2]?`<a href="${r[2]}" target="_blank" rel="noopener">${r[2].replace(/^https?:\/\//,"")}</a>`:""}</div>`).join("");
+}
+$("#resFilters").onclick=e=>{if(e.target.dataset.c){rf=e.target.dataset.c;res()}};
+
+matrix();jobs();roadmap();res();
+</script>
+</body>
+</html>
