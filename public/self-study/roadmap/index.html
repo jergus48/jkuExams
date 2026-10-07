@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Self-Study Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#f4f5f9;--panel:#ffffff;--panel2:#f0f2f7;--ink:#0f1424;--ink2:#3a4260;--mute:#6b7494;--line:#e3e6ef;
+ --acc:#4f46e5;--acc2:#7c3aed;--accbg:#eceafd;
+ --ok:#0f9d6b;--okbg:#dff5ec;--part:#c27a00;--partbg:#fcefd2;--gap:#d6394a;--gapbg:#fde3e6;
+ --shadow:0 1px 2px rgba(15,20,36,.05),0 8px 24px rgba(15,20,36,.06);
+}
+:root[data-theme=dark]{
+ --bg:#0b0e17;--panel:#131828;--panel2:#1a2033;--ink:#eef0f8;--ink2:#c3c9de;--mute:#8a93b3;--line:#232a42;
+ --acc:#8b8cff;--acc2:#b48bff;--accbg:#1e2247;
+ --ok:#3ddc9a;--okbg:#10301f;--part:#f5b94a;--partbg:#3a2c0e;--gap:#ff7a8a;--gapbg:#3a1822;
+ --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+ --bg:#0b0e17;--panel:#131828;--panel2:#1a2033;--ink:#eef0f8;--ink2:#c3c9de;--mute:#8a93b3;--line:#232a42;
+ --acc:#8b8cff;--acc2:#b48bff;--accbg:#1e2247;
+ --ok:#3ddc9a;--okbg:#10301f;--part:#f5b94a;--partbg:#3a2c0e;--gap:#ff7a8a;--gapbg:#3a1822;
+ --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,system-ui,Segoe UI,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.shell{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+aside{position:sticky;top:0;height:100vh;padding:24px 16px;border-right:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;gap:6px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:-.01em;padding:0 10px 18px}
+.logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px}
+.nav button{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;color:var(--ink2);font-weight:500;cursor:pointer}
+.nav button:hover{background:var(--panel2)}
+.nav button.on{background:var(--accbg);color:var(--acc);font-weight:600}
+.nav svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sidefoot{margin-top:auto;padding:14px 10px 0;border-top:1px solid var(--line);font-size:13px;color:var(--mute);display:grid;gap:10px}
+.sidefoot .mini{height:6px;background:var(--panel2);border-radius:9px;overflow:hidden}
+.sidefoot .mini i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:9px}
+.tbtn{all:unset;cursor:pointer;color:var(--mute);font-size:13px}.tbtn:hover{color:var(--ink)}
+main{padding:40px clamp(18px,4vw,56px) 90px;max-width:1120px;width:100%}
+section{display:none;animation:in .25s ease}section.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.15;letter-spacing:-.03em;margin:0 0 10px;font-weight:800}
+h2{font-size:20px;letter-spacing:-.02em;margin:36px 0 14px;font-weight:700}
+.lead{color:var(--ink2);font-size:17px;max-width:720px;margin:0 0 26px}
+.eyebrow{font:500 12px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin-bottom:10px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.kpi .l{font-size:13px;color:var(--mute);font-weight:500}
+.kpi .v{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:6px 0 4px}
+.kpi .s{font-size:13px;color:var(--mute)}
+.hero{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;padding:28px;border-radius:20px;background:linear-gradient(135deg,var(--accbg),var(--panel));border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:20px}
+.ringwrap{position:relative;width:170px;height:170px}
+.ringwrap svg{transform:rotate(-90deg)}
+.ringwrap .c{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ringwrap b{font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.ringwrap span{font-size:12px;color:var(--mute);margin-top:4px}
+.note{border:1px solid var(--line);background:var(--panel2);border-radius:12px;padding:12px 16px;font-size:13.5px;color:var(--ink2);margin:0 0 22px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600;white-space:nowrap}
+.p-ok{background:var(--okbg);color:var(--ok)}.p-part{background:var(--partbg);color:var(--part)}.p-gap{background:var(--gapbg);color:var(--gap)}.p-acc{background:var(--accbg);color:var(--acc)}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.catrow{display:grid;grid-template-columns:130px 1fr 54px;gap:14px;align-items:center;padding:9px 0}
+.catrow .n{font-weight:600;font-size:14px}
+.stack{display:flex;height:12px;border-radius:9px;overflow:hidden;background:var(--panel2)}
+.stack i{display:block;height:100%}
+.catrow .pc{text-align:right;font:500 13px "JetBrains Mono",monospace;color:var(--ink2)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--mute);margin-top:10px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;background:var(--c)}
+.next{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.btn{all:unset;cursor:pointer;background:var(--acc);color:#fff;padding:10px 18px;border-radius:10px;font-weight:600;font-size:14px}
+.btn:hover{filter:brightness(1.1)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.chip{all:unset;cursor:pointer;padding:6px 14px;border:1px solid var(--line);border-radius:99px;background:var(--panel);color:var(--ink2);font-size:13px;font-weight:500}
+.chip:hover{border-color:var(--acc)}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.sk{display:grid;grid-template-columns:1.5fr .8fr .8fr 1.6fr;gap:14px;align-items:start;padding:14px 18px;border-top:1px solid var(--line)}
+.sk:first-child{border-top:0}
+.sk .nm{font-weight:600}.sk .sub{font-size:13px;color:var(--mute)}
+.dots{display:inline-flex;gap:4px;vertical-align:middle}.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}.dots i.f{background:var(--acc)}
+.sk .hd{display:none}
+.tablehead{display:grid;grid-template-columns:1.5fr .8fr .8fr 1.6fr;gap:14px;padding:0 18px 8px;font:500 11px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.list{padding:0;overflow:hidden}
+.job{display:flex;flex-direction:column;gap:12px}
+.jh{display:flex;gap:12px;align-items:center}
+.av{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--acc),var(--acc2));flex:none}
+.jh h3{margin:0;font-size:16px;letter-spacing:-.01em;line-height:1.3}
+.jh .m{font-size:13px;color:var(--mute)}
+.reqs{display:flex;gap:6px;flex-wrap:wrap}
+.req{font-size:12.5px;padding:4px 10px;border-radius:8px;background:var(--panel2);color:var(--ink2);border:1px solid var(--line)}
+.rail{position:relative;margin-left:6px;padding-left:28px;border-left:2px solid var(--line)}
+.phase{margin-bottom:34px}
+.phase>h2{margin:0 0 2px;position:relative}
+.phase>h2::before{content:"";position:absolute;left:-39px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 5px var(--bg)}
+.phase>.d{color:var(--mute);margin:0 0 14px;font-size:14px}
+details.chap{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+details.chap[open]{border-color:var(--acc)}
+.chap summary{list-style:none;cursor:pointer;padding:14px 18px;display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:center}
+.chap summary::-webkit-details-marker{display:none}
+.chap summary b{font-weight:650;font-size:15.5px}
+.chap summary .cnt{font:500 12px "JetBrains Mono",monospace;color:var(--mute)}
+.bar{grid-column:1/-1;height:5px;background:var(--panel2);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:9px;transition:width .3s}
+.body{padding:2px 18px 18px;border-top:1px solid var(--line)}
+.body p{color:var(--ink2);margin:14px 0 0}
+.body h4{margin:18px 0 6px;font:500 11px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.task{display:flex;gap:12px;padding:7px 0;cursor:pointer;align-items:flex-start}
+.task input{appearance:none;width:19px;height:19px;border:2px solid var(--line);border-radius:6px;flex:none;margin-top:2px;cursor:pointer;display:grid;place-content:center;background:var(--panel)}
+.task input:checked{background:var(--acc);border-color:var(--acc)}
+.task input:checked::after{content:"";width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.task.done .tt{color:var(--mute);text-decoration:line-through}
+.links{display:flex;flex-direction:column;gap:6px}
+.lk{display:flex;gap:10px;align-items:center;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--ink);font-size:14px}
+.lk:hover{border-color:var(--acc);text-decoration:none}
+.lk .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:11px;font-weight:800;color:#fff;flex:none}
+.ic.v{background:#e0334c}.ic.r{background:var(--acc)}
+.lk span.t{flex:1}
+.lk .arrow{color:var(--mute)}
+.res{display:block}
+.rcard{display:flex;flex-direction:column;gap:6px}
+.rcard h3{margin:4px 0 0;font-size:15.5px;letter-spacing:-.01em}
+.rcard p{margin:0;color:var(--mute);font-size:13.5px;flex:1}
+.rcard .u{font-size:12.5px;word-break:break-all}
+.sal{display:grid;grid-template-columns:130px 1fr 130px;gap:14px;align-items:center;padding:12px 0}
+.sal .tr{position:relative;height:14px;background:var(--panel2);border-radius:9px}
+.sal .tr i{position:absolute;top:0;bottom:0;border-radius:9px;background:linear-gradient(90deg,var(--acc),var(--acc2))}
+.sal .v{font:500 13px "JetBrains Mono",monospace;text-align:right;color:var(--ink2)}
+.ul{margin:0;padding-left:20px;color:var(--ink2)}.ul li{margin:7px 0}
+@media (max-width:860px){
+ .shell{grid-template-columns:1fr}
+ aside{position:sticky;height:auto;flex-direction:row;overflow-x:auto;padding:10px;border-right:0;border-bottom:1px solid var(--line);z-index:9;gap:4px}
+ .brand,.sidefoot{display:none}
+ .nav{display:flex;gap:4px}.nav button{width:auto;white-space:nowrap;padding:8px 12px}
+ .hero{grid-template-columns:1fr}.ringwrap{margin:0 auto}
+ .sk,.tablehead{grid-template-columns:1fr 1fr}
+ .tablehead{display:none}
+ .sk .hd{display:block;font:500 10px "JetBrains Mono",monospace;text-transform:uppercase;color:var(--mute);margin-bottom:2px}
+ .sk>div:last-child,.sk>div:first-child{grid-column:1/-1}
+ .catrow{grid-template-columns:90px 1fr 46px}
+ .sal{grid-template-columns:1fr;gap:4px}.sal .v{text-align:left}
+}
+table.t{width:100%;border-collapse:collapse;font-size:14px}
+table.t th{font:500 11px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);text-align:left;padding:12px 16px;background:var(--panel2)}
+table.t td{padding:11px 16px;border-top:1px solid var(--line);vertical-align:top;color:var(--ink2)}
+.tw{overflow-x:auto}
+.btn{display:inline-block}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+ <div class="brand"><div class="logo">AI</div>Self-Study</div>
+ <nav class="nav" id="nav"></nav>
+ <div class="sidefoot">
+  <div><div style="display:flex;justify-content:space-between"><span>Roadmap</span><b id="sbPct" style="color:var(--ink)">0%</b></div><div class="mini"><i id="sbBar" style="width:0"></i></div></div>
+  <a href="/">&larr; Exam Trainer</a>
+  <button class="tbtn" id="themeBtn">Toggle theme</button>
+ </div>
+</aside>
+<main>
+
+<section id="overview" class="on">
+ <div class="eyebrow">JKU Bachelor AI vs. the job market</div>
+ <h1>What your degree covers, and what employers pay for.</h1>
+ <p class="lead">Compared against the JKU curriculum and ML/AI engineering listings in Germany and Switzerland. The gaps are mostly engineering and LLM tooling. The math is a real strength.</p>
+ <div class="hero">
+  <div>
+   <h2 style="margin:0 0 6px">Market readiness</h2>
+   <p style="margin:0 0 16px;color:var(--ink2)">Weighted by how often each skill shows up in postings. Covered counts fully, partial counts half.</p>
+   <div class="next" id="next"></div>
+  </div>
+  <div class="ringwrap" id="ring"></div>
+ </div>
+ <div class="grid g4" id="stats"></div>
+ <h2>Coverage by area</h2>
+ <div class="card" id="cats"></div>
+ <h2>Where JKU is strong</h2>
+ <div class="card"><ul class="ul">
+  <li>Mathematics (31.5 ECTS: linear algebra, analysis, probability, numerical optimization) and statistics. A real edge over bootcamp and self-taught candidates.</li>
+  <li>Classical ML theory: supervised, unsupervised, reinforcement learning, signal processing, NLP basics.</li>
+  <li>Algorithms, data structures, logic, formal models. Useful for interviews and research roles.</li></ul></div>
+ <h2>Where it leaves you exposed</h2>
+ <div class="card"><ul class="ul">
+  <li>Almost nothing on shipping software: Git workflows, testing, Docker, CI/CD, cloud, APIs, monitoring.</li>
+  <li>Nothing dedicated to LLMs: transformer internals at depth, fine-tuning (LoRA/QLoRA), RAG, agents, evaluation, inference serving.</li>
+  <li>No SQL or data engineering, pipelines, or experiment tracking.</li>
+  <li>About 10.5 ECTS (Responsible AI, Gender Studies, Technology and Society) do not appear in job requirements, apart from EU AI Act awareness being a small plus.</li></ul></div>
+ <div class="note" style="margin-top:24px">Based on the JKU curriculum (2020 version, 180 ECTS) and job and salary pages found in October 2026. Your actual course content may differ from the titles. Partial means touched but not at the depth or tooling employers expect.</div>
+</section>
+
+<section id="matrix">
+ <div class="eyebrow">Skill gap matrix</div>
+ <h1>34 skills, rated against the market.</h1>
+ <p class="lead">Demand shows how often a skill appears in postings. Status is my judgement of what the JKU curriculum gives you.</p>
+ <div class="chips" id="matrixFilters"></div>
+ <div class="tablehead"><div>Skill</div><div>Demand</div><div>JKU status</div><div>Closest course / what is missing</div></div>
+ <div class="card list" id="matrixBody"></div>
+</section>
+
+<section id="jobs">
+ <div class="eyebrow">Job postings</div>
+ <h1>What real listings ask for.</h1>
+ <p class="lead">Summarized from listings found in search. Postings expire, so read them as patterns. Archetype cards are composites of many listings.</p>
+ <div class="chips" id="jobFilters"></div>
+ <div class="grid g2" id="jobList"></div>
+</section>
+
+<section id="roadmap">
+ <div class="eyebrow">Roadmap</div>
+ <h1>30 chapters, in the order that pays off.</h1>
+ <p class="lead">Open a chapter, watch the videos, tick off what you can do, and build the project. Progress is saved in this browser.</p>
+ <div class="card" style="margin-bottom:28px"><div style="display:flex;justify-content:space-between;align-items:baseline"><b>Overall</b><span id="pct" class="cnt" style="font:500 13px 'JetBrains Mono',monospace;color:var(--mute)"></span></div><div class="bar" style="height:8px;margin-top:10px"><i id="pbar" style="width:0"></i></div></div>
+ <div class="rail" id="phases"></div>
+</section>
+
+<section id="resources">
+ <div class="eyebrow">Resources</div>
+ <h1>Courses, docs and books.</h1>
+ <p class="lead">Links come from my knowledge of well-known sites and were not each opened today. If one is dead, search the title.</p>
+ <div class="chips" id="resFilters"></div>
+ <div class="grid g4" id="resList"></div>
+</section>
+
+<section id="salary">
+ <div class="eyebrow">Salaries</div>
+ <h1>What the skills are worth.</h1>
+ <p class="lead">Gross yearly figures from salary aggregator pages. They disagree with each other, so use them as rough ranges. Swiss cost of living and taxes are much higher. Big tech and quant packages sit above these.</p>
+ <div class="grid g2">
+  <div class="card"><h3 style="margin:0 0 6px">Germany (EUR, thousands)</h3><div id="salDE"></div></div>
+  <div class="card"><h3 style="margin:0 0 6px">Zurich (CHF, thousands)</h3><div id="salCH"></div></div>
+ </div>
+ <h2>What moves you up the range</h2>
+ <div class="card"><ul class="ul">
+  <li>Production experience: a deployed model serving real users, with monitoring.</li>
+  <li>LLM systems skills (RAG, evaluation, inference optimization) are in current demand.</li>
+  <li>Cloud plus Kubernetes plus MLOps is repeatedly named as the biggest premium.</li>
+  <li>Location: Munich and Zurich pay the most; Berlin the least of the large hubs.</li>
+  <li>An MSc is often preferred for research-heavy and senior roles in Switzerland.</li></ul></div>
+</section>
+
+
+</main>
+</div>
+
+<script>
+const SKILLS=[
+// name, demand(1-3), status(ok/part/gap), jku course, missing, cat
+["Python (language)",3,"ok","Programming in Python I/II","Software engineering style: typing, packaging, tests, linters","Core"],
+["Algorithms and data structures",2,"ok","Algorithms and Data Structures 1/2","Mostly interview prep (LeetCode style)","Core"],
+["Linear algebra, calculus, probability",3,"ok","Mathematics for AI I-III","Nothing; keep it fresh","Core"],
+["Statistics, experiment design",2,"ok","Statistics for AI, Computational Statistics","A/B testing in practice","Core"],
+["Classical ML (sklearn, trees, SVM, clustering)",3,"ok","ML: Supervised/Unsupervised, Pattern Classification","Feature engineering on messy real data, Kaggle-style practice","ML"],
+["Optimization",1,"ok","Numerical Optimization","None for most jobs","ML"],
+["Reinforcement learning",1,"ok","Reinforcement Learning","Niche in jobs (robotics, games, RLHF)","ML"],
+["NumPy, pandas, matplotlib (data wrangling and EDA)",3,"part","Basic Methods of Data Analysis, Programming in Python","Cleaning messy data, joins, groupby, plotting, EDA habits","Data"],
+["scikit-learn (pipelines, model selection, metrics)",3,"part","Machine Learning: Supervised/Unsupervised (theory-heavy)","Pipelines, cross-validation, hyperparameter search, leakage, calibration","ML"],
+["Gradient boosting (XGBoost, LightGBM)",2,"gap","-","Dominant method for tabular data in industry; tuning and feature importance","ML"],
+["TensorFlow and Keras",2,"gap","-","Named next to PyTorch in German postings; Keras API, tf.data, SavedModel","DL"],
+["Deep learning with PyTorch",3,"part","Hands-on AI I/II (verify content)","Writing training loops, debugging, mixed precision, multi-GPU basics","DL"],
+["Transformers and LLM internals",3,"part","Natural Language Processing (3 ECTS)","Attention from scratch, tokenization, KV cache, scaling laws","LLM"],
+["Hugging Face ecosystem (transformers, datasets)",3,"gap","-","Daily-use library in most LLM job ads","LLM"],
+["Prompting and LLM API apps",3,"gap","-","Structured outputs, tool calling, cost/latency control","LLM"],
+["RAG (chunking, embeddings, retrieval, reranking)",3,"gap","-","Whole topic; plus hybrid search and evaluation","LLM"],
+["Vector databases (Qdrant, Weaviate, pgvector, FAISS)",2,"gap","-","Indexing, filtering, scaling","LLM"],
+["Agents and orchestration (LangGraph, tool use)",2,"gap","-","State machines, memory, guardrails, MCP","LLM"],
+["LLM evaluation and observability",3,"gap","-","Eval sets, LLM-as-judge, Ragas, tracing","LLM"],
+["Fine-tuning (SFT, LoRA/QLoRA, DPO)",3,"gap","-","PEFT, TRL, dataset curation, evaluating the result","LLM"],
+["Inference serving and optimization (vLLM, quantization)",2,"gap","-","Latency/throughput, GPU memory, batching","LLM"],
+["Computer vision",2,"part","Visual Analytics, Digital Signal Processing","CNNs/ViTs in PyTorch, detection, segmentation","DL"],
+["Git and collaborative workflow",3,"gap","-","Branching, PRs, code review, CI","Eng"],
+["Testing, clean code, packaging",2,"gap","-","pytest, type checking, project structure","Eng"],
+["SQL and relational databases",3,"gap","-","Joins, window functions, query tuning","Data"],
+["Data pipelines (Airflow, Spark, dbt)",2,"gap","-","Orchestration, batch vs streaming","Data"],
+["Docker and containers",3,"gap","-","Images, compose, GPU containers","Ops"],
+["Kubernetes",2,"gap","-","Deployments, services, basics of GPU scheduling","Ops"],
+["CI/CD (GitHub Actions)",2,"gap","-","Automated tests, builds, deploys","Ops"],
+["Cloud (AWS, Azure or GCP)",3,"gap","-","One provider well: compute, storage, managed ML","Ops"],
+["MLOps (MLflow, experiment tracking, model registry, monitoring)",3,"gap","-","Reproducibility, drift detection, retraining","Ops"],
+["REST APIs (FastAPI)",3,"gap","-","Serving a model behind an API, async, auth","Eng"],
+["German/English professional communication",2,"part","Seminar in AI, Practical Work in AI","Writing design docs, presenting trade-offs","Soft"],
+["AI regulation awareness (EU AI Act)",1,"ok","Responsible AI","Small plus, especially in DE/CH enterprise","Soft"]
+];
+
+const JOBS=[
+{co:"NETCONOMY",loc:"Berlin / Dortmund",role:"AI Engineer",reg:"DE",src:"posting",req:["End-to-end generative AI solutions","Scalable AI agents","LangGraph"]},
+{co:"Luxoft",loc:"Munich",role:"Backend Engineer, LLM Integration",reg:"DE",src:"posting",req:["FastAPI microservices","LangChain","Integrating AI features in vehicles","Backend engineering"]},
+{co:"IONOS",loc:"Karlsruhe",role:"AI Developer",reg:"DE",src:"posting",req:["LLM-based workflows","Real-time interaction optimization","Evaluation techniques for output accuracy","LangChain"]},
+{co:"Logicalis",loc:"Frankfurt",role:"AI Engineer, Automation and Data Integration",reg:"DE",src:"posting",req:["Python","AI-driven workflows","Integration and automation systems"]},
+{co:"European Tech Recruit",loc:"Frankfurt",role:"Senior AI Engineer, LLM / RAG Expert",reg:"DE",src:"posting",req:["Production AI systems","Retrieval workflows","Scalable agent platforms","Vector databases"]},
+{co:"Nebius",loc:"Zurich",role:"Senior ML Engineer, LLM Inference Optimization",reg:"CH",src:"posting",req:["Optimize endpoints for latency, throughput, memory, GPU use","vLLM, SGLang, TensorRT-LLM or Triton","PyTorch","Distributed systems"]},
+{co:"Alpine AI",loc:"Switzerland",role:"LLM and Machine Learning Engineer",reg:"CH",src:"posting (page changed, details not re-read)",req:["LLM engineering","Machine learning engineering"]},
+{co:"Archetype: ML Engineer (DE)",loc:"Berlin, Munich, Hamburg",role:"Machine Learning Engineer, mid",reg:"DE",src:"composite",req:["Python, PyTorch or TensorFlow","Hugging Face for LLM fine-tuning","Docker, Kubernetes, MLflow or Kubeflow","AWS / Azure / GCP","Data engineering fundamentals","CI/CD"]},
+{co:"Archetype: RAG / GenAI Engineer",loc:"DE and CH",role:"AI Engineer, applied LLM",reg:"BOTH",src:"composite",req:["Document ingestion, chunking, embedding models","Vector DB: Pinecone, Weaviate, Qdrant, Chroma, FAISS","LangChain, LlamaIndex, Haystack or DSPy","LLM evaluation and observability tools","LoRA / QLoRA fine-tuning","FastAPI, Docker"]},
+{co:"Archetype: ML Engineer (Zurich)",loc:"Zurich",role:"Machine Learning Engineer, 2+ years",reg:"CH",src:"composite",req:["Python + PyTorch, JAX or TensorFlow","Training and serving deep models","MLOps: deployment, versioning, monitoring","Docker, APIs, databases, distributed systems","Cloud (Azure often named)","Translating research code to production","Often MSc preferred"]}
+];
+
+const yt=q=>["YouTube search: "+q,"https://www.youtube.com/results?search_query="+encodeURIComponent(q)];
+const PHASES=[
+{t:"Phase 0: Engineering foundations",d:"Weeks 1-4. Makes everything else employable. JKU teaches none of this.",chapters:[
+{id:"git",t:"Git and GitHub workflow",
+ why:"Every team works through pull requests. If you cannot branch, rebase and resolve a conflict, you slow everyone down. Your GitHub profile is also your first portfolio.",
+ know:["Commit, branch, merge, rebase, and when to use each","Resolve a merge conflict without panic","Open a pull request, review one, respond to comments","Write a .gitignore and never commit secrets or API keys","Use GitHub Issues and a README properly"],
+ proj:"Put 3 of your existing uni projects on GitHub with clean READMEs and a sensible commit history.",
+ vid:[["Git & GitHub Crash Course for Beginners [2026]","https://www.youtube.com/watch?v=mAFoROnOfHs"]],
+ read:[["Pro Git (free book)","https://git-scm.com/book"],["MIT Missing Semester","https://missing.csail.mit.edu"]]},
+{id:"docker",t:"Docker and containers",
+ why:"A model that only runs on your laptop is not a product. Docker is the unit of deployment for nearly every ML job listing, and it is the prerequisite for Kubernetes.",
+ know:["Image vs container, layers and caching","Write a Dockerfile for a Python app (slim base, pinned deps)","Volumes, ports, environment variables","docker compose for app + database","Run a GPU container (NVIDIA container toolkit idea)"],
+ proj:"Containerize a small ML inference script and run it with docker compose together with Postgres.",
+ vid:[["Docker Tutorial for Beginners - A Full DevOps Course","https://www.youtube.com/watch?v=fqMOX6JJhGo"],["Docker Tutorial for Beginners to Advanced","https://www.youtube.com/watch?v=Tw8i9p_GSpw"]],
+ read:[["Docker: Get started","https://docs.docker.com/get-started/"]]},
+{id:"fastapi",t:"REST APIs with FastAPI and testing",
+ why:"Models are consumed through APIs. Luxoft and many other postings explicitly ask for FastAPI. Tests are what separate a script from software.",
+ know:["Routes, request/response models with Pydantic","Dependency injection, async endpoints","Error handling and status codes","pytest basics, fixtures, testing an API with TestClient","Type hints and a linter (ruff)"],
+ proj:"Wrap a scikit-learn or small PyTorch model in a FastAPI service with 5+ tests, packaged in your Docker image.",
+ vid:[["Python FastAPI Tutorial: Full Course for Beginners","https://www.youtube.com/watch?v=iukOehU5aF4"]],
+ read:[["FastAPI tutorial","https://fastapi.tiangolo.com/tutorial/"],["pytest docs","https://docs.pytest.org"],["Pydantic docs","https://docs.pydantic.dev"]]},
+{id:"sql",t:"SQL and relational databases",
+ why:"Most real ML work starts with getting data out of a database. SQL is asked in screening rounds and is the one skill uni almost never tests properly.",
+ know:["SELECT, WHERE, GROUP BY, HAVING","All join types and when each is used","CTEs and subqueries","Window functions: ROW_NUMBER, RANK, LAG, running totals","Indexes and reading an EXPLAIN plan"],
+ proj:"Load a public dataset into Postgres and answer 15 analytical questions with SQL only.",
+ vid:[["Advanced SQL Full Course","https://www.youtube.com/watch?v=D2xUEYR-GIY"],["SQL Joins Basics (Visually Explained)","https://www.youtube.com/watch?v=aY7z4HcHm5M"],["SQL Window Functions Basics (Visually Explained)","https://www.youtube.com/watch?v=o666k19mZwE"]],
+ read:[["SQLBolt interactive lessons","https://sqlbolt.com"],["PostgreSQL tutorial","https://www.postgresql.org/docs/current/tutorial.html"]]}
+]},
+{t:"Phase 1: Core ML and deep learning in practice",d:"Weeks 5-12. Data tools, scikit-learn, boosting, then PyTorch, TensorFlow and transformers.",chapters:[
+{id:"pydata",t:"NumPy, pandas and matplotlib",
+ why:"Every ML task starts with messy tables. Fluent pandas and honest exploratory analysis is faster and more valuable than any model you will train in the first week of a job.",
+ know:["Vectorized NumPy: broadcasting, indexing, no Python loops","pandas: filtering, groupby, merge, pivot, time series basics","Handle missing values, outliers and duplicates deliberately","Plot distributions and relationships with matplotlib and seaborn","Write a short EDA that states findings, not just charts"],
+ proj:"Take a messy public dataset (for example Austrian open data or Kaggle), clean it in a reproducible script, and write a one-page EDA notebook.",
+ vid:[["Data Analysis with Python - Full Course for Beginners (Numpy, Pandas, Matplotlib, Seaborn)","https://www.youtube.com/watch?v=r-uOLxNrNk8"],["Pandas & Python for Data Analysis by Example","https://www.youtube.com/watch?v=gtjxAH8uaP0"]],
+ read:[["pandas user guide","https://pandas.pydata.org/docs/user_guide/index.html"],["NumPy quickstart","https://numpy.org/doc/stable/user/quickstart.html"],["Kaggle Learn: Pandas","https://www.kaggle.com/learn/pandas"]]},
+{id:"sklearn",t:"scikit-learn properly",
+ why:"JKU explains the algorithms; employers want you to apply them correctly. Most real-world ML projects still use sklearn for baselines, preprocessing and evaluation, and data leakage mistakes are a classic interview filter.",
+ know:["Estimator API: fit, predict, transform","Pipeline and ColumnTransformer for preprocessing without leakage","Train/validation/test split, cross-validation, stratification","Choose metrics: precision, recall, F1, ROC-AUC, PR curves, regression errors","GridSearchCV, RandomizedSearchCV, and why Optuna is often better","Handle class imbalance","Save a model with joblib and load it in a service"],
+ proj:"Build a full tabular pipeline on one dataset: preprocessing in a Pipeline, cross-validated model comparison, tuned best model, error analysis, and a saved artifact loaded by your FastAPI service.",
+ vid:[["Scikit-Learn Full Crash Course - Python Machine Learning","https://www.youtube.com/watch?v=SIEaLBXr0rk"],["Scikit-Learn Course - Machine Learning in Python Tutorial","https://www.youtube.com/watch?v=pqNCD_5r0IU"],["Build Machine Learning Pipelines with Scikit-Learn","https://www.youtube.com/watch?v=HYYvZkS_P4A"]],
+ read:[["scikit-learn user guide","https://scikit-learn.org/stable/user_guide.html"],["scikit-learn tutorials","https://scikit-learn.org/stable/tutorial/index.html"],["Kaggle Learn: Intermediate Machine Learning","https://www.kaggle.com/learn/intermediate-machine-learning"]]},
+{id:"boost",t:"Gradient boosting: XGBoost and LightGBM",
+ why:"For tabular data (finance, insurance, manufacturing, which are huge in DE and CH) boosted trees usually beat neural nets. Employers expect you to know when to reach for them.",
+ know:["Boosting vs bagging, how trees are added sequentially","Key hyperparameters: learning rate, depth, n_estimators, subsample","Early stopping with a validation set","Feature importance and SHAP for explanations","Compare against a neural net baseline honestly"],
+ proj:"Beat your sklearn baseline with XGBoost or LightGBM, tune with Optuna, and explain the top features with SHAP.",
+ vid:[["Visual Guide to Gradient Boosted Trees (xgboost)","https://www.youtube.com/watch?v=TyvYZ26alZs"],["XGBoost 101: eXtreme Gradient Boosting eXplained","https://www.youtube.com/watch?v=E5L3ZBw5zkk"]],
+ read:[["XGBoost docs","https://xgboost.readthedocs.io"],["LightGBM docs","https://lightgbm.readthedocs.io"],["Optuna docs","https://optuna.readthedocs.io"],["SHAP docs","https://shap.readthedocs.io"]]},
+{id:"nn",t:"Neural networks and backpropagation, intuition",
+ why:"You have the math from JKU. This chapter ties it to code so that autograd stops being magic. Karpathy's micrograd is the best single resource for this.",
+ know:["Forward pass, loss, gradients, chain rule in a computation graph","Why gradients vanish or explode","SGD vs Adam, learning rate effects","Overfitting, regularization, dropout"],
+ proj:"Follow micrograd and reproduce it yourself without looking, then train a tiny MLP on a toy dataset.",
+ vid:[["3Blue1Brown: But what is a neural network?","https://www.youtube.com/watch?v=aircAruvnKk"],["3Blue1Brown: What is backpropagation really doing?","https://www.youtube.com/watch?v=Ilg3gGewQ5U"],["Karpathy: The spelled-out intro to neural networks and backpropagation (micrograd)","https://www.youtube.com/watch?v=VMj-3S1tku0"]],
+ read:[["micrograd repo","https://github.com/karpathy/micrograd"],["Neural Networks: Zero to Hero","https://karpathy.ai/zero-to-hero.html"]]},
+{id:"torch",t:"PyTorch fundamentals and a real training loop",
+ why:"Job ads say PyTorch constantly. Employers want someone who can write, debug and speed up a training loop, not call model.fit.",
+ know:["Tensors, devices, broadcasting, dtype","Dataset and DataLoader","Write the train/validation loop by hand","Checkpointing, early stopping, seeding for reproducibility","Mixed precision (autocast) and gradient accumulation","Profile where the time goes"],
+ proj:"Train a classifier on a dataset of your choice with your own loop, logging curves, and reach a documented baseline.",
+ vid:[["PyTorch for Deep Learning & Machine Learning - Full Course","https://www.youtube.com/watch?v=V_xro1bcAuA"],["Understanding the PyTorch Training Loop","https://www.youtube.com/watch?v=w_L0o3bRD1k"]],
+ read:[["PyTorch tutorials","https://pytorch.org/tutorials/"],["fast.ai Practical Deep Learning","https://course.fast.ai"]]},
+{id:"tf",t:"TensorFlow and Keras",
+ why:"Your degree gave you neither. German industry postings often list TensorFlow beside PyTorch, and many older production systems and mobile/edge deployments still use it. Learn Keras 3 well enough to read and extend existing code.",
+ know:["Keras Sequential and Functional API","Compile, fit, callbacks (EarlyStopping, ModelCheckpoint, TensorBoard)","tf.data input pipelines","Custom training step with GradientTape","Save and load a model, export as SavedModel","Know what you would port to PyTorch and why"],
+ proj:"Reimplement your PyTorch classifier in Keras, log both to TensorBoard, and write down the API differences you hit.",
+ vid:[["Keras with TensorFlow Course - Python Deep Learning and Neural Networks for Beginners","https://www.youtube.com/watch?v=qFJeN9V1ZsI"],["Deep Learning With Tensorflow 2.0, Keras and Python (playlist)","https://www.youtube.com/playlist?list=PLeo1K3hjS3uu7CxAacxVndI4bE_o3BDtO"]],
+ read:[["TensorFlow tutorials","https://www.tensorflow.org/tutorials"],["Keras getting started","https://keras.io/getting_started/"]]},
+{id:"cv",t:"Convolutional networks and transfer learning",
+ why:"Vision still appears in many German industry roles (automotive, manufacturing). Transfer learning is the practical skill: fine-tune a pretrained model on little data.",
+ know:["Convolution, pooling, receptive field","ResNet idea and skip connections","Fine-tune a pretrained torchvision model","Data augmentation","Confusion matrix and per-class metrics"],
+ proj:"Fine-tune a pretrained ResNet on a small custom image dataset and report per-class metrics.",
+ vid:[["Build Your First CNN with PyTorch: MNIST Image Classification","https://www.youtube.com/watch?v=DqJy5PeV3pg"],["Image Classification CNN in PyTorch","https://www.youtube.com/watch?v=CtzfbUwrYGI"]],
+ read:[["CNN Explainer (interactive)","https://poloclub.github.io/cnn-explainer/"],["PyTorch transfer learning tutorial","https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html"]]},
+{id:"gpt",t:"Transformers and building GPT from scratch",
+ why:"This is the foundation of every LLM job. JKU gives you roughly 3 ECTS of NLP; here you build the whole thing so interviews on attention, KV cache and tokenization are easy.",
+ know:["Self-attention: queries, keys, values, causal masking","Positional information, layer norm, residuals","Tokenization (BPE) and its failure modes","Pretraining vs fine-tuning vs RLHF pipeline","KV cache and why inference is memory bound"],
+ proj:"Build and train a small GPT on a text corpus following Karpathy, then add one change of your own (for example a different positional scheme) and compare.",
+ vid:[["3Blue1Brown: Attention in transformers, visually explained","https://www.youtube.com/watch?v=eMlx5fFNoYc"],["Karpathy: Let's build GPT: from scratch, in code, spelled out","https://www.youtube.com/watch?v=kCc8FmEb1nY"],["Karpathy: Deep Dive into LLMs like ChatGPT","https://www.youtube.com/watch?v=7xTGNNLPyMI"]],
+ read:[["The Illustrated Transformer","https://jalammar.github.io/illustrated-transformer/"],["Raschka: LLMs from scratch","https://github.com/rasbt/LLMs-from-scratch"],["Stanford CS336 (advanced, optional)","https://cs336.stanford.edu"]]}
+]},
+{t:"Phase 2: LLM applications and RAG",d:"Weeks 11-16. The highest hiring demand in the postings I found.",chapters:[
+{id:"hf",t:"Hugging Face ecosystem",
+ why:"Transformers, datasets, tokenizers and the Hub appear in nearly every LLM job ad. Fluency here saves you weeks on the job.",
+ know:["Load a model and tokenizer, generate text, control sampling","Use datasets with map and streaming","Pipelines vs manual inference","Model cards, licenses, picking a model size for your GPU","Push your own model to the Hub"],
+ proj:"Build a notebook that compares 3 open models on one task with the same evaluation set.",
+ vid:[yt("Hugging Face transformers tutorial LLM course")],
+ read:[["Hugging Face LLM course","https://huggingface.co/learn/llm-course"]]},
+{id:"prompt",t:"Prompting, structured output and tool calling",
+ why:"Most production LLM work is careful interface design around a model: schemas, retries, cost and latency control, not clever prompts.",
+ know:["System prompts, few-shot, and when they fail","Structured outputs with JSON schema and Pydantic validation","Tool/function calling loop","Streaming, retries, rate limits, timeouts","Token counting, caching and cost estimation"],
+ proj:"Build a CLI or API that extracts structured data from messy documents, with validation and a retry policy, and log cost per request.",
+ vid:[yt("structured output function calling LLM tutorial pydantic")],
+ read:[["Anthropic docs","https://docs.anthropic.com"],["Pydantic docs","https://docs.pydantic.dev"]]},
+{id:"embed",t:"Embeddings and vector search",
+ why:"Retrieval quality decides whether a RAG system works. Understand what an embedding is and how approximate nearest neighbor search trades accuracy for speed.",
+ know:["Cosine similarity vs dot product","Sentence embedding models and how to pick one","Exact vs approximate search, HNSW idea","Metadata filtering","Hybrid search: BM25 plus dense vectors","pgvector vs dedicated vector DB trade-offs"],
+ proj:"Index 10k+ documents in Qdrant or pgvector and measure recall@k against a brute-force baseline.",
+ vid:[yt("vector database embeddings explained HNSW")],
+ read:[["Qdrant documentation","https://qdrant.tech/documentation/"],["Sentence-Transformers","https://www.sbert.net"],["FAISS wiki","https://github.com/facebookresearch/faiss/wiki"]]},
+{id:"rag",t:"Building a RAG pipeline",
+ why:"RAG is the most commonly requested GenAI skill in DE/CH postings. Good RAG is mostly data work: parsing, chunking and retrieval tuning.",
+ know:["Document parsing (PDF, HTML, tables)","Chunking strategies and overlap","Query rewriting, reranking with a cross-encoder","Prompt assembly and citations","Failure modes: missing context, wrong chunk, hallucination despite context"],
+ proj:"Build RAG over a real document set (for example JKU course PDFs or EU AI Act text) with citations, a reranker and a web UI.",
+ vid:[["Advanced Retrieval Augmented Generation (RAG) Deep Dive","https://www.youtube.com/watch?v=hfx7F7lObdg"]],
+ read:[["LLM Zoomcamp (free course)","https://github.com/DataTalksClub/llm-zoomcamp"]]},
+{id:"eval",t:"Evaluating LLM and RAG systems",
+ why:"This is what separates juniors who demo from engineers who ship. Postings mention evaluation techniques and observability explicitly (IONOS, others).",
+ know:["Build a golden question set from real usage","Retrieval metrics: recall@k, MRR","Answer metrics: faithfulness, relevance, LLM-as-judge and its biases","Regression tests in CI for prompts","Tracing and logging of every call"],
+ proj:"Create a 50-question eval set for your RAG project, score it with Ragas, change one component, and show the numbers before and after.",
+ vid:[yt("evaluating RAG applications Ragas tutorial")],
+ read:[["Ragas docs","https://docs.ragas.io"],["Hamel Husain: Your AI product needs evals","https://hamel.dev/blog/posts/evals/"]]},
+{id:"agents",t:"Agents and orchestration",
+ why:"NETCONOMY and others ask for agent frameworks. Learn the loop (plan, call tool, observe) and its failure modes before relying on a framework.",
+ know:["Agent loop and state machine thinking","Tools with clear schemas and error messages","Memory and context management","Guardrails, human-in-the-loop, loop limits","Model Context Protocol (MCP) basics"],
+ proj:"Build a LangGraph agent with 3 tools, a step limit and a trace log; write down 5 failure cases you found.",
+ vid:[["Agentic AI Full Course with LangGraph (Zero to Hero) - Part 1","https://www.youtube.com/watch?v=4RtKGasvNC0"]],
+ read:[["LangGraph docs","https://langchain-ai.github.io/langgraph/"],["Model Context Protocol","https://modelcontextprotocol.io"]]}
+]},
+{t:"Phase 3: Fine-tuning and serving",d:"Weeks 17-22. Differentiator for LLM-focused and inference roles (for example Nebius Zurich).",chapters:[
+{id:"lora",t:"Supervised fine-tuning with LoRA and QLoRA",
+ why:"You rarely retrain full models. Parameter-efficient methods let you adapt a 7B model on one GPU. Knowing when NOT to fine-tune (prompting or RAG is enough) is part of the skill.",
+ know:["Why low-rank updates work; rank, alpha, target modules","QLoRA: 4-bit base + LoRA adapters","Build an instruction dataset and chat template correctly","Hyperparameters and overfitting signs","Merge adapters and export the model","Compare against prompting baseline"],
+ proj:"Fine-tune a small open model on a narrow task (for example JSON extraction), and prove with an eval whether it beats few-shot prompting.",
+ vid:[["PEFT LoRA Explained in Detail - Fine-Tune your LLM on your local GPU","https://www.youtube.com/watch?v=YVU5wAA6Txo"],["How to Fine-Tune Llama with QLoRA Using HuggingFace's SFT Trainer","https://www.youtube.com/watch?v=XOlyOWE4YaM"]],
+ read:[["PEFT docs","https://huggingface.co/docs/peft"],["TRL docs","https://huggingface.co/docs/trl"],["LoRA paper","https://arxiv.org/abs/2106.09685"],["QLoRA paper","https://arxiv.org/abs/2305.14314"]]},
+{id:"dpo",t:"Preference tuning: RLHF and DPO",
+ why:"Explains how chat models are aligned, and it is a frequent interview topic. DPO makes it practical on small hardware.",
+ know:["SFT, then reward model, then PPO: the RLHF pipeline","DPO objective in plain words","Preference dataset format (chosen/rejected)","Where preference tuning helps vs hurts"],
+ proj:"Run a small DPO job with TRL on a preference dataset and compare outputs before and after.",
+ vid:[["DPO - Part1 - Direct Preference Optimization Paper Explanation","https://www.youtube.com/watch?v=q_BvQyusEjU"]],
+ read:[["DPO paper","https://arxiv.org/abs/2305.18290"],["TRL docs","https://huggingface.co/docs/trl"]]},
+{id:"quant",t:"Quantization",
+ why:"Memory is the bottleneck of inference. Quantization is how a 70B model fits on affordable hardware, and inference roles test it.",
+ know:["FP32, FP16, BF16, INT8, INT4 trade-offs","GPTQ, AWQ, GGUF at a conceptual level","bitsandbytes NF4","Measure quality loss, not just speed","Memory math: params x bytes plus KV cache"],
+ proj:"Quantize one model three ways and tabulate memory, tokens/s and eval score.",
+ vid:[["LLM Quantization Techniques Explained - GPTQ AWQ GGUF HQQ BitNet","https://www.youtube.com/watch?v=0pF6GdbwMo4"],["LLM Quantization Explained: GPTQ, AWQ, QLoRA, GGUF and More","https://www.youtube.com/watch?v=WmvZwR4rKJg"]],
+ read:[["AWQ paper","https://arxiv.org/abs/2306.00978"]]},
+{id:"serve",t:"Inference serving with vLLM",
+ why:"Throughput, latency and GPU utilization are what inference-optimization roles are paid for. vLLM, SGLang, TensorRT-LLM and Triton were named in the Zurich posting I found.",
+ know:["Prefill vs decode phases","PagedAttention and continuous batching","Latency vs throughput trade-off, time to first token","Serve an OpenAI-compatible endpoint","Load test with concurrent requests","Speculative decoding, prefix caching (awareness)"],
+ proj:"Serve a model with vLLM, load test it, and plot throughput vs concurrency, with and without quantization.",
+ vid:[["PagedAttention: Behind vLLM's Insane Speed","https://www.youtube.com/watch?v=6uPnLkCiy5g"],["vLLM Deep Dive: PagedAttention, Continuous Batching","https://www.youtube.com/watch?v=bNIOGEkAI1I"]],
+ read:[["vLLM docs","https://docs.vllm.ai"],["PagedAttention paper","https://arxiv.org/abs/2309.06180"]]}
+]},
+{t:"Phase 4: MLOps and cloud",d:"Weeks 23-30. Where the salary premium shows up in the listings.",chapters:[
+{id:"mlflow",t:"Experiment tracking and model registry",
+ why:"Reproducibility is a hiring filter for mid-level roles. MLflow or similar appears constantly in German postings.",
+ know:["Log params, metrics, artifacts per run","Compare runs and pick a winner reproducibly","Model registry and stages/aliases","Data and code versioning (DVC idea)"],
+ proj:"Add MLflow tracking to your fine-tuning or classifier project and register the best model.",
+ vid:[["Track Your ML Experiments with MLflow","https://www.youtube.com/watch?v=Z4unUK0vn4k"],["MLflow Crash Course - Model Registry and Model Deployment","https://www.youtube.com/watch?v=bDflB17YUNc"]],
+ read:[["MLflow docs","https://mlflow.org/docs/latest/"]]},
+{id:"cicd",t:"CI/CD with GitHub Actions",
+ why:"Automation is how teams keep quality while moving fast. A green pipeline in your repo is visible proof of engineering habits.",
+ know:["Workflow files, triggers, jobs, secrets","Run tests and linting on each pull request","Build and push a Docker image","Deploy on merge to main","Cache dependencies to speed up runs"],
+ proj:"Pipeline for your FastAPI model service: test, build image, push to a registry, deploy.",
+ vid:[["GitHub Actions Tutorial for Beginners","https://www.youtube.com/watch?v=0PbxpIao_EU"],["CI/CD Full Course (2 Hours): GitHub Actions, Docker, Kubernetes","https://www.youtube.com/watch?v=hbeLqL6sjKA"]],
+ read:[["GitHub Actions docs","https://docs.github.com/en/actions"]]},
+{id:"k8s",t:"Kubernetes basics",
+ why:"Named in many MLOps and ML engineer postings. You do not need to be an admin, but you must read manifests and deploy a service.",
+ know:["Pods, Deployments, Services, Ingress","ConfigMaps and Secrets","Resource requests/limits, autoscaling idea","Debugging with kubectl logs/describe","GPU scheduling (awareness)"],
+ proj:"Deploy your Dockerized model API to a local cluster (kind or minikube) with 2 replicas and a rolling update.",
+ vid:[["Complete Kubernetes Course - From BEGINNER to PRO","https://www.youtube.com/watch?v=2T86xAtR6Fo"],["Complete Kubernetes Tutorial for Beginners (playlist)","https://www.youtube.com/playlist?list=PLy7NrYWoggjziYQIDorlXjTvvwweTYoNC"]],
+ read:[["Kubernetes basics tutorial","https://kubernetes.io/docs/tutorials/kubernetes-basics/"]]},
+{id:"cloud",t:"One cloud provider, done properly",
+ why:"Postings list AWS, Azure or GCP; Zurich listings lean Azure, Germany mixes all three. Depth in one transfers to the others.",
+ know:["IAM and least privilege","Compute (VMs, containers, serverless) and GPU instances","Object storage and managed databases","Managed ML or LLM service of that provider","Cost control: budgets, shutting things down"],
+ proj:"Deploy your containerized API to the provider with a budget alert set up first.",
+ vid:[yt("AWS OR Azure machine learning engineer deployment tutorial")],
+ read:[["AWS Skill Builder","https://skillbuilder.aws"],["Microsoft Learn training","https://learn.microsoft.com/training/"],["Google Cloud training","https://cloud.google.com/learn/training"]]},
+{id:"monitor",t:"Pipelines and production monitoring",
+ why:"Models decay. Monitoring for drift and quality is what turns a project into a maintained service.",
+ know:["Orchestrated pipelines (Airflow or Prefect idea)","Data drift vs concept drift","Latency, error rate and quality dashboards","Alerting and rollback strategy","Retraining triggers"],
+ proj:"Add drift and latency monitoring to a deployed model and simulate a drift event.",
+ vid:[["Ultimate MLOps Full Course in One Video","https://www.youtube.com/watch?v=w71RHxAWxaM"]],
+ read:[["MLOps Zoomcamp","https://github.com/DataTalksClub/mlops-zoomcamp"],["Evidently docs","https://docs.evidentlyai.com"],["Apache Airflow docs","https://airflow.apache.org/docs/"]]}
+]},
+{t:"Phase 5: Portfolio, interviews, career",d:"Ongoing. Proof beats claims.",chapters:[
+{id:"design",t:"ML system design and interview prep",
+ why:"Mid and senior loops include an open-ended design round. Practice explaining trade-offs out loud.",
+ know:["Requirements, data, offline and online metrics","Training vs serving architecture","Latency, cost and scale estimates","Failure modes and monitoring plan","Explain one past project end to end in 10 minutes"],
+ proj:"Write design docs for 3 systems (RAG support bot, recommender, fraud detector) and present each to a friend.",
+ vid:[["ML Engineering in 45 minutes (Designing ML systems)","https://www.youtube.com/watch?v=18sMYvzqhTU"],["Chip Huyen on Machine Learning Interviews","https://www.youtube.com/watch?v=pli1K75PSa8"]],
+ read:[["Designing Machine Learning Systems (book, Chip Huyen)",""]]},
+{id:"flagship",t:"Flagship project",
+ why:"One deployed project with numbers beats ten notebooks. This is what you show recruiters.",
+ know:["Real problem with real users or real data","Eval set with before/after metrics","Docker, CI, tests, monitoring","Live demo link and a short write-up","Honest section on limitations"],
+ proj:"Pick a RAG or fine-tuned-model product, ship it using everything from Phases 0-4, and publish a README with architecture diagram and metrics.",
+ vid:[],read:[]},
+{id:"career",t:"Experience, master and job search",
+ why:"Degree plus a Werkstudent or internship plus portfolio is the realistic route to the junior ranges shown in the Salaries tab. Some Swiss research-heavy roles prefer an MSc.",
+ know:["Apply for Werkstudent or internships in Linz, Vienna, Munich, Zurich","Use JKU Practical Work in AI for something real","Decide on master: JKU AI master vs a stronger program abroad","CV with measurable results and links","Practice interviews in English, learn basic German for DE roles"],
+ proj:"Send 5 applications per week for 8 weeks and track outcomes in a sheet.",
+ vid:[],
+ read:[["jobs.ch","https://www.jobs.ch"],["LinkedIn Jobs","https://www.linkedin.com/jobs"]]}
+]}
+];
+
+const RES=[
+["Course","fast.ai Practical Deep Learning","https://course.fast.ai","Top-down PyTorch practice."],
+["Course","Karpathy Zero to Hero","https://karpathy.ai/zero-to-hero.html","Build GPT from scratch."],
+["Course","Hugging Face LLM Course","https://huggingface.co/learn/llm-course","Transformers, datasets, fine-tuning."],
+["Course","LLM Zoomcamp","https://github.com/DataTalksClub/llm-zoomcamp","RAG project course, free."],
+["Course","MLOps Zoomcamp","https://github.com/DataTalksClub/mlops-zoomcamp","Tracking, deploy, monitor."],
+["Course","Stanford CS336","https://cs336.stanford.edu","Language models from scratch, advanced."],
+["Course","Made With ML","https://madewithml.com","Production ML workflow."],
+["Course","Full Stack Deep Learning","https://fullstackdeeplearning.com","Shipping DL systems."],
+["Course","MIT Missing Semester","https://missing.csail.mit.edu","Shell, git, tooling."],
+["Docs","Hugging Face PEFT","https://huggingface.co/docs/peft","LoRA / QLoRA."],
+["Docs","Hugging Face TRL","https://huggingface.co/docs/trl","SFT, DPO training."],
+["Docs","vLLM","https://docs.vllm.ai","Inference serving."],
+["Docs","LangGraph","https://langchain-ai.github.io/langgraph/","Agent orchestration."],
+["Docs","Qdrant","https://qdrant.tech/documentation/","Vector database."],
+["Docs","Ragas","https://docs.ragas.io","RAG evaluation."],
+["Docs","MLflow","https://mlflow.org/docs/latest/","Experiment tracking."],
+["Docs","Evidently","https://docs.evidentlyai.com","Monitoring and drift."],
+["Docs","FastAPI","https://fastapi.tiangolo.com/tutorial/","API serving."],
+["Docs","Docker","https://docs.docker.com/get-started/","Containers."],
+["Docs","Kubernetes basics","https://kubernetes.io/docs/tutorials/kubernetes-basics/","Cluster fundamentals."],
+["Docs","GitHub Actions","https://docs.github.com/en/actions","CI/CD."],
+["Docs","Apache Airflow","https://airflow.apache.org/docs/","Pipeline orchestration."],
+["Code","Raschka LLMs-from-scratch","https://github.com/rasbt/LLMs-from-scratch","Book companion code."],
+["Practice","Kaggle Learn","https://www.kaggle.com/learn","Short practical courses, SQL, pandas."],
+["Book","Designing Machine Learning Systems (Chip Huyen)","","System design for ML interviews."],
+["Book","Build a Large Language Model From Scratch (Raschka)","","Pairs with the repo."],
+["Book","Pro Git","https://git-scm.com/book","Free online."]
+];
+
+
+
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+/* theme */
+function applyTheme(t){if(t)document.documentElement.setAttribute("data-theme",t)}
+applyTheme(store.get("theme",null));
+$("#themeBtn").onclick=()=>{const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");const n=cur==="dark"?"light":"dark";applyTheme(n);store.set("theme",n)};
+
+/* nav */
+const IC={
+ overview:'<path d="M3 11l9-8 9 8M5 10v10h14V10"/>',
+ matrix:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+ jobs:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/>',
+ roadmap:'<path d="M4 19c4 0 4-14 8-14s4 14 8 14"/><circle cx="4" cy="19" r="1.5"/><circle cx="20" cy="19" r="1.5"/>',
+ resources:'<path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2zM4 21V5"/>',
+ salary:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>'
+};
+const TABS=[["overview","Overview"],["matrix","Skill gaps"],["jobs","Job postings"],["roadmap","Roadmap"],["resources","Resources"],["salary","Salaries"]];
+$("#nav").innerHTML=TABS.map(t=>`<button data-t="${t[0]}"><svg viewBox="0 0 24 24">${IC[t[0]]}</svg>${t[1]}</button>`).join("");
+function show(id){$$("section").forEach(s=>s.classList.toggle("on",s.id===id));$$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id));store.set("tab",id);window.scrollTo(0,0)}
+$("#nav").onclick=e=>{const b=e.target.closest("button");if(b)show(b.dataset.t)};
+
+const lab={ok:"Covered",part:"Partial",gap:"Not taught"},pcl={ok:"p-ok",part:"p-part",gap:"p-gap"};
+const dem=n=>`<span class="dots" title="${["","Nice to have","Common","Very common"][n]}">${[1,2,3].map(i=>`<i class="${i<=n?"f":""}"></i>`).join("")}</span> <span class="sub">${["","Nice to have","Common","Very common"][n]}</span>`;
+
+/* overview */
+const CATN={Core:"Core CS and math",ML:"Classical ML",DL:"Deep learning",LLM:"LLMs and RAG",Data:"Data and SQL",Eng:"Software engineering",Ops:"MLOps and cloud",Soft:"Soft skills"};
+function score(list){let w=0,s=0;list.forEach(x=>{w+=x[1];s+=x[1]*(x[2]==="ok"?1:x[2]==="part"?.5:0)});return w?s/w:0}
+function overview(){
+ const sc=Math.round(score(SKILLS)*100);
+ const R=74,C=2*Math.PI*R;
+ $("#ring").innerHTML=`<svg width="170" height="170" viewBox="0 0 170 170"><circle cx="85" cy="85" r="${R}" fill="none" stroke="var(--panel2)" stroke-width="14"/><circle cx="85" cy="85" r="${R}" fill="none" stroke="url(#g)" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-sc/100)}"/><defs><linearGradient id="g"><stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs></svg><div class="c"><b>${sc}%</b><span>of market skills</span></div>`;
+ const c={ok:0,part:0,gap:0};SKILLS.forEach(s=>c[s[2]]++);
+ const hi=SKILLS.filter(s=>s[1]===3),hg=hi.filter(s=>s[2]==="gap").length;
+ const [d,t]=progress();
+ $("#stats").innerHTML=`
+ <div class="card kpi"><div class="l">Skills tracked</div><div class="v">${SKILLS.length}</div><div class="s">${c.ok} covered, ${c.part} partial, ${c.gap} not taught</div></div>
+ <div class="card kpi"><div class="l">Top-demand gaps</div><div class="v" style="color:var(--gap)">${hg} of ${hi.length}</div><div class="s">very common skills JKU does not teach</div></div>
+ <div class="card kpi"><div class="l">Roadmap done</div><div class="v">${t?Math.round(d/t*100):0}%</div><div class="s">${d} of ${t} items</div></div>
+ <div class="card kpi"><div class="l">Junior pay</div><div class="v">55-75k</div><div class="s">EUR in Germany, or 90-125k CHF in Zurich</div></div>`;
+ $("#cats").innerHTML=Object.keys(CATN).map(k=>{
+  const l=SKILLS.filter(s=>s[5]===k),w=l.reduce((a,s)=>a+s[1],0);
+  const f=st=>l.filter(s=>s[2]===st).reduce((a,s)=>a+s[1],0)/w*100;
+  return `<div class="catrow"><div class="n">${CATN[k]}</div><div class="stack"><i style="width:${f("ok")}%;background:var(--ok)"></i><i style="width:${f("part")}%;background:var(--part)"></i><i style="width:${f("gap")}%;background:var(--gap)"></i></div><div class="pc">${Math.round(score(l)*100)}%</div></div>`}).join("")+
+  `<div class="legend"><span style="--c:var(--ok)">Covered</span><span style="--c:var(--part)">Partial</span><span style="--c:var(--gap)">Not taught</span></div>`;
+ const nx=nextChapter();
+ $("#next").innerHTML=nx?`<div><div class="sub" style="font-size:12px;color:var(--mute)">Up next</div><b>${nx.t}</b></div><button class="btn" id="goNext">Continue</button>`:`<b>Roadmap complete</b>`;
+ const gb=$("#goNext");if(gb)gb.onclick=()=>{const o=store.get("open",{});o[nx.id]=1;store.set("open",o);roadmap();show("roadmap");setTimeout(()=>{const el=document.querySelector(`details[data-id="${nx.id}"]`);if(el)el.scrollIntoView({block:"start"})},50)};
+}
+/* matrix */
+let mf="All";
+function matrix(){
+ const cats=["All",...Object.keys(CATN)],stt=["gap","part","ok"];
+ $("#matrixFilters").innerHTML=cats.map(c=>`<button class="chip ${mf===c?"on":""}" data-c="${c}">${c==="All"?"All":CATN[c]}</button>`).join("")+stt.map(c=>`<button class="chip ${mf===c?"on":""}" data-c="${c}">${lab[c]}</button>`).join("");
+ const rows=SKILLS.filter(s=>mf==="All"||s[5]===mf||s[2]===mf).sort((a,b)=>b[1]-a[1]);
+ $("#matrixBody").innerHTML=rows.map(s=>`<div class="sk"><div><div class="nm">${s[0]}</div><div class="sub">${CATN[s[5]]}</div></div><div><div class="hd">Demand</div>${dem(s[1])}</div><div><div class="hd">Status</div><span class="pill ${pcl[s[2]]}">${lab[s[2]]}</span></div><div><div class="hd">Course / missing</div><div class="sub" style="color:var(--ink2)">${s[3]==="-"?"No matching course":s[3]}</div><div class="sub">${s[4]}</div></div></div>`).join("");
+}
+$("#matrixFilters").onclick=e=>{const b=e.target.closest("[data-c]");if(b){mf=b.dataset.c;matrix()}};
+
+/* jobs */
+let jf="ALL";
+function jobs(){
+ $("#jobFilters").innerHTML=[["ALL","All"],["DE","Germany"],["CH","Switzerland"]].map(x=>`<button class="chip ${jf===x[0]?"on":""}" data-c="${x[0]}">${x[1]}</button>`).join("");
+ $("#jobList").innerHTML=JOBS.filter(j=>jf==="ALL"||j.reg===jf||j.reg==="BOTH").map(j=>{
+  const arche=j.src==="composite";
+  return `<div class="card job"><div class="jh"><div class="av">${arche?"A":j.co[0]}</div><div><h3>${j.role}</h3><div class="m">${arche?"Composite":j.co} - ${j.loc}</div></div></div>
+  <div><span class="pill p-acc">${j.reg==="BOTH"?"DE + CH":j.reg==="DE"?"Germany":"Switzerland"}</span> <span class="pill ${arche?"p-part":"p-ok"}">${arche?"Archetype":"Listing"}</span></div>
+  <div class="reqs">${j.req.map(r=>`<span class="req">${r}</span>`).join("")}</div></div>`}).join("");
+}
+$("#jobFilters").onclick=e=>{const b=e.target.closest("[data-c]");if(b){jf=b.dataset.c;jobs()}};
+
+/* roadmap */
+const done=store.get("done2",{});
+const items=c=>[...c.know.map((_,i)=>c.id+":k"+i),c.id+":p"];
+function countP(phases,d){let t=0,n=0;phases.forEach(p=>p.chapters.forEach(c=>items(c).forEach(k=>{t++;if(d[k])n++})));return [n,t]}
+function progress(){return countP(PHASES,done)}
+const lnk=(r,vid)=>r[1]?`<a class="lk" href="${r[1]}" target="_blank" rel="noopener"><span class="ic ${vid?"v":"r"}">${vid?"&#9654;":"&#9776;"}</span><span class="t">${r[0]}</span><span class="arrow">&#8599;</span></a>`:`<div class="lk"><span class="ic r">&#9776;</span><span class="t">${r[0]}</span></div>`;
+function phaseHTML(phases,d,op){
+ return phases.map(p=>`<div class="phase"><h2>${p.t}</h2><p class="d">${p.d}</p>${p.chapters.map(c=>{
+  const ks=items(c),n=ks.filter(k=>d[k]).length,pc=Math.round(n/ks.length*100);
+  return `<details class="chap" data-id="${c.id}" ${op[c.id]?"open":""}><summary><span><b>${c.t}</b>${c.tag?` <span class="pill p-acc" style="margin-left:6px">${c.tag}</span>`:""}</span><span class="cnt">${n}/${ks.length}</span><div class="bar"><i style="width:${pc}%"></i></div></summary>
+  <div class="body"><p>${c.why}</p>
+  <h4>You know it when you can</h4>
+  ${c.know.map((k,i)=>`<label class="task ${d[c.id+":k"+i]?"done":""}"><input type="checkbox" data-k="${c.id}:k${i}" ${d[c.id+":k"+i]?"checked":""}><span class="tt">${k}</span></label>`).join("")}
+  <h4>Practice</h4>
+  <label class="task ${d[c.id+":p"]?"done":""}"><input type="checkbox" data-k="${c.id}:p" ${d[c.id+":p"]?"checked":""}><span class="tt">${c.proj}</span></label>
+  ${c.vid.length?`<h4>Videos</h4><div class="links">${c.vid.map(r=>lnk(r,true)).join("")}</div>`:""}
+  ${c.read.length?`<h4>Read and practice</h4><div class="links">${c.read.map(r=>lnk(r,false)).join("")}</div>`:""}
+  </div></details>`}).join("")}</div>`).join("");
+}
+function roadmap(){
+ $("#phases").innerHTML=phaseHTML(PHASES,done,store.get("open",{}));
+ const [d,t]=progress(),p=Math.round(d/t*100);
+ $("#pct").textContent=p+"%  ("+d+" / "+t+")";$("#pbar").style.width=p+"%";
+ $("#sbPct").textContent=p+"%";$("#sbBar").style.width=p+"%";
+ overview();
+}
+function wire(el,d,key,okey,fn){$(el).onchange=e=>{const k=e.target.dataset.k;if(k){d[k]=e.target.checked;store.set(key,d);const o={};$$(el+" details").forEach(x=>{if(x.open)o[x.dataset.id]=1});store.set(okey,o);fn()}}}
+wire("#phases",done,"done2","open",roadmap);
+function nextChapter(){for(const p of PHASES)for(const c of p.chapters)if(items(c).some(k=>!done[k]))return c;return null}
+
+/* resources */
+let rf="All";
+function res(){
+ const cats=["All",...new Set(RES.map(r=>r[0]))];
+ $("#resFilters").innerHTML=cats.map(c=>`<button class="chip ${rf===c?"on":""}" data-c="${c}">${c}</button>`).join("");
+ $("#resList").innerHTML=RES.filter(r=>rf==="All"||r[0]===rf).map(r=>`<div class="card rcard"><div><span class="pill p-acc">${r[0]}</span></div><h3>${r[1]}</h3><p>${r[3]}</p>${r[2]?`<a class="u" href="${r[2]}" target="_blank" rel="noopener">${r[2].replace(/^https?:\/\//,"").replace(/\/$/,"")} &#8599;</a>`:""}</div>`).join("");
+}
+$("#resFilters").onclick=e=>{const b=e.target.closest("[data-c]");if(b){rf=b.dataset.c;res()}};
+
+/* salary */
+function sal(el,rows,max){
+ $(el).innerHTML=rows.map(r=>`<div class="sal"><div style="font-weight:600">${r[0]}</div><div class="tr"><i style="left:${r[1]/max*100}%;width:${(r[2]-r[1])/max*100}%"></i></div><div class="v">${r[1]}-${r[2]}k</div></div>`).join("");
+}
+sal("#salDE",[["Junior (0-2 y)",55,75],["Mid (3-5 y)",75,105],["Senior (6+ y)",105,140]],220);
+sal("#salCH",[["Junior (0-2 y)",90,125],["Mid (3-5 y)",125,160],["Senior (6+ y)",160,210]],220);
+
+matrix();jobs();roadmap();res();
+show(store.get("tab","overview"));
+</script>
+</body>
+</html>
