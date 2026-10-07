@@ -6,49 +6,232 @@
 <title>AI Study Platform</title>
 </head>
 <body>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
-:root{--bg:#fafaf8;--fg:#1d1d1b;--mut:#6b6b66;--card:#fff;--bd:#e3e2dc;--acc:#2f6fd6;--accbg:#e6eefb;--ok:#1e8a4c;--okbg:#e2f4e9;--bad:#c23a3a;--badbg:#fbe7e7;--warn:#b7791f;--code:#f1f0ea}
-:root[data-theme=dark]{--bg:#16171a;--fg:#e8e8e4;--mut:#9a9a94;--card:#1f2024;--bd:#33343a;--acc:#7aa7ff;--accbg:#1c2740;--ok:#4cc982;--okbg:#17301f;--bad:#ff7b7b;--badbg:#3a1c1c;--warn:#e0b050;--code:#101114}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#16171a;--fg:#e8e8e4;--mut:#9a9a94;--card:#1f2024;--bd:#33343a;--acc:#7aa7ff;--accbg:#1c2740;--ok:#4cc982;--okbg:#17301f;--bad:#ff7b7b;--badbg:#3a1c1c;--warn:#e0b050;--code:#101114}}
+/* Layout concept: left rail for navigation, a calm reading column, phase colours as the only loud thing. Primary actions are ink, not accent. */
+:root{
+  --bg:#F5F6FA;--surface:#FFFFFF;--surface2:#EEF0F7;--ink:#11131F;--mut:#5A6078;--faint:#8A90A6;--line:#E1E4EE;
+  --btn:#11131F;--btn-fg:#FFFFFF;
+  --ok:#188A52;--ok-bg:#E3F5EB;--bad:#C93A4A;--bad-bg:#FCE9EB;--warn:#B8740A;--warn-bg:#FFF3DC;
+  --code-bg:#12141F;--code-fg:#E6E8F2;--code-cm:#7C849F;--code-str:#8FD3A8;
+  --ph0:#0E8F7E;--ph1:#3558F0;--ph2:#8A4FE0;--ph3:#D6366B;--ph4:#C77C08;--ph5:#2E9E4F;
+  --shadow:0 1px 2px rgba(17,19,31,.05),0 6px 20px rgba(17,19,31,.05);
+  --f-display:"Bricolage Grotesque","Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;
+  --f-body:"Instrument Sans","Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"Cascadia Code",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0D0F18;--surface:#151826;--surface2:#1C2032;--ink:#ECEEF8;--mut:#A0A6BE;--faint:#6F7590;--line:#272B40;
+  --btn:#ECEEF8;--btn-fg:#11131F;
+  --ok:#4CC984;--ok-bg:#12301F;--bad:#FF7A89;--bad-bg:#3A1A20;--warn:#E8B34E;--warn-bg:#35280C;
+  --code-bg:#0A0C14;--code-fg:#E6E8F2;
+  --ph0:#35C9B3;--ph1:#7C93FF;--ph2:#B58CFF;--ph3:#FF7BA6;--ph4:#F0B04A;--ph5:#5FD283;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D0F18;--surface:#151826;--surface2:#1C2032;--ink:#ECEEF8;--mut:#A0A6BE;--faint:#6F7590;--line:#272B40;
+  --btn:#ECEEF8;--btn-fg:#11131F;
+  --ok:#4CC984;--ok-bg:#12301F;--bad:#FF7A89;--bad-bg:#3A1A20;--warn:#E8B34E;--warn-bg:#35280C;
+  --code-bg:#0A0C14;--code-fg:#E6E8F2;
+  --ph0:#35C9B3;--ph1:#7C93FF;--ph2:#B58CFF;--ph3:#FF7BA6;--ph4:#F0B04A;--ph5:#5FD283;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);color-scheme:dark}
+.p0{--ph:var(--ph0)}.p1{--ph:var(--ph1)}.p2{--ph:var(--ph2)}.p3{--ph:var(--ph3)}.p4{--ph:var(--ph4)}.p5{--ph:var(--ph5)}
+
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-#app{display:flex;min-height:100vh}
-#side{width:290px;flex:none;border-right:1px solid var(--bd);padding:16px 12px;position:sticky;top:0;height:100vh;overflow:auto;background:var(--card)}
-#main{flex:1;min-width:0;padding:28px clamp(16px,4vw,48px);max-width:960px}
-h1{font-size:1.7rem;margin:.2em 0 .4em}h2{font-size:1.3rem;margin:1.6em 0 .4em}h3{font-size:1.1rem;margin:1.3em 0 .3em}
-a{color:var(--acc)}
-.brand{font-weight:700;font-size:1.05rem;margin:0 4px 10px;cursor:pointer}
-.nav a,.nav button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--fg);padding:6px 8px;border-radius:6px;cursor:pointer;font:inherit;font-size:.92rem;text-decoration:none}
-.nav a:hover,.nav button:hover{background:var(--accbg)}
-.nav a.cur{background:var(--accbg);color:var(--acc);font-weight:600}
-.ph{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:14px 8px 4px}
-.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;background:var(--bd)}
-.dot.p{background:var(--warn)}.dot.d{background:var(--ok)}.dot.n{background:var(--bd)}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px 18px;margin:12px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-.stat{font-size:1.8rem;font-weight:700}.mut{color:var(--mut);font-size:.9rem}
-.tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--bd);margin:12px 0 16px}
-.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:8px 12px;font:inherit;color:var(--mut);cursor:pointer}
-.tabs button.cur{color:var(--acc);border-color:var(--acc);font-weight:600}
-.btn{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:8px 16px;font:inherit;cursor:pointer}
-.btn.sec{background:var(--card);color:var(--fg);border:1px solid var(--bd)}
-.btn:disabled{opacity:.5;cursor:default}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.bar{height:8px;background:var(--bd);border-radius:4px;overflow:hidden}.bar>i{display:block;height:100%;background:var(--acc)}
-pre{background:var(--code);border:1px solid var(--bd);border-radius:8px;padding:12px;overflow:auto;font-size:.88rem;line-height:1.45}
-code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.9em}pre code{background:none;padding:0}
-blockquote{margin:12px 0;padding:8px 14px;border-left:4px solid var(--acc);background:var(--accbg);border-radius:0 8px 8px 0}
-table{border-collapse:collapse;margin:12px 0;font-size:.92rem;display:block;overflow:auto}th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left}th{background:var(--code)}
-.opt{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:9px 12px;margin:6px 0;cursor:pointer;font:inherit;color:var(--fg)}
-.opt:hover{border-color:var(--acc)}.opt.sel{border-color:var(--acc);background:var(--accbg)}
-.opt.ok{border-color:var(--ok);background:var(--okbg)}.opt.bad{border-color:var(--bad);background:var(--badbg)}
-.expl{margin-top:8px;padding:10px 12px;border-radius:8px;background:var(--code);font-size:.92rem}
-.tag{display:inline-block;font-size:.72rem;padding:1px 8px;border-radius:10px;background:var(--accbg);color:var(--acc);margin-right:6px}
-.fc{min-height:180px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:1.1rem;cursor:pointer;padding:24px}
-textarea{width:100%;min-height:90px;background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:8px;padding:8px;font:inherit}
-.ok-t{color:var(--ok)}.bad-t{color:var(--bad)}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--f-body);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ph,var(--ink));outline-offset:2px;border-radius:6px}
+h1,h2,h3,.disp{font-family:var(--f-display);letter-spacing:-.02em;text-wrap:balance}
+.mono{font-family:var(--f-mono)}
+svg.i{width:1.1em;height:1.1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+#app{display:grid;grid-template-columns:288px minmax(0,1fr);min-height:100vh}
+#side{position:sticky;top:0;height:100vh;overflow:auto;padding:18px 14px 24px;border-right:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;gap:2px}
+#main{min-width:0;padding:0 clamp(16px,4vw,56px) 80px}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:12px 0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px)}
+.top .sp{flex:1}
+.wrap{max-width:1120px;margin:0 auto}
+.read{max-width:720px}
+
+.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 16px;font:700 1.12rem var(--f-display);letter-spacing:-.02em;text-decoration:none}
+.logo{width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--bg);display:grid;place-items:center}
+.nv{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;text-decoration:none;font-size:.93rem;color:var(--mut);border:0;background:none;width:100%;text-align:left}
+.nv:hover{background:var(--surface2);color:var(--ink)}
+.nv.cur{background:var(--surface2);color:var(--ink);font-weight:600}
+.nv .badge{margin-left:auto;font:600 .72rem var(--f-mono);background:var(--ink);color:var(--bg);padding:1px 7px;border-radius:99px}
+.grp{margin-top:6px}
+.grp>summary{list-style:none;display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:9px;cursor:pointer;font:600 .8rem var(--f-body);color:var(--ph);letter-spacing:.02em}
+.grp>summary::-webkit-details-marker{display:none}
+.grp>summary:hover{background:var(--surface2)}
+.grp>summary .n{margin-left:auto;font:500 .72rem var(--f-mono);color:var(--faint)}
+.grp>summary .chev{transition:transform .15s}
+.grp[open]>summary .chev{transform:rotate(90deg)}
+.ci{display:flex;align-items:center;gap:10px;padding:6px 10px 6px 14px;margin-left:10px;border-left:1px solid var(--line);font-size:.9rem;color:var(--mut);text-decoration:none;border-radius:0 8px 8px 0}
+.ci:hover{background:var(--surface2);color:var(--ink)}
+.ci.cur{color:var(--ink);font-weight:600;border-left:2px solid var(--ph);margin-left:10px;background:color-mix(in srgb,var(--ph) 10%,transparent)}
+.st{width:14px;height:14px;flex:none;border-radius:50%;border:1.8px solid var(--faint);position:relative}
+.st.p{border-color:var(--ph);background:conic-gradient(var(--ph) 0 50%,transparent 0)}
+.st.d{border-color:var(--ph);background:var(--ph)}
+.st.d::after{content:"";position:absolute;left:3.5px;top:1px;width:3px;height:6px;border:solid var(--bg);border-width:0 1.8px 1.8px 0;transform:rotate(45deg)}
+.side-foot{margin-top:auto;padding-top:14px;display:flex;gap:6px;flex-wrap:wrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--btn);color:var(--btn-fg);border:1px solid var(--btn);border-radius:10px;padding:9px 16px;font-weight:600;font-size:.93rem;text-decoration:none;transition:transform .08s}
+.btn:hover{transform:translateY(-1px)}.btn:active{transform:none}
+.btn.sec{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn.ghost{background:none;color:var(--mut);border-color:transparent;padding:8px 10px}
+.btn.sm{padding:6px 11px;font-size:.84rem;border-radius:8px}
+.btn:disabled{opacity:.45;cursor:default;transform:none}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;font-size:.84rem;color:var(--mut);text-decoration:none;cursor:pointer}
+.chip b{color:var(--ink);font-family:var(--f-mono);font-weight:600}
+.chip:hover{border-color:var(--faint)}
+.tag{display:inline-block;font:600 .72rem var(--f-body);letter-spacing:.04em;text-transform:uppercase;color:var(--ph,var(--mut));background:color-mix(in srgb,var(--ph,var(--faint)) 12%,var(--surface));padding:2px 9px;border-radius:99px}
+.kbd{font:500 .72rem var(--f-mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 5px;color:var(--mut);background:var(--surface)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow)}
+.flat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.mut{color:var(--mut)}.small{font-size:.86rem}
+.bar{height:6px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--ph,var(--ink));border-radius:99px;transition:width .3s}
+
+/* dashboard */
+.hello{padding:18px 0 6px}
+.hello h1{font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.08;margin:0 0 6px}
+.hero{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;margin:18px 0 8px}
+.hero .go{display:flex;flex-direction:column;gap:12px;border-top:4px solid var(--ph)}
+.hero h2{margin:0;font-size:1.55rem;line-height:1.15}
+.ring{--v:0;width:var(--s,96px);height:var(--s,96px);border-radius:50%;background:conic-gradient(var(--ph,var(--ink)) calc(var(--v)*1%),var(--surface2) 0);display:grid;place-items:center;flex:none}
+.ring>span{width:calc(100% - 16px);height:calc(100% - 16px);background:var(--surface);border-radius:50%;display:grid;place-items:center;font:700 1.25rem var(--f-display)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:12px 0 4px}
+.stat .v{font:700 1.9rem var(--f-display);letter-spacing:-.03em;line-height:1.1}
+.phh{display:flex;align-items:end;gap:14px;margin:38px 0 12px;flex-wrap:wrap}
+.phh h2{margin:0;font-size:1.25rem;color:var(--ph)}
+.phh .bar{width:120px}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.cc{display:flex;flex-direction:column;gap:10px;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px 16px;transition:border-color .12s,transform .12s}
+.cc:hover{border-color:var(--ph);transform:translateY(-2px)}
+.cc .t{font:600 1.02rem/1.25 var(--f-display);letter-spacing:-.01em}
+.dots{display:flex;gap:5px}.dots i{width:18px;height:5px;border-radius:99px;background:var(--surface2)}.dots i.on{background:var(--ph)}
+.cc .meta{display:flex;justify-content:space-between;font-size:.8rem;color:var(--faint)}
+
+/* chapter */
+.chead{padding:22px 0 8px;border-bottom:1px solid var(--line)}
+.chead h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.1;margin:8px 0 14px}
+.steps{display:flex;gap:6px;flex-wrap:wrap;padding:14px 0 0;margin-bottom:-1px}
+.steps a{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:10px 10px 0 0;text-decoration:none;color:var(--mut);font-size:.93rem;border-bottom:2px solid transparent}
+.steps a:hover{color:var(--ink)}
+.steps a.cur{color:var(--ink);font-weight:600;border-bottom-color:var(--ph)}
+.steps .ck{width:16px;height:16px;border-radius:50%;border:1.8px solid var(--faint);display:grid;place-items:center;font-size:.6rem}
+.steps .ck.on{background:var(--ph);border-color:var(--ph);color:var(--bg)}
+.cols{display:grid;grid-template-columns:minmax(0,720px) 220px;gap:56px;justify-content:center;padding-top:28px}
+.toc{position:sticky;top:76px;align-self:start;font-size:.86rem;max-height:calc(100vh - 100px);overflow:auto}
+.toc h4{margin:0 0 8px;font:600 .72rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.toc a{display:block;padding:4px 0 4px 12px;border-left:2px solid var(--line);color:var(--mut);text-decoration:none;line-height:1.35}
+.toc a:hover{color:var(--ink)}.toc a.on{color:var(--ink);border-left-color:var(--ph);font-weight:600}
+.prog{position:fixed;left:0;top:0;height:3px;background:var(--ph,var(--ink));width:0;z-index:50}
+.lesson section{margin-bottom:12px;scroll-margin-top:80px}
+.lesson h2{font-size:1.65rem;line-height:1.2;margin:2.1em 0 .5em}
+.lesson section:first-child h2{margin-top:0}
+.lesson h3{font-size:1.15rem;margin:1.6em 0 .4em}
+.lesson p,.lesson li{font-size:1.04rem}
+.lesson li{margin:.25em 0}
+.lesson code{font-family:var(--f-mono);font-size:.86em;background:var(--surface2);padding:.12em .4em;border-radius:6px}
+.code{position:relative;margin:18px 0}
+.code pre{margin:0;background:var(--code-bg);color:var(--code-fg);border-radius:12px;padding:16px 18px;overflow:auto;font:400 .85rem/1.6 var(--f-mono)}
+.code pre code{background:none;padding:0;font-size:inherit;color:inherit}
+.code .cp{position:absolute;right:8px;top:8px;background:rgba(255,255,255,.1);color:#c9cde0;border:0;border-radius:7px;padding:3px 9px;font:500 .72rem var(--f-mono);opacity:0;transition:opacity .15s}
+.code:hover .cp,.code .cp:focus-visible{opacity:1}
+.cm{color:var(--code-cm)}.sg{color:var(--code-str)}
+blockquote{margin:18px 0;padding:14px 18px;border-radius:12px;background:color-mix(in srgb,var(--ph,var(--ink)) 9%,var(--surface));border:1px solid color-mix(in srgb,var(--ph,var(--ink)) 25%,var(--line))}
+blockquote p{margin:0}
+.tw{overflow:auto;margin:18px 0;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--surface2);font-weight:600}tr:last-child td{border-bottom:0}
+.done-box{margin-top:40px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+/* flashcards */
+.deck{max-width:640px;margin:0 auto}
+.flip{perspective:1400px;margin:14px 0}
+.flip .in{position:relative;min-height:260px;transition:transform .45s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:auto;cursor:pointer}
+.face.back{transform:rotateY(180deg);border-top:4px solid var(--ph)}
+.face .lab{position:absolute;left:18px;top:14px}
+.face .txt{font:600 1.35rem/1.35 var(--f-display);letter-spacing:-.01em}
+.face.back .txt{font:400 1.05rem/1.55 var(--f-body);text-align:left;width:100%}
+.face.back .txt p{margin:.4em 0}
+.rates{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.rates button{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 6px;font-weight:600}
+.rates button small{display:block;font:400 .72rem var(--f-mono);color:var(--faint)}
+.rates button:hover{border-color:var(--ink)}
+
+/* quiz / exam */
+.qs{max-width:760px}
+.qtop{display:flex;align-items:center;gap:12px;margin:6px 0 16px}
+.qtop .bar{flex:1}
+.timer{font:600 .95rem var(--f-mono);padding:3px 10px;border-radius:99px;background:var(--surface2)}
+.timer.low{background:var(--bad-bg);color:var(--bad)}
+.qcard{padding:24px 26px}
+.qcard .q{font-size:1.1rem;line-height:1.55}
+.qcard .q p{margin:.5em 0}
+.opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin:9px 0;transition:border-color .1s,background .1s}
+.opt:hover{border-color:var(--faint)}
+.opt .k{flex:none;width:24px;height:24px;border-radius:7px;border:1.5px solid var(--line);display:grid;place-items:center;font:600 .74rem var(--f-mono);color:var(--mut);margin-top:1px}
+.opt.sel{border-color:var(--ink);background:var(--surface2)}.opt.sel .k{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.opt.ok{border-color:var(--ok);background:var(--ok-bg)}.opt.ok .k{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:var(--bad-bg)}.opt.bad .k{background:var(--bad);border-color:var(--bad);color:#fff}
+.opt code,.qcard code,.fb code{font-family:var(--f-mono);font-size:.88em;background:var(--surface2);padding:.1em .35em;border-radius:5px}
+.fb{margin-top:14px;padding:13px 16px;border-radius:12px;font-size:.96rem;background:var(--surface2)}
+.fb.ok{background:var(--ok-bg)}.fb.bad{background:var(--bad-bg)}
+.fb .h{font-weight:700;margin-bottom:2px}.fb.ok .h{color:var(--ok)}.fb.bad .h{color:var(--bad)}
+.fb p{margin:.3em 0}
+textarea{width:100%;min-height:120px;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;resize:vertical}
+textarea:focus{outline:none;border-color:var(--ink)}
+.qnav{display:flex;gap:10px;margin-top:18px;align-items:center;flex-wrap:wrap}
+.qnav .sp{flex:1}
+.pal{display:flex;gap:6px;flex-wrap:wrap;margin-top:18px}
+.pal button{width:34px;height:34px;border-radius:9px;border:1.5px solid var(--line);background:var(--surface);font:600 .8rem var(--f-mono);color:var(--mut);position:relative}
+.pal button.ans{background:var(--surface2);color:var(--ink);border-color:var(--faint)}
+.pal button.cur{border-color:var(--ink);color:var(--ink)}
+.pal button.flag::after{content:"";position:absolute;right:3px;top:3px;width:7px;height:7px;border-radius:50%;background:var(--warn)}
+.result{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.result h2{margin:0 0 4px;font-size:1.7rem}
+.rv{margin-top:14px}
+.rv>summary{cursor:pointer;list-style:none;display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.rv>summary::-webkit-details-marker{display:none}
+.rv[open]>summary{border-radius:12px 12px 0 0}
+.rv .bd{border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;padding:6px 16px 14px;background:var(--surface)}
+.dot{width:10px;height:10px;border-radius:50%;margin-top:7px;flex:none}.dot.g{background:var(--ok)}.dot.r{background:var(--bad)}
+.tagrow{display:flex;flex-direction:column;gap:7px;margin-top:6px}
+.tagrow div{display:grid;grid-template-columns:150px 1fr 40px;gap:10px;align-items:center;font-size:.86rem}
+
+/* lab, weak, search */
+.lab-step{display:flex;gap:12px;align-items:flex-start;padding:13px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin:9px 0;cursor:pointer}
+.lab-step input{width:18px;height:18px;margin-top:4px;accent-color:var(--ink)}
+.lab-step.on{opacity:.6}.lab-step.on span{text-decoration:line-through}
+.sheet{position:fixed;inset:0;z-index:100;background:rgba(10,12,22,.5);display:flex;justify-content:center;align-items:flex-start;padding:12vh 16px 16px}
+.pal-box{width:min(600px,100%);background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.35);overflow:hidden}
+.pal-box input{width:100%;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);padding:16px 18px;font:inherit;font-size:1.05rem}
+.pal-box input:focus{outline:none}
+.pal-list{max-height:50vh;overflow:auto;padding:6px}
+.pal-list a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;text-decoration:none}
+.pal-list a.on{background:var(--surface2)}
+.pal-list .sub{margin-left:auto;font-size:.78rem;color:var(--faint)}
 #menu{display:none}
-@media (max-width:820px){#app{display:block}#side{position:static;width:auto;height:auto;border:0;border-bottom:1px solid var(--bd);max-height:50vh}#main{padding:20px 16px}}
+.scrim{display:none}
+
+@media (max-width:1180px){.cols{grid-template-columns:minmax(0,720px)}.toc{display:none}}
+@media (max-width:900px){
+  #app{display:block}
+  #menu{display:inline-flex}
+  #side{position:fixed;left:0;top:0;bottom:0;width:min(320px,86vw);z-index:60;transform:translateX(-100%);transition:transform .2s;box-shadow:0 0 40px rgba(0,0,0,.3)}
+  body.nav-open #side{transform:none}
+  body.nav-open .scrim{display:block;position:fixed;inset:0;background:rgba(10,12,22,.45);z-index:55}
+  .hero{grid-template-columns:1fr}
+  .tagrow div{grid-template-columns:100px 1fr 36px}
+}
+@media (max-width:520px){.qcard{padding:18px 16px}.rates{grid-template-columns:repeat(2,1fr)}.steps a{padding:8px 10px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
 </style>
 <div id="app"><aside id="side"></aside><main id="main"></main></div>
@@ -396,19 +579,36 @@ window.CONTENT=window.CONTENT||{};CONTENT["torch"]={"lesson":[{"h":"Why PyTorch,
 </script>
 <script>
 "use strict";
-/* AI Study Platform. Content per chapter lives in content/<id>.js (see content/SCHEMA.md). */
-const CH = {}; // id -> {phase, i, meta}
-PHASES.forEach((p, pi) => p.chapters.forEach((c, ci) => { CH[c.id] = { pi, ci, meta: c }; }));
+/* AI Study Platform. Chapter content lives in content/<id>.js (format: SCHEMA.md). */
+const CH = {}; const ORDER = [];
+PHASES.forEach((p, pi) => p.chapters.forEach((c, ci) => { CH[c.id] = { pi, ci, meta: c }; ORDER.push(c.id); }));
 window.CONTENT = window.CONTENT || {};
 const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/* ---------- icons ---------- */
+const IC = {
+  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>', search: '<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/>',
+  moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/>', flame: '<path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 .3 1.3 1 2 2 2 0-3-.5-5 1-8Z"/>',
+  cards: '<rect x="3" y="6" width="14" height="12" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v10"/>', arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  back: '<path d="M19 12H5M11 6l-6 6 6 6"/>', chev: '<path d="m9 6 6 6-6 6"/>', flag: '<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  logo: '<path d="M4 18V8l8-4 8 4v10M9 18v-5h6v5"/>', home: '<path d="M4 11 12 4l8 7v9H4z"/>', weak: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>'
+};
+const ic = n => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${IC[n]}</svg>`;
 
 /* ---------- storage ---------- */
 const KEY = "ai.study.v1";
 let S;
 try { S = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { S = {}; }
-S.read = S.read || {}; S.quiz = S.quiz || {}; S.exam = S.exam || {}; S.cards = S.cards || {}; S.miss = S.miss || {}; S.lab = S.lab || {};
+["read", "quiz", "exam", "cards", "miss", "lab"].forEach(k => S[k] = S[k] || {}); S.days = S.days || [];
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+const today = () => Math.floor(Date.now() / 864e5);
+function touchDay() { const t = today(); if (S.days[S.days.length - 1] !== t) { S.days.push(t); S.days = S.days.slice(-400); } save(); }
+function streak() {
+  const d = new Set(S.days); let t = today(); if (!d.has(t)) t--; let n = 0; while (d.has(t)) { n++; t--; } return n;
+}
 
 /* ---------- markdown (small, safe) ---------- */
 function inline(s) {
@@ -416,31 +616,43 @@ function inline(s) {
   s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
   s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   s = s.replace(/(^|[^*])\*([^*\s][^*]*)\*/g, "$1<em>$2</em>");
-  s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="text-decoration:underline">$1</a>');
   return s;
+}
+function hlLine(line) {
+  let q = null, cut = -1;
+  if (/^\s*--\s/.test(line)) cut = line.indexOf("--");
+  else for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (q) { if (c === "\\") { i++; continue; } if (c === q) q = null; }
+    else if (c === '"' || c === "'" || c === "`") q = c;
+    else if (c === "#" || (c === "/" && line[i + 1] === "/")) { cut = i; break; }
+  }
+  const code = cut < 0 ? line : line.slice(0, cut), cm = cut < 0 ? "" : line.slice(cut);
+  return esc(code).replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g, '<span class="sg">$1</span>') + (cm ? '<span class="cm">' + esc(cm) + "</span>" : "");
 }
 function md(src) {
   const lines = String(src).replace(/\r/g, "").split("\n");
   let out = "", i = 0;
   while (i < lines.length) {
-    let l = lines[i];
+    const l = lines[i];
     if (/^```/.test(l)) {
       const buf = []; i++;
       while (i < lines.length && !/^```/.test(lines[i])) buf.push(lines[i++]);
-      i++; out += "<pre><code>" + esc(buf.join("\n")) + "</code></pre>"; continue;
+      i++; out += '<div class="code"><button class="cp" type="button">Copy</button><pre><code>' + buf.map(hlLine).join("\n") + "</code></pre></div>"; continue;
     }
     if (/^###\s/.test(l)) { out += "<h3>" + inline(l.slice(4)) + "</h3>"; i++; continue; }
     if (/^##\s/.test(l)) { out += "<h2>" + inline(l.slice(3)) + "</h2>"; i++; continue; }
     if (/^>\s?/.test(l)) {
       const buf = []; while (i < lines.length && /^>\s?/.test(lines[i])) buf.push(lines[i++].replace(/^>\s?/, ""));
-      out += "<blockquote>" + inline(buf.join(" ")) + "</blockquote>"; continue;
+      out += "<blockquote><p>" + inline(buf.join(" ")) + "</p></blockquote>"; continue;
     }
     if (/^\|.*\|\s*$/.test(l) && /^\|[\s:|-]+\|\s*$/.test(lines[i + 1] || "")) {
       const rows = []; while (i < lines.length && /^\|.*\|\s*$/.test(lines[i])) rows.push(lines[i++]);
       const cells = r => r.replace(/^\||\|\s*$/g, "").split("|").map(x => inline(x.trim()));
       const h = cells(rows[0]); const body = rows.slice(2).map(cells);
-      out += "<table><tr>" + h.map(x => "<th>" + x + "</th>").join("") + "</tr>" +
-        body.map(r => "<tr>" + r.map(x => "<td>" + x + "</td>").join("") + "</tr>").join("") + "</table>"; continue;
+      out += '<div class="tw"><table><tr>' + h.map(x => "<th>" + x + "</th>").join("") + "</tr>" +
+        body.map(r => "<tr>" + r.map(x => "<td>" + x + "</td>").join("") + "</tr>").join("") + "</table></div>"; continue;
     }
     if (/^\s*([-*]|\d+\.)\s/.test(l)) {
       const ord = /^\s*\d+\./.test(l); const items = [];
@@ -449,7 +661,7 @@ function md(src) {
     }
     if (!l.trim()) { i++; continue; }
     const buf = []; while (i < lines.length && lines[i].trim() && !/^(```|##|>|\s*([-*]|\d+\.)\s|\|)/.test(lines[i])) buf.push(lines[i++]);
-    if (!buf.length) { buf.push(lines[i++]); }
+    if (!buf.length) buf.push(lines[i++]);
     out += "<p>" + inline(buf.join(" ")) + "</p>";
   }
   return out;
@@ -457,13 +669,29 @@ function md(src) {
 
 /* ---------- helpers ---------- */
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const today = () => Math.floor(Date.now() / 864e5);
 const has = id => !!CONTENT[id];
+const pct = (a, b) => b ? Math.round(100 * a / b) : 0;
+const words = s => String(s).split(/\s+/).filter(Boolean).length;
+const phc = id => "p" + CH[id].pi;
+let cleanups = [];
+const on = (t, ev, fn, o) => { t.addEventListener(ev, fn, o); cleanups.push(() => t.removeEventListener(ev, fn, o)); };
+const typing = e => /^(TEXTAREA|INPUT)$/.test((e.target || {}).tagName);
+
+function lastExam(id) { return (S.exam[id] || []).slice(-1)[0]; }
+function steps(id) {
+  const C = CONTENT[id] || {}; const cards = C.cards || [];
+  const rated = cards.filter((_, i) => S.cards[id + ":" + i]).length;
+  const lab = S.lab[id] || {}; const L = C.lab;
+  const q = S.quiz[id], e = lastExam(id);
+  return {
+    lesson: !!S.read[id], cards: cards.length > 0 && rated >= Math.ceil(cards.length / 2),
+    quiz: !!q && q.best >= 0.7, exam: !!e && e.s / e.m >= 0.8,
+    lab: !!L && L.steps.length > 0 && L.steps.every((_, i) => lab[i])
+  };
+}
 function chStatus(id) {
-  const q = S.quiz[id], e = (S.exam[id] || []).slice(-1)[0];
-  if (e && e.s / e.m >= 0.8) return "d";
-  if (S.read[id] || q || e) return "p";
-  return "n";
+  const s = steps(id); if (s.exam) return "d";
+  return (s.lesson || S.quiz[id] || (S.exam[id] || []).length || Object.keys(S.cards).some(k => k.startsWith(id + ":"))) ? "p" : "n";
 }
 function mastery(id) {
   const q = S.quiz[id] ? S.quiz[id].best : 0;
@@ -476,7 +704,7 @@ function dueCards() {
   allCards().forEach(c => { const st = S.cards[c.id]; if (st) { if (st.due <= t) due.push(c); } else if (S.read[c.ch]) fresh.push(c); });
   return { due: shuffle(due), fresh: shuffle(fresh).slice(0, 15) };
 }
-function rate(c, g) { // g: 0 again, 1 hard, 2 good, 3 easy (SM-2 style)
+function rate(c, g) { // 0 again, 1 hard, 2 good, 3 easy (SM-2 style)
   const st = S.cards[c.id] || { ef: 2.5, iv: 0, reps: 0, due: 0 };
   if (g === 0) { st.reps = 0; st.iv = 0; st.ef = Math.max(1.3, st.ef - 0.2); st.due = today(); }
   else {
@@ -484,198 +712,364 @@ function rate(c, g) { // g: 0 again, 1 hard, 2 good, 3 easy (SM-2 style)
     st.iv = st.reps === 1 ? (g === 3 ? 3 : 1) : st.reps === 2 ? (g === 3 ? 7 : 3) : Math.round(st.iv * st.ef * (g === 1 ? 0.8 : 1));
     st.due = today() + Math.max(1, st.iv);
   }
-  S.cards[c.id] = st; save();
+  S.cards[c.id] = st; touchDay();
 }
+function nextChapter() { return ORDER.find(i => has(i) && chStatus(i) !== "d") || ORDER[0]; }
+function nextStep(id) { const s = steps(id); return ["lesson", "cards", "quiz", "exam", "lab"].find(k => !s[k]) || "lesson"; }
 
-/* ---------- layout ---------- */
-function side(cur) {
-  let h = '<div class="brand" onclick="location.hash=\'#/\'">AI Study Platform</div><div class="nav">';
-  if (window.STUDY_HOME) h += `<a href="${window.STUDY_HOME}">Back to JKU Exams</a>`;
-  h += `<a href="#/" class="${cur === "home" ? "cur" : ""}">Dashboard</a>`;
+/* ---------- shell ---------- */
+function sideHtml(cur, curPh) {
   const d = dueCards(); const n = d.due.length + d.fresh.length;
-  h += `<a href="#/review" class="${cur === "review" ? "cur" : ""}">Daily review${n ? " (" + n + ")" : ""}</a>`;
-  h += `<a href="#/weak" class="${cur === "weak" ? "cur" : ""}">Weak topics</a>`;
+  let h = `<a class="brand" href="#/"><span class="logo">${ic("logo")}</span>AI Study</a>`;
+  if (window.STUDY_HOME) h += `<a class="nv" href="${window.STUDY_HOME}">${ic("back")}JKU Exams</a>`;
+  h += `<a class="nv ${cur === "home" ? "cur" : ""}" href="#/">${ic("home")}Dashboard</a>`;
+  h += `<a class="nv ${cur === "review" ? "cur" : ""}" href="#/review">${ic("cards")}Daily review${n ? `<span class="badge">${n}</span>` : ""}</a>`;
+  h += `<a class="nv ${cur === "weak" ? "cur" : ""}" href="#/weak">${ic("weak")}Weak topics</a>`;
   PHASES.forEach((p, pi) => {
-    h += `<div class="ph">${esc(p.t)}</div>`;
-    p.chapters.forEach(c => {
-      h += `<a href="#/c/${c.id}/lesson" class="${cur === c.id ? "cur" : ""}"><span class="dot ${chStatus(c.id)}"></span>${esc(c.t)}</a>`;
-    });
-    h += `<a href="#/phase/${pi}" class="${cur === "ph" + pi ? "cur" : ""}" style="font-style:italic">Phase ${pi} exam</a>`;
+    const done = p.chapters.filter(c => chStatus(c.id) === "d").length;
+    h += `<details class="grp p${pi}" ${curPh === pi ? "open" : ""}><summary>${ic("chev").replace('class="i"', 'class="i chev"')}${esc(p.t.replace(/^Phase (\d+): /, "P$1 "))}<span class="n">${done}/${p.chapters.length}</span></summary>`;
+    p.chapters.forEach(c => { h += `<a class="ci ${cur === c.id ? "cur" : ""}" href="#/c/${c.id}/lesson"><span class="st ${chStatus(c.id)}"></span>${esc(c.t)}</a>`; });
+    h += `<a class="ci ${cur === "ph" + pi ? "cur" : ""}" href="#/phase/${pi}" style="font-style:italic"><span class="st n" style="border-style:dashed"></span>Phase ${pi} exam</a></details>`;
   });
-  h += `<div class="ph">Settings</div><button onclick="toggleTheme()">Toggle theme</button><button onclick="resetAll()">Reset progress</button></div>`;
-  $("#side").innerHTML = h;
+  h += `<div class="side-foot"><button class="btn ghost sm" id="reset">Reset progress</button></div>`;
+  return h;
 }
-window.toggleTheme = () => {
-  const r = document.documentElement; const dark = r.dataset.theme === "dark" || (!r.dataset.theme && matchMedia("(prefers-color-scheme:dark)").matches);
-  r.dataset.theme = dark ? "light" : "dark"; try { localStorage.setItem("ai.theme", r.dataset.theme); } catch (e) {}
-};
+function isDark() { const r = document.documentElement; return r.dataset.theme === "dark" || (!r.dataset.theme && matchMedia("(prefers-color-scheme:dark)").matches); }
+function topHtml() {
+  const d = dueCards(); const n = d.due.length + d.fresh.length; const st = streak();
+  return `<div class="top"><button class="btn sec sm" id="menu" aria-label="Menu">${ic("menu")}</button>
+  <button class="chip" id="srch">${ic("search")}<span>Search chapters</span><span class="kbd">Ctrl K</span></button><span class="sp"></span>
+  <span class="chip" title="Days in a row with study activity">${ic("flame")}<b>${st}</b></span>
+  <a class="chip" href="#/review" title="Cards waiting for review">${ic("cards")}<b>${n}</b></a>
+  <button class="btn sec sm" id="theme" aria-label="Toggle theme">${ic(isDark() ? "sun" : "moon")}</button></div>`;
+}
+function shell(cur, curPh, inner) {
+  $("#side").innerHTML = sideHtml(cur, curPh);
+  $("#main").innerHTML = topHtml() + `<div class="wrap">${inner}</div>`;
+  $("#menu").onclick = () => document.body.classList.add("nav-open");
+  $("#srch").onclick = openSearch;
+  $("#theme").onclick = () => { document.documentElement.dataset.theme = isDark() ? "light" : "dark"; try { localStorage.setItem("ai.theme", document.documentElement.dataset.theme); } catch (e) {} $("#theme").innerHTML = ic(isDark() ? "sun" : "moon"); };
+  $("#reset").onclick = e => {
+    const b = e.currentTarget;
+    if (b.dataset.arm) { S = { read: {}, quiz: {}, exam: {}, cards: {}, miss: {}, lab: {}, days: [] }; save(); route(); return; }
+    b.dataset.arm = 1; b.textContent = "Click again to delete everything"; setTimeout(() => { delete b.dataset.arm; b.textContent = "Reset progress"; }, 4000);
+  };
+  const c$ = $(".ci.cur", $("#side")); if (c$) c$.scrollIntoView({ block: "nearest" });
+}
 try { const t = localStorage.getItem("ai.theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
-let resetArmed = false;
-window.resetAll = () => {
-  const b = event && event.target;
-  if (!resetArmed) { resetArmed = true; if (b) b.textContent = "Click again to delete all progress"; setTimeout(() => { resetArmed = false; if (b) b.textContent = "Reset progress"; }, 4000); return; }
-  resetArmed = false; S = { read: {}, quiz: {}, exam: {}, cards: {}, miss: {}, lab: {} }; save(); route();
-};
 
-/* ---------- views ---------- */
+/* ---------- dashboard ---------- */
+function ring(v, size, label) { return `<div class="ring" style="--v:${v};--s:${size}px"><span>${label == null ? v + "%" : label}</span></div>`; }
 function home() {
-  side("home");
-  const ids = Object.keys(CH); const loaded = ids.filter(has);
-  const done = ids.filter(i => chStatus(i) === "d").length;
+  const ids = ORDER; const loaded = ids.filter(has); const done = ids.filter(i => chStatus(i) === "d").length;
   const avg = loaded.length ? Math.round(loaded.reduce((s, i) => s + mastery(i), 0) / loaded.length) : 0;
-  const d = dueCards();
-  let h = `<h1>Your study program</h1><p class="mut">${ids.length} chapters in ${PHASES.length} phases. Read the lesson, drill the flashcards, pass the quiz, then pass the exam with 80 percent or more to finish a chapter.</p>
-  <div class="grid"><div class="card"><div class="stat">${done}/${ids.length}</div><div class="mut">chapters passed</div></div>
-  <div class="card"><div class="stat">${avg}%</div><div class="mut">average mastery (available chapters)</div></div>
-  <div class="card"><div class="stat">${d.due.length}</div><div class="mut">cards due, ${d.fresh.length} new <a href="#/review">review</a></div></div>
-  <div class="card"><div class="stat">${loaded.length}/${ids.length}</div><div class="mut">chapters with full content</div></div></div>`;
-  const next = ids.find(i => has(i) && chStatus(i) !== "d");
-  if (next) h += `<div class="card"><b>Next up:</b> ${esc(CH[next].meta.t)} <a class="btn" style="text-decoration:none;margin-left:8px" href="#/c/${next}/lesson">Continue</a></div>`;
+  const d = dueCards(); const due = d.due.length + d.fresh.length; const nx = nextChapter(); const ns = nextStep(nx);
+  const labels = { lesson: "Read the lesson", cards: "Drill the flashcards", quiz: "Take the quiz", exam: "Pass the exam", lab: "Do the lab" };
+  const weakTop = Object.entries(S.miss).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  let h = `<div class="hello"><div class="mut small mono">${new Date().toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" })}</div>
+  <h1 class="disp">${done ? "Keep going." : "Start here."}</h1><p class="mut" style="margin:0;max-width:56ch">${ids.length} chapters across ${PHASES.length} phases. Read, drill, quiz, then pass the exam with 80 percent to finish a chapter.</p></div>
+  <div class="hero"><div class="card go ${phc(nx)}"><span class="tag" style="align-self:flex-start">${esc(PHASES[CH[nx].pi].t.split(":")[0])}</span>
+    <h2 class="disp">${esc(CH[nx].meta.t)}</h2><p class="mut" style="margin:0">Next step: ${labels[ns]}.</p>
+    <div class="row"><a class="btn" href="#/c/${nx}/${ns}">Continue ${ic("arrow")}</a><span class="mut small">${mastery(nx)}% mastery</span></div></div>
+    <div class="card"><div class="row" style="justify-content:space-between;align-items:flex-start"><div><div class="mut small">Daily review</div><div class="disp" style="font-size:2.4rem;font-weight:700;line-height:1.1">${due}</div><div class="mut small">cards waiting</div></div></div>
+    <div style="margin-top:14px"><a class="btn ${due ? "" : "sec"}" href="#/review">${due ? "Start review" : "All caught up"}</a></div></div></div>
+  <div class="stats"><div class="flat stat"><div class="v">${done}<span class="mut" style="font-size:1rem">/${ids.length}</span></div><div class="mut small">chapters passed</div></div>
+  <div class="flat stat"><div class="v">${avg}%</div><div class="mut small">average mastery</div></div>
+  <div class="flat stat"><div class="v">${streak()}</div><div class="mut small">day streak</div></div>
+  <div class="flat stat"><div class="v">${Object.keys(S.cards).length}<span class="mut" style="font-size:1rem">/${allCards().length}</span></div><div class="mut small">cards learned</div></div></div>`;
+  if (weakTop.length) h += `<div class="row" style="margin-top:14px"><span class="mut small">Weakest:</span>${weakTop.map(([t, n]) => `<a class="chip" href="#/weak">${esc(t)} <b>${n}</b></a>`).join("")}</div>`;
   PHASES.forEach((p, pi) => {
-    h += `<h2>${esc(p.t)}</h2><p class="mut">${esc(p.d || "")}</p>`;
-    p.chapters.forEach(c => {
-      const m = mastery(c.id);
-      h += `<div class="card"><div class="row" style="justify-content:space-between"><a href="#/c/${c.id}/lesson"><b>${esc(c.t)}</b></a><span class="mut">${has(c.id) ? m + "% mastery" : "content pending"}</span></div><div class="bar" style="margin-top:8px"><i style="width:${m}%"></i></div></div>`;
+    const pd = p.chapters.filter(c => chStatus(c.id) === "d").length;
+    h += `<div class="p${pi}"><div class="phh"><div><div class="mut small mono">${esc(p.t.split(":")[0])}</div><h2 class="disp">${esc(p.t.split(": ").slice(1).join(": "))}</h2></div><div style="margin-left:auto;text-align:right"><div class="mut small">${pd}/${p.chapters.length} passed</div><div class="bar" style="margin-top:4px"><i style="width:${pct(pd, p.chapters.length)}%"></i></div></div></div>
+    <p class="mut small" style="margin:-4px 0 12px;max-width:70ch">${esc(p.d || "")}</p><div class="cg">`;
+    p.chapters.forEach((c, ci) => {
+      const s = steps(c.id); const n = Object.values(s).filter(Boolean).length;
+      h += `<a class="cc" href="#/c/${c.id}/${has(c.id) ? nextStep(c.id) : "res"}"><div class="row" style="justify-content:space-between"><span class="mono small mut">${pi}.${ci + 1}</span><span class="st ${chStatus(c.id)}"></span></div>
+      <div class="t">${esc(c.t)}</div><div class="dots">${Object.values(s).map(v => `<i class="${v ? "on" : ""}"></i>`).join("")}</div>
+      <div class="meta"><span>${has(c.id) ? n + "/5 steps" : "content pending"}</span><span>${mastery(c.id)}%</span></div></a>`;
     });
+    h += "</div></div>";
   });
-  $("#main").innerHTML = h;
+  shell("home", CH[nx].pi, h);
 }
 
+/* ---------- chapter ---------- */
+const TABS = [["lesson", "Lesson"], ["cards", "Flashcards"], ["quiz", "Quiz"], ["exam", "Exam"], ["lab", "Lab"], ["res", "Resources"]];
 function chapter(id, tab) {
   const c = CH[id]; if (!c) return home();
-  side(id); const C = CONTENT[id]; const m = c.meta;
-  const tabs = [["lesson", "Lesson"], ["cards", "Flashcards"], ["quiz", "Quiz"], ["exam", "Exam"], ["lab", "Lab"], ["res", "Resources"]];
-  let h = `<div class="mut">${esc(PHASES[c.pi].t)}</div><h1>${esc(m.t)}</h1>`;
-  h += '<div class="tabs">' + tabs.map(t => `<button class="${t[0] === tab ? "cur" : ""}" onclick="location.hash='#/c/${id}/${t[0]}'">${t[1]}</button>`).join("") + "</div><div id=\"pane\"></div>";
-  $("#main").innerHTML = h; const pane = $("#pane");
+  const C = CONTENT[id]; const m = c.meta; const s = steps(id);
+  const lw = C ? C.lesson.reduce((n, x) => n + words(x.md), 0) : 0;
+  let h = `<div class="chead ${phc(id)}"><span class="tag">${esc(PHASES[c.pi].t.split(":")[0])}</span><h1 class="disp">${esc(m.t)}</h1>`;
+  if (C) h += `<div class="row small mut"><span>${Math.max(1, Math.round(lw / 220))} min read</span><span>·</span><span>${C.cards.length} cards</span><span>·</span><span>${C.quiz.length} quiz</span><span>·</span><span>${C.exam.length} exam questions</span><span>·</span><span>${mastery(id)}% mastery</span></div>`;
+  h += '<nav class="steps">' + TABS.map(t => `<a class="${t[0] === tab ? "cur" : ""}" href="#/c/${id}/${t[0]}">${s[t[0]] !== undefined ? `<span class="ck ${s[t[0]] ? "on" : ""}">${s[t[0]] ? "✓" : ""}</span>` : ""}${t[1]}</a>`).join("") + "</nav></div>";
+  h += `<div id="pane" class="${phc(id)}" style="padding-top:24px"></div>`;
+  shell(id, c.pi, h);
+  const pane = $("#pane");
   if (tab === "res") return resources(pane, m);
-  if (!C) { pane.innerHTML = `<div class="card">Full content for this chapter has not been written yet. Goals and resources are available under Resources.</div>`; return; }
-  if (tab === "lesson") {
-    pane.innerHTML = (C.lesson || []).map(s => `<h2>${esc(s.h)}</h2>` + md(s.md)).join("") +
-      `<div class="card row" style="justify-content:space-between"><span>${S.read[id] ? "Marked as read" : "Finished reading?"}</span><button class="btn" id="rd">${S.read[id] ? "Unmark" : "Mark lesson as read"}</button></div>`;
-    $("#rd").onclick = () => { S.read[id] = !S.read[id]; save(); chapter(id, "lesson"); };
-  } else if (tab === "cards") {
-    deck(pane, (C.cards || []).map((c2, i) => ({ id: id + ":" + i, ch: id, q: c2[0], a: c2[1] })), "No flashcards yet.");
-  } else if (tab === "quiz") {
-    runSet(pane, C.quiz || [], { id, kind: "quiz", title: "Quiz" });
-  } else if (tab === "exam") {
-    const q = C.exam || [];
-    pane.innerHTML = `<div class="card"><b>Exam</b><p class="mut">${q.length} questions, ${Math.ceil(q.length * 1.5)} minutes, questions and options shuffled. Pass mark 80 percent. Past attempts: ${(S.exam[id] || []).map(x => Math.round(100 * x.s / x.m) + "%").join(", ") || "none"}.</p><button class="btn" id="go">Start exam</button></div><div id="run"></div>`;
-    $("#go").onclick = () => { $("#go").disabled = true; runSet($("#run"), q, { id, kind: "exam", title: "Exam", minutes: Math.ceil(q.length * 1.5) }); };
-  } else if (tab === "lab") {
-    const L = C.lab; if (!L) { pane.innerHTML = '<div class="card">No lab yet.</div>'; return; }
-    const st = S.lab[id] = S.lab[id] || {};
-    pane.innerHTML = `<h2>${esc(L.title)}</h2>${md(L.brief || "")}<h3>Steps</h3>` +
-      (L.steps || []).map((s, i) => `<label class="card" style="display:block;cursor:pointer"><input type="checkbox" data-i="${i}" ${st[i] ? "checked" : ""}> ${inline(s)}</label>`).join("") +
-      (L.checks && L.checks.length ? "<h3>Self-check</h3><ul>" + L.checks.map(x => "<li>" + inline(x) + "</li>").join("") + "</ul>" : "") +
-      (L.stretch ? "<h3>Stretch goals</h3>" + md(L.stretch) : "");
-    pane.querySelectorAll("input[type=checkbox]").forEach(b => b.onchange = () => { st[b.dataset.i] = b.checked; save(); });
-  }
+  if (!C) { pane.innerHTML = `<div class="flat">Full content for this chapter has not been written yet. Goals and resources are under Resources.</div>`; return; }
+  if (tab === "lesson") lesson(pane, id, C);
+  else if (tab === "cards") deck(pane, C.cards.map((c2, i) => ({ id: id + ":" + i, ch: id, q: c2[0], a: c2[1] })), "No flashcards yet.", null, id);
+  else if (tab === "quiz") intro(pane, id, C.quiz, { kind: "quiz", title: "Quiz", blurb: "Instant feedback after each question. Written questions are self-graded.", best: S.quiz[id] ? Math.round(S.quiz[id].best * 100) + "%" : null });
+  else if (tab === "exam") intro(pane, id, C.exam, { kind: "exam", title: "Exam", minutes: Math.ceil(C.exam.length * 1.5), blurb: "Timed. No feedback until you submit. Pass mark 80 percent.", past: (S.exam[id] || []).map(x => pct(x.s, x.m)) });
+  else if (tab === "lab") lab(pane, id, C);
+}
+function lesson(pane, id, C) {
+  const secs = C.lesson;
+  pane.innerHTML = `<div class="cols"><article class="lesson read">${secs.map((x, i) => `<section id="sec${i}"><h2>${esc(x.h)}</h2>${md(x.md)}</section>`).join("")}
+  <div class="card done-box"><div><b>${S.read[id] ? "Lesson marked as read" : "Finished reading?"}</b><div class="mut small">${S.read[id] ? "Its flashcards are unlocked for daily review." : "Marking it read unlocks its flashcards for daily review."}</div></div>
+  <div class="row"><button class="btn ${S.read[id] ? "sec" : ""}" id="rd">${S.read[id] ? "Unmark" : "Mark as read"}</button><a class="btn sec" href="#/c/${id}/cards">Flashcards ${ic("arrow")}</a></div></div></article>
+  <aside class="toc"><h4>On this page</h4>${secs.map((x, i) => `<a href="#/c/${id}/lesson" data-s="${i}">${esc(x.h)}</a>`).join("")}</aside></div><div class="prog" id="prog"></div>`;
+  $("#rd").onclick = () => { S.read[id] = !S.read[id]; if (S.read[id]) touchDay(); save(); chapter(id, "lesson"); };
+  $$(".toc a", pane).forEach(a => a.onclick = e => { e.preventDefault(); const el = $("#sec" + a.dataset.s); if (el) el.scrollIntoView({ behavior: "smooth" }); });
+  pane.addEventListener("click", e => {
+    const b = e.target.closest(".cp"); if (!b) return; const t = b.parentElement.querySelector("pre").innerText;
+    try { navigator.clipboard.writeText(t).then(() => { b.textContent = "Copied"; setTimeout(() => b.textContent = "Copy", 1200); }, () => { b.textContent = "Select and copy"; }); } catch (err) { b.textContent = "Select and copy"; }
+  });
+  const links = $$(".toc a", pane), sections = secs.map((_, i) => $("#sec" + i));
+  const onScroll = () => {
+    const h = document.documentElement; const p = $("#prog"); if (p) p.style.width = Math.min(100, 100 * h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight)) + "%";
+    let k = 0; sections.forEach((el, i) => { if (el && el.getBoundingClientRect().top < 140) k = i; }); links.forEach((a, i) => a.classList.toggle("on", i === k));
+  };
+  on(window, "scroll", onScroll, { passive: true }); onScroll();
+}
+function intro(pane, id, qs, o) {
+  const pass = o.kind === "exam";
+  pane.innerHTML = `<div class="card qs"><h2 class="disp" style="margin:0 0 6px">${o.title}</h2><p class="mut" style="margin:0 0 14px">${o.blurb}</p>
+  <div class="row small mut" style="margin-bottom:16px"><span class="chip"><b>${qs.length}</b> questions</span>${o.minutes ? `<span class="chip"><b>${o.minutes}</b> min</span>` : ""}${o.best ? `<span class="chip">best <b>${o.best}</b></span>` : ""}${(o.past || []).slice(-5).map(p => `<span class="chip">attempt <b>${p}%</b></span>`).join("")}</div>
+  <button class="btn" id="go" ${qs.length ? "" : "disabled"}>${pass ? "Start exam" : "Start quiz"} ${ic("arrow")}</button></div><div id="run"></div>`;
+  $("#go").onclick = () => { $(".qs", pane).hidden = true; runner($("#run"), qs, { id, kind: o.kind, minutes: o.minutes, again: () => chapter(id, o.kind) }); };
+}
+function lab(pane, id, C) {
+  const L = C.lab; if (!L) { pane.innerHTML = '<div class="flat">No lab yet.</div>'; return; }
+  const st = S.lab[id] = S.lab[id] || {};
+  const n = () => L.steps.filter((_, i) => st[i]).length;
+  pane.innerHTML = `<div class="read"><h2 class="disp" style="margin:0 0 8px">${esc(L.title)}</h2><div class="lesson">${md(L.brief || "")}</div>
+  <div class="row" style="margin:18px 0 6px"><b>Steps</b><span class="mut small" id="lc">${n()}/${L.steps.length}</span></div><div class="bar"><i id="lb" style="width:${pct(n(), L.steps.length)}%"></i></div>
+  ${L.steps.map((s, i) => `<label class="lab-step ${st[i] ? "on" : ""}"><input type="checkbox" data-i="${i}" ${st[i] ? "checked" : ""}><span>${inline(s)}</span></label>`).join("")}
+  ${L.checks.length ? `<h3 class="disp" style="margin-top:28px">Self-check</h3><div class="lesson"><ul>${L.checks.map(x => "<li>" + inline(x) + "</li>").join("")}</ul></div>` : ""}
+  ${L.stretch ? `<h3 class="disp">Stretch goals</h3><div class="lesson">${md(L.stretch)}</div>` : ""}</div>`;
+  $$("input[type=checkbox]", pane).forEach(b => b.onchange = () => {
+    st[b.dataset.i] = b.checked; b.closest(".lab-step").classList.toggle("on", b.checked); touchDay(); save();
+    $("#lc").textContent = n() + "/" + L.steps.length; $("#lb").style.width = pct(n(), L.steps.length) + "%";
+  });
 }
 function resources(pane, m) {
-  const l = a => (a || []).map(x => `<li><a href="${esc(x[1])}" target="_blank" rel="noopener">${esc(x[0])}</a></li>`).join("");
-  pane.innerHTML = `<div class="card"><b>Why it matters</b><p>${esc(m.why || "")}</p></div>
-  <h3>You should be able to</h3><ul>${(m.know || []).map(x => "<li>" + esc(x) + "</li>").join("")}</ul>
-  <h3>Project</h3><p>${esc(m.proj || "")}</p><h3>Videos</h3><ul>${l(m.vid)}</ul><h3>Reading</h3><ul>${l(m.read)}</ul>`;
+  const l = a => (a || []).map(x => `<a class="nv" style="padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin:6px 0;background:var(--surface)" href="${esc(x[1])}" target="_blank" rel="noopener"><span style="color:var(--ink)">${esc(x[0])}</span><span style="margin-left:auto">${ic("arrow")}</span></a>`).join("");
+  pane.innerHTML = `<div class="read"><div class="card"><div class="mut small" style="margin-bottom:4px">Why it matters</div><div style="font-size:1.05rem">${esc(m.why || "")}</div></div>
+  <h3 class="disp" style="margin-top:28px">You should be able to</h3><ul>${(m.know || []).map(x => "<li>" + esc(x) + "</li>").join("")}</ul>
+  <h3 class="disp">Project</h3><div class="flat">${esc(m.proj || "")}</div>
+  ${(m.vid || []).length ? `<h3 class="disp">Videos</h3>${l(m.vid)}` : ""}${(m.read || []).length ? `<h3 class="disp">Reading</h3>${l(m.read)}` : ""}</div>`;
 }
 
 /* ---------- flashcards ---------- */
-function deck(pane, cards, empty, onDone) {
-  if (!cards.length) { pane.innerHTML = `<div class="card">${empty}</div>`; return; }
-  let i = 0, shown = false;
+function deck(pane, cards, empty, onDone, chId) {
+  if (!cards.length) { pane.innerHTML = `<div class="flat">${empty}</div>`; return; }
+  let i = 0, flipped = false;
   const draw = () => {
-    if (i >= cards.length) { pane.innerHTML = `<div class="card"><b>Deck finished.</b> ${cards.length} cards reviewed.</div>`; if (onDone) onDone(); side(location.hash.split("/")[2] || "review"); return; }
+    if (i >= cards.length) {
+      pane.innerHTML = `<div class="deck card" style="text-align:center"><h2 class="disp" style="margin:0 0 6px">Deck finished</h2><p class="mut">${cards.length} cards reviewed. They come back on the schedule you chose.</p>
+      <div class="row" style="justify-content:center"><a class="btn" href="#/">Dashboard</a>${chId ? `<a class="btn sec" href="#/c/${chId}/quiz">Take the quiz</a>` : ""}</div></div>`;
+      $("#side").innerHTML = sideHtml(chId || "review", chId ? CH[chId].pi : -1); if (onDone) onDone(); return;
+    }
     const c = cards[i];
-    pane.innerHTML = `<div class="mut">Card ${i + 1} of ${cards.length} <span class="tag">${esc(CH[c.ch].meta.t)}</span></div>
-    <div class="card fc" id="fc">${shown ? md(c.a) : inline(c.q)}</div>
-    <div class="row">${shown ? ["Again", "Hard", "Good", "Easy"].map((n, g) => `<button class="btn ${g === 0 ? "sec" : ""}" data-g="${g}">${n}</button>`).join("") : '<button class="btn" id="sh">Show answer</button>'}</div>`;
-    if (shown) pane.querySelectorAll("[data-g]").forEach(b => b.onclick = () => { rate(c, +b.dataset.g); i++; shown = false; draw(); });
-    else { $("#sh").onclick = $("#fc").onclick = () => { shown = true; draw(); }; }
+    pane.innerHTML = `<div class="deck ${phc(c.ch)}"><div class="row mut small" style="justify-content:space-between;margin-bottom:8px"><span class="mono">${i + 1} / ${cards.length}</span><span class="tag">${esc(CH[c.ch].meta.t)}</span></div>
+    <div class="bar"><i style="width:${pct(i, cards.length)}%"></i></div>
+    <div class="flip ${flipped ? "on" : ""}" id="fl"><div class="in"><div class="face"><span class="tag lab">Question</span><div class="txt">${inline(c.q)}</div></div><div class="face back"><span class="tag lab">Answer</span><div class="txt">${md(c.a)}</div></div></div></div>
+    <div id="ctl">${flipped ? `<div class="rates">${["Again", "Hard", "Good", "Easy"].map((n, g) => `<button data-g="${g}">${n}<small>${g + 1}</small></button>`).join("")}</div>` : `<div class="mut small" style="text-align:center">Click the card or press <span class="kbd">Space</span></div>`}</div></div>`;
+    $("#fl").onclick = flip;
+    $$("[data-g]", pane).forEach(b => b.onclick = () => grade(+b.dataset.g));
   };
+  const flip = () => { if (flipped) return; flipped = true; draw(); };
+  const grade = g => { rate(cards[i], g); i++; flipped = false; draw(); };
+  on(document, "keydown", e => {
+    if (typing(e) || e.ctrlKey || e.metaKey || i >= cards.length) return;
+    if (e.key === " " || e.key === "Enter") { e.preventDefault(); flip(); }
+    else if (flipped && /^[1-4]$/.test(e.key)) grade(+e.key - 1);
+  });
   draw();
 }
 function review() {
-  side("review"); const d = dueCards(); const cards = d.due.concat(d.fresh);
-  $("#main").innerHTML = `<h1>Daily review</h1><p class="mut">Spaced repetition across every chapter you have started. ${d.due.length} due, ${d.fresh.length} new. Mark a chapter lesson as read to unlock its cards.</p><div id="pane"></div>`;
-  deck($("#pane"), cards, "Nothing due. Come back tomorrow, or read another lesson to unlock new cards.");
+  const d = dueCards(); const cards = d.due.concat(d.fresh);
+  shell("review", -1, `<div class="hello"><h1 class="disp">Daily review</h1><p class="mut" style="margin:0 0 18px">Spaced repetition across every chapter you have read. ${d.due.length} due, ${d.fresh.length} new. Mark a lesson as read to unlock its cards.</p></div><div id="pane"></div>`);
+  deck($("#pane"), cards, "Nothing due right now. Read another lesson to unlock new cards, or come back tomorrow.", null, null);
 }
 
 /* ---------- quiz / exam runner ---------- */
-function runSet(pane, questions, o) {
-  if (!questions.length) { pane.innerHTML = '<div class="card">No questions yet.</div>'; return; }
-  const qs = shuffle(questions).map(q => {
-    if (q.t === "open") return { q, ord: [] };
-    const ord = shuffle(q.o.map((_, i) => i)); return { q, ord };
-  });
-  let timer = null, left = (o.minutes || 0) * 60, submitted = false;
-  let h = o.minutes ? `<div class="card row" style="justify-content:space-between;position:sticky;top:0;z-index:2"><b>${o.title}</b><b id="tm"></b></div>` : "";
-  qs.forEach((x, n) => {
-    const q = x.q; h += `<div class="card" id="q${n}"><div class="mut">Question ${n + 1} ${q.tag ? '<span class="tag">' + esc(q.tag) + "</span>" : ""}${q.t === "multi" ? " (select all that apply)" : ""}</div><div>${md(q.q)}</div>`;
-    if (q.t === "open") h += `<textarea id="ta${n}" placeholder="Write your answer, then submit to compare with the model answer"></textarea>`;
-    else x.ord.forEach(oi => { h += `<button class="opt" data-n="${n}" data-o="${oi}">${inline(q.o[oi])}</button>`; });
-    h += `<div id="fb${n}"></div></div>`;
-  });
-  h += `<div class="row"><button class="btn" id="sub">Submit</button></div><div id="res"></div>`;
-  pane.innerHTML = h;
-  const sel = qs.map(() => new Set());
-  pane.querySelectorAll(".opt").forEach(b => b.onclick = () => {
-    if (submitted) return; const n = +b.dataset.n, oi = +b.dataset.o, q = qs[n].q;
-    if (q.t === "multi") { sel[n].has(oi) ? sel[n].delete(oi) : sel[n].add(oi); b.classList.toggle("sel"); }
-    else { sel[n].clear(); sel[n].add(oi); pane.querySelectorAll(`.opt[data-n="${n}"]`).forEach(x => x.classList.remove("sel")); b.classList.add("sel"); }
-  });
-  const tick = () => { const t = $("#tm", pane); if (t) t.textContent = Math.floor(left / 60) + ":" + String(left % 60).padStart(2, "0"); if (left-- <= 0) { clearInterval(timer); finish(); } };
-  if (o.minutes) { tick(); timer = setInterval(tick, 1000); }
-  $("#sub", pane).onclick = () => finish();
-  function finish() {
-    if (submitted) return; submitted = true; clearInterval(timer); $("#sub", pane).disabled = true;
-    let score = 0; const open = []; const missed = [];
-    qs.forEach((x, n) => {
-      const q = x.q, fb = $("#fb" + n, pane);
-      if (q.t === "open") { open.push(n); const ans = $("#ta" + n, pane); ans.readOnly = true;
-        fb.innerHTML = `<div class="expl"><b>Model answer</b>${md(q.a)}${q.e ? md(q.e) : ""}<div class="row">Did you get it? <button class="btn" data-r="1" data-n="${n}">Yes</button><button class="btn sec" data-r="0" data-n="${n}">No</button></div></div>`; return; }
-      const right = new Set(q.t === "multi" ? q.a : [q.a]);
-      pane.querySelectorAll(`.opt[data-n="${n}"]`).forEach(b => { const oi = +b.dataset.o; if (right.has(oi)) b.classList.add("ok"); else if (sel[n].has(oi)) b.classList.add("bad"); });
-      const good = right.size === sel[n].size && [...right].every(v => sel[n].has(v));
-      if (good) score++; else missed.push(q);
-      fb.innerHTML = `<div class="expl ${good ? "ok-t" : "bad-t"}"><b>${good ? "Correct" : "Incorrect"}.</b> <span style="color:var(--fg)">${inline(q.e || "")}</span></div>`;
-    });
-    let pend = open.length;
-    const done = () => {
-      const max = qs.length; const pct = Math.round(100 * score / max);
-      missed.forEach(q => { const t = q.tag || CH[o.id].meta.t; S.miss[t] = (S.miss[t] || 0) + 1; });
-      if (o.kind === "quiz") { const b = S.quiz[o.id] || { best: 0, att: 0 }; b.best = Math.max(b.best, score / max); b.att++; S.quiz[o.id] = b; }
-      else if (o.kind === "exam") { (S.exam[o.id] = S.exam[o.id] || []).push({ s: score, m: max, d: Date.now() }); }
-      else if (o.kind === "phase") { (S.exam["ph" + o.id] = S.exam["ph" + o.id] || []).push({ s: score, m: max, d: Date.now() }); }
-      save(); side(o.kind === "phase" ? "ph" + o.id : o.id);
-      $("#res", pane).innerHTML = `<div class="card"><div class="stat ${pct >= 80 ? "ok-t" : "bad-t"}">${score}/${max} (${pct}%)</div><p>${pct >= 80 ? "Passed." : "Below the 80 percent pass mark. Review the lesson and the missed topics, then retry."}</p></div>`;
-    };
-    if (!pend) return done();
-    pane.querySelectorAll("[data-r]").forEach(b => b.onclick = () => {
-      const n = +b.dataset.n; if (b.dataset.r === "1") score++; else missed.push(qs[n].q);
-      b.parentElement.innerHTML = b.dataset.r === "1" ? '<span class="ok-t">Counted as correct</span>' : '<span class="bad-t">Counted as missed</span>';
-      if (--pend === 0) done();
-    });
-    $("#res", pane).innerHTML = '<div class="mut">Self-grade the open questions to see your score.</div>';
+function runner(pane, questions, o) {
+  const practice = o.kind === "quiz";
+  const qs = shuffle(questions).map(q => ({ q, ord: q.t === "open" ? [] : shuffle(q.o.map((_, k) => k)), sel: new Set(), text: "", checked: false, flag: false, ok: null }));
+  const n = qs.length; let i = 0, left = (o.minutes || 0) * 60, timer = null, stage = "q", saved = false, armed = false;
+  pane.className = o.kind === "phase" ? "p" + o.id : phc(o.id);
+  const answered = x => x.q.t === "open" ? x.text.trim().length > 0 : x.sel.size > 0;
+  const right = x => new Set(x.q.t === "multi" ? x.q.a : [x.q.a]);
+  const isOk = x => { const r = right(x); return r.size === x.sel.size && [...r].every(v => x.sel.has(v)); };
+  const fmt = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+
+  function optHtml(x, k, pos, review) {
+    const r = right(x); let c = "";
+    if (review || (practice && x.checked)) { if (r.has(k)) c = "ok"; else if (x.sel.has(k)) c = "bad"; } else if (x.sel.has(k)) c = "sel";
+    return `<button class="opt ${c}" data-k="${k}" type="button"><span class="k">${String.fromCharCode(65 + pos)}</span><span>${inline(x.q.o[k])}</span></button>`;
   }
+  function draw() {
+    if (stage === "grade") return drawGrade();
+    if (stage === "res") return drawResult();
+    const x = qs[i], q = x.q; const locked = practice && x.checked;
+    let h = `<div class="qs"><div class="qtop"><span class="mono small mut">${i + 1} / ${n}</span><div class="bar"><i style="width:${pct(qs.filter(answered).length, n)}%"></i></div>${o.minutes ? `<span class="timer ${left < 60 ? "low" : ""}" id="tm">${fmt(left)}</span>` : ""}</div>
+    <div class="card qcard"><div class="row" style="margin-bottom:8px">${q.tag ? `<span class="tag">${esc(q.tag)}</span>` : ""}<span class="mut small">${q.t === "multi" ? "Select all that apply" : q.t === "open" ? "Written answer, self-graded" : "Choose one"}</span></div>
+    <div class="q">${md(q.q)}</div>`;
+    if (q.t === "open") {
+      h += `<textarea id="ta" placeholder="Write your answer first, then compare it with the model answer" ${locked ? "readonly" : ""}>${esc(x.text)}</textarea>`;
+      if (locked) h += `<div class="fb"><div class="h">Model answer</div>${md(q.a)}${q.e ? md(q.e) : ""}${x.ok === null ? `<div class="row" style="margin-top:10px"><span class="mut small">Did you get it?</span><button class="btn sm" data-g="1">Yes</button><button class="btn sec sm" data-g="0">No</button></div>` : `<div style="font-weight:600;color:var(--${x.ok ? "ok" : "bad"})">${x.ok ? "Counted as correct" : "Counted as missed"}</div>`}</div>`;
+    } else {
+      h += x.ord.map((k, pos) => optHtml(x, k, pos, false)).join("");
+      if (locked) h += `<div class="fb ${x.ok ? "ok" : "bad"}"><div class="h">${x.ok ? "Correct" : "Not quite"}</div>${q.e ? md(q.e) : ""}</div>`;
+    }
+    h += "</div>";
+    if (practice) {
+      const last = i === n - 1; const ready = q.t === "open" ? (locked ? x.ok !== null : answered(x)) : (locked || answered(x));
+      h += `<div class="qnav"><span class="mut small">Keys: <span class="kbd">A</span>-<span class="kbd">D</span> choose, <span class="kbd">Enter</span> ${locked ? "next" : "check"}</span><span class="sp"></span>
+      <button class="btn" id="act" ${ready ? "" : "disabled"}>${locked ? (last ? "See results" : "Next") : (q.t === "open" ? "Show model answer" : "Check answer")} ${ic("arrow")}</button></div>`;
+    } else {
+      h += `<div class="qnav"><button class="btn sec" id="prev" ${i === 0 ? "disabled" : ""}>${ic("back")}Previous</button><button class="btn ghost sm" id="flag">${ic("flag")}${x.flag ? "Unflag" : "Flag for review"}</button><span class="sp"></span>
+      ${i < n - 1 ? `<button class="btn sec" id="next">Next ${ic("arrow")}</button>` : ""}<button class="btn" id="submit">Submit exam</button></div>
+      <div class="pal">${qs.map((y, k) => `<button data-n="${k}" class="${answered(y) ? "ans" : ""} ${k === i ? "cur" : ""} ${y.flag ? "flag" : ""}" aria-label="Question ${k + 1}">${k + 1}</button>`).join("")}</div><div id="warn"></div>`;
+    }
+    h += "</div>";
+    pane.innerHTML = h; bind();
+  }
+  function bind() {
+    const x = qs[i];
+    $$(".opt", pane).forEach(b => b.onclick = () => {
+      if (practice && x.checked) return; const k = +b.dataset.k;
+      if (x.q.t === "multi") x.sel.has(k) ? x.sel.delete(k) : x.sel.add(k); else { x.sel.clear(); x.sel.add(k); }
+      draw();
+    });
+    const ta = $("#ta", pane); if (ta) ta.oninput = () => { x.text = ta.value; const a = $("#act", pane); if (a && practice) a.disabled = !x.text.trim(); };
+    $$("[data-g]", pane).forEach(b => b.onclick = () => { x.ok = b.dataset.g === "1"; draw(); });
+    const act = $("#act", pane); if (act) act.onclick = actNow;
+    const pv = $("#prev", pane); if (pv) pv.onclick = () => { i--; draw(); };
+    const nx = $("#next", pane); if (nx) nx.onclick = () => { i++; draw(); };
+    const fl = $("#flag", pane); if (fl) fl.onclick = () => { x.flag = !x.flag; draw(); };
+    const sb = $("#submit", pane); if (sb) sb.onclick = trySubmit;
+    $$(".pal button", pane).forEach(b => b.onclick = () => { i = +b.dataset.n; draw(); });
+  }
+  function actNow() {
+    const x = qs[i];
+    if (!x.checked) { x.checked = true; if (x.q.t !== "open") x.ok = isOk(x); draw(); return; }
+    if (i < n - 1) { i++; draw(); } else finish();
+  }
+  function trySubmit() {
+    const un = qs.filter(y => !answered(y)).length;
+    if (un && !armed) { armed = true; $("#warn", pane).innerHTML = `<div class="fb" style="background:var(--warn-bg)">${un} question${un > 1 ? "s are" : " is"} unanswered. Press Submit again to finish anyway.</div>`; return; }
+    finish();
+  }
+  function finish() {
+    clearInterval(timer); timer = null;
+    qs.forEach(x => { if (x.q.t !== "open") x.ok = isOk(x); else if (!answered(x) && x.ok === null) x.ok = false; });
+    stage = qs.some(x => x.ok === null) ? "grade" : "res"; draw();
+  }
+  function drawGrade() {
+    const pend = qs.filter(x => x.ok === null);
+    pane.innerHTML = `<div class="qs"><h2 class="disp" style="margin:6px 0">Grade your written answers</h2><p class="mut">Compare each answer with the model answer and be honest. The pass mark is built on this.</p>
+    ${qs.map((x, k) => x.q.t === "open" && x.text.trim() ? `<div class="card qcard" style="margin:12px 0"><div class="q">${md(x.q.q)}</div><div class="mut small">Your answer</div><div class="fb">${esc(x.text)}</div><div class="fb"><div class="h">Model answer</div>${md(x.q.a)}</div>
+      <div class="row" style="margin-top:10px">${x.ok === null ? `<button class="btn sm" data-k="${k}" data-v="1">I got it</button><button class="btn sec sm" data-k="${k}" data-v="0">I missed it</button>` : `<b style="color:var(--${x.ok ? "ok" : "bad"})">${x.ok ? "Counted as correct" : "Counted as missed"}</b>`}</div></div>` : "").join("")}
+    <button class="btn" id="cont" ${pend.length ? "disabled" : ""}>See results ${ic("arrow")}</button></div>`;
+    $$("[data-k]", pane).forEach(b => b.onclick = () => { qs[+b.dataset.k].ok = b.dataset.v === "1"; drawGrade(); });
+    $("#cont", pane).onclick = () => { stage = "res"; draw(); };
+  }
+  function persist(score) {
+    if (saved) return; saved = true;
+    qs.filter(x => !x.ok).forEach(x => { const t = x.q.tag || (CH[o.id] ? CH[o.id].meta.t : "Phase " + o.id); S.miss[t] = (S.miss[t] || 0) + 1; });
+    if (o.kind === "quiz") { const b = S.quiz[o.id] || { best: 0, att: 0 }; b.best = Math.max(b.best, score / n); b.att++; S.quiz[o.id] = b; }
+    else { const k = o.kind === "phase" ? "ph" + o.id : o.id; (S.exam[k] = S.exam[k] || []).push({ s: score, m: n, d: Date.now() }); }
+    touchDay();
+  }
+  function drawResult() {
+    const score = qs.filter(x => x.ok).length; const p = pct(score, n); persist(score);
+    $("#side").innerHTML = sideHtml(o.kind === "phase" ? "ph" + o.id : o.id, o.kind === "phase" ? o.id : CH[o.id].pi);
+    const tags = {}; qs.forEach(x => { const t = x.q.tag || "general"; (tags[t] = tags[t] || [0, 0]); tags[t][1]++; if (x.ok) tags[t][0]++; });
+    const passed = p >= 80; const nxt = o.kind !== "phase" ? ORDER[ORDER.indexOf(o.id) + 1] : null;
+    let h = `<div class="qs"><div class="card"><div class="result">${ring(p, 110)}<div><h2 class="disp" style="color:var(--${passed ? "ok" : "bad"})">${passed ? "Passed" : "Not passed yet"}</h2>
+    <div class="mut">${score} of ${n} correct. ${passed ? "Nice work." : "The pass mark is 80 percent. Review what you missed and try again."}</div>
+    <div class="row" style="margin-top:14px"><button class="btn" id="again">Try again</button>${o.kind !== "phase" ? `<a class="btn sec" href="#/c/${o.id}/lesson">Back to lesson</a>` : ""}${nxt && passed && has(nxt) ? `<a class="btn sec" href="#/c/${nxt}/lesson">Next chapter ${ic("arrow")}</a>` : ""}</div></div></div></div>
+    <h3 class="disp" style="margin-top:26px">By topic</h3><div class="tagrow">${Object.entries(tags).sort((a, b) => a[1][0] / a[1][1] - b[1][0] / b[1][1]).map(([t, v]) => `<div><span>${esc(t)}</span><div class="bar"><i style="width:${pct(v[0], v[1])}%"></i></div><span class="mono mut">${v[0]}/${v[1]}</span></div>`).join("")}</div>
+    <div class="row" style="margin:26px 0 4px"><h3 class="disp" style="margin:0">Review</h3><span style="flex:1"></span><button class="btn sec sm" id="onlym">Show missed only</button></div><div id="rvl">`;
+    qs.forEach(x => {
+      const q = x.q;
+      h += `<details class="rv" data-ok="${x.ok ? 1 : 0}"><summary><span class="dot ${x.ok ? "g" : "r"}"></span><span>${inline(q.q.split("\n")[0].replace(/^#+\s*/, "").slice(0, 160))}</span></summary><div class="bd"><div class="q">${md(q.q)}</div>`;
+      if (q.t === "open") h += `<div class="mut small">Your answer</div><div class="fb">${x.text.trim() ? esc(x.text) : "(blank)"}</div><div class="fb"><div class="h">Model answer</div>${md(q.a)}${q.e ? md(q.e) : ""}</div>`;
+      else h += x.ord.map((kk, pos) => optHtml(x, kk, pos, true)).join("").replace(/class="opt /g, 'style="pointer-events:none" class="opt ') + (q.e ? `<div class="fb">${md(q.e)}</div>` : "");
+      h += "</div></details>";
+    });
+    pane.innerHTML = h + "</div></div>";
+    $("#again", pane).onclick = o.again || (() => runner(pane, questions, o));
+    let only = false; $("#onlym", pane).onclick = e => { only = !only; e.currentTarget.textContent = only ? "Show all" : "Show missed only"; $$(".rv", pane).forEach(d => d.hidden = only && d.dataset.ok === "1"); };
+    window.scrollTo({ top: pane.offsetTop - 60, behavior: "smooth" });
+  }
+  if (o.minutes) { timer = setInterval(() => { left--; const t = $("#tm", pane); if (t) { t.textContent = fmt(Math.max(0, left)); t.classList.toggle("low", left < 60); } if (left <= 0) finish(); }, 1000); cleanups.push(() => clearInterval(timer)); }
+  on(document, "keydown", e => {
+    if (stage !== "q" || e.ctrlKey || e.metaKey) return;
+    const x = qs[i]; const inTa = typing(e);
+    if (e.key === "Enter" && !inTa) { if (practice) { const a = $("#act", pane); if (a && !a.disabled) a.click(); } else { const nx = $("#next", pane); if (nx) nx.click(); } return; }
+    if (inTa) return;
+    if (!practice && e.key === "ArrowRight") { const nx = $("#next", pane); if (nx) nx.click(); }
+    if (!practice && e.key === "ArrowLeft") { const pv = $("#prev", pane); if (pv && !pv.disabled) pv.click(); }
+    const pos = /^[1-9]$/.test(e.key) ? +e.key - 1 : "abcdefghi".indexOf(e.key.toLowerCase());
+    if (pos >= 0 && x.q.t !== "open" && pos < x.ord.length && !(practice && x.checked)) { const b = $$(".opt", pane)[pos]; if (b) b.click(); }
+  });
+  draw();
 }
 
 /* ---------- phase exam, weak topics ---------- */
 function phaseExam(pi) {
-  const p = PHASES[pi]; if (!p) return home(); side("ph" + pi);
-  const pool = []; p.chapters.forEach(c => { const C = CONTENT[c.id]; if (C) shuffle((C.exam || []).concat(C.quiz || [])).slice(0, 6).forEach(q => pool.push(Object.assign({}, q, { tag: q.tag || c.t }))); });
-  const prev = (S.exam["ph" + pi] || []).map(x => Math.round(100 * x.s / x.m) + "%").join(", ") || "none";
-  $("#main").innerHTML = `<h1>${esc(p.t)}: final exam</h1><div class="card"><p class="mut">Mixed questions from every chapter of the phase (${pool.length} questions, ${Math.ceil(pool.length * 1.5)} minutes). Past attempts: ${prev}.</p><button class="btn" id="go">Start</button></div><div id="run"></div>`;
-  $("#go").onclick = () => { $("#go").disabled = true; runSet($("#run"), pool, { id: pi, kind: "phase", title: "Phase exam", minutes: Math.ceil(pool.length * 1.5) }); };
-  if (!pool.length) { $("#go").disabled = true; $("#run").innerHTML = '<div class="card">No chapter content available for this phase yet.</div>'; }
+  const p = PHASES[pi]; if (!p) return home();
+  const pool = []; p.chapters.forEach(c => { const C = CONTENT[c.id]; if (C) shuffle(C.exam.concat(C.quiz)).slice(0, 6).forEach(q => pool.push(Object.assign({}, q, { tag: q.tag || c.t }))); });
+  const prev = (S.exam["ph" + pi] || []).map(x => pct(x.s, x.m));
+  shell("ph" + pi, pi, `<div class="chead p${pi}"><span class="tag">Phase ${pi} exam</span><h1 class="disp">${esc(p.t.split(": ").slice(1).join(": "))}</h1></div>
+  <div id="pane" class="p${pi}" style="padding-top:24px"><div class="card qs"><p class="mut" style="margin:0 0 14px">Mixed questions from every chapter in this phase. Timed, no feedback until you submit.</p>
+  <div class="row small" style="margin-bottom:16px"><span class="chip"><b>${pool.length}</b> questions</span><span class="chip"><b>${Math.ceil(pool.length * 1.5)}</b> min</span>${prev.slice(-5).map(v => `<span class="chip">attempt <b>${v}%</b></span>`).join("")}</div>
+  <button class="btn" id="go" ${pool.length ? "" : "disabled"}>Start exam ${ic("arrow")}</button></div><div id="run"></div></div>`);
+  $("#go").onclick = () => { $(".qs", $("#pane")).hidden = true; runner($("#run"), pool, { id: pi, kind: "phase", minutes: Math.ceil(pool.length * 1.5), again: () => phaseExam(pi) }); };
 }
 function weak() {
-  side("weak"); const e = Object.entries(S.miss).sort((a, b) => b[1] - a[1]);
-  $("#main").innerHTML = `<h1>Weak topics</h1><p class="mut">Topics you missed most often across quizzes and exams.</p>` +
-    (e.length ? e.slice(0, 25).map(([t, n]) => `<div class="card row" style="justify-content:space-between"><span>${esc(t)}</span><b>${n} missed</b></div>`).join("") : '<div class="card">No misses recorded yet.</div>');
+  const e = Object.entries(S.miss).sort((a, b) => b[1] - a[1]); const mx = e.length ? e[0][1] : 1;
+  const byTitle = Object.fromEntries(ORDER.map(id => [CH[id].meta.t, id]));
+  shell("weak", -1, `<div class="hello"><h1 class="disp">Weak topics</h1><p class="mut" style="margin:0 0 18px">What you miss most often across quizzes and exams. Fix these first.</p></div><div class="read">` +
+    (e.length ? e.slice(0, 30).map(([t, n]) => `<div class="flat" style="margin:8px 0"><div class="row" style="justify-content:space-between"><b>${esc(t)}</b><span class="mono mut small">${n} missed</span></div><div class="bar" style="margin:8px 0 ${byTitle[t] ? "10px" : "0"}"><i style="width:${pct(n, mx)}%;background:var(--bad)"></i></div>${byTitle[t] ? `<a class="small" style="text-decoration:underline" href="#/c/${byTitle[t]}/lesson">Review this chapter</a>` : ""}</div>`).join("") : '<div class="flat">Nothing here yet. Take a quiz and your misses will show up.</div>') + "</div>");
 }
+
+/* ---------- search palette ---------- */
+function openSearch() {
+  if ($(".sheet")) return;
+  const items = [{ t: "Dashboard", sub: "page", href: "#/", k: "home dashboard overview" }, { t: "Daily review", sub: "page", href: "#/review", k: "cards review spaced repetition flashcards" }, { t: "Weak topics", sub: "page", href: "#/weak", k: "weak mistakes misses" }];
+  ORDER.forEach(id => { const c = CH[id].meta; items.push({ t: c.t, sub: PHASES[CH[id].pi].t.split(":")[0], href: "#/c/" + id + "/lesson", k: (c.t + " " + (c.know || []).join(" ") + " " + (c.why || "")).toLowerCase() }); });
+  PHASES.forEach((p, pi) => items.push({ t: "Phase " + pi + " exam", sub: "exam", href: "#/phase/" + pi, k: "exam phase final test " + p.t.toLowerCase() }));
+  const el = document.createElement("div"); el.className = "sheet";
+  el.innerHTML = `<div class="pal-box"><input id="q" placeholder="Jump to a chapter, topic or skill" autocomplete="off"><div class="pal-list" id="pl"></div></div>`;
+  document.body.appendChild(el); const inp = $("#q", el), list = $("#pl", el); let sel = 0, cur = [];
+  const close = () => { el.remove(); document.removeEventListener("keydown", kd, true); };
+  const render = () => {
+    const q = inp.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    cur = items.filter(it => q.every(w => (it.t + " " + it.k).toLowerCase().includes(w))).slice(0, 30); sel = Math.min(sel, Math.max(0, cur.length - 1));
+    list.innerHTML = cur.map((it, k) => `<a href="${it.href}" class="${k === sel ? "on" : ""}"><span>${esc(it.t)}</span><span class="sub">${esc(it.sub)}</span></a>`).join("") || '<div class="mut" style="padding:14px">No match</div>';
+    $$("a", list).forEach(a => a.onclick = close);
+  };
+  const kd = e => {
+    if (e.key === "Escape") { e.preventDefault(); close(); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); sel = Math.min(cur.length - 1, sel + 1); render(); const a = $$("a", list)[sel]; if (a) a.scrollIntoView({ block: "nearest" }); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); sel = Math.max(0, sel - 1); render(); const a = $$("a", list)[sel]; if (a) a.scrollIntoView({ block: "nearest" }); }
+    else if (e.key === "Enter" && cur[sel]) { e.preventDefault(); location.hash = cur[sel].href; close(); }
+  };
+  document.addEventListener("keydown", kd, true); inp.oninput = () => { sel = 0; render(); }; el.onclick = e => { if (e.target === el) close(); };
+  render(); inp.focus();
+}
+document.addEventListener("keydown", e => {
+  if (((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") || (e.key === "/" && !typing(e) && !e.ctrlKey && !e.metaKey)) { e.preventDefault(); openSearch(); }
+});
 
 /* ---------- routing / boot ---------- */
 function route() {
+  cleanups.forEach(f => f()); cleanups = []; document.body.classList.remove("nav-open");
   const p = location.hash.replace(/^#\/?/, "").split("/");
   if (p[0] === "c") return chapter(p[1], p[2] || "lesson");
   if (p[0] === "review") return review();
@@ -684,7 +1078,8 @@ function route() {
   home();
 }
 window.addEventListener("hashchange", () => { route(); window.scrollTo(0, 0); });
-const loads = Object.keys(CH).map(id => CONTENT[id] ? Promise.resolve() : new Promise(r => { const s = document.createElement("script"); s.src = "content/" + id + ".js"; s.onload = s.onerror = r; document.head.appendChild(s); }));
+const scrim = document.createElement("div"); scrim.className = "scrim"; scrim.onclick = () => document.body.classList.remove("nav-open"); document.body.appendChild(scrim);
+const loads = ORDER.map(id => CONTENT[id] ? Promise.resolve() : new Promise(r => { const s = document.createElement("script"); s.src = "content/" + id + ".js"; s.onload = s.onerror = r; document.head.appendChild(s); }));
 Promise.all(loads).then(route);
 
 </script>
