@@ -233,6 +233,20 @@ textarea:focus{outline:none;border-color:var(--ink)}
 @media (max-width:520px){.qcard{padding:18px 16px}.rates{grid-template-columns:repeat(2,1fr)}.steps a{padding:8px 10px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
+/* per-section read marks */
+.toc a{display:flex;gap:8px;align-items:flex-start}
+.toc .tt{flex:1;min-width:0}
+.tck{flex:none;width:16px;height:16px;margin-top:2px;border:1.5px solid var(--faint);border-radius:50%;display:inline-grid;place-items:center;font-size:.62rem;line-height:1;color:transparent;cursor:pointer;transition:background .15s,border-color .15s}
+.toc a:hover .tck{border-color:var(--ink)}
+.tck.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.tcnt{margin-left:6px;font:500 .72rem var(--f-body);letter-spacing:0;text-transform:none;color:var(--faint)}
+.sec-end{margin:20px 0 6px;display:flex;justify-content:flex-end}
+.sec-ck{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 8px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--mut);font:500 .8rem var(--f-body);cursor:pointer}
+.sec-ck:hover{color:var(--ink);border-color:var(--faint)}
+.sec-ck.on{color:var(--ok);border-color:var(--ok)}
+.sec-ck .tck{cursor:inherit;margin-top:0}
+.lesson section.sdone>h2{opacity:.62}
+
 </style>
 <div id="app"><aside id="side"></aside><main id="main"></main></div>
 <script>
@@ -604,7 +618,7 @@ const KEY = CFG.key;
 document.title = CFG.title;
 let S;
 try { S = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { S = {}; }
-["read", "quiz", "exam", "cards", "miss", "lab"].forEach(k => S[k] = S[k] || {}); S.days = S.days || [];
+["read", "quiz", "exam", "cards", "miss", "lab", "sec"].forEach(k => S[k] = S[k] || {}); S.days = S.days || [];
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 const today = () => Math.floor(Date.now() / 864e5);
 function touchDay() { const t = today(); if (S.days[S.days.length - 1] !== t) { S.days.push(t); S.days = S.days.slice(-400); } save(); }
@@ -615,6 +629,7 @@ function streak() {
 /* ---------- markdown (small, safe) ---------- */
 function inline(s) {
   s = esc(s);
+  s = s.split(/(`[^`]+`)/).map((t, i) => i % 2 ? t : t.replace(/([A-Za-z0-9Ͱ-Ͽ\)\]])\^(-?\d+(?:[.,]\d+)?)(?![\w^])/g, "$1<sup>$2</sup>")).join("");
   s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
   s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   s = s.replace(/(^|[^*])\*([^*\s][^*]*)\*/g, "$1<em>$2</em>");
@@ -817,12 +832,17 @@ function chapter(id, tab) {
 }
 function lesson(pane, id, C) {
   const secs = C.lesson;
-  pane.innerHTML = `<div class="cols"><article class="lesson read">${secs.map((x, i) => `<section id="sec${i}"><h2>${esc(x.h)}</h2>${md(x.md)}</section>`).join("")}
+  const sk = i => id + "#" + secs[i].h, secDone = i => !!S.sec[sk(i)];
+  pane.innerHTML = `<div class="cols"><article class="lesson read">${secs.map((x, i) => `<section id="sec${i}" class="${secDone(i) ? "sdone" : ""}"><h2>${esc(x.h)}</h2>${md(x.md)}<div class="sec-end"><button type="button" class="sec-ck ${secDone(i) ? "on" : ""}" data-i="${i}"><span class="tck ${secDone(i) ? "on" : ""}">✓</span><span class="sl">${secDone(i) ? "Section read" : "Mark section as read"}</span></button></div></section>`).join("")}
   <div class="card done-box"><div><b>${S.read[id] ? "Lesson marked as read" : "Finished reading?"}</b><div class="mut small">${S.read[id] ? "Its flashcards are unlocked for daily review." : "Marking it read unlocks its flashcards for daily review."}</div></div>
   <div class="row"><button class="btn ${S.read[id] ? "sec" : ""}" id="rd">${S.read[id] ? "Unmark" : "Mark as read"}</button><a class="btn sec" href="#/c/${id}/cards">Flashcards ${ic("arrow")}</a></div></div></article>
-  <aside class="toc"><h4>On this page</h4>${secs.map((x, i) => `<a href="#/c/${id}/lesson" data-s="${i}">${esc(x.h)}</a>`).join("")}</aside></div><div class="prog" id="prog"></div>`;
-  $("#rd").onclick = () => { S.read[id] = !S.read[id]; if (S.read[id]) touchDay(); save(); chapter(id, "lesson"); };
-  $$(".toc a", pane).forEach(a => a.onclick = e => { e.preventDefault(); const el = $("#sec" + a.dataset.s); if (el) el.scrollIntoView({ behavior: "smooth" }); });
+  <aside class="toc"><h4>On this page <span class="tcnt" id="tcnt"></span></h4>${secs.map((x, i) => `<a href="#/c/${id}/lesson" data-s="${i}"><span class="tck ${secDone(i) ? "on" : ""}" role="checkbox" aria-checked="${secDone(i)}" title="Mark section as read">✓</span><span class="tt">${esc(x.h)}</span></a>`).join("")}</aside></div><div class="prog" id="prog"></div>`;
+  $("#rd").onclick = () => { S.read[id] = !S.read[id]; secs.forEach((_, i) => { if (S.read[id]) S.sec[sk(i)] = true; else delete S.sec[sk(i)]; }); if (S.read[id]) touchDay(); save(); chapter(id, "lesson"); };
+  const paintSec = i => { const on = secDone(i), el = $("#sec" + i); if (!el) return; el.classList.toggle("sdone", on); const b = $(".sec-ck", el); b.classList.toggle("on", on); $(".tck", b).classList.toggle("on", on); $(".sl", b).textContent = on ? "Section read" : "Mark section as read"; const tk = $$(".toc a", pane)[i] && $(".tck", $$(".toc a", pane)[i]); if (tk) { tk.classList.toggle("on", on); tk.setAttribute("aria-checked", on); } $("#tcnt").textContent = secs.filter((_, j) => secDone(j)).length + "/" + secs.length + " read"; };
+  const toggleSec = i => { if (secDone(i)) delete S.sec[sk(i)]; else { S.sec[sk(i)] = true; touchDay(); } save(); paintSec(i); };
+  $$(".sec-ck", pane).forEach(b => b.onclick = () => toggleSec(+b.dataset.i));
+  secs.forEach((_, i) => { if (i === 0) paintSec(0); });
+  $$(".toc a", pane).forEach(a => a.onclick = e => { e.preventDefault(); if (e.target.closest(".tck")) { toggleSec(+a.dataset.s); return; } const el = $("#sec" + a.dataset.s); if (el) el.scrollIntoView({ behavior: "smooth" }); });
   pane.addEventListener("click", e => {
     const b = e.target.closest(".cp"); if (!b) return; const t = b.parentElement.querySelector("pre").innerText;
     try { navigator.clipboard.writeText(t).then(() => { b.textContent = "Copied"; setTimeout(() => b.textContent = "Copy", 1200); }, () => { b.textContent = "Select and copy"; }); } catch (err) { b.textContent = "Select and copy"; }
