@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>:root{color-scheme:light}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Kuchyňa 7C</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: architektonický list - vľavo pôdorys v mierke, vpravo 3D model, pod tým porovnanie. */
+:root{
+  --paper:#eef0ec; --panel:#f8f9f6; --ink:#1f2a2e; --muted:#5b686a; --line:#c8cec9;
+  --accent:#2c6a8a; --warn:#bf4328; --good:#3a7a4c;
+  --floor:#e6ded1; --area:#dfe3df; --counter:#d6b688; --tall:#f4f3ef; --wood:#c49b6c;
+  --steel:#b7bcc0; --sofa:#a9adb2; --stage:#dfe4e1; --nick:#a7b1a1; --nick2:#7f8b79;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans","Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#13191b; --panel:#1a2225; --ink:#e3e9e6; --muted:#98a5a6; --line:#2d383b;
+  --accent:#7db4cf; --warn:#ec7a5f; --good:#71c086;
+  --floor:#2b2722; --area:#1f2729; --counter:#9c7c50; --tall:#c9ccc7; --wood:#8a6a47;
+  --steel:#7d8387; --sofa:#5d6267; --stage:#1c2427; --nick:#5f6b5b; --nick2:#8e9b87; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#13191b; --panel:#1a2225; --ink:#e3e9e6; --muted:#98a5a6; --line:#2d383b;
+  --accent:#7db4cf; --warn:#ec7a5f; --good:#71c086;
+  --floor:#2b2722; --area:#1f2729; --counter:#9c7c50; --tall:#c9ccc7; --wood:#8a6a47;
+  --steel:#7d8387; --sofa:#5d6267; --stage:#1c2427; --nick:#5f6b5b; --nick2:#8e9b87; color-scheme:dark}
+
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:20px;padding-block:28px 64px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;text-wrap:balance;margin:0;line-height:1.1}
+h1{font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:-.01em}
+h2{font-size:24px;font-weight:700}
+h3{font-size:17px;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lead{max-width:68ch;color:var(--muted);margin-top:10px}
+header{display:grid;gap:6px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+
+.answers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+.answers div{background:var(--panel);padding:14px 16px;display:grid;gap:4px;align-content:start;min-width:0}
+.answers b{font-family:var(--f-display);font-stretch:85%;font-size:16px}
+.answers span{color:var(--muted);font-size:14px}
+.answers .q{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+.tab{font:inherit;font-family:var(--f-display);font-stretch:85%;font-weight:600;font-size:15px;cursor:pointer;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:9px 14px;border-radius:3px;display:flex;gap:8px;align-items:baseline}
+.tabs.older{margin-top:10px}
+.tabs.older .tab{font-size:13.5px;padding:6px 11px}
+.tab small{font-family:var(--f-mono);font-weight:400;font-size:11px;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tab[aria-selected="true"] small{color:var(--paper);opacity:.75}
+.tab:focus-visible,.cam:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.pill{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:1px 6px;border-radius:2px;background:var(--good);color:var(--paper)}
+
+.sheet{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:20px;margin-top:16px}
+.figure{background:var(--panel);border:1px solid var(--line);min-width:0;display:flex;flex-direction:column}
+.figure .cap{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--line)}
+.plan svg{display:block;width:100%;height:auto}
+.stage{position:relative;flex:1;min-height:380px;background:var(--stage)}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.cams{display:flex;gap:6px;flex-wrap:wrap}
+.cam{font:inherit;font-size:12.5px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--ink);padding:4px 10px;border-radius:3px}
+.cam[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+.hint{position:absolute;left:10px;bottom:8px;font-family:var(--f-mono);font-size:11px;color:#2b3538;background:rgba(255,255,255,.72);padding:2px 6px;border-radius:2px}
+.nogl{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;color:var(--muted)}
+
+.detail{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:20px;margin-top:20px}
+.detail .desc{display:grid;gap:10px;align-content:start}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pc ul{margin:6px 0 0;padding-left:18px;display:grid;gap:4px}
+.pc h3.plus{color:var(--good)} .pc h3.minus{color:var(--warn)}
+
+section.block{margin-top:44px;display:grid;gap:14px}
+.tblwrap{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-family:var(--f-display);font-stretch:85%;font-size:15px}
+tbody th{font-weight:500;color:var(--muted);white-space:nowrap}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.bad{color:var(--warn)} .ok{color:var(--good)}
+tr:last-child td,tr:last-child th{border-bottom:0}
+
+.todo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin:0;padding:0;list-style:none}
+.todo li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.todo li::before{content:"";width:12px;height:12px;border:1.5px solid var(--accent);border-radius:2px;margin-top:5px}
+.todo b{font-weight:600}
+.src{font-size:13.5px;color:var(--muted);max-width:80ch}
+
+/* plan svg */
+.p-floor{fill:var(--floor)} .p-area{fill:var(--area)} .p-wall{fill:var(--ink)}
+.p-arealbl{fill:var(--muted);font-family:var(--f-display);font-stretch:85%;font-size:150px;font-weight:600}
+.p-base{fill:var(--counter);stroke:var(--ink);stroke-width:12}
+.p-tall{fill:var(--tall);stroke:var(--ink);stroke-width:14}
+.p-x{stroke:var(--ink);stroke-width:7;opacity:.45}
+.p-upper{fill:none;stroke:var(--accent);stroke-width:12;stroke-dasharray:45 30}
+.p-hood{fill:none;stroke:var(--ink);stroke-width:10;stroke-dasharray:18 18}
+.p-cook{fill:var(--ink)} .p-burn{fill:none;stroke:var(--paper);stroke-width:10}
+.p-sink{fill:var(--steel);stroke:var(--ink);stroke-width:10}
+.p-wood{fill:var(--wood);stroke:var(--ink);stroke-width:12}
+.p-chair{fill:var(--panel);stroke:var(--ink);stroke-width:10}
+.p-back{stroke:var(--ink);stroke-width:40;stroke-linecap:butt}
+.p-sofa{fill:var(--sofa);stroke:var(--ink);stroke-width:10}
+.p-thin{fill:var(--panel);stroke:var(--ink);stroke-width:10}
+.p-win{fill:var(--panel);stroke:var(--ink);stroke-width:10}
+.p-door{fill:none;stroke:var(--ink);stroke-width:10}
+.p-warn{fill:var(--warn);fill-opacity:.28;stroke:var(--warn);stroke-width:14}
+.p-lbl{fill:var(--ink);font-family:var(--f-body);font-size:100px;font-weight:500;text-anchor:middle;dominant-baseline:central;paint-order:stroke;stroke:var(--paper);stroke-width:22;stroke-linejoin:round}
+.p-lbl.s{font-size:84px}
+.p-lbl.w{fill:var(--warn);font-weight:600}
+.p-dim{stroke:var(--accent);stroke-width:9;fill:none}
+.p-dimt{fill:var(--accent);font-family:var(--f-mono);font-size:112px;font-weight:500;text-anchor:middle;dominant-baseline:central;paint-order:stroke;stroke:var(--paper);stroke-width:26;stroke-linejoin:round}
+.p-mk{fill:var(--warn);stroke:var(--paper);stroke-width:14}
+.p-ceil{fill:none;stroke:var(--muted);stroke-width:10}
+.p-nbase{fill:var(--nick);stroke:var(--ink);stroke-width:10}
+.p-ntall{fill:var(--nick2);stroke:var(--ink);stroke-width:14}
+.p-modw{fill:var(--ink);opacity:.7;font-family:var(--f-mono);font-size:70px;text-anchor:middle;dominant-baseline:central}
+.ikea{margin-top:56px;padding-top:28px;border-top:3px solid var(--nick2);display:grid;gap:10px}
+.ikea .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;padding:0;list-style:none}
+.ikea .facts li{font-size:13.5px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--nick2);padding:5px 10px;border-radius:2px}
+.swatch{display:inline-block;width:12px;height:12px;border-radius:2px;background:var(--nick2);vertical-align:-1px;margin-right:6px}
+.bom{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 24px;margin-top:20px}
+.bomgrp{min-width:0}
+.bomgrp table{min-width:0;font-size:13.5px;background:var(--panel);border:1px solid var(--line);margin-top:6px}
+.bomgrp td{padding:7px 10px}
+.bomgrp td.num{width:76px;white-space:nowrap;color:var(--accent)}
+.note{font-size:13.5px;color:var(--muted);margin-top:10px;max-width:90ch}
+@media (max-width:900px){.bom{grid-template-columns:minmax(0,1fr)}}
+
+@media (max-width:900px){
+  .sheet,.detail{grid-template-columns:minmax(0,1fr)}
+  .answers{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .todo{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){
+  .answers{grid-template-columns:minmax(0,1fr)}
+  .pc{grid-template-columns:minmax(0,1fr)}
+  .wrap{padding-inline:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Byt 7C · obývačka s kuchyňou · 3,82 × 6,69 m</span>
+    <h1>Kuchyňa 7C: možnosti rozloženia</h1>
+    <p class="lead">Rozmery sú z pôdorysu od projektanta, výšky a rozvody z fotiek a videa. Kuchynský kút má 3,13 × 3,04 m. Z jednej strany je stena ku kúpeľni, vzadu obvodová stena a z druhej strany okno široké 96 cm, ktoré začína 1,26 m od zadného rohu. V rohu pri kúpeľni vychádzajú zo steny káble pre spotrebiče a v strede podlahy je krabica s káblami, približne tam, kde mal projektant ostrovček s varnou doskou.</p>
+    <p class="lead"><b>Najnovšie sú <a href="#ikea">varianty IKEA</a> úplne dole.</b> Počítajú s tým, že prívod pre varnú dosku je v podlahe, nad ňou je pripravený stropný digestor a parapet je 91 cm. Varianty A až F vyššie vznikli ešte pred týmito informáciami.</p>
+  </header>
+
+  <div class="answers" aria-label="Krátke odpovede">
+    <div><span class="q">L alebo U?</span><b>Ani jedno: linka vzadu + ostrovček</b><span>Varná doska musí byť na ostrovčeku, lebo prívod je v podlahe a digestor na strope.</span></div>
+    <div><span class="q">Kam dať stôl?</span><b>Napojiť na ostrovček</b><span>Smerom k oknu (IKEA 1) alebo ku kúpeľni (IKEA 2), celý v kuchynskom kúte.</span></div>
+    <div><span class="q">Kde sedenie?</span><b>4 stoličky pri stole</b><span>Bežne 2 až 3 ľudia, najviac 4. Stôl 100 × 80 cm stačí.</span></div>
+    <div><span class="q">Kde pracovná doska?</span><b>Zadná stena + ostrovček</b><span>Spolu 2,6 m (IKEA 1), menej ako v pôvodnom návrhu (4,7 m).</span></div>
+  </div>
+
+  <div id="oldTabs">
+  <div class="tabs" role="tablist" aria-label="Nové varianty">
+    <button class="tab" role="tab" id="tab-d" data-v="d">D · rovná linka + stôl pri okne <span class="pill">odporúčam</span></button>
+    <button class="tab" role="tab" id="tab-e" data-v="e">E · malé L + lavica pod oknom</button>
+    <button class="tab" role="tab" id="tab-f" data-v="f">F · linka pri kúpeľni + stôl pod oknom</button>
+  </div>
+  <div class="tabs older" role="tablist" aria-label="Staršie varianty">
+    <span class="eyebrow" style="align-self:center">Staršie:</span>
+    <button class="tab" role="tab" id="tab-orig" data-v="orig">Pôvodný <small>z PDF</small></button>
+    <button class="tab" role="tab" id="tab-a" data-v="a">A · L + stôl</button>
+    <button class="tab" role="tab" id="tab-b" data-v="b">B · L + polostrov</button>
+    <button class="tab" role="tab" id="tab-c" data-v="c">C · U</button>
+  </div>
+  </div>
+  <p class="note">Varianty A až F majú varnú dosku na stene. Podľa nových informácií je však prívod pre ňu v podlahe a digestor na strope, takže tieto varianty by znamenali prerábať elektrinu. Aktuálne návrhy sú <a href="#ikea">IKEA 1 a IKEA 2</a>.</p>
+
+  <div class="sheet">
+    <div class="figure plan">
+      <div class="cap"><h3 id="vplanTitle">Pôdorys</h3><span class="eyebrow">mierka podľa PDF · mm</span></div>
+      <div id="vplan"></div>
+    </div>
+    <div class="figure">
+      <div class="cap">
+        <h3>3D model</h3>
+        <div class="cams" id="vcams" role="group" aria-label="Pohľad">
+          <button class="cam" id="cam-living" data-cam="living" aria-pressed="true">Z obývačky</button>
+          <button class="cam" id="cam-entry" data-cam="entry">Od chodby</button>
+          <button class="cam" id="cam-top" data-cam="top">Zhora</button>
+        </div>
+      </div>
+      <div class="stage" id="vstage">
+        <canvas id="vgl"></canvas>
+        <span class="hint">ťahaj = otáčanie · koliesko / dva prsty = priblíženie</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail">
+    <div class="desc">
+      <span class="eyebrow" id="vEyebrow"></span>
+      <h2 id="vTitle"></h2>
+      <p id="vText"></p>
+    </div>
+    <div class="pc">
+      <div><h3 class="plus">Výhody</h3><ul id="vPlus"></ul></div>
+      <div><h3 class="minus">Nevýhody</h3><ul id="vMinus"></ul></div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>Porovnanie</h2>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th></th><th>D · rovná linka</th><th>E · malé L</th><th>F · linka pri kúpeľni, stôl pod oknom</th><th>pre porovnanie: B</th></tr></thead>
+        <tbody>
+          <tr><th>Zasahuje do obývačky</th><td class="ok">nie</td><td class="ok">nie</td><td class="ok">nie</td><td class="bad">stôl áno</td></tr>
+          <tr><th>Dĺžka linky (bez vysokých skríň)</th><td class="num">2,5 m</td><td class="num">3,7 m</td><td class="num">2,4 m</td><td class="num">5,9 m</td></tr>
+          <tr><th>Voľná doska (bez drezu a platne)</th><td class="num">1,1 m</td><td class="num">2,3 m</td><td class="num">1,0 m</td><td class="num">4,5 m</td></tr>
+          <tr><th>Vysoké skrine</th><td>1 (chladnička)</td><td>1 (chladnička)</td><td>1 (chladnička)</td><td>2</td></tr>
+          <tr><th>Miesta pri stole</th><td class="num">4</td><td class="num">4 až 5</td><td class="num">4</td><td class="num">5</td></tr>
+          <tr><th>Sedenie</th><td>stoličky</td><td>lavica pod oknom + 2 stoličky</td><td>stôl pod oknom, 4 stoličky</td><td>stoličky</td></tr>
+          <tr><th>Drez a voda</th><td class="ok">zadná stena, bez zmeny</td><td class="ok">zadná stena, bez zmeny</td><td class="bad">presun na stenu ku kúpeľni</td><td class="ok">zadná stena</td></tr>
+          <tr><th>Svetlo zo stropu</th><td class="ok">vyjde nad stôl</td><td class="ok">vyjde nad stôl</td><td class="ok">z vývodu digestora nad stôl</td><td>nad kuchyňou</td></tr>
+          <tr><th>Krabica v podlahe</th><td>pri stole, podlahová zásuvka</td><td>pri stole, podlahová zásuvka</td><td>na voľnej podlahe, zaslepiť</td><td class="ok">v polostrove</td></tr>
+          <tr><th>Cena</th><td class="ok">najnižšia</td><td>stredná</td><td>stredná + inštalatér</td><td>vyššia</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ikea" id="ikea">
+    <span class="eyebrow"><span class="swatch"></span>IKEA METOD · dvierka Nickebo matná sivozelená</span>
+    <h2>Varianty IKEA</h2>
+    <p class="lead">Prerobené podľa nových informácií a zložené z modulov METOD (spodné skrinky 20, 30 a 60 cm, hĺbka 60 cm, vysoké skrinky 60 × 200 cm, horné hĺbka 37 cm). V 3D modeli sú dvierka Nickebo a pracovná doska v odtieni dubu.</p>
+    <ul class="facts">
+      <li>parapet 91 cm</li>
+      <li>prívod varnej dosky z podlahy</li>
+      <li>stropný uhlíkový digestor nad doskou</li>
+      <li>pri stole najviac 4, bežne 2 dospelí a dieťa</li>
+      <li>nič nezasahuje do obývačky</li>
+      <li>menej pracovnej dosky</li>
+    </ul>
+    <div class="tabs" id="ikTabs" role="tablist" aria-label="Varianty IKEA">
+      <button class="tab" role="tab" id="tab-i1" data-v="i1">IKEA 1 · ostrovček + stôl pri okne <span class="pill">odporúčam</span></button>
+      <button class="tab" role="tab" id="tab-i2" data-v="i2">IKEA 2 · ostrovček + stôl ku kúpeľni</button>
+      <button class="tab" role="tab" id="tab-i3" data-v="i3">IKEA 3 · linka pri kúpeľni + stôl pod oknom <small>tatinov nápad</small></button>
+    </div>
+    <div class="sheet">
+      <div class="figure plan">
+        <div class="cap"><h3 id="ikplanTitle">Pôdorys</h3><span class="eyebrow">čísla = šírka modulu v cm</span></div>
+        <div id="ikplan"></div>
+      </div>
+      <div class="figure">
+        <div class="cap">
+          <h3>3D model</h3>
+          <div class="cams" id="ikcams" role="group" aria-label="Pohľad IKEA">
+            <button class="cam" id="ikcam-living" data-cam="living" aria-pressed="true">Z obývačky</button>
+            <button class="cam" id="ikcam-entry" data-cam="entry">Od chodby</button>
+            <button class="cam" id="ikcam-top" data-cam="top">Zhora</button>
+          </div>
+        </div>
+        <div class="stage" id="ikstage">
+          <canvas id="ikgl"></canvas>
+          <span class="hint">ťahaj = otáčanie · koliesko / dva prsty = priblíženie</span>
+        </div>
+      </div>
+    </div>
+    <div class="detail">
+      <div class="desc">
+        <span class="eyebrow" id="ikEyebrow"></span>
+        <h2 id="ikTitle"></h2>
+        <p id="ikText"></p>
+      </div>
+      <div class="pc">
+        <div><h3 class="plus">Výhody</h3><ul id="ikPlus"></ul></div>
+        <div><h3 class="minus">Nevýhody</h3><ul id="ikMinus"></ul></div>
+      </div>
+    </div>
+    <h2 style="margin-top:26px">Zostava skriniek</h2>
+    <div class="bom" id="ikBom"></div>
+    <p class="note">Presné kódy a ceny vygeneruje IKEA plánovač kuchýň podľa tejto zostavy. Spodná skrinka METOD má s nohami a doskou asi 91 až 92 cm, preto pod okno (parapet 91 cm) skrinky nedávam. Ak bude krabica v podlahe alebo vývod v strope inde, ako odhadujem, stačí na ostrovčeku prehodiť poradie modulov (napr. 30/60/30 na 20/60/40).</p>
+  </section>
+
+  <section class="block">
+    <h2>Čo ešte treba zmerať a zistiť</h2>
+    <ul class="todo">
+      <li><span><b>Presná poloha krabice v podlahe a káblov v strope.</b> Odmerať od steny s oknom a od zadnej steny. Podľa toho sa doladí poradie modulov na ostrovčeku.</span></li>
+      <li><span><b>Kde je voda a odpad.</b> Na fotkách ich nevidno. Projektant má drez na zadnej stene, s tým rátajú všetky varianty.</span></li>
+      <li><span><b>Čo je v kábloch v rohu.</b> Ktorý kábel je pre rúru, umývačku a chladničku. Elektrikár by to mal vedieť.</span></li>
+      <li><span><b>Chladnička.</b> Vstavaná do vysokej skrine METOD (60 cm), alebo voľne stojaca?</span></li>
+      <li><span><b>Výška stropu.</b> Ak majú byť skrinky až po strop, treba presnú výšku. V modeli rátam s 2,60 m.</span></li>
+    </ul>
+    <p class="src">Podklady: podorys_7C.pdf (rozmery miestnosti, okno, balkónové dvere, pôvodný návrh linky a stola), video a fotky kuchynského kúta (výška okna, káble v rohu a v podlahe). Gauč a stolík v obývačke sú prevzaté z pôdorysu, televízor na stene oproti gauču je môj odhad.</p>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+/* Súradnice v mm: x = od steny s oknom smerom ku kúpeľni, y = od steny s balkónom smerom ku kuchyni. */
+const H=2600, SILL=910, WHEAD=2250, DOORH=2250;
+const WIN={y0:4477,y1:5433}, BAL={x0:450,x1:2080,leaf:950};
+const WALLS=[
+  [-300,0,-300,WIN.y0,0,H],[-300,0,WIN.y0,WIN.y1,0,SILL],[-300,0,WIN.y0,WIN.y1,WHEAD,H],[-300,0,WIN.y1,6991,0,H],
+  [-300,BAL.x0,-300,0,0,H],[BAL.x0,BAL.x1,-300,0,DOORH,H],[BAL.x1,3900,-300,0,0,H],
+  [3820,3900,0,2705,0,H],[3900,4700,2605,2705,0,H],
+  [3130,4700,3650,3750,0,H],[3130,3230,3750,6991,0,H],
+  [-300,3230,6691,6991,0,H]
+];
+const FLOORS=[[0,3820,0,3650],[0,3130,3650,6691],[3820,4700,2705,3650]];
+
+function chair(cx,cy,face){return {k:'chair',x:cx,y:cy,face};}
+const COMMON=[
+  {k:'sofa',x:2390,y:85,w:1357,d:800},{k:'sofa',x:2948,y:885,w:800,d:1800},
+  {k:'ctable',x:2250,y:1570,r:350},
+  {k:'lowboard',x:0,y:800,w:400,d:1400},{k:'tv',x:20,y:880,w:60,d:1240}
+];
+const MARKERS=[{k:'box',x:1450,y:4450},{k:'cables',x:3040,y:6610},{k:'ceil',x:1155,y:4586}];
+
+/* spoločná L linka pre A a B */
+const L_KITCHEN=[
+  {k:'tall',x:0,y:6091,w:600,d:600,label:'chladnička'},
+  {k:'tall',x:600,y:6091,w:600,d:600,label:'rúra + mikro'},
+  {k:'base',x:1200,y:6091,w:1930,d:600},
+  {k:'sink',x:1250,y:6180,w:560,d:430},
+  {k:'lbl',x:2230,y:6420,text:'umývačka',s:1},
+  {k:'base',x:2530,y:3650,w:600,d:2441},
+  {k:'cook',x:2575,y:4700,w:520,d:600},
+  {k:'hood',x:2780,y:4700,w:350,d:600},
+  {k:'upper',x:1200,y:6341,w:1930,d:350},
+  {k:'upper',x:2780,y:3650,w:350,d:1000},
+  {k:'upper',x:2780,y:5350,w:350,d:991}
+];
+
+const V={
+ orig:{eyebrow:'Pôvodný návrh · z PDF od projektanta',title:'Polostrov s varnou doskou a pripojeným stolom',
+  text:'Linka je len na zadnej stene, od steny s oknom vybieha polostrov dlhý 1,6 m s varnou doskou a na neho je zo strany obývačky pripojený stôl. Elektrina je na to už pripravená (krabica v podlahe a vývod zo stropu nad polostrovom). Problém je, že polostrov stojí presne tam, kde začína okno.',
+  plus:['Elektrina v podlahe je pripravená presne na toto','Stôl je pri kuchyni, netreba ho nosiť ďaleko','Medzi polostrovom a linkou je dobrá ulička 1,2 m'],
+  minus:['Polostrov prekrýva okno asi o 41 cm, doska je od parapetu (91 cm) len asi 1 cm','Varná doska je hneď vedľa stola: špliecha na sediacich a digestor visí nad stolom','Stôl vystupuje do obývačky','V pláne nie je chladnička ani vysoké skrine'],
+  items:[
+   {k:'base',x:0,y:6091,w:3130,d:600},{k:'sink',x:1175,y:6194,w:335,d:336},
+   {k:'base',x:0,y:4289,w:1600,d:602,label:'polostrov'},{k:'cook',x:1010,y:4320,w:560,d:520},
+   {k:'hoodI',x:1040,y:4340,w:500,d:480},
+   {k:'table',x:801,y:3091,w:799,d:1198,label:'stôl 120×80'},
+   chair(576,3391,'E'),chair(576,3989,'E'),chair(1825,3391,'W'),chair(1825,3989,'W'),
+   {k:'warn',x:0,y:WIN.y0,w:620,d:4891-WIN.y0,label:'zakrýva okno',lx:1150,ly:5130}
+  ],
+  dims:[{a:[2300,4891],b:[2300,6091],t:'1 200'}]
+ },
+ a:{eyebrow:'Variant A · bez ostrovčeka',title:'Linka do L a stôl pri okne',
+  text:'Linka ide do L po zadnej stene a po stene ku kúpeľni. Chladnička a rúra sú vo vysokých skriniach v zadnom rohu pri okne, varná doska na stene ku kúpeľni. Stena s oknom ostáva voľná a jedálenský stôl stojí pri nej. Krabica v podlahe vyjde pod stôl, dá sa z nej spraviť podlahová zásuvka.',
+  plus:['Najjednoduchšie a najlacnejšie riešenie','Okno je úplne voľné, v kuchyni je najviac svetla','Kuchyňa je otvorená do obývačky','Chladnička aj rúra vo výške očí'],
+  minus:['Najmenej pracovnej dosky (4,4 m)','Stôl stojí priamo v kuchyni, pri varení je bližšie k rušnu','Podlahová krabica sa nevyužije na linku'],
+  items:[...L_KITCHEN,
+   {k:'table',x:200,y:3750,w:1400,d:800,label:'stôl 140×80'},
+   chair(550,3525,'S'),chair(1250,3525,'S'),chair(550,4775,'N'),chair(1250,4775,'N')
+  ],
+  dims:[{a:[900,5000],b:[900,6091],t:'1 090'},{a:[1600,4150],b:[2530,4150],t:'930'}]
+ },
+ b:{eyebrow:'Variant B · odporúčam',title:'Linka do L, polostrov a na ňom stôl',
+  text:'Myšlienka projektanta ostáva, ale polostrov je posunutý o 49 cm smerom k obývačke, takže už nezasahuje do okna. Varná doska nie je na polostrove, ale na stene ku kúpeľni pod digestorom. Polostrov slúži ako hlavná pracovná doska s úložným priestorom zo strany kuchyne a do krabice v podlahe sa napoja zásuvky. Stôl je pripojený na polostrov zo strany obývačky.',
+  plus:['Okno je voľné a polostrov ho nezakrýva','Najviac pracovnej dosky pri rovnakej ploche (5,9 m)','Využije elektrinu, ktorá už je v podlahe','Kuchyňa je oddelená od obývačky, ale stále otvorená','Pri varení nikto nesedí vedľa platne'],
+  minus:['Drahšie ako A (polostrov navyše)','Medzi stoličkou a linkou pri vchode do kuchyne je užšie miesto (asi 60 cm na krátkom úseku)','Treba presne zmerať krabicu v podlahe, aby vyšla do polostrova'],
+  items:[...L_KITCHEN,
+   {k:'base',x:0,y:3800,w:1500,d:600,label:'polostrov'},
+   {k:'table',x:700,y:2600,w:800,d:1200,label:'stôl 120×80'},
+   chair(475,2900,'E'),chair(475,3500,'E'),chair(1725,2900,'W'),chair(1725,3500,'W'),chair(1100,2375,'S')
+  ],
+  dims:[{a:[900,4400],b:[900,6091],t:'1 690'},{a:[1500,4120],b:[2530,4120],t:'1 030'}]
+ },
+ c:{eyebrow:'Variant C · linka do U',title:'Linka do U, stôl v obývačke',
+  text:'Linka ide po všetkých troch stenách kuchynského kúta, aj popod okno. Parapet je 91 cm, takže doska vo výške 90 cm sa pod okno zmestí len tesne. Stôl musí ísť do obývačky a krabica v podlahe ostane v uličke.',
+  plus:['Najviac úložného priestoru a pracovnej dosky (6,1 m)','Pracovná doska pri okne s výhľadom','Všetko je na dosah na malom priestore'],
+  minus:['Pod oknom je rezerva len asi 1 cm, s IKEA linkou (91 až 92 cm) to nemusí vyjsť','Kuchyňa je najviac uzavretá','Stôl zaberá miesto v obývačke','Prívod varnej dosky v podlahe sa nevyužije'],
+  items:[
+   {k:'tall',x:2530,y:3650,w:600,d:600,label:'chladnička'},
+   {k:'tall',x:2530,y:4250,w:600,d:600,label:'rúra'},
+   {k:'base',x:2530,y:4850,w:600,d:1241},
+   {k:'base',x:0,y:6091,w:3130,d:600},
+   {k:'base',x:0,y:4400,w:600,d:1691},
+   {k:'sink',x:1250,y:6180,w:560,d:430},{k:'lbl',x:2230,y:6420,text:'umývačka',s:1},
+   {k:'cook',x:2575,y:5150,w:520,d:600},{k:'hood',x:2780,y:5150,w:350,d:600},
+   {k:'upper',x:0,y:6341,w:3130,d:350},{k:'upper',x:0,y:5550,w:350,d:791},{k:'upper',x:2780,y:5750,w:350,d:591},
+   {k:'table',x:300,y:2700,w:1200,d:800,label:'stôl 120×80'},
+   chair(600,2475,'S'),chair(1200,2475,'S'),chair(600,3725,'N'),chair(1200,3725,'N')
+  ],
+  dims:[{a:[600,5600],b:[2530,5600],t:'1 930'}]
+ }
+};
+
+/* nové návrhy: nič nezasahuje do obývačky, menej pracovnej dosky */
+const SOUTH_I=[
+  {k:'cook',x:430,y:6130,w:540,d:520},{k:'hood',x:400,y:6341,w:600,d:350},
+  {k:'lbl',x:1300,y:6420,text:'umývačka',s:1},
+  {k:'sink',x:1700,y:6180,w:640,d:430},
+  {k:'upper',x:0,y:6341,w:400,d:350}
+];
+Object.assign(V,{
+ d:{eyebrow:'Variant D · odporúčam',title:'Rovná linka na zadnej stene a stôl pri okne',
+  text:'Celá kuchyňa je na jednej, zadnej stene: varná doska s rúrou pod ňou pri okne, potom umývačka, drez a v rohu pri kúpeľni vysoká skriňa s chladničkou. Drez ostáva tam, kde je pripravená voda. Stôl 130 × 80 stojí pozdĺž steny s oknom, celý vo vnútri kuchynského kútu, a vývod svetla zo stropu vyjde presne nad neho.',
+  plus:['Nič nezasahuje do obývačky, prechod z chodby ostáva voľný','Najmenej pracovnej dosky a najlacnejšia linka','Voda, odpad aj káble v rohu ostávajú tam, kde sú','Svetlo zo stropu vyjde nad stôl, stačí zavesiť lampu','Stena ku kúpeľni ostáva voľná (napr. na police alebo obraz)'],
+  minus:['Voľnej pracovnej dosky je len asi 1,1 m','Úložný priestor je len pod linkou, nad ňou a v chladničkovej skrini','Pri varení stojíte chrbtom k stolu'],
+  items:[
+   {k:'base',x:0,y:6091,w:2530,d:600},{k:'tall',x:2530,y:6091,w:600,d:600,label:'chladnička'},
+   ...SOUTH_I,{k:'upper',x:1000,y:6341,w:1530,d:350},
+   {k:'table',x:450,y:3700,w:800,d:1300,label:'stôl 130×80'},
+   chair(225,4025,'E'),chair(225,4675,'E'),chair(1475,4025,'W'),chair(1475,4675,'W')
+  ],
+  dims:[{a:[850,5000],b:[850,6091],t:'1 090'},{a:[1700,3900],b:[3130,3900],t:'1 430'}]
+ },
+ e:{eyebrow:'Variant E · lavica pod oknom',title:'Malé L a lavica pod oknom',
+  text:'Linka ide po zadnej stene a kúsok sa zalomí na stenu ku kúpeľni, kde stojí vysoká skriňa s chladničkou. Pod oknom je lavica (sedák 45 cm, opierka nižšie ako parapet) a pred ňou stôl 120 × 80, z druhej strany dve stoličky. Je to o niečo viac úložného priestoru ako D, ale stále menej pracovnej dosky ako v pôvodnom návrhu.',
+  plus:['Nič nezasahuje do obývačky','Lavica pod oknom využije miesto, kam sa linka nedá dať','V lavici môže byť úložný priestor (výklopný sedák)','Rohová skriňa dá viac miesta na hrnce','Drez a voda ostávajú bez zmeny'],
+  minus:['Lavica je pevná, stôl sa nedá ľahko posunúť','Viac pracovnej dosky ako D (3,7 m), ak má byť naozaj čo najmenej, D je lepšie','Chladničková skriňa stojí bokom v miestnosti, je vidieť jej bočnicu'],
+  items:[
+   {k:'base',x:0,y:6091,w:3130,d:600},{k:'base',x:2530,y:5500,w:600,d:591},
+   {k:'tall',x:2530,y:4900,w:600,d:600,label:'chladnička'},
+   ...SOUTH_I,{k:'upper',x:1000,y:6341,w:2130,d:350},{k:'upper',x:2780,y:5500,w:350,d:841},
+   {k:'bench',x:0,y:3800,w:450,d:1200,back:'W'},
+   {k:'table',x:450,y:3800,w:800,d:1200,label:'stôl 120×80'},
+   chair(1475,4100,'W'),chair(1475,4700,'W')
+  ],
+  dims:[{a:[850,5000],b:[850,6091],t:'1 090'},{a:[1700,3950],b:[3130,3950],t:'1 430'}]
+ },
+ f:{eyebrow:'Variant F · upravený podľa tatina',title:'Linka pri stene ku kúpeľni a stôl pod oknom',
+  text:'Celá linka je na stene ku kúpeľni: pri vchode chladnička, potom zásuvky, varná doska s rúrou, umývačka a drez pri zadnom rohu. Stôl 120 × 80 stojí kolmo na okno, čelom pod parapetom, so 4 stoličkami. Káble v podlahe sa nepoužijú a z vývodu pre stropný digestor sa urobí svetlo nad stolom. Digestor je nad varnou doskou na stene.',
+  plus:['Stôl je pod oknom, 4 stoličky, najviac svetla pri jedle','Zo stropného vývodu bude svetlo nad stolom','Nič nezasahuje do obývačky','Najmenej pracovnej dosky (2,4 m)','Stred kuchyne ostáva voľný, ulička 1,3 m'],
+  minus:['Treba presunúť vodu a odpad k stene ku kúpeľni (asi 1,5 m)','Prívod pre varnú dosku treba doviesť na stenu (elektrikár, možno je medzi káblami v rohu)','Krabicu v podlahe treba zaslepiť alebo z nej spraviť podlahovú zásuvku','Digestor ide na stenu namiesto stropu'],
+  items:[
+   {k:'tall',x:2530,y:3650,w:600,d:600,label:'chladnička'},
+   {k:'base',x:2530,y:4250,w:600,d:2441},
+   {k:'cook',x:2575,y:4680,w:520,d:540},{k:'hood',x:2780,y:4650,w:350,d:600},
+   {k:'lbl',x:2830,y:5550,text:'umývačka',s:1},
+   {k:'sink',x:2620,y:5940,w:430,d:440},
+   {k:'upper',x:2780,y:4250,w:350,d:400},{k:'upper',x:2780,y:5250,w:350,d:1441},
+   {k:'table',x:0,y:4555,w:1200,d:800,label:'stôl 120×80'},
+   chair(330,4330,'S'),chair(870,4330,'S'),chair(330,5580,'N'),chair(870,5580,'N'),
+   {k:'lbl',x:1250,y:3950,text:'svetlo nad stôl',s:1}
+  ],
+  dims:[{a:[1200,5150],b:[2530,5150],t:'1 330'}]
+ }
+});
+
+/* ---------- Varianty IKEA METOD + Nickebo ----------
+   Fakty: parapet 91 cm, prívod varnej dosky z krabice v podlahe, stropný uhlíkový digestor nad ňou,
+   pri stole najviac 4 ľudia, nič nesmie ísť do obývačky, menej pracovnej dosky.
+   Moduly METOD: spodné 20/30/40/60 × 60 × 80 cm na nohách 8 cm, vysoké 60 × 60 × 200 cm, horné hĺbka 37 cm. */
+const IK={
+ i1:{style:'ikea',eyebrow:'IKEA 1 · odporúčam',title:'Ostrovček s varnou doskou a stôl pri okne',
+  text:'Varná doska je na ostrovčeku nad krabicou v podlahe a pod stropným digestorom, presne tam, kde je pripravená elektrina. Na ostrovček je od okna napojený stôl 100 × 80 pre 4 ľudí, takže sa sedí s výhľadom von. Na zadnej stene je drez tam, kde je voda, vedľa umývačka a v rohu pri kúpeľni vysoká skriňa s chladničkou, kde vychádzajú káble. Celé je to vo vnútri kuchynského kúta.',
+  plus:['Varná doska aj digestor sú tam, kde je pripravený prívod','Stôl je pri okne, cez deň najviac svetla','Nič nezasahuje do obývačky','Najmenej pracovnej dosky (2,6 m)','Chladnička stojí pri kábloch v rohu, drez pri vode'],
+  minus:['Medzi varnou doskou a stolom je len 30 cm dosky (ostrovček je však o 15 cm vyšší ako stôl)','Úložného priestoru je menej ako v IKEA 2','Za stolom ostáva voľná zadná stena (113 cm), hodí sa na police'],
+  items:[
+   {k:'run',x:1130,y:6091,d:600,dir:'x',front:'N',mods:[{w:600,t:'drez'},{w:600,t:'umývačka'},{w:200,t:'výsuv'},{w:600,t:'chladnička',kind:'tall'}]},
+   {k:'sink',x:1210,y:6180,w:440,d:420},
+   {k:'run',x:1000,y:4300,d:600,dir:'x',front:'S',island:true,mods:[{w:300,t:'zásuvky'},{w:600,t:'rúra',hide:1},{w:300,t:'police'}]},
+   {k:'cook',x:1310,y:4340,w:580,d:520},
+   {k:'hoodC',x:1150,y:4350,w:900,d:500},
+   {k:'upper',x:1130,y:6321,w:1400,d:370},
+   {k:'table',x:0,y:4200,w:1000,d:800,label:'stôl 100×80'},
+   chair(270,3975,'S'),chair(730,3975,'S'),chair(270,5225,'N'),chair(730,5225,'N'),
+   {k:'lbl',x:565,y:6400,text:'voľné (police)',s:1}
+  ],
+  dims:[{a:[2200,4120],b:[3130,4120],t:'930'},{a:[1700,4935],b:[1700,6056],t:'1 120'}],
+  bom:[
+   ['Zadná stena, od okna',[['113 cm','voľné miesto za stolom: police alebo nízka komoda'],['60','skrinka pre drez 60×60×80 (ako na fotke), drez a batéria'],['60','integrovaná umývačka 60 cm, dvierka Nickebo 60×80'],['20','úzka skrinka s výsuvom 20×60×80 (plechy, utierky)'],['60','vysoká skrinka na vstavanú chladničku 60×60×200, dvierka Nickebo']]],
+   ['Ostrovček 120 × 60, od stola',[['30','spodná skrinka so zásuvkami 30×60×80'],['60','skrinka na rúru 60×60×80, rúra + indukčná doska 60 cm (prívod z podlahy)'],['30','spodná skrinka s policami 30×60×80'],['','krycie panely Nickebo na zadnú stranu a boky ostrovčeka']]],
+   ['Nad zadnou linkou',[['80 + 60','horné skrinky hĺbky 37 cm, výška 80 cm, nad drezom a umývačkou']]],
+   ['Ostatné',[['','stropný uhlíkový digestor nad ostrovčekom (káble sú pripravené)'],['','pracovná doska do 3 cm, napr. dub: zadná 140 cm, ostrovček 120 cm'],['','sokel (lišta pod skrinkami) Nickebo'],['','stôl 100 × 80 a 4 stoličky']]]
+  ]
+ },
+ i2:{style:'ikea',eyebrow:'IKEA 2 · viac úložného priestoru',title:'Ostrovček s varnou doskou a stôl ku kúpeľni',
+  text:'Ostrovček s varnou doskou je opäť nad krabicou v podlahe a pod digestorom. Stôl 100 × 80 je napojený na ostrovček z druhej strany, smerom ku kúpeľni. Pri okne vedie ulička do kuchyne. Zadná linka je dlhšia: chladnička v rohu pri okne, zásuvky, drez a umývačka.',
+  plus:['Varná doska aj digestor sú tam, kde je pripravený prívod','Viac zásuviek a horných skriniek ako IKEA 1','Nič nezasahuje do obývačky','Drez ostáva pri vode'],
+  minus:['Viac pracovnej dosky (3,0 m)','Chladnička je ďaleko od káblov v rohu, kábel pôjde v sokli popod linku (asi 2,5 m)','Stôl je ďalej od okna','Medzi varnou doskou a stolom je tiež len 30 cm dosky'],
+  items:[
+   {k:'run',x:0,y:6091,d:600,dir:'x',front:'N',mods:[{w:600,t:'chladnička',kind:'tall'},{w:600,t:'zásuvky'},{w:600,t:'drez'},{w:600,t:'umývačka'}]},
+   {k:'sink',x:1280,y:6180,w:440,d:420},
+   {k:'run',x:900,y:4300,d:600,dir:'x',front:'S',island:true,mods:[{w:300,t:'zásuvky'},{w:600,t:'rúra',hide:1},{w:300,t:'zásuvky'}]},
+   {k:'cook',x:1210,y:4340,w:580,d:520},
+   {k:'hoodC',x:1050,y:4350,w:900,d:500},
+   {k:'upper',x:600,y:6321,w:1800,d:370},
+   {k:'table',x:2100,y:4200,w:1000,d:800,label:'stôl 100×80'},
+   chair(2370,3975,'S'),chair(2830,3975,'S'),chair(2370,5225,'N'),chair(2830,5225,'N'),
+   {k:'lbl',x:2765,y:6400,text:'voľné',s:1}
+  ],
+  dims:[{a:[0,4120],b:[900,4120],t:'900'},{a:[1500,4935],b:[1500,6056],t:'1 120'}],
+  bom:[
+   ['Zadná stena, od okna',[['60','vysoká skrinka na vstavanú chladničku 60×60×200, dvierka Nickebo'],['60','spodná skrinka so zásuvkami 60×60×80'],['60','skrinka pre drez 60×60×80, drez a batéria'],['60','integrovaná umývačka 60 cm, dvierka Nickebo 60×80'],['73 cm','voľné miesto za stolom']]],
+   ['Ostrovček 120 × 60, od okna',[['30','spodná skrinka so zásuvkami 30×60×80'],['60','skrinka na rúru 60×60×80, rúra + indukčná doska 60 cm (prívod z podlahy)'],['30','spodná skrinka so zásuvkami 30×60×80'],['','krycie panely Nickebo na zadnú stranu a boky ostrovčeka']]],
+   ['Nad zadnou linkou',[['60 + 60 + 60','horné skrinky hĺbky 37 cm, výška 80 cm']]],
+   ['Ostatné',[['','stropný uhlíkový digestor nad ostrovčekom'],['','pracovná doska do 3 cm: zadná 180 cm, ostrovček 120 cm'],['','sokel Nickebo'],['','stôl 100 × 80 a 4 stoličky']]]
+  ]
+ },
+ i3:{style:'ikea',eyebrow:'IKEA 3 · tatinov nápad',title:'Linka pri kúpeľni, stôl pod oknom, zo stropu svetlo',
+  text:'Variant F zložený z METOD. Celá linka je na stene ku kúpeľni, od chodby: chladnička, zásuvky, varná doska s rúrou, umývačka, drez a úzky výsuv. Stôl 120 × 80 stojí čelom pod oknom so 4 stoličkami. Káble v podlahe sa nepoužijú a z vývodu pre digestor v strope bude závesné svetlo nad stolom. Digestor je recirkulačný, na stene alebo vstavaný do hornej skrinky nad doskou.',
+  plus:['Stôl pod oknom pre 4, najviac svetla pri jedle','Zo stropného vývodu bude svetlo nad stolom','Nič nezasahuje do obývačky','Najmenej pracovnej dosky (2,4 m)','Stred kuchyne ostáva voľný, ulička 1,3 m'],
+  minus:['Treba presunúť vodu a odpad k stene ku kúpeľni (asi 1,5 m)','Prívod pre varnú dosku treba doviesť na stenu (elektrikár, možno je medzi káblami v rohu)','Krabicu v podlahe treba zaslepiť alebo z nej spraviť podlahovú zásuvku','Svetlo zo stropu vyjde pri rohu stola, nad stred sa dá posunúť háčikom'],
+  items:[
+   {k:'run',x:2530,y:3650,d:600,dir:'y',front:'W',mods:[{w:600,t:'chladnička',kind:'tall'},{w:400,t:'zásuvky'},{w:600,t:'rúra',hide:1},{w:600,t:'umývačka'},{w:600,t:'drez',hide:1},{w:200,t:'výsuv'}]},
+   {k:'cook',x:2575,y:4690,w:520,d:520},{k:'hood',x:2780,y:4650,w:350,d:600},
+   {k:'sink',x:2620,y:5940,w:420,d:420},
+   {k:'upper',x:2763,y:4250,w:367,d:400},{k:'upper',x:2763,y:5250,w:367,d:1400},
+   {k:'table',x:0,y:4555,w:1200,d:800,label:'stôl 120×80'},
+   chair(330,4330,'S'),chair(870,4330,'S'),chair(330,5580,'N'),chair(870,5580,'N'),
+   {k:'lbl',x:1250,y:3950,text:'svetlo nad stôl',s:1}
+  ],
+  dims:[{a:[1200,5150],b:[2530,5150],t:'1 330'}],
+  bom:[
+   ['Stena ku kúpeľni, od chodby',[['60','vysoká skrinka na vstavanú chladničku 60×60×200, dvierka Nickebo'],['40','spodná skrinka so zásuvkami 40×60×80'],['60','skrinka na rúru 60×60×80, rúra + indukčná doska 60 cm (prívod doviesť na stenu)'],['60','integrovaná umývačka 60 cm, dvierka Nickebo 60×80'],['60','skrinka pre drez 60×60×80 (ako na fotke), drez a batéria'],['20','úzka skrinka s výsuvom 20×60×80'],['4 cm','krycia lišta k zadnej stene']]],
+   ['Nad linkou',[['40','horná skrinka hĺbky 37 cm nad zásuvkami'],['60','digestor na stenu alebo vstavaný do hornej skrinky nad doskou (recirkulačný)'],['60 + 60 + 20','horné skrinky hĺbky 37 cm nad umývačkou, drezom a výsuvom']]],
+   ['Jedálenský kút',[['','stôl 120 × 80 čelom pod oknom (parapet 91 cm, stôl 75 cm) a 4 stoličky'],['','závesné svetlo z vývodu pre digestor v strope']]],
+   ['Ostatné',[['','pracovná doska do 3 cm, napr. dub, 240 cm'],['','sokel Nickebo'],['','krabica v podlahe: zaslepiť alebo podlahová zásuvka']]]
+  ]
+ }
+};
+
+/* ---------- 2D pôdorys ---------- */
+function r(x,y,w,d,c,extra){return `<rect x="${x}" y="${y}" width="${w}" height="${d}" class="${c}" ${extra||''}/>`;}
+function t(x,y,s,c,rot){return `<text x="${x}" y="${y}" class="p-lbl ${c||''}"${rot?` transform="rotate(-90 ${x} ${y})"`:''}>${s}</text>`;}
+function drawItem(it){
+  const {x,y,w,d}=it; let s='';
+  switch(it.k){
+    case 'base': s=r(x,y,w,d,'p-base'); if(it.label) s+=t(x+w/2,y+d/2,it.label); break;
+    case 'tall': s=r(x,y,w,d,'p-tall')+`<line x1="${x}" y1="${y}" x2="${x+w}" y2="${y+d}" class="p-x"/><line x1="${x+w}" y1="${y}" x2="${x}" y2="${y+d}" class="p-x"/>`+t(x+w/2,y+d/2,it.label,'s'); break;
+    case 'upper': s=r(x+15,y+15,w-30,d-30,'p-upper'); break;
+    case 'hood': s=r(x,y,w,d,'p-hood'); break;
+    case 'hoodI': s=r(x,y,w,d,'p-hood'); break;
+    case 'cook': { s=r(x,y,w,d,'p-cook','rx="20"'); const cx=[x+w*.28,x+w*.72], cy=[y+d*.28,y+d*.72];
+      cx.forEach(a=>cy.forEach(b=>{s+=`<circle cx="${a}" cy="${b}" r="${Math.min(w,d)*.17}" class="p-burn"/>`;})); break; }
+    case 'sink': s=r(x,y,w,d,'p-sink','rx="40"')+t(x+w/2,y+d/2,'drez','s'); break;
+    case 'table': s=r(x,y,w,d,'p-wood')+t(x+w/2,y+d/2,it.label,'s',d>w); break;
+    case 'chair': { const a=210, cx=it.x, cy=it.y; s=r(cx-a,cy-a,2*a,2*a,'p-chair','rx="40"');
+      const b={N:[cx-a,cy+a-20,cx+a,cy+a-20],S:[cx-a,cy-a+20,cx+a,cy-a+20],E:[cx-a+20,cy-a,cx-a+20,cy+a],W:[cx+a-20,cy-a,cx+a-20,cy+a]}[it.face];
+      s+=`<line x1="${b[0]}" y1="${b[1]}" x2="${b[2]}" y2="${b[3]}" class="p-back"/>`; break; }
+    case 'sofa': s=r(x,y,w,d,'p-sofa','rx="60"'); break;
+    case 'bench': s=r(x,y,w,d,'p-sofa','rx="30"')+t(x+w/2,y+d/2,'lavica','s',d>w); break;
+    case 'ctable': s=`<circle cx="${x}" cy="${y}" r="${it.r}" class="p-wood"/>`; break;
+    case 'lowboard': s=r(x,y,w,d,'p-thin')+t(x+w/2+20,y+d/2,'TV skrinka','s',true); break;
+    case 'tv': s=r(x+w,y,30,d,'p-cook'); break;
+    case 'lbl': s=t(x,y,it.text,it.s?'s':''); break;
+    case 'warn': s=r(x,y,w,d,'p-warn')+t(it.lx,it.ly,it.label,'w s'); break;
+    case 'hoodC': s=r(x,y,w,d,'p-hood')+t(x+w/2,y-80,'digestor na strope','s'); break;
+    case 'run': runMods(it).forEach(m=>{
+      const tall=m.kind==='tall';
+      s+=r(m.x,m.y,m.w,m.d,tall?'p-ntall':'p-nbase');
+      if(tall) s+=`<line x1="${m.x}" y1="${m.y}" x2="${m.x+m.w}" y2="${m.y+m.d}" class="p-x"/><line x1="${m.x+m.w}" y1="${m.y}" x2="${m.x}" y2="${m.y+m.d}" class="p-x"/>`;
+      const narrow=it.dir==='x'&&m.w<450;
+      if(m.t&&!m.hide) s+=t(m.x+m.w/2,m.y+m.d/2,m.t,'s',narrow);
+      const wx=it.dir==='x'?m.x+m.w/2:(it.front==='W'?m.x+70:m.x+m.w-70);
+      const wy=it.dir==='x'?(it.front==='S'?m.y+m.d-70:m.y+70):m.y+m.d/2;
+      s+=`<text x="${wx}" y="${wy}" class="p-modw">${m.mw/10}</text>`;
+    }); break;
+  }
+  return s;
+}
+function runMods(it){
+  let pos=0;
+  return it.mods.map(m=>{
+    const g=it.dir==='x'?{x:it.x+pos,y:it.y,w:m.w,d:it.d}:{x:it.x,y:it.y+pos,w:it.d,d:m.w};
+    pos+=m.w; return Object.assign({},m,g,{mw:m.w});
+  });
+}
+function dim(dm){
+  const [x1,y1]=dm.a,[x2,y2]=dm.b, horiz=Math.abs(y1-y2)<1;
+  const k=60, mx=(x1+x2)/2, my=(y1+y2)/2;
+  let s=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="p-dim"/>`;
+  [[x1,y1],[x2,y2]].forEach(([px,py])=>{s+=`<line x1="${px-k}" y1="${py+k}" x2="${px+k}" y2="${py-k}" class="p-dim"/>`;});
+  s+= horiz? `<text x="${mx}" y="${my-95}" class="p-dimt">${dm.t}</text>` : `<text x="${mx-95}" y="${my}" class="p-dimt" transform="rotate(-90 ${mx-95} ${my})">${dm.t}</text>`;
+  return s;
+}
+function planSVG(v){
+  const order=['base','tall','run','sink','cook','lbl','bench','table','chair','warn','upper','hood','hoodI','hoodC'];
+  const its=v.items.slice().sort((p,q)=>order.indexOf(p.k)-order.indexOf(q.k));
+  let s=`<svg viewBox="-700 -560 5520 7720" role="img" aria-label="Pôdorys: ${v.title}" xmlns="http://www.w3.org/2000/svg">`;
+  s+=`<path d="M0 0H3820V2705H4700V3650H3130V6691H0Z" class="p-floor"/>`;
+  s+=r(3900,-300,800,2905,'p-area')+r(3230,3750,1470,3241,'p-area');
+  s+=`<text x="4300" y="1300" class="p-arealbl" text-anchor="middle">spálňa</text><text x="3965" y="5300" class="p-arealbl" text-anchor="middle">kúpeľňa</text><text x="4260" y="3200" class="p-arealbl" text-anchor="middle" dominant-baseline="central">chodba</text>`;
+  s+=`<text x="1150" y="550" class="p-arealbl" text-anchor="middle">obývačka</text><text x="1300" y="7180" class="p-arealbl" text-anchor="middle" style="font-size:120px">zadná stena</text>`;
+  COMMON.forEach(it=>s+=drawItem(it));
+  its.forEach(it=>s+=drawItem(it));
+  WALLS.filter(w=>w[4]===0&&w[5]===H).forEach(w=>s+=r(w[0],w[2],w[1]-w[0],w[3]-w[2],'p-wall'));
+  // okno
+  s+=r(-300,WIN.y0,300,WIN.y1-WIN.y0,'p-win')+`<line x1="-150" y1="${WIN.y0}" x2="-150" y2="${WIN.y1}" class="p-door"/>`;
+  s+=t(-470,(WIN.y0+WIN.y1)/2,'okno 96 cm','s',true);
+  // balkonove dvere
+  s+=r(BAL.x0,-300,BAL.x1-BAL.x0,300,'p-win')+`<line x1="${BAL.x0}" y1="-150" x2="${BAL.x1}" y2="-150" class="p-door"/>`;
+  s+=`<line x1="${BAL.x0}" y1="0" x2="${BAL.x0}" y2="${BAL.leaf}" class="p-door"/><path d="M${BAL.x0+BAL.leaf} 0A${BAL.leaf} ${BAL.leaf} 0 0 1 ${BAL.x0} ${BAL.leaf}" class="p-door" stroke-dasharray="25 20"/>`;
+  s+=t((BAL.x0+BAL.x1)/2,-430,'balkón','s');
+  // znacky
+  MARKERS.forEach(m=>{
+    if(m.k==='box') s+=`<circle cx="${m.x}" cy="${m.y}" r="75" class="p-mk"/>`+t(m.x+120,m.y+175,'prívod dosky (podlaha)','s w').replace('class="p-lbl s w"','class="p-lbl s w" style="text-anchor:start"');
+    if(m.k==='cables') s+=`<circle cx="${m.x}" cy="${m.y}" r="60" class="p-mk"/>`;
+    if(m.k==='ceil') s+=`<circle cx="${m.x}" cy="${m.y}" r="70" class="p-ceil"/><path d="M${m.x-50} ${m.y-50}L${m.x+50} ${m.y+50}M${m.x+50} ${m.y-50}L${m.x-50} ${m.y+50}" class="p-ceil"/>`;
+  });
+  s+=t(3040,6440,'káble','s w');
+  // kóty miestnosti
+  s+=dim({a:[0,-430],b:[3820,-430],t:'3 820'});
+  s+=dim({a:[-560,0],b:[-560,4300],t:'6 690'});
+  s+=dim({a:[0,7060],b:[3130,7060],t:'3 130'});
+  s+=dim({a:[3480,3750],b:[3480,6691],t:'3 040'});
+  (v.dims||[]).forEach(dm=>s+=dim(dm));
+  s+='</svg>';
+  return s;
+}
+
+/* ---------- 3D ---------- */
+const M={}; let floorTex=null;
+function initMaterials(){
+  if(M.wall) return;
+  const col=c=>new THREE.Color(c).convertSRGBToLinear();
+  const std=(c,o)=>new THREE.MeshStandardMaterial(Object.assign({color:col(c),roughness:.8,metalness:0},o||{}));
+  M.wall=std('#f1f0ec',{roughness:.95}); M.ceil=std('#f7f7f4',{roughness:1});
+  M.front=std('#c9a77c',{roughness:.7}); M.white=std('#f3f2ee',{roughness:.55}); M.top=std('#2e3133',{roughness:.45});
+  M.plinth=std('#3a3b3c'); M.black=std('#141516',{roughness:.25}); M.steel=std('#b9bdc1',{roughness:.3,metalness:.6});
+  M.wood=std('#b48c5f',{roughness:.6}); M.chair=std('#3b3c3e',{roughness:.6}); M.sofa=std('#8e9297',{roughness:1});
+  M.frame=std('#3a3e42',{roughness:.5}); M.sill=std('#26292b',{roughness:.4});
+  M.nick=std('#86917f',{roughness:.85}); M.oak=std('#c9a573',{roughness:.6}); M.hoodw=std('#e9e9e6',{roughness:.5});
+  M.glass=new THREE.MeshBasicMaterial({color:col('#cfe5f3'),transparent:true,opacity:.35,depthWrite:false});
+  M.warn=new THREE.MeshBasicMaterial({color:col('#e0533a'),transparent:true,opacity:.35,depthWrite:false});
+  floorTex=floorTexture();
+}
+function floorTexture(){
+  const c=document.createElement('canvas'); c.width=c.height=512; const g=c.getContext('2d');
+  const n=5, pw=512/n; let seed=7; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+  for(let i=0;i<n;i++){ const j=rnd()*512;
+    [[0,j],[j,512]].forEach(([a,b])=>{const v=125+Math.round(rnd()*22); g.fillStyle=`rgb(${v+30},${v+14},${v-6})`; g.fillRect(i*pw,a,pw,b-a);
+      g.globalAlpha=.08; for(let q=0;q<14;q++){g.fillStyle=rnd()>.5?'#000':'#fff'; g.fillRect(i*pw+rnd()*pw,a,1.5,b-a);} g.globalAlpha=1;});
+    g.fillStyle='rgba(60,45,30,.55)'; g.fillRect(i*pw,j-1,pw,2); g.fillRect(i*pw,0,1.5,512);
+  }
+  const t=new THREE.CanvasTexture(c); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.encoding=THREE.sRGBEncoding; t.anisotropy=8; return t;
+}
+function box(x0,x1,y0,y1,z0,z1,mat,cast=true,recv=true){
+  const m=new THREE.Mesh(new THREE.BoxGeometry((x1-x0)/1000,(z1-z0)/1000,(y1-y0)/1000),mat);
+  m.position.set((x0+x1)/2000,(z0+z1)/2000,(y0+y1)/2000); m.castShadow=cast; m.receiveShadow=recv; return m;
+}
+function build(it,grp,st){
+  const {x,y,w,d}=it, add=(...ms)=>ms.forEach(m=>grp.add(m)), ik=st==='ikea';
+  const TOPZ=ik?910:900;
+  switch(it.k){
+    case 'base': add(box(x+40,x+w-40,y+40,y+d-40,0,100,M.plinth),box(x,x+w,y,y+d,100,860,M.front),box(x-10,x+w+10,y-10,y+d+10,860,900,M.top)); break;
+    case 'tall': add(box(x,x+w,y,y+d,0,2250,M.white)); break;
+    case 'upper': add(box(x,x+w,y,y+d,1450,ik?2250:2150,ik?M.nick:M.white)); break;
+    case 'hood': { const cx=x+w/2, cy=y+d/2; add(box(x-40,x+w,y,y+d,1550,1650,M.steel),box(cx-120,cx+120,cy-150,cy+150,1650,H,M.steel)); break; }
+    case 'hoodI': { const cx=x+w/2, cy=y+d/2; add(box(x,x+w,y,y+d,1600,1720,M.steel),box(cx-110,cx+110,cy-110,cy+110,1720,H,M.steel)); break; }
+    case 'hoodC': add(box(x,x+w,y,y+d,H-140,H,M.hoodw,false,false)); break;
+    case 'cook': add(box(x,x+w,y,y+d,TOPZ,TOPZ+6,M.black)); break;
+    case 'sink': add(box(x,x+w,y,y+d,TOPZ-4,TOPZ+3,M.steel)); break;
+    case 'run': {
+      const mods=runMods(it); let bx0=1e9,bx1=-1e9,by0=1e9,by1=-1e9;
+      mods.forEach(m=>{
+        const g=1.5, X0=m.x+(it.dir==='x'?g:0), X1=m.x+m.w-(it.dir==='x'?g:0), Y0=m.y+(it.dir==='y'?g:0), Y1=m.y+m.d-(it.dir==='y'?g:0);
+        if(m.kind==='tall'){ add(box(X0,X1,Y0,Y1,0,80,M.nick),box(X0,X1,Y0,Y1,80,2080,M.nick),box(X0,X1,Y0,Y1,2083,2480,M.nick)); return; }
+        add(box(X0+30,X1-30,Y0+30,Y1-30,0,80,M.nick),box(X0,X1,Y0,Y1,80,880,M.nick));
+        bx0=Math.min(bx0,m.x); bx1=Math.max(bx1,m.x+m.w); by0=Math.min(by0,m.y); by1=Math.max(by1,m.y+m.d);
+      });
+      if(bx1>bx0){ const o=35;
+        if(it.island) add(box(bx0,bx1,by0-o,by1+o,880,910,M.oak));
+        else if(it.front==='N') add(box(bx0,bx1,by0-o,by1,880,910,M.oak));
+        else if(it.front==='S') add(box(bx0,bx1,by0,by1+o,880,910,M.oak));
+        else add(box(bx0-o,bx1,by0,by1,880,910,M.oak));
+      }
+      break; }
+    case 'table': { add(box(x,x+w,y,y+d,720,750,ik?M.oak:M.wood)); [[x+40,y+40],[x+w-100,y+40],[x+40,y+d-100],[x+w-100,y+d-100]].forEach(([a,b])=>add(box(a,a+60,b,b+60,0,720,ik?M.oak:M.wood))); break; }
+    case 'chair': { const a=210, cx=it.x, cy=it.y; add(box(cx-a,cx+a,cy-a,cy+a,430,470,M.chair));
+      [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([p,q])=>add(box(cx+p*(a-30)-15,cx+p*(a-30)+15,cy+q*(a-30)-15,cy+q*(a-30)+15,0,430,M.chair)));
+      const b={N:[cx-a,cx+a,cy+a-40,cy+a],S:[cx-a,cx+a,cy-a,cy-a+40],E:[cx-a,cx-a+40,cy-a,cy+a],W:[cx+a-40,cx+a,cy-a,cy+a]}[it.face];
+      add(box(b[0],b[1],b[2],b[3],470,880,M.chair)); break; }
+    case 'sofa': add(box(x,x+w,y,y+d,0,430,M.sofa)); break;
+    case 'sofaBack': add(box(2390,3747,85,285,430,820,M.sofa),box(3547,3747,285,2685,430,820,M.sofa),box(2948,3747,2485,2685,430,600,M.sofa)); break;
+    case 'bench': add(box(x,x+w,y,y+d,0,420,M.front),box(x,x+w,y,y+d,420,470,M.sofa));
+      if(it.back==='W') add(box(x,x+70,y,y+d,470,820,M.sofa)); else add(box(x,x+w,y+d-70,y+d,470,900,M.sofa)); break;
+    case 'ctable': { const m=new THREE.Mesh(new THREE.CylinderGeometry(it.r/1000,it.r/1000,.04,40),M.wood); m.position.set(x/1000,.4,y/1000); m.castShadow=true; add(m);
+      const l=new THREE.Mesh(new THREE.CylinderGeometry(.04,.04,.38,12),M.chair); l.position.set(x/1000,.19,y/1000); add(l); break; }
+    case 'lowboard': add(box(x,x+w,y,y+d,80,480,M.white)); break;
+    case 'tv': add(box(x,x+w,y,y+d,900,1600,M.black)); break;
+    case 'warn': add(box(x,x+w,y,y+d,0,920,M.warn,false,false)); break;
+  }
+}
+COMMON.push({k:'sofaBack'});
+const CAMS={
+  living:{p:[2.3,1.7,0.6],t:[1.3,0.9,5.2]},
+  entry:{p:[3.55,1.6,3.0],t:[1.0,0.9,5.4]},
+  top:{p:[1.9,10.5,4.9],t:[1.9,0,3.55]}
+};
+function createViewer(stage,canvas,camWrap,storeKey){
+  initMaterials();
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,preserveDrawingBuffer:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.outputEncoding=THREE.sRGBEncoding;
+  const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(58,1,0.05,100);
+  const controls=new THREE.OrbitControls(camera,renderer.domElement);
+  controls.maxPolarAngle=Math.PI/2-0.02;
+  const render=()=>renderer.render(scene,camera);
+  controls.addEventListener('change',render);
+  const bg=()=>{try{renderer.setClearColor(new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--stage').trim()||'#dfe4e1'));}catch(e){} render();};
+  bg(); try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',bg);}catch(e){}
+
+  scene.add(new THREE.HemisphereLight(0xffffff,0xb9a68e,.75));
+  const sun=new THREE.DirectionalLight(0xfff6ea,.55); sun.position.set(-2.5,7,1.5); sun.target.position.set(1.9,0,3.6);
+  sun.castShadow=true; sun.shadow.mapSize.set(2048,2048); const sc=sun.shadow.camera; sc.left=-5;sc.right=5;sc.top=5;sc.bottom=-5;sc.near=1;sc.far=20; sun.shadow.bias=-0.0005;
+  scene.add(sun,sun.target);
+  [[1.6,2.45,5.0],[1.9,2.45,1.5]].forEach(p=>{const l=new THREE.PointLight(0xfff1dc,.28,9,1.5); l.position.set(...p); scene.add(l);});
+  FLOORS.forEach(([x0,x1,y0,y1])=>{
+    const w=(x1-x0)/1000,d=(y1-y0)/1000, tx=floorTex.clone(); tx.needsUpdate=true; tx.repeat.set(w,d);
+    const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),new THREE.MeshStandardMaterial({map:tx,roughness:.75}));
+    m.rotation.x=-Math.PI/2; m.position.set((x0+x1)/2000,0,(y0+y1)/2000); m.receiveShadow=true; scene.add(m);
+    const c=new THREE.Mesh(new THREE.PlaneGeometry(w,d),M.ceil); c.rotation.x=Math.PI/2; c.position.set((x0+x1)/2000,H/1000,(y0+y1)/2000); scene.add(c);
+  });
+  WALLS.forEach(w=>scene.add(box(w[0],w[1],w[2],w[3],w[4],w[5],M.wall,false,true)));
+  scene.add(box(-130,-110,WIN.y0,WIN.y1,SILL,WHEAD,M.glass,false,false));
+  scene.add(box(-160,-80,WIN.y0,WIN.y0+70,SILL,WHEAD,M.frame),box(-160,-80,WIN.y1-70,WIN.y1,SILL,WHEAD,M.frame),
+            box(-160,-80,WIN.y0,WIN.y1,WHEAD-70,WHEAD,M.frame),box(-160,-80,WIN.y0,WIN.y1,SILL,SILL+70,M.frame));
+  scene.add(box(-160,30,WIN.y0-25,WIN.y1+25,SILL-25,SILL,M.sill));
+  scene.add(box(BAL.x0,BAL.x1,-140,-120,0,DOORH,M.glass,false,false));
+  [[BAL.x0,BAL.x0+70],[BAL.x1-70,BAL.x1],[BAL.x0+BAL.leaf-35,BAL.x0+BAL.leaf+35]].forEach(([a,b])=>scene.add(box(a,b,-160,-90,0,DOORH,M.frame)));
+  scene.add(box(BAL.x0,BAL.x1,-160,-90,DOORH-70,DOORH,M.frame));
+  const cg=new THREE.Group(); COMMON.forEach(it=>build(it,cg)); scene.add(cg);
+  const vgroup=new THREE.Group(); scene.add(vgroup);
+
+  function resize(){ const w=stage.clientWidth,h=stage.clientHeight; if(!w||!h) return;
+    renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); render(); }
+  new ResizeObserver(resize).observe(stage); resize();
+  function setCam(name){
+    const c=CAMS[name]||CAMS.living; camera.position.set(...c.p); controls.target.set(...c.t); controls.update(); render();
+    camWrap.querySelectorAll('.cam').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cam===name)));
+    try{localStorage.setItem(storeKey,name);}catch(e){}
+  }
+  function setVariant(v){
+    while(vgroup.children.length){const m=vgroup.children.pop(); m.geometry&&m.geometry.dispose();}
+    v.items.forEach(it=>build(it,vgroup,v.style)); render();
+  }
+  camWrap.querySelectorAll('.cam').forEach(b=>b.addEventListener('click',()=>setCam(b.dataset.cam)));
+  let cam='living'; try{cam=localStorage.getItem(storeKey)||'living';}catch(e){} if(!CAMS[cam]) cam='living';
+  setCam(cam);
+  return {setVariant};
+}
+
+/* ---------- UI ---------- */
+function li(arr){return arr.map(s=>`<li>${s}</li>`).join('');}
+function bomHTML(b){
+  return b.map(([h,rows])=>`<div class="bomgrp"><h3>${h}</h3><table><tbody>${rows.map(([w,s])=>`<tr><td class="num">${w}</td><td>${s}</td></tr>`).join('')}</tbody></table></div>`).join('');
+}
+function mount(o){
+  const $=id=>document.getElementById(o.p+id);
+  let viewer=null;
+  try{ if(!window.THREE||!THREE.OrbitControls) throw 0; viewer=createViewer($('stage'),$('gl'),$('cams'),o.store+'-cam'); }
+  catch(e){ $('stage').insertAdjacentHTML('beforeend','<div class="nogl">3D model sa nepodarilo načítať v tomto prehliadači. Pôdorys vľavo platí.</div>'); }
+  const tabs=document.querySelectorAll(o.tabs);
+  function show(key){
+    const v=o.data[key]; if(!v) return;
+    tabs.forEach(b=>b.setAttribute('aria-selected',String(b.dataset.v===key)));
+    $('plan').innerHTML=planSVG(v);
+    $('planTitle').textContent='Pôdorys · '+o.name(key);
+    $('Eyebrow').textContent=v.eyebrow; $('Title').textContent=v.title; $('Text').textContent=v.text;
+    $('Plus').innerHTML=li(v.plus); $('Minus').innerHTML=li(v.minus);
+    if(v.bom&&$('Bom')) $('Bom').innerHTML=bomHTML(v.bom);
+    viewer&&viewer.setVariant(v);
+    try{localStorage.setItem(o.store,key);}catch(e){}
+  }
+  tabs.forEach(b=>b.addEventListener('click',()=>{show(b.dataset.v); try{history.replaceState(null,'','#'+b.dataset.v);}catch(e){}}));
+  let start=(location.hash||'').slice(1); if(!o.data[start]){ try{start=localStorage.getItem(o.store)||'';}catch(e){} }
+  if(!o.data[start]) start=o.def;
+  show(start);
+}
+mount({p:'v',tabs:'#oldTabs .tab',data:V,store:'k7c-var2',def:'d',name:k=>k==='orig'?'pôvodný':'variant '+k.toUpperCase()});
+mount({p:'ik',tabs:'#ikTabs .tab',data:IK,store:'k7c-ik',def:'i1',name:k=>'IKEA '+k.slice(1)});
+})();
+</script>
+
+</body>
+</html>
