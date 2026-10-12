@@ -131,6 +131,16 @@ tr:last-child td,tr:last-child th{border-bottom:0}
 .bomgrp td{padding:7px 10px}
 .bomgrp td.num{width:76px;white-space:nowrap;color:var(--accent)}
 .note{font-size:13.5px;color:var(--muted);margin-top:10px;max-width:90ch}
+.shopgrp{margin-top:18px}
+.shopgrp h3{margin-bottom:6px}
+table.shop{min-width:560px}
+table.shop td{vertical-align:top}
+table.shop select{font:inherit;font-size:13.5px;max-width:100%;padding:4px 6px;border:1px solid var(--line);border-radius:3px;background:var(--paper);color:var(--ink)}
+table.shop .meta{font-size:12.5px;color:var(--muted);margin-top:3px}
+table.shop .meta a{color:var(--accent)}
+table.shop th.num,table.shop td.num{text-align:right;white-space:nowrap}
+.shoptotal{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:16px;padding:14px 16px;background:var(--ink);color:var(--paper);border-radius:3px}
+.shoptotal b{font-family:var(--f-mono);font-size:20px;font-variant-numeric:tabular-nums}
 @media (max-width:900px){.bom{grid-template-columns:minmax(0,1fr)}}
 
 @media (max-width:900px){
@@ -159,7 +169,7 @@ tr:last-child td,tr:last-child th{border-bottom:0}
   <div class="answers" aria-label="Krátke odpovede">
     <div><span class="q">L alebo U?</span><b>Ani jedno: linka vzadu + ostrovček</b><span>Varná doska musí byť na ostrovčeku, lebo prívod je v podlahe a digestor na strope.</span></div>
     <div><span class="q">Kam dať stôl?</span><b>Napojiť na ostrovček</b><span>Smerom k oknu (IKEA 1) alebo ku kúpeľni (IKEA 2), celý v kuchynskom kúte.</span></div>
-    <div><span class="q">Kde sedenie?</span><b>4 stoličky pri stole</b><span>Bežne 2 až 3 ľudia, najviac 4. Stôl 100 × 80 cm stačí.</span></div>
+    <div><span class="q">Kde sedenie?</span><b>4 stoličky pri stole</b><span>Bežne 2 až 3 ľudia, najviac 4. Stôl LISABO 88 × 78 alebo PINNTORP 125 × 75 (IKEA 3).</span></div>
     <div><span class="q">Kde pracovná doska?</span><b>Zadná stena + ostrovček</b><span>Spolu 2,6 m (IKEA 1), menej ako v pôvodnom návrhu (4,7 m).</span></div>
   </div>
 
@@ -188,6 +198,7 @@ tr:last-child td,tr:last-child th{border-bottom:0}
       <div class="cap">
         <h3>3D model</h3>
         <div class="cams" id="vcams" role="group" aria-label="Pohľad">
+          <button class="cam" id="cam-kitchen" data-cam="kitchen">Do kuchyne</button>
           <button class="cam" id="cam-living" data-cam="living" aria-pressed="true">Z obývačky</button>
           <button class="cam" id="cam-entry" data-cam="entry">Od chodby</button>
           <button class="cam" id="cam-top" data-cam="top">Zhora</button>
@@ -259,7 +270,8 @@ tr:last-child td,tr:last-child th{border-bottom:0}
         <div class="cap">
           <h3>3D model</h3>
           <div class="cams" id="ikcams" role="group" aria-label="Pohľad IKEA">
-            <button class="cam" id="ikcam-living" data-cam="living" aria-pressed="true">Z obývačky</button>
+            <button class="cam" id="ikcam-kitchen" data-cam="kitchen">Do kuchyne</button>
+          <button class="cam" id="ikcam-living" data-cam="living" aria-pressed="true">Z obývačky</button>
             <button class="cam" id="ikcam-entry" data-cam="entry">Od chodby</button>
             <button class="cam" id="ikcam-top" data-cam="top">Zhora</button>
           </div>
@@ -283,6 +295,9 @@ tr:last-child td,tr:last-child th{border-bottom:0}
     </div>
     <h2 style="margin-top:26px">Zostava skriniek</h2>
     <div class="bom" id="ikBom"></div>
+    <h2 style="margin-top:30px">Nákupný zoznam z ikea.sk</h2>
+    <p class="lead">Pri každej položke si môžeš vybrať z overených produktov na ikea.sk, súčet sa prepočíta. Ceny sú z 12. 10. 2026 a môžu sa zmeniť. Výber sa pamätá len v tomto prehliadači.</p>
+    <div id="ikShop"></div>
     <p class="note">Presné kódy a ceny vygeneruje IKEA plánovač kuchýň podľa tejto zostavy. Spodná skrinka METOD má s nohami a doskou asi 91 až 92 cm, preto pod okno (parapet 91 cm) skrinky nedávam. Ak bude krabica v podlahe alebo vývod v strope inde, ako odhadujem, stačí na ostrovčeku prehodiť poradie modulov (napr. 30/60/30 na 20/60/40).</p>
   </section>
 
@@ -453,7 +468,7 @@ Object.assign(V,{
    Moduly METOD: spodné 20/30/40/60 × 60 × 80 cm na nohách 8 cm, vysoké 60 × 60 × 200 cm, horné hĺbka 37 cm. */
 const IK={
  i1:{style:'ikea',eyebrow:'IKEA 1 · odporúčam',title:'Ostrovček s varnou doskou a stôl pri okne',
-  text:'Varná doska je na ostrovčeku nad krabicou v podlahe a pod stropným digestorom, presne tam, kde je pripravená elektrina. Na ostrovček je od okna napojený stôl 100 × 80 pre 4 ľudí, takže sa sedí s výhľadom von. Na zadnej stene je drez tam, kde je voda, vedľa umývačka a v rohu pri kúpeľni vysoká skriňa s chladničkou, kde vychádzajú káble. Celé je to vo vnútri kuchynského kúta.',
+  text:'Varná doska je na ostrovčeku nad krabicou v podlahe a pod stropným digestorom, presne tam, kde je pripravená elektrina. Na ostrovček je od okna napojený stôl 88 × 78 (LISABO) pre 4 ľudí, takže sa sedí s výhľadom von. Na zadnej stene je drez tam, kde je voda, vedľa umývačka a v rohu pri kúpeľni vysoká skriňa s chladničkou, kde vychádzajú káble. Celé je to vo vnútri kuchynského kúta.',
   plus:['Varná doska aj digestor sú tam, kde je pripravený prívod','Stôl je pri okne, cez deň najviac svetla','Nič nezasahuje do obývačky','Najmenej pracovnej dosky (2,6 m)','Chladnička stojí pri kábloch v rohu, drez pri vode'],
   minus:['Medzi varnou doskou a stolom je len 30 cm dosky (ostrovček je však o 15 cm vyšší ako stôl)','Úložného priestoru je menej ako v IKEA 2','Za stolom ostáva voľná zadná stena (113 cm), hodí sa na police'],
   items:[
@@ -463,8 +478,8 @@ const IK={
    {k:'cook',x:1310,y:4340,w:580,d:520},
    {k:'hoodC',x:1150,y:4350,w:900,d:500},
    {k:'upper',x:1130,y:6321,w:1400,d:370},
-   {k:'table',x:0,y:4200,w:1000,d:800,label:'stôl 100×80'},
-   chair(270,3975,'S'),chair(730,3975,'S'),chair(270,5225,'N'),chair(730,5225,'N'),
+   {k:'table',x:120,y:4210,w:880,d:780,label:'stôl 88×78'},
+   chair(340,3985,'S'),chair(780,3985,'S'),chair(340,5215,'N'),chair(780,5215,'N'),
    {k:'lbl',x:565,y:6400,text:'voľné (police)',s:1}
   ],
   dims:[{a:[2200,4120],b:[3130,4120],t:'930'},{a:[1700,4935],b:[1700,6056],t:'1 120'}],
@@ -472,11 +487,11 @@ const IK={
    ['Zadná stena, od okna',[['113 cm','voľné miesto za stolom: police alebo nízka komoda'],['60','skrinka pre drez 60×60×80 (ako na fotke), drez a batéria'],['60','integrovaná umývačka 60 cm, dvierka Nickebo 60×80'],['20','úzka skrinka s výsuvom 20×60×80 (plechy, utierky)'],['60','vysoká skrinka na vstavanú chladničku 60×60×200, dvierka Nickebo']]],
    ['Ostrovček 120 × 60, od stola',[['30','spodná skrinka so zásuvkami 30×60×80'],['60','skrinka na rúru 60×60×80, rúra + indukčná doska 60 cm (prívod z podlahy)'],['30','spodná skrinka s policami 30×60×80'],['','krycie panely Nickebo na zadnú stranu a boky ostrovčeka']]],
    ['Nad zadnou linkou',[['80 + 60','horné skrinky hĺbky 37 cm, výška 80 cm, nad drezom a umývačkou']]],
-   ['Ostatné',[['','stropný uhlíkový digestor nad ostrovčekom (káble sú pripravené)'],['','pracovná doska do 3 cm, napr. dub: zadná 140 cm, ostrovček 120 cm'],['','sokel (lišta pod skrinkami) Nickebo'],['','stôl 100 × 80 a 4 stoličky']]]
+   ['Ostatné',[['','stropný uhlíkový digestor nad ostrovčekom (káble sú pripravené)'],['','pracovná doska do 3 cm, napr. dub: zadná 140 cm, ostrovček 120 cm'],['','sokel (lišta pod skrinkami) Nickebo'],['','stôl 88 × 78 (LISABO) a 4 stoličky']]]
   ]
  },
  i2:{style:'ikea',eyebrow:'IKEA 2 · viac úložného priestoru',title:'Ostrovček s varnou doskou a stôl ku kúpeľni',
-  text:'Ostrovček s varnou doskou je opäť nad krabicou v podlahe a pod digestorom. Stôl 100 × 80 je napojený na ostrovček z druhej strany, smerom ku kúpeľni. Pri okne vedie ulička do kuchyne. Zadná linka je dlhšia: chladnička v rohu pri okne, zásuvky, drez a umývačka.',
+  text:'Ostrovček s varnou doskou je opäť nad krabicou v podlahe a pod digestorom. Stôl 88 × 78 (LISABO) je napojený na ostrovček z druhej strany, smerom ku kúpeľni. Pri okne vedie ulička do kuchyne. Zadná linka je dlhšia: chladnička v rohu pri okne, zásuvky, drez a umývačka.',
   plus:['Varná doska aj digestor sú tam, kde je pripravený prívod','Viac zásuviek a horných skriniek ako IKEA 1','Nič nezasahuje do obývačky','Drez ostáva pri vode'],
   minus:['Viac pracovnej dosky (3,0 m)','Chladnička je ďaleko od káblov v rohu, kábel pôjde v sokli popod linku (asi 2,5 m)','Stôl je ďalej od okna','Medzi varnou doskou a stolom je tiež len 30 cm dosky'],
   items:[
@@ -486,8 +501,8 @@ const IK={
    {k:'cook',x:1210,y:4340,w:580,d:520},
    {k:'hoodC',x:1050,y:4350,w:900,d:500},
    {k:'upper',x:600,y:6321,w:1800,d:370},
-   {k:'table',x:2100,y:4200,w:1000,d:800,label:'stôl 100×80'},
-   chair(2370,3975,'S'),chair(2830,3975,'S'),chair(2370,5225,'N'),chair(2830,5225,'N'),
+   {k:'table',x:2100,y:4210,w:880,d:780,label:'stôl 88×78'},
+   chair(2320,3985,'S'),chair(2760,3985,'S'),chair(2320,5215,'N'),chair(2760,5215,'N'),
    {k:'lbl',x:2765,y:6400,text:'voľné',s:1}
   ],
   dims:[{a:[0,4120],b:[900,4120],t:'900'},{a:[1500,4935],b:[1500,6056],t:'1 120'}],
@@ -495,27 +510,27 @@ const IK={
    ['Zadná stena, od okna',[['60','vysoká skrinka na vstavanú chladničku 60×60×200, dvierka Nickebo'],['60','spodná skrinka so zásuvkami 60×60×80'],['60','skrinka pre drez 60×60×80, drez a batéria'],['60','integrovaná umývačka 60 cm, dvierka Nickebo 60×80'],['73 cm','voľné miesto za stolom']]],
    ['Ostrovček 120 × 60, od okna',[['30','spodná skrinka so zásuvkami 30×60×80'],['60','skrinka na rúru 60×60×80, rúra + indukčná doska 60 cm (prívod z podlahy)'],['30','spodná skrinka so zásuvkami 30×60×80'],['','krycie panely Nickebo na zadnú stranu a boky ostrovčeka']]],
    ['Nad zadnou linkou',[['60 + 60 + 60','horné skrinky hĺbky 37 cm, výška 80 cm']]],
-   ['Ostatné',[['','stropný uhlíkový digestor nad ostrovčekom'],['','pracovná doska do 3 cm: zadná 180 cm, ostrovček 120 cm'],['','sokel Nickebo'],['','stôl 100 × 80 a 4 stoličky']]]
+   ['Ostatné',[['','stropný uhlíkový digestor nad ostrovčekom'],['','pracovná doska do 3 cm: zadná 180 cm, ostrovček 120 cm'],['','sokel Nickebo'],['','stôl 88 × 78 (LISABO) a 4 stoličky']]]
   ]
  },
  i3:{style:'ikea',eyebrow:'IKEA 3 · tatinov nápad',title:'Linka pri kúpeľni, stôl pod oknom, zo stropu svetlo',
-  text:'Variant F zložený z METOD. Celá linka je na stene ku kúpeľni, od chodby: chladnička, zásuvky, varná doska s rúrou, umývačka, drez a úzky výsuv. Stôl 120 × 80 stojí čelom pod oknom so 4 stoličkami. Káble v podlahe sa nepoužijú a z vývodu pre digestor v strope bude závesné svetlo nad stolom. Digestor je recirkulačný, na stene alebo vstavaný do hornej skrinky nad doskou.',
-  plus:['Stôl pod oknom pre 4, najviac svetla pri jedle','Zo stropného vývodu bude svetlo nad stolom','Nič nezasahuje do obývačky','Najmenej pracovnej dosky (2,4 m)','Stred kuchyne ostáva voľný, ulička 1,3 m'],
+  text:'Variant F zložený z METOD. Celá linka je na stene ku kúpeľni, od chodby: chladnička, zásuvky, varná doska s rúrou, umývačka, drez a úzky výsuv. Stôl 125 × 75 (PINNTORP) stojí čelom pod oknom so 4 stoličkami. Káble v podlahe sa nepoužijú a z vývodu pre digestor v strope bude závesné svetlo nad stolom. Digestor je recirkulačný, na stene alebo vstavaný do hornej skrinky nad doskou.',
+  plus:['Stôl pod oknom pre 4, najviac svetla pri jedle','Zo stropného vývodu bude svetlo nad stolom','Nič nezasahuje do obývačky','Najmenej pracovnej dosky (2,4 m)','Stred kuchyne ostáva voľný, ulička 1,28 m'],
   minus:['Treba presunúť vodu a odpad k stene ku kúpeľni (asi 1,5 m)','Prívod pre varnú dosku treba doviesť na stenu (elektrikár, možno je medzi káblami v rohu)','Krabicu v podlahe treba zaslepiť alebo z nej spraviť podlahovú zásuvku','Svetlo zo stropu vyjde pri rohu stola, nad stred sa dá posunúť háčikom'],
   items:[
    {k:'run',x:2530,y:3650,d:600,dir:'y',front:'W',mods:[{w:600,t:'chladnička',kind:'tall'},{w:400,t:'zásuvky'},{w:600,t:'rúra',hide:1},{w:600,t:'umývačka'},{w:600,t:'drez',hide:1},{w:200,t:'výsuv'}]},
    {k:'cook',x:2575,y:4690,w:520,d:520},{k:'hood',x:2780,y:4650,w:350,d:600},
    {k:'sink',x:2620,y:5940,w:420,d:420},
    {k:'upper',x:2763,y:4250,w:367,d:400},{k:'upper',x:2763,y:5250,w:367,d:1400},
-   {k:'table',x:0,y:4555,w:1200,d:800,label:'stôl 120×80'},
-   chair(330,4330,'S'),chair(870,4330,'S'),chair(330,5580,'N'),chair(870,5580,'N'),
+   {k:'table',x:0,y:4580,w:1250,d:750,label:'stôl 125×75'},
+   chair(330,4355,'S'),chair(920,4355,'S'),chair(330,5555,'N'),chair(920,5555,'N'),
    {k:'lbl',x:1250,y:3950,text:'svetlo nad stôl',s:1}
   ],
-  dims:[{a:[1200,5150],b:[2530,5150],t:'1 330'}],
+  dims:[{a:[1250,5150],b:[2530,5150],t:'1 280'}],
   bom:[
    ['Stena ku kúpeľni, od chodby',[['60','vysoká skrinka na vstavanú chladničku 60×60×200, dvierka Nickebo'],['40','spodná skrinka so zásuvkami 40×60×80'],['60','skrinka na rúru 60×60×80, rúra + indukčná doska 60 cm (prívod doviesť na stenu)'],['60','integrovaná umývačka 60 cm, dvierka Nickebo 60×80'],['60','skrinka pre drez 60×60×80 (ako na fotke), drez a batéria'],['20','úzka skrinka s výsuvom 20×60×80'],['4 cm','krycia lišta k zadnej stene']]],
    ['Nad linkou',[['40','horná skrinka hĺbky 37 cm nad zásuvkami'],['60','digestor na stenu alebo vstavaný do hornej skrinky nad doskou (recirkulačný)'],['60 + 60 + 20','horné skrinky hĺbky 37 cm nad umývačkou, drezom a výsuvom']]],
-   ['Jedálenský kút',[['','stôl 120 × 80 čelom pod oknom (parapet 91 cm, stôl 75 cm) a 4 stoličky'],['','závesné svetlo z vývodu pre digestor v strope']]],
+   ['Jedálenský kút',[['','stôl 125 × 75 (PINNTORP) čelom pod oknom (parapet 91 cm, stôl 75 cm) a 4 stoličky'],['','závesné svetlo z vývodu pre digestor v strope']]],
    ['Ostatné',[['','pracovná doska do 3 cm, napr. dub, 240 cm'],['','sokel Nickebo'],['','krabica v podlahe: zaslepiť alebo podlahová zásuvka']]]
   ]
  }
@@ -684,7 +699,47 @@ function build(it,grp,st){
   }
 }
 COMMON.push({k:'sofaBack'});
+/* popisky spotrebičov v 3D */
+const LBL_KEYS={'chladnička':1,'rúra':1,'rúra + mikro':1,'umývačka':1,'drez':1};
+function labelsFor(v){
+  const out=[];
+  const front=(m,it,dist)=>{ // bod pred čelom modulu
+    if(it.dir==='y') return [it.front==='W'?m.x-dist:m.x+m.w+dist, m.y+m.d/2];
+    return [m.x+m.w/2, it.front==='S'?m.y+m.d+dist:m.y-dist];
+  };
+  v.items.forEach(it=>{
+    if(it.k==='run') runMods(it).forEach(m=>{
+      if(!LBL_KEYS[m.t]||m.t==='drez') return;
+      const [px,py]=front(m,it,40); out.push([m.t,px,py,m.kind==='tall'?1300:480]);
+    });
+    if(it.k==='tall'&&LBL_KEYS[it.label]){ const fx=it.x>=2500?it.x-40:it.x+it.w/2, fy=it.x>=2500?it.y+it.d/2:it.y-40; out.push([it.label,fx,fy,1300]); }
+    if(it.k==='lbl'&&it.text==='umývačka') out.push(['umývačka',it.x,it.y-260,480]);
+    if(it.k==='sink') out.push(['drez',it.x+it.w/2,it.y+it.d/2,1100]);
+    if(it.k==='cook') out.push(['varná doska',it.x+it.w/2,it.y+it.d/2,1150]);
+    if(it.k==='hoodC') out.push(['digestor',it.x+it.w/2,it.y+it.d/2,2300]);
+    if(it.k==='hood'||it.k==='hoodI') out.push(['digestor',it.x+it.w/2,it.y+it.d/2,1800]);
+  });
+  // rúra pod varnou doskou tam, kde nie je vo vysokej skrini
+  if(!out.some(l=>l[0].startsWith('rúra'))) v.items.filter(i=>i.k==='cook').forEach(c=>{
+    const cx=c.x+c.w/2, cy=c.y+c.d/2;
+    const pt=c.x>=2500?[c.x-60,cy]:(c.y>=6000?[cx,c.y-60]:[cx,c.y+c.d+60]);
+    out.push(['rúra pod doskou',pt[0],pt[1],480]);
+  });
+  if(!out.some(l=>l[0]==='chladnička')) out.push(['chladnička chýba v pláne',1565,6300,1300]);
+  return out;
+}
+function makeLabel(text,x,y,z){
+  const c=document.createElement('canvas'), g=c.getContext('2d'), fs=44;
+  g.font=`600 ${fs}px "IBM Plex Sans",Arial,sans-serif`; const w=Math.ceil(g.measureText(text).width)+36;
+  c.width=w; c.height=fs+28; g.font=`600 ${fs}px "IBM Plex Sans",Arial,sans-serif`;
+  g.fillStyle='rgba(31,42,46,.86)'; g.beginPath(); if(g.roundRect) g.roundRect(0,0,c.width,c.height,12); else g.rect(0,0,c.width,c.height); g.fill();
+  g.fillStyle='#ffffff'; g.textBaseline='middle'; g.fillText(text,18,c.height/2+2);
+  const tx=new THREE.CanvasTexture(c); tx.encoding=THREE.sRGBEncoding;
+  const s=new THREE.Sprite(new THREE.SpriteMaterial({map:tx,depthTest:false,transparent:true}));
+  const hgt=.12; s.scale.set(hgt*c.width/c.height,hgt,1); s.position.set(x/1000,z/1000,y/1000); s.renderOrder=10; return s;
+}
 const CAMS={
+  kitchen:{p:[0.35,1.65,3.75],t:[2.5,0.9,5.7]},
   living:{p:[2.3,1.7,0.6],t:[1.3,0.9,5.2]},
   entry:{p:[3.55,1.6,3.0],t:[1.0,0.9,5.4]},
   top:{p:[1.9,10.5,4.9],t:[1.9,0,3.55]}
@@ -735,12 +790,167 @@ function createViewer(stage,canvas,camWrap,storeKey){
   }
   function setVariant(v){
     while(vgroup.children.length){const m=vgroup.children.pop(); m.geometry&&m.geometry.dispose();}
-    v.items.forEach(it=>build(it,vgroup,v.style)); render();
+    v.items.forEach(it=>build(it,vgroup,v.style));
+    labelsFor(v).forEach(([s,x,y,z])=>vgroup.add(makeLabel(s,x,y,z)));
+    render();
   }
   camWrap.querySelectorAll('.cam').forEach(b=>b.addEventListener('click',()=>setCam(b.dataset.cam)));
   let cam='living'; try{cam=localStorage.getItem(storeKey)||'living';}catch(e){} if(!CAMS[cam]) cam='living';
   setCam(cam);
   return {setVariant};
+}
+
+/* ---------- Nákupný zoznam IKEA (ceny z ikea.com/sk/sk, overené 12. 10. 2026) ---------- */
+const U='https://www.ikea.com/sk/sk/p/';
+const P={
+ sink60:['METOD skrinka pre drez 60×60, biela/Nickebo','S895.656.32',78.50,'metod-skrinka-pre-drez-biela-nickebo-matna-sivozelena-s89565632/'],
+ sink60b:['METOD skrinka na drez + 2 dvere 60×60, Nickebo','S795.653.93',104,'metod-skrinka-na-drez-2dvere-biela-nickebo-matna-sivozelena-s79565393/'],
+ ovenA:['METOD/MAXIMERA skrinka na rúru so zásuvkou 60×60, Nickebo','S195.655.03',111.99,'metod-maximera-skrinka-ruru-so-zasuvkami-biela-nickebo-matna-sivozelena-s19565503/'],
+ ovenB:['METOD/MAXIMERA skrinka na rúru, nízka zásuvka 60×60, Nickebo','S295.662.72',110.99,'metod-maximera-spod-skr-var-dos-rur-zas-biela-nickebo-matna-sivozelena-s29566272/'],
+ dwfront:['METOD čelo na umývačku 60 cm, Nickebo','S395.654.65',52.99,'metod-celo-na-umyvacku-riadu-nickebo-matna-sivozelena-s39565465/'],
+ fr120:['METOD vysoká skriňa na chladničku s mrazničkou 60×60×200 (dvierka 120 + 80)','S095.662.68',198,'metod-skr-chldnc-mrznck-2-zas-biela-nickebo-matna-sivozelena-s09566268/'],
+ fr140:['METOD vysoká skriňa na chladničku 60×60×200 (dvierka 140 + 60, polica)','S995.654.91',214.50,'metod-skrinka-chlad-s-2-dver-biela-nickebo-matna-sivozelena-s99565491/'],
+ fr1:['METOD vysoká skriňa na chladničku 60×60×200 (jedny dvierka)','S395.659.60',191.50,'metod-skrinka-chlad-al-mraz-dv-biela-nickebo-matna-sivozelena-s39565960/'],
+ pull20:['METOD/MAXIMERA úzka skrinka s výsuvom 20×60, Nickebo','S695.653.79',100,'metod-maximera-skrinka-vys-vnut-vybavenie-biela-nickebo-matna-sivozelena-s69565379/'],
+ pull30:['METOD/MAXIMERA skrinka s výsuvom 30×60, Nickebo','S095.664.33',108,'metod-maximera-skrinka-vys-vnut-vybavenie-biela-nickebo-matna-sivozelena-s09566433/'],
+ shelf30:['METOD spodná skrinka s policami 30×60, Nickebo','S095.658.10',63.50,'metod-spodna-skrinka-s-policami-biela-nickebo-matna-sivozelena-s09565810/'],
+ d60_3:['METOD/MAXIMERA skrinka s 3 zásuvkami 60×60, Nickebo','S195.654.90',216,'metod-maximera-skrinka-3-zasuvky-biela-nickebo-matna-sivozelena-s19565490/'],
+ d60_2:['METOD/MAXIMERA skrinka s 2 vysokými zásuvkami 60×60, Nickebo','S995.661.84',190,'metod-maximera-spod-skr-2-cela-2vys-zas-biela-nickebo-matna-sivozelena-s99566184/'],
+ d60_1:['METOD/MAXIMERA skrinka so zásuvkou a dvierkami 60×60, Nickebo','S495.659.45',134.50,'metod-maximera-spodna-skrinka-so-zasuv-dvierkami-biela-nickebo-matna-sivozelena-s49565945/'],
+ sh60:['METOD spodná skrinka s policami 60×60, Nickebo','S095.662.87',80.50,'metod-spodna-skrinka-s-policami-biela-nickebo-matna-sivozelena-s09566287/'],
+ d40_3:['METOD/MAXIMERA skrinka s 3 zásuvkami 40×60, Nickebo','S295.655.07',179,'metod-maximera-skrinka-3-zasuvky-biela-nickebo-matna-sivozelena-s29565507/'],
+ d40_1:['METOD/MAXIMERA skrinka so zásuvkou a dvierkami 40×60, Nickebo','S195.654.14',108.50,'metod-maximera-spodna-skrinka-so-zasuv-dvierkami-biela-nickebo-matna-sivozelena-s19565414/'],
+ sh40:['METOD spodná skrinka s policami 40×60, Nickebo','S295.659.65',69,'metod-spodna-skrinka-s-policami-biela-nickebo-matna-sivozelena-s29565965/'],
+ w80:['METOD horná skrinka 80×80, 2 dvierka, Nickebo','S795.657.03',114.50,'metod-nast-skrin-s-polic-2-dv-biela-nickebo-matna-sivozelena-s79565703/'],
+ w60:['METOD horná skrinka 60×80, Nickebo','S895.658.06',73,'metod-nastenna-skrinka-s-policami-biela-nickebo-matna-sivozelena-s89565806/'],
+ w60b:['METOD horná skrinka 60×80, 2 dvierka, Nickebo','S295.657.86',98.50,'metod-nast-skrin-s-polic-2-dv-biela-nickebo-matna-sivozelena-s29565786/'],
+ w40:['METOD horná skrinka 40×80, Nickebo','S595.659.83',63,'metod-nastenna-skrinka-s-policami-biela-nickebo-matna-sivozelena-s59565983/'],
+ whood:['METOD horná skrinka na vstavaný odsávač 60×80, Nickebo','S395.662.00',80.50,'metod-nast-skr-na-ods-s-pol-dvierk-biela-nickebo-matna-sivozelena-s39566200/'],
+ rail:['METOD závesný držiak 200 cm (na horné skrinky)','602.056.64',10,'metod-zavesny-drziak-galvanizovane-60205664/'],
+ pan80:['NICKEBO krycí panel 62×80 (boky a zadná strana)','505.625.59',27,'nickebo-kryci-panel-s-matnym-vzhladom-sivozelena-50562559/'],
+ pan240:['NICKEBO krycí panel 62×240 (bok vysokej skrine, zarezať)','105.625.61',66,'nickebo-kryci-panel-s-matnym-vzhladom-sivozelena-10562561/'],
+ plinth:['NICKEBO sokel 220×8 cm','705.625.63',10.50,'nickebo-sokel-s-matnym-vzhladom-sivozelena-70562563/'],
+ legs:['METOD noha na skrinku 8 cm (2 ks)','705.560.67',3,'metod-noha-na-skrinku-70556067/'],
+ hS:['BAGGANÄS úchytka 21 mm, nerez (2 ks)','903.384.22',4.99,'bagganaes-uchytka-nehrdzavejuca-ocel-90338422/'],
+ hB:['BAGGANÄS úchytka 21 mm, čierna (2 ks)','903.384.17',4.99,'bagganaes-uchytka-cierna-90338417/'],
+ hBar:['BAGGANÄS úchytka 143 mm, čierna (2 ks)','803.384.13',6.99,'bagganaes-uchytka-cierna-80338413/'],
+ push:['UTRUSTA otvárač na zatlačenie (2 ks), bez úchytiek','802.302.24',4.50,'utrusta-otvarac-80230224/'],
+ ekb186:['EKBACKEN pracovná doska svetlý dub, 186 × 2,8 cm','306.338.07',54.90,'ekbacken-pracovna-doska-efekt-svetly-dub-laminat-30633807/'],
+ ekb246:['EKBACKEN pracovná doska svetlý dub, 246 × 2,8 cm','506.338.11',64.90,'ekbacken-pracovna-doska-efekt-svetly-dub-laminat-50633811/'],
+ sal186:['SÄLJAN pracovná doska dubový efekt, 186 × 3,8 cm','604.391.73',59.90,'saeljan-pracovna-doska-dubovy-efekt-laminat-60439173/'],
+ sal246:['SÄLJAN pracovná doska dubový efekt, 246 × 3,8 cm','804.392.09',69.90,'saeljan-pracovna-doska-dubovy-efekt-laminat-80439209/'],
+ kar186:['KARLBY pracovná doska dub dyha, 186 × 3,8 cm','703.351.89',129,'karlby-pracovna-doska-dub-dyha-70335189/'],
+ kar246:['KARLBY pracovná doska dub dyha, 246 × 3,8 cm','603.351.99',199,'karlby-pracovna-doska-dub-dyha-60335199/'],
+ salW186:['SÄLJAN pracovná doska biela/svetlo sivý kameň, 186 × 3,8 cm','205.568.71',59.90,'saeljan-pracovna-doska-biela-svetlo-siva-kameninovy-efekt-laminat-20556871/'],
+ salW246:['SÄLJAN pracovná doska biela/svetlo sivý kameň, 246 × 3,8 cm','805.568.73',69.90,'saeljan-pracovna-doska-biela-svetlo-siva-kameninovy-efekt-laminat-80556873/'],
+ lang:['LÅNGUDDEN drez nerez, 56×53 (so sifónom)','503.151.73',69.90,'langudden-zabudovany-drez-nehrdzavejuca-ocel-s29157477/'],
+ hill:['HILLESJÖN drez nerez, 56×46 (so sifónom)','794.017.35',89.90,'hillesjoen-zabudovany-drez-nehrdzavejuca-ocel-s79401735/'],
+ havsen:['HAVSEN drez keramika biela, 53×47 (so sifónom)','392.537.13',99,'havsen-zabudovany-drez-biela-s39253713/'],
+ kils:['KILSVIKEN drez čierny kremenný kompozit, 56×46','593.370.24',164,'kilsviken-zabudovany-drez-cierna-kremenny-kompozit-s59337024/'],
+ sallsjon:['SALLSJÖN batéria s jednou pákou, nízka 26,7 cm','906.020.25',39.99,'sallsjoen-kuchynska-bateria-s-jednou-pakou-farba-nehrdzavejucej-ocele-90602025/'],
+ taksjon:['TAKSJÖN batéria, nízka 27,4 cm','006.023.03',99.90,'taksjoen-kuchynska-bateria-horna-paka-farba-nehrdzavejucej-ocele-00602303/'],
+ majsjon:['MAJSJÖN batéria s výsuvnou sprchou','706.019.13',149,'majsjoen-kuchynska-bateria-vysuvna-sprcha-farba-nehrdzavejucej-ocele-70601913/'],
+ sallP:['SALLSJÖN batéria výsuvná, čierna','706.089.38',79.90,'sallsjoen-kuchynska-bateria-vysuvna-cierna-70608938/'],
+ vilsta:['VILSTA indukčná doska 59 cm (posledná šanca)','905.577.25',199,'vilsta-indukcna-varna-doska-ikea-300-cierna-90557725/'],
+ matm:['MATMÄSSIG indukčná doska 59 cm (posledná šanca)','104.670.93',279,'matmaessig-indukcna-varna-doska-ikea-300-cierna-10467093/'],
+ smaklig:['SMAKLIG indukčná doska 59 cm (posledná šanca)','504.678.83',429,'smaklig-indukcna-varna-doska-ikea-500-cierna-50467883/'],
+ hogk:['HÖGKLASSIG indukčná doska 59 cm (posledná šanca)','404.678.26',549,'hoegklassig-indukcna-varna-doska-ikea-700-cierna-40467826/'],
+ tacknan:['TÄCKNAN indukčná doska so zabudovaným odsávačom + recirkulácia (digestor netreba)','096.124.68',699,'taecknan-indukcna-varna-dos-odsavac-recirkul-ikea-300-cierna-s09612468/'],
+ lagan:['LAGAN rúra 74 l, bez ventilátora','606.000.56',179,'lagan-rura-s-ovladacim-panelom-farba-nehrdzavejucej-ocele-60600056/'],
+ sten3:['STENABY teplovzdušná rúra IKEA 300, 72 l','406.000.62',249,'stenaby-teplovzdusna-rura-funkcia-grilu-cierna-ikea-300-40600062/'],
+ sten5:['STENABY rúra IKEA 500 s parou, 72 l','706.002.06',399,'stenaby-teplovzdusna-rura-s-ventilatorom-pridana-funkcia-pary-funkcia-pecenia-cierna-ikea-500-70600206/'],
+ sten7:['STENABY rúra IKEA 700, samočistiaca, 72 l','806.002.20',599,'stenaby-teplovzdusna-rura-s-ventilatorom-funkcia-teplovzdusnej-fritezy-samocistiaca-cierna-ikea-700-80600220/'],
+ dwL:['LAGAN integrovaná umývačka 60 cm, trieda A','306.273.64',269,'lagan-zabudovatelna-umyvacka-30627364/'],
+ dwR:['RÅGLANDA integrovaná umývačka 60 cm','005.680.35',479,'raglanda-zabudovatelna-umyvacka-ikea-500-00568035/'],
+ dwO:['ÖSTVEDA integrovaná umývačka 60 cm, zásuvka na príbory','005.681.44',599,'oestveda-zabudovatelna-umyvacka-ikea-500-00568144/'],
+ dwK:['KALLBODA integrovaná umývačka 60 cm, IKEA 700','705.480.63',699,'kallboda-zabudovatelna-umyvacka-ikea-700-70548063/'],
+ skog:['SKOGSNÄS vstavaná chladnička s mrazničkou, 197,7 cm (do skrine 200)','105.728.76',749,'skogsnaes-chladnicka-mraznicka-ikea-700-vstavana-10572876/'],
+ svav:['SVÄVANDE stropný ostrovčekový odsávač 90 cm','403.890.89',579,'svaevande-odsavac-pripevneny-k-stropu-nehrdzavejuca-ocel-40389089/'],
+ omnejd:['OMNEJD stropný ostrovčekový odsávač 90 cm, LED','105.217.35',849,'omnejd-odsavac-pripevneny-k-stropu-nehrdzavejuca-ocel-10521735/'],
+ fil650:['NYTTIG FIL 650 uhlíkový filter (k SVÄVANDE)','003.953.51',39.90,'nyttig-fil-650-uhlikovy-filter-00395351/'],
+ fil440:['NYTTIG FIL 440 uhlíkový filter, 2 ks (k OMNEJD, NILSBYN)','704.019.52',34.99,'nyttig-fil-440-uhlikovy-filter-70401952/'],
+ tub150:['NYTTIG TUB 150 potrubie na recirkuláciu','902.502.59',19.99,'nyttig-tub-150-odsavacie-potrubie-90250259/'],
+ underv:['UNDERVERK odsávač vstavaný do hornej skrinky 60 cm','703.891.39',229,'underverk-zabudovany-odsavac-nehrdzavejuca-ocel-70389139/'],
+ utdrag:['UTDRAG výsuvný odsávač do hornej skrinky 60 cm','103.891.42',129,'utdrag-zabudovany-odsavac-nehrdzavejuca-ocel-10389142/'],
+ mangs:['MÅNGSBO odsávač do hornej skrinky 60 cm, IKEA 700','906.091.16',399,'mangsbo-zabudovany-odsavac-ikea-700-90609116/'],
+ rullbo:['RULLBO nástenný odsávač 60 cm, čierny','106.092.24',159,'rullbo-nastenny-odsavac-ikea-300-cierna-10609224/'],
+ nilsbyn:['NILSBYN nástenný odsávač 60 cm, čierny','106.023.69',269,'nilsbyn-nastenny-odsavac-ikea-300-cierna-10602369/'],
+ lisS:['LISABO stôl jaseň 88×78 cm','405.637.76',109,'lisabo-stol-jasenova-dyha-40563776/'],
+ pinT:['PINNTORP stôl 125×75 cm, svetlohnedá/biela','305.294.67',99.90,'pinntorp-stol-morena-svetlohneda-biela-morena-borovica-30529467/'],
+ skalT:['SKÅLSTA stôl 140×80 cm, dubový efekt','396.083.37',99.90,'skalsta-stol-dubovy-efekt-rovne-svetla-sivobezova-s39608337/'],
+ lis140:['LISABO stôl jaseň 140×78 cm','702.943.39',119,'lisabo-stol-jasenova-dyha-70294339/'],
+ tonT:['TONSTAD rozkladací stôl dub 140/196×85 cm','405.938.82',249,'tonstad-rozkladaci-stol-dubova-dyha-40593882/'],
+ pinC:['PINNTORP stolička, svetlohnedá','205.294.82',29.99,'pinntorp-stolicka-morena-svetlohneda-katorp-prirodna-20529482/'],
+ lisC:['LISABO stolička, jaseň','004.572.35',49.99,'lisabo-stolicka-jasen-00457235/'],
+ tonC:['TONSTAD stolička, dub/béžová','005.938.84',59.90,'tonstad-stolicka-dubovy-efekt-fridtuna-svetlobezova-00593884/'],
+ sjom:['SJÖMAKT závesná lampa béžová/jaseň Ø38','805.956.81',24.99,'sjoemakt-zavesna-lampa-bezova-jasen-80595681/'],
+ kapp:['KAPPELAND / HAVSDJUP závesná lampa biela/ratan Ø45','296.040.52',38.99,'kappeland-havsdjup-zavesna-lampa-biela-ratan-s29604052/'],
+ ranarp:['RANARP závesná lampa krémová Ø38','203.909.70',24.99,'ranarp-zavesna-lampa-kremova-20390970/'],
+ mitt:['MITTLED LED pásik pod skrinky 60 cm','605.285.84',17.99,'mittled-pasik-led-kuch-prac-doska-stmievatelne-biela-60528584/'],
+ kolv:['KÖLVATTEN LED pod skrinky na batérie so senzorom 70 cm','206.337.80',13.99,'koelvatten-osvetlenie-led-so-senzorom-biela-na-baterie-20633780/'],
+ trad:['TRÅDFRI transformátor 30 W (k MITTLED)','603.426.56',14.99,'tradfri-transformator-na-bezdrot-ovladanie-inteligentny-vyrobok-siva-60342656/'],
+ forn:['FÖRNIMMA zdrojový kábel 3,5 m (k MITTLED)','504.468.81',4.99,'foernimma-zdrojovy-kabel-50446881/'],
+ lack:['LACK nástenná polica 110 cm, bielo morený dub','603.835.19',11.99,'lack-nastenna-polica-bielo-moreny-dub-vzor-60383519/']
+};
+const HOBS=['smaklig','vilsta','matm','hogk','tacknan'], OVENS=['sten3','lagan','sten5','sten7'], DWS=['dwL','dwR','dwO','dwK'];
+const TOPS186=['ekb186','sal186','kar186','salW186'], TOPS246=['ekb246','sal246','kar246','salW246'];
+const SINKS=['lang','hill','havsen','kils'], TAPS=['sallsjon','taksjon','sallP','majsjon'];
+const CHAIRS=['pinC','lisC','tonC'], LAMPS=['sjom','kapp','ranarp'], HANDLES=['hB','hS','hBar','push'];
+const FR=['fr120','fr140','fr1'];
+const ISLAND=[[1,['pull30','shelf30'],'ostrovček 30 cm (pri stole)'],[1,['ovenA','ovenB'],'ostrovček 60 cm pod varnou doskou'],[1,['shelf30','pull30'],'ostrovček 30 cm']];
+const KITCHEN_COMMON=(tops,topQty,hoods)=>[
+ ['Pracovná doska',[[topQty,tops,'doska sa reže na mieru, hrany sú v balení']]],
+ ['Drez a batéria',[[1,SINKS],[1,TAPS]]],
+ ['Spotrebiče',[[1,HOBS,'bežné dosky IKEA sú označené „posledná šanca“'],[1,OVENS],[1,DWS],[1,['skog'],'jediná chladnička IKEA na výšku 200 cm']].concat(hoods)],
+];
+const SHOP={
+ i1:[
+  ['Skrinky METOD Nickebo',[
+   [1,['sink60','sink60b'],'zadná stena'],[1,['dwfront'],'zadná stena'],[1,['pull20','shelf30'],'zadná stena'],[1,FR,'roh pri kúpeľni'],
+   ...ISLAND,[1,['w80','w60b'],'nad drezom'],[1,['w60','w60b'],'nad umývačkou'],[1,['rail']],
+   [5,['pan80'],'4 na ostrovček, 1 na koniec zadnej linky'],[1,['pan240'],'bok chladničky'],[3,['plinth']],[14,['legs'],'4 nohy na skrinku, počet overí plánovač'],[6,HANDLES,'na dvierka a zásuvky']]],
+  ...KITCHEN_COMMON(TOPS186,2,[[1,['svav','omnejd'],'zavesený zo stropu nad ostrovčekom; pri TÄCKNAN odpadá'],[1,['fil650','fil440'],'uhlíkový filter'],[1,['tub150']]]),
+  ['Stôl, stoličky a svetlo',[[1,['lisS'],'medzi oknom a ostrovčekom je 100 cm, väčší stôl sa nezmestí'],[4,CHAIRS],[1,LAMPS,'nad stôl'],[2,['mitt','kolv'],'pod horné skrinky'],[1,['trad'],'len k MITTLED'],[1,['forn'],'len k MITTLED'],[2,['lack'],'voľná stena za stolom']]]
+ ],
+ i2:[
+  ['Skrinky METOD Nickebo',[
+   [1,FR,'roh pri okne'],[1,['d60_3','d60_1','d60_2','sh60'],'zadná stena'],[1,['sink60','sink60b']],[1,['dwfront']],
+   ...ISLAND,[3,['w60','w60b','w80']],[1,['rail']],
+   [5,['pan80'],'4 na ostrovček, 1 na koniec zadnej linky'],[1,['pan240'],'bok chladničky'],[3,['plinth']],[14,['legs']],[6,HANDLES]]],
+  ...KITCHEN_COMMON(TOPS186,2,[[1,['svav','omnejd'],'zavesený zo stropu nad ostrovčekom; pri TÄCKNAN odpadá'],[1,['fil650','fil440']],[1,['tub150']]]),
+  ['Stôl, stoličky a svetlo',[[1,['lisS'],'medzi ostrovčekom a stenou je 103 cm'],[4,CHAIRS],[1,LAMPS],[3,['mitt','kolv']],[1,['trad']],[1,['forn']]]]
+ ],
+ i3:[
+  ['Skrinky METOD Nickebo',[
+   [1,FR,'pri chodbe'],[1,['d40_3','d40_1','sh40']],[1,['ovenA','ovenB'],'pod varnou doskou'],[1,['dwfront']],[1,['sink60','sink60b']],[1,['pull20']],
+   [1,['w40']],[1,['whood'],'nad varnou doskou, ak bude vstavaný odsávač'],[1,['w80','w60b']],[1,['w60']],[1,['rail']],
+   [1,['pan240'],'bok chladničky smerom k chodbe'],[2,['plinth']],[12,['legs']],[5,HANDLES]]],
+  ...KITCHEN_COMMON(TOPS246,1,[[1,['underv','utdrag','mangs','rullbo','nilsbyn'],'na stene nad doskou, recirkulačný'],[1,['fil440'],'filter podľa modelu, overiť na stránke odsávača']]),
+  ['Stôl, stoličky a svetlo',[[1,['pinT','skalT','lis140','tonT'],'stôl čelom pod oknom'],[4,CHAIRS],[1,LAMPS,'z vývodu pre digestor v strope'],[2,['mitt','kolv']],[1,['trad']],[1,['forn']]]]
+ ]
+};
+const eur=n=>n.toLocaleString('sk-SK',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+function shopRender(key,el){
+  const lists=SHOP[key]; if(!lists||!el) return;
+  let sel={}; try{sel=JSON.parse(localStorage.getItem('k7c-shop-'+key)||'{}');}catch(e){}
+  let html='', i=0;
+  lists.forEach(([h,rows])=>{
+    html+=`<div class="shopgrp"><h3>${h}</h3><div class="tblwrap"><table class="shop"><thead><tr><th>Položka</th><th class="num">ks</th><th class="num">cena/ks</th><th class="num">spolu</th></tr></thead><tbody>`;
+    rows.forEach(([q,opts,note])=>{
+      const id=`sh-${key}-${i++}`, cur=opts.includes(sel[id])?sel[id]:opts[0], p=P[cur];
+      const choose=opts.length>1?`<select id="${id}" data-key="${key}" aria-label="Výber: ${h}">${opts.map(o=>`<option value="${o}"${o===cur?' selected':''}>${P[o][0]} · ${eur(P[o][2])}</option>`).join('')}</select>`:`<span>${p[0]}</span>`;
+      html+=`<tr data-q="${q}" data-p="${p[2]}"><td>${choose}<div class="meta"><a href="${U+p[3]}" target="_blank" rel="noopener">ikea.sk · ${p[1]}</a>${note?` · ${note}`:''}</div></td><td class="num">${q}</td><td class="num">${eur(p[2])}</td><td class="num">${eur(p[2]*q)}</td></tr>`;
+    });
+    html+='</tbody></table></div></div>';
+  });
+  el.innerHTML=html+`<div class="shoptotal"><span>Spolu (orientačne, bez dopravy a montáže)</span><b id="shTotal-${key}"></b></div>`;
+  let tot=0; el.querySelectorAll('tr[data-q]').forEach(tr=>tot+=(+tr.dataset.q)*(+tr.dataset.p));
+  document.getElementById('shTotal-'+key).textContent=eur(tot);
+  el.querySelectorAll('select').forEach(s=>s.addEventListener('change',()=>{
+    sel[s.id]=s.value; try{localStorage.setItem('k7c-shop-'+key,JSON.stringify(sel));}catch(e){}
+    shopRender(key,el);
+    const n=document.getElementById(s.id); n&&n.focus();
+  }));
 }
 
 /* ---------- UI ---------- */
@@ -762,6 +972,7 @@ function mount(o){
     $('Eyebrow').textContent=v.eyebrow; $('Title').textContent=v.title; $('Text').textContent=v.text;
     $('Plus').innerHTML=li(v.plus); $('Minus').innerHTML=li(v.minus);
     if(v.bom&&$('Bom')) $('Bom').innerHTML=bomHTML(v.bom);
+    if($('Shop')) shopRender(key,$('Shop'));
     viewer&&viewer.setVariant(v);
     try{localStorage.setItem(o.store,key);}catch(e){}
   }
