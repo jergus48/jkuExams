@@ -258,7 +258,8 @@ table.shop th.num,table.shop td.num{text-align:right;white-space:nowrap}
       <li>menej pracovnej dosky</li>
     </ul>
     <div class="tabs" id="ikTabs" role="tablist" aria-label="Varianty IKEA">
-      <button class="tab" role="tab" id="tab-i4" data-v="i4">IKEA 4 · tatinov pôdorys, upravený <span class="pill">najnovšie</span></button>
+      <button class="tab" role="tab" id="tab-i5" data-v="i5">IKEA 5 · tatinov pôdorys, linka do U <span class="pill">najnovšie</span></button>
+      <button class="tab" role="tab" id="tab-i4" data-v="i4">IKEA 4 · tatinov pôdorys, upravený</button>
       <button class="tab" role="tab" id="tab-i4o" data-v="i4o">IKEA 4 pôvodný · tatinov pôdorys bez úprav <small>na porovnanie</small></button>
       <button class="tab" role="tab" id="tab-i1" data-v="i1">IKEA 1 · ostrovček + stôl pri okne</button>
       <button class="tab" role="tab" id="tab-i2" data-v="i2">IKEA 2 · ostrovček + stôl ku kúpeľni</button>
@@ -516,6 +517,31 @@ const IK={
    ['Ostatné',[['','stropný uhlíkový digestor nad ostrovčekom'],['','pracovná doska do 3 cm: zadná 180 cm, ostrovček 120 cm'],['','sokel Nickebo'],['','stôl 88 × 78 (LISABO) a 4 stoličky']]]
   ]
  },
+ i5:{style:'ikea',eyebrow:'IKEA 5 · tatinov pôdorys, linka do U',title:'Polostrov s doskou pri okne, linka do U s rohovou skrinkou, okrúhly stôl',
+  text:'Prekreslené podľa tatinovho nového pôdorysu. Polostrov 120 × 60 cm ide od steny s oknom, varná doska je v jeho strede a pri konci polostrova je prívod z podlahy. Ulička k zadnej linke má 115 cm. Zadná linka od okna: vysoká skriňa 60 × 200 (v modeli na rúru a mikrovlnku), zásuvky, umývačka, drez a rohová skrinka 88 × 88. Linka pokračuje do U na stene ku kúpeľni: výsuv 30 cm, zásuvky a pri vstupe do kuchyne vysoká skriňa s chladničkou. Okrúhly stôl Ø 90 cm s 3 stoličkami stojí pred polostrovom pri okne.',
+  plus:['Varná doska je v strede polostrova, z oboch strán je 30 cm odkladacej plochy','Prívod z podlahy je pri konci polostrova, tak ako ho tatino zakreslil','Linka do U: najviac pracovnej plochy a úložného priestoru zo všetkých variantov, roh využije rohová skrinka 88 × 88','Chladnička je hneď pri vstupe z chodby, s nákupom netreba prejsť celou kuchyňou','Rúra a mikrovlnka sú vo vysokej skrini vo výške očí, pod varnou doskou sú zásuvky','Medzi polostrovom a linkou pri kúpeľni je priechod 133 cm'],
+  minus:['Polostrov zasahuje asi 46 cm pod okno. Skrinka METOD má s doskou 91 až 92 cm a parapet je 91 cm, preto pod oknom treba tenkú dosku (EKBACKEN 2,8 cm) a nižšie nohy','Umývačka je v pláne 40 cm, ale najužšia umývačka IKEA má 45 cm. V modeli je 45 cm a zadná linka tak vychádza presne na 313 cm, bez krycej lišty pri okne','Medzi stolom a polostrovom je len asi 22 cm, zo strany polostrova sa nedá sedieť, preto sú pri stole 3 miesta','Polovica stola je už v obývačke, za hranou kuchynského kúta','Digestor nad stredom dosky je asi 55 cm od pripraveného vývodu v strope, kábel treba predĺžiť','Ulička 115 cm stačí pre jedného, dvaja sa v nej tesne miňú','Pracovná doska je z 3 kusov (zadná má 253 cm a dosky IKEA majú najviac 246 cm)'],
+  items:[
+   {k:'run',x:0,y:6091,d:600,dir:'x',front:'N',mods:[{w:600,t:'rúra + mikro',kind:'tall'},{w:600,t:'zásuvky'},{w:450,t:'umývačka'},{w:600,t:'drez',hide:1},{w:880,t:'rohová'}]},
+   {k:'sink',x:1730,y:6180,w:440,d:420},
+   {k:'run',x:2530,y:4311,d:600,dir:'y',front:'W',mods:[{w:600,t:'chladnička',kind:'tall'},{w:600,t:'zásuvky'},{w:300,t:'výsuv'},{w:280,t:'',cont:1}]},
+   {k:'run',x:0,y:4341,d:600,dir:'x',front:'S',island:true,mods:[{w:300,t:'výsuv'},{w:600,t:'zásuvky'},{w:300,t:'výsuv'}]},
+   {k:'cook',x:310,y:4381,w:580,d:520},
+   {k:'hoodC',x:150,y:4391,w:900,d:500},
+   {k:'upper',x:600,y:6321,w:1650,d:370},
+   {k:'warn',x:0,y:4477,w:600,d:464,label:'46 cm pod oknom',lx:330,ly:5180},
+   {k:'rtable',x:756,y:3678,r:450},
+   chair(756,3158,'S'),chair(236,3678,'E'),chair(1276,3678,'W')
+  ],
+  dims:[{a:[1500,4941],b:[1500,6091],t:'1 150'},{a:[0,5450],b:[1200,5450],t:'1 200'},{a:[1200,4200],b:[2530,4200],t:'1 330'}],
+  bom:[
+   ['Zadná stena, od okna',[['60','vysoká skriňa 60×60×200 na rúru a mikrovlnku (alebo špajza)'],['60','skrinka so zásuvkami 60×60×80'],['45','integrovaná umývačka 45 cm, čelo Nickebo 45×80'],['60','skrinka pre drez 60×60×80'],['88','rohová skrinka 88×88 (s policou alebo otočným košom)']]],
+   ['Stena ku kúpeľni, od rohu',[['30','skrinka s výsuvom 30×60×80'],['60','skrinka so zásuvkami 60×60×80'],['60','vysoká skriňa na vstavanú chladničku 60×60×200, pri vstupe do kuchyne']]],
+   ['Polostrov 120 × 60, od okna',[['30','skrinka s výsuvom 30×60×80'],['60','skrinka so zásuvkami 60×60×80 pod indukčnou doskou 60 cm'],['30','skrinka s výsuvom 30×60×80'],['','krycie panely Nickebo na koniec a zadnú stranu']]],
+   ['Nad zadnou linkou',[['80 + 80','horné skrinky hĺbky 37 cm, výška 80 cm, nad zásuvkami, umývačkou a drezom']]],
+   ['Ostatné',[['','digestor zavesený zo stropu nad varnou doskou (uhlíkový filter)'],['','okrúhly stôl Ø 90 cm a 3 stoličky; okrúhly stôl som na ikea.sk overený nenašiel']]]
+  ]
+ },
  i4:{style:'ikea',eyebrow:'IKEA 4 · tatinov pôdorys, upravený',title:'Polostrov 140 cm s doskou v strede, ulička 120 cm, okrúhly stôl',
   text:'Podľa tatinovho pôdorysu, s úpravami. Polostrov má 140 cm a varná doska je v jeho strede, s odkladacou plochou 40 cm z oboch strán. Medzi polostrovom a zadnou linkou je ulička 120 cm, preto je polostrov o 20 cm bližšie k zadnej stene. Varná doska tak vychádza zhruba nad prívod v podlahe a pod vývod v strope. Okrúhly stôl je 65 cm pred polostrovom, mimo prechodu z chodby do obývačky. Zadná linka ostáva: chladnička, zásuvky, umývačka, drez a úzka skrinka.',
   plus:['Varná doska je v strede polostrova, z oboch strán je 40 cm odkladacej plochy','Ulička 120 cm, z polostrova k drezu je to jeden krok','Varná doska je zhruba tam, kde je pripravený prívod a digestor','Pri drezi a umývačke nikto nesedí','Stôl v obývačke má okolo seba miesto na 3 stoličky','Prechod z chodby do obývačky a do kuchyne ostáva voľný'],
@@ -620,7 +646,7 @@ function drawItem(it){
       if(m.t&&!m.hide) s+=t(m.x+m.w/2,m.y+m.d/2,m.t,'s',narrow);
       const wx=it.dir==='x'?m.x+m.w/2:(it.front==='W'?m.x+70:m.x+m.w-70);
       const wy=it.dir==='x'?(it.front==='S'?m.y+m.d-70:m.y+70):m.y+m.d/2;
-      s+=`<text x="${wx}" y="${wy}" class="p-modw">${m.mw/10}</text>`;
+      if(!m.cont) s+=`<text x="${wx}" y="${wy}" class="p-modw">${m.mw/10}</text>`;
     }); break;
   }
   return s;
@@ -916,6 +942,13 @@ const P={
  dwR:['RÅGLANDA integrovaná umývačka 60 cm','005.680.35',479,'raglanda-zabudovatelna-umyvacka-ikea-500-00568035/'],
  dwO:['ÖSTVEDA integrovaná umývačka 60 cm, zásuvka na príbory','005.681.44',599,'oestveda-zabudovatelna-umyvacka-ikea-500-00568144/'],
  dwK:['KALLBODA integrovaná umývačka 60 cm, IKEA 700','705.480.63',699,'kallboda-zabudovatelna-umyvacka-ikea-700-70548063/'],
+ tallOM:['METOD/MAXIMERA vysoká skriňa na rúru a mikrovlnku 60×60×200, 2 zásuvky, Nickebo','S595.659.64',279.50,'metod-maximera-vys-skr-na-mikr-rur-2-zasuvky-biela-nickebo-matna-sivozelena-s59565964/'],
+ tallO2:['METOD vysoká skriňa na rúru a mikrovlnku 60×60×200, 2 dvierka, Nickebo','S295.659.46',181,'metod-vys-skr-na-mikr-rur-2dvier-pol-biela-nickebo-matna-sivozelena-s29565946/'],
+ cor88:['METOD rohová skrinka s policou 88×88, Nickebo','S595.847.45',134,'metod-rohova-skrinka-s-policou-biela-nickebo-matna-sivozelena-s59584745/'],
+ cor88k:['METOD rohová skrinka s otočným košom 88×88, Nickebo','S995.846.25',211.50,'metod-rohova-skrinka-s-otoc-kosom-biela-nickebo-matna-sivozelena-s99584625/'],
+ dw45L:['LAGAN integrovaná umývačka 45 cm','205.681.62',249,'lagan-zabudovatelna-umyvacka-20568162/'],
+ dw45F:['FRÖSLUNDA integrovaná umývačka 45 cm, IKEA 500','105.681.67',399,'froeslunda-zabudovatelna-umyvacka-ikea-500-10568167/'],
+ dwf45:['NICKEBO čelo umývačky 45×80','205.625.51',35,'nickebo-predna-strana-umyvacky-riadu-s-matnym-vzhladom-sivozelena-20562551/'],
  skog:['SKOGSNÄS vstavaná chladnička s mrazničkou, 197,7 cm (do skrine 200)','105.728.76',749,'skogsnaes-chladnicka-mraznicka-ikea-700-vstavana-10572876/'],
  svav:['SVÄVANDE stropný ostrovčekový odsávač 90 cm','403.890.89',579,'svaevande-odsavac-pripevneny-k-stropu-nehrdzavejuca-ocel-40389089/'],
  omnejd:['OMNEJD stropný ostrovčekový odsávač 90 cm, LED','105.217.35',849,'omnejd-odsavac-pripevneny-k-stropu-nehrdzavejuca-ocel-10521735/'],
@@ -956,6 +989,18 @@ const KITCHEN_COMMON=(tops,topQty,hoods)=>[
  ['Spotrebiče',[[1,HOBS,'bežné dosky IKEA sú označené „posledná šanca“'],[1,OVENS],[1,DWS],[1,['skog'],'jediná chladnička IKEA na výšku 200 cm']].concat(hoods)],
 ];
 const SHOP={
+ i5:[
+  ['Skrinky METOD Nickebo',[
+   [1,['tallOM','tallO2'],'zadná stena pri okne'],[1,['d60_3','d60_1','d60_2','sh60'],'zadná stena'],[1,['dwf45'],'čelo umývačky 45 cm'],[1,['sink60','sink60b']],[1,['cor88','cor88k'],'roh pri kúpeľni'],
+   [1,['pull30','shelf30'],'stena ku kúpeľni pri rohu'],[1,['d60_3','d60_1','d60_2','sh60'],'stena ku kúpeľni'],[1,FR,'pri vstupe do kuchyne'],
+   [1,['pull30','shelf30'],'polostrov pri okne'],[1,['d60_3','d60_2'],'polostrov pod varnou doskou'],[1,['pull30','shelf30'],'polostrov, koniec'],
+   [2,['w80','w60b']],[1,['rail']],
+   [3,['pan80'],'koniec a zadná strana polostrova'],[1,['pan240'],'bok chladničky smerom k oknu'],[4,['plinth']],[20,['legs']],[10,HANDLES]]],
+  ['Pracovná doska',[[2,['ekb246','sal246','kar246','salW246'],'zadná linka 193 cm a polostrov 120 cm; pod oknom je lepšia tenká EKBACKEN'],[1,['ekb186','sal186','kar186','salW186'],'linka ku kúpeľni s rohom 178 cm']]],
+  ['Drez a batéria',[[1,SINKS],[1,TAPS]]],
+  ['Spotrebiče',[[1,HOBS,'bežné dosky IKEA sú označené „posledná šanca“'],[1,OVENS,'do vysokej skrine'],[1,['dw45L','dw45F'],'najužšia umývačka IKEA je 45 cm'],[1,['skog']],[1,['svav','omnejd'],'zavesený zo stropu nad polostrovom'],[1,['fil650','fil440']],[1,['tub150']]]],
+  ['Stoličky a svetlo',[[3,CHAIRS,'okrúhly stôl podľa tatinovho plánu, nie je v zozname'],[2,['mitt','kolv'],'pod horné skrinky'],[1,['trad'],'len k MITTLED'],[1,['forn'],'len k MITTLED']]]
+ ],
  i4o:[
   ['Skrinky METOD Nickebo',[
    [1,FR,'roh pri okne'],[1,['d60_3','d60_1','d60_2','sh60'],'zadná stena'],[1,['d40_3','d40_1','sh40'],'zadná stena'],[1,['dwfront']],[1,['sink60','sink60b']],[1,['shelf30','pull30']],
@@ -1056,7 +1101,7 @@ function mount(o){
   show(start);
 }
 mount({p:'v',tabs:'#oldTabs .tab',data:V,store:'k7c-var2',def:'d',name:k=>k==='orig'?'pôvodný':'variant '+k.toUpperCase()});
-mount({p:'ik',tabs:'#ikTabs .tab',data:IK,store:'k7c-ik2',def:'i4',name:k=>k==='i4o'?'IKEA 4 pôvodný':'IKEA '+k.slice(1)});
+mount({p:'ik',tabs:'#ikTabs .tab',data:IK,store:'k7c-ik3',def:'i5',name:k=>k==='i4o'?'IKEA 4 pôvodný':'IKEA '+k.slice(1)});
 })();
 </script>
 
