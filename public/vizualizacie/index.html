@@ -522,8 +522,8 @@ const IK={
   ]
  },
  i7:{style:'ikea',noBox:1,eyebrow:'IKEA 7 · variant F do L, drez na zadnej stene',title:'Linka do L s rohovou skrinkou, drez a umývačka na zadnej stene, stôl pod oknom',
-  text:'IKEA 6 doplnená podľa tatina do tvaru L. Na stene ku kúpeľni ostáva od chodby vysoká skriňa s chladničkou, zásuvky 40 a varná doska s rúrou na rovnakom mieste ako v IKEA 6, za nimi výsuvy 30 a 20 cm. V rohu je spodná rohová skrinka 88 × 88 a na zadnej stene k nej pokračuje skrinka 60 s drezom a umývačka 45 cm. Horné skrinky sú len na stene ku kúpeľni, nad zadnou stenou nie sú. Pod oknom je okrúhly čierny stôl Ø 90 cm so 4 stoličkami zo svetlého dreva. Pracovná doska je čierna a stenu medzi doskou a hornými skrinkami pokrýva melamínový panel v imitácii svetlého dreva. Bez ostrova a bez digestora.',
-  plus:['Drez je na zadnej stene, kde ho má aj pôvodný projekt, takže vodu a odpad netreba ťahať k stene ku kúpeľni','Roh využije rohová skrinka 88 × 88','Varná doska a rúra sú na rovnakom mieste ako v IKEA 6, prívod je v rohu','Medzi doskou a drezom je pracovná plocha cez roh','Nad zadnou stenou nie sú horné skrinky, kuchyňa pôsobí otvorenejšie','Okrúhly stôl pod oknom pre 4, ulička medzi stolom a linkou 1,33 m','Nič nezasahuje do obývačky'],
+  text:'IKEA 6 doplnená podľa tatina do tvaru L. Na stene ku kúpeľni ostáva od chodby vysoká skriňa s chladničkou, zásuvky 40 a varná doska s rúrou na rovnakom mieste ako v IKEA 6, za nimi výsuvy 30 a 20 cm. V rohu je spodná rohová skrinka 88 × 88 a na zadnej stene k nej pokračuje skrinka 60 s drezom a umývačka 45 cm. Horné skrinky sú len na stene ku kúpeľni, nad zadnou stenou nie sú. Pod oknom, takmer pri stene, je okrúhly čierny stôl Ø 90 cm s 3 stoličkami zo svetlého dreva. Pracovná doska je čierna a stenu nad pracovnou doskou pokrýva melamínový panel v imitácii svetlého dreva, na stene ku kúpeľni až po horné skrinky a na zadnej stene aj za drezom. Bez ostrova a bez digestora.',
+  plus:['Drez je na zadnej stene, kde ho má aj pôvodný projekt, takže vodu a odpad netreba ťahať k stene ku kúpeľni','Roh využije rohová skrinka 88 × 88','Varná doska a rúra sú na rovnakom mieste ako v IKEA 6, prívod je v rohu','Medzi doskou a drezom je pracovná plocha cez roh','Nad zadnou stenou nie sú horné skrinky, kuchyňa pôsobí otvorenejšie','Okrúhly stôl je pri okne s 3 stoličkami, od stola k linke je 1,58 m','Nič nezasahuje do obývačky'],
   minus:['Medzi rúrou a rohovou skrinkou ostáva 56 cm, preto sú tam výsuvy 30 + 20 cm a 6 cm krycia lišta','Umývačka 45 cm má menší objem ako 60 cm, pre 2 až 3 ľudí to stačí','Bez digestora bude spodok skrinky nad doskou chytať paru a mastnotu','Kábel z rohu k varnej doske má asi 1,7 m, elektrikár ho vedie za skrinkami','Prázdnu krabicu v podlahe treba zaslepiť','Okrúhly čierny stôl Ø 90 cm IKEA na ikea.sk nemá, najbližšie sú čierne Ø 105 cm (LISABO, NORRMJÖLE)'],
   items:[
    {k:'run',x:2530,y:3650,d:600,dir:'y',front:'W',top:'black',mods:[{w:600,t:'chladnička',kind:'tall'},{w:400,t:'zásuvky'},{w:600,t:'rúra',hide:1},{w:300,t:'výsuv'},{w:200,t:'výsuv'},{w:61,t:'',cont:1},{w:280,t:'',cont:1}]},
@@ -531,19 +531,19 @@ const IK={
    {k:'cook',x:2575,y:4690,w:520,d:520},
    {k:'sink',x:1730,y:6180,w:440,d:420},
    {k:'upper',x:2763,y:4250,w:367,d:400},{k:'upper',x:2763,y:4650,w:367,d:600},{k:'upper',x:2763,y:5250,w:367,d:1441},
-   {k:'splash',x:3120,y:4250,w:10,d:2441},
-   {k:'rtable',x:750,y:4955,r:450,black:1},
-   ...[chair(750,4435,'S'),chair(750,5475,'N'),chair(230,4955,'E'),chair(1270,4955,'W')].map(c=>Object.assign(c,{wood:1})),
+   {k:'splash',x:3120,y:4250,w:10,d:2441},{k:'splash',x:1200,y:6681,w:1920,d:10},
+   {k:'rtable',x:500,y:4955,r:450,black:1},
+   ...[chair(500,4435,'S'),chair(500,5475,'N'),chair(1020,4955,'W')].map(c=>Object.assign(c,{wood:1})),
    {k:'lbl',x:1250,y:3950,text:'svetlo nad stôl',s:1},
    {k:'lbl',x:2150,y:5650,text:'prívod dosky v rohu',s:1}
   ],
-  dims:[{a:[1200,5150],b:[2530,5150],t:'1 330'},{a:[1200,5900],b:[3130,5900],t:'1 930'}],
+  dims:[{a:[950,5150],b:[2530,5150],t:'1 580'},{a:[1200,5900],b:[3130,5900],t:'1 930'}],
   bom:[
    ['Stena ku kúpeľni, od chodby',[['60','vysoká skriňa na vstavanú chladničku 60×60×200, dvierka Nickebo'],['40','skrinka so zásuvkami 40×60×80'],['60','skrinka na rúru 60×60×80, rúra + indukčná doska 60 cm (ako v IKEA 6)'],['30','skrinka s výsuvom 30×60×80'],['20','úzka skrinka s výsuvom 20×60×80'],['6 cm','krycia lišta k rohovej skrinke']]],
    ['Roh a zadná stena, od rohu',[['88','spodná rohová skrinka 88×88 (s policou alebo otočným košom)'],['60','skrinka pre drez 60×60×80, drez a batéria'],['45','integrovaná umývačka 45 cm, čelo Nickebo 45×80'],['','krycí panel Nickebo na koniec linky pri stole']]],
    ['Horné skrinky, hĺbka 37 cm, výška 80 cm, len na stene ku kúpeľni',[['40','nad zásuvkami'],['60','nad varnou doskou'],['80 + 60','nad výsuvmi a rohom'],['','nad zadnou stenou nič']]],
-   ['Jedálenský kút',[['','okrúhly čierny stôl Ø 90 cm pod oknom a 4 stoličky zo svetlého dreva'],['','závesné svetlo z vývodu pre digestor v strope']]],
-   ['Ostatné',[['','čierna pracovná doska do 3 cm: stena ku kúpeľni 244 cm s rohom, zadná stena 133 cm'],['','obklad medzi doskou a hornými skrinkami: melamínový panel, imitácia svetlého dreva (nie z IKEA)'],['','sokel Nickebo'],['','bez digestora; krabicu v podlahe zaslepiť']]]
+   ['Jedálenský kút',[['','okrúhly čierny stôl Ø 90 cm pri okne a 3 stoličky zo svetlého dreva'],['','závesné svetlo z vývodu pre digestor v strope']]],
+   ['Ostatné',[['','čierna pracovná doska do 3 cm: stena ku kúpeľni 244 cm s rohom, zadná stena 133 cm'],['','obklad nad pracovnou doskou (stena ku kúpeľni 244 cm, zadná stena za drezom 193 cm, výška 54 cm): melamínový panel, imitácia svetlého dreva (nie z IKEA)'],['','sokel Nickebo'],['','bez digestora; krabicu v podlahe zaslepiť']]]
   ]
  },
  i6:{style:'ikea',noBox:1,eyebrow:'IKEA 6 · variant F bez ostrova a digestora',title:'Celá linka pri kúpeľni, stôl pod oknom, bez digestora',
@@ -1059,7 +1059,7 @@ const SHOP={
   ['Pracovná doska',[[1,['ekbB246'],'čierna, stena ku kúpeľni s rohom, 244 cm'],[1,['ekbB186'],'čierna, zadná stena, 133 cm']]],
   ['Drez a batéria',[[1,SINKS],[1,TAPS]]],
   ['Spotrebiče',[[1,HOBS,'bez digestora; TÄCKNAN má odsávač zabudovaný v doske. Bežné dosky IKEA sú označené „posledná šanca“'],[1,OVENS],[1,['dw45L','dw45F'],'umývačka 45 cm'],[1,['skog'],'jediná chladnička IKEA na výšku 200 cm']]],
-  ['Stôl, stoličky a svetlo',[[1,['lisR','norrR'],'čierny okrúhly Ø 90 cm IKEA nemá, toto sú najbližšie (Ø 105 cm)'],[4,['lisC','pinC2','pinC','ronC'],'svetlé drevo'],[1,LAMPS,'z vývodu pre digestor v strope'],[4,['mitt','kolv'],'pod horné skrinky'],[1,['trad'],'len k MITTLED'],[1,['forn'],'len k MITTLED']]]
+  ['Stôl, stoličky a svetlo',[[1,['lisR','norrR'],'čierny okrúhly Ø 90 cm IKEA nemá, toto sú najbližšie (Ø 105 cm)'],[3,['lisC','pinC2','pinC','ronC'],'svetlé drevo'],[1,LAMPS,'z vývodu pre digestor v strope'],[4,['mitt','kolv'],'pod horné skrinky'],[1,['trad'],'len k MITTLED'],[1,['forn'],'len k MITTLED']]]
  ],
  i6:[
   ['Skrinky METOD Nickebo',[
