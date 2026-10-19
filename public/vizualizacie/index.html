@@ -114,6 +114,8 @@ tr:last-child td,tr:last-child th{border-bottom:0}
 .p-lbl{fill:var(--ink);font-family:var(--f-body);font-size:100px;font-weight:500;text-anchor:middle;dominant-baseline:central;paint-order:stroke;stroke:var(--paper);stroke-width:22;stroke-linejoin:round}
 .p-lbl.s{font-size:84px}
 .p-lbl.w{fill:var(--warn);font-weight:600}
+.p-lbl.inv{fill:#f3f2ee;stroke:#26282a}
+.p-tblk{fill:#26282a;stroke:var(--ink);stroke-width:12}
 .p-dim{stroke:var(--accent);stroke-width:9;fill:none}
 .p-dimt{fill:var(--accent);font-family:var(--f-mono);font-size:112px;font-weight:500;text-anchor:middle;dominant-baseline:central;paint-order:stroke;stroke:var(--paper);stroke-width:26;stroke-linejoin:round}
 .p-mk{fill:var(--warn);stroke:var(--paper);stroke-width:14}
@@ -520,17 +522,18 @@ const IK={
   ]
  },
  i7:{style:'ikea',noBox:1,eyebrow:'IKEA 7 · variant F do L, drez na zadnej stene',title:'Linka do L s rohovou skrinkou, drez a umývačka na zadnej stene, stôl pod oknom',
-  text:'IKEA 6 doplnená podľa tatina do tvaru L. Na stene ku kúpeľni ostáva od chodby vysoká skriňa s chladničkou, zásuvky 40 a varná doska s rúrou na rovnakom mieste ako v IKEA 6, za nimi výsuvy 30 a 20 cm. V rohu je spodná rohová skrinka 88 × 88 a na zadnej stene k nej pokračuje skrinka 60 s drezom a umývačka 45 cm. Horné skrinky sú len na stene ku kúpeľni, nad zadnou stenou nie sú. Stôl 120 × 80 so 4 stoličkami stojí pod oknom ako v IKEA 6. Bez ostrova a bez digestora.',
-  plus:['Drez je na zadnej stene, kde ho má aj pôvodný projekt, takže vodu a odpad netreba ťahať k stene ku kúpeľni','Roh využije rohová skrinka 88 × 88','Varná doska a rúra sú na rovnakom mieste ako v IKEA 6, prívod je v rohu','Medzi doskou a drezom je pracovná plocha cez roh','Nad zadnou stenou nie sú horné skrinky, kuchyňa pôsobí otvorenejšie','Stôl pod oknom pre 4, ulička medzi stolom a linkou 1,33 m','Nič nezasahuje do obývačky'],
-  minus:['Medzi rúrou a rohovou skrinkou ostáva 56 cm, preto sú tam výsuvy 30 + 20 cm a 6 cm krycia lišta','Umývačka 45 cm má menší objem ako 60 cm, pre 2 až 3 ľudí to stačí','Bez digestora bude spodok skrinky nad doskou chytať paru a mastnotu','Kábel z rohu k varnej doske má asi 1,7 m, elektrikár ho vedie za skrinkami','Prázdnu krabicu v podlahe treba zaslepiť'],
+  text:'IKEA 6 doplnená podľa tatina do tvaru L. Na stene ku kúpeľni ostáva od chodby vysoká skriňa s chladničkou, zásuvky 40 a varná doska s rúrou na rovnakom mieste ako v IKEA 6, za nimi výsuvy 30 a 20 cm. V rohu je spodná rohová skrinka 88 × 88 a na zadnej stene k nej pokračuje skrinka 60 s drezom a umývačka 45 cm. Horné skrinky sú len na stene ku kúpeľni, nad zadnou stenou nie sú. Pod oknom je okrúhly čierny stôl Ø 90 cm so 4 stoličkami zo svetlého dreva. Pracovná doska je čierna a stenu medzi doskou a hornými skrinkami pokrýva melamínový panel v imitácii svetlého dreva. Bez ostrova a bez digestora.',
+  plus:['Drez je na zadnej stene, kde ho má aj pôvodný projekt, takže vodu a odpad netreba ťahať k stene ku kúpeľni','Roh využije rohová skrinka 88 × 88','Varná doska a rúra sú na rovnakom mieste ako v IKEA 6, prívod je v rohu','Medzi doskou a drezom je pracovná plocha cez roh','Nad zadnou stenou nie sú horné skrinky, kuchyňa pôsobí otvorenejšie','Okrúhly stôl pod oknom pre 4, ulička medzi stolom a linkou 1,33 m','Nič nezasahuje do obývačky'],
+  minus:['Medzi rúrou a rohovou skrinkou ostáva 56 cm, preto sú tam výsuvy 30 + 20 cm a 6 cm krycia lišta','Umývačka 45 cm má menší objem ako 60 cm, pre 2 až 3 ľudí to stačí','Bez digestora bude spodok skrinky nad doskou chytať paru a mastnotu','Kábel z rohu k varnej doske má asi 1,7 m, elektrikár ho vedie za skrinkami','Prázdnu krabicu v podlahe treba zaslepiť','Okrúhly čierny stôl Ø 90 cm IKEA na ikea.sk nemá, najbližšie sú čierne Ø 105 cm (LISABO, NORRMJÖLE)'],
   items:[
-   {k:'run',x:2530,y:3650,d:600,dir:'y',front:'W',mods:[{w:600,t:'chladnička',kind:'tall'},{w:400,t:'zásuvky'},{w:600,t:'rúra',hide:1},{w:300,t:'výsuv'},{w:200,t:'výsuv'},{w:61,t:'',cont:1},{w:280,t:'',cont:1}]},
-   {k:'run',x:1200,y:6091,d:600,dir:'x',front:'N',mods:[{w:450,t:'umývačka'},{w:600,t:'drez',hide:1},{w:880,t:'rohová'}]},
+   {k:'run',x:2530,y:3650,d:600,dir:'y',front:'W',top:'black',mods:[{w:600,t:'chladnička',kind:'tall'},{w:400,t:'zásuvky'},{w:600,t:'rúra',hide:1},{w:300,t:'výsuv'},{w:200,t:'výsuv'},{w:61,t:'',cont:1},{w:280,t:'',cont:1}]},
+   {k:'run',x:1200,y:6091,d:600,dir:'x',front:'N',top:'black',mods:[{w:450,t:'umývačka'},{w:600,t:'drez',hide:1},{w:880,t:'rohová'}]},
    {k:'cook',x:2575,y:4690,w:520,d:520},
    {k:'sink',x:1730,y:6180,w:440,d:420},
    {k:'upper',x:2763,y:4250,w:367,d:400},{k:'upper',x:2763,y:4650,w:367,d:600},{k:'upper',x:2763,y:5250,w:367,d:1441},
-   {k:'table',x:0,y:4555,w:1200,d:800,label:'stôl 120×80'},
-   chair(330,4330,'S'),chair(870,4330,'S'),chair(330,5580,'N'),chair(870,5580,'N'),
+   {k:'splash',x:3120,y:4250,w:10,d:2441},
+   {k:'rtable',x:750,y:4955,r:450,black:1},
+   ...[chair(750,4435,'S'),chair(750,5475,'N'),chair(230,4955,'E'),chair(1270,4955,'W')].map(c=>Object.assign(c,{wood:1})),
    {k:'lbl',x:1250,y:3950,text:'svetlo nad stôl',s:1},
    {k:'lbl',x:2150,y:5650,text:'prívod dosky v rohu',s:1}
   ],
@@ -539,8 +542,8 @@ const IK={
    ['Stena ku kúpeľni, od chodby',[['60','vysoká skriňa na vstavanú chladničku 60×60×200, dvierka Nickebo'],['40','skrinka so zásuvkami 40×60×80'],['60','skrinka na rúru 60×60×80, rúra + indukčná doska 60 cm (ako v IKEA 6)'],['30','skrinka s výsuvom 30×60×80'],['20','úzka skrinka s výsuvom 20×60×80'],['6 cm','krycia lišta k rohovej skrinke']]],
    ['Roh a zadná stena, od rohu',[['88','spodná rohová skrinka 88×88 (s policou alebo otočným košom)'],['60','skrinka pre drez 60×60×80, drez a batéria'],['45','integrovaná umývačka 45 cm, čelo Nickebo 45×80'],['','krycí panel Nickebo na koniec linky pri stole']]],
    ['Horné skrinky, hĺbka 37 cm, výška 80 cm, len na stene ku kúpeľni',[['40','nad zásuvkami'],['60','nad varnou doskou'],['80 + 60','nad výsuvmi a rohom'],['','nad zadnou stenou nič']]],
-   ['Jedálenský kút',[['','stôl 120 × 80 čelom pod oknom a 4 stoličky'],['','závesné svetlo z vývodu pre digestor v strope']]],
-   ['Ostatné',[['','pracovná doska do 3 cm: stena ku kúpeľni 244 cm s rohom, zadná stena 133 cm'],['','sokel Nickebo'],['','bez digestora; krabicu v podlahe zaslepiť']]]
+   ['Jedálenský kút',[['','okrúhly čierny stôl Ø 90 cm pod oknom a 4 stoličky zo svetlého dreva'],['','závesné svetlo z vývodu pre digestor v strope']]],
+   ['Ostatné',[['','čierna pracovná doska do 3 cm: stena ku kúpeľni 244 cm s rohom, zadná stena 133 cm'],['','obklad medzi doskou a hornými skrinkami: melamínový panel, imitácia svetlého dreva (nie z IKEA)'],['','sokel Nickebo'],['','bez digestora; krabicu v podlahe zaslepiť']]]
   ]
  },
  i6:{style:'ikea',noBox:1,eyebrow:'IKEA 6 · variant F bez ostrova a digestora',title:'Celá linka pri kúpeľni, stôl pod oknom, bez digestora',
@@ -676,12 +679,12 @@ function drawItem(it){
       cx.forEach(a=>cy.forEach(b=>{s+=`<circle cx="${a}" cy="${b}" r="${Math.min(w,d)*.17}" class="p-burn"/>`;})); break; }
     case 'sink': s=r(x,y,w,d,'p-sink','rx="40"')+t(x+w/2,y+d/2,'drez','s'); break;
     case 'table': s=r(x,y,w,d,'p-wood')+t(x+w/2,y+d/2,it.label,'s',d>w); break;
-    case 'chair': { const a=210, cx=it.x, cy=it.y; s=r(cx-a,cy-a,2*a,2*a,'p-chair','rx="40"');
+    case 'chair': { const a=210, cx=it.x, cy=it.y; s=r(cx-a,cy-a,2*a,2*a,it.wood?'p-wood':'p-chair','rx="40"');
       const b={N:[cx-a,cy+a-20,cx+a,cy+a-20],S:[cx-a,cy-a+20,cx+a,cy-a+20],E:[cx-a+20,cy-a,cx-a+20,cy+a],W:[cx+a-20,cy-a,cx+a-20,cy+a]}[it.face];
       s+=`<line x1="${b[0]}" y1="${b[1]}" x2="${b[2]}" y2="${b[3]}" class="p-back"/>`; break; }
     case 'sofa': s=r(x,y,w,d,'p-sofa','rx="60"'); break;
     case 'bench': s=r(x,y,w,d,'p-sofa','rx="30"')+t(x+w/2,y+d/2,'lavica','s',d>w); break;
-    case 'rtable': s=`<circle cx="${x}" cy="${y}" r="${it.r}" class="p-wood"/>`+t(x,y,'stôl Ø '+(it.r/5),'s'); break;
+    case 'rtable': s=`<circle cx="${x}" cy="${y}" r="${it.r}" class="${it.black?'p-tblk':'p-wood'}"/>`+t(x,y,'stôl Ø '+(it.r/5),it.black?'s inv':'s'); break;
     case 'ctable': s=`<circle cx="${x}" cy="${y}" r="${it.r}" class="p-wood"/>`; break;
     case 'lowboard': s=r(x,y,w,d,'p-thin')+t(x+w/2+20,y+d/2,'TV skrinka','s',true); break;
     case 'tv': s=r(x+w,y,30,d,'p-cook'); break;
@@ -762,7 +765,7 @@ function initMaterials(){
   M.plinth=std('#3a3b3c'); M.black=std('#141516',{roughness:.25}); M.steel=std('#b9bdc1',{roughness:.3,metalness:.6});
   M.wood=std('#b48c5f',{roughness:.6}); M.chair=std('#3b3c3e',{roughness:.6}); M.sofa=std('#8e9297',{roughness:1});
   M.frame=std('#3a3e42',{roughness:.5}); M.sill=std('#26292b',{roughness:.4});
-  M.nick=std('#86917f',{roughness:.85}); M.oak=std('#c9a573',{roughness:.6}); M.hoodw=std('#e9e9e6',{roughness:.5});
+  M.nick=std('#86917f',{roughness:.85}); M.oak=std('#c9a573',{roughness:.6}); M.topB=std('#1e2022',{roughness:.5}); M.lwood=std('#d8bc8f',{roughness:.65}); M.tblk=std('#232527',{roughness:.5}); M.hoodw=std('#e9e9e6',{roughness:.5});
   M.glass=new THREE.MeshBasicMaterial({color:col('#cfe5f3'),transparent:true,opacity:.35,depthWrite:false});
   M.warn=new THREE.MeshBasicMaterial({color:col('#e0533a'),transparent:true,opacity:.35,depthWrite:false});
   floorTex=floorTexture();
@@ -801,29 +804,30 @@ function build(it,grp,st){
         add(box(X0+30,X1-30,Y0+30,Y1-30,0,80,M.nick),box(X0,X1,Y0,Y1,80,880,M.nick));
         bx0=Math.min(bx0,m.x); bx1=Math.max(bx1,m.x+m.w); by0=Math.min(by0,m.y); by1=Math.max(by1,m.y+m.d);
       });
-      if(bx1>bx0){ const o=35;
-        if(it.island) add(box(bx0,bx1,by0-o,by1+o,880,910,M.oak));
-        else if(it.front==='N') add(box(bx0,bx1,by0-o,by1,880,910,M.oak));
-        else if(it.front==='S') add(box(bx0,bx1,by0,by1+o,880,910,M.oak));
-        else add(box(bx0-o,bx1,by0,by1,880,910,M.oak));
+      if(bx1>bx0){ const o=35, TM=it.top==='black'?M.topB:M.oak;
+        if(it.island) add(box(bx0,bx1,by0-o,by1+o,880,910,TM));
+        else if(it.front==='N') add(box(bx0,bx1,by0-o,by1,880,910,TM));
+        else if(it.front==='S') add(box(bx0,bx1,by0,by1+o,880,910,TM));
+        else add(box(bx0-o,bx1,by0,by1,880,910,TM));
       }
       break; }
     case 'table': { add(box(x,x+w,y,y+d,720,750,ik?M.oak:M.wood)); [[x+40,y+40],[x+w-100,y+40],[x+40,y+d-100],[x+w-100,y+d-100]].forEach(([a,b])=>add(box(a,a+60,b,b+60,0,720,ik?M.oak:M.wood))); break; }
-    case 'chair': { const a=210, cx=it.x, cy=it.y; add(box(cx-a,cx+a,cy-a,cy+a,430,470,M.chair));
-      [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([p,q])=>add(box(cx+p*(a-30)-15,cx+p*(a-30)+15,cy+q*(a-30)-15,cy+q*(a-30)+15,0,430,M.chair)));
+    case 'chair': { const a=210, cx=it.x, cy=it.y, CM=it.wood?M.lwood:M.chair; add(box(cx-a,cx+a,cy-a,cy+a,430,470,CM));
+      [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([p,q])=>add(box(cx+p*(a-30)-15,cx+p*(a-30)+15,cy+q*(a-30)-15,cy+q*(a-30)+15,0,430,CM)));
       const b={N:[cx-a,cx+a,cy+a-40,cy+a],S:[cx-a,cx+a,cy-a,cy-a+40],E:[cx-a,cx-a+40,cy-a,cy+a],W:[cx+a-40,cx+a,cy-a,cy+a]}[it.face];
-      add(box(b[0],b[1],b[2],b[3],470,880,M.chair)); break; }
+      add(box(b[0],b[1],b[2],b[3],470,880,CM)); break; }
     case 'sofa': add(box(x,x+w,y,y+d,0,430,M.sofa)); break;
     case 'sofaBack': add(box(2390,3747,85,285,430,820,M.sofa),box(3547,3747,285,2685,430,820,M.sofa),box(2948,3747,2485,2685,430,600,M.sofa)); break;
     case 'bench': add(box(x,x+w,y,y+d,0,420,M.front),box(x,x+w,y,y+d,420,470,M.sofa));
       if(it.back==='W') add(box(x,x+70,y,y+d,470,820,M.sofa)); else add(box(x,x+w,y+d-70,y+d,470,900,M.sofa)); break;
-    case 'rtable': { const m=new THREE.Mesh(new THREE.CylinderGeometry(it.r/1000,it.r/1000,.03,48),M.oak); m.position.set(x/1000,.735,y/1000); m.castShadow=true; add(m);
+    case 'rtable': { const m=new THREE.Mesh(new THREE.CylinderGeometry(it.r/1000,it.r/1000,.03,48),it.black?M.tblk:M.oak); m.position.set(x/1000,.735,y/1000); m.castShadow=true; add(m);
       [[1,1],[1,-1],[-1,1],[-1,-1]].forEach(([p,q])=>{const l=box(x-20,x+20,y-20,y+20,0,720,M.black); l.position.x+=p*.12; l.position.z+=q*.12; add(l);}); break; }
     case 'ctable': { const m=new THREE.Mesh(new THREE.CylinderGeometry(it.r/1000,it.r/1000,.04,40),M.wood); m.position.set(x/1000,.4,y/1000); m.castShadow=true; add(m);
       const l=new THREE.Mesh(new THREE.CylinderGeometry(.04,.04,.38,12),M.chair); l.position.set(x/1000,.19,y/1000); add(l); break; }
     case 'lowboard': add(box(x,x+w,y,y+d,80,480,M.white)); break;
     case 'tv': add(box(x,x+w,y,y+d,900,1600,M.black)); break;
     case 'warn': add(box(x,x+w,y,y+d,0,920,M.warn,false,false)); break;
+    case 'splash': add(box(x,x+w,y,y+d,910,1450,M.lwood,false,true)); break;
   }
 }
 COMMON.push({k:'sofaBack'});
@@ -1000,6 +1004,12 @@ const P={
  dw45L:['LAGAN integrovaná umývačka 45 cm','205.681.62',249,'lagan-zabudovatelna-umyvacka-20568162/'],
  dw45F:['FRÖSLUNDA integrovaná umývačka 45 cm, IKEA 500','105.681.67',399,'froeslunda-zabudovatelna-umyvacka-ikea-500-10568167/'],
  dwf45:['NICKEBO čelo umývačky 45×80','205.625.51',35,'nickebo-predna-strana-umyvacky-riadu-s-matnym-vzhladom-sivozelena-20562551/'],
+ ekbB186:['EKBACKEN pracovná doska čierna, 186 × 2,8 cm','105.896.74',54.90,'ekbacken-pracovna-doska-cierna-laminat-10589674/'],
+ ekbB246:['EKBACKEN pracovná doska čierna, 246 × 2,8 cm','205.896.78',64.90,'ekbacken-pracovna-doska-cierna-laminat-20589678/'],
+ lisR:['LISABO okrúhly stôl čierna, Ø 105 cm','504.165.01',149,'lisabo-stol-cierna-jasenova-dyha-50416501/'],
+ norrR:['NORRMJÖLE okrúhly stôl čierny mramorový efekt, Ø 105 cm','506.205.64',169,'norrmjoele-stol-cierna-mramorovy-efekt-cierna-50620564/'],
+ ronC:['RÖNNINGE stolička, breza','104.225.04',99,'roenninge-stolicka-breza-10422504/'],
+ pinC2:['PINNTORP stolička, svetlohnedá/borovica','005.904.80',24.99,'pinntorp-stolicka-morena-svetlohneda-borovica-00590480/'],
  skog:['SKOGSNÄS vstavaná chladnička s mrazničkou, 197,7 cm (do skrine 200)','105.728.76',749,'skogsnaes-chladnicka-mraznicka-ikea-700-vstavana-10572876/'],
  svav:['SVÄVANDE stropný ostrovčekový odsávač 90 cm','403.890.89',579,'svaevande-odsavac-pripevneny-k-stropu-nehrdzavejuca-ocel-40389089/'],
  omnejd:['OMNEJD stropný ostrovčekový odsávač 90 cm, LED','105.217.35',849,'omnejd-odsavac-pripevneny-k-stropu-nehrdzavejuca-ocel-10521735/'],
@@ -1046,10 +1056,10 @@ const SHOP={
    [1,['cor88','cor88k'],'spodná rohová skrinka'],[1,['sink60','sink60b'],'zadná stena'],[1,['dwf45'],'čelo umývačky 45 cm'],
    [1,['w40'],'nad zásuvkami'],[1,['w60','w60b'],'nad varnou doskou'],[1,['w80','w60b'],'nad výsuvmi'],[1,['w60','w60b'],'nad rohom'],[2,['rail']],
    [1,['pan240'],'bok chladničky smerom k chodbe'],[1,['pan80'],'koniec linky pri stole'],[3,['plinth']],[16,['legs']],[9,HANDLES]]],
-  ['Pracovná doska',[[1,TOPS246,'stena ku kúpeľni s rohom, 244 cm'],[1,TOPS186,'zadná stena, 133 cm']]],
+  ['Pracovná doska',[[1,['ekbB246'],'čierna, stena ku kúpeľni s rohom, 244 cm'],[1,['ekbB186'],'čierna, zadná stena, 133 cm']]],
   ['Drez a batéria',[[1,SINKS],[1,TAPS]]],
   ['Spotrebiče',[[1,HOBS,'bez digestora; TÄCKNAN má odsávač zabudovaný v doske. Bežné dosky IKEA sú označené „posledná šanca“'],[1,OVENS],[1,['dw45L','dw45F'],'umývačka 45 cm'],[1,['skog'],'jediná chladnička IKEA na výšku 200 cm']]],
-  ['Stôl, stoličky a svetlo',[[1,['skalT','lis140','pinT','tonT'],'stôl 120 × 80 som na ikea.sk overený nenašiel, toto sú najbližšie rozmery'],[4,CHAIRS],[1,LAMPS,'z vývodu pre digestor v strope'],[4,['mitt','kolv'],'pod horné skrinky'],[1,['trad'],'len k MITTLED'],[1,['forn'],'len k MITTLED']]]
+  ['Stôl, stoličky a svetlo',[[1,['lisR','norrR'],'čierny okrúhly Ø 90 cm IKEA nemá, toto sú najbližšie (Ø 105 cm)'],[4,['lisC','pinC2','pinC','ronC'],'svetlé drevo'],[1,LAMPS,'z vývodu pre digestor v strope'],[4,['mitt','kolv'],'pod horné skrinky'],[1,['trad'],'len k MITTLED'],[1,['forn'],'len k MITTLED']]]
  ],
  i6:[
   ['Skrinky METOD Nickebo',[
