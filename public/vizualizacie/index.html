@@ -258,7 +258,8 @@ table.shop th.num,table.shop td.num{text-align:right;white-space:nowrap}
       <li>menej pracovnej dosky</li>
     </ul>
     <div class="tabs" id="ikTabs" role="tablist" aria-label="Varianty IKEA">
-      <button class="tab" role="tab" id="tab-i6" data-v="i6">IKEA 6 · variant F bez ostrova a digestora <span class="pill">najnovšie</span></button>
+      <button class="tab" role="tab" id="tab-i7" data-v="i7">IKEA 7 · variant F do L, drez na zadnej stene <span class="pill">najnovšie</span></button>
+      <button class="tab" role="tab" id="tab-i6" data-v="i6">IKEA 6 · variant F bez ostrova a digestora</button>
       <button class="tab" role="tab" id="tab-i5" data-v="i5">IKEA 5 · tatinov pôdorys, linka do U</button>
       <button class="tab" role="tab" id="tab-i4" data-v="i4">IKEA 4 · tatinov pôdorys, upravený</button>
       <button class="tab" role="tab" id="tab-i4o" data-v="i4o">IKEA 4 pôvodný · tatinov pôdorys bez úprav <small>na porovnanie</small></button>
@@ -516,6 +517,30 @@ const IK={
    ['Ostrovček 120 × 60, od okna',[['30','spodná skrinka so zásuvkami 30×60×80'],['60','skrinka na rúru 60×60×80, rúra + indukčná doska 60 cm (prívod z podlahy)'],['30','spodná skrinka so zásuvkami 30×60×80'],['','krycie panely Nickebo na zadnú stranu a boky ostrovčeka']]],
    ['Nad zadnou linkou',[['60 + 60 + 60','horné skrinky hĺbky 37 cm, výška 80 cm']]],
    ['Ostatné',[['','stropný uhlíkový digestor nad ostrovčekom'],['','pracovná doska do 3 cm: zadná 180 cm, ostrovček 120 cm'],['','sokel Nickebo'],['','stôl 88 × 78 (LISABO) a 4 stoličky']]]
+  ]
+ },
+ i7:{style:'ikea',noBox:1,eyebrow:'IKEA 7 · variant F do L, drez na zadnej stene',title:'Linka do L s rohovou skrinkou, drez a umývačka na zadnej stene, stôl pod oknom',
+  text:'IKEA 6 doplnená podľa tatina do tvaru L. Na stene ku kúpeľni ostáva od chodby vysoká skriňa s chladničkou, zásuvky 40 a varná doska s rúrou na rovnakom mieste ako v IKEA 6, za nimi výsuvy 30 a 20 cm. V rohu je spodná rohová skrinka 88 × 88 a na zadnej stene k nej pokračuje skrinka 60 s drezom a umývačka 45 cm. Horné skrinky sú len na stene ku kúpeľni, nad zadnou stenou nie sú. Stôl 120 × 80 so 4 stoličkami stojí pod oknom ako v IKEA 6. Bez ostrova a bez digestora.',
+  plus:['Drez je na zadnej stene, kde ho má aj pôvodný projekt, takže vodu a odpad netreba ťahať k stene ku kúpeľni','Roh využije rohová skrinka 88 × 88','Varná doska a rúra sú na rovnakom mieste ako v IKEA 6, prívod je v rohu','Medzi doskou a drezom je pracovná plocha cez roh','Nad zadnou stenou nie sú horné skrinky, kuchyňa pôsobí otvorenejšie','Stôl pod oknom pre 4, ulička medzi stolom a linkou 1,33 m','Nič nezasahuje do obývačky'],
+  minus:['Medzi rúrou a rohovou skrinkou ostáva 56 cm, preto sú tam výsuvy 30 + 20 cm a 6 cm krycia lišta','Umývačka 45 cm má menší objem ako 60 cm, pre 2 až 3 ľudí to stačí','Bez digestora bude spodok skrinky nad doskou chytať paru a mastnotu','Kábel z rohu k varnej doske má asi 1,7 m, elektrikár ho vedie za skrinkami','Prázdnu krabicu v podlahe treba zaslepiť'],
+  items:[
+   {k:'run',x:2530,y:3650,d:600,dir:'y',front:'W',mods:[{w:600,t:'chladnička',kind:'tall'},{w:400,t:'zásuvky'},{w:600,t:'rúra',hide:1},{w:300,t:'výsuv'},{w:200,t:'výsuv'},{w:61,t:'',cont:1},{w:280,t:'',cont:1}]},
+   {k:'run',x:1200,y:6091,d:600,dir:'x',front:'N',mods:[{w:450,t:'umývačka'},{w:600,t:'drez',hide:1},{w:880,t:'rohová'}]},
+   {k:'cook',x:2575,y:4690,w:520,d:520},
+   {k:'sink',x:1730,y:6180,w:440,d:420},
+   {k:'upper',x:2763,y:4250,w:367,d:400},{k:'upper',x:2763,y:4650,w:367,d:600},{k:'upper',x:2763,y:5250,w:367,d:1441},
+   {k:'table',x:0,y:4555,w:1200,d:800,label:'stôl 120×80'},
+   chair(330,4330,'S'),chair(870,4330,'S'),chair(330,5580,'N'),chair(870,5580,'N'),
+   {k:'lbl',x:1250,y:3950,text:'svetlo nad stôl',s:1},
+   {k:'lbl',x:2150,y:5650,text:'prívod dosky v rohu',s:1}
+  ],
+  dims:[{a:[1200,5150],b:[2530,5150],t:'1 330'},{a:[1200,5900],b:[3130,5900],t:'1 930'}],
+  bom:[
+   ['Stena ku kúpeľni, od chodby',[['60','vysoká skriňa na vstavanú chladničku 60×60×200, dvierka Nickebo'],['40','skrinka so zásuvkami 40×60×80'],['60','skrinka na rúru 60×60×80, rúra + indukčná doska 60 cm (ako v IKEA 6)'],['30','skrinka s výsuvom 30×60×80'],['20','úzka skrinka s výsuvom 20×60×80'],['6 cm','krycia lišta k rohovej skrinke']]],
+   ['Roh a zadná stena, od rohu',[['88','spodná rohová skrinka 88×88 (s policou alebo otočným košom)'],['60','skrinka pre drez 60×60×80, drez a batéria'],['45','integrovaná umývačka 45 cm, čelo Nickebo 45×80'],['','krycí panel Nickebo na koniec linky pri stole']]],
+   ['Horné skrinky, hĺbka 37 cm, výška 80 cm, len na stene ku kúpeľni',[['40','nad zásuvkami'],['60','nad varnou doskou'],['80 + 60','nad výsuvmi a rohom'],['','nad zadnou stenou nič']]],
+   ['Jedálenský kút',[['','stôl 120 × 80 čelom pod oknom a 4 stoličky'],['','závesné svetlo z vývodu pre digestor v strope']]],
+   ['Ostatné',[['','pracovná doska do 3 cm: stena ku kúpeľni 244 cm s rohom, zadná stena 133 cm'],['','sokel Nickebo'],['','bez digestora; krabicu v podlahe zaslepiť']]]
   ]
  },
  i6:{style:'ikea',noBox:1,eyebrow:'IKEA 6 · variant F bez ostrova a digestora',title:'Celá linka pri kúpeľni, stôl pod oknom, bez digestora',
@@ -1015,6 +1040,17 @@ const KITCHEN_COMMON=(tops,topQty,hoods)=>[
  ['Spotrebiče',[[1,HOBS,'bežné dosky IKEA sú označené „posledná šanca“'],[1,OVENS],[1,DWS],[1,['skog'],'jediná chladnička IKEA na výšku 200 cm']].concat(hoods)],
 ];
 const SHOP={
+ i7:[
+  ['Skrinky METOD Nickebo',[
+   [1,FR,'pri chodbe'],[1,['d40_3','d40_1','sh40']],[1,['ovenA','ovenB'],'pod varnou doskou'],[1,['pull30','shelf30']],[1,['pull20']],
+   [1,['cor88','cor88k'],'spodná rohová skrinka'],[1,['sink60','sink60b'],'zadná stena'],[1,['dwf45'],'čelo umývačky 45 cm'],
+   [1,['w40'],'nad zásuvkami'],[1,['w60','w60b'],'nad varnou doskou'],[1,['w80','w60b'],'nad výsuvmi'],[1,['w60','w60b'],'nad rohom'],[2,['rail']],
+   [1,['pan240'],'bok chladničky smerom k chodbe'],[1,['pan80'],'koniec linky pri stole'],[3,['plinth']],[16,['legs']],[9,HANDLES]]],
+  ['Pracovná doska',[[1,TOPS246,'stena ku kúpeľni s rohom, 244 cm'],[1,TOPS186,'zadná stena, 133 cm']]],
+  ['Drez a batéria',[[1,SINKS],[1,TAPS]]],
+  ['Spotrebiče',[[1,HOBS,'bez digestora; TÄCKNAN má odsávač zabudovaný v doske. Bežné dosky IKEA sú označené „posledná šanca“'],[1,OVENS],[1,['dw45L','dw45F'],'umývačka 45 cm'],[1,['skog'],'jediná chladnička IKEA na výšku 200 cm']]],
+  ['Stôl, stoličky a svetlo',[[1,['skalT','lis140','pinT','tonT'],'stôl 120 × 80 som na ikea.sk overený nenašiel, toto sú najbližšie rozmery'],[4,CHAIRS],[1,LAMPS,'z vývodu pre digestor v strope'],[4,['mitt','kolv'],'pod horné skrinky'],[1,['trad'],'len k MITTLED'],[1,['forn'],'len k MITTLED']]]
+ ],
  i6:[
   ['Skrinky METOD Nickebo',[
    [1,FR,'pri chodbe'],[1,['d40_3','d40_1','sh40']],[1,['ovenA','ovenB'],'pod varnou doskou'],[1,['dwfront']],[1,['sink60','sink60b']],[1,['pull20']],
@@ -1137,7 +1173,7 @@ function mount(o){
   show(start);
 }
 mount({p:'v',tabs:'#oldTabs .tab',data:V,store:'k7c-var2',def:'d',name:k=>k==='orig'?'pôvodný':'variant '+k.toUpperCase()});
-mount({p:'ik',tabs:'#ikTabs .tab',data:IK,store:'k7c-ik4',def:'i6',name:k=>k==='i4o'?'IKEA 4 pôvodný':'IKEA '+k.slice(1)});
+mount({p:'ik',tabs:'#ikTabs .tab',data:IK,store:'k7c-ik5',def:'i7',name:k=>k==='i4o'?'IKEA 4 pôvodný':'IKEA '+k.slice(1)});
 })();
 </script>
 
