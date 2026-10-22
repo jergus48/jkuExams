@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Lanzarote za 7 dní</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: basalt hero with a lava horizon, then an island map beside a day picker, then seven day timelines and practical grids. */
+:root{
+  --bg:#F2F5F3; --surface:#FFFFFF; --surface-2:#E7ECE9; --ink:#14181B; --ink-2:#4A5559; --line:#D3DAD6;
+  --lava:#C73A17; --on-lava:#FFFFFF; --sea:#0B6F7A; --vine:#3A7448;
+  --map-sea:#D9EAEB; --land:#2C3438; --land-line:#4B565B;
+  --hero-bg:#0D1012; --hero-fg:#F2F0EC; --hero-dim:#A9B1B4; --hero-lava:#FF6A3D;
+  --f-display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"DM Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1315; --surface:#171C1F; --surface-2:#20272B; --ink:#E8ECEA; --ink-2:#9AA6AB; --line:#2B3439;
+    --lava:#FF7A52; --on-lava:#1A0A05; --sea:#52C3CD; --vine:#80C58D;
+    --map-sea:#0F2A2F; --land:#2A3338; --land-line:#46535A; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1315; --surface:#171C1F; --surface-2:#20272B; --ink:#E8ECEA; --ink-2:#9AA6AB; --line:#2B3439;
+  --lava:#FF7A52; --on-lava:#1A0A05; --sea:#52C3CD; --vine:#80C58D;
+  --map-sea:#0F2A2F; --land:#2A3338; --land-line:#46535A; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;line-height:1.02}
+p{margin:0}
+a{color:inherit}
+.mono{font-family:var(--f-mono);font-feature-settings:"tnum"}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+
+/* hero */
+.hero{margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));
+  background:var(--hero-bg);color:var(--hero-fg);position:relative;overflow:hidden;
+  padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(60% 55% at 72% 100%,rgba(255,106,61,.55),rgba(255,106,61,0) 70%),
+  radial-gradient(40% 30% at 20% 100%,rgba(255,150,70,.22),rgba(255,150,70,0) 70%)}
+.hero svg.ridge{position:absolute;left:0;right:0;bottom:0;width:100%;height:46%;min-height:150px}
+.hero .wrap{position:relative;padding-block:56px 150px}
+.hero .eyebrow{color:var(--hero-lava)}
+.hero h1{font-size:clamp(64px,15vw,176px);font-weight:800;font-stretch:75%;font-variation-settings:"wdth" 75,"opsz" 96;letter-spacing:-.02em;margin-top:14px}
+.hero .sub{font-size:clamp(18px,2.4vw,24px);max-width:34ch;color:var(--hero-fg);margin-top:18px;line-height:1.35}
+.facts{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:-1px;background:var(--surface);border:1px solid var(--line);border-radius:6px;transform:translateY(-50%);margin-bottom:-28px}
+.fact{padding:16px 18px;min-width:0;border-left:1px solid var(--line)}
+.fact:first-child{border-left:0}
+.fact .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.fact .v{font-family:var(--f-display);font-weight:700;font-size:20px;margin-top:4px;line-height:1.15}
+
+section{padding-block:56px 0}
+.sec-head{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:end;justify-content:space-between;margin-bottom:24px}
+.sec-head h2{font-size:clamp(34px,5vw,56px);font-weight:700;font-stretch:80%;font-variation-settings:"wdth" 80,"opsz" 72}
+.sec-head p{color:var(--ink-2);max-width:46ch}
+
+/* map + picker */
+.mapgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px;align-items:start}
+.mapcard{background:var(--map-sea);border:1px solid var(--line);border-radius:6px;overflow:hidden;position:sticky;top:max(12px,env(safe-area-inset-top,0px))}
+.mapcard svg{display:block;width:100%;height:auto}
+.land{fill:var(--land);stroke:var(--land-line);stroke-width:1.5}
+.fire{fill:var(--hero-lava);opacity:.28}
+.sea-label{font-family:var(--f-body);font-style:italic;font-size:15px;fill:var(--sea);opacity:.85}
+.route{fill:none;stroke:var(--lava);stroke-width:2.5;stroke-dasharray:2 7;stroke-linecap:round}
+.pin circle{fill:var(--lava);stroke:var(--surface);stroke-width:2;transition:r .15s,opacity .15s}
+.pin text.n{font-family:var(--f-mono);font-size:11px;font-weight:500;fill:var(--on-lava);text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.pin text.lbl{font-family:var(--f-body);font-weight:600;font-size:14px;fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round;opacity:0}
+.pin.on text.lbl{opacity:1}
+.pin.dim{opacity:.22}
+.base-ring{fill:none;stroke:var(--hero-lava);stroke-width:1.5}
+.scale line{stroke:var(--ink-2);stroke-width:2}
+.scale text,.north text{font-family:var(--f-mono);font-size:11px;fill:var(--ink-2)}
+.north path{fill:var(--ink-2)}
+
+.picker{display:flex;flex-direction:column;gap:8px}
+.daybtn{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;
+  background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.daybtn:hover{border-color:var(--lava)}
+.daybtn:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
+.daybtn .dn{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1;color:var(--lava);font-stretch:75%;font-variation-settings:"wdth" 75}
+.daybtn .dt{font-weight:600;line-height:1.2}
+.daybtn .dg{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.daybtn .chev{font-family:var(--f-mono);color:var(--ink-2);transition:transform .15s}
+.daybtn[aria-expanded="true"]{background:var(--lava);border-color:var(--lava);color:var(--on-lava)}
+.daybtn[aria-expanded="true"] .dn,.daybtn[aria-expanded="true"] .dg,.daybtn[aria-expanded="true"] .chev{color:var(--on-lava)}
+.daybtn[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.stops{list-style:none;margin:-4px 0 4px;padding:12px 14px 12px 14px;background:var(--surface);border:1px solid var(--line);border-top:0;border-radius:0 0 6px 6px;display:grid;gap:10px}
+.stops li{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start}
+.stops .b{width:22px;height:22px;border-radius:50%;background:var(--lava);color:var(--on-lava);font-family:var(--f-mono);font-size:11px;display:grid;place-items:center;margin-top:1px}
+.stops b{display:block;line-height:1.25}
+.stops span{color:var(--ink-2);font-size:14px;line-height:1.4}
+.hint{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);margin-top:4px}
+
+/* day timelines */
+.day{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:16px 40px;padding-block:40px;border-top:1px solid var(--line)}
+.day:first-of-type{border-top:2px solid var(--ink)}
+.day-h{position:sticky;top:max(12px,env(safe-area-inset-top,0px));align-self:start}
+.day-h .num{font-family:var(--f-display);font-weight:800;font-size:96px;line-height:.85;color:var(--lava);font-stretch:75%;font-variation-settings:"wdth" 75,"opsz" 96}
+.day-h h3{font-size:30px;font-weight:700;margin-top:10px;font-stretch:85%;font-variation-settings:"wdth" 85}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;border:1px solid var(--line);color:var(--ink-2)}
+.tag.sea{color:var(--sea);border-color:var(--sea)}
+.tag.fire{color:var(--lava);border-color:var(--lava)}
+.tag.vine{color:var(--vine);border-color:var(--vine)}
+.drive{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);margin-top:14px}
+.tl{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);margin-left:6px}
+.pic{display:block;width:100%;height:auto;aspect-ratio:8/5;border-radius:6px;background:var(--surface-2)}
+.tl li{position:relative;display:grid;grid-template-columns:72px minmax(0,1fr) 168px;gap:14px;padding:0 0 22px 24px;align-items:start}
+.dish .pic{margin-bottom:12px}
+img.pic{object-fit:cover}
+.credits{margin-top:20px;font-size:12px;line-height:1.5}
+.credits summary{cursor:pointer;font-family:var(--f-mono);letter-spacing:.06em;text-transform:uppercase}
+.credits ul{columns:2 280px;column-gap:32px;padding-left:16px;margin:10px 0 0}
+.credits li{break-inside:avoid;margin-bottom:4px}
+.tl li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--lava)}
+.tl li:last-child{padding-bottom:0}
+.tl .t{font-family:var(--f-mono);font-size:13px;color:var(--ink-2);padding-top:2px}
+.tl b{display:block;font-weight:600;font-size:17px;line-height:1.3}
+.tl p{color:var(--ink-2);margin-top:2px}
+.tip{margin-top:20px;margin-left:6px;padding:12px 16px;background:var(--surface-2);border-radius:6px;font-size:15px}
+.tip .eyebrow{color:var(--sea);margin-right:8px}
+
+/* lower grids */
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:22px}
+.panel h3{font-size:24px;font-weight:700;margin-bottom:14px;font-stretch:85%;font-variation-settings:"wdth" 85}
+.check{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.check label{display:grid;grid-template-columns:22px 1fr;gap:12px;padding:8px 6px;border-radius:4px;cursor:pointer;align-items:start}
+.check label:hover{background:var(--surface-2)}
+.check input{appearance:none;-webkit-appearance:none;width:20px;height:20px;margin:2px 0 0;border:2px solid var(--ink-2);border-radius:4px;display:grid;place-content:center;background:transparent}
+.check input:checked{background:var(--lava);border-color:var(--lava)}
+.check input:checked::after{content:"";width:5px;height:10px;border:solid var(--on-lava);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.check input:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
+.check small{display:block;color:var(--ink-2);font-size:14px;line-height:1.4}
+.check input:checked + span{color:var(--ink-2);text-decoration:line-through}
+.food{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:16px}
+.dish{padding:18px 0 0;border-top:2px solid var(--ink)}
+.dish h3{font-size:22px;font-weight:700}
+.dish p{color:var(--ink-2);font-size:15px;margin-top:6px}
+.planb{display:grid;gap:0}
+.planb div{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:8px 24px;padding:16px 0;border-top:1px solid var(--line)}
+.planb div:first-child{border-top:2px solid var(--ink)}
+.planb b{font-family:var(--f-display);font-size:20px;font-weight:700}
+.planb p{color:var(--ink-2)}
+.bullets{margin:0;padding-left:18px;display:grid;gap:8px;color:var(--ink)}
+.bullets li::marker{color:var(--lava)}
+footer{padding-block:56px 48px;color:var(--ink-2);font-size:14px;max-width:70ch}
+
+@media (max-width:860px){
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .fact:nth-child(3){border-left:0}
+  .fact:nth-child(n+3){border-top:1px solid var(--line)}
+  .mapgrid{grid-template-columns:minmax(0,1fr)}
+  .mapcard{position:static}
+  .day{grid-template-columns:minmax(0,1fr)}
+  .day-h{position:static;display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:end}
+  .day-h .num{font-size:72px;grid-row:span 2}
+  .day-h h3{margin-top:0;font-size:26px}
+  .day-h .tags,.day-h .drive{grid-column:2;margin-top:0}
+  .planb div{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:1000px){
+  .tl li{grid-template-columns:72px minmax(0,1fr)}
+  .tl li .pic{grid-column:2;max-width:320px}
+}
+@media (max-width:520px){
+  .tl li{grid-template-columns:minmax(0,1fr);gap:2px}
+  .tl li .pic{grid-column:1;margin-top:8px}
+  .hero .wrap{padding-block:40px 120px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+body{margin:0}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+<symbol id="sc-plane" viewBox="0 0 160 100"><rect width="160" height="100" fill="#9CCBE0"/><circle cx="128" cy="24" r="11" fill="#FBE3A6"/><path d="M0 72L34 54L66 72Z" fill="#3A4348"/><path d="M50 72L92 50L140 72Z" fill="#2C3438"/><rect y="72" width="160" height="28" fill="#4B565B"/><path d="M0 88H160" stroke="#F4F4EF" stroke-width="2" stroke-dasharray="10 8"/><g transform="rotate(-8 80 40)"><path d="M44 40C44 33 74 30 104 32C118 33 126 38 126 42C126 46 118 49 104 50C74 52 44 48 44 40Z" fill="#F4F4EF"/><path d="M78 40L104 56L92 56L68 42Z" fill="#D5DBD8"/><path d="M44 40L36 24L48 24L60 36Z" fill="#C73A17"/><circle cx="96" cy="39" r="2" fill="#2A63A8"/><circle cx="106" cy="39" r="2" fill="#2A63A8"/><circle cx="86" cy="39" r="2" fill="#2A63A8"/></g></symbol>
+<symbol id="sc-road" viewBox="0 0 160 100"><rect width="160" height="100" fill="#F6C9A0"/><circle cx="122" cy="26" r="12" fill="#FFE3A8"/><path d="M0 62L36 36H50L90 62Z" fill="#6B3F36"/><path d="M60 62L104 42L140 62Z" fill="#5A3A33"/><rect y="62" width="160" height="38" fill="#2C3438"/><path d="M72 62H88L136 100H24Z" fill="#4B565B"/><path d="M80 64V70M80 76V84M80 90V98" stroke="#F4F4EF" stroke-width="2"/><rect x="66" y="78" width="26" height="10" rx="3" fill="#E2512B"/><path d="M71 78L76 70H84L89 78Z" fill="#E2512B"/><path d="M76 77L78 72H82L84 77Z" fill="#BFE3EC"/><circle cx="73" cy="89" r="3" fill="#14181B"/><circle cx="86" cy="89" r="3" fill="#14181B"/></symbol>
+<symbol id="sc-beach" viewBox="0 0 160 100"><rect width="160" height="100" fill="#BFE3EC"/><circle cx="125" cy="24" r="12" fill="#FFD27A"/><rect y="46" width="160" height="28" fill="#2E8C9A"/><rect y="46" width="160" height="6" fill="#5FB4BE"/><path d="M0 68Q10 64 20 68T40 68T60 68T80 68T100 68T120 68T140 68T160 68" stroke="#F4F4EF" stroke-width="2" fill="none"/><path d="M0 76Q80 64 160 74V100H0Z" fill="#E8CF9E"/><path d="M0 82L14 66L30 82Z" fill="#2C3438"/><path d="M104 74A14 14 0 0 1 132 74Z" fill="#E2512B"/><path d="M118 60V86" stroke="#F4F4EF" stroke-width="2"/></symbol>
+<symbol id="sc-town" viewBox="0 0 160 100"><rect width="160" height="100" fill="#F6C9A0"/><rect y="84" width="160" height="16" fill="#D9CBB0"/><rect x="8" y="46" width="40" height="38" fill="#F4F4EF"/><rect x="52" y="56" width="34" height="28" fill="#F4F4EF"/><rect x="90" y="40" width="30" height="44" fill="#F4F4EF"/><rect x="124" y="54" width="30" height="30" fill="#F4F4EF"/><g fill="#2A63A8"><rect x="14" y="54" width="9" height="12"/><rect x="32" y="54" width="9" height="12"/><rect x="64" y="68" width="10" height="16"/><rect x="98" y="48" width="8" height="12"/><rect x="98" y="66" width="8" height="12"/><rect x="132" y="62" width="8" height="10"/></g><path d="M86 84Q90 62 84 40" stroke="#6B4F3A" stroke-width="3" fill="none"/><path d="M84 40Q70 34 62 42M84 40Q98 32 106 40M84 40Q78 28 68 26M84 40Q92 28 102 26" stroke="#4F8F5B" stroke-width="3" stroke-linecap="round" fill="none"/></symbol>
+<symbol id="sc-food" viewBox="0 0 160 100"><rect width="160" height="100" fill="#F6EFE2"/><circle cx="80" cy="52" r="36" fill="#FFFFFF" stroke="#D5DBD8" stroke-width="3"/><g fill="#D9B56A"><ellipse cx="66" cy="46" rx="10" ry="7"/><ellipse cx="86" cy="42" rx="10" ry="7"/><ellipse cx="74" cy="60" rx="10" ry="7"/><ellipse cx="94" cy="58" rx="9" ry="6"/><ellipse cx="58" cy="60" rx="8" ry="6"/></g><g fill="#FFFFFF"><circle cx="64" cy="44" r="1.2"/><circle cx="70" cy="48" r="1.2"/><circle cx="84" cy="40" r="1.2"/><circle cx="90" cy="44" r="1.2"/><circle cx="72" cy="58" r="1.2"/><circle cx="94" cy="56" r="1.2"/></g><circle cx="28" cy="78" r="13" fill="#E8E1D2"/><circle cx="28" cy="78" r="9" fill="#4F8F5B"/><circle cx="132" cy="78" r="13" fill="#E8E1D2"/><circle cx="132" cy="78" r="9" fill="#C73A17"/></symbol>
+<symbol id="sc-sunset" viewBox="0 0 160 100"><rect width="160" height="100" fill="#F08A5D"/><rect y="28" width="160" height="24" fill="#F3B27A"/><circle cx="80" cy="50" r="20" fill="#FFD27A"/><path d="M104 52L124 38L136 44L158 52Z" fill="#3A4348"/><rect y="52" width="160" height="48" fill="#1F5F6B"/><g fill="#FFD27A"><rect x="70" y="56" width="20" height="2"/><rect x="64" y="62" width="32" height="2"/><rect x="72" y="68" width="16" height="2"/></g><path d="M20 76H52L46 82H26Z" fill="#0E2A30"/><path d="M36 76V62L46 76Z" fill="#0E2A30"/></symbol>
+<symbol id="sc-lighthouse" viewBox="0 0 160 100"><rect width="160" height="100" fill="#BFE3EC"/><rect y="62" width="160" height="38" fill="#2E8C9A"/><path d="M0 70Q20 66 40 70T80 70T120 70T160 70" stroke="#F4F4EF" stroke-width="2" fill="none"/><path d="M36 100L54 76H108L128 100Z" fill="#2C3438"/><path d="M71 78L75 32H85L89 78Z" fill="#F4F4EF"/><path d="M73 50H87L88 58H72Z" fill="#C73A17"/><rect x="73" y="24" width="14" height="8" fill="#FFD27A"/><path d="M72 24L80 16L88 24Z" fill="#C73A17"/></symbol>
+<symbol id="sc-volcano" viewBox="0 0 160 100"><rect width="160" height="100" fill="#F6C9A0"/><circle cx="68" cy="18" r="6" fill="#D9CBB0"/><circle cx="78" cy="10" r="5" fill="#D9CBB0"/><path d="M90 72L116 42H128L158 72Z" fill="#7A463A"/><path d="M8 80L58 30H76L124 80Z" fill="#4B3A38"/><path d="M58 30Q67 36 76 30Z" fill="#FF6A3D"/><path d="M64 33L60 56L66 52L64 72" stroke="#FF6A3D" stroke-width="2.5" fill="none"/><rect y="76" width="160" height="24" fill="#2C3438"/></symbol>
+<symbol id="sc-grill" viewBox="0 0 160 100"><rect width="160" height="100" fill="#1D2326"/><rect y="72" width="160" height="28" fill="#2C3438"/><ellipse cx="80" cy="74" rx="46" ry="8" fill="#14181B"/><path d="M62 72Q58 54 66 42Q66 56 74 52Q72 42 80 30Q84 48 92 44Q90 56 98 72Z" fill="#FF6A3D"/><path d="M72 72Q70 60 78 52Q80 62 88 60Q88 66 90 72Z" fill="#FFD27A"/><path d="M30 50H130M30 58H130" stroke="#8A959A" stroke-width="2"/><ellipse cx="48" cy="46" rx="11" ry="5" fill="#B5733A"/><ellipse cx="112" cy="46" rx="11" ry="5" fill="#B5733A"/></symbol>
+<symbol id="sc-vine" viewBox="0 0 160 100"><rect width="160" height="100" fill="#BFE3EC"/><path d="M0 56Q50 40 100 52T160 46V100H0Z" fill="#3A4348"/><rect y="60" width="160" height="40" fill="#2C3438"/><g fill="none" stroke="#8A959A" stroke-width="3"><path d="M18 70A12 12 0 0 1 42 70"/><path d="M54 66A12 12 0 0 1 78 66"/><path d="M90 70A12 12 0 0 1 114 70"/><path d="M126 66A12 12 0 0 1 150 66"/><path d="M34 88A12 12 0 0 1 58 88"/><path d="M72 86A12 12 0 0 1 96 86"/><path d="M110 88A12 12 0 0 1 134 88"/></g><g fill="#4F8F5B"><circle cx="30" cy="70" r="6"/><circle cx="66" cy="66" r="6"/><circle cx="102" cy="70" r="6"/><circle cx="138" cy="66" r="6"/><circle cx="46" cy="88" r="6"/><circle cx="84" cy="86" r="6"/><circle cx="122" cy="88" r="6"/></g></symbol>
+<symbol id="sc-salt" viewBox="0 0 160 100"><rect width="160" height="100" fill="#BFE3EC"/><path d="M0 50L40 32L80 50Z" fill="#8A7A6A"/><rect y="50" width="160" height="50" fill="#E8CF9E"/><rect y="50" width="160" height="6" fill="#2E8C9A"/><path d="M10 96L34 62H70L56 96Z" fill="#E58AA0"/><path d="M60 96L74 62H110L106 96Z" fill="#F4F4EF"/><path d="M112 96L114 62H146L158 96Z" fill="#E58AA0"/><path d="M120 62L132 46L144 62Z" fill="#F4F4EF"/></symbol>
+<symbol id="sc-lagoon" viewBox="0 0 160 100"><rect width="160" height="100" fill="#F6C9A0"/><path d="M10 74L40 28Q60 22 90 36L124 74Z" fill="#B5532E"/><path d="M10 74L40 28L50 30L40 74Z" fill="#8E3E22"/><rect y="72" width="160" height="28" fill="#2C3438"/><ellipse cx="86" cy="82" rx="38" ry="10" fill="#4FA86B"/><ellipse cx="78" cy="80" rx="16" ry="3" fill="#7FD09A"/></symbol>
+<symbol id="sc-manrique" viewBox="0 0 160 100"><rect width="160" height="100" fill="#BFE3EC"/><rect y="76" width="160" height="24" fill="#2C3438"/><path d="M14 76A26 26 0 0 1 66 76Z" fill="#F4F4EF"/><path d="M58 76A18 18 0 0 1 94 76Z" fill="#F4F4EF"/><path d="M90 76A28 28 0 0 1 146 76Z" fill="#F4F4EF"/><g fill="#2A63A8"><circle cx="40" cy="62" r="5"/><circle cx="76" cy="68" r="3.5"/><circle cx="118" cy="60" r="6"/></g><path d="M148 78Q150 56 146 40" stroke="#6B4F3A" stroke-width="3" fill="none"/><path d="M146 40Q134 36 128 44M146 40Q158 34 160 42M146 40Q144 30 136 28" stroke="#4F8F5B" stroke-width="3" stroke-linecap="round" fill="none"/></symbol>
+<symbol id="sc-cactus" viewBox="0 0 160 100"><rect width="160" height="100" fill="#F6C9A0"/><rect y="76" width="160" height="24" fill="#C9A877"/><g fill="#4F8F5B"><ellipse cx="34" cy="70" rx="14" ry="9"/><ellipse cx="44" cy="52" rx="12" ry="9"/><ellipse cx="28" cy="50" rx="10" ry="8"/><ellipse cx="82" cy="72" rx="15" ry="9"/><ellipse cx="90" cy="52" rx="12" ry="10"/><ellipse cx="72" cy="46" rx="9" ry="7"/><ellipse cx="82" cy="32" rx="9" ry="7"/><ellipse cx="128" cy="72" rx="14" ry="9"/><ellipse cx="136" cy="54" rx="11" ry="9"/></g><g fill="#C73A17"><circle cx="44" cy="48" r="2.5"/><circle cx="28" cy="46" r="2.5"/><circle cx="90" cy="48" r="2.5"/><circle cx="82" cy="28" r="2.5"/><circle cx="136" cy="50" r="2.5"/></g></symbol>
+<symbol id="sc-cave" viewBox="0 0 160 100"><rect width="160" height="100" fill="#14181B"/><path d="M0 100Q0 30 80 24Q160 30 160 100Z" fill="#2C3438"/><path d="M24 100Q24 46 80 40Q136 46 136 100Z" fill="#3A4348"/><path d="M70 0H90L112 42H48Z" fill="#FFE3A8" opacity=".35"/><rect y="88" width="160" height="12" fill="#1D2326"/><g fill="#E2512B"><circle cx="58" cy="76" r="3"/><rect x="55" y="79" width="6" height="9" rx="2"/><circle cx="104" cy="76" r="3"/><rect x="101" y="79" width="6" height="9" rx="2"/></g></symbol>
+<symbol id="sc-jameos" viewBox="0 0 160 100"><rect width="160" height="100" fill="#BFE3EC"/><rect y="30" width="160" height="70" fill="#3A4348"/><path d="M0 0H160V32Q130 20 100 30Q70 38 40 26Q20 20 0 32Z" fill="#2C3438"/><ellipse cx="80" cy="68" rx="54" ry="19" fill="#3CB6C6"/><ellipse cx="80" cy="66" rx="30" ry="8" fill="#7FD6E0"/><g fill="#FFFFFF"><circle cx="64" cy="68" r="2"/><circle cx="92" cy="72" r="2"/><circle cx="78" cy="76" r="2"/></g><path d="M140 86Q142 62 138 46" stroke="#6B4F3A" stroke-width="3" fill="none"/><path d="M138 46Q126 42 120 50M138 46Q150 40 156 48M138 46Q136 36 128 34" stroke="#4F8F5B" stroke-width="3" stroke-linecap="round" fill="none"/></symbol>
+<symbol id="sc-ferry" viewBox="0 0 160 100"><rect width="160" height="100" fill="#BFE3EC"/><path d="M92 62L118 40L132 46L158 62Z" fill="#4B565B"/><rect y="62" width="160" height="38" fill="#2E8C9A"/><path d="M20 72H96L88 82H28Z" fill="#F4F4EF"/><path d="M24 77H92" stroke="#2A63A8" stroke-width="3"/><rect x="40" y="58" width="38" height="14" fill="#F4F4EF"/><rect x="56" y="48" width="8" height="10" fill="#C73A17"/><g fill="#2A63A8"><rect x="44" y="62" width="6" height="5"/><rect x="54" y="62" width="6" height="5"/><rect x="64" y="62" width="6" height="5"/></g><path d="M0 90Q20 86 40 90T80 90T120 90T160 90" stroke="#F4F4EF" stroke-width="2" fill="none"/></symbol>
+<symbol id="sc-bike" viewBox="0 0 160 100"><rect width="160" height="100" fill="#F6C9A0"/><path d="M0 62L44 32L84 62Z" fill="#E2B64B"/><rect y="62" width="160" height="38" fill="#E8CF9E"/><path d="M0 92Q80 72 160 90" stroke="#D3B67F" stroke-width="9" fill="none"/><g fill="none" stroke="#14181B" stroke-width="2.5"><circle cx="54" cy="80" r="10"/><circle cx="96" cy="80" r="10"/></g><path d="M54 80L70 62L88 62L96 80M70 62L76 80L54 80M88 62L84 56H92" stroke="#E2512B" stroke-width="2.5" fill="none"/></symbol>
+<symbol id="sc-viewpoint" viewBox="0 0 160 100"><rect width="160" height="100" fill="#BFE3EC"/><circle cx="130" cy="22" r="10" fill="#FFD27A"/><rect y="52" width="160" height="48" fill="#2E8C9A"/><path d="M62 52Q84 38 108 44Q130 50 152 52Z" fill="#5E6B70"/><path d="M0 62Q30 58 60 62T120 62T160 62" stroke="#F4F4EF" stroke-width="1.5" fill="none"/><path d="M0 100V60L40 54L58 72L42 100Z" fill="#2C3438"/><path d="M0 58H44M10 58V70M24 58V68M38 58V66" stroke="#F4F4EF" stroke-width="2"/></symbol>
+<symbol id="sc-palms" viewBox="0 0 160 100"><rect width="160" height="100" fill="#BFE3EC"/><path d="M0 66Q40 36 80 54T160 48V100H0Z" fill="#7FA770"/><path d="M0 80Q60 64 160 80V100H0Z" fill="#4F8F5B"/><g stroke="#6B4F3A" stroke-width="3" fill="none"><path d="M40 84Q44 64 40 44"/><path d="M86 86Q90 60 84 32"/><path d="M126 84Q128 66 124 50"/></g><g stroke="#2F6B3C" stroke-width="3" stroke-linecap="round" fill="none"><path d="M40 44Q28 40 22 48M40 44Q52 38 58 46M40 44Q36 34 28 32M40 44Q46 34 54 32"/><path d="M84 32Q70 26 62 36M84 32Q98 24 106 34M84 32Q78 20 68 18M84 32Q92 20 102 18"/><path d="M124 50Q114 46 108 54M124 50Q136 44 142 52M124 50Q122 40 114 38"/></g><rect x="136" y="70" width="16" height="12" fill="#F4F4EF"/><rect x="142" y="74" width="4" height="8" fill="#2A63A8"/></symbol>
+<symbol id="sc-surf" viewBox="0 0 160 100"><rect width="160" height="100" fill="#BFE3EC"/><path d="M0 52L30 30L70 38L100 28L160 44V60H0Z" fill="#7A8A8F"/><rect y="56" width="160" height="44" fill="#2E8C9A"/><path d="M0 100V74Q30 50 62 72Q88 56 110 80Q130 60 160 78V100Z" fill="#1F7A8A"/><path d="M22 66Q38 54 52 66M96 72Q110 62 122 74" stroke="#F4F4EF" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="130" cy="58" r="3" fill="#14181B"/><path d="M130 61L128 70M130 63L136 66" stroke="#14181B" stroke-width="2"/><ellipse cx="128" cy="72" rx="12" ry="2" fill="#E2512B"/></symbol>
+<symbol id="sc-harbor" viewBox="0 0 160 100"><rect width="160" height="100" fill="#F6C9A0"/><rect y="64" width="160" height="36" fill="#2E8C9A"/><rect x="8" y="42" width="30" height="22" fill="#F4F4EF"/><rect x="40" y="48" width="26" height="16" fill="#F4F4EF"/><rect x="68" y="40" width="28" height="24" fill="#F4F4EF"/><g fill="#2A63A8"><rect x="14" y="48" width="6" height="8"/><rect x="26" y="48" width="6" height="8"/><rect x="46" y="54" width="6" height="7"/><rect x="76" y="46" width="6" height="8"/><rect x="86" y="46" width="6" height="8"/></g><rect x="112" y="38" width="38" height="26" fill="#D9CBB0"/><g fill="#D9CBB0"><rect x="112" y="33" width="7" height="5"/><rect x="124" y="33" width="7" height="5"/><rect x="136" y="33" width="7" height="5"/></g><path d="M30 82H62L56 90H36Z" fill="#E2512B"/><path d="M96 84H130L124 92H102Z" fill="#F4F4EF"/><path d="M46 82V72L56 82Z" fill="#F4F4EF"/></symbol>
+<symbol id="sc-souvenir" viewBox="0 0 160 100"><rect width="160" height="100" fill="#F6EFE2"/><path d="M14 80L60 56L60 80Z" fill="#F0C75A"/><path d="M14 80L60 56L44 52L14 66Z" fill="#F7DD8E"/><rect x="78" y="34" width="20" height="48" rx="4" fill="#3F7D4E"/><rect x="83" y="18" width="10" height="18" fill="#3F7D4E"/><rect x="80" y="48" width="16" height="16" fill="#F4F4EF"/><path d="M118 84Q122 44 134 36Q136 62 134 84Z" fill="#4F8F5B"/><path d="M130 84Q148 54 156 52Q150 72 142 84Z" fill="#6AAE76"/></symbol>
+<symbol id="sc-statues" viewBox="0 0 160 100"><rect width="160" height="100" fill="#1F7A8A"/><rect width="160" height="40" fill="#3CB6C6" opacity=".5"/><rect y="84" width="160" height="16" fill="#D9C79A"/><g fill="#C9D1D3"><circle cx="30" cy="52" r="5"/><path d="M24 58H36L38 84H22Z"/><circle cx="58" cy="46" r="5"/><path d="M52 52H64L66 84H50Z"/><circle cx="86" cy="54" r="5"/><path d="M80 60H92L94 84H78Z"/><circle cx="114" cy="48" r="5"/><path d="M108 54H120L122 84H106Z"/><circle cx="140" cy="56" r="5"/><path d="M134 62H146L148 84H132Z"/></g><g fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity=".8"><circle cx="46" cy="30" r="3"/><circle cx="100" cy="22" r="4"/><circle cx="124" cy="34" r="2.5"/></g></symbol>
+<symbol id="sc-windmill" viewBox="0 0 160 100"><rect width="160" height="100" fill="#BFE3EC"/><rect y="80" width="160" height="20" fill="#D9CBB0"/><rect x="8" y="54" width="70" height="26" fill="#F4F4EF"/><rect x="14" y="60" width="10" height="20" fill="#3F7D4E"/><rect x="34" y="60" width="10" height="10" fill="#3F7D4E"/><rect x="54" y="60" width="10" height="10" fill="#3F7D4E"/><path d="M108 80L114 44H126L132 80Z" fill="#F4F4EF"/><path d="M110 44L120 34L130 44Z" fill="#6B4F3A"/><path d="M100 22L140 60M140 22L100 60" stroke="#6B4F3A" stroke-width="3" transform="translate(0 -4)"/></symbol>
+</defs>
+</svg>
+
+<header class="hero">
+  <svg class="ridge" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 300V210L90 170L170 205L260 120L330 95L405 150L480 200L560 140L640 60L700 40L760 70L830 150L900 190L980 150L1050 110L1110 140L1200 190V300Z" fill="#1A1D20"/>
+    <path d="M0 300V250L120 225L210 245L330 190L420 215L520 240L620 190L720 165L790 190L880 235L990 215L1090 180L1200 225V300Z" fill="#101315"/>
+    <path d="M0 300V282L160 268L300 285L470 262L640 284L820 266L1000 286L1200 270V300Z" fill="#090B0C"/>
+  </svg>
+  <div class="wrap">
+    <div class="eyebrow">Kanárske ostrovy · 7 dní · auto · základňa Puerto del Carmen</div>
+    <h1>Lanzarote</h1>
+    <p class="sub">Ostrov sopiek, bielych domov a lávových vinohradov. Týždeň naplánovaný deň po dni.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="facts">
+    <div class="fact"><div class="k">Čas</div><div class="v">o hodinu menej ako doma</div></div>
+    <div class="fact"><div class="k">Mena</div><div class="v">euro</div></div>
+    <div class="fact"><div class="k">Počasie</div><div class="v">asi 20 až 28 °C, stále vietor</div></div>
+    <div class="fact"><div class="k">Doprava</div><div class="v">prenajaté auto, jazda vpravo</div></div>
+  </div>
+
+  <section id="mapa">
+    <div class="sec-head">
+      <h2>Týždeň na mape</h2>
+      <p>Ostrov je dlhý okolo 60 km, takže z jednej základne vidíš všetko za maximálne hodinu jazdy. Klikni na deň a zobrazí sa trasa.</p>
+    </div>
+    <div class="mapgrid">
+      <div class="mapcard">
+        <svg id="map" viewBox="0 0 700 715" role="img" aria-label="Mapa Lanzarote s trasami na jednotlivé dni"></svg>
+      </div>
+      <div>
+        <div class="picker" id="picker"></div>
+        <p class="hint">Čísla na mape sú dni. Po výbere dňa sa zobrazí poradie zastávok.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="sec-head">
+      <h2>Deň po dni</h2>
+      <p>Časy sú orientačné a počítajú s prenajatým autom. Otváracie hodiny a ceny si pred cestou over na oficiálnych weboch.</p>
+    </div>
+
+    <article class="day" id="d1">
+      <div class="day-h">
+        <div class="num">1</div>
+        <h3>Príchod a prvý západ slnka</h3>
+        <div class="tags"><span class="tag sea">Pohoda</span></div>
+        <div class="drive">letisko → Puerto del Carmen asi 15 min</div>
+      </div>
+      <div>
+        <ul class="tl">
+          <li><span class="t">podľa letu</span><div><b>Prílet a preberenie auta</b><p>Letisko Arrecife (ACE) je len pár kilometrov od hlavných letovísk. Auto si vyzdvihni hneď, bez neho sa na ostrove nepohneš.</p></div></li>
+          <li><span class="t">15:00</span><div><b>Ubytovanie a prvý obed</b><p>Daj si papas arrugadas (pokrčené zemiaky) s mojo omáčkou. Lacné, rýchle a skutočne kanárske.</p></div></li>
+          <li><span class="t">17:30</span><div><b>Promenáda Avenida de las Playas</b><p>Hlavná pláž Playa Grande a prechádzka popri mori. Zoznám sa s vetrom a oceánom.</p></div></li>
+          <li><span class="t">19:30</span><div><b>Západ slnka a večera v starej časti</b><p>La Tiñosa je pôvodná rybárska štvrť Puerto del Carmen. Čerstvá ryba pri prístave.</p></div></li>
+        </ul>
+        <div class="tip"><span class="eyebrow">Tip</span>Večer nakúp vodu a snacky. Na zajtrajšej pláži nebude tieň ani obchod.</div>
+      </div>
+    </article>
+
+    <article class="day" id="d2">
+      <div class="day-h">
+        <div class="num">2</div>
+        <h3>Pláže Papagayo</h3>
+        <div class="tags"><span class="tag sea">Pláž</span><span class="tag sea">More</span></div>
+        <div class="drive">Puerto del Carmen → Playa Blanca asi 30 min</div>
+      </div>
+      <div>
+        <ul class="tl">
+          <li><span class="t">09:00</span><div><b>Odchod na juh</b><p>Príď skoro. Na parkovisko pri plážach sa neskôr stoja rady.</p></div></li>
+          <li><span class="t">10:00</span><div><b>Playa de Papagayo a okolité zátoky</b><p>Zlatý piesok a tyrkysová voda v prírodnej pamiatke Los Ajaches. Skús aj Caleta del Congrio a Playa Mujeres, bývajú pokojnejšie. Za vjazd autom po prašnej ceste sa platí poplatok, výšku over na mieste.</p></div></li>
+          <li><span class="t">14:00</span><div><b>Obed v Playa Blanca</b><p>Promenáda a marina Rubicón s množstvom reštaurácií.</p></div></li>
+          <li><span class="t">16:30</span><div><b>Maják Faro de Pechiguera</b><p>Prechádzka po lávových skalách na juhozápadnom cípe ostrova.</p></div></li>
+          <li><span class="t">19:00</span><div><b>Večera pri mori</b><p>Pri dobrej viditeľnosti uvidíš z pobrežia siluetu Fuerteventury.</p></div></li>
+        </ul>
+        <div class="tip"><span class="eyebrow">Tip</span>Južné pláže sú pred severným pasátom chránenejšie ako zvyšok ostrova. Ideálny deň na kúpanie.</div>
+      </div>
+    </article>
+
+    <article class="day" id="d3">
+      <div class="day-h">
+        <div class="num">3</div>
+        <h3>Sopky, víno a západ slnka</h3>
+        <div class="tags"><span class="tag fire">Sopky</span><span class="tag vine">Víno</span></div>
+        <div class="drive">celkovo asi 1,5 h jazdy</div>
+      </div>
+      <div>
+        <ul class="tl">
+          <li><span class="t">09:00</span><div><b>Národný park Timanfaya</b><p>Príď na otvorenie, po 10:30 sa tvoria rady. Autobusový okruh Ruta de los Volcanes trvá asi 40 minút a je v cene vstupu. Park ukáže, ako vyzerá pôda pár centimetrov nad žeravým magmatickým vreckom.</p></div></li>
+          <li><span class="t">12:30</span><div><b>Obed v Restaurante El Diablo</b><p>Mäso sa tu griluje priamo na geotermálnom teple zeme. Atrakcia aj obed v jednom.</p></div></li>
+          <li><span class="t">14:30</span><div><b>La Geria</b><p>Vinič rastie v jamkách v čiernom lapilli, každý chránený kamenným múrikom. Zastav sa v niektorej z vinární (napríklad El Grifo alebo Bodega La Geria) a ochutnaj Malvasía volcánica.</p></div></li>
+          <li><span class="t">17:30</span><div><b>Salinas de Janubio a Los Hervideros</b><p>Ružové soľné panvy a lávové útesy, v ktorých vlny dunia ako v tuneloch. Pri vlnobití zostaň za zábradlím.</p></div></li>
+          <li><span class="t">19:15</span><div><b>El Golfo</b><p>Zelená lagúna Charco de los Clicos pod polovičným kráterom. Potom večera v rybárskej dedinke a návrat v tme.</p></div></li>
+        </ul>
+        <div class="tip"><span class="eyebrow">Tip</span>Vodič ochutnáva len symbolicky. Víno si kúp radšej na odvoz domov.</div>
+      </div>
+    </article>
+
+    <article class="day" id="d4">
+      <div class="day-h">
+        <div class="num">4</div>
+        <h3>César Manrique a sever</h3>
+        <div class="tags"><span class="tag">Umenie</span><span class="tag fire">Jaskyne</span></div>
+        <div class="drive">celkovo asi 2 h jazdy</div>
+      </div>
+      <div>
+        <ul class="tl">
+          <li><span class="t">10:00</span><div><b>Fundación César Manrique v Tahíche</b><p>Manriqueho bývalý dom, vstavaný do piatich lávových bublín. Pochopíš, prečo je ostrov taký jednotný: Manrique presadil biele domy a zákaz billboardov.</p></div></li>
+          <li><span class="t">11:45</span><div><b>Teguise</b><p>Biele historické mestečko a bývalé hlavné mesto. V nedeľu ráno tu býva veľký trh, ak to takto vyjde, presuň sem celý deň.</p></div></li>
+          <li><span class="t">12:45</span><div><b>Jardín de Cactus, Guatiza</b><p>Záhrada tisícok kaktusov v bývalom lome, ďalšie Manriqueho dielo. Okolo Guatizy rastú plantáže kaktusov pre cochinillu (červené farbivo).</p></div></li>
+          <li><span class="t">13:45</span><div><b>Obed v Arrieta</b><p>Biela pláž a malé rybie reštaurácie pri samom mori.</p></div></li>
+          <li><span class="t">15:00</span><div><b>Cueva de los Verdes</b><p>Vedená prehliadka lávovou trubicou. Prehliadky idú v pevných časoch, na posledné sa neponáhľaj.</p></div></li>
+          <li><span class="t">16:30</span><div><b>Jameos del Agua</b><p>Lávová jaskyňa s jazierkom, ktoré obývajú drobné slepé biele krabíky. Manrique ju premenil na kultúrny priestor s bazénom a koncertnou sálou.</p></div></li>
+        </ul>
+        <div class="tip"><span class="eyebrow">Tip</span>Pozri si kombinovanú vstupenku (Bono) pre centrá Manriqueho a Cabilda. Pri troch a viac vstupoch sa oplatí.</div>
+      </div>
+    </article>
+
+    <article class="day" id="d5">
+      <div class="day-h">
+        <div class="num">5</div>
+        <h3>Výlet na La Graciosa</h3>
+        <div class="tags"><span class="tag sea">More</span><span class="tag sea">Bicykel</span></div>
+        <div class="drive">Puerto del Carmen → Órzola asi 1 h</div>
+      </div>
+      <div>
+        <ul class="tl">
+          <li><span class="t">08:00</span><div><b>Odchod do Órzola</b><p>Auto nechaj na parkovisku pri prístave a nastúp na trajekt. Prvé spoje idú okolo deviatej, aktuálny cestovný poriadok over online.</p></div></li>
+          <li><span class="t">09:00</span><div><b>Trajekt do Caleta de Sebo</b><p>Plavba trvá asi pol hodiny. Spiatočný lístok si kúp vopred a pozri si posledný večerný spoj.</p></div></li>
+          <li><span class="t">10:00</span><div><b>Bicykle po ostrove bez asfaltu</b><p>Na ostrove nie sú spevnené cesty, požičaj si bicykel alebo sa nechaj odviezť 4x4 taxíkom. Hlavné ciele: Playa Francesa, Playa de la Cocina a Playa de las Conchas.</p></div></li>
+          <li><span class="t">13:00</span><div><b>Obed v Caleta de Sebo</b><p>Čerstvá ryba a pokojná atmosféra. Dedinka je jediné väčšie sídlo na ostrove.</p></div></li>
+          <li><span class="t">16:30</span><div><b>Spiatočná loď a večer</b><p>Návrat do Órzola a pokojná večera cestou späť.</p></div></li>
+        </ul>
+        <div class="tip"><span class="eyebrow">Pozor</span>Na Playa de las Conchas sa nekúpaj, sú tu silné prúdy. Obdivuj ju zhora. Vodu a krém si vezmi so sebou.</div>
+      </div>
+    </article>
+
+    <article class="day" id="d6">
+      <div class="day-h">
+        <div class="num">6</div>
+        <h3>Výhľady a surfová pláž</h3>
+        <div class="tags"><span class="tag">Výhľady</span><span class="tag sea">Pláž</span></div>
+        <div class="drive">celkovo asi 1,5 h jazdy</div>
+      </div>
+      <div>
+        <ul class="tl">
+          <li><span class="t">10:00</span><div><b>Mirador del Río</b><p>Manriqueho vyhliadka vstavaná do útesu vo výške okolo 475 m. Pod tebou je úžina El Río a ostrov La Graciosa.</p></div></li>
+          <li><span class="t">11:30</span><div><b>Haría a Valle de las Mil Palmeras</b><p>Zelené údolie palmových hájov, ostrov, ako ho nepoznáš z juhu. Káva a prechádzka v centre.</p></div></li>
+          <li><span class="t">13:00</span><div><b>Obed v Haría alebo Máguez</b><p>Domáce jedlá, kozí syr a víno z ostrova.</p></div></li>
+          <li><span class="t">15:00</span><div><b>Playa de Famara</b><p>Asi 6 km dlhá divoká pláž pod strmými útesmi. Surfári, jazdci na kite a veľké vlny. Kúpanie len ak sú podmienky pokojné.</p></div></li>
+          <li><span class="t">18:30</span><div><b>Západ slnka v Caleta de Famara</b><p>Večera v rybárskej dedinke s výhľadom na útesy.</p></div></li>
+        </ul>
+        <div class="tip"><span class="eyebrow">Tip</span>Ak je na severe zamračené (stáva sa), vymeň tento deň s dňom 2 a choď na južné pláže.</div>
+      </div>
+    </article>
+
+    <article class="day" id="d7">
+      <div class="day-h">
+        <div class="num">7</div>
+        <h3>Arrecife a odlet</h3>
+        <div class="tags"><span class="tag sea">Pohoda</span></div>
+        <div class="drive">Arrecife → letisko asi 10 min</div>
+      </div>
+      <div>
+        <ul class="tl">
+          <li><span class="t">09:30</span><div><b>Arrecife</b><p>Hlavné mesto ostrova. Lagúna Charco de San Ginés s bielymi domami a rybárskymi člnmi, potom pevnosť Castillo de San Gabriel cez Puente de las Bolas.</p></div></li>
+          <li><span class="t">11:00</span><div><b>Suveníry</b><p>Kozí syr, malvasía, aloe vera a soľ z Janubio. Sú ľahké a dobre sa vezú.</p></div></li>
+          <li><span class="t">12:30</span><div><b>Posledný obed a vrátenie auta</b><p>Natankuj podľa podmienok požičovne a odovzdaj auto.</p></div></li>
+          <li><span class="t">podľa letu</span><div><b>Letisko</b><p>Na letisku buď 2 až 3 hodiny pred odletom.</p></div></li>
+        </ul>
+        <div class="tip"><span class="eyebrow">Ak máš večerný let</span>Pridaj ešte kúpanie na Playa Chica v Puerto del Carmen, je to pokojná zátoka vhodná na šnorchlovanie.</div>
+      </div>
+    </article>
+  </section>
+
+  <section id="skryte">
+    <div class="sec-head">
+      <h2>Skryté miesta</h2>
+      <p>Menej známe zastávky, ktoré sa dajú vložiť do plánu bez veľkého zdržania. Pri každej je uvedené, ku ktorému dňu sedí.</p>
+    </div>
+    <div class="food">
+      <div class="dish"><h3>Playa Quemada</h3><p>Malá rybárska osada na juhu, kde vodu od pobrežia delí len pár metrov čiernych skál. Večera na rybe bez turistov. Dopoludnia pre Deň 3.</p></div>
+      <div class="dish"><h3>Mirador de Femés</h3><p>Vyhliadka nad Playa Blanca s výhľadom na Papagayo a Fuerteventuru. Skvelá na ranný presun pred Dňom 2.</p></div>
+      <div class="dish"><h3>Museo Atlántico</h3><p>Podmorské sochárske múzeum pri Playa Blanca od Jasona deCairesa Taylora. Dá sa pozrieť z člna so sklenenou podlahou alebo zo šnorchla. Deň 2.</p></div>
+      <div class="dish"><h3>Caldera Blanca</h3><p>Kruhový výstup na sopečný kráter, takmer bez ľudí a s panorámou na Timanfaya. Cca 2 až 3 hodiny, ráno a s vodou. Namiesto popoludnia v Deň 3.</p></div>
+      <div class="dish"><h3>Caldera de los Cuervos</h3><p>Krátka a ľahká okružná cesta okolo kráteru pri Tinajo, vhodná pre každého. Deň 3.</p></div>
+      <div class="dish"><h3>Punta Mujeres</h3><p>Pokojná dedinka na severovýchode s prírodnými bazénmi a rybacími reštauráciami, ďaleko od davov. Obed v Deň 4 namiesto Arrieta.</p></div>
+      <div class="dish"><h3>Playa de la Cantería</h3><p>Pláž pod bielou sopečnou skalou kúsok od Órzola. Pokojná a fotogenická. Večer po trajekte v Deň 5.</p></div>
+      <div class="dish"><h3>Mirador de Guinate</h3><p>Menej známa vyhliadka v severných útesoch a v blízkosti papagájového parku. Doplnok k Dňu 6.</p></div>
+      <div class="dish"><h3>Casa Museo del Campesino</h3><p>Manriqueho pocta roľníkom v San Bartolomé, s reštauráciou a miestnymi výrobkami. Dobrá zastávka cestou na sever v Deň 4.</p></div>
+      <div class="dish"><h3>Montaña Amarilla</h3><p>Žltý kopec na La Graciosa, 15 minút bicyklom od Caleta de Sebo. Ticho a výhľady. Deň 5.</p></div>
+    </div>
+  </section>
+
+  <section id="pred-cestou">
+    <div class="sec-head">
+      <h2>Pred cestou</h2>
+      <p>Odškrtávanie si pamätá tvoj prehliadač. Na iných zariadeniach sa nezobrazí.</p>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Rezervuj vopred</h3>
+        <ul class="check" id="check1">
+          <li><label><input type="checkbox" data-k="a"><span>Let a ubytovanie<small>Puerto del Carmen je centrálny. Pokojnejšia alternatíva je Playa Blanca.</small></span></label></li>
+          <li><label><input type="checkbox" data-k="b"><span>Prenájom auta<small>V sezóne a cez sviatky sa míňajú ako prvé. Vyber plné poistenie.</small></span></label></li>
+          <li><label><input type="checkbox" data-k="c"><span>Trajekt na La Graciosa<small>Over cestovný poriadok a kúp spiatočný lístok vopred.</small></span></label></li>
+          <li><label><input type="checkbox" data-k="d"><span>Timanfaya a Cueva de los Verdes<small>Skontroluj online predpredaj a otváracie hodiny.</small></span></label></li>
+          <li><label><input type="checkbox" data-k="e"><span>Kombinovaná vstupenka (Bono)<small>Centrá Manriqueho a Cabilda. Porovnaj cenu so samostatnými vstupmi.</small></span></label></li>
+          <li><label><input type="checkbox" data-k="f"><span>Stôl v El Diablo<small>V čase obeda býva plno.</small></span></label></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Zbaliť</h3>
+        <ul class="check" id="check2">
+          <li><label><input type="checkbox" data-k="g"><span>Krém SPF 50, šiltovka, slnečné okuliare<small>Vietor klame, spáliš sa aj pri oblakoch.</small></span></label></li>
+          <li><label><input type="checkbox" data-k="h"><span>Vetrovka na večer a na sever</span></label></li>
+          <li><label><input type="checkbox" data-k="i"><span>Pevné topánky<small>Lávové polia a Timanfaya sú ostré a nerovné.</small></span></label></li>
+          <li><label><input type="checkbox" data-k="j"><span>Plavky, šnorchel, uterák</span></label></li>
+          <li><label><input type="checkbox" data-k="k"><span>Fľaša na vodu aspoň 1,5 l<small>Na odľahlých plážach a na La Graciosa kúpiš málo.</small></span></label></li>
+          <li><label><input type="checkbox" data-k="l"><span>Preukaz poistenca EÚ a cestovné poistenie</span></label></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="jedlo">
+    <div class="sec-head">
+      <h2>Čo ochutnať</h2>
+      <p>Kuchyňa je jednoduchá a stojí na čerstvých surovinách, soli a lávovej pôde.</p>
+    </div>
+    <div class="food">
+      <div class="dish"><h3>Papas arrugadas</h3><p>Zemiaky varené v slanej vode, podávané s mojo rojo (červená) alebo mojo verde (zelená).</p></div>
+      <div class="dish"><h3>Čerstvá ryba</h3><p>Hľadaj pescado del día. Bežné sú vieja (papagájia ryba) a cherne, vždy podávané s papas.</p></div>
+      <div class="dish"><h3>Lapas</h3><p>Grilované prílipky s cesnakovo-petržlenovou omáčkou. Špecialita pri pobreží.</p></div>
+      <div class="dish"><h3>Kozí syr</h3><p>Queso curado z ostrovných kôz, často s paprikou alebo gofio.</p></div>
+      <div class="dish"><h3>Malvasía volcánica</h3><p>Ovocné biele víno z lávových jamiek v La Geria. Sladké aj suché verzie.</p></div>
+      <div class="dish"><h3>Barraquito</h3><p>Vrstvená káva s kondenzovaným mliekom, likérom a štipkou škorice.</p></div>
+    </div>
+  </section>
+
+  <section id="plan-b">
+    <div class="sec-head">
+      <h2>Keď počasie nevyjde</h2>
+      <p>Na ostrove býva málo dažďa, ale vietor a oblaky sa menia podľa strany.</p>
+    </div>
+    <div class="planb">
+      <div><b>Zamračené na severe</b><p>Sever je na pasát vystavený a ráno býva zamračený. Presuň dni 4 až 6 na neskôr a choď na južné pláže, ktoré sú chránenejšie.</p></div>
+      <div><b>Silný vietor</b><p>Preskoč Famaru aj Playa de las Conchas. Namiesto toho choď do Papagaya, Playa Blanca alebo na pokojnú Playa Chica.</p></div>
+      <div><b>Calima (saharský prach)</b><p>Vzduch je zakalený a horúci. Zaraď múzeá a jaskyne: Fundación Manrique, Cueva de los Verdes, Jameos del Agua.</p></div>
+      <div><b>Chceš niečo navyše</b><p>Z Playa Blanca ide trajekt do Corralejo na Fuerteventuru, kde sú rozsiahle duny. Dá sa stihnúť za deň.</p></div>
+    </div>
+  </section>
+
+  <section id="prakticke">
+    <div class="sec-head"><h2>Dôležité na mieste</h2></div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Auto a cesty</h3>
+        <ul class="bullets">
+          <li>Jazda vpravo, značenie ako v EÚ. Cesty sú dobré, no úzke v horách.</li>
+          <li>Parkovanie pri atrakciách je väčšinou zdarma alebo lacné.</li>
+          <li>Tankuj pred vzdialenejším severom a pred La Graciosa.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Príroda</h3>
+        <ul class="bullets">
+          <li>Nezbieraj lávové kamene ani piesok v chránených územiach, hrozí pokuta.</li>
+          <li>Neprechádzaj mimo vyznačených chodníkov v sopečných poliach.</li>
+          <li>Voda v oceáne je chladnejšia a prúdy silné. Kúp sa tam, kde sú ľudia.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Rôzne</h3>
+        <ul class="bullets">
+          <li>Zásuvky a napätie ako na Slovensku, adaptér netreba.</li>
+          <li>Obedy sa podávajú neskoro, kuchyne sa po 16:00 často zatvárajú.</li>
+          <li>Čas na ostrove je o hodinu menej ako na Slovensku.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>Väčšina obrázkov sú fotografie z Wikimedia Commons, pri zastávkach bez vhodnej fotky je ilustrácia. Plán je odporúčanie zostavené z bežne dostupných informácií. Ceny, otváracie hodiny, cestovné poriadky trajektov a poplatky sa menia, preto ich pred cestou over na oficiálnych weboch jednotlivých miest.<details class="credits"><summary>Autori fotografií</summary><ul><li>Arrecife-Airport.jpg, Frank Härtelt, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Arrecife-Airport.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Montaña Amarilla La Graciosa 6.jpg, Dreizung, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Monta%C3%B1a_Amarilla_La_Graciosa_6.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>At Lanzarote 2022 043.jpg, Photograph by Mike Peel (www.mikepeel.net)., CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:At_Lanzarote_2022_043.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Arrieta - Playa de la Garita.jpg, Patrice78500, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Arrieta_-_Playa_de_la_Garita.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Jardín de cactus pano.jpg, Alchemist-hp (talk) (www.pse-mendelejew.de), FAL, <a href="https://commons.wikimedia.org/wiki/File:Jard%C3%ADn_de_cactus_pano.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Kolkrabe auf der Caldera Blanca, Lanzarote III.jpg, GerritR, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Kolkrabe_auf_der_Caldera_Blanca,_Lanzarote_III.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>San Bartolomé - LZ-20-LZ-30 - Monumento al Campesino 11 ies., Frank Vincentz, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:San_Bartolom%C3%A9_-_LZ-20-LZ-30_-_Monumento_al_Campesino_11_ies.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Playa La Cantería.jpg, Jtavleo, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Playa_La_Canter%C3%ADa.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Caldera de Los Cuervos.jpg, MiljenkoSuljic, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Caldera_de_Los_Cuervos.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Lanzarote 5 Luc Viatour.jpg, Lviatour, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Lanzarote_5_Luc_Viatour.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Timanfaya - Lanzarote 11.jpg, H. Zell, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Timanfaya_-_Lanzarote_11.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Playa de Famara on Lanzarote, June 2013 (2).jpg, Chmee2, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Playa_de_Famara_on_Lanzarote,_June_2013_(2).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Caleta de Famara 2.jpg, Txapisotegi, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Caleta_de_Famara_2.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Femés, Lanzarote.JPG, Wiki05, CC0, <a href="https://commons.wikimedia.org/wiki/File:Fem%C3%A9s,_Lanzarote.JPG" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Órzola, the ferry to La Graciosa.JPG, Dguendel, CC BY 4.0, <a href="https://commons.wikimedia.org/wiki/File:%C3%93rzola,_the_ferry_to_La_Graciosa.JPG" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>2011 - El Golfo - Charco de los Clicos -Lanzarote - G07.jpg, Luis Miguel Bugallo Sánchez (Lmbuga), CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:2011_-_El_Golfo_-_Charco_de_los_Clicos_-Lanzarote_-_G07.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Graciosa R01.jpg, Marc Ryckaert, CC BY 3.0, <a href="https://commons.wikimedia.org/wiki/File:Graciosa_R01.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Guinate, Lanzarote.JPG, Wiki05, CC0, <a href="https://commons.wikimedia.org/wiki/File:Guinate,_Lanzarote.JPG" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Calle San Juan (Haría) 02.jpg, Axel Cotón Gutiérrez, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Calle_San_Juan_(Har%C3%ADa)_02.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Jameos del Agua - Lanzarote -04.jpg, H. Zell, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Jameos_del_Agua_-_Lanzarote_-04.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Salinas de Janubio at Lanzarote.jpg, Alchemist-hp (talk) (www.pse-mendelejew.de), CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Salinas_de_Janubio_at_Lanzarote.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Vineyards La Geria IMGP1903.jpg, Nikodem Nijaki, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Vineyards_La_Geria_IMGP1903.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Fundación César Manrique - Yellow bubble.jpg, H. Zell, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Fundaci%C3%B3n_C%C3%A9sar_Manrique_-_Yellow_bubble.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Mirador del Río - Lanzarote - 04.jpg, H. Zell, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Mirador_del_R%C3%ADo_-_Lanzarote_-_04.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Órzola - Haría - Lanzarote -OH07.jpg, Lmbuga, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:%C3%93rzola_-_Har%C3%ADa_-_Lanzarote_-OH07.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Lanzarote 1 Luc Viatour.jpg, Lviatour, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Lanzarote_1_Luc_Viatour.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Mojo rojo - Papas arrugads.JPG, Tamorlan, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Mojo_rojo_-_Papas_arrugads.JPG" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Lanzarote Faro de Pechiguera R06.jpg, Marc Ryckaert (MJJR), CC BY 3.0, <a href="https://commons.wikimedia.org/wiki/File:Lanzarote_Faro_de_Pechiguera_R06.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Beach in Playa Blanca - Lanzarote -B20.jpg, Luis Miguel Bugallo Sánchez (Lmbuga), CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Beach_in_Playa_Blanca_-_Lanzarote_-B20.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Lanzarote, Puerto del Carmen, Playa Grande (02).JPG, Bayreuth2009, CC BY 3.0, <a href="https://commons.wikimedia.org/wiki/File:Lanzarote,_Puerto_del_Carmen,_Playa_Grande_(02).JPG" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Punta Mujeres Lanzarote.jpg, Wiki05, CC0, <a href="https://commons.wikimedia.org/wiki/File:Punta_Mujeres_Lanzarote.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Lanzarote Playa Quemada.jpg, This media file was made by Michiel1972
+You may use it using a redistr, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Lanzarote_Playa_Quemada.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Museo de Aloe de Lanzarote, Punta Mujeres, Lanzarote, Kanárs, Fry72 (Karel Frydrýšek), CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Museo_de_Aloe_de_Lanzarote,_Punta_Mujeres,_Lanzarote,_Kan%C3%A1rsk%C3%A9_ostrovy_01.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Teguise - Plaza - Iglesia.jpg, H. Zell, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Teguise_-_Plaza_-_Iglesia.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>Timanfaya- Lanzarote- Illas Canarias- Spain-T20.jpg, Luis Miguel Bugallo Sánchez (Lmbuga), CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Timanfaya-_Lanzarote-_Illas_Canarias-_Spain-T20.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li><li>ES-lanza-pdc-hafen-La-Tiñosa.jpg, Balou46, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:ES-lanza-pdc-hafen-La-Ti%C3%B1osa.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li></ul></details></footer>
+</main>
+
+<script>
+(function(){
+  var NS="http://www.w3.org/2000/svg";
+  function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function P(lat,lon){return [(lon+13.92)*1250,(29.31-lat)*1429];}
+
+  var coast=[[28.845,-13.875],[28.875,-13.885],[28.915,-13.865],[28.945,-13.850],[28.975,-13.845],[29.005,-13.790],[29.030,-13.715],[29.065,-13.640],[29.100,-13.585],[29.140,-13.540],[29.185,-13.515],[29.222,-13.490],[29.238,-13.460],[29.232,-13.428],[29.195,-13.422],[29.150,-13.425],[29.105,-13.440],[29.060,-13.450],[29.010,-13.470],[28.985,-13.495],[28.965,-13.535],[28.945,-13.585],[28.925,-13.640],[28.905,-13.700],[28.865,-13.745],[28.840,-13.790],[28.835,-13.840]];
+  var grac=[[29.285,-13.545],[29.292,-13.510],[29.275,-13.475],[29.255,-13.485],[29.245,-13.510],[29.250,-13.535]];
+  var fire=[[28.955,-13.795],[28.985,-13.830],[29.030,-13.790],[29.045,-13.740],[29.010,-13.715],[28.970,-13.740]];
+  function path(pts){return "M"+pts.map(function(q){var c=P(q[0],q[1]);return c[0].toFixed(1)+" "+c[1].toFixed(1);}).join("L")+"Z";}
+
+  // name, lat, lon, note, label dx, dy, anchor
+  var days=[
+   {n:1,t:"Príchod a prvý západ slnka",g:"Pohoda",p:[
+     ["Letisko Arrecife",28.945,-13.605,"Prílet, auto",-14,-12,"end"],
+     ["Puerto del Carmen",28.920,-13.660,"Základňa na celý týždeň",-14,16,"end"]]},
+   {n:2,t:"Pláže Papagayo",g:"Pláž a more",p:[
+     ["Playa de Papagayo",28.845,-13.785,"Zlatý piesok a zátoky",14,10,"start"],
+     ["Playa Blanca",28.862,-13.830,"Obed, marina Rubicón",-14,-10,"end"],
+     ["Faro de Pechiguera",28.852,-13.872,"Maják a západ slnka",-14,22,"start"]]},
+   {n:3,t:"Sopky, víno a západ slnka",g:"Sopky a víno",p:[
+     ["Timanfaya",28.995,-13.765,"Národný park, okruh autobusom",16,-6,"start"],
+     ["La Geria",28.985,-13.700,"Vinárne a vinohrady",16,6,"start"],
+     ["Salinas de Janubio",28.945,-13.820,"Soľné panvy",18,16,"start"],
+     ["Los Hervideros",28.935,-13.845,"Lávové útesy a vlny",-14,24,"end"],
+     ["El Golfo",28.975,-13.835,"Zelená lagúna, večera",-14,-8,"end"]]},
+   {n:4,t:"César Manrique a sever",g:"Umenie a jaskyne",p:[
+     ["Tahíche",29.000,-13.545,"Fundación César Manrique",-14,-8,"end"],
+     ["Teguise",29.060,-13.560,"Biele mestečko, trh v nedeľu",-14,6,"end"],
+     ["Guatiza",29.090,-13.470,"Jardín de Cactus",-14,-8,"end"],
+     ["Arrieta",29.128,-13.447,"Obed pri mori",-14,14,"end"],
+     ["Cueva de los Verdes",29.153,-13.450,"Vedená prehliadka",-14,-4,"end"],
+     ["Jameos del Agua",29.162,-13.428,"Lávová jaskyňa Manriqueho",-14,-16,"end"]]},
+   {n:5,t:"Výlet na La Graciosa",g:"More a bicykel",p:[
+     ["Órzola",29.222,-13.435,"Prístav, trajekt",-14,22,"end"],
+     ["Caleta de Sebo",29.257,-13.500,"Dedinka, obed, bicykle",14,14,"start"],
+     ["Playa de las Conchas",29.282,-13.525,"Výhľad, bez kúpania",-14,-8,"end"]]},
+   {n:6,t:"Výhľady a surfová pláž",g:"Výhľady a pláž",p:[
+     ["Mirador del Río",29.214,-13.482,"Výhľad na La Graciosa",-14,-8,"end"],
+     ["Haría",29.140,-13.505,"Údolie tisícich paliem",16,8,"start"],
+     ["Playa de Famara",29.103,-13.570,"Surfová pláž, západ slnka",-14,14,"end"]]},
+   {n:7,t:"Arrecife a odlet",g:"Pohoda",p:[
+     ["Arrecife",28.962,-13.545,"Charco de San Ginés, suveníry",16,18,"start"]]}
+  ];
+
+  var svg=document.getElementById("map");
+  el("path",{d:path(coast),class:"land"},svg);
+  el("path",{d:path(grac),class:"land"},svg);
+  el("path",{d:path(fire),class:"fire"},svg);
+  var t1=el("text",{x:20,y:60,class:"sea-label"},svg);t1.textContent="Atlantický oceán";
+  var b=P(28.80,-13.83);
+  var t2=el("text",{x:b[0]-30,y:700,class:"sea-label"},svg);t2.textContent="Fuerteventura je ďalej na juh";
+  var sc=el("g",{class:"scale"},svg);
+  el("line",{x1:30,y1:640,x2:158,y2:640},sc);el("line",{x1:30,y1:634,x2:30,y2:646},sc);el("line",{x1:158,y1:634,x2:158,y2:646},sc);
+  var s1=el("text",{x:30,y:660},sc);s1.textContent="10 km";
+  var nr=el("g",{class:"north",transform:"translate(655,48)"},svg);
+  el("path",{d:"M0 -18L7 8L0 3L-7 8Z"},nr);var nt=el("text",{x:-4,y:24},nr);nt.textContent="S";
+
+  var routeLine=el("polyline",{class:"route",points:""},svg);
+  var layer=el("g",{},svg);
+  var pinEls=[];
+  days.forEach(function(d){
+    d.pins=[];
+    d.p.forEach(function(q,i){
+      var c=P(q[1],q[2]);
+      var g=el("g",{class:"pin"},layer);
+      if(d.n===1&&i===1){el("circle",{cx:c[0],cy:c[1],r:17,class:"base-ring"},g).style.fill="none";}
+      var ci=el("circle",{cx:c[0],cy:c[1],r:11},g);
+      var nt=el("text",{x:c[0],y:c[1],class:"n"},g);nt.textContent=d.n;
+      var lb=el("text",{x:c[0]+q[4],y:c[1]+q[5],class:"lbl","text-anchor":q[6]},g);lb.textContent=q[0];
+      d.pins.push({g:g,c:c,n:nt,ci:ci});
+    });
+  });
+
+  var picker=document.getElementById("picker");
+  var sel=0;
+  var rows=[];
+  days.forEach(function(d){
+    var wrap=document.createElement("div");
+    var btn=document.createElement("button");
+    btn.className="daybtn";btn.type="button";btn.setAttribute("aria-expanded","false");btn.id="dbtn"+d.n;
+    btn.innerHTML='<span class="dn">'+d.n+'</span><span><span class="dt">'+d.t+'</span><br><span class="dg">'+d.g+'</span></span><span class="chev">&gt;</span>';
+    var ul=document.createElement("ul");ul.className="stops";ul.hidden=true;
+    d.p.forEach(function(q,i){
+      var li=document.createElement("li");
+      li.innerHTML='<span class="b">'+(i+1)+'</span><div><b>'+q[0]+'</b><span>'+q[3]+'</span></div>';
+      ul.appendChild(li);
+    });
+    var go=document.createElement("li");
+    go.innerHTML='<span></span><a href="#d'+d.n+'" class="mono" style="font-size:13px;color:var(--lava)">Celý plán dňa</a>';
+    ul.appendChild(go);
+    btn.addEventListener("click",function(){select(sel===d.n?0:d.n);});
+    wrap.appendChild(btn);wrap.appendChild(ul);picker.appendChild(wrap);
+    rows.push({btn:btn,ul:ul});
+  });
+
+  function select(n){
+    sel=n;
+    rows.forEach(function(r,i){var on=(i+1===n);r.btn.setAttribute("aria-expanded",on?"true":"false");r.ul.hidden=!on;});
+    days.forEach(function(d){
+      d.pins.forEach(function(p,i){
+        var on=(d.n===n);
+        p.g.setAttribute("class","pin"+(n===0?"":(on?" on":" dim")));
+        p.n.textContent=(on?(i+1):d.n);
+        p.ci.setAttribute("r",on?13:11);
+      });
+    });
+    if(n){
+      var d=days[n-1];
+      routeLine.setAttribute("points",d.pins.map(function(p){return p.c[0].toFixed(1)+","+p.c[1].toFixed(1);}).join(" "));
+      d.pins.forEach(function(p){layer.appendChild(p.g);});
+    }else{routeLine.setAttribute("points","");}
+  }
+  select(0);
+
+  // illustrations: first matching rule wins
+  var rules=[
+    [/Prílet|Letisko/,"plane"],[/El Diablo/,"grill"],[/vrátenie auta|Odchod/,"road"],[/obed/i,"food"],
+    [/Playa de Famara/,"surf"],[/Avenida|Papagayo|Cantería|Punta Mujeres/,"beach"],
+    [/Západ slnka|Večera pri mori/,"sunset"],[/Maják/,"lighthouse"],[/Timanfaya|Caldera/,"volcano"],
+    [/La Geria/,"vine"],[/Salinas/,"salt"],[/El Golfo/,"lagoon"],[/Manrique v/,"manrique"],
+    [/Teguise/,"town"],[/Cactus/,"cactus"],[/Cueva/,"cave"],[/Jameos/,"jameos"],[/Trajekt|loď/,"ferry"],
+    [/Bicykle|Amarilla/,"bike"],[/Mirador/,"viewpoint"],[/Haría|Guinate/,"palms"],
+    [/Arrecife|Quemada/,"harbor"],[/Suveníry/,"souvenir"],[/Atlántico/,"statues"],[/Campesino/,"windmill"]
+  ];
+  function pic(title){
+    for(var i=0;i<rules.length;i++){if(rules[i][0].test(title))return rules[i][1];}
+    return "beach";
+  }
+  var photos=[
+    [/Prílet/,"airport"],[/Ubytovanie/,"papas"],[/Avenida/,"playagrande"],[/starej časti/,"tinosa"],[/Papagayo/,"papagayo"],
+    [/Obed v Playa Blanca/,"playablanca"],[/Maják/,"pechiguera"],[/Timanfaya/,"timanfaya"],[/El Diablo/,"diablo"],
+    [/La Geria/,"lageria"],[/Salinas/,"janubio"],[/El Golfo/,"golfo"],[/Manrique v/,"manrique"],[/Teguise/,"teguise"],
+    [/Cactus/,"cactus"],[/Obed v Arrieta/,"arrieta"],[/Cueva/,"cueva"],[/Jameos/,"jameos"],[/Trajekt/,"ferry"],
+    [/Bicykle/,"graciosa"],[/Spiatočná/,"orzola"],[/Mirador del/,"mirador"],[/Haría a/,"haria"],
+    [/Caleta de Famara/,"famarasunset"],[/Playa de Famara/,"famara"],[/^Arrecife/,"arrecife"],[/Suveníry/,"souvenir"],
+    [/Quemada/,"quemada"],[/Femés/,"femes"],[/Caldera Blanca/,"calderablanca"],[/Cuervos/,"cuervos"],
+    [/Punta Mujeres/,"puntamujeres"],[/Cantería/,"canteria"],[/Guinate/,"guinate"],[/Campesino/,"campesino"],[/Amarilla/,"amarilla"]
+  ];
+  function photo(title){
+    for(var i=0;i<photos.length;i++){if(photos[i][0].test(title))return photos[i][1];}
+    return null;
+  }
+  function addPic(host,title,first){
+    var ph=photo(title);
+    if(ph){
+      var im=document.createElement("img");im.className="pic photo";im.src="/lanzarote/images/"+ph+".jpg";im.alt=title;im.loading="lazy";im.decoding="async";
+      if(first)host.insertBefore(im,host.firstChild);else host.appendChild(im);
+      return;
+    }
+    var s=document.createElementNS(NS,"svg");s.setAttribute("class","pic");s.setAttribute("aria-hidden","true");s.setAttribute("viewBox","0 0 160 100");
+    var u=document.createElementNS(NS,"use");u.setAttribute("href","#sc-"+pic(title));s.appendChild(u);
+    if(first)host.insertBefore(s,host.firstChild);else host.appendChild(s);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("#plan .tl li"),function(li){
+    addPic(li,li.querySelector("b").textContent,false);
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("#skryte .dish"),function(d){
+    addPic(d,d.querySelector("h3").textContent,true);
+  });
+
+  // checklists remembered per viewer
+  var KEY="lanzarote-check";
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){}
+  Array.prototype.forEach.call(document.querySelectorAll(".check input"),function(i){
+    if(saved[i.dataset.k])i.checked=true;
+    i.addEventListener("change",function(){
+      saved[i.dataset.k]=i.checked;
+      try{localStorage.setItem(KEY,JSON.stringify(saved));}catch(e){}
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
