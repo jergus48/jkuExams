@@ -1,34 +1,537 @@
-{"version":1,"units":"m","ceilingHeight":2.6,
-"scale":{"source":"printed_dimensions","mPerUnit":0.001,"candidates":12,"spreadPct":0},
-"bounds":{"width":7.27,"depth":7.926},
-"rooms":[
- {"id":"r1","name":"Obývačka s kuchyňou","type":"living","userKind":"living_kitchen","polygon":[[0,1.235],[3.82,1.235],[3.82,4.885],[3.13,4.885],[3.13,7.926],[0,7.926]],"areaM2":23.47},
- {"id":"r2","name":"Spálňa","type":"bedroom","userKind":"bedroom","polygon":[[3.9,0],[7.27,0],[7.27,3.84],[3.9,3.84]],"areaM2":12.94},
- {"id":"r3","name":"Chodba","type":"hall","userKind":"hall","polygon":[[3.82,3.94],[7.27,3.94],[7.27,7.926],[5.48,7.926],[5.48,4.885],[3.82,4.885]],"areaM2":8.7},
- {"id":"r4","name":"Kúpeľňa","type":"bathroom","userKind":"bathroom","polygon":[[3.23,4.985],[5.38,4.985],[5.38,7.926],[3.23,7.926]],"areaM2":6.32}
-],
-"walls":[
- {"id":"w1","a":[0,1.085],"b":[3.9,1.085],"exterior":true,"thickness":0.3},
- {"id":"w2","a":[-0.15,1.235],"b":[-0.15,7.926],"exterior":true,"thickness":0.3},
- {"id":"w3","a":[0,8.076],"b":[7.27,8.076],"exterior":true,"thickness":0.3},
- {"id":"w4","a":[7.42,0],"b":[7.42,7.926],"exterior":true,"thickness":0.3},
- {"id":"w5","a":[3.9,-0.15],"b":[7.27,-0.15],"exterior":true,"thickness":0.3},
- {"id":"w6","a":[3.75,0],"b":[3.75,1.235],"exterior":true,"thickness":0.3},
- {"id":"w7","a":[3.86,1.235],"b":[3.86,4.885],"exterior":false,"thickness":0.1},
- {"id":"w8","a":[3.9,3.89],"b":[7.27,3.89],"exterior":false,"thickness":0.1},
- {"id":"w9","a":[3.13,4.935],"b":[5.48,4.935],"exterior":false,"thickness":0.1},
- {"id":"w10","a":[3.18,4.885],"b":[3.18,7.926],"exterior":false,"thickness":0.1},
- {"id":"w11","a":[5.43,4.885],"b":[5.43,7.926],"exterior":false,"thickness":0.1}
-],
-"openings":[
- {"id":"o1","kind":"door","style":"hinged","wall":"w1","offset":0.925,"width":0.95,"height":2.25,"sill":0},
- {"id":"o2","kind":"window","wall":"w1","offset":1.74,"width":0.68,"height":2.25,"sill":0},
- {"id":"o3","kind":"window","wall":"w2","offset":4.955,"width":0.956,"height":1.34,"sill":0.91},
- {"id":"o4","kind":"window","wall":"w5","offset":0.87,"width":1.6,"height":1.35,"sill":0.9},
- {"id":"o5","kind":"opening","wall":"w7","offset":3.1775,"width":0.945,"height":2.25,"sill":0},
- {"id":"o6","kind":"door","style":"hinged","wall":"w8","offset":2.335,"width":0.9,"height":2.1,"sill":0},
- {"id":"o7","kind":"door","style":"hinged","wall":"w11","offset":0.65,"width":0.8,"height":2.1,"sill":0},
- {"id":"o8","kind":"door","style":"hinged","wall":"w4","offset":4.55,"width":0.9,"height":2.1,"sill":0}
-],
-"warnings":[],
-"notes":"Byt 7C podľa pôdorysu od tatina (PDF z 22.10.2026). Rozmery v mm z kót, chýbajúce miery (kúpeľňa, vstupné dvere) sú odhad z kresby."}
+{
+ "version": 1,
+ "units": "m",
+ "ceilingHeight": 2.6,
+ "scale": {
+  "source": "printed_dimensions",
+  "mPerUnit": 0.001,
+  "candidates": 12,
+  "spreadPct": 0
+ },
+ "bounds": {
+  "width": 7.27,
+  "depth": 7.926
+ },
+ "rooms": [
+  {
+   "id": "r1",
+   "name": "Obývačka s kuchyňou",
+   "type": "living",
+   "userKind": "living_kitchen",
+   "polygon": [
+    [
+     0,
+     1.235
+    ],
+    [
+     3.82,
+     1.235
+    ],
+    [
+     3.82,
+     4.885
+    ],
+    [
+     3.13,
+     4.885
+    ],
+    [
+     3.13,
+     7.926
+    ],
+    [
+     0,
+     7.926
+    ]
+   ],
+   "areaM2": 23.47
+  },
+  {
+   "id": "r2",
+   "name": "Spálňa",
+   "type": "bedroom",
+   "userKind": "bedroom",
+   "polygon": [
+    [
+     3.9,
+     0
+    ],
+    [
+     7.27,
+     0
+    ],
+    [
+     7.27,
+     3.84
+    ],
+    [
+     3.9,
+     3.84
+    ]
+   ],
+   "areaM2": 12.94
+  },
+  {
+   "id": "r3",
+   "name": "Chodba",
+   "type": "hall",
+   "userKind": "hall",
+   "polygon": [
+    [
+     3.82,
+     3.94
+    ],
+    [
+     7.27,
+     3.94
+    ],
+    [
+     7.27,
+     7.926
+    ],
+    [
+     5.48,
+     7.926
+    ],
+    [
+     5.48,
+     4.885
+    ],
+    [
+     3.82,
+     4.885
+    ]
+   ],
+   "areaM2": 8.7
+  },
+  {
+   "id": "r4",
+   "name": "Kúpeľňa",
+   "type": "bathroom",
+   "userKind": "bathroom",
+   "polygon": [
+    [
+     3.23,
+     4.985
+    ],
+    [
+     5.38,
+     4.985
+    ],
+    [
+     5.38,
+     7.926
+    ],
+    [
+     3.23,
+     7.926
+    ]
+   ],
+   "areaM2": 6.32
+  }
+ ],
+ "walls": [
+  {
+   "id": "w1",
+   "a": [
+    0,
+    1.085
+   ],
+   "b": [
+    3.9,
+    1.085
+   ],
+   "exterior": true,
+   "thickness": 0.3
+  },
+  {
+   "id": "w2",
+   "a": [
+    -0.15,
+    1.235
+   ],
+   "b": [
+    -0.15,
+    7.926
+   ],
+   "exterior": true,
+   "thickness": 0.3
+  },
+  {
+   "id": "w3",
+   "a": [
+    0,
+    8.076
+   ],
+   "b": [
+    7.27,
+    8.076
+   ],
+   "exterior": true,
+   "thickness": 0.3
+  },
+  {
+   "id": "w4",
+   "a": [
+    7.42,
+    0
+   ],
+   "b": [
+    7.42,
+    7.926
+   ],
+   "exterior": true,
+   "thickness": 0.3
+  },
+  {
+   "id": "w5",
+   "a": [
+    3.9,
+    -0.15
+   ],
+   "b": [
+    7.27,
+    -0.15
+   ],
+   "exterior": true,
+   "thickness": 0.3
+  },
+  {
+   "id": "w6",
+   "a": [
+    3.75,
+    0
+   ],
+   "b": [
+    3.75,
+    1.235
+   ],
+   "exterior": true,
+   "thickness": 0.3
+  },
+  {
+   "id": "w7",
+   "a": [
+    3.86,
+    1.235
+   ],
+   "b": [
+    3.86,
+    4.885
+   ],
+   "exterior": false,
+   "thickness": 0.1
+  },
+  {
+   "id": "w8",
+   "a": [
+    3.9,
+    3.89
+   ],
+   "b": [
+    7.27,
+    3.89
+   ],
+   "exterior": false,
+   "thickness": 0.1
+  },
+  {
+   "id": "w9",
+   "a": [
+    3.13,
+    4.935
+   ],
+   "b": [
+    5.48,
+    4.935
+   ],
+   "exterior": false,
+   "thickness": 0.1
+  },
+  {
+   "id": "w10",
+   "a": [
+    3.18,
+    4.885
+   ],
+   "b": [
+    3.18,
+    7.926
+   ],
+   "exterior": false,
+   "thickness": 0.1
+  },
+  {
+   "id": "w11",
+   "a": [
+    5.43,
+    4.885
+   ],
+   "b": [
+    5.43,
+    7.926
+   ],
+   "exterior": false,
+   "thickness": 0.1
+  }
+ ],
+ "openings": [
+  {
+   "id": "o1",
+   "kind": "door",
+   "style": "hinged",
+   "wall": "w1",
+   "offset": 0.925,
+   "width": 0.95,
+   "height": 2.25,
+   "sill": 0
+  },
+  {
+   "id": "o2",
+   "kind": "window",
+   "wall": "w1",
+   "offset": 1.74,
+   "width": 0.68,
+   "height": 2.25,
+   "sill": 0
+  },
+  {
+   "id": "o3",
+   "kind": "window",
+   "wall": "w2",
+   "offset": 4.955,
+   "width": 0.956,
+   "height": 1.34,
+   "sill": 0.91
+  },
+  {
+   "id": "o4",
+   "kind": "window",
+   "wall": "w5",
+   "offset": 0.87,
+   "width": 1.74,
+   "height": 1.35,
+   "sill": 0.9
+  },
+  {
+   "id": "o5",
+   "kind": "opening",
+   "wall": "w7",
+   "offset": 3.1775,
+   "width": 0.945,
+   "height": 2.25,
+   "sill": 0
+  },
+  {
+   "id": "o6",
+   "kind": "door",
+   "style": "hinged",
+   "wall": "w8",
+   "offset": 2.335,
+   "width": 0.9,
+   "height": 2.1,
+   "sill": 0
+  },
+  {
+   "id": "o7",
+   "kind": "door",
+   "style": "hinged",
+   "wall": "w11",
+   "offset": 0.65,
+   "width": 0.8,
+   "height": 2.1,
+   "sill": 0
+  },
+  {
+   "id": "o8",
+   "kind": "door",
+   "style": "hinged",
+   "wall": "w4",
+   "offset": 4.55,
+   "width": 0.9,
+   "height": 2.1,
+   "sill": 0
+  }
+ ],
+ "warnings": [],
+ "notes": "Byt 7C podla podorysu od tatina (podorys_7C_novy.pdf, 22.10.2026): steny a miery z kot, nabytok presne z podorysu (zamknuty, v kazdom rozlozeni). Kupelna a vstupne dvere v podoryse nie su, tie su odhad.",
+ "furniture": [
+  {
+   "type": "sofa",
+   "x": 3.08,
+   "z": 1.725,
+   "w": 1.36,
+   "d": 0.83,
+   "h": 0.85,
+   "rot": 0,
+   "fixed": true,
+   "note": "rohova sedacka: kratke rameno pri severnej stene"
+  },
+  {
+   "type": "sofa",
+   "x": 3.34,
+   "z": 3.04,
+   "w": 1.8,
+   "d": 0.88,
+   "h": 0.85,
+   "rot": -1.5708,
+   "fixed": true,
+   "note": "rohova sedacka: dlhe rameno pri stene so spalnou"
+  },
+  {
+   "type": "side_table",
+   "x": 2.26,
+   "z": 2.83,
+   "w": 0.72,
+   "d": 0.72,
+   "h": 0.4,
+   "rot": 0,
+   "fixed": true,
+   "note": "okruhly konferencny stolik"
+  },
+  {
+   "type": "counter",
+   "x": 0.6,
+   "z": 5.635,
+   "w": 1.2,
+   "d": 0.6,
+   "h": 0.9,
+   "rot": 0,
+   "fixed": true,
+   "note": "kuchynsky blok s varnou doskou, pri lavej stene"
+  },
+  {
+   "type": "fridge",
+   "x": 0.37,
+   "z": 7.6,
+   "w": 0.7,
+   "d": 0.65,
+   "h": 1.85,
+   "rot": 3.1416,
+   "fixed": true,
+   "note": "chladnicka"
+  },
+  {
+   "type": "counter",
+   "x": 1.94,
+   "z": 7.626,
+   "w": 2.38,
+   "d": 0.6,
+   "h": 0.9,
+   "rot": 3.1416,
+   "fixed": true,
+   "note": "kuchynska linka pri spodnej stene (zasuvky, umyvacka, drez)"
+  },
+  {
+   "type": "bistro_table",
+   "x": 2.45,
+   "z": 6.1,
+   "w": 1.2,
+   "d": 1.2,
+   "h": 0.75,
+   "rot": 0,
+   "fixed": true,
+   "note": "okruhly jedalensky stol 120 cm (novy stol z podorysu)"
+  },
+  {
+   "type": "chair",
+   "x": 2.45,
+   "z": 5.2,
+   "w": 0.45,
+   "d": 0.5,
+   "h": 0.9,
+   "rot": 0,
+   "fixed": true,
+   "note": "stolicka sever"
+  },
+  {
+   "type": "chair",
+   "x": 1.55,
+   "z": 6.1,
+   "w": 0.45,
+   "d": 0.5,
+   "h": 0.9,
+   "rot": 1.5708,
+   "fixed": true,
+   "note": "stolicka zapad"
+  },
+  {
+   "type": "chair",
+   "x": 2.45,
+   "z": 7.0,
+   "w": 0.45,
+   "d": 0.5,
+   "h": 0.9,
+   "rot": 3.1416,
+   "fixed": true,
+   "note": "stolicka juh"
+  },
+  {
+   "type": "bed",
+   "x": 5.02,
+   "z": 1.95,
+   "w": 2.0,
+   "d": 2.24,
+   "h": 0.95,
+   "rot": 1.5708,
+   "fixed": true,
+   "note": "postel hlavou k zapadnej stene"
+  },
+  {
+   "type": "nightstand",
+   "x": 4.1,
+   "z": 0.43,
+   "w": 0.44,
+   "d": 0.4,
+   "h": 0.5,
+   "rot": 1.5708,
+   "fixed": true,
+   "note": "nocny stolik"
+  },
+  {
+   "type": "nightstand",
+   "x": 4.1,
+   "z": 3.13,
+   "w": 0.44,
+   "d": 0.4,
+   "h": 0.5,
+   "rot": 1.5708,
+   "fixed": true,
+   "note": "nocny stolik"
+  },
+  {
+   "type": "wardrobe",
+   "x": 7.05,
+   "z": 2.09,
+   "w": 2.0,
+   "d": 0.44,
+   "h": 2.2,
+   "rot": -1.5708,
+   "fixed": true,
+   "note": "satnik pri vychodnej stene"
+  },
+  {
+   "type": "desk",
+   "x": 6.97,
+   "z": 0.6,
+   "w": 1.2,
+   "d": 0.6,
+   "h": 0.75,
+   "rot": -1.5708,
+   "fixed": true,
+   "note": "pracovny stol v rohu"
+  },
+  {
+   "type": "chair",
+   "x": 6.42,
+   "z": 0.61,
+   "w": 0.45,
+   "d": 0.5,
+   "h": 0.9,
+   "rot": 1.5708,
+   "fixed": true,
+   "note": "stolicka k stolu"
+  }
+ ],
+ "originalImage": "/vizualizacie/3d/app/data/showcase/podorys-7c.png"
+}

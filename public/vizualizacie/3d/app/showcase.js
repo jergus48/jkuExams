@@ -37,7 +37,7 @@ export function mountPlanBar(host, currentId, onPick, { empty = false, onMode = 
   host.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => { if ((b.dataset.mode === 'empty') !== empty) onMode(b.dataset.mode === 'empty') }))
   host.querySelector('.sc-orig')?.addEventListener('toggle', (e) => { origOpen = e.target.open })
   const img = host.querySelector('.sc-origimg img')
-  return { update: (items) => { if (img && plan) img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(drawing(plan, items || [])) } }          // the drawing follows the arrangement that is shown
+  return { update: (items) => { if (img && plan) img.src = plan.originalImage || ('data:image/svg+xml;charset=utf-8,' + encodeURIComponent(drawing(plan, items || []))) } }          // the drawing follows the arrangement that is shown
 }
 
 // ---- the furniture: a card per piece, a model picture drawn from our own 3D model, a link to the shop
