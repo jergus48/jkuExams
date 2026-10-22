@@ -354,6 +354,184 @@
   }
  ],
  "warnings": [],
- "notes": "Byt 7C podla podorysu od tatina (podorys_7C_novy.pdf): steny a miery z kot. Nabytok nie je zamknuty, rozlozenia sa generuju a da sa vsetko posuvat. Kupelna a vstupne dvere v podoryse nie su, tie su odhad.",
- "originalImage": "/vizualizacie/3d/app/data/showcase/podorys-7c.png"
+ "notes": "Byt 7C podla podorysu od tatina (podorys_7C_novy.pdf): steny, miery a nabytok z podorysu. Nabytok z podorysu je vo vsetkych rozlozeniach na svojom mieste, nie je zamknuty, da sa vsetko posuvat. Kupelna a vstupne dvere v podoryse nie su, tie su odhad.",
+ "originalImage": "/vizualizacie/3d/app/data/showcase/podorys-7c.png",
+ "furniture": [
+  {
+   "type": "sofa",
+   "x": 3.08,
+   "z": 1.725,
+   "w": 1.36,
+   "d": 0.83,
+   "h": 0.85,
+   "rot": 0,
+   "note": "rohova sedacka: kratke rameno pri severnej stene",
+   "start": true
+  },
+  {
+   "type": "sofa",
+   "x": 3.34,
+   "z": 3.04,
+   "w": 1.8,
+   "d": 0.88,
+   "h": 0.85,
+   "rot": -1.5708,
+   "note": "rohova sedacka: dlhe rameno pri stene so spalnou",
+   "start": true
+  },
+  {
+   "type": "side_table",
+   "x": 2.26,
+   "z": 2.83,
+   "w": 0.72,
+   "d": 0.72,
+   "h": 0.4,
+   "rot": 0,
+   "note": "okruhly konferencny stolik",
+   "start": true
+  },
+  {
+   "type": "counter",
+   "x": 0.6,
+   "z": 5.635,
+   "w": 1.2,
+   "d": 0.6,
+   "h": 0.9,
+   "rot": 0,
+   "note": "kuchynsky blok s varnou doskou, pri lavej stene",
+   "start": true
+  },
+  {
+   "type": "fridge",
+   "x": 0.37,
+   "z": 7.6,
+   "w": 0.7,
+   "d": 0.65,
+   "h": 1.85,
+   "rot": 3.1416,
+   "note": "chladnicka",
+   "start": true
+  },
+  {
+   "type": "counter",
+   "x": 1.94,
+   "z": 7.626,
+   "w": 2.38,
+   "d": 0.6,
+   "h": 0.9,
+   "rot": 3.1416,
+   "note": "kuchynska linka pri spodnej stene (zasuvky, umyvacka, drez)",
+   "start": true
+  },
+  {
+   "type": "bistro_table",
+   "x": 2.45,
+   "z": 6.1,
+   "w": 1.2,
+   "d": 1.2,
+   "h": 0.75,
+   "rot": 0,
+   "note": "okruhly jedalensky stol 120 cm (novy stol z podorysu)",
+   "start": true
+  },
+  {
+   "type": "chair",
+   "x": 2.45,
+   "z": 5.2,
+   "w": 0.45,
+   "d": 0.5,
+   "h": 0.9,
+   "rot": 0,
+   "note": "stolicka sever",
+   "start": true
+  },
+  {
+   "type": "chair",
+   "x": 1.55,
+   "z": 6.1,
+   "w": 0.45,
+   "d": 0.5,
+   "h": 0.9,
+   "rot": 1.5708,
+   "note": "stolicka zapad",
+   "start": true
+  },
+  {
+   "type": "chair",
+   "x": 2.45,
+   "z": 7.0,
+   "w": 0.45,
+   "d": 0.5,
+   "h": 0.9,
+   "rot": 3.1416,
+   "note": "stolicka juh",
+   "start": true
+  },
+  {
+   "type": "bed",
+   "x": 5.02,
+   "z": 1.95,
+   "w": 2.0,
+   "d": 2.24,
+   "h": 0.95,
+   "rot": 1.5708,
+   "note": "postel hlavou k zapadnej stene",
+   "start": true
+  },
+  {
+   "type": "nightstand",
+   "x": 4.1,
+   "z": 0.43,
+   "w": 0.44,
+   "d": 0.4,
+   "h": 0.5,
+   "rot": 1.5708,
+   "note": "nocny stolik",
+   "start": true
+  },
+  {
+   "type": "nightstand",
+   "x": 4.1,
+   "z": 3.13,
+   "w": 0.44,
+   "d": 0.4,
+   "h": 0.5,
+   "rot": 1.5708,
+   "note": "nocny stolik",
+   "start": true
+  },
+  {
+   "type": "wardrobe",
+   "x": 7.05,
+   "z": 2.09,
+   "w": 2.0,
+   "d": 0.44,
+   "h": 2.2,
+   "rot": -1.5708,
+   "note": "satnik pri vychodnej stene",
+   "start": true
+  },
+  {
+   "type": "desk",
+   "x": 6.97,
+   "z": 0.6,
+   "w": 1.2,
+   "d": 0.6,
+   "h": 0.75,
+   "rot": -1.5708,
+   "note": "pracovny stol v rohu",
+   "start": true
+  },
+  {
+   "type": "chair",
+   "x": 6.42,
+   "z": 0.61,
+   "w": 0.45,
+   "d": 0.5,
+   "h": 0.9,
+   "rot": 1.5708,
+   "note": "stolicka k stolu",
+   "start": true
+  }
+ ]
 }

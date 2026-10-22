@@ -9,7 +9,7 @@ import { obb, pip, overlaps } from './geom.js'
 import { fitsRoom } from './space.js'
 
 const pick = (arr, rank) => arr[Math.min(rank, arr.length - 1)]
-const plain = (it) => { const { _b, _keep, _keepTry, ...rest } = it; return rest }
+const plain = (it) => { const { _b, _keep, _keepTry, start, ...rest } = it; return start ? { ...rest, locked: false, fixed: false, drawn: true } : rest }          // start: a piece drawn in the original plan: in place in every arrangement, but free to move (no lock)
 
 // ================================================================ living room
 function sofaOptions(ctx, tv) {
@@ -630,9 +630,9 @@ const RECIPES = { living, bedroom, office, meeting, kitchen, bathroom, wc: bathr
 export function fixedOf(plan, space) {
   const out = []
   ;(plan.furniture || []).forEach((f, k) => {
-    if (!f.fixed || !TYPES[f.type]) return
+    if (!(f.fixed || f.start) || !TYPES[f.type]) return
     const room = space.rooms.find((r) => pip(f.x, f.z, r.poly)); if (!room) return
-    out.push({ ...make(f.type, { w: f.w, d: f.d, h: f.h }), x: f.x, z: f.z, rot: f.rot || 0, id: 'fx' + k, room: room.i, locked: true, fixed: true })
+    out.push({ ...make(f.type, { w: f.w, d: f.d, h: f.h }), x: f.x, z: f.z, rot: f.rot || 0, id: 'fx' + k, room: room.i, locked: true, fixed: true, ...(f.start ? { start: true } : {}) })
   })
   return out
 }

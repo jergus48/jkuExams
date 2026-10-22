@@ -158,7 +158,7 @@ export function validate(plan, items, { space = buildSpace(plan) } = {}) {
     for (const t of need) if (!has(t) && !(t === 'toilet' && room.noToilet)) rc({ rule: 'missing', level: 'warn', label: `${room.name}: no ${TYPES[t].label.toLowerCase()} could be placed` })
   }
   // a built-in piece (drawn in the plan itself: a bathtub, a sink counter, a shower cabin) is a fact, not a mistake: a rule it does not meet is shown as a note, not as an error
-  const builtIn = new Set(items.filter((i) => i.fixed).map((i) => i.id)), byHand = new Set(items.filter((i) => i.pinned).map((i) => i.id))          // pinned: put on a spot the person clicked
+  const builtIn = new Set(items.filter((i) => i.fixed || i.drawn).map((i) => i.id)), byHand = new Set(items.filter((i) => i.pinned).map((i) => i.id))          // pinned: put on a spot the person clicked
   for (const c of checks) if (c.level === 'error' && c.item && (builtIn.has(c.item) || byHand.has(c.item))) { c.level = 'warn'; c.label += builtIn.has(c.item) ? ' (built in, as drawn in the plan)' : ' (placed where you chose)'; c.builtIn = builtIn.has(c.item); c.byHand = byHand.has(c.item) }
   const counts = { error: 0, warn: 0, ok: 0 }; for (const c of checks) counts[c.level] = (counts[c.level] || 0) + 1
   return { checks, dims, counts, pass: counts.error === 0, rooms: space.rooms.map((r) => ({ i: r.i, name: r.name, kind: r.kind, checks: checks.filter((c) => c.room === r.i) })) }
