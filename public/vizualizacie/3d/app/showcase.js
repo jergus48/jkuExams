@@ -76,7 +76,10 @@ export function mountShowcaseFurniture(host, api) {
     host.querySelectorAll('[data-rm]').forEach((b) => b.addEventListener('click', async () => { await api.remove(b.dataset.rm); say(''); refresh() }))
   }
   function drawGrid() {
-    loadCatalog().then((cat) => {
+    loadCatalog().then((base) => {
+      // models made from a pasted link are kept in the browser: they stand first in the grid, so a piece that found no spot can be tried again (in another room) without making it again
+      const mine = savedModels().filter((x) => x.model?.key && x.product).reverse().map((x) => ({ id: 'link-' + x.model.key.replace(/[^a-z0-9]/gi, ''), name: x.product.name, link: x.product.link, type: x.product.type, dims: { ...x.product.dims }, use: ['home', 'office'], desc: { [LANG]: 'Z tvojho odkazu', en: 'From your link' } }))
+      const cat = [...mine, ...base.filter((c) => !mine.some((m) => m.id === c.id))]
       const shown = cat.filter((c) => filter === 'all' || c.use.includes(filter)), onList = new Set(api.list().map((p) => p.catId))
       $('#sc-grid').innerHTML = shown.map((c) => `<article class="sc-card ${onList.has(c.id) ? 'in' : ''}"><div class="sc-pic"><img data-pic="${esc(c.id)}" alt="" ${thumbs.has(c.id) ? `src="${thumbs.get(c.id)}"` : 'hidden'}></div>
         <div class="sc-body"><h3>${esc(c.name)}</h3><p class="sc-dims">${esc(cmText(c.dims))}</p><p class="sc-desc">${esc(c.desc[LANG])}</p>
@@ -135,6 +138,7 @@ export function mountShowcaseFurniture(host, api) {
       go.disabled = false
     }
     $('#sc-link').value = ''
+    drawGrid()          // the new model is in the grid even if it finds no spot
     await addPiece({ id: 'link-' + key.replace(/[^a-z0-9]/gi, ''), name: got.product.name, link: got.product.link, type: got.product.type, dims: { ...got.product.dims } })
   }
   $('#sc-clear').onclick = async () => { for (const p of [...api.list()]) await api.remove(p.id); say(''); refresh() }
