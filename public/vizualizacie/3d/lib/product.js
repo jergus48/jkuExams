@@ -27,11 +27,11 @@ const LABELS = {
   w: ['width', 'overall width', 'plotis', 'breite', 'breedte', 'largeur', 'ancho', 'anchura', 'larghezza', 'szerokosc', 'platums', 'laius', 'sirka', 'sirina', 'ширина', 'bredd', 'bredde', 'leveys', 'szelesseg', 'latime', 'lungime sofa'],
   d: ['depth', 'overall depth', 'gylis', 'tiefe', 'diepte', 'profondeur', 'fondo', 'profundidad', 'profondita', 'glebokosc', 'dzilums', 'sugavus', 'hloubka', 'hlbka', 'globina', 'глубина', 'djup', 'dybde', 'syvyys', 'melyseg', 'adancime'],
   h: ['height', 'overall height', 'aukstis', 'hohe', 'hoehe', 'hoogte', 'hauteur', 'alto', 'altura', 'altezza', 'wysokosc', 'augstums', 'korgus', 'vyska', 'visina', 'высота', 'hojd', 'hoyde', 'hojde', 'korkeus', 'magassag', 'inaltime'],
-  l: ['length', 'ilgis', 'lange', 'laenge', 'lengte', 'longueur', 'largo', 'lunghezza', 'dlugosc', 'garums', 'pikkus', 'delka', 'dolzina', 'длина', 'langd', 'laengde', 'lengde', 'pituus', 'hosszusag', 'lungime'],
+  l: ['length', 'ilgis', 'lange', 'laenge', 'lengte', 'longueur', 'largo', 'lunghezza', 'dlugosc', 'garums', 'pikkus', 'delka', 'dlzka', 'dolzina', 'длина', 'langd', 'laengde', 'lengde', 'pituus', 'hosszusag', 'lungime'],
 }
 // words that turn a width or height into a part of the piece (seat width, mattress length, drawer depth, ...): those are not the size of the piece
-const PART = ['seat', 'sitting', 'armrest', 'arm', 'back', 'backrest', 'mattress', 'sleeping', 'bed', 'drawer', 'shelf', 'cushion', 'clearance', 'leg', 'legs', 'inner', 'inside', 'internal', 'headboard', 'footboard', 'under', 'free', 'between', 'opening', 'door', 'recess', 'frame', 'tabletop', 'top', 'package', 'packaging', 'parcel', 'carton', 'box', 'unassembled', 'sedim', 'sedynes', 'sedimos', 'sitz', 'lehne', 'matratze', 'schublade', 'miegam', 'kojel', 'rankos', 'stalcius', 'dezes', 'pakuot', 'max', 'min', 'load', 'weight', 'volume', 'including']
-const CONTEXT_BAD = /unassembled|package|packaging|parcel|carton|shipping|packed|nesurink|pakuot|verpack|emballage|opakowan/
+const PART = ['seat', 'sitting', 'armrest', 'arm', 'back', 'backrest', 'mattress', 'sleeping', 'bed', 'drawer', 'shelf', 'cushion', 'clearance', 'leg', 'legs', 'inner', 'inside', 'internal', 'headboard', 'footboard', 'under', 'free', 'between', 'opening', 'door', 'recess', 'frame', 'tabletop', 'top', 'package', 'packaging', 'parcel', 'carton', 'box', 'unassembled', 'sedim', 'sedynes', 'sedimos', 'sitz', 'lehne', 'matratze', 'schublade', 'miegam', 'kojel', 'rankos', 'stalcius', 'dezes', 'pakuot', 'max', 'min', 'load', 'weight', 'volume', 'including', 'vnutorna', 'volna']
+const CONTEXT_BAD = /unassembled|package|packaging|parcel|carton|shipping|packed|nesurink|pakuot|verpack|emballage|opakowan|balen/
 const CONTEXT_GOOD = /assembled|product dimension|dimensions|measurements|overall|size\b|matmen|isma|abmessung|masse|dimensions|dimensiones|dimensioni|wymiar|izmeri|mootmed|rozmery/
 
 const labelRe = (() => {
@@ -40,6 +40,31 @@ const labelRe = (() => {
 })()
 const keyOf = (label) => (labelRe.all.find(([a]) => a === label) || [])[1]
 const NUM = '(\\d{1,4}(?:[.,]\\d{1,2})?)', UNIT = '(mm|cm|m|inches|inch|in|ft|feet|"|″)'
+
+// ---------------------------------------------------------------- IKEA measurement rows
+// IKEA rows are "name = value". Only a row named exactly Width / Depth / Height / Length (in the page's language) is the size of the piece, plus
+// "Height including back cushions" (sofas have no plain height row) and "Min. length" (an extendable table, closed). Seat height, armrest height,
+// drawer depth, bed width (of a sofa bed) and so on are parts. When no height row exists (a sofa bed), the tallest part is the height of the piece.
+const INCLUDING = /^(including|incl|inkl|inklusive|vratane|vcetne|y compris|incluido|compreso|wlacznie|iskaitant|ieskaitot|inklusive|med)\b/
+export function ikeaRows(rows) {
+  const vals = {}, ev = {}, heights = []
+  let maxLen = null
+  for (const [name, value] of rows) {
+    const v = String(value).match(new RegExp(`${NUM}\\s*${UNIT}(?![a-z])`, 'i')), m = v && toMetres(v[1], v[2])
+    if (!sane(m)) continue
+    let n = strip(name).replace(/[^a-z\s]+/g, ' ').replace(/\s+/g, ' ').trim(), bound = ''
+    const b = n.match(/^(max|min)\s+(.*)$/); if (b) { bound = b[1]; n = b[2] }
+    const label = labelRe.all.map(([a]) => a).filter((a) => n === a || (n.startsWith(a + ' ') && INCLUDING.test(n.slice(a.length + 1)))).sort((x, y) => y.length - x.length)[0]
+    const key = label && keyOf(label)
+    if (!key) { if (!bound && LABELS.h.some((a) => new RegExp(`(^|\\s)${strip(a)}(\\s|$)`).test(n))) heights.push({ m, raw: `${name} ${value}` }); continue }
+    if (bound === 'max') { if (key === 'l' && maxLen === null) maxLen = { m, raw: `${name} ${value}` }; continue }
+    if (vals[key] === undefined) { vals[key] = m; ev[key] = `${name} ${value}` }
+  }
+  if (vals.l === undefined && maxLen) { vals.l = maxLen.m; ev.l = maxLen.raw }
+  let note = ''
+  if (vals.h === undefined && heights.length) { const t = heights.sort((x, y) => y.m - x.m)[0]; vals.h = t.m; ev.h = t.raw; note = 'The page has no overall height, the tallest part is used. Check it.' }
+  return { vals, evidence: ['w', 'l', 'd', 'h'].filter((k) => ev[k]).map((k) => ev[k].replace(/\s+/g, ' ').trim()).join(', '), count: Object.keys(vals).length, note }
+}
 
 // ---------------------------------------------------------------- text of a page
 export function visibleText(html) {
@@ -119,24 +144,24 @@ const meta = (html, prop) => { const re = new RegExp(`<meta[^>]+(?:property|name
 // keyword -> catalogue type (accents are stripped first). The most specific words come first.
 const KINDS = [
   ['kitchen_island', /kitchen island|kitchen trolley|kucheninsel|kuecheninsel|kuchenwagen|ilot de cuisine|isola cucina|isla de cocina|wyspa kuchenna|keukeneiland|virtuves sala|virtuvės sala/],
-  ['tv_unit', /tv-?bank|tv-?schrank|tv-?m(oe|ö)bel|tv ?(bench|unit|stand|cabinet|table|furniture|combination|storage|wall)|tv-?komb\w*|fernsehkomb\w*|media (unit|wall|combination|storage)|entertainment (unit|cent(er|re))|tv stal|tv spintel|fernsehtisch|tv-?board|lowboard|szafka rtv|tv-?kast|meuble tv/],
-  ['coffee_table', /coffee table|kavos stal|couchtisch|salontisch|table basse|mesa de centro|tavolino|stolik kawowy|koffietafel|sofabord|sohvapoyta|zurnalinis|sofa table/],
-  ['nightstand', /bedside|night ?stand|night table|naktin\w* stal|prie loves|nachttisch|nachtkastje|table de chevet|mesilla de noche|comodino|szafka nocna/],
-  ['side_table', /side table|end table|sofa end|nesting table|zonin\w* stal|beistelltisch|table d.appoint|mesa auxiliar|stolik pomocniczy/],
-  ['dining_table', /dining table|valgomojo stal|esstisch|table a manger|mesa de comedor|tavolo da pranzo|stol jadalniany|eettafel|spisebord|matbord|extendable table|kitchen table|virtuves stal/],
-  ['desk', /\bdesk|rasomasis stal|raso stal|darbo stal|schreibtisch|bureau\b|escritorio|scrivania|biurko|skrivebord|skrivbord|kirjoituspoyta|computer table|kompiuterio stal/],
-  ['shoe_cabinet', /shoe (cabinet|storage|rack|bench)|batu (spintel|lentyn|stovas)|schuhschrank|schuhregal|meuble a chaussures|zapatero|scarpiera|szafka na buty/],
-  ['wardrobe', /wardrobe|clothes cabinet|spinta drabuz|drabuziu spint|kleiderschrank|garde-?robe|armoire|armario|guardaroba|szafa\b|garderobekast|klaedeskab|klader skap|vaatekaappi|pax\b|closet/],
-  ['shelf', /bookcase|bookshelf|book shelf|shelving unit|shelf unit|etagere|regal\b|knygu (spint|lentyn)|lentyn|buecherregal|bibliotheque|libreria|biblioteca|biblioteczka|boekenkast|reol|bokhylla|kirjahylly/],
-  ['sideboard', /sideboard|aufbewahrungskomb\w*|storage combination|schrankkomb\w*|chest of drawers|dresser|buffet|cupboard|storage cabinet|cabinet\b|komod|kommode|commode|cassettiera|cajonera|szafka|spintel|kast\b|skab|skap\b/],
-  ['armchair', /arm ?chair|lounge chair|wing chair|recliner|fotel|sessel|fauteuil|sillon|poltrona|fotelis|fåtölj|nojatuoli|lounge ?stuhl/],
-  ['sofa', /sofa|couch|settee|loveseat|canape|divano|kanapa|soffa|sohva|trivie|dvivie|kampin|corner sofa|sectional/],
-  ['bed', /\bbed\b|bed frame|bedstead|\blova\b|lovos? remas|kusetes? remas|loveles|bett\b|bettgestell|bettrahmen|bettkasten|boxspring|lit\b|cama\b|letto\b|lozko|bed met|seng\b|sang\b|sanky|vuode/],
-  ['chair', /\bchair|kede\b|stuhl|chaise|silla|sedia|krzeslo|stoel|stool|baro kede|taburet/],
+  ['tv_unit', /skrinka na tv|tv stolik|tv-?bank|tv-?schrank|tv-?m(oe|ö)bel|tv ?(bench|unit|stand|cabinet|table|furniture|combination|storage|wall)|tv-?komb\w*|fernsehkomb\w*|media (unit|wall|combination|storage)|entertainment (unit|cent(er|re))|tv stal|tv spintel|fernsehtisch|tv-?board|lowboard|szafka rtv|tv-?kast|meuble tv/],
+  ['coffee_table', /konferencny stolik|coffee table|kavos stal|couchtisch|salontisch|table basse|mesa de centro|tavolino|stolik kawowy|koffietafel|sofabord|sohvapoyta|zurnalinis|sofa table/],
+  ['nightstand', /nocny stolik|bedside|night ?stand|night table|naktin\w* stal|prie loves|nachttisch|nachtkastje|table de chevet|mesilla de noche|comodino|szafka nocna/],
+  ['side_table', /odkladaci stolik|pristavny stolik|side table|end table|sofa end|nesting table|zonin\w* stal|beistelltisch|table d.appoint|mesa auxiliar|stolik pomocniczy/],
+  ['dining_table', /jedalensky stol|rozkladaci stol|dining table|valgomojo stal|esstisch|table a manger|mesa de comedor|tavolo da pranzo|stol jadalniany|eettafel|spisebord|matbord|extendable table|kitchen table|virtuves stal/],
+  ['desk', /pisac\w* stol|pracovn\w* stol|stol\w* na pocitac|\bdesk|rasomasis stal|raso stal|darbo stal|schreibtisch|bureau\b|escritorio|scrivania|biurko|skrivebord|skrivbord|kirjoituspoyta|computer table|kompiuterio stal/],
+  ['shoe_cabinet', /botnik|skrinka na topanky|shoe (cabinet|storage|rack|bench)|batu (spintel|lentyn|stovas)|schuhschrank|schuhregal|meuble a chaussures|zapatero|scarpiera|szafka na buty/],
+  ['wardrobe', /satnik|\bskrina\b|wardrobe|clothes cabinet|spinta drabuz|drabuziu spint|kleiderschrank|garde-?robe|armoire|armario|guardaroba|szafa\b|garderobekast|klaedeskab|klader skap|vaatekaappi|pax\b|closet/],
+  ['shelf', /kniznica|policov\w* diel|bookcase|bookshelf|book shelf|shelving unit|shelf unit|etagere|regal\b|knygu (spint|lentyn)|lentyn|buecherregal|bibliotheque|libreria|biblioteca|biblioteczka|boekenkast|reol|bokhylla|kirjahylly/],
+  ['sideboard', /skrinka|uloz\w* diel|ulozn\w* kombin|sideboard|aufbewahrungskomb\w*|storage combination|schrankkomb\w*|chest of drawers|dresser|buffet|cupboard|storage cabinet|cabinet\b|komod|kommode|commode|cassettiera|cajonera|szafka|spintel|kast\b|skab|skap\b/],
+  ['armchair', /kreslo|arm ?chair|lounge chair|wing chair|recliner|fotel|sessel|fauteuil|sillon|poltrona|fotelis|fåtölj|nojatuoli|lounge ?stuhl/],
+  ['sofa', /pohovka|sedacka|gauc|sofa|couch|settee|loveseat|canape|divano|kanapa|soffa|sohva|trivie|dvivie|kampin|corner sofa|sectional/],
+  ['bed', /\bpostel\b|ram (rozkl\w* )?postele|\bbed\b|bed frame|bedstead|\blova\b|lovos? remas|kusetes? remas|loveles|bett\b|bettgestell|bettrahmen|bettkasten|boxspring|lit\b|cama\b|letto\b|lozko|bed met|seng\b|sang\b|sanky|vuode/],
+  ['chair', /stolick\w*|\bchair|kede\b|stuhl|chaise|silla|sedia|krzeslo|stoel|stool|baro kede|taburet/],
   ['floor_lamp', /floor lamp|standard lamp|torsher|toršer|stehlampe|lampadaire|lampara de pie|lampada da terra|lampa podlogowa|vloerlamp|golvlampa/],
   ['rug', /\brug\b|carpet|kilim|teppich|tapis|alfombra|tappeto|dywan|vloerkleed/],
   ['plant', /plant\b|augal|pflanze|plante|planta\b|roslina|kamerplant|vaso con/],
-  ['dining_table', /\btable\b|\bstal(as|iuk\w*)\b|tisch\b|\btafel\b|\bmesa\b|tavolo|stolik/],          // any other table; the height decides (refineType) whether it is a dining or a coffee table
+  ['dining_table', /\btable\b|\bstol\b|\bstal(as|iuk\w*)\b|tisch\b|\btafel\b|\bmesa\b|tavolo|stolik/],          // any other table; the height decides (refineType) whether it is a dining or a coffee table
 ]
 // a piece no word could place, but whose size is a bed's (one side 1.9 to 2.35 m, the other 0.75 to 2.2 m, up to 1.3 m high): a bed, the long side is its length (depth)
 export const bedLike = (d) => { const a = Math.max(d.w ?? 0, d.d ?? 0), b = Math.min(d.w ?? 9, d.d ?? 9); return a >= 1.9 && a <= 2.35 && b >= 0.75 && b <= 2.2 && (d.h ?? 9) <= 1.3 }
@@ -191,9 +216,11 @@ export function parseProduct(html, url = '') {
   // the measurements: groups of labelled values from the visible text first (most shops), then JSON-LD, then the title
   // an IKEA page: only the rows of its measurements tab count (the rest of the page is full of package sizes and sizes of parts); a set page has no rows and the part pages have
   const isIkea = /pipf-/.test(html), rows = isIkea ? [...String(html).matchAll(/pipf-measurements-tab__measurement-name">([^<]*)<\/span><span class="pipf-measurements-tab__measurement-value">([^<]*)</g)] : []
-  const text = isIkea ? 'Measurements | ' + rows.map((r) => `${decodeEntities(r[1])} ${decodeEntities(r[2])}`).join(' | ') : visibleText(html), groups = labelledGroups(text)
+  const ikea = isIkea ? ikeaRows(rows.map((r) => [decodeEntities(r[1]), decodeEntities(r[2])])) : null
+  const groups = isIkea ? [] : labelledGroups(visibleText(html))
   const score = (g) => g.count * 10 + (g.good ? 4 : 0) - (g.bad ? 100 : 0) - Math.min(g.index / 100000, 3) + (g.w !== undefined && g.h !== undefined && g.d !== undefined ? 6 : 0)
-  const best = groups.filter((g) => g.count >= 2 && !g.bad).sort((a, b) => score(b) - score(a))[0]
+  const best = ikea ? (ikea.count >= 2 ? { ...ikea.vals, evidence: ikea.evidence } : null) : groups.filter((g) => g.count >= 2 && !g.bad).sort((a, b) => score(b) - score(a))[0]
+  if (best && ikea?.note) notes.push(ikea.note)
   let dims = { w: null, d: null, h: null }, source = null, evidence = ''
   if (best) { dims = fromLabels(best, cls.type); source = 'the measurements on the page'; evidence = best.evidence }
   const ldv = { w: schemaSize(prod?.width), d: schemaSize(prod?.depth), h: schemaSize(prod?.height) }
