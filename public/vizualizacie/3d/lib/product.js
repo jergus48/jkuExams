@@ -43,24 +43,28 @@ const NUM = '(\\d{1,4}(?:[.,]\\d{1,2})?)', UNIT = '(mm|cm|m|inches|inch|in|ft|fe
 
 // ---------------------------------------------------------------- IKEA measurement rows
 // IKEA rows are "name = value". Only a row named exactly Width / Depth / Height / Length (in the page's language) is the size of the piece, plus
-// "Height including back cushions" (sofas have no plain height row) and "Min. length" (an extendable table, closed). Seat height, armrest height,
-// drawer depth, bed width (of a sofa bed) and so on are parts. When no height row exists (a sofa bed), the tallest part is the height of the piece.
+// "Height including back cushions" (sofas have no plain height row), "Min./Max. length" (an extendable table) and "Diameter" (a round piece). Seat height,
+// armrest height, drawer depth, bed width (of a sofa bed) and so on are parts. When no height row exists (a sofa bed), the tallest part is the height of the piece.
 const INCLUDING = /^(including|incl|inkl|inklusive|vratane|vcetne|y compris|incluido|compreso|wlacznie|iskaitant|ieskaitot|inklusive|med)\b/
+const DIAMETER = /(^|\s)(diameter|priemer|prumer|durchmesser|diametre|diametro|srednica|skersmuo|diametrs|halkaisija|diameter)(\s|$)/
 export function ikeaRows(rows) {
-  const vals = {}, ev = {}, heights = []
-  let maxLen = null
+  const vals = {}, ev = {}, heights = [], seen = {}
+  let dia = null, round = false
   for (const [name, value] of rows) {
     const v = String(value).match(new RegExp(`${NUM}\\s*${UNIT}(?![a-z])`, 'i')), m = v && toMetres(v[1], v[2])
     if (!sane(m)) continue
     let n = strip(name).replace(/[^a-z\s]+/g, ' ').replace(/\s+/g, ' ').trim(), bound = ''
     const b = n.match(/^(max|min)\s+(.*)$/); if (b) { bound = b[1]; n = b[2] }
+    if (DIAMETER.test(n)) { round = true; if (!bound && !n.includes(' ') && !dia) dia = { m, raw: `${name} ${value}` }; continue }          // a round piece: "Diameter" alone is its size, "Seat diameter" only says it is round
     const label = labelRe.all.map(([a]) => a).filter((a) => n === a || (n.startsWith(a + ' ') && INCLUDING.test(n.slice(a.length + 1)))).sort((x, y) => y.length - x.length)[0]
     const key = label && keyOf(label)
     if (!key) { if (!bound && LABELS.h.some((a) => new RegExp(`(^|\\s)${strip(a)}(\\s|$)`).test(n))) heights.push({ m, raw: `${name} ${value}` }); continue }
-    if (bound === 'max') { if (key === 'l' && maxLen === null) maxLen = { m, raw: `${name} ${value}` }; continue }
-    if (vals[key] === undefined) { vals[key] = m; ev[key] = `${name} ${value}` }
+    seen[key + bound] ||= { m, raw: `${name} ${value}` }
   }
-  if (vals.l === undefined && maxLen) { vals.l = maxLen.m; ev.l = maxLen.raw }
+  // a plain row wins; an extendable piece with no plain row is taken closed (min), then open (max)
+  for (const k of ['w', 'd', 'h', 'l']) { const s = seen[k] || seen[k + 'min'] || seen[k + 'max']; if (s) { vals[k] = s.m; ev[k] = s.raw } }
+  if (dia) for (const k of ['w', 'd']) if (vals[k] === undefined && !(k === 'w' && vals.l !== undefined)) { vals[k] = dia.m; ev[k] = dia.raw }
+  if (round && vals.w !== undefined && vals.d === undefined && vals.l === undefined) { vals.d = vals.w; ev.d = 'round, depth = width' }          // a round stool: as deep as it is wide
   let note = ''
   if (vals.h === undefined && heights.length) { const t = heights.sort((x, y) => y.m - x.m)[0]; vals.h = t.m; ev.h = t.raw; note = 'The page has no overall height, the tallest part is used. Check it.' }
   return { vals, evidence: ['w', 'l', 'd', 'h'].filter((k) => ev[k]).map((k) => ev[k].replace(/\s+/g, ' ').trim()).join(', '), count: Object.keys(vals).length, note }
@@ -150,14 +154,14 @@ const KINDS = [
   ['side_table', /odkladaci stolik|pristavny stolik|side table|end table|sofa end|nesting table|zonin\w* stal|beistelltisch|table d.appoint|mesa auxiliar|stolik pomocniczy/],
   ['dining_table', /jedalensky stol|rozkladaci stol|dining table|valgomojo stal|esstisch|table a manger|mesa de comedor|tavolo da pranzo|stol jadalniany|eettafel|spisebord|matbord|extendable table|kitchen table|virtuves stal/],
   ['desk', /pisac\w* stol|pracovn\w* stol|stol\w* na pocitac|\bdesk|rasomasis stal|raso stal|darbo stal|schreibtisch|bureau\b|escritorio|scrivania|biurko|skrivebord|skrivbord|kirjoituspoyta|computer table|kompiuterio stal/],
-  ['shoe_cabinet', /botnik|skrinka na topanky|shoe (cabinet|storage|rack|bench)|batu (spintel|lentyn|stovas)|schuhschrank|schuhregal|meuble a chaussures|zapatero|scarpiera|szafka na buty/],
-  ['wardrobe', /satnik|\bskrina\b|wardrobe|clothes cabinet|spinta drabuz|drabuziu spint|kleiderschrank|garde-?robe|armoire|armario|guardaroba|szafa\b|garderobekast|klaedeskab|klader skap|vaatekaappi|pax\b|closet/],
-  ['shelf', /kniznica|policov\w* diel|bookcase|bookshelf|book shelf|shelving unit|shelf unit|etagere|regal\b|knygu (spint|lentyn)|lentyn|buecherregal|bibliotheque|libreria|biblioteca|biblioteczka|boekenkast|reol|bokhylla|kirjahylly/],
+  ['shoe_cabinet', /botnik\w*|skrinka na topanky|shoe (cabinet|storage|rack|bench)|batu (spintel|lentyn|stovas)|schuhschrank|schuhregal|meuble a chaussures|zapatero|scarpiera|szafka na buty/],
+  ['wardrobe', /satnik\w*|\bskrin[aeu]\b|wardrobe|clothes cabinet|spinta drabuz|drabuziu spint|kleiderschrank|garde-?robe|armoire|armario|guardaroba|szafa\b|garderobekast|klaedeskab|klader skap|vaatekaappi|pax\b|closet/],
+  ['shelf', /knizni\w*|policov\w* diel|bookcase|bookshelf|book shelf|shelving unit|shelf unit|etagere|regal\b|knygu (spint|lentyn)|lentyn|buecherregal|bibliotheque|libreria|biblioteca|biblioteczka|boekenkast|reol|bokhylla|kirjahylly/],
   ['sideboard', /skrinka|uloz\w* diel|ulozn\w* kombin|sideboard|aufbewahrungskomb\w*|storage combination|schrankkomb\w*|chest of drawers|dresser|buffet|cupboard|storage cabinet|cabinet\b|komod|kommode|commode|cassettiera|cajonera|szafka|spintel|kast\b|skab|skap\b/],
-  ['armchair', /kreslo|arm ?chair|lounge chair|wing chair|recliner|fotel|sessel|fauteuil|sillon|poltrona|fotelis|fåtölj|nojatuoli|lounge ?stuhl/],
-  ['sofa', /pohovka|sedacka|gauc|sofa|couch|settee|loveseat|canape|divano|kanapa|soffa|sohva|trivie|dvivie|kampin|corner sofa|sectional/],
+  ['armchair', /\bkresl[oa]\b|arm ?chair|lounge chair|wing chair|recliner|fotel|sessel|fauteuil|sillon|poltrona|fotelis|fåtölj|nojatuoli|lounge ?stuhl/],
+  ['sofa', /pohov\w*|sedack\w*|gauc|sofa|couch|settee|loveseat|canape|divano|kanapa|soffa|sohva|trivie|dvivie|kampin|corner sofa|sectional/],
   ['bed', /\bpostel\b|ram (rozkl\w* )?postele|\bbed\b|bed frame|bedstead|\blova\b|lovos? remas|kusetes? remas|loveles|bett\b|bettgestell|bettrahmen|bettkasten|boxspring|lit\b|cama\b|letto\b|lozko|bed met|seng\b|sang\b|sanky|vuode/],
-  ['chair', /stolick\w*|\bchair|kede\b|stuhl|chaise|silla|sedia|krzeslo|stoel|stool|baro kede|taburet/],
+  ['chair', /(?<!stol\w* a (\d+ )?)stolick\w*|\bchair|kede\b|stuhl|chaise|silla|sedia|krzeslo|stoel|stool|baro kede|taburet/],
   ['floor_lamp', /floor lamp|standard lamp|torsher|toršer|stehlampe|lampadaire|lampara de pie|lampada da terra|lampa podlogowa|vloerlamp|golvlampa/],
   ['rug', /\brug\b|carpet|kilim|teppich|tapis|alfombra|tappeto|dywan|vloerkleed/],
   ['plant', /plant\b|augal|pflanze|plante|planta\b|roslina|kamerplant|vaso con/],
@@ -266,8 +270,8 @@ export function refineType(type, d) {
   return type
 }
 export function mainPart(parts) {
-  const bad = /cover|bezug|housse|cushion|kissen|leg|slat|mattress|pillow|throw|insert|screw|bracket|shelf board|lighting|accessor|drawer|door|panel|chaise|longue|r[ée]camier|ottoman|footstool|armlehne|armrest|arm rest/i, good = /frame|sofa|bed|table|desk|wardrobe|cabinet|unit|bench|chair|armchair|shelving|bookcase|chest|rack|gestell|sitzelement/i
-  return parts.find((p) => good.test(p.typeName) && !bad.test(p.typeName)) || null
+  const bad = /cover|bezug|housse|cushion|kissen|leg|slat|mattress|pillow|throw|insert|screw|bracket|shelf board|lighting|accessor|drawer|door|panel|chaise|longue|r[ée]camier|ottoman|footstool|armlehne|armrest|arm rest|potah|vankus|nohy|nozick|rost|matrac|polic|zasuv|dvier|opierk|lehatk|taburet/i, good = /frame|sofa|bed|table|desk|wardrobe|cabinet|unit|bench|chair|armchair|shelving|bookcase|chest|rack|gestell|sitzelement|\bram\b|pohovk|postel|\bstol\b|skrin|kreslo|regal|kniznic|komod|lavic/i
+  return parts.find((p) => good.test(strip(p.typeName)) && !bad.test(strip(p.typeName))) || null
 }
 
 // how sure the sizes are, for the card: 'ok' (all three read from the page), 'check' (some missing or from the name/structured data), 'missing'
