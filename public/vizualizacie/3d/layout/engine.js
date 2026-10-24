@@ -632,6 +632,7 @@ export function fixedOf(plan, space) {
   ;(plan.furniture || []).forEach((f, k) => {
     if (!(f.fixed || f.start) || !TYPES[f.type]) return
     const room = space.rooms.find((r) => pip(f.x, f.z, r.poly)); if (!room) return
+    if (f.start && !f.fixed && (Object.keys(plan._overrides?.[room.i] || {}).length || (plan._extras || []).some((e) => e.room === room.i))) return          // the person brought a piece of their own (a sofa from a link) into this room: the room is arranged around it, the pieces drawn in the plan only start the room
     out.push({ ...make(f.type, { w: f.w, d: f.d, h: f.h }), x: f.x, z: f.z, rot: f.rot || 0, id: 'fx' + k, room: room.i, locked: true, fixed: true, ...(f.start ? { start: true } : {}) })
   })
   return out
