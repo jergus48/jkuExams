@@ -18975,7 +18975,7 @@
      ],
      "rows": [
       {
-       "label": "Odpoveď 1",
+       "label": "1. políčko: názov skupiny (__ kovy: lítium, …)",
        "cells": [
         {
          "v": "alkalické",
@@ -18984,7 +18984,7 @@
        ]
       },
       {
-       "label": "Odpoveď 2",
+       "label": "2. políčko: lítium, __ , …",
        "cells": [
         {
          "v": "sodík",
@@ -18993,7 +18993,7 @@
        ]
       },
       {
-       "label": "Odpoveď 3",
+       "label": "3. políčko: lítium, … , __ , rubídium …",
        "cells": [
         {
          "v": "draslík",
@@ -19002,7 +19002,7 @@
        ]
       },
       {
-       "label": "Odpoveď 4",
+       "label": "4. políčko: vzácne plyny: __ , neón …",
        "cells": [
         {
          "v": "hélium",
@@ -19011,7 +19011,7 @@
        ]
       },
       {
-       "label": "Odpoveď 5",
+       "label": "5. políčko: … neón, __ , kryptón …",
        "cells": [
         {
          "v": "argón",
@@ -19020,7 +19020,7 @@
        ]
       },
       {
-       "label": "Odpoveď 6",
+       "label": "6. políčko: … xenón, __ (posledné)",
        "cells": [
         {
          "v": "radón",
@@ -19029,7 +19029,7 @@
        ]
       },
       {
-       "label": "Odpoveď 7",
+       "label": "7. políčko: názov skupiny (__ : kyslík …)",
        "cells": [
         {
          "v": "chalkogény",
@@ -19038,7 +19038,7 @@
        ]
       },
       {
-       "label": "Odpoveď 8",
+       "label": "8. políčko: kyslík, __ , …",
        "cells": [
         {
          "v": "síra",
@@ -19047,7 +19047,7 @@
        ]
       },
       {
-       "label": "Odpoveď 9",
+       "label": "9. políčko: kyslík, … , __ , antimón …",
        "cells": [
         {
          "v": "selén",
@@ -19056,7 +19056,7 @@
        ]
       },
       {
-       "label": "Odpoveď 10",
+       "label": "10. políčko: halogény: fluór, __ …",
        "cells": [
         {
          "v": "chlór",
@@ -19065,7 +19065,7 @@
        ]
       },
       {
-       "label": "Odpoveď 11",
+       "label": "11. políčko: halogény: fluór, … , __ …",
        "cells": [
         {
          "v": "bróm",
@@ -19074,7 +19074,7 @@
        ]
       },
       {
-       "label": "Odpoveď 12",
+       "label": "12. políčko: halogény: … , __ , (astát)",
        "cells": [
         {
          "v": "jód",
@@ -19083,7 +19083,7 @@
        ]
       },
       {
-       "label": "Odpoveď 13",
+       "label": "13. políčko: kovy alkalických zemín: berýlium, __ …",
        "cells": [
         {
          "v": "horčík",
@@ -19092,7 +19092,7 @@
        ]
       },
       {
-       "label": "Odpoveď 14",
+       "label": "14. políčko: … , __ , stroncium …",
        "cells": [
         {
          "v": "vápnik",
@@ -19101,7 +19101,7 @@
        ]
       },
       {
-       "label": "Odpoveď 15",
+       "label": "15. políčko: … bárium, __ (posledné)",
        "cells": [
         {
          "v": "rádium",
@@ -33598,7 +33598,7 @@
      ],
      "rows": [
       {
-       "label": "Odpoveď 1",
+       "label": "Veta 1: Pre chudobného je charakteristická __",
        "cells": [
         {
          "v": "chudoba",
@@ -33607,7 +33607,7 @@
        ]
       },
       {
-       "label": "Odpoveď 2",
+       "label": "Veta 2: Charakteristické pre sklo je, že je __",
        "cells": [
         {
          "v": "priehľadné",
@@ -33616,7 +33616,7 @@
        ]
       },
       {
-       "label": "Odpoveď 3",
+       "label": "Veta 3: Keď sa niekto ušpiní, je __",
        "cells": [
         {
          "v": "špinavý",
@@ -37099,7 +37099,7 @@
      ],
      "rows": [
       {
-       "label": "Odpoveď 1",
+       "label": "Úloha 1: počet gramov granúl",
        "cells": [
         {
          "v": "1260",
@@ -37108,7 +37108,7 @@
        ]
       },
       {
-       "label": "Odpoveď 2",
+       "label": "Úloha 2: počet dní",
        "cells": [
         {
          "v": "20",
@@ -39070,24 +39070,18 @@
     "qHtml": "<p>4. Čomu sa rovná číslo `x`?</p><p>Označte dvojicu/dvojice vzťahov, z ktorých <em>nie je</em> možné určiť jednoznačnú hodnotu čísla `x`.</p>",
     "opts": [
      "`x^3=x^2` `x*x!=0`",
-     "",
      "`x=2x` `|x|=x`",
-     "",
      "`x/2=2/x` `2x>0`",
-     "",
      "`(-x)^3=-x^3` `x^2=(-x)^2`"
     ],
     "ans": [
-     6
+     3
     ],
     "multi": true,
     "optsHtml": [
      "<p>`x^3=x^2`</p><p>`x*x!=0`</p>",
-     "",
      "<p>`x=2x`</p><p>`|x|=x`</p>",
-     "",
      "<p>`x/2=2/x`</p><p>`2x&gt;0`</p>",
-     "",
      "<p>`(-x)^3=-x^3`</p><p>`x^2=(-x)^2`</p>"
     ]
    }
@@ -39944,38 +39938,30 @@
     "qHtml": "<p>2.                                                   `1/2x`</p><p>Nájdite a označte všetky slovné vyjadrenia, ktoré popisujú rovnakú hodnotu ako uvedený výraz.</p>",
     "opts": [
      "polovica x",
-     "",
      "štvrtina z 2x",
      "o polovicu menej než x",
-     "",
      "50 % z x",
      "o polovicu viac než 0",
-     "",
      "o 50 % menej než x",
      "o polovicu viac než x",
-     "",
      "o 50 % viac než x"
     ],
     "ans": [
      0,
+     1,
      2,
      3,
-     5,
-     8
+     5
     ],
     "multi": true,
     "optsHtml": [
      "polovica x",
-     "",
      "štvrtina z 2x",
      "o polovicu menej než x",
-     "",
      "50 % z x",
      "o polovicu viac než 0",
-     "",
      "o 50 % menej než x",
      "o polovicu viac než x",
-     "",
      "o 50 % viac než x"
     ]
    },
@@ -40022,31 +40008,23 @@
     "qHtml": "<p>4. `1/2j=3h+1/4`</p><p>Ktoré z nasledujúcich vzťahov <em>nezodpovedajú</em> uvedenému vzťahu?</p>",
     "opts": [
      "`1/2j+2=3h+9/4`",
-     "",
      "`j=3h+1/2`",
-     "",
      "`1/2j-2h=h+1/4`",
      "`1/6j=h+1/12`",
-     "",
      "`1/2j-3=1/4`",
-     "",
      "`3j=18h+3/2`"
     ],
     "ans": [
-     2,
-     7
+     1,
+     4
     ],
     "multi": true,
     "optsHtml": [
      "`1/2j+2=3h+9/4`",
-     "",
      "`j=3h+1/2`",
-     "",
      "`1/2j-2h=h+1/4`",
      "`1/6j=h+1/12`",
-     "",
      "`1/2j-3=1/4`",
-     "",
      "`3j=18h+3/2`"
     ]
    }
