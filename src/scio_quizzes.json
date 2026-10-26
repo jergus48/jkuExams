@@ -34045,7 +34045,7 @@
      ],
      "rows": [
       {
-       "label": "Odpoveď 1",
+       "label": "svetlý",
        "cells": [
         {
          "v": "tmavý",
@@ -34054,7 +34054,7 @@
        ]
       },
       {
-       "label": "Odpoveď 2",
+       "label": "neprítomný",
        "cells": [
         {
          "v": "prítomný",
@@ -34063,7 +34063,7 @@
        ]
       },
       {
-       "label": "Odpoveď 3",
+       "label": "vidiaci",
        "cells": [
         {
          "v": "slepý",
@@ -34072,7 +34072,7 @@
        ]
       },
       {
-       "label": "Odpoveď 4",
+       "label": "poriadok",
        "cells": [
         {
          "v": "neporiadok",
